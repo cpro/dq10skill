@@ -451,6 +451,8 @@
 		}
 	},
 	
+	"vocationOrder": ["warrior", "priest", "mage", "martialartist", "thief", "minstrel", "paladin", "ranger"],
+	
 	"skillPtsGiven": [null,
 		  0,   0,   0,   0,   0,   0,   0,   0,   0,   3,
 		  6,   6,   9,  13,  13,  17,  21,  21,  25,  29,
