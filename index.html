@@ -9,8 +9,10 @@
 	<title>DQ10 スキルシミュレータ</title>
 	
 	<link rel="stylesheet" type="text/css" href="./dq10skill.css" />
+	<link rel="stylesheet" type="text/css" href="./css/smoothness/jquery-ui-1.9.1.custom.min.css" />
 	<script type="text/javascript" src="./js/jquery-1.8.2.js"></script>
 	<script type="text/javascript" src="./js/jquery.socialbutton-1.9.0.js"></script>
+	<script type="text/javascript" src="./js/jquery-ui-1.9.1.custom.min.js"></script>
 	<script type="text/javascript" src="./dq10skill.js"></script>
 <!--
 <script type="text/javascript">
@@ -81,30 +83,6 @@
 <dt class="error" style="display:none">必要レベル:</dt><dd class="error" style="display:none"><span class="req_lv">1</span> (あと <span class="exp_remain">0</span> exp)</dd>
 </dl>
 </div>
-<table class="sword skill_table">
-<caption>片手剣: <span class="skill_total">0</span></caption>
-<tr><th colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="twohandedsword skill_table">
-<caption>両手剣: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="axe skill_table">
-<caption>オノ: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="shield skill_table">
-<caption>盾	: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="courage skill_table">
-<caption>ゆうかん: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table>
 </div>
 
 <div id="priest" class="class_group">
@@ -118,30 +96,6 @@
 <dt class="error" style="display:none">必要レベル:</dt><dd class="error" style="display:none"><span class="req_lv">1</span> (あと <span class="exp_remain">0</span> exp)</dd>
 </dl>
 </div>
-<table class="spear skill_table">
-<caption>ヤリ: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="stick skill_table">
-<caption>スティック: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="staff skill_table">
-<caption>棍: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="shield skill_table">
-<caption>盾	: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="faith skill_table">
-<caption>しんこう心	: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table>
 </div>
 
 <div id="mage" class="class_group">
@@ -155,30 +109,6 @@
 <dt class="error" style="display:none">必要レベル:</dt><dd class="error" style="display:none"><span class="req_lv">1</span> (あと <span class="exp_remain">0</span> exp)</dd>
 </dl>
 </div>
-<table class="wand skill_table">
-<caption>両手杖: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="knife skill_table">
-<caption>短剣: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="whip skill_table">
-<caption>ムチ: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="shield skill_table">
-<caption>盾	: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="spellcraft skill_table">
-<caption>まほう: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table>
 </div>
 
 <div id="martialartist" class="class_group">
@@ -192,30 +122,6 @@
 <dt class="error" style="display:none">必要レベル:</dt><dd class="error" style="display:none"><span class="req_lv">1</span> (あと <span class="exp_remain">0</span> exp)</dd>
 </dl>
 </div>
-<table class="claw skill_table">
-<caption>ツメ: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="staff skill_table">
-<caption>棍: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="fan skill_table">
-<caption>扇: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="fisticuffs skill_table">
-<caption>格闘: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="focus skill_table">
-<caption>きあい: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table>
 </div>
 
 <div id="thief" class="class_group">
@@ -229,30 +135,6 @@
 <dt class="error" style="display:none">必要レベル:</dt><dd class="error" style="display:none"><span class="req_lv">1</span> (あと <span class="exp_remain">0</span> exp)</dd>
 </dl>
 </div>
-<table class="knife skill_table">
-<caption>短剣: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="whip skill_table">
-<caption>ムチ: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="claw skill_table">
-<caption>ツメ: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="fisticuffs skill_table">
-<caption>格闘: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="acquisitiveness skill_table">
-<caption>おたから: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table>
 </div>
 
 <div id="minstrel" class="class_group">
@@ -266,30 +148,6 @@
 <dt class="error" style="display:none">必要レベル:</dt><dd class="error" style="display:none"><span class="req_lv">1</span> (あと <span class="exp_remain">0</span> exp)</dd>
 </dl>
 </div>
-<table class="fan skill_table">
-<caption>扇: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="staff skill_table">
-<caption>棍: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="knife skill_table">
-<caption>短剣: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="shield skill_table">
-<caption>盾	: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="litheness skill_table">
-<caption>きょくげい: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table>
 </div>
 
 <div id="paladin" class="class_group">
@@ -303,30 +161,6 @@
 <dt class="error" style="display:none">必要レベル:</dt><dd class="error" style="display:none"><span class="req_lv">1</span> (あと <span class="exp_remain">0</span> exp)</dd>
 </dl>
 </div>
-<table class="hammer skill_table">
-<caption>ハンマー: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="spear skill_table">
-<caption>ヤリ: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="stick skill_table">
-<caption>スティック: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="shield skill_table">
-<caption>盾: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="virtue skill_table">
-<caption>はくあい: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table>
 </div>
 
 <div id="ranger" class="class_group">
@@ -340,30 +174,6 @@
 <dt class="error" style="display:none">必要レベル:</dt><dd class="error" style="display:none"><span class="req_lv">1</span> (あと <span class="exp_remain">0</span> exp)</dd>
 </dl>
 </div>
-<table class="bow skill_table">
-<caption>弓: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="boomerang skill_table">
-<caption>ブーメラン: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="axe skill_table">
-<caption>オノ: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="fisticuffs skill_table">
-<caption>格闘: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table><!--
-
---><table class="ruggedness skill_table">
-<caption>サバイバル: <span class="skill_total">0</span></caption>
-<tr><td colspan="2" class="console"><input type="button" value="<" class="minus_button" /><input type="text" size="2" value="0" /><input type="button" value=">" class="plus_button" /></td></tr>
-</table>
 </div>
 
 <div id="footer">

@@ -172,6 +172,23 @@ span.fold, span.unfold {
 	color: #aab;
 	cursor: pointer;
 }
+.skill_table th {
+	padding: 1px 3px 2px 3px;
+	cursor: pointer;
+}
+.skill_table .console .skill_name, .skill_table .console .skill_total {
+	font-size: 120%;
+	text-align: right;
+	display: inline-block;
+	vertical-align: bottom;
+}
+.skill_table .console .skill_name {
+	width: 5.5em;
+}
+
+.skill_table .console .skill_total {
+	width: 2em;
+}
 .skill_table .console {
 	text-align: center;
 }
@@ -187,6 +204,10 @@ span.fold, span.unfold {
 	color: black;
 	text-align: right;
 	padding-right: 3px;
+}
+.skill_table .console .ptspinner {
+	width: 2em;
+	text-align: right;
 }
 tr.enabled > td {
 	color: black;
