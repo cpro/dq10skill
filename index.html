@@ -1,260 +1,925 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="Content-Style-Type" content="text/css" />
-	<meta http-equiv="Content-Script-Type" content="text/javascript" />
-	<link rel="canonical" href="http://cpro.jp/dq10/skillsimulator/" />
-	<meta name="description" content="ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。" />
-	<title>DQ10 スキルシミュレータ</title>
-	
-	<link rel="stylesheet" type="text/css" href="./dq10skill.css" />
-	<link rel="stylesheet" type="text/css" href="./css/smoothness/jquery-ui-1.9.1.custom.min.css" />
-	<script type="text/javascript" src="./js/jquery-1.8.2.js"></script>
-	<script type="text/javascript" src="./js/jquery.socialbutton-1.9.0.js"></script>
-	<script type="text/javascript" src="./js/jquery-ui-1.9.1.custom.min.js"></script>
-	<script type="text/javascript" src="./dq10skill.js"></script>
-<!--
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-5127088-4']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
--->
-</head>
-<body>
-<div id="header">
-<div id="headerleft">
-<h1><a href="http://cpro.jp/dq10/skillsimulator/">DQ10 スキルシミュレータ</a></h1>
-<div id="snsbuttons">
-<div class="snsbutton" id="tw-share"></div>
-<div class="snsbutton" id="fb-like"></div>
-<div class="snsbutton" id="g-plusone"></div>
-<p id="toggle_buttons"></p>
-</div>
-</div>
-<table id="total">
-<tr>
-	<td>獲得経験値合計:</td><td id="total_exp" class="total_pts">0</td>
-	<td>さいだいHP:</td><td id="total_maxhp" class="total_pts">0</td>
-	<td>ちから:</td><td id="total_pow" class="total_pts">0</td>
-	<td>きようさ:</td><td id="total_dex" class="total_pts">0</td>
-	<td>こうげき魔力:</td><td id="total_magic" class="total_pts">0</td>
-	<td>みりょく:</td><td id="total_charm" class="total_pts">0</td>
-</tr>
-<tr>
-	<td id="total_exp_remain_label">不足経験値合計:</td><td id="total_exp_remain" class="total_pts">0</td>
-	<td>さいだいMP:</td><td id="total_maxmp" class="total_pts">0</td>
-	<td>みのまもり:</td><td id="total_def" class="total_pts">0</td>
-	<td>すばやさ:</td><td id="total_spd" class="total_pts">0</td>
-	<td>かいふく魔力:</td><td id="total_heal" class="total_pts">0</td>
-	<td></td><td class="total_pts"></td>
-</tr>
-<tr>
-	<td colspan="12" id="save_url">保存用URL: <input type="text" size="60" id="url_text" /> <input type="button" value="生成" id="produce_url" /></td>
-</tr>
-</table>
-<!--<p><input type="button" value="リセット" /></p>-->
-</div>
-
-<div id="body_content">
-<!--
-<ul id="beta_notice" style="font-size:90%">
-</li>
--->
-</ul>
-
-<div id="warrior" class="class_group">
-<div class="class_info">
-<h2>戦士 Lv<span class="lv_h2">1</span></h2>
-<dl>
-<dt class="label_lv">レベル</dt>
-<dd class="lv_select"><select size="1"></select></dd>
-<dt>獲得経験値:</dt><dd class="exp">0</dd>
-<dt>スキルポイント:</dt><dd class="pts">0 / 0</dd>
-<dt class="error" style="display:none">必要レベル:</dt><dd class="error" style="display:none"><span class="req_lv">1</span> (あと <span class="exp_remain">0</span> exp)</dd>
-</dl>
-</div>
-</div>
-
-<div id="priest" class="class_group">
-<div class="class_info">
-<h2>僧侶 Lv<span class="lv_h2">1</span></h2>
-<dl>
-<dt class="label_lv">レベル</dt>
-<dd class="lv_select"><select size="1"></select></dd>
-<dt>獲得経験値:</dt><dd class="exp">0</dd>
-<dt>スキルポイント:</dt><dd class="pts">0 / 0</dd>
-<dt class="error" style="display:none">必要レベル:</dt><dd class="error" style="display:none"><span class="req_lv">1</span> (あと <span class="exp_remain">0</span> exp)</dd>
-</dl>
-</div>
-</div>
-
-<div id="mage" class="class_group">
-<div class="class_info">
-<h2>魔法使い Lv<span class="lv_h2">1</span></h2>
-<dl>
-<dt class="label_lv">レベル</dt>
-<dd class="lv_select"><select size="1"></select></dd>
-<dt>獲得経験値:</dt><dd class="exp">0</dd>
-<dt>スキルポイント:</dt><dd class="pts">0 / 0</dd>
-<dt class="error" style="display:none">必要レベル:</dt><dd class="error" style="display:none"><span class="req_lv">1</span> (あと <span class="exp_remain">0</span> exp)</dd>
-</dl>
-</div>
-</div>
-
-<div id="martialartist" class="class_group">
-<div class="class_info">
-<h2>武闘家 Lv<span class="lv_h2">1</span></h2>
-<dl>
-<dt class="label_lv">レベル</dt>
-<dd class="lv_select"><select size="1"></select></dd>
-<dt>獲得経験値:</dt><dd class="exp">0</dd>
-<dt>スキルポイント:</dt><dd class="pts">0 / 0</dd>
-<dt class="error" style="display:none">必要レベル:</dt><dd class="error" style="display:none"><span class="req_lv">1</span> (あと <span class="exp_remain">0</span> exp)</dd>
-</dl>
-</div>
-</div>
-
-<div id="thief" class="class_group">
-<div class="class_info">
-<h2>盗賊 Lv<span class="lv_h2">1</span></h2>
-<dl>
-<dt class="label_lv">レベル</dt>
-<dd class="lv_select"><select size="1"></select></dd>
-<dt>獲得経験値:</dt><dd class="exp">0</dd>
-<dt>スキルポイント:</dt><dd class="pts">0 / 0</dd>
-<dt class="error" style="display:none">必要レベル:</dt><dd class="error" style="display:none"><span class="req_lv">1</span> (あと <span class="exp_remain">0</span> exp)</dd>
-</dl>
-</div>
-</div>
-
-<div id="minstrel" class="class_group">
-<div class="class_info">
-<h2>旅芸人 Lv<span class="lv_h2">1</span></h2>
-<dl>
-<dt class="label_lv">レベル</dt>
-<dd class="lv_select"><select size="1"></select></dd>
-<dt>獲得経験値:</dt><dd class="exp">0</dd>
-<dt>スキルポイント:</dt><dd class="pts">0 / 0</dd>
-<dt class="error" style="display:none">必要レベル:</dt><dd class="error" style="display:none"><span class="req_lv">1</span> (あと <span class="exp_remain">0</span> exp)</dd>
-</dl>
-</div>
-</div>
-
-<div id="paladin" class="class_group">
-<div class="class_info">
-<h2>パラディン Lv<span class="lv_h2">1</span></h2>
-<dl>
-<dt class="label_lv">レベル</dt>
-<dd class="lv_select"><select size="1"></select></dd>
-<dt>獲得経験値:</dt><dd class="exp">0</dd>
-<dt>スキルポイント:</dt><dd class="pts">0 / 0</dd>
-<dt class="error" style="display:none">必要レベル:</dt><dd class="error" style="display:none"><span class="req_lv">1</span> (あと <span class="exp_remain">0</span> exp)</dd>
-</dl>
-</div>
-</div>
-
-<div id="ranger" class="class_group">
-<div class="class_info">
-<h2>レンジャー Lv<span class="lv_h2">1</span></h2>
-<dl>
-<dt class="label_lv">レベル</dt>
-<dd class="lv_select"><select size="1"></select></dd>
-<dt>獲得経験値:</dt><dd class="exp">0</dd>
-<dt>スキルポイント:</dt><dd class="pts">0 / 0</dd>
-<dt class="error" style="display:none">必要レベル:</dt><dd class="error" style="display:none"><span class="req_lv">1</span> (あと <span class="exp_remain">0</span> exp)</dd>
-</dl>
-</div>
-</div>
-
-<div id="footer">
-<ul>
-	<li>スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』のスキルポイント割り振りを検討するためのシミュレータです。</li>
-	<li>要JavaScript。Google Chrome, Firefox, IE8以上で動作確認。IE対応は後回しになりがちです。</li>
-	<li>使い方:
-		<ul>
-			<li>プルダウンで職業レベルを選択。括弧内はそのレベルの累計スキルポイント。</li>
-			<li>スキルポイントはスキル一覧の項目をクリックすると必要なポイントが自動入力されます。矢印ボタンで1ずつ調整、キーボードからの直接入力も可能。</li>
-			<li>「保存用URL」の生成ボタンで表示されるURLは、アクセスすることで現在の状態を再現できます。メモ用・掲示板に貼る用などにどうぞ。</li>
-			<li>レベル欄あたりにカーソルを持っていくと「おりたたむ」ボタンが出てきて、クリックすると簡易表示になります。そのまま操作も可能。「すべておりたたむ」でレベル・スキルを一覧するのがおすすめです。</li>
-		</ul>
-	</li>
-	<li>履歴:
-		<ul>
-			<li>2012/11/8 v1.1.1 経験値テーブルを公式ガイドブックおよびその<a href="http://www.square-enix.co.jp/magazine/gamebooks/dq/10_guide01/seigohyou.html" target="_blank">正誤表</a>に準拠</li>
-			<li>2012/10/12 v1.1 スキル一覧ポイント時にスキル詳細をヒント表示</li>
-			<li>2012/10/11 v1.0.2 新職業の経験値テーブルの予測値を1.333倍の四捨五入に変更、Lv18までの実測値を反映。</li>
-			<li>2012/10/10 v1.0.1 新職業の経験値テーブルが従来職と異なるのに暫定対応（1.33倍として計算）。職業の順序を転職時の並び順に準拠。</li>
-			<li>2012/10/9 v1.0 大型バージョンアップに対応（新職業追加、レベルキャップ50→55）。ページ読込の高速化。</li>
-			<li>2012/9/18 v0.6.3 <del>おまけ機能追加。不足経験値が1以上のとき数値をダブルクリックすると……</del>（v1.0で廃止）</li>
-			<li>2012/8/23 v0.6.2 パラメータ付きURLで読み込んだときの生成URLが異常になるバグ修正</li>
-			<li>2012/8/23 v0.6.1 かいふく魔力合計に反映されないバグ修正</li>
-			<li>2012/8/21 v0.6 おりたたむ・ひろげるボタン追加</li>
-			<li>2012/8/21 v0.5.2 まほうスキル全般、ムチの攻撃力+・みやぶるの必要ポイントを訂正</li>
-			<li>2012/8/21 v0.5.1 ツメスキルのこうげき力+を訂正</li>
-			<li>2012/8/21 v0.5 パッシブ合計の表示、保存用URLの生成・読込</li>
-			<li>2012/8/20 v0.2 スキル一覧クリックでポイント自動入力</li>
-			<li>2012/8/20 v0.1 暫定公開</li>
-		</ul>
-	</li>
-	<li>ToDo:
-		<ul>
-			<li><del>スキル一覧ポイント時にスキル詳細をヒント表示する</del>(v1.1)</li>
-			<li><del>スキル一覧クリックでスキルポイントを自動設定する</del>(v0.2)</li>
-			<li><del>パッシブ合計を表示する</del>(v0.5)</li>
-			<li><del>設定値の再現URLを生成・読込</del>(v0.5)</li>
-		</ul>
-	</li>
-	<li>ご意見・ご要望は下記まで。</li>
-</ul>
-<address><p id="contact">連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a></p></address>
-</div>
-
-</div><!-- #body_content -->
-
-<div id="ad_sidebar">
-<h2>DQ10ツールリンク</h2>
-<ul>
-	<li><a href="http://dqx.herokuapp.com/" target="_blank">DQXレシピ君</a></li>
-	<li><a href="http://dqx-bazaar.herokuapp.com/" target="_blank">ドラクエ10アイテム価格調査隊</a></li>
-	<li><a href="http://www4.atpages.jp/studiogobli/php/dqxm/" target="_blank">DQ10 ソロ用</a></li>
-</ul>
-<!--
-<span><a href="http://www.amazon.co.jp/gp/product/4757537484/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=4757537484&linkCode=as2&tag=marbleland-22" target="_blank"><img border="0" src="http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&ASIN=4757537484&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=marbleland-22" ></a><img src="http://www.assoc-amazon.jp/e/ir?t=marbleland-22&l=as2&o=9&a=4757537484" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></span>
-<span><a href="http://www.amazon.co.jp/gp/product/B009K1ECXQ/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=B009K1ECXQ&linkCode=as2&tag=marbleland-22" target="_blank"><img border="0" src="http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&ASIN=B009K1ECXQ&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=marbleland-22" ></a><img src="http://www.assoc-amazon.jp/e/ir?t=marbleland-22&l=as2&o=9&a=B009K1ECXQ" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></span>
-<span><a href="http://www.amazon.co.jp/gp/product/B008Z1E48K/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=B008Z1E48K&linkCode=as2&tag=marbleland-22" target="_blank"><img border="0" src="http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&ASIN=B008Z1E48K&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=marbleland-22" ></a><img src="http://www.assoc-amazon.jp/e/ir?t=marbleland-22&l=as2&o=9&a=B008Z1E48K" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></span>
-<span><a href="http://www.amazon.co.jp/gp/product/B009Z5XKJO/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=B009Z5XKJO&linkCode=as2&tag=marbleland-22" target="_blank"><img border="0" src="http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&ASIN=B009Z5XKJO&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=marbleland-22" ></a><img src="http://www.assoc-amazon.jp/e/ir?t=marbleland-22&l=as2&o=9&a=B009Z5XKJO" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></span>
-<span><a href="http://www.amazon.co.jp/gp/product/B002C1AUP0/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=B002C1AUP0&linkCode=as2&tag=marbleland-22" target="_blank"><img border="0" src="http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&ASIN=B002C1AUP0&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=marbleland-22" ></a><img src="http://www.assoc-amazon.jp/e/ir?t=marbleland-22&l=as2&o=9&a=B002C1AUP0" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></span>
-<span><a href="http://www.amazon.co.jp/gp/product/B008DRIR20/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=B008DRIR20&linkCode=as2&tag=marbleland-22" target="_blank"><img border="0" src="http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&ASIN=B008DRIR20&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=marbleland-22" ></a><img src="http://www.assoc-amazon.jp/e/ir?t=marbleland-22&l=as2&o=9&a=B008DRIR20" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></span>
-<span><a href="http://www.amazon.co.jp/gp/product/B000MSMM06/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=B000MSMM06&linkCode=as2&tag=marbleland-22" target="_blank"><img border="0" src="http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&ASIN=B000MSMM06&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=marbleland-22" ></a><img src="http://www.assoc-amazon.jp/e/ir?t=marbleland-22&l=as2&o=9&a=B000MSMM06" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></span>
-<span><a href="http://www.amazon.co.jp/gp/product/B0094E58C8/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=B0094E58C8&linkCode=as2&tag=marbleland-22" target="_blank"><img border="0" src="http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&ASIN=B0094E58C8&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=marbleland-22" ></a><img src="http://www.assoc-amazon.jp/e/ir?t=marbleland-22&l=as2&o=9&a=B0094E58C8" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></span>
-<span><a href="http://www.amazon.co.jp/gp/product/B0050MLQOC/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=B0050MLQOC&linkCode=as2&tag=marbleland-22" target="_blank"><img border="0" src="http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&ASIN=B0050MLQOC&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=marbleland-22" ></a><img src="http://www.assoc-amazon.jp/e/ir?t=marbleland-22&l=as2&o=9&a=B0050MLQOC" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></span>
-<span><a href="http://www.amazon.co.jp/gp/product/B004W1KCCO/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=B004W1KCCO&linkCode=as2&tag=marbleland-22" target="_blank"><img border="0" src="http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&ASIN=B004W1KCCO&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=marbleland-22" ></a><img src="http://www.assoc-amazon.jp/e/ir?t=marbleland-22&l=as2&o=9&a=B004W1KCCO" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></span>
-<span><a href="http://www.amazon.co.jp/gp/product/B0055FVJLY/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=B0055FVJLY&linkCode=as2&tag=marbleland-22" target="_blank"><img border="0" src="http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&ASIN=B0055FVJLY&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=marbleland-22" ></a><img src="http://www.assoc-amazon.jp/e/ir?t=marbleland-22&l=as2&o=9&a=B0055FVJLY" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></span>
-<span><a href="http://www.amazon.co.jp/gp/product/B000KF5LS6/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=B000KF5LS6&linkCode=as2&tag=marbleland-22" target="_blank"><img border="0" src="http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&ASIN=B000KF5LS6&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=marbleland-22" ></a><img src="http://www.assoc-amazon.jp/e/ir?t=marbleland-22&l=as2&o=9&a=B000KF5LS6" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></span>
-<span><a href="http://www.amazon.co.jp/gp/product/475753583X/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=475753583X&linkCode=as2&tag=marbleland-22" target="_blank"><img border="0" src="http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&ASIN=475753583X&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=marbleland-22" ></a><img src="http://www.assoc-amazon.jp/e/ir?t=marbleland-22&l=as2&o=9&a=475753583X" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></span>
-<span><a href="http://www.amazon.co.jp/gp/product/B009ID1VYO/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=B009ID1VYO&linkCode=as2&tag=marbleland-22" target="_blank"><img border="0" src="http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&ASIN=B009ID1VYO&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=marbleland-22" ></a><img src="http://www.assoc-amazon.jp/e/ir?t=marbleland-22&l=as2&o=9&a=B009ID1VYO" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></span>
-<span><a href="http://www.amazon.co.jp/gp/product/B002UM5TL6/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=B002UM5TL6&linkCode=as2&tag=marbleland-22"><img border="0" src="http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&ASIN=B002UM5TL6&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=marbleland-22" ></a><img src="http://www.assoc-amazon.jp/e/ir?t=marbleland-22&l=as2&o=9&a=B002UM5TL6" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></span>
--->
-</div>
-
-<!-- Amazon link enhancer -->
-<!--
-<script type="text/javascript" src="http://wms.assoc-amazon.jp/20070822/JP/js/link-enhancer-common.js?tag=marbleland-22">
-</script>
-<noscript>
-    <img src="http://wms.assoc-amazon.jp/20070822/JP/img/noscript.gif?tag=marbleland-22" alt="" />
-</noscript>
--->
-
-</body>
+  <head>
+    <meta charset='UTF-8' />
+    <meta content='text/css' http-equiv='Content-Style-Type' />
+    <meta content='text/javascript' http-equiv='Content-Script-Type' />
+    <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical' />
+    <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description' />
+    <title>DQ10 スキルシミュレータ</title>
+    <link href='./dq10skill.css' rel='stylesheet' type='text/css' />
+    <link href='css/smoothness/jquery-ui-1.9.1.custom.min.css' rel='stylesheet' type='text/css' />
+    <script src='js/jquery-1.8.2.js' type='text/javascript'></script>
+    <script src='js/jquery.socialbutton-1.9.0.js' type='text/javascript'></script>
+    <script src='js/jquery-ui-1.9.1.custom.min.js' type='text/javascript'></script>
+    <script src='./dq10skill.js' type='text/javascript'></script>
+    <!--
+      <script type='text/javascript'>
+        //<![CDATA[
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-5127088-4']);
+          _gaq.push(['_trackPageview']);
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+        //]]>
+      </script>
+    -->
+  </head>
+  <body>
+    <div id='header'>
+      <div id='headerleft'>
+        <h1><a href='http://cpro.jp/dq10/skillsimulator/'>DQ10 スキルシミュレータ</a></h1>
+        <div id='snsbuttons'>
+          <div class='snsbutton' id='tw-share'></div>
+          <div class='snsbutton' id='fb-like'></div>
+          <div class='snsbutton' id='g-plusone'></div>
+          <p id='toggle_buttons'></p>
+        </div>
+      </div>
+      <table id='total'>
+        <tr>
+          <td>獲得経験値合計:</td>
+          <td class='total_pts' id='total_exp'>0</td>
+          <td>さいだいHP:</td>
+          <td class='total_pts' id='total_maxhp'>0</td>
+          <td>ちから:</td>
+          <td class='total_pts' id='total_pow'>0</td>
+          <td>きようさ:</td>
+          <td class='total_pts' id='total_dex'>0</td>
+          <td>こうげき魔力:</td>
+          <td class='total_pts' id='total_magic'>0</td>
+          <td>みりょく:</td>
+          <td class='total_pts' id='total_charm'>0</td>
+        </tr>
+        <tr>
+          <td>不足経験値合計:</td>
+          <td class='total_pts' id='total_exp_remain'>0</td>
+          <td>さいだいMP:</td>
+          <td class='total_pts' id='total_maxmp'>0</td>
+          <td>みのまもり:</td>
+          <td class='total_pts' id='total_def'>0</td>
+          <td>すばやさ:</td>
+          <td class='total_pts' id='total_spd'>0</td>
+          <td>かいふく魔力:</td>
+          <td class='total_pts' id='total_heal'>0</td>
+          <td></td>
+          <td class='total_pts'></td>
+        </tr>
+        <tr>
+          <td colspan='12' id='save_url'>
+            保存用URL:
+            <input id='url_text' size='60' type='text' />
+            <input id='produce_url' type='button' value='生成' />
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id='body_content'>
+      <!--
+        <ul id='beta_notice' style='font-size:90%'>
+          <li></li>
+        </ul>
+      -->
+      <div class='class_group' id='warrior'>
+        <div class='class_info'>
+          <h2>
+            戦士
+            Lv<span class='lv_h2'>1</span></h2>
+          <dl>
+            <dt class='label_lv'>レベル</dt>
+            <dd class='lv_select'>
+              <select size='1'></select>
+            </dd>
+            <dt>獲得経験値:</dt>
+            <dd class='exp'>0</dd>
+            <dt>スキルポイント:</dt>
+            <dd class='pts'>0 / 0</dd>
+            <dt class='error' style='display:none'>必要レベル:</dt>
+            <dd class='error' style='display:none'>
+              <span class='req_lv'>1</span>（あと<span class='exp_remain'>0</span> exp）
+            </dd>
+          </dl>
+        </div><table class='sword skill_table'>
+          <caption>片手剣:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='sword_0'><td class='skill_pt'>3</td><td class='skill_name'>かえん斬り</td></tr>
+          <tr class='sword_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='sword_2'><td class='skill_pt'>13</td><td class='skill_name'>ドラゴン斬り</td></tr>
+          <tr class='sword_3'><td class='skill_pt'>22</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='sword_4'><td class='skill_pt'>35</td><td class='skill_name'>ミラクルソード</td></tr>
+          <tr class='sword_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='sword_6'><td class='skill_pt'>58</td><td class='skill_name'>はやぶさ斬り</td></tr>
+          <tr class='sword_7'><td class='skill_pt'>76</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+          <tr class='sword_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='sword_9'><td class='skill_pt'>100</td><td class='skill_name'>ギガスラッシュ</td></tr>
+        </table><table class='twohandedsword skill_table'>
+          <caption>両手剣:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='twohandedsword_0'><td class='skill_pt'>3</td><td class='skill_name'>ブレードガード</td></tr>
+          <tr class='twohandedsword_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='twohandedsword_2'><td class='skill_pt'>13</td><td class='skill_name'>ドラゴンスラッシュ</td></tr>
+          <tr class='twohandedsword_3'><td class='skill_pt'>22</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='twohandedsword_4'><td class='skill_pt'>35</td><td class='skill_name'>ぶんまわし</td></tr>
+          <tr class='twohandedsword_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+          <tr class='twohandedsword_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='twohandedsword_7'><td class='skill_pt'>76</td><td class='skill_name'>フリーズブレード</td></tr>
+          <tr class='twohandedsword_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
+          <tr class='twohandedsword_9'><td class='skill_pt'>100</td><td class='skill_name'>渾身斬り</td></tr>
+        </table><table class='axe skill_table'>
+          <caption>オノ:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='axe_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='axe_1'><td class='skill_pt'>7</td><td class='skill_name'>たいぼく斬</td></tr>
+          <tr class='axe_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='axe_3'><td class='skill_pt'>22</td><td class='skill_name'>蒼天魔斬</td></tr>
+          <tr class='axe_4'><td class='skill_pt'>35</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='axe_5'><td class='skill_pt'>42</td><td class='skill_name'>かぶと割り</td></tr>
+          <tr class='axe_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='axe_7'><td class='skill_pt'>76</td><td class='skill_name'>まじん斬り</td></tr>
+          <tr class='axe_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
+          <tr class='axe_9'><td class='skill_pt'>100</td><td class='skill_name'>オノむそう</td></tr>
+        </table><table class='shield skill_table'>
+          <caption>盾:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='shield_0'><td class='skill_pt'>6</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_1'><td class='skill_pt'>12</td><td class='skill_name'>ぼうぎょ</td></tr>
+          <tr class='shield_2'><td class='skill_pt'>18</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_3'><td class='skill_pt'>25</td><td class='skill_name'>ビッグシールド</td></tr>
+          <tr class='shield_4'><td class='skill_pt'>32</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_5'><td class='skill_pt'>40</td><td class='skill_name'>シールドアタック</td></tr>
+          <tr class='shield_6'><td class='skill_pt'>52</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_7'><td class='skill_pt'>66</td><td class='skill_name'>まもりのたて</td></tr>
+          <tr class='shield_8'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
+          <tr class='shield_9'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
+        </table><table class='courage skill_table'>
+          <caption>ゆうかん:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='courage_0'><td class='skill_pt'>8</td><td class='skill_name'>かばう（専）</td></tr>
+          <tr class='courage_1'><td class='skill_pt'>16</td><td class='skill_name'>常時みのまもり+5</td></tr>
+          <tr class='courage_2'><td class='skill_pt'>28</td><td class='skill_name'>常時ちから+5</td></tr>
+          <tr class='courage_3'><td class='skill_pt'>40</td><td class='skill_name'>ロストアタック</td></tr>
+          <tr class='courage_4'><td class='skill_pt'>48</td><td class='skill_name'>常時みのまもり+5</td></tr>
+          <tr class='courage_5'><td class='skill_pt'>56</td><td class='skill_name'>常時ちから+5</td></tr>
+          <tr class='courage_6'><td class='skill_pt'>70</td><td class='skill_name'>たいあたり（専）</td></tr>
+          <tr class='courage_7'><td class='skill_pt'>80</td><td class='skill_name'>常時さいだいHP+30</td></tr>
+          <tr class='courage_8'><td class='skill_pt'>90</td><td class='skill_name'>常時みのまもり+10</td></tr>
+          <tr class='courage_9'><td class='skill_pt'>100</td><td class='skill_name'>やいばくだき（専）</td></tr>
+        </table></div>
+      <div class='class_group' id='priest'>
+        <div class='class_info'>
+          <h2>
+            僧侶
+            Lv<span class='lv_h2'>1</span></h2>
+          <dl>
+            <dt class='label_lv'>レベル</dt>
+            <dd class='lv_select'>
+              <select size='1'></select>
+            </dd>
+            <dt>獲得経験値:</dt>
+            <dd class='exp'>0</dd>
+            <dt>スキルポイント:</dt>
+            <dd class='pts'>0 / 0</dd>
+            <dt class='error' style='display:none'>必要レベル:</dt>
+            <dd class='error' style='display:none'>
+              <span class='req_lv'>1</span>（あと<span class='exp_remain'>0</span> exp）
+            </dd>
+          </dl>
+        </div><table class='spear skill_table'>
+          <caption>ヤリ:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='spear_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='spear_1'><td class='skill_pt'>7</td><td class='skill_name'>けもの突き</td></tr>
+          <tr class='spear_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時武器ガード率+3%</td></tr>
+          <tr class='spear_3'><td class='skill_pt'>22</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='spear_4'><td class='skill_pt'>35</td><td class='skill_name'>雷鳴突き</td></tr>
+          <tr class='spear_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時武器ガード率+3%</td></tr>
+          <tr class='spear_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='spear_7'><td class='skill_pt'>76</td><td class='skill_name'>一閃突き</td></tr>
+          <tr class='spear_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
+          <tr class='spear_9'><td class='skill_pt'>100</td><td class='skill_name'>狼牙突き</td></tr>
+        </table><table class='stick skill_table'>
+          <caption>スティック:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='stick_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時MP吸収率+2%</td></tr>
+          <tr class='stick_1'><td class='skill_pt'>7</td><td class='skill_name'>マジステッキ</td></tr>
+          <tr class='stick_2'><td class='skill_pt'>13</td><td class='skill_name'>戦闘勝利時MP小回復</td></tr>
+          <tr class='stick_3'><td class='skill_pt'>21</td><td class='skill_name'>装備時かいふく魔力+30</td></tr>
+          <tr class='stick_4'><td class='skill_pt'>31</td><td class='skill_name'>デビルンチャーム</td></tr>
+          <tr class='stick_5'><td class='skill_pt'>44</td><td class='skill_name'>装備時さいだいMP+30</td></tr>
+          <tr class='stick_6'><td class='skill_pt'>57</td><td class='skill_name'>装備時MP吸収率+2%</td></tr>
+          <tr class='stick_7'><td class='skill_pt'>70</td><td class='skill_name'>パニパニハニー</td></tr>
+          <tr class='stick_8'><td class='skill_pt'>84</td><td class='skill_name'>装備時かいふく魔力+30</td></tr>
+          <tr class='stick_9'><td class='skill_pt'>100</td><td class='skill_name'>キラキラポーン</td></tr>
+        </table><table class='staff skill_table'>
+          <caption>棍:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='staff_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='staff_1'><td class='skill_pt'>7</td><td class='skill_name'>足ばらい</td></tr>
+          <tr class='staff_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+          <tr class='staff_3'><td class='skill_pt'>22</td><td class='skill_name'>黄泉送り</td></tr>
+          <tr class='staff_4'><td class='skill_pt'>35</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='staff_5'><td class='skill_pt'>42</td><td class='skill_name'>なぎはらい</td></tr>
+          <tr class='staff_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時みかわし率+4%</td></tr>
+          <tr class='staff_7'><td class='skill_pt'>76</td><td class='skill_name'>氷結らんげき</td></tr>
+          <tr class='staff_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
+          <tr class='staff_9'><td class='skill_pt'>100</td><td class='skill_name'>天地のかまえ</td></tr>
+        </table><table class='shield skill_table'>
+          <caption>盾:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='shield_0'><td class='skill_pt'>6</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_1'><td class='skill_pt'>12</td><td class='skill_name'>ぼうぎょ</td></tr>
+          <tr class='shield_2'><td class='skill_pt'>18</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_3'><td class='skill_pt'>25</td><td class='skill_name'>ビッグシールド</td></tr>
+          <tr class='shield_4'><td class='skill_pt'>32</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_5'><td class='skill_pt'>40</td><td class='skill_name'>シールドアタック</td></tr>
+          <tr class='shield_6'><td class='skill_pt'>52</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_7'><td class='skill_pt'>66</td><td class='skill_name'>まもりのたて</td></tr>
+          <tr class='shield_8'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
+          <tr class='shield_9'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
+        </table><table class='faith skill_table'>
+          <caption>しんこう心:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='faith_0'><td class='skill_pt'>8</td><td class='skill_name'>おはらい</td></tr>
+          <tr class='faith_1'><td class='skill_pt'>16</td><td class='skill_name'>常時かいふく魔力+10</td></tr>
+          <tr class='faith_2'><td class='skill_pt'>28</td><td class='skill_name'>マホトラのころも（専）</td></tr>
+          <tr class='faith_3'><td class='skill_pt'>40</td><td class='skill_name'>常時さいだいMP+10</td></tr>
+          <tr class='faith_4'><td class='skill_pt'>48</td><td class='skill_name'>聖女の守り（専）</td></tr>
+          <tr class='faith_5'><td class='skill_pt'>56</td><td class='skill_name'>常時かいふく魔力+10</td></tr>
+          <tr class='faith_6'><td class='skill_pt'>70</td><td class='skill_name'>天使の守り（専）</td></tr>
+          <tr class='faith_7'><td class='skill_pt'>80</td><td class='skill_name'>常時さいだいMP+10</td></tr>
+          <tr class='faith_8'><td class='skill_pt'>90</td><td class='skill_name'>常時かいふく魔力+10</td></tr>
+          <tr class='faith_9'><td class='skill_pt'>100</td><td class='skill_name'>聖なる祈り（専）</td></tr>
+        </table></div>
+      <div class='class_group' id='mage'>
+        <div class='class_info'>
+          <h2>
+            魔法使い
+            Lv<span class='lv_h2'>1</span></h2>
+          <dl>
+            <dt class='label_lv'>レベル</dt>
+            <dd class='lv_select'>
+              <select size='1'></select>
+            </dd>
+            <dt>獲得経験値:</dt>
+            <dd class='exp'>0</dd>
+            <dt>スキルポイント:</dt>
+            <dd class='pts'>0 / 0</dd>
+            <dt class='error' style='display:none'>必要レベル:</dt>
+            <dd class='error' style='display:none'>
+              <span class='req_lv'>1</span>（あと<span class='exp_remain'>0</span> exp）
+            </dd>
+          </dl>
+        </div><table class='wand skill_table'>
+          <caption>両手杖:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='wand_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時MP吸収率+2%</td></tr>
+          <tr class='wand_1'><td class='skill_pt'>7</td><td class='skill_name'>悪魔ばらい</td></tr>
+          <tr class='wand_2'><td class='skill_pt'>13</td><td class='skill_name'>戦闘勝利時MP小回復</td></tr>
+          <tr class='wand_3'><td class='skill_pt'>21</td><td class='skill_name'>早詠みの杖</td></tr>
+          <tr class='wand_4'><td class='skill_pt'>31</td><td class='skill_name'>装備時こうげき魔力+30</td></tr>
+          <tr class='wand_5'><td class='skill_pt'>44</td><td class='skill_name'>しゅくふくの杖</td></tr>
+          <tr class='wand_6'><td class='skill_pt'>57</td><td class='skill_name'>装備時こうげき魔力+30</td></tr>
+          <tr class='wand_7'><td class='skill_pt'>70</td><td class='skill_name'>暴走魔法陣</td></tr>
+          <tr class='wand_8'><td class='skill_pt'>84</td><td class='skill_name'>装備時さいだいMP+100</td></tr>
+          <tr class='wand_9'><td class='skill_pt'>100</td><td class='skill_name'>戦闘勝利時MP中回復</td></tr>
+        </table><table class='knife skill_table'>
+          <caption>短剣:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='knife_0'><td class='skill_pt'>3</td><td class='skill_name'>キラーブーン</td></tr>
+          <tr class='knife_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='knife_2'><td class='skill_pt'>13</td><td class='skill_name'>スリープダガー</td></tr>
+          <tr class='knife_3'><td class='skill_pt'>22</td><td class='skill_name'>攻撃時たまにMP回復</td></tr>
+          <tr class='knife_4'><td class='skill_pt'>35</td><td class='skill_name'>ヒュプノスハント</td></tr>
+          <tr class='knife_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='knife_6'><td class='skill_pt'>58</td><td class='skill_name'>ヴァイパーファング</td></tr>
+          <tr class='knife_7'><td class='skill_pt'>76</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='knife_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='knife_9'><td class='skill_pt'>100</td><td class='skill_name'>タナトスハント</td></tr>
+        </table><table class='whip skill_table'>
+          <caption>ムチ:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='whip_0'><td class='skill_pt'>3</td><td class='skill_name'>らせん打ち</td></tr>
+          <tr class='whip_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='whip_2'><td class='skill_pt'>13</td><td class='skill_name'>愛のムチ</td></tr>
+          <tr class='whip_3'><td class='skill_pt'>22</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='whip_4'><td class='skill_pt'>35</td><td class='skill_name'>スパークショット</td></tr>
+          <tr class='whip_5'><td class='skill_pt'>42</td><td class='skill_name'>しばり打ち</td></tr>
+          <tr class='whip_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='whip_7'><td class='skill_pt'>76</td><td class='skill_name'>地ばしり打ち</td></tr>
+          <tr class='whip_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時効果範囲+2m</td></tr>
+          <tr class='whip_9'><td class='skill_pt'>100</td><td class='skill_name'>双竜打ち</td></tr>
+        </table><table class='shield skill_table'>
+          <caption>盾:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='shield_0'><td class='skill_pt'>6</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_1'><td class='skill_pt'>12</td><td class='skill_name'>ぼうぎょ</td></tr>
+          <tr class='shield_2'><td class='skill_pt'>18</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_3'><td class='skill_pt'>25</td><td class='skill_name'>ビッグシールド</td></tr>
+          <tr class='shield_4'><td class='skill_pt'>32</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_5'><td class='skill_pt'>40</td><td class='skill_name'>シールドアタック</td></tr>
+          <tr class='shield_6'><td class='skill_pt'>52</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_7'><td class='skill_pt'>66</td><td class='skill_name'>まもりのたて</td></tr>
+          <tr class='shield_8'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
+          <tr class='shield_9'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
+        </table><table class='spellcraft skill_table'>
+          <caption>まほう:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='spellcraft_0'><td class='skill_pt'>8</td><td class='skill_name'>魔結界</td></tr>
+          <tr class='spellcraft_1'><td class='skill_pt'>18</td><td class='skill_name'>常時こうげき魔力+10</td></tr>
+          <tr class='spellcraft_2'><td class='skill_pt'>26</td><td class='skill_name'>常時さいだいMP+10</td></tr>
+          <tr class='spellcraft_3'><td class='skill_pt'>38</td><td class='skill_name'>ぶきみなひかり</td></tr>
+          <tr class='spellcraft_4'><td class='skill_pt'>46</td><td class='skill_name'>呪文ぼうそう率アップ</td></tr>
+          <tr class='spellcraft_5'><td class='skill_pt'>54</td><td class='skill_name'>常時こうげき魔力+10</td></tr>
+          <tr class='spellcraft_6'><td class='skill_pt'>68</td><td class='skill_name'>魔力の息吹（専）</td></tr>
+          <tr class='spellcraft_7'><td class='skill_pt'>78</td><td class='skill_name'>常時こうげき魔力+10</td></tr>
+          <tr class='spellcraft_8'><td class='skill_pt'>88</td><td class='skill_name'>常時さいだいMP+10</td></tr>
+          <tr class='spellcraft_9'><td class='skill_pt'>100</td><td class='skill_name'>魔力かくせい（専）</td></tr>
+        </table></div>
+      <div class='class_group' id='martialartist'>
+        <div class='class_info'>
+          <h2>
+            武闘家
+            Lv<span class='lv_h2'>1</span></h2>
+          <dl>
+            <dt class='label_lv'>レベル</dt>
+            <dd class='lv_select'>
+              <select size='1'></select>
+            </dd>
+            <dt>獲得経験値:</dt>
+            <dd class='exp'>0</dd>
+            <dt>スキルポイント:</dt>
+            <dd class='pts'>0 / 0</dd>
+            <dt class='error' style='display:none'>必要レベル:</dt>
+            <dd class='error' style='display:none'>
+              <span class='req_lv'>1</span>（あと<span class='exp_remain'>0</span> exp）
+            </dd>
+          </dl>
+        </div><table class='claw skill_table'>
+          <caption>ツメ:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='claw_0'><td class='skill_pt'>3</td><td class='skill_name'>ウィングブロウ</td></tr>
+          <tr class='claw_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='claw_2'><td class='skill_pt'>13</td><td class='skill_name'>裂鋼拳</td></tr>
+          <tr class='claw_3'><td class='skill_pt'>22</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='claw_4'><td class='skill_pt'>35</td><td class='skill_name'>必中拳</td></tr>
+          <tr class='claw_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='claw_6'><td class='skill_pt'>58</td><td class='skill_name'>タイガークロー</td></tr>
+          <tr class='claw_7'><td class='skill_pt'>76</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='claw_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='claw_9'><td class='skill_pt'>100</td><td class='skill_name'>ゴールドフィンガー</td></tr>
+        </table><table class='staff skill_table'>
+          <caption>棍:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='staff_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='staff_1'><td class='skill_pt'>7</td><td class='skill_name'>足ばらい</td></tr>
+          <tr class='staff_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+          <tr class='staff_3'><td class='skill_pt'>22</td><td class='skill_name'>黄泉送り</td></tr>
+          <tr class='staff_4'><td class='skill_pt'>35</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='staff_5'><td class='skill_pt'>42</td><td class='skill_name'>なぎはらい</td></tr>
+          <tr class='staff_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時みかわし率+4%</td></tr>
+          <tr class='staff_7'><td class='skill_pt'>76</td><td class='skill_name'>氷結らんげき</td></tr>
+          <tr class='staff_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
+          <tr class='staff_9'><td class='skill_pt'>100</td><td class='skill_name'>天地のかまえ</td></tr>
+        </table><table class='fan skill_table'>
+          <caption>扇:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='fan_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='fan_1'><td class='skill_pt'>7</td><td class='skill_name'>花ふぶき</td></tr>
+          <tr class='fan_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='fan_3'><td class='skill_pt'>22</td><td class='skill_name'>明鏡止水</td></tr>
+          <tr class='fan_4'><td class='skill_pt'>35</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='fan_5'><td class='skill_pt'>42</td><td class='skill_name'>波紋演舞</td></tr>
+          <tr class='fan_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時みとれる+5%</td></tr>
+          <tr class='fan_7'><td class='skill_pt'>76</td><td class='skill_name'>おうぎのまい</td></tr>
+          <tr class='fan_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='fan_9'><td class='skill_pt'>100</td><td class='skill_name'>アゲハ乱舞</td></tr>
+        </table><table class='fisticuffs skill_table'>
+          <caption>格闘:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='fisticuffs_0'><td class='skill_pt'>3</td><td class='skill_name'>素手時こうげき力+10</td></tr>
+          <tr class='fisticuffs_1'><td class='skill_pt'>7</td><td class='skill_name'>石つぶて</td></tr>
+          <tr class='fisticuffs_2'><td class='skill_pt'>12</td><td class='skill_name'>素手時かいしん率+2%</td></tr>
+          <tr class='fisticuffs_3'><td class='skill_pt'>18</td><td class='skill_name'>かまいたち</td></tr>
+          <tr class='fisticuffs_4'><td class='skill_pt'>25</td><td class='skill_name'>素手時こうげき力+20</td></tr>
+          <tr class='fisticuffs_5'><td class='skill_pt'>30</td><td class='skill_name'>せいけん突き</td></tr>
+          <tr class='fisticuffs_6'><td class='skill_pt'>42</td><td class='skill_name'>素手時みかわし率+2%</td></tr>
+          <tr class='fisticuffs_7'><td class='skill_pt'>60</td><td class='skill_name'>ムーンサルト</td></tr>
+          <tr class='fisticuffs_8'><td class='skill_pt'>77</td><td class='skill_name'>素手時こうげき力+40</td></tr>
+          <tr class='fisticuffs_9'><td class='skill_pt'>100</td><td class='skill_name'>ばくれつけん</td></tr>
+        </table><table class='focus skill_table'>
+          <caption>きあい:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='focus_0'><td class='skill_pt'>4</td><td class='skill_name'>ためる（専）</td></tr>
+          <tr class='focus_1'><td class='skill_pt'>12</td><td class='skill_name'>常時きようさ+20</td></tr>
+          <tr class='focus_2'><td class='skill_pt'>22</td><td class='skill_name'>心頭滅却</td></tr>
+          <tr class='focus_3'><td class='skill_pt'>34</td><td class='skill_name'>常時すばやさ+30</td></tr>
+          <tr class='focus_4'><td class='skill_pt'>48</td><td class='skill_name'>不撓不屈（専）</td></tr>
+          <tr class='focus_5'><td class='skill_pt'>56</td><td class='skill_name'>常時ちから+10</td></tr>
+          <tr class='focus_6'><td class='skill_pt'>70</td><td class='skill_name'>おたけび</td></tr>
+          <tr class='focus_7'><td class='skill_pt'>80</td><td class='skill_name'>常時さいだいHP+40</td></tr>
+          <tr class='focus_8'><td class='skill_pt'>90</td><td class='skill_name'>めいそう（専）</td></tr>
+          <tr class='focus_9'><td class='skill_pt'>100</td><td class='skill_name'>ためる弐（専）</td></tr>
+        </table></div>
+      <div class='class_group' id='thief'>
+        <div class='class_info'>
+          <h2>
+            盗賊
+            Lv<span class='lv_h2'>1</span></h2>
+          <dl>
+            <dt class='label_lv'>レベル</dt>
+            <dd class='lv_select'>
+              <select size='1'></select>
+            </dd>
+            <dt>獲得経験値:</dt>
+            <dd class='exp'>0</dd>
+            <dt>スキルポイント:</dt>
+            <dd class='pts'>0 / 0</dd>
+            <dt class='error' style='display:none'>必要レベル:</dt>
+            <dd class='error' style='display:none'>
+              <span class='req_lv'>1</span>（あと<span class='exp_remain'>0</span> exp）
+            </dd>
+          </dl>
+        </div><table class='knife skill_table'>
+          <caption>短剣:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='knife_0'><td class='skill_pt'>3</td><td class='skill_name'>キラーブーン</td></tr>
+          <tr class='knife_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='knife_2'><td class='skill_pt'>13</td><td class='skill_name'>スリープダガー</td></tr>
+          <tr class='knife_3'><td class='skill_pt'>22</td><td class='skill_name'>攻撃時たまにMP回復</td></tr>
+          <tr class='knife_4'><td class='skill_pt'>35</td><td class='skill_name'>ヒュプノスハント</td></tr>
+          <tr class='knife_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='knife_6'><td class='skill_pt'>58</td><td class='skill_name'>ヴァイパーファング</td></tr>
+          <tr class='knife_7'><td class='skill_pt'>76</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='knife_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='knife_9'><td class='skill_pt'>100</td><td class='skill_name'>タナトスハント</td></tr>
+        </table><table class='whip skill_table'>
+          <caption>ムチ:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='whip_0'><td class='skill_pt'>3</td><td class='skill_name'>らせん打ち</td></tr>
+          <tr class='whip_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='whip_2'><td class='skill_pt'>13</td><td class='skill_name'>愛のムチ</td></tr>
+          <tr class='whip_3'><td class='skill_pt'>22</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='whip_4'><td class='skill_pt'>35</td><td class='skill_name'>スパークショット</td></tr>
+          <tr class='whip_5'><td class='skill_pt'>42</td><td class='skill_name'>しばり打ち</td></tr>
+          <tr class='whip_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='whip_7'><td class='skill_pt'>76</td><td class='skill_name'>地ばしり打ち</td></tr>
+          <tr class='whip_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時効果範囲+2m</td></tr>
+          <tr class='whip_9'><td class='skill_pt'>100</td><td class='skill_name'>双竜打ち</td></tr>
+        </table><table class='claw skill_table'>
+          <caption>ツメ:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='claw_0'><td class='skill_pt'>3</td><td class='skill_name'>ウィングブロウ</td></tr>
+          <tr class='claw_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='claw_2'><td class='skill_pt'>13</td><td class='skill_name'>裂鋼拳</td></tr>
+          <tr class='claw_3'><td class='skill_pt'>22</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='claw_4'><td class='skill_pt'>35</td><td class='skill_name'>必中拳</td></tr>
+          <tr class='claw_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='claw_6'><td class='skill_pt'>58</td><td class='skill_name'>タイガークロー</td></tr>
+          <tr class='claw_7'><td class='skill_pt'>76</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='claw_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='claw_9'><td class='skill_pt'>100</td><td class='skill_name'>ゴールドフィンガー</td></tr>
+        </table><table class='fisticuffs skill_table'>
+          <caption>格闘:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='fisticuffs_0'><td class='skill_pt'>3</td><td class='skill_name'>素手時こうげき力+10</td></tr>
+          <tr class='fisticuffs_1'><td class='skill_pt'>7</td><td class='skill_name'>石つぶて</td></tr>
+          <tr class='fisticuffs_2'><td class='skill_pt'>12</td><td class='skill_name'>素手時かいしん率+2%</td></tr>
+          <tr class='fisticuffs_3'><td class='skill_pt'>18</td><td class='skill_name'>かまいたち</td></tr>
+          <tr class='fisticuffs_4'><td class='skill_pt'>25</td><td class='skill_name'>素手時こうげき力+20</td></tr>
+          <tr class='fisticuffs_5'><td class='skill_pt'>30</td><td class='skill_name'>せいけん突き</td></tr>
+          <tr class='fisticuffs_6'><td class='skill_pt'>42</td><td class='skill_name'>素手時みかわし率+2%</td></tr>
+          <tr class='fisticuffs_7'><td class='skill_pt'>60</td><td class='skill_name'>ムーンサルト</td></tr>
+          <tr class='fisticuffs_8'><td class='skill_pt'>77</td><td class='skill_name'>素手時こうげき力+40</td></tr>
+          <tr class='fisticuffs_9'><td class='skill_pt'>100</td><td class='skill_name'>ばくれつけん</td></tr>
+        </table><table class='acquisitiveness skill_table'>
+          <caption>おたから:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='acquisitiveness_0'><td class='skill_pt'>8</td><td class='skill_name'>ぬすむ（専）</td></tr>
+          <tr class='acquisitiveness_1'><td class='skill_pt'>18</td><td class='skill_name'>みやぶる</td></tr>
+          <tr class='acquisitiveness_2'><td class='skill_pt'>26</td><td class='skill_name'>おたからさがし（専）</td></tr>
+          <tr class='acquisitiveness_3'><td class='skill_pt'>38</td><td class='skill_name'>常時すばやさ+30</td></tr>
+          <tr class='acquisitiveness_4'><td class='skill_pt'>46</td><td class='skill_name'>常時きようさ+20</td></tr>
+          <tr class='acquisitiveness_5'><td class='skill_pt'>54</td><td class='skill_name'>バナナトラップ（専）</td></tr>
+          <tr class='acquisitiveness_6'><td class='skill_pt'>68</td><td class='skill_name'>常時すばやさ+30</td></tr>
+          <tr class='acquisitiveness_7'><td class='skill_pt'>78</td><td class='skill_name'>メガボンバー（専）</td></tr>
+          <tr class='acquisitiveness_8'><td class='skill_pt'>82</td><td class='skill_name'>常時すばやさ+30</td></tr>
+          <tr class='acquisitiveness_9'><td class='skill_pt'>100</td><td class='skill_name'>しんだふり</td></tr>
+        </table></div>
+      <div class='class_group' id='minstrel'>
+        <div class='class_info'>
+          <h2>
+            旅芸人
+            Lv<span class='lv_h2'>1</span></h2>
+          <dl>
+            <dt class='label_lv'>レベル</dt>
+            <dd class='lv_select'>
+              <select size='1'></select>
+            </dd>
+            <dt>獲得経験値:</dt>
+            <dd class='exp'>0</dd>
+            <dt>スキルポイント:</dt>
+            <dd class='pts'>0 / 0</dd>
+            <dt class='error' style='display:none'>必要レベル:</dt>
+            <dd class='error' style='display:none'>
+              <span class='req_lv'>1</span>（あと<span class='exp_remain'>0</span> exp）
+            </dd>
+          </dl>
+        </div><table class='fan skill_table'>
+          <caption>扇:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='fan_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='fan_1'><td class='skill_pt'>7</td><td class='skill_name'>花ふぶき</td></tr>
+          <tr class='fan_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='fan_3'><td class='skill_pt'>22</td><td class='skill_name'>明鏡止水</td></tr>
+          <tr class='fan_4'><td class='skill_pt'>35</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='fan_5'><td class='skill_pt'>42</td><td class='skill_name'>波紋演舞</td></tr>
+          <tr class='fan_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時みとれる+5%</td></tr>
+          <tr class='fan_7'><td class='skill_pt'>76</td><td class='skill_name'>おうぎのまい</td></tr>
+          <tr class='fan_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='fan_9'><td class='skill_pt'>100</td><td class='skill_name'>アゲハ乱舞</td></tr>
+        </table><table class='staff skill_table'>
+          <caption>棍:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='staff_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='staff_1'><td class='skill_pt'>7</td><td class='skill_name'>足ばらい</td></tr>
+          <tr class='staff_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+          <tr class='staff_3'><td class='skill_pt'>22</td><td class='skill_name'>黄泉送り</td></tr>
+          <tr class='staff_4'><td class='skill_pt'>35</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='staff_5'><td class='skill_pt'>42</td><td class='skill_name'>なぎはらい</td></tr>
+          <tr class='staff_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時みかわし率+4%</td></tr>
+          <tr class='staff_7'><td class='skill_pt'>76</td><td class='skill_name'>氷結らんげき</td></tr>
+          <tr class='staff_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
+          <tr class='staff_9'><td class='skill_pt'>100</td><td class='skill_name'>天地のかまえ</td></tr>
+        </table><table class='knife skill_table'>
+          <caption>短剣:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='knife_0'><td class='skill_pt'>3</td><td class='skill_name'>キラーブーン</td></tr>
+          <tr class='knife_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='knife_2'><td class='skill_pt'>13</td><td class='skill_name'>スリープダガー</td></tr>
+          <tr class='knife_3'><td class='skill_pt'>22</td><td class='skill_name'>攻撃時たまにMP回復</td></tr>
+          <tr class='knife_4'><td class='skill_pt'>35</td><td class='skill_name'>ヒュプノスハント</td></tr>
+          <tr class='knife_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='knife_6'><td class='skill_pt'>58</td><td class='skill_name'>ヴァイパーファング</td></tr>
+          <tr class='knife_7'><td class='skill_pt'>76</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='knife_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='knife_9'><td class='skill_pt'>100</td><td class='skill_name'>タナトスハント</td></tr>
+        </table><table class='shield skill_table'>
+          <caption>盾:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='shield_0'><td class='skill_pt'>6</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_1'><td class='skill_pt'>12</td><td class='skill_name'>ぼうぎょ</td></tr>
+          <tr class='shield_2'><td class='skill_pt'>18</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_3'><td class='skill_pt'>25</td><td class='skill_name'>ビッグシールド</td></tr>
+          <tr class='shield_4'><td class='skill_pt'>32</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_5'><td class='skill_pt'>40</td><td class='skill_name'>シールドアタック</td></tr>
+          <tr class='shield_6'><td class='skill_pt'>52</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_7'><td class='skill_pt'>66</td><td class='skill_name'>まもりのたて</td></tr>
+          <tr class='shield_8'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
+          <tr class='shield_9'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
+        </table><table class='litheness skill_table'>
+          <caption>きょくげい:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='litheness_0'><td class='skill_pt'>4</td><td class='skill_name'>ボケ</td></tr>
+          <tr class='litheness_1'><td class='skill_pt'>12</td><td class='skill_name'>常時みりょく+20</td></tr>
+          <tr class='litheness_2'><td class='skill_pt'>22</td><td class='skill_name'>ツッコミ</td></tr>
+          <tr class='litheness_3'><td class='skill_pt'>34</td><td class='skill_name'>常時すばやさ+30</td></tr>
+          <tr class='litheness_4'><td class='skill_pt'>46</td><td class='skill_name'>タップダンス（専）</td></tr>
+          <tr class='litheness_5'><td class='skill_pt'>54</td><td class='skill_name'>常時こうげき魔力+10</td></tr>
+          <tr class='litheness_6'><td class='skill_pt'>68</td><td class='skill_name'>キラージャグリング（専）</td></tr>
+          <tr class='litheness_7'><td class='skill_pt'>78</td><td class='skill_name'>常時かいふく魔力+10</td></tr>
+          <tr class='litheness_8'><td class='skill_pt'>82</td><td class='skill_name'>常時きようさ+20</td></tr>
+          <tr class='litheness_9'><td class='skill_pt'>100</td><td class='skill_name'>ハッスルダンス（専）</td></tr>
+        </table></div>
+      <div class='class_group' id='paladin'>
+        <div class='class_info'>
+          <h2>
+            パラディン
+            Lv<span class='lv_h2'>1</span></h2>
+          <dl>
+            <dt class='label_lv'>レベル</dt>
+            <dd class='lv_select'>
+              <select size='1'></select>
+            </dd>
+            <dt>獲得経験値:</dt>
+            <dd class='exp'>0</dd>
+            <dt>スキルポイント:</dt>
+            <dd class='pts'>0 / 0</dd>
+            <dt class='error' style='display:none'>必要レベル:</dt>
+            <dd class='error' style='display:none'>
+              <span class='req_lv'>1</span>（あと<span class='exp_remain'>0</span> exp）
+            </dd>
+          </dl>
+        </div><table class='hammer skill_table'>
+          <caption>ハンマー:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='hammer_0'><td class='skill_pt'>3</td><td class='skill_name'>ウェイトブレイク</td></tr>
+          <tr class='hammer_1'><td class='skill_pt'>7</td><td class='skill_name'>ドラムクラッシュ</td></tr>
+          <tr class='hammer_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='hammer_3'><td class='skill_pt'>22</td><td class='skill_name'>シールドブレイク</td></tr>
+          <tr class='hammer_4'><td class='skill_pt'>35</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='hammer_5'><td class='skill_pt'>42</td><td class='skill_name'>MPブレイク</td></tr>
+          <tr class='hammer_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='hammer_7'><td class='skill_pt'>76</td><td class='skill_name'>キャンセルショット</td></tr>
+          <tr class='hammer_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='hammer_9'><td class='skill_pt'>100</td><td class='skill_name'>ランドインパクト</td></tr>
+        </table><table class='spear skill_table'>
+          <caption>ヤリ:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='spear_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='spear_1'><td class='skill_pt'>7</td><td class='skill_name'>けもの突き</td></tr>
+          <tr class='spear_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時武器ガード率+3%</td></tr>
+          <tr class='spear_3'><td class='skill_pt'>22</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='spear_4'><td class='skill_pt'>35</td><td class='skill_name'>雷鳴突き</td></tr>
+          <tr class='spear_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時武器ガード率+3%</td></tr>
+          <tr class='spear_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='spear_7'><td class='skill_pt'>76</td><td class='skill_name'>一閃突き</td></tr>
+          <tr class='spear_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
+          <tr class='spear_9'><td class='skill_pt'>100</td><td class='skill_name'>狼牙突き</td></tr>
+        </table><table class='stick skill_table'>
+          <caption>スティック:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='stick_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時MP吸収率+2%</td></tr>
+          <tr class='stick_1'><td class='skill_pt'>7</td><td class='skill_name'>マジステッキ</td></tr>
+          <tr class='stick_2'><td class='skill_pt'>13</td><td class='skill_name'>戦闘勝利時MP小回復</td></tr>
+          <tr class='stick_3'><td class='skill_pt'>21</td><td class='skill_name'>装備時かいふく魔力+30</td></tr>
+          <tr class='stick_4'><td class='skill_pt'>31</td><td class='skill_name'>デビルンチャーム</td></tr>
+          <tr class='stick_5'><td class='skill_pt'>44</td><td class='skill_name'>装備時さいだいMP+30</td></tr>
+          <tr class='stick_6'><td class='skill_pt'>57</td><td class='skill_name'>装備時MP吸収率+2%</td></tr>
+          <tr class='stick_7'><td class='skill_pt'>70</td><td class='skill_name'>パニパニハニー</td></tr>
+          <tr class='stick_8'><td class='skill_pt'>84</td><td class='skill_name'>装備時かいふく魔力+30</td></tr>
+          <tr class='stick_9'><td class='skill_pt'>100</td><td class='skill_name'>キラキラポーン</td></tr>
+        </table><table class='shield skill_table'>
+          <caption>盾:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='shield_0'><td class='skill_pt'>6</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_1'><td class='skill_pt'>12</td><td class='skill_name'>ぼうぎょ</td></tr>
+          <tr class='shield_2'><td class='skill_pt'>18</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_3'><td class='skill_pt'>25</td><td class='skill_name'>ビッグシールド</td></tr>
+          <tr class='shield_4'><td class='skill_pt'>32</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_5'><td class='skill_pt'>40</td><td class='skill_name'>シールドアタック</td></tr>
+          <tr class='shield_6'><td class='skill_pt'>52</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_7'><td class='skill_pt'>66</td><td class='skill_name'>まもりのたて</td></tr>
+          <tr class='shield_8'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
+          <tr class='shield_9'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
+        </table><table class='virtue skill_table'>
+          <caption>はくあい:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='virtue_0'><td class='skill_pt'>2</td><td class='skill_name'>やいばのぼうぎょ</td></tr>
+          <tr class='virtue_1'><td class='skill_pt'>12</td><td class='skill_name'>常時みのまもり+10</td></tr>
+          <tr class='virtue_2'><td class='skill_pt'>22</td><td class='skill_name'>HPパサー</td></tr>
+          <tr class='virtue_3'><td class='skill_pt'>34</td><td class='skill_name'>常時かいふく魔力+10</td></tr>
+          <tr class='virtue_4'><td class='skill_pt'>46</td><td class='skill_name'>におうだち（専）</td></tr>
+          <tr class='virtue_5'><td class='skill_pt'>54</td><td class='skill_name'>常時みのまもり+10</td></tr>
+          <tr class='virtue_6'><td class='skill_pt'>68</td><td class='skill_name'>ヘヴィチャージ（専）</td></tr>
+          <tr class='virtue_7'><td class='skill_pt'>78</td><td class='skill_name'>常時みのまもり+20</td></tr>
+          <tr class='virtue_8'><td class='skill_pt'>82</td><td class='skill_name'>常時さいだいHP+30</td></tr>
+          <tr class='virtue_9'><td class='skill_pt'>100</td><td class='skill_name'>大ぼうぎょ（専）</td></tr>
+        </table></div>
+      <div class='class_group' id='ranger'>
+        <div class='class_info'>
+          <h2>
+            レンジャー
+            Lv<span class='lv_h2'>1</span></h2>
+          <dl>
+            <dt class='label_lv'>レベル</dt>
+            <dd class='lv_select'>
+              <select size='1'></select>
+            </dd>
+            <dt>獲得経験値:</dt>
+            <dd class='exp'>0</dd>
+            <dt>スキルポイント:</dt>
+            <dd class='pts'>0 / 0</dd>
+            <dt class='error' style='display:none'>必要レベル:</dt>
+            <dd class='error' style='display:none'>
+              <span class='req_lv'>1</span>（あと<span class='exp_remain'>0</span> exp）
+            </dd>
+          </dl>
+        </div><table class='bow skill_table'>
+          <caption>弓:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='bow_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='bow_1'><td class='skill_pt'>7</td><td class='skill_name'>マジックアロー</td></tr>
+          <tr class='bow_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時射程距離+2m</td></tr>
+          <tr class='bow_3'><td class='skill_pt'>22</td><td class='skill_name'>バードシュート</td></tr>
+          <tr class='bow_4'><td class='skill_pt'>35</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='bow_5'><td class='skill_pt'>42</td><td class='skill_name'>サンダーボルト</td></tr>
+          <tr class='bow_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時射程距離+2m</td></tr>
+          <tr class='bow_7'><td class='skill_pt'>76</td><td class='skill_name'>さみだれうち</td></tr>
+          <tr class='bow_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='bow_9'><td class='skill_pt'>100</td><td class='skill_name'>天使の矢</td></tr>
+        </table><table class='boomerang skill_table'>
+          <caption>ブーメラン:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='boomerang_0'><td class='skill_pt'>3</td><td class='skill_name'>スライムブロウ</td></tr>
+          <tr class='boomerang_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='boomerang_2'><td class='skill_pt'>13</td><td class='skill_name'>メタルウィング</td></tr>
+          <tr class='boomerang_3'><td class='skill_pt'>22</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='boomerang_4'><td class='skill_pt'>35</td><td class='skill_name'>パワフルスロー</td></tr>
+          <tr class='boomerang_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時命中+20%</td></tr>
+          <tr class='boomerang_6'><td class='skill_pt'>58</td><td class='skill_name'>シャインスコール</td></tr>
+          <tr class='boomerang_7'><td class='skill_pt'>76</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='boomerang_8'><td class='skill_pt'>88</td><td class='skill_name'>バーニングバード</td></tr>
+          <tr class='boomerang_9'><td class='skill_pt'>100</td><td class='skill_name'>デュアルカッター</td></tr>
+        </table><table class='axe skill_table'>
+          <caption>オノ:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='axe_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='axe_1'><td class='skill_pt'>7</td><td class='skill_name'>たいぼく斬</td></tr>
+          <tr class='axe_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='axe_3'><td class='skill_pt'>22</td><td class='skill_name'>蒼天魔斬</td></tr>
+          <tr class='axe_4'><td class='skill_pt'>35</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='axe_5'><td class='skill_pt'>42</td><td class='skill_name'>かぶと割り</td></tr>
+          <tr class='axe_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='axe_7'><td class='skill_pt'>76</td><td class='skill_name'>まじん斬り</td></tr>
+          <tr class='axe_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
+          <tr class='axe_9'><td class='skill_pt'>100</td><td class='skill_name'>オノむそう</td></tr>
+        </table><table class='fisticuffs skill_table'>
+          <caption>格闘:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='fisticuffs_0'><td class='skill_pt'>3</td><td class='skill_name'>素手時こうげき力+10</td></tr>
+          <tr class='fisticuffs_1'><td class='skill_pt'>7</td><td class='skill_name'>石つぶて</td></tr>
+          <tr class='fisticuffs_2'><td class='skill_pt'>12</td><td class='skill_name'>素手時かいしん率+2%</td></tr>
+          <tr class='fisticuffs_3'><td class='skill_pt'>18</td><td class='skill_name'>かまいたち</td></tr>
+          <tr class='fisticuffs_4'><td class='skill_pt'>25</td><td class='skill_name'>素手時こうげき力+20</td></tr>
+          <tr class='fisticuffs_5'><td class='skill_pt'>30</td><td class='skill_name'>せいけん突き</td></tr>
+          <tr class='fisticuffs_6'><td class='skill_pt'>42</td><td class='skill_name'>素手時みかわし率+2%</td></tr>
+          <tr class='fisticuffs_7'><td class='skill_pt'>60</td><td class='skill_name'>ムーンサルト</td></tr>
+          <tr class='fisticuffs_8'><td class='skill_pt'>77</td><td class='skill_name'>素手時こうげき力+40</td></tr>
+          <tr class='fisticuffs_9'><td class='skill_pt'>100</td><td class='skill_name'>ばくれつけん</td></tr>
+        </table><table class='ruggedness skill_table'>
+          <caption>サバイバル:<span class='skill_total'>0</span></caption>
+          <tr>
+            <th class='console' colspan='2'><input class='ptspinner' /></th>
+          </tr>
+          <tr class='ruggedness_0'><td class='skill_pt'>2</td><td class='skill_name'>みのがす</td></tr>
+          <tr class='ruggedness_1'><td class='skill_pt'>12</td><td class='skill_name'>常時きようさ+20</td></tr>
+          <tr class='ruggedness_2'><td class='skill_pt'>22</td><td class='skill_name'>てなづける（専）</td></tr>
+          <tr class='ruggedness_3'><td class='skill_pt'>34</td><td class='skill_name'>常時みりょく+20</td></tr>
+          <tr class='ruggedness_4'><td class='skill_pt'>46</td><td class='skill_name'>メタルトラップ（専）</td></tr>
+          <tr class='ruggedness_5'><td class='skill_pt'>54</td><td class='skill_name'>常時きようさ+20</td></tr>
+          <tr class='ruggedness_6'><td class='skill_pt'>68</td><td class='skill_name'>まもりのきり（専）</td></tr>
+          <tr class='ruggedness_7'><td class='skill_pt'>78</td><td class='skill_name'>常時かいふく魔力+20</td></tr>
+          <tr class='ruggedness_8'><td class='skill_pt'>82</td><td class='skill_name'>常時きようさ+20</td></tr>
+          <tr class='ruggedness_9'><td class='skill_pt'>100</td><td class='skill_name'>オオカミアタック（専）</td></tr>
+        </table></div>
+      <div id='footer'>
+        <ul>
+          <li>スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』のスキルポイント割り振りを検討するためのシミュレータです。</li>
+          <li>要JavaScript。Google Chrome, Firefox, IE8以上で動作確認。IE対応は後回しになりがちです。</li>
+          <li>
+            使い方:
+            <ul>
+              <li>プルダウンで職業レベルを選択。括弧内はそのレベルの累計スキルポイント。</li>
+              <li>スキルポイントはスキル一覧の項目をクリックすると必要なポイントが自動入力されます。矢印ボタンで1ずつ調整、キーボードからの直接入力も可能。</li>
+              <li>「保存用URL」の生成ボタンで表示されるURLは、アクセスすることで現在の状態を再現できます。メモ用・掲示板に貼る用などにどうぞ。</li>
+              <li>レベル欄あたりにカーソルを持っていくと「おりたたむ」ボタンが出てきて、クリックすると簡易表示になります。そのまま操作も可能。「すべておりたたむ」でレベル・スキルを一覧するのがおすすめです。</li>
+            </ul>
+          </li>
+          <li>
+            履歴:
+            <ul>
+              <li>2012/11/8 v1.1.1 経験値テーブルを公式ガイドブックおよびその<a href="http://www.square-enix.co.jp/magazine/gamebooks/dq/10_guide01/seigohyou.html" target="_blank">正誤表</a>に準拠</li></li>
+              <li>2012/10/12 v1.1 スキル一覧ポイント時にスキル詳細をヒント表示</li></li>
+              <li>2012/10/11 v1.0.2 新職業の経験値テーブルの予測値を1.333倍の四捨五入に変更、Lv18までの実測値を反映。</li></li>
+              <li>2012/10/10 v1.0.1 新職業の経験値テーブルが従来職と異なるのに暫定対応（1.33倍として計算）。職業の順序を転職時の並び順に準拠。</li></li>
+              <li>2012/10/9 v1.0 大型バージョンアップに対応（新職業追加、レベルキャップ50→55）。ページ読込の高速化。</li></li>
+              <li>2012/9/18 v0.6.3 <del>おまけ機能追加。不足経験値が1以上のとき数値をダブルクリックすると……</del>（v1.0で廃止）</li></li>
+              <li>2012/8/23 v0.6.2 パラメータ付きURLで読み込んだときの生成URLが異常になるバグ修正</li></li>
+              <li>2012/8/23 v0.6.1 かいふく魔力合計に反映されないバグ修正</li></li>
+              <li>2012/8/21 v0.6 おりたたむ・ひろげるボタン追加</li></li>
+              <li>2012/8/21 v0.5.2 まほうスキル全般、ムチの攻撃力+・みやぶるの必要ポイントを訂正</li></li>
+              <li>2012/8/21 v0.5.1 ツメスキルのこうげき力+を訂正</li></li>
+              <li>2012/8/21 v0.5 パッシブ合計の表示、保存用URLの生成・読込</li></li>
+              <li>2012/8/20 v0.2 スキル一覧クリックでポイント自動入力</li></li>
+              <li>2012/8/20 v0.1 暫定公開</li></li>
+            </ul>
+          </li>
+          <li>
+            ToDo:
+            <ul>
+              <li><del>スキル一覧ポイント時にスキル詳細をヒント表示する</del>(v1.1)</li></li>
+              <li><del>スキル一覧クリックでスキルポイントを自動設定する</del>(v0.2)</li></li>
+              <li><del>パッシブ合計を表示する</del>(v0.5)</li></li>
+              <li><del>設定値の再現URLを生成・読込</del>(v0.5)</li></li>
+            </ul>
+          </li>
+          <li>ご意見・ご要望は下記まで。</li>
+        </ul>
+        <address><p class='contact'>連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a></p></address>
+      </div>
+    </div>
+    <div id='ad_sidebar'>
+      <h2>DQ10ツールリンク</h2>
+      <ul>
+        <li><a href='http://dqx.herokuapp.com/' target='_blank'>DQXレシピ君</a></li>
+        <li><a href='http://dqx-bazaar.herokuapp.com/' target='_blank'>ドラクエ10アイテム価格調査隊</a></li>
+        <li><a href='http://www4.atpages.jp/studiogobli/php/dqxm/' target='_blank'>DQ10 ソロ用</a></li>
+      </ul>
+      <!--
+        <span><a href='http://www.amazon.co.jp/gp/product/4757537484/ref=as_li_tf_il?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4757537484&amp;linkCode=as2&amp;tag=marbleland-22' target='_blank'><img border='0' src='http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&amp;ASIN=4757537484&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=JP&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=marbleland-22' /></a><img alt='' border='0' height='1' src='http://www.assoc-amazon.jp/e/ir?t=marbleland-22&amp;l=as2&amp;o=9&amp;a=4757537484' style='border:none !important; margin:0px !important;' width='1' /></span>
+        <span><a href='http://www.amazon.co.jp/gp/product/B009K1ECXQ/ref=as_li_tf_il?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B009K1ECXQ&amp;linkCode=as2&amp;tag=marbleland-22' target='_blank'><img border='0' src='http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&amp;ASIN=B009K1ECXQ&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=JP&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=marbleland-22' /></a><img alt='' border='0' height='1' src='http://www.assoc-amazon.jp/e/ir?t=marbleland-22&amp;l=as2&amp;o=9&amp;a=B009K1ECXQ' style='border:none !important; margin:0px !important;' width='1' /></span>
+        <span><a href='http://www.amazon.co.jp/gp/product/B008Z1E48K/ref=as_li_tf_il?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B008Z1E48K&amp;linkCode=as2&amp;tag=marbleland-22' target='_blank'><img border='0' src='http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&amp;ASIN=B008Z1E48K&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=JP&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=marbleland-22' /></a><img alt='' border='0' height='1' src='http://www.assoc-amazon.jp/e/ir?t=marbleland-22&amp;l=as2&amp;o=9&amp;a=B008Z1E48K' style='border:none !important; margin:0px !important;' width='1' /></span>
+        <span><a href='http://www.amazon.co.jp/gp/product/B009Z5XKJO/ref=as_li_tf_il?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B009Z5XKJO&amp;linkCode=as2&amp;tag=marbleland-22' target='_blank'><img border='0' src='http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&amp;ASIN=B009Z5XKJO&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=JP&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=marbleland-22' /></a><img alt='' border='0' height='1' src='http://www.assoc-amazon.jp/e/ir?t=marbleland-22&amp;l=as2&amp;o=9&amp;a=B009Z5XKJO' style='border:none !important; margin:0px !important;' width='1' /></span>
+        <span><a href='http://www.amazon.co.jp/gp/product/B002C1AUP0/ref=as_li_tf_il?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B002C1AUP0&amp;linkCode=as2&amp;tag=marbleland-22' target='_blank'><img border='0' src='http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&amp;ASIN=B002C1AUP0&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=JP&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=marbleland-22' /></a><img alt='' border='0' height='1' src='http://www.assoc-amazon.jp/e/ir?t=marbleland-22&amp;l=as2&amp;o=9&amp;a=B002C1AUP0' style='border:none !important; margin:0px !important;' width='1' /></span>
+        <span><a href='http://www.amazon.co.jp/gp/product/B008DRIR20/ref=as_li_tf_il?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B008DRIR20&amp;linkCode=as2&amp;tag=marbleland-22' target='_blank'><img border='0' src='http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&amp;ASIN=B008DRIR20&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=JP&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=marbleland-22' /></a><img alt='' border='0' height='1' src='http://www.assoc-amazon.jp/e/ir?t=marbleland-22&amp;l=as2&amp;o=9&amp;a=B008DRIR20' style='border:none !important; margin:0px !important;' width='1' /></span>
+        <span><a href='http://www.amazon.co.jp/gp/product/B000MSMM06/ref=as_li_tf_il?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B000MSMM06&amp;linkCode=as2&amp;tag=marbleland-22' target='_blank'><img border='0' src='http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&amp;ASIN=B000MSMM06&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=JP&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=marbleland-22' /></a><img alt='' border='0' height='1' src='http://www.assoc-amazon.jp/e/ir?t=marbleland-22&amp;l=as2&amp;o=9&amp;a=B000MSMM06' style='border:none !important; margin:0px !important;' width='1' /></span>
+        <span><a href='http://www.amazon.co.jp/gp/product/B0094E58C8/ref=as_li_tf_il?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B0094E58C8&amp;linkCode=as2&amp;tag=marbleland-22' target='_blank'><img border='0' src='http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&amp;ASIN=B0094E58C8&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=JP&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=marbleland-22' /></a><img alt='' border='0' height='1' src='http://www.assoc-amazon.jp/e/ir?t=marbleland-22&amp;l=as2&amp;o=9&amp;a=B0094E58C8' style='border:none !important; margin:0px !important;' width='1' /></span>
+        <span><a href='http://www.amazon.co.jp/gp/product/B0050MLQOC/ref=as_li_tf_il?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B0050MLQOC&amp;linkCode=as2&amp;tag=marbleland-22' target='_blank'><img border='0' src='http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&amp;ASIN=B0050MLQOC&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=JP&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=marbleland-22' /></a><img alt='' border='0' height='1' src='http://www.assoc-amazon.jp/e/ir?t=marbleland-22&amp;l=as2&amp;o=9&amp;a=B0050MLQOC' style='border:none !important; margin:0px !important;' width='1' /></span>
+        <span><a href='http://www.amazon.co.jp/gp/product/B004W1KCCO/ref=as_li_tf_il?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B004W1KCCO&amp;linkCode=as2&amp;tag=marbleland-22' target='_blank'><img border='0' src='http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&amp;ASIN=B004W1KCCO&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=JP&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=marbleland-22' /></a><img alt='' border='0' height='1' src='http://www.assoc-amazon.jp/e/ir?t=marbleland-22&amp;l=as2&amp;o=9&amp;a=B004W1KCCO' style='border:none !important; margin:0px !important;' width='1' /></span>
+        <span><a href='http://www.amazon.co.jp/gp/product/B0055FVJLY/ref=as_li_tf_il?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B0055FVJLY&amp;linkCode=as2&amp;tag=marbleland-22' target='_blank'><img border='0' src='http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&amp;ASIN=B0055FVJLY&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=JP&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=marbleland-22' /></a><img alt='' border='0' height='1' src='http://www.assoc-amazon.jp/e/ir?t=marbleland-22&amp;l=as2&amp;o=9&amp;a=B0055FVJLY' style='border:none !important; margin:0px !important;' width='1' /></span>
+        <span><a href='http://www.amazon.co.jp/gp/product/B000KF5LS6/ref=as_li_tf_il?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B000KF5LS6&amp;linkCode=as2&amp;tag=marbleland-22' target='_blank'><img border='0' src='http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&amp;ASIN=B000KF5LS6&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=JP&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=marbleland-22' /></a><img alt='' border='0' height='1' src='http://www.assoc-amazon.jp/e/ir?t=marbleland-22&amp;l=as2&amp;o=9&amp;a=B000KF5LS6' style='border:none !important; margin:0px !important;' width='1' /></span>
+        <span><a href='http://www.amazon.co.jp/gp/product/475753583X/ref=as_li_tf_il?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=475753583X&amp;linkCode=as2&amp;tag=marbleland-22' target='_blank'><img border='0' src='http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&amp;ASIN=475753583X&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=JP&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=marbleland-22' /></a><img alt='' border='0' height='1' src='http://www.assoc-amazon.jp/e/ir?t=marbleland-22&amp;l=as2&amp;o=9&amp;a=475753583X' style='border:none !important; margin:0px !important;' width='1' /></span>
+        <span><a href='http://www.amazon.co.jp/gp/product/B009ID1VYO/ref=as_li_tf_il?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B009ID1VYO&amp;linkCode=as2&amp;tag=marbleland-22' target='_blank'><img border='0' src='http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&amp;ASIN=B009ID1VYO&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=JP&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=marbleland-22' /></a><img alt='' border='0' height='1' src='http://www.assoc-amazon.jp/e/ir?t=marbleland-22&amp;l=as2&amp;o=9&amp;a=B009ID1VYO' style='border:none !important; margin:0px !important;' width='1' /></span>
+        <span><a href='http://www.amazon.co.jp/gp/product/B002UM5TL6/ref=as_li_tf_il?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B002UM5TL6&amp;linkCode=as2&amp;tag=marbleland-22' target='_blank'><img border='0' src='http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&amp;ASIN=B002UM5TL6&amp;Format=_SL160_&amp;ID=AsinImage&amp;MarketPlace=JP&amp;ServiceVersion=20070822&amp;WS=1&amp;tag=marbleland-22' /></a><img alt='' border='0' height='1' src='http://www.assoc-amazon.jp/e/ir?t=marbleland-22&amp;l=as2&amp;o=9&amp;a=B002UM5TL6' style='border:none !important; margin:0px !important;' width='1' /></span>
+      -->
+    </div>
+    <!-- Amazon link enhancer -->
+    <!--
+      <script src='http://wms.assoc-amazon.jp/20070822/JP/js/link-enhancer-common.js?tag=#{associate_id}' type='text/javascript'></script>
+      <noscript>
+        <img alt='' src='http://wms.assoc-amazon.jp/20070822/JP/img/noscript.gif?tag=#{associate_id}' />
+      </noscript>
+    -->
+  </body>
 </html>
