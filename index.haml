@@ -102,8 +102,9 @@
 								= cat['name'] + ': '
 								%span.skill_total> 0
 							%tr
-								%th.console{:colspan => 2}<
+								%th.console{:colspan => 2}
 									%input.ptspinner
+									%button.reset リセット
 							- cat['skills'].each_with_index do |skill, i|
 								%tr{:class => [skillCategory, i].join('_')}<
 									%td.skill_pt>= skill['pt']

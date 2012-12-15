@@ -360,6 +360,24 @@ var SimulatorUI = (function($) {
 			});
 		},
 		
+		//リセットボタン設定
+		function() {
+			$reset = $('.reset').button({
+				icons: { primary: 'ui-icon-refresh' },
+				text: false
+			}).click(function (e) {
+				var vocation = $(this).parents('.class_group').attr('id');
+				var skill =  $(this).parents('.skill_table').attr('class').split(' ')[0];
+				
+				sim.updateSkillPt(vocation, skill, 0);
+				$('#' + vocation + ' .' + skill + ' .ptspinner').spinner('value', sim.getSkillPt(vocation, skill));
+				refreshSkillList(skill);
+				refreshAllVocationInfo();
+				refreshTotalExpRemain();
+				refreshTotalPassive();
+			});
+		},
+		
 		//スキルテーブル項目クリック時
 		function() {
 			for(var vocation in sim.vocations) {
@@ -385,26 +403,6 @@ var SimulatorUI = (function($) {
 								
 								return false;
 							});
-						});
-						
-						$('#' + vocation + ' .' + skill + ' tr:first').dblclick(function() {
-							sim.updateSkillPt(vocation, skill, 0);
-							$('#' + vocation + ' .' + skill + ' :text').val(sim.getSkillPt(vocation, skill));
-							refreshSkillList(skill);
-							refreshAllVocationInfo();
-							refreshTotalExpRemain();
-							refreshTotalPassive();
-							
-							return false;
-						});
-						
-						//テキストボックスクリック時のイベント発生を抑止
-						$('#' + vocation + ' .' + skill + ' :text').click(function() {
-							return false;
-						});
-						//スピンボタンのクリックイベントを波及させない
-						$('.ui-spinner').dblclick(function (e) {
-							e.stopPropagation();
 						});
 					})(vocation, skill);
 				}
