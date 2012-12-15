@@ -182,6 +182,6 @@
 						%img{:src => "http://www.assoc-amazon.jp/e/ir?t=#{associate_id}&l=as2&o=9&a=#{asin}", :width => 1, :height => 1, :border => 0, :alt => '', :style => 'border:none !important; margin:0px !important;'}/
 		/ Amazon link enhancer
 		/
-			%script{:type => 'text/javascript', :src => 'http://wms.assoc-amazon.jp/20070822/JP/js/link-enhancer-common.js?tag=#{associate_id}'}
+			%script{:type => 'text/javascript', :src => "http://wms.assoc-amazon.jp/20070822/JP/js/link-enhancer-common.js?tag=#{associate_id}"}
 			%noscript
-				%img{:src => 'http://wms.assoc-amazon.jp/20070822/JP/img/noscript.gif?tag=#{associate_id}', :alt => ''}/
+				%img{:src => "http://wms.assoc-amazon.jp/20070822/JP/img/noscript.gif?tag=#{associate_id}", :alt => ''}/
