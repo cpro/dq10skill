@@ -321,45 +321,43 @@ var SimulatorUI = (function($) {
 		
 		//スピンボタン設定
 		function() {
-			for(var vocation in sim.vocations) {
-				for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
-					var skill = sim.vocations[vocation].skills[s];
+			$spinner = $('.ptspinner');
+			$spinner.spinner({
+				min: sim.SKILL_PTS_MIN,
+				max: sim.SKILL_PTS_MAX,
+				spin: function (e, ui) {
+					var vocation = $(this).parents('.class_group').attr('id');
+					var skill =  $(this).parents('.skill_table').attr('class').split(' ')[0];
 					
-					(function(vocation, skill) {
-						var $spinner = $('#' + vocation + ' .' + skill + ' .ptspinner');
-						$spinner.spinner({
-							min: sim.SKILL_PTS_MIN,
-							max: sim.SKILL_PTS_MAX,
-							spin: function (e, ui) {
-								if(sim.updateSkillPt(vocation, skill, parseInt(ui.value))) {
-									refreshSkillList(skill);
-									refreshAllVocationInfo();
-									refreshTotalExpRemain();
-									refreshTotalPassive();
-									e.stopPropagation();
-								} else {
-									return false;
-								}
-							},
-							change: function (e, ui) {
-								if(isNaN($(this).val())) {
-									$(this).val(sim.getSkillPt(vocation, skill));
-									return false;
-								}
-								if(sim.updateSkillPt(vocation, skill, parseInt($(this).val()))) {
-									refreshSkillList(skill);
-									refreshAllVocationInfo();
-									refreshTotalExpRemain();
-									refreshTotalPassive();
-								} else {
-									$(this).val(sim.getSkillPt(vocation, skill));
-									return false;
-								}
-							}
-						});
-					})(vocation, skill);
+					if(sim.updateSkillPt(vocation, skill, parseInt(ui.value))) {
+						refreshSkillList(skill);
+						refreshAllVocationInfo();
+						refreshTotalExpRemain();
+						refreshTotalPassive();
+						e.stopPropagation();
+					} else {
+						return false;
+					}
+				},
+				change: function (e, ui) {
+					var vocation = $(this).parents('.class_group').attr('id');
+					var skill =  $(this).parents('.skill_table').attr('class').split(' ')[0];
+					
+					if(isNaN($(this).val())) {
+						$(this).val(sim.getSkillPt(vocation, skill));
+						return false;
+					}
+					if(sim.updateSkillPt(vocation, skill, parseInt($(this).val()))) {
+						refreshSkillList(skill);
+						refreshAllVocationInfo();
+						refreshTotalExpRemain();
+						refreshTotalPassive();
+					} else {
+						$(this).val(sim.getSkillPt(vocation, skill));
+						return false;
+					}
 				}
-			}
+			});
 		},
 		
 		//スキルテーブル項目クリック時
