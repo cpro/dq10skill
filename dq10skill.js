@@ -346,7 +346,7 @@ var SimulatorUI = (function($) {
 									$(this).val(sim.getSkillPt(vocation, skill));
 									return false;
 								}
-								if(sim.updateSkillPt(vocation, skillCategory, parseInt($(this).val()))) {
+								if(sim.updateSkillPt(vocation, skill, parseInt($(this).val()))) {
 									refreshSkillList(skill);
 									refreshAllVocationInfo();
 									refreshTotalExpRemain();
