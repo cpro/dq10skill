@@ -382,6 +382,18 @@
 				{"pt": 82, "name": "常時きようさ+20", "desc": "常時\nきようさが\n２０増える", "mp": null, "dex": 20},
 				{"pt": 100, "name": "オオカミアタック（専）", "desc": "オオカミが\n２回攻撃する\nレンジャー専用", "mp": 6}
 			]
+		},
+		
+		"fource": {
+			"name": "フォース",
+			"skills": [
+			]
+		},
+		
+		"jenesaisquoi": {
+			"name": "オーラ",
+			"skills": [
+			]
 		}
 	},
 	
@@ -436,7 +448,7 @@
 		},
 		"armamentalist": {
 			"name": "魔法戦士",
-			"skills": [],
+			"skills": ["sword", "wand", "bow", "shield", "fource"],
 			"expTable": 2
 		},
 		"sage": {
@@ -446,7 +458,7 @@
 		},
 		"luminary": {
 			"name": "スーパースター",
-			"skills": [],
+			"skills": ["whip", "fan", "stick", "fisticuffs", "jenesaisquoi"],
 			"expTable": 2
 		}
 	},
