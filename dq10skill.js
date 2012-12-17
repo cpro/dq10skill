@@ -213,6 +213,7 @@ var SimulatorUI = (function($) {
 		refreshTotalExpRemain();
 		refreshTotalPassive();
 		refreshControls();
+		refreshSaveUrl();
 	}
 	
 	function refreshVocationInfo(vocation) {
@@ -289,6 +290,25 @@ var SimulatorUI = (function($) {
 		}
 	}
 	
+	function refreshSaveUrl() {
+		var url = window.location.href.replace(window.location.search, "") + '?' + Base64Param.encode()
+		$('#url_text').val(url);
+		var $twbutton = $('<div id="tw-saverul-inner-new" />')
+			.css({ position: 'absolute', top: 0, left: 0, zIndex: 100 })
+			.appendTo('#tw-saveurl')
+			.socialbutton('twitter', {
+				button: 'none',
+				text: 'DQ10 現在のスキル構成:',
+				url: url,
+				lang: 'ja',
+				hashtags: 'DQ10, DQX'
+			});
+		setTimeout(function() {
+			$('#tw-saverul-inner').remove();
+			$twbutton.attr('id', 'tw-saverul-inner').css('z-index', 101);
+		}, 100);
+	}
+	
 	function setup() {
 		for(var i = 0; i < setupFunctions.length; i++) {
 			setupFunctions[i]();
@@ -314,6 +334,7 @@ var SimulatorUI = (function($) {
 						refreshVocationInfo(vocation);
 						refreshTotalRequiredExp();
 						refreshTotalExpRemain();
+						refreshSaveUrl();
 					});
 				})(vocation);
 			}
@@ -352,10 +373,14 @@ var SimulatorUI = (function($) {
 						refreshAllVocationInfo();
 						refreshTotalExpRemain();
 						refreshTotalPassive();
+						refreshSaveUrl();
 					} else {
 						$(this).val(sim.getSkillPt(vocation, skill));
 						return false;
 					}
+				},
+				stop: function (e, ui) {
+					refreshSaveUrl();
 				}
 			});
 		},
@@ -375,6 +400,7 @@ var SimulatorUI = (function($) {
 				refreshAllVocationInfo();
 				refreshTotalExpRemain();
 				refreshTotalPassive();
+				refreshSaveUrl();
 			});
 		},
 		
@@ -400,6 +426,7 @@ var SimulatorUI = (function($) {
 								refreshAllVocationInfo();
 								refreshTotalExpRemain();
 								refreshTotalPassive();
+								refreshSaveUrl();
 								
 								return false;
 							});
@@ -407,13 +434,6 @@ var SimulatorUI = (function($) {
 					})(vocation, skill);
 				}
 			}
-		},
-		
-		//URL生成ボタン押下時
-		function() {
-			$('#produce_url').click(function() {
-				$('#url_text').val(window.location.href.replace(window.location.search, "") + '?' + Base64Param.encode());
-			});
 		},
 		
 		//URLテキストボックスクリック時

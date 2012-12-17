@@ -55,6 +55,14 @@ a:hover {
 #header #snsbuttons .snsbutton#fb-like {
 	width: 105px;
 }
+#header #tw-saveurl {
+	display: inline-block;
+	position: relative;
+	width: 68px;
+	height: 23px;
+	overflow: hidden;
+	vertical-align: middle;
+}
 
 /* 合計表示欄・保存URLテキストボックス */
 #header table#total {
