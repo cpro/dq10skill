@@ -619,7 +619,6 @@ jQuery(function($) {
 	
 	SimulatorUI.setup();
 	
-	/*
 	$('#tw-share').socialbutton('twitter', {
 		button: 'horizontal',
 		url: 'http://cpro.jp/dq10/skillsimulator/',
@@ -636,5 +635,4 @@ jQuery(function($) {
 		size: 'medium',
 		url: 'http://cpro.jp/dq10/skillsimulator/'
 	});
-	*/
 });
