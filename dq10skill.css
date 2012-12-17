@@ -199,7 +199,7 @@ tr.enabled > td {
 	color: black;
 	font-weight: bold;
 }
-.skill_table tr:hover {
+.skill_table tr+tr:hover {
 	background-color: #edd;
 }
 
