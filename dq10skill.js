@@ -6,7 +6,7 @@ var Simulator = (function($) {
 	var SKILL_PTS_MIN = 0;
 	var SKILL_PTS_MAX = 100;
 	var LEVEL_MIN = 1;
-	var LEVEL_MAX = 55;
+	var LEVEL_MAX = 60;
 	
 	var DATA_JSON_URI = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'dq10skill-data.json';
 	
