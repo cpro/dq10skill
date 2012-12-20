@@ -237,3 +237,8 @@ tr.enabled > td {
 	line-height: 100%;
 	text-align: center;
 }
+
+/* ベータ版注意事項 */
+#beta_notice {
+	font-size: 90%;
+}

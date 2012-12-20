@@ -70,9 +70,8 @@
 						%input#url_text.ui-widget-content.ui-corner-all{:type => 'text', :size => 60}>/
 						%a#tw-saveurl{title: '保存用URLをツイートする'} ツイート
 		#body_content
-			/
-				%ul#beta_notice{:style => 'font-size:90%'}
-					%li
+			%ul#beta_notice{:style => 'font-size:90%'}
+				%li バージョン1.2で予定されている新職業・Lv56以上の設定についてはテスト用の仮のものです。実際のシミュレーションには使用できないのでご注意ください。
 			- data['vocationOrder'].each do |vocation|
 				%div.class_group{:id => vocation}
 					.class_info
