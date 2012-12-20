@@ -68,7 +68,6 @@
 					%td#save_url{:colspan => 12}
 						保存用URL:
 						%input#url_text.ui-widget-content.ui-corner-all{:type => 'text', :size => 60}>/
-						-# %input#produce_url.ui-state-default.ui-corner-right{:type => 'button', :value => '生成'}/
 						%a#tw-saveurl{title: '保存用URLをツイートする'} ツイート
 		#body_content
 			/
@@ -124,6 +123,7 @@
 					%li
 						履歴:
 						%ul
+							%li 2012/12/20 v2.0beta2 保存用URLのツイートボタンを軽量化
 							%li 2012/12/17 v2.0beta1 スキルポイント調整UIを変更（スピンボタン採用・リセットボタン追加）。保存用URL生成を手動から自動に変更、ツイートボタン追加。
 							%li 2012/11/8 v1.1.1 経験値テーブルを公式ガイドブックおよびその<a href="http://www.square-enix.co.jp/magazine/gamebooks/dq/10_guide01/seigohyou.html" target="_blank">正誤表</a>に準拠</li>
 							%li 2012/10/12 v1.1 スキル一覧ポイント時にスキル詳細をヒント表示</li>
@@ -160,23 +160,6 @@
 					%a{:href => 'http://www4.atpages.jp/studiogobli/php/dqxm/', :target => '_blank'} DQ10 ソロ用
 			/
 				- associate_id = 'marbleland-22'
-				-#- asin_list = %w(
-				-#- 4757537484
-				-#- B009K1ECXQ
-				-#- B008Z1E48K
-				-#- B009Z5XKJO
-				-#- B002C1AUP0
-				-#- B008DRIR20
-				-#- B000MSMM06
-				-#- B0094E58C8
-				-#- B0050MLQOC
-				-#- B004W1KCCO
-				-#- B0055FVJLY
-				-#- B000KF5LS6
-				-#- 475753583X
-				-#- B009ID1VYO
-				-#- B002UM5TL6
-				-#- )
 				- asin_list.each do |asin|
 					%span<
 						%a{:href => "http://www.amazon.co.jp/gp/product/#{asin}/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=#{asin}&linkCode=as2&tag=#{associate_id}", :target => '_blank'}><
