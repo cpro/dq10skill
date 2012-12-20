@@ -229,3 +229,11 @@ tr.enabled > td {
 	margin: 0;
 	border-bottom: 1px solid #99a;
 }
+#ad_sidebar div.amazonitem {
+	position: relative;
+	width: 160px;
+	float: left;
+	font-size: 80%;
+	line-height: 100%;
+	text-align: center;
+}

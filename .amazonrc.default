@@ -1,0 +1,6 @@
+key_id = 'XXXXX'
+secret_key_id = 'XXXXX'
+associate = 'XXXXX'
+cache = false
+locale = 'jp'
+encoding = 'utf-8'
