@@ -538,12 +538,12 @@ var Base64Param = (function($) {
 		'thief',         //盗賊
 		'minstrel',      //旅芸人
 		'ranger',        //レンジャー
-		'paladin'        //パラディン
+		'paladin',       //パラディン
+		'armamentalist', //魔法戦士
+		'luminary'       //スーパースター
 		/* ,
 		'gladiator',     //バトルマスター
-		'armamentalist', //魔法戦士
 		'sage',          //賢者
-		'luminary'       //スーパースター
 		*/
 	];
 	
