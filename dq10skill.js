@@ -293,20 +293,15 @@ var SimulatorUI = (function($) {
 	function refreshSaveUrl() {
 		var url = window.location.href.replace(window.location.search, "") + '?' + Base64Param.encode()
 		$('#url_text').val(url);
-		var $twbutton = $('<div id="tw-saverul-inner-new" />')
-			.css({ position: 'absolute', top: 0, left: 0, zIndex: 100 })
-			.appendTo('#tw-saveurl')
-			.socialbutton('twitter', {
-				button: 'none',
-				text: 'DQ10 現在のスキル構成:',
-				url: url,
-				lang: 'ja',
-				hashtags: 'DQ10, DQX'
-			});
-		setTimeout(function() {
-			$('#tw-saverul-inner').remove();
-			$twbutton.attr('id', 'tw-saverul-inner').css('z-index', 101);
-		}, 100);
+		
+		var params = {
+			text: 'DQ10 現在のスキル構成:',
+			hashtags: 'DQ10, DQX',
+			url: url,
+			original_referer: window.location.href,
+			tw_p: 'tweetbutton'
+		}
+		$('#tw-saveurl').attr('href', 'https://twitter.com/intent/tweet?' + $.param(params));
 	}
 	
 	function setup() {
@@ -454,6 +449,30 @@ var SimulatorUI = (function($) {
 		function() {
 			$('#url_text').click(function() {
 				$(this).select();
+			});
+		},
+		
+		//保存用URLツイートボタン設定
+		function() {
+			$('#tw-saveurl').button().click(function(e) {
+				var screenWidth = screen.width, screenHeight = screen.height;
+				var windowWidth = 550, windowHeight = 420;
+				var windowLeft = Math.round(screenWidth / 2 - windowWidth / 2);
+				var windowTop = windowHeight >= screenHeight ? 0 : Math.round(screenHeight / 2 - windowHeight / 2);
+				var windowParams = {
+					scrollbars: 'yes',
+					resizable: 'yes',
+					toolbar: 'no',
+					location: 'yes',
+					width: windowWidth,
+					height: windowHeight,
+					left: windowLeft,
+					top: windowTop
+				};
+				var windowParam = $.map(windowParams, function(val, key) { return key + '=' + val; }).join(',');
+				window.open(this.href, null, windowParam);
+				
+				return false;
 			});
 		},
 		

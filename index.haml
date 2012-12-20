@@ -69,7 +69,7 @@
 						保存用URL:
 						%input#url_text.ui-widget-content.ui-corner-all{:type => 'text', :size => 60}>/
 						-# %input#produce_url.ui-state-default.ui-corner-right{:type => 'button', :value => '生成'}/
-						.snsbutton#tw-saveurl
+						%a#tw-saveurl{title: '保存用URLをツイートする'} ツイート
 		#body_content
 			/
 				%ul#beta_notice{:style => 'font-size:90%'}
@@ -158,31 +158,32 @@
 					%a{:href => 'http://dqx-bazaar.herokuapp.com/', :target => '_blank'} ドラクエ10アイテム価格調査隊
 				%li<
 					%a{:href => 'http://www4.atpages.jp/studiogobli/php/dqxm/', :target => '_blank'} DQ10 ソロ用
-			
-			- associate_id = 'marbleland-22'
-			-#- asin_list = %w(
-			-#- 4757537484
-			-#- B009K1ECXQ
-			-#- B008Z1E48K
-			-#- B009Z5XKJO
-			-#- B002C1AUP0
-			-#- B008DRIR20
-			-#- B000MSMM06
-			-#- B0094E58C8
-			-#- B0050MLQOC
-			-#- B004W1KCCO
-			-#- B0055FVJLY
-			-#- B000KF5LS6
-			-#- 475753583X
-			-#- B009ID1VYO
-			-#- B002UM5TL6
-			-#- )
-			- asin_list.each do |asin|
-				%span<
-					%a{:href => "http://www.amazon.co.jp/gp/product/#{asin}/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=#{asin}&linkCode=as2&tag=#{associate_id}", :target => '_blank'}><
-						%img{:border => 0, :src => "http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&ASIN=#{asin}&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=#{associate_id}"}/
-					%img{:src => "http://www.assoc-amazon.jp/e/ir?t=#{associate_id}&l=as2&o=9&a=#{asin}", :width => 1, :height => 1, :border => 0, :alt => '', :style => 'border:none !important; margin:0px !important;'}/
+			/
+				- associate_id = 'marbleland-22'
+				-#- asin_list = %w(
+				-#- 4757537484
+				-#- B009K1ECXQ
+				-#- B008Z1E48K
+				-#- B009Z5XKJO
+				-#- B002C1AUP0
+				-#- B008DRIR20
+				-#- B000MSMM06
+				-#- B0094E58C8
+				-#- B0050MLQOC
+				-#- B004W1KCCO
+				-#- B0055FVJLY
+				-#- B000KF5LS6
+				-#- 475753583X
+				-#- B009ID1VYO
+				-#- B002UM5TL6
+				-#- )
+				- asin_list.each do |asin|
+					%span<
+						%a{:href => "http://www.amazon.co.jp/gp/product/#{asin}/ref=as_li_tf_il?ie=UTF8&camp=247&creative=1211&creativeASIN=#{asin}&linkCode=as2&tag=#{associate_id}", :target => '_blank'}><
+							%img{:border => 0, :src => "http://ws.assoc-amazon.jp/widgets/q?_encoding=UTF8&ASIN=#{asin}&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=#{associate_id}"}/
+						%img{:src => "http://www.assoc-amazon.jp/e/ir?t=#{associate_id}&l=as2&o=9&a=#{asin}", :width => 1, :height => 1, :border => 0, :alt => '', :style => 'border:none !important; margin:0px !important;'}/
 		/ Amazon link enhancer
-		%script{:type => 'text/javascript', :src => "http://wms.assoc-amazon.jp/20070822/JP/js/link-enhancer-common.js?tag=#{associate_id}"}
-		%noscript
-			%img{:src => "http://wms.assoc-amazon.jp/20070822/JP/img/noscript.gif?tag=#{associate_id}", :alt => ''}/
+		/
+			%script{:type => 'text/javascript', :src => "http://wms.assoc-amazon.jp/20070822/JP/js/link-enhancer-common.js?tag=#{associate_id}"}
+			%noscript
+				%img{:src => "http://wms.assoc-amazon.jp/20070822/JP/img/noscript.gif?tag=#{associate_id}", :alt => ''}/
