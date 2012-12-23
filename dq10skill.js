@@ -7,6 +7,9 @@ var Simulator = (function($) {
 	var SKILL_PTS_MAX = 100;
 	var LEVEL_MIN = 1;
 	var LEVEL_MAX = 60;
+	var TRAINING_SKILL_PTS_MIN = 0;
+	var TRAINING_SKILL_PTS_MAX = 4;
+	var LEVEL_FOR_TRAINING_MODE = 50;
 	
 	var DATA_JSON_URI = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'dq10skill-data.json';
 	
@@ -28,6 +31,7 @@ var Simulator = (function($) {
 	//パラメータ格納用
 	var skillPts = {};
 	var levels = {};
+	var trainingSkillPts = {};
 	
 	//パラメータ初期化
 	for(var vocation in vocations) {
@@ -37,6 +41,7 @@ var Simulator = (function($) {
 			skillPts[vocation][skill] = 0;
 		}
 		levels[vocation] = LEVEL_MIN;
+		trainingSkillPts[vocation] = TRAINING_SKILL_PTS_MIN;
 	}
 	
 	/* メソッド */
@@ -73,6 +78,22 @@ var Simulator = (function($) {
 		
 		levels[vocation] = newValue;
 		return newValue;
+	}
+	
+	//特訓スキルポイント取得
+	function getTrainingSkillPt(vocation) {
+		return trainingSkillPts[vocation];
+	}
+	
+	//特訓スキルポイント更新
+	function updateTrainingSkillPt(vocation, newValue) {
+		if(newValue > TRAINING_SKILL_PTS_MIN && getLevel(vocation) < LEVEL_FOR_TRAINING_MODE)
+			return false;
+		if(newValue < TRAINING_SKILL_PTS_MIN || newValue > TRAINING_SKILL_PTS_MAX)
+			return false;
+		
+		trainingSkillPts[vocation] = newValue;
+		return true;
 	}
 	
 	//職業のスキルポイント合計
@@ -174,6 +195,8 @@ var Simulator = (function($) {
 		updateSkillPt: updateSkillPt,
 		getLevel: getLevel,
 		updateLevel: updateLevel,
+		getTrainingSkillPt : getTrainingSkillPt,
+		updateTrainingSkillPt : updateTrainingSkillPt,
 		totalSkillPts: totalSkillPts,
 		totalOfSameSkills: totalOfSameSkills,
 		maxSkillPts: maxSkillPts,
@@ -194,7 +217,10 @@ var Simulator = (function($) {
 		SKILL_PTS_MIN: SKILL_PTS_MIN,
 		SKILL_PTS_MAX: SKILL_PTS_MAX,
 		LEVEL_MIN: LEVEL_MIN,
-		LEVEL_MAX: LEVEL_MAX
+		LEVEL_MAX: LEVEL_MAX,
+		TRAINING_SKILL_PTS_MIN: TRAINING_SKILL_PTS_MIN,
+		TRAINING_SKILL_PTS_MAX: TRAINING_SKILL_PTS_MAX,
+		LEVEL_FOR_TRAINING_MODE: LEVEL_FOR_TRAINING_MODE
 	};
 })(jQuery);
 
