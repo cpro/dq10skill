@@ -132,6 +132,11 @@ a:hover {
 .class_info .exp {
 	font-size: 120%;
 }
+.class_info .training_pt {
+	width: 2em;
+	text-align: right;
+}
+
 /* 折りたたみ/展開ボタン */
 p.fold, p.unfold {
 	margin: 0;
