@@ -7,6 +7,9 @@ var Simulator = (function($) {
 	var SKILL_PTS_MAX = 100;
 	var LEVEL_MIN = 1;
 	var LEVEL_MAX = 60;
+	var TRAINING_SKILL_PTS_MIN = 0;
+	var TRAINING_SKILL_PTS_MAX = 4;
+	var LEVEL_FOR_TRAINING_MODE = 50;
 	
 	var DATA_JSON_URI = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'dq10skill-data.json';
 	
@@ -24,10 +27,12 @@ var Simulator = (function($) {
 	var vocations = allData.vocations;
 	var skillPtsGiven = allData.skillPtsGiven;
 	var expRequired = allData.expRequired;
+	var trainingPts = allData.trainingPts;
 	
 	//パラメータ格納用
 	var skillPts = {};
 	var levels = {};
+	var trainingSkillPts = {};
 	
 	//パラメータ初期化
 	for(var vocation in vocations) {
@@ -37,6 +42,7 @@ var Simulator = (function($) {
 			skillPts[vocation][skill] = 0;
 		}
 		levels[vocation] = LEVEL_MIN;
+		trainingSkillPts[vocation] = TRAINING_SKILL_PTS_MIN;
 	}
 	
 	/* メソッド */
@@ -75,6 +81,25 @@ var Simulator = (function($) {
 		return newValue;
 	}
 	
+	//特訓スキルポイント取得
+	function getTrainingSkillPt(vocation) {
+		if(getLevel(vocation) < LEVEL_FOR_TRAINING_MODE)
+			return TRAINING_SKILL_PTS_MIN;
+		else
+			return trainingSkillPts[vocation];
+	}
+	
+	//特訓スキルポイント更新
+	function updateTrainingSkillPt(vocation, newValue) {
+		if(newValue > TRAINING_SKILL_PTS_MIN && getLevel(vocation) < LEVEL_FOR_TRAINING_MODE)
+			return false;
+		if(newValue < TRAINING_SKILL_PTS_MIN || newValue > TRAINING_SKILL_PTS_MAX)
+			return false;
+		
+		trainingSkillPts[vocation] = newValue;
+		return true;
+	}
+	
 	//職業のスキルポイント合計
 	function totalSkillPts(vocation) {
 		var total = 0;
@@ -101,7 +126,7 @@ var Simulator = (function($) {
 	
 	//スキルポイント合計に対する必要レベル取得
 	function requiredLevel(vocation) {
-		var total = totalSkillPts(vocation);
+		var total = totalSkillPts(vocation) - getTrainingSkillPt(vocation);
 		for(var l = LEVEL_MIN; l <= LEVEL_MAX; l++) {
 			if(skillPtsGiven[l] >= total) return l;
 		}
@@ -174,6 +199,8 @@ var Simulator = (function($) {
 		updateSkillPt: updateSkillPt,
 		getLevel: getLevel,
 		updateLevel: updateLevel,
+		getTrainingSkillPt : getTrainingSkillPt,
+		updateTrainingSkillPt : updateTrainingSkillPt,
 		totalSkillPts: totalSkillPts,
 		totalOfSameSkills: totalOfSameSkills,
 		maxSkillPts: maxSkillPts,
@@ -189,12 +216,16 @@ var Simulator = (function($) {
 		vocations: vocations,
 		skillPtsGiven: skillPtsGiven,
 		expRequired: expRequired,
+		trainingPts: trainingPts,
 		
 		//定数
 		SKILL_PTS_MIN: SKILL_PTS_MIN,
 		SKILL_PTS_MAX: SKILL_PTS_MAX,
 		LEVEL_MIN: LEVEL_MIN,
-		LEVEL_MAX: LEVEL_MAX
+		LEVEL_MAX: LEVEL_MAX,
+		TRAINING_SKILL_PTS_MIN: TRAINING_SKILL_PTS_MIN,
+		TRAINING_SKILL_PTS_MAX: TRAINING_SKILL_PTS_MAX,
+		LEVEL_FOR_TRAINING_MODE: LEVEL_FOR_TRAINING_MODE
 	};
 })(jQuery);
 
@@ -227,11 +258,19 @@ var SimulatorUI = (function($) {
 		//スキルポイント 現在値 / 最大値
 		var totalSkillPts = sim.totalSkillPts(vocation);
 		var maxSkillPts = sim.maxSkillPts(vocation);
+		var additionalSkillPts = sim.getTrainingSkillPt(vocation);
 		var $skillPtsText = $('#' + vocation + ' .pts');
 		$skillPtsText.text(totalSkillPts + ' / ' + maxSkillPts);
+		if(additionalSkillPts > 0)
+			$skillPtsText.append('<small> + ' + additionalSkillPts + '</small>');
+		
+		//特訓スキルポイント レベルによる使用可否
+		$('#' + vocation + ' .training_pt').spinner(
+			sim.getLevel(vocation) >= sim.LEVEL_FOR_TRAINING_MODE ? 'enable' : 'disable'
+		);
 		
 		//Lv不足の処理
-		var isLevelError = totalSkillPts > maxSkillPts;
+		var isLevelError = totalSkillPts > (maxSkillPts + additionalSkillPts);
 		
 		$levelH2.toggleClass(CLASSNAME_ERROR, isLevelError);
 		$skillPtsText.toggleClass(CLASSNAME_ERROR, isLevelError);
@@ -281,6 +320,7 @@ var SimulatorUI = (function($) {
 	function refreshControls() {
 		for(var vocation in sim.vocations) {
 			$('#' + vocation + ' .lv_select>select').val(sim.getLevel(vocation));
+			$('#' + vocation + ' .training_pt').val(sim.getTrainingSkillPt(vocation));
 			
 			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
 				var skill = sim.vocations[vocation].skills[s];
@@ -333,6 +373,42 @@ var SimulatorUI = (function($) {
 					});
 				})(vocation);
 			}
+		},
+		
+		//特訓ポイント選択スピンボタン設定
+		function() {
+			var $spinner = $('.training_pt');
+			$spinner.spinner({
+				min: sim.TRAINING_SKILL_PTS_MIN,
+				max: sim.TRAINING_SKILL_PTS_MAX,
+				spin: function (e, ui) {
+					var vocation = $(this).parents('.class_group').attr('id');
+					
+					if(sim.updateTrainingSkillPt(vocation, parseInt(ui.value))) {
+						refreshVocationInfo(vocation);
+					} else {
+						return false;
+					}
+				},
+				change: function (e, ui) {
+					var vocation = $(this).parents('.class_group').attr('id');
+					
+					if(isNaN($(this).val())) {
+						$(this).val(sim.getTraningSkillPt(vocation));
+						return false;
+					}
+					if(sim.updateTrainingSkillPt(vocation, parseInt($(this).val()))) {
+						refreshVocationInfo(vocation);
+						refreshSaveUrl();
+					} else {
+						$(this).val(sim.getTraningSkillPt(vocation));
+						return false;
+					}
+				},
+				stop: function (e, ui) {
+					refreshSaveUrl();
+				}
+			});
 		},
 		
 		//スピンボタン設定
@@ -550,14 +626,17 @@ var Base64Param = (function($) {
 	var EN_CHAR = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 	var BITS_LEVEL = 8; //レベルは8ビット確保
 	var BITS_SKILL = 7; //スキルは7ビット
+	var BITS_TRAINING = 7; //特訓スキルポイント7ビット
 	
 	var sim = Simulator;
+	var isIncludingTrainingPts = false; //直前にデコードした文字列が特訓ポイントを含んでいるかどうか
 	
 	function encode() {
 		//2進にして結合する
 		var binArray = [];
 		for(var vocation in sim.vocations) {
 			binArray.push(numberToBin(sim.getLevel(vocation), BITS_LEVEL));
+			binArray.push(numberToBin(sim.getTrainingSkillPt(vocation), BITS_TRAINING));
 			
 			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
 				var skill = sim.vocations[vocation].skills[s];
@@ -583,10 +662,21 @@ var Base64Param = (function($) {
 		}
 		var binStr = binArray.join('');
 		
+		//特訓ポイントを含むかどうか: ビット列の長さで判断
+		isIncludingTrainingPts = binStr.length >= (
+			BITS_LEVEL + 
+			BITS_TRAINING + 
+			BITS_SKILL * sim.vocations[VOCATIONS_DATA_ORDER[0]].skills.length
+		) * VOCATIONS_DATA_ORDER.length;
+		
 		var paramArray = [];
 		var i = 0;
 		for(var vocation in sim.vocations) {
 			paramArray.push(parseInt(binStr.substring(i, i += 8), 2) || 1);
+			if(isIncludingTrainingPts)
+				paramArray.push(parseInt(binStr.substring(i, i += 7), 2) || 0);
+			else
+				paramArray.push(0);
 			
 			for(var s in sim.vocations[vocation].skills) {
 				paramArray.push(parseInt(binStr.substring(i, i += 7), 2) || 0);
@@ -600,9 +690,10 @@ var Base64Param = (function($) {
 		//要素数カウント
 		var count = 0;
 		for(var vocation in sim.vocations) {
-			count += 1;
+			count += 1; //レベル
+			count += 1; //特訓ポイント
 			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
-				count += 1;
+				count += 1; //各スキルポイント
 			}
 		}
 		if(decodedArray.length != count) 
@@ -611,6 +702,8 @@ var Base64Param = (function($) {
 		var i = 0;
 		for(var vocation in sim.vocations) {
 			sim.updateLevel(vocation, decodedArray[i]);
+			i += 1;
+			sim.updateTrainingSkillPt(vocation, decodedArray[i]);
 			i += 1;
 			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
 				var skill = sim.vocations[vocation].skills[s];
