@@ -516,7 +516,7 @@
 		]
 	},
 	
-	"training": [null,
+	"trainingPts": [
 		{ "stamps":  100, "pt": 1 },
 		{ "stamps":  300, "pt": 2 },
 		{ "stamps":  600, "pt": 3 },
