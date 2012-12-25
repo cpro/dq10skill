@@ -83,7 +83,10 @@ var Simulator = (function($) {
 	
 	//特訓スキルポイント取得
 	function getTrainingSkillPt(vocation) {
-		return trainingSkillPts[vocation];
+		if(getLevel(vocation) < LEVEL_FOR_TRAINING_MODE)
+			return TRAINING_SKILL_PTS_MIN;
+		else
+			return trainingSkillPts[vocation];
 	}
 	
 	//特訓スキルポイント更新
@@ -123,7 +126,7 @@ var Simulator = (function($) {
 	
 	//スキルポイント合計に対する必要レベル取得
 	function requiredLevel(vocation) {
-		var total = totalSkillPts(vocation);
+		var total = totalSkillPts(vocation) - getTrainingSkillPt(vocation);
 		for(var l = LEVEL_MIN; l <= LEVEL_MAX; l++) {
 			if(skillPtsGiven[l] >= total) return l;
 		}
@@ -255,10 +258,11 @@ var SimulatorUI = (function($) {
 		//スキルポイント 現在値 / 最大値
 		var totalSkillPts = sim.totalSkillPts(vocation);
 		var maxSkillPts = sim.maxSkillPts(vocation);
+		var additionalSkillPts = sim.getTrainingSkillPt(vocation);
 		var $skillPtsText = $('#' + vocation + ' .pts');
 		$skillPtsText.text(totalSkillPts + ' / ' + maxSkillPts);
-		if(sim.getLevel(vocation) >= sim.LEVEL_FOR_TRAINING_MODE && sim.getTrainingSkillPt(vocation) > 0)
-			$skillPtsText.append('<small> + ' + sim.getTrainingSkillPt(vocation) + '</small>');
+		if(additionalSkillPts > 0)
+			$skillPtsText.append('<small> + ' + additionalSkillPts + '</small>');
 		
 		//特訓スキルポイント レベルによる使用可否
 		$('#' + vocation + ' .training_pt').spinner(
@@ -266,7 +270,7 @@ var SimulatorUI = (function($) {
 		);
 		
 		//Lv不足の処理
-		var isLevelError = totalSkillPts > maxSkillPts;
+		var isLevelError = totalSkillPts > (maxSkillPts + additionalSkillPts);
 		
 		$levelH2.toggleClass(CLASSNAME_ERROR, isLevelError);
 		$skillPtsText.toggleClass(CLASSNAME_ERROR, isLevelError);
