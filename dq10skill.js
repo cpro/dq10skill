@@ -257,6 +257,13 @@ var SimulatorUI = (function($) {
 		var maxSkillPts = sim.maxSkillPts(vocation);
 		var $skillPtsText = $('#' + vocation + ' .pts');
 		$skillPtsText.text(totalSkillPts + ' / ' + maxSkillPts);
+		if(sim.getLevel(vocation) >= sim.LEVEL_FOR_TRAINING_MODE && sim.getTrainingSkillPt(vocation) > 0)
+			$skillPtsText.append('<small> + ' + sim.getTrainingSkillPt(vocation) + '</small>');
+		
+		//特訓スキルポイント レベルによる使用可否
+		$('#' + vocation + ' .training_pt').spinner(
+			sim.getLevel(vocation) >= sim.LEVEL_FOR_TRAINING_MODE ? 'enable' : 'disable'
+		);
 		
 		//Lv不足の処理
 		var isLevelError = totalSkillPts > maxSkillPts;
@@ -309,6 +316,7 @@ var SimulatorUI = (function($) {
 	function refreshControls() {
 		for(var vocation in sim.vocations) {
 			$('#' + vocation + ' .lv_select>select').val(sim.getLevel(vocation));
+			$('#' + vocation + ' .training_pt').val(sim.getTrainingSkillPt(vocation));
 			
 			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
 				var skill = sim.vocations[vocation].skills[s];
@@ -370,6 +378,31 @@ var SimulatorUI = (function($) {
 				min: sim.TRAINING_SKILL_PTS_MIN,
 				max: sim.TRAINING_SKILL_PTS_MAX,
 				spin: function (e, ui) {
+					var vocation = $(this).parents('.class_group').attr('id');
+					
+					if(sim.updateTrainingSkillPt(vocation, parseInt(ui.value))) {
+						refreshVocationInfo(vocation);
+					} else {
+						return false;
+					}
+				},
+				change: function (e, ui) {
+					var vocation = $(this).parents('.class_group').attr('id');
+					
+					if(isNaN($(this).val())) {
+						$(this).val(sim.getTraningSkillPt(vocation));
+						return false;
+					}
+					if(sim.updateTrainingSkillPt(vocation, parseInt($(this).val()))) {
+						refreshVocationInfo(vocation);
+						refreshSaveUrl();
+					} else {
+						$(this).val(sim.getTraningSkillPt(vocation));
+						return false;
+					}
+				},
+				stop: function (e, ui) {
+					refreshSaveUrl();
 				}
 			});
 		},
