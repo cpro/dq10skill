@@ -626,14 +626,17 @@ var Base64Param = (function($) {
 	var EN_CHAR = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 	var BITS_LEVEL = 8; //レベルは8ビット確保
 	var BITS_SKILL = 7; //スキルは7ビット
+	var BITS_TRAINING = 7; //特訓スキルポイント7ビット
 	
 	var sim = Simulator;
+	var isIncludingTrainingPts = false; //直前にデコードした文字列が特訓ポイントを含んでいるかどうか
 	
 	function encode() {
 		//2進にして結合する
 		var binArray = [];
 		for(var vocation in sim.vocations) {
 			binArray.push(numberToBin(sim.getLevel(vocation), BITS_LEVEL));
+			binArray.push(numberToBin(sim.getTrainingSkillPt(vocation), BITS_TRAINING));
 			
 			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
 				var skill = sim.vocations[vocation].skills[s];
@@ -659,10 +662,21 @@ var Base64Param = (function($) {
 		}
 		var binStr = binArray.join('');
 		
+		//特訓ポイントを含むかどうか: ビット列の長さで判断
+		isIncludingTrainingPts = binStr.length >= (
+			BITS_LEVEL + 
+			BITS_TRAINING + 
+			BITS_SKILL * sim.vocations[VOCATIONS_DATA_ORDER[0]].skills.length
+		) * VOCATIONS_DATA_ORDER.length;
+		
 		var paramArray = [];
 		var i = 0;
 		for(var vocation in sim.vocations) {
 			paramArray.push(parseInt(binStr.substring(i, i += 8), 2) || 1);
+			if(isIncludingTrainingPts)
+				paramArray.push(parseInt(binStr.substring(i, i += 7), 2) || 0);
+			else
+				paramArray.push(0);
 			
 			for(var s in sim.vocations[vocation].skills) {
 				paramArray.push(parseInt(binStr.substring(i, i += 7), 2) || 0);
@@ -676,9 +690,10 @@ var Base64Param = (function($) {
 		//要素数カウント
 		var count = 0;
 		for(var vocation in sim.vocations) {
-			count += 1;
+			count += 1; //レベル
+			count += 1; //特訓ポイント
 			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
-				count += 1;
+				count += 1; //各スキルポイント
 			}
 		}
 		if(decodedArray.length != count) 
@@ -687,6 +702,8 @@ var Base64Param = (function($) {
 		var i = 0;
 		for(var vocation in sim.vocations) {
 			sim.updateLevel(vocation, decodedArray[i]);
+			i += 1;
+			sim.updateTrainingSkillPt(vocation, decodedArray[i]);
 			i += 1;
 			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
 				var skill = sim.vocations[vocation].skills[s];
