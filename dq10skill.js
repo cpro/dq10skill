@@ -359,6 +359,15 @@ var SimulatorUI = (function($) {
 			}
 		},
 		
+		//特訓ポイント選択セレクトボックス項目設定
+		function() {
+			var $select = $('.training_pt');
+			for(var i = 0; i < sim.trainingPts.length; i++) {
+				$select.append($('<option />').val(sim.trainingPts[i].stamps)
+					.text(sim.trainingPts[i].stamps.toString() + ' (' + sim.trainingPts[i].pt.toString() + ')'));
+			}
+		},
+		
 		//スピンボタン設定
 		function() {
 			$spinner = $('.ptspinner');
