@@ -27,6 +27,7 @@ var Simulator = (function($) {
 	var vocations = allData.vocations;
 	var skillPtsGiven = allData.skillPtsGiven;
 	var expRequired = allData.expRequired;
+	var trainingPts = allData.trainingPts;
 	
 	//パラメータ格納用
 	var skillPts = {};
@@ -212,6 +213,7 @@ var Simulator = (function($) {
 		vocations: vocations,
 		skillPtsGiven: skillPtsGiven,
 		expRequired: expRequired,
+		trainingPts: trainingPts,
 		
 		//定数
 		SKILL_PTS_MIN: SKILL_PTS_MIN,
