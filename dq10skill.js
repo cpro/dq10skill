@@ -363,13 +363,15 @@ var SimulatorUI = (function($) {
 			}
 		},
 		
-		//特訓ポイント選択セレクトボックス項目設定
+		//特訓ポイント選択スピンボタン設定
 		function() {
-			var $select = $('.training_pt');
-			for(var i = 0; i < sim.trainingPts.length; i++) {
-				$select.append($('<option />').val(sim.trainingPts[i].stamps)
-					.text(sim.trainingPts[i].stamps.toString() + ' (' + sim.trainingPts[i].pt.toString() + ')'));
-			}
+			var $spinner = $('.training_pt');
+			$spinner.spinner({
+				min: sim.TRAINING_SKILL_PTS_MIN,
+				max: sim.TRAINING_SKILL_PTS_MAX,
+				spin: function (e, ui) {
+				}
+			});
 		},
 		
 		//スピンボタン設定
