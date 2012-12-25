@@ -40,7 +40,7 @@ var Simulator = (function($) {
 			skillPts[vocation][skill] = 0;
 		}
 		levels[vocation] = LEVEL_MIN;
-		trainingSkillPts[vocation] = TRAINING_STAMPS_MIN;
+		trainingSkillPts[vocation] = 0;
 	}
 	
 	/* メソッド */
