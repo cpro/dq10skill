@@ -387,32 +387,32 @@
 		"fource": {
 			"name": "フォース",
 			"skills": [
-				{"pt":   2, "name": "（未定）", "desc": "", "mp": null},
-				{"pt":  12, "name": "（未定）", "desc": "", "mp": null},
-				{"pt":  22, "name": "（未定）", "desc": "", "mp": null},
-				{"pt":  34, "name": "（未定）", "desc": "", "mp": null},
-				{"pt":  46, "name": "（未定）", "desc": "", "mp": null},
-				{"pt":  54, "name": "（未定）", "desc": "", "mp": null},
-				{"pt":  68, "name": "（未定）", "desc": "", "mp": null},
-				{"pt":  78, "name": "（未定）", "desc": "", "mp": null},
-				{"pt":  82, "name": "（未定）", "desc": "", "mp": null},
-				{"pt": 100, "name": "（未定）", "desc": "", "mp": null}
+				{"pt":   4, "name": "ファイアフォース（専）", "desc": "", "mp": null},
+				{"pt":  10, "name": "常時ちから+10", "desc": "", "mp": null, "pow": 10},
+				{"pt":  16, "name": "アイスフォース（専）", "desc": "", "mp": null},
+				{"pt":  22, "name": "常時さいだいMP+10", "desc": "", "mp": null, "maxmp": 10},
+				{"pt":  32, "name": "ストームフォース（専）", "desc": "", "mp": null},
+				{"pt":  42, "name": "常時みのまもり+5", "desc": "", "mp": null, "def": 5},
+				{"pt":  55, "name": "ダークフォース（専）", "desc": "", "mp": null},
+				{"pt":  68, "name": "MPパサー（専）", "desc": "", "mp": null},
+				{"pt":  82, "name": "常時さいだいHP+20", "desc": "", "mp": null, "maxhp": 20},
+				{"pt": 100, "name": "ライトフォース（専）", "desc": "", "mp": null}
 			]
 		},
 		
 		"jenesaisquoi": {
 			"name": "オーラ",
 			"skills": [
-				{"pt":   2, "name": "（未定）", "desc": "", "mp": null},
-				{"pt":  12, "name": "（未定）", "desc": "", "mp": null},
-				{"pt":  22, "name": "（未定）", "desc": "", "mp": null},
-				{"pt":  34, "name": "（未定）", "desc": "", "mp": null},
-				{"pt":  46, "name": "（未定）", "desc": "", "mp": null},
-				{"pt":  54, "name": "（未定）", "desc": "", "mp": null},
-				{"pt":  68, "name": "（未定）", "desc": "", "mp": null},
-				{"pt":  78, "name": "（未定）", "desc": "", "mp": null},
-				{"pt":  82, "name": "（未定）", "desc": "", "mp": null},
-				{"pt": 100, "name": "（未定）", "desc": "", "mp": null}
+				{"pt":   4, "name": "サインぜめ（専）", "desc": "", "mp": null},
+				{"pt":  10, "name": "常時みりょく+20", "desc": "", "mp": null, "charm": 20},
+				{"pt":  16, "name": "スキャンダル（専）", "desc": "", "mp": 6},
+				{"pt":  22, "name": "常時すばやさ+30", "desc": "", "mp": null, "spd": 30},
+				{"pt":  32, "name": "メイクアップ（専）", "desc": "", "mp": 2},
+				{"pt":  42, "name": "常時こうげき魔力+10", "desc": "", "mp": null, "magic": 10},
+				{"pt":  55, "name": "ボディーガード（専）", "desc": "", "mp": null},
+				{"pt":  68, "name": "常時みりょく+60", "desc": "", "mp": null, "charm": 60},
+				{"pt":  82, "name": "ベストスマイル（専）", "desc": "", "mp": 12},
+				{"pt": 100, "name": "ゴールドシャワー（専）", "desc": "", "mp": null}
 			]
 		}
 	},
