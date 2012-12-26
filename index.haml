@@ -75,9 +75,8 @@
 			- data['vocationOrder'].each do |vocation|
 				%div.class_group{:id => vocation}
 					.class_info
-						%h2
-							= data['vocations'][vocation]['name']
-							Lv
+						%h2<
+							= data['vocations'][vocation]['name'] + ' Lv '
 							%span.lv_h2> 1
 						%dl
 							%dt.label_lv レベル
@@ -88,7 +87,7 @@
 							%dt スキルポイント:
 							%dd.pts 0 / 0
 							%dd<
-								特訓:
+								特訓
 								%input.training_pt>
 							%dt.error{:style => 'display:none'}<
 								必要レベル:
