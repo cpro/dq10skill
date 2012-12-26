@@ -70,8 +70,8 @@
 						%input#url_text.ui-widget-content.ui-corner-all{:type => 'text', :size => 60}>/
 						%a#tw-saveurl{title: '保存用URLをツイートする'} ツイート
 		#body_content
-			%ul#beta_notice{:style => 'font-size:90%'}
-				%li Lv56以上の取得スキルポイントについては匿名掲示板等の報告に基づく未検証のものです。ご了承ください。
+			-# %ul#beta_notice{:style => 'font-size:90%'}
+			-# 	%li
 			- data['vocationOrder'].each do |vocation|
 				%div.class_group{:id => vocation}
 					.class_info
@@ -115,6 +115,7 @@
 				%ul
 					%li スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』のスキルポイント割り振りを検討するためのシミュレータです。
 					%li 要JavaScript。Google Chrome, Firefox, IE8以上で動作確認。IE対応は後回しになりがちです。
+					%li Lv56-60の獲得スキルポイントは、匿名掲示板・Twitterの投稿に基づく未検証の数値です。複数の証言があるので確度は高いと思いますが、ご利用は自己責任でお願いします。
 					%li
 						使い方:
 						%ul
@@ -127,7 +128,7 @@
 						履歴:
 						%ul
 							%li
-								2012/12/26 v2.0 大型バージョンアップ (1.2) に対応、およびインタフェースの改善。
+								2012/12/27 v2.0 大型バージョンアップ (1.2) に対応、およびインタフェースの改善。
 								%ul
 									%li 新職業追加、レベルキャップ55→60。特訓モードで得られるスキルポイントの機能追加。
 									%li スキルポイント調整UIを変更（スピンボタン採用・リセットボタン追加）。
@@ -150,6 +151,8 @@
 					%li
 						ToDo:
 						%ul
+							%li Lv57-60の必要経験値入力
+							%li 魔法戦士・スーパースターのスキル詳細入力
 							%li <del>スキル一覧ポイント時にスキル詳細をヒント表示する</del>(v1.1)</li>
 							%li <del>スキル一覧クリックでスキルポイントを自動設定する</del>(v0.2)</li>
 							%li <del>パッシブ合計を表示する</del>(v0.5)</li>
