@@ -336,7 +336,7 @@ var SimulatorUI = (function($) {
 		
 		var params = {
 			text: 'DQ10 現在のスキル構成:',
-			hashtags: 'DQ10, DQX',
+			hashtags: 'DQ10, DQX, dq10_skillsim',
 			url: url,
 			original_referer: window.location.href,
 			tw_p: 'tweetbutton'
@@ -749,7 +749,7 @@ jQuery(function($) {
 		button: 'horizontal',
 		url: 'http://cpro.jp/dq10/skillsimulator/',
 		lang: 'ja',
-		hashtags: 'DQ10, DQX'
+		hashtags: 'DQ10, DQX, dq10_skillsim'
 	});
 	$('#fb-like').socialbutton('facebook_like', {
 		button: 'button_count',
