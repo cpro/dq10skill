@@ -1,6 +1,8 @@
 #! ruby -E utf-8:utf-8
 # coding: utf-8
 
+dir = File.dirname(__FILE__)
+
 refresh_item_cache = false
 
 #オプション解析: -aオプション時商品キャッシュのリフレッシュ
@@ -10,7 +12,7 @@ opts.on('-a') {|v| refresh_item_cache = true}
 opts.parse!(ARGV)
 
 if ARGV.size < 1
-  index_html_path = 'index.html'
+  index_html_path = "#{dir}/../index.html"
 else
   index_html_path = ARGV[0].to_s
 end
@@ -21,7 +23,7 @@ require 'json'
 require 'amazon/aws'
 require 'amazon/aws/search'
 
-ITEM_CACHE_PATH = 'amazon_item_cache.json'
+ITEM_CACHE_PATH = "#{dir}/amazon_item_cache.json"
 
 item_list = []
 
@@ -29,11 +31,11 @@ item_list = []
 # AWSから商品タイトル・画像URL等を取得する
 if refresh_item_cache or !File.exist?(ITEM_CACHE_PATH)
   # Ruby/AWS 設定
-  ENV['AMAZONRCDIR']  = '.'
+  ENV['AMAZONRCDIR']  = dir
   ENV['AMAZONRCFILE'] = '.amazonrc'
   include Amazon::AWS
 
-  asin_list = File.readlines('asin_list.txt').map { |e| e.chomp }
+  asin_list = File.readlines("#{dir}/asin_list.txt").map { |e| e.chomp }
   item_list = asin_list.map do |asin|
     il = ItemLookup.new('ASIN', {ItemId: asin})
     request = Search::Request.new
@@ -74,8 +76,8 @@ else
 end
 
 # スキル等データロード
-data = JSON.parse(File.read('dq10skill-data.json'))
+data = JSON.parse(File.read("#{dir}/../dq10skill-data.json"))
 # HAMLからHTML生成
 File.open(index_html_path, 'w') do |file|
-  file.puts Haml::Engine.new(File.read('index.haml')).render(Object.new, {:data => data, :item_list => item_list})
+  file.puts Haml::Engine.new(File.read("#{dir}/index.haml")).render(Object.new, {:data => data, :item_list => item_list})
 end

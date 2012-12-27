@@ -79,16 +79,17 @@
 							= data['vocations'][vocation]['name'] + ' Lv '
 							%span.lv_h2> 1
 						%dl
-							%dt.label_lv レベル
+							%dt.label_lv<
+								%label{for: "lv-#{vocation}"} レベル
 							%dd.lv_select
-								%select{:size => 1}
+								%select{size: 1, id: "lv-#{vocation}"}
 							%dt 獲得経験値:
 							%dd.exp 0
 							%dt スキルポイント:
 							%dd.pts 0 / 0
 							%dd<
-								特訓
-								%input.training_pt>
+								%label{for: "training-#{vocation}"}> 特訓
+								%input.training_pt{id: "training-#{vocation}"}>
 							%dt.error{:style => 'display:none'}<
 								必要レベル:
 								%span.req_lv>< 1
