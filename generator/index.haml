@@ -70,8 +70,11 @@
 						%input#url_text.ui-widget-content.ui-corner-all{:type => 'text', :size => 60}>/
 						%a#tw-saveurl{title: '保存用URLをツイートする'} ツイート
 		#body_content
-			-# %ul#beta_notice{:style => 'font-size:90%'}
-			-# 	%li
+			%ul#beta_notice{:style => 'font-size:90%'}
+				%li<
+					バージョンアップ後に正しく表示されない場合、
+					%a{href: 'http://www.netyasun.com/browser/reload.html', target: '_blank'}> スーパーリロード
+					してブラウザのキャッシュを更新してみてください。
 			- data['vocationOrder'].each do |vocation|
 				%div.class_group{:id => vocation}
 					.class_info
