@@ -126,9 +126,17 @@ var Simulator = (function($) {
 	
 	//スキルポイント合計に対する必要レベル取得
 	function requiredLevel(vocation) {
-		var total = totalSkillPts(vocation) - getTrainingSkillPt(vocation);
+		var trainingSkillPt = getTrainingSkillPt(vocation);
+		var total = totalSkillPts(vocation) - trainingSkillPt;
+		
 		for(var l = LEVEL_MIN; l <= LEVEL_MAX; l++) {
-			if(skillPtsGiven[l] >= total) return l;
+			if(skillPtsGiven[l] >= total) {
+				//特訓スキルポイントが1以上の場合、最低レベル50必要
+				if(trainingSkillPt > TRAINING_SKILL_PTS_MIN && l < LEVEL_FOR_TRAINING_MODE)
+					return LEVEL_FOR_TRAINING_MODE;
+				else
+					return l;
+			}
 		}
 		return NaN;
 	}
