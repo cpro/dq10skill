@@ -251,12 +251,15 @@ var SimulatorUI = (function($) {
 	}
 	
 	function refreshVocationInfo(vocation) {
+		var currentLevel = sim.getLevel(vocation);
+		var requiredLevel = sim.requiredLevel(vocation);
+		
 		//見出し中のレベル数値
-		$('#' + vocation + ' .lv_h2').text(sim.getLevel(vocation));
+		$('#' + vocation + ' .lv_h2').text(currentLevel);
 		var $levelH2 = $('#' + vocation + ' h2');
 		
 		//必要経験値
-		$('#' + vocation + ' .exp').text(numToFormedStr(sim.requiredExp(vocation, sim.getLevel(vocation))));
+		$('#' + vocation + ' .exp').text(numToFormedStr(sim.requiredExp(vocation, currentLevel)));
 		
 		//スキルポイント 現在値 / 最大値
 		var totalSkillPts = sim.totalSkillPts(vocation);
@@ -268,13 +271,13 @@ var SimulatorUI = (function($) {
 			$skillPtsText.append('<small> + ' + additionalSkillPts + '</small>');
 		
 		//Lv不足の処理
-		var isLevelError = sim.getLevel(vocation) < sim.requiredLevel(vocation);
+		var isLevelError = currentLevel < requiredLevel;
 		
 		$levelH2.toggleClass(CLASSNAME_ERROR, isLevelError);
 		$skillPtsText.toggleClass(CLASSNAME_ERROR, isLevelError);
 		$('#' + vocation + ' .error').toggle(isLevelError);
 		if(isLevelError) {
-			$('#' + vocation + ' .req_lv').text(numToFormedStr(sim.requiredLevel(vocation)));
+			$('#' + vocation + ' .req_lv').text(numToFormedStr(requiredLevel));
 			$('#' + vocation + ' .exp_remain').text(numToFormedStr(sim.requiredExpRemain(vocation)));
 		}
 	}
