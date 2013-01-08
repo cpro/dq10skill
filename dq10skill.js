@@ -384,6 +384,8 @@ var SimulatorUI = (function($) {
 					
 					if(sim.updateTrainingSkillPt(vocation, parseInt(ui.value))) {
 						refreshVocationInfo(vocation);
+						refreshTotalRequiredExp();
+						refreshTotalExpRemain();
 					} else {
 						return false;
 					}
@@ -397,6 +399,8 @@ var SimulatorUI = (function($) {
 					}
 					if(sim.updateTrainingSkillPt(vocation, parseInt($(this).val()))) {
 						refreshVocationInfo(vocation);
+						refreshTotalRequiredExp();
+						refreshTotalExpRemain();
 						refreshSaveUrl();
 					} else {
 						$(this).val(sim.getTraningSkillPt(vocation));
