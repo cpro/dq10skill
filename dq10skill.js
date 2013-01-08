@@ -268,7 +268,7 @@ var SimulatorUI = (function($) {
 			$skillPtsText.append('<small> + ' + additionalSkillPts + '</small>');
 		
 		//Lv不足の処理
-		var isLevelError = totalSkillPts > (maxSkillPts + additionalSkillPts);
+		var isLevelError = sim.getLevel(vocation) < sim.requiredLevel(vocation);
 		
 		$levelH2.toggleClass(CLASSNAME_ERROR, isLevelError);
 		$skillPtsText.toggleClass(CLASSNAME_ERROR, isLevelError);
