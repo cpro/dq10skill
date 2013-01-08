@@ -83,16 +83,11 @@ var Simulator = (function($) {
 	
 	//特訓スキルポイント取得
 	function getTrainingSkillPt(vocation) {
-		if(getLevel(vocation) < LEVEL_FOR_TRAINING_MODE)
-			return TRAINING_SKILL_PTS_MIN;
-		else
-			return trainingSkillPts[vocation];
+		return trainingSkillPts[vocation];
 	}
 	
 	//特訓スキルポイント更新
 	function updateTrainingSkillPt(vocation, newValue) {
-		if(newValue > TRAINING_SKILL_PTS_MIN && getLevel(vocation) < LEVEL_FOR_TRAINING_MODE)
-			return false;
 		if(newValue < TRAINING_SKILL_PTS_MIN || newValue > TRAINING_SKILL_PTS_MAX)
 			return false;
 		
