@@ -20,8 +20,6 @@ end
 require 'rubygems'
 require 'haml'
 require 'json'
-require 'amazon/aws'
-require 'amazon/aws/search'
 
 ITEM_CACHE_PATH = "#{dir}/amazon_item_cache.json"
 
@@ -30,6 +28,9 @@ item_list = []
 # -aオプション時、またはキャッシュが存在しない場合
 # AWSから商品タイトル・画像URL等を取得する
 if refresh_item_cache or !File.exist?(ITEM_CACHE_PATH)
+  require 'amazon/aws'
+  require 'amazon/aws/search'
+  
   # Ruby/AWS 設定
   ENV['AMAZONRCDIR']  = dir
   ENV['AMAZONRCFILE'] = '.amazonrc'
