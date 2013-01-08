@@ -83,16 +83,11 @@ var Simulator = (function($) {
 	
 	//特訓スキルポイント取得
 	function getTrainingSkillPt(vocation) {
-		if(getLevel(vocation) < LEVEL_FOR_TRAINING_MODE)
-			return TRAINING_SKILL_PTS_MIN;
-		else
-			return trainingSkillPts[vocation];
+		return trainingSkillPts[vocation];
 	}
 	
 	//特訓スキルポイント更新
 	function updateTrainingSkillPt(vocation, newValue) {
-		if(newValue > TRAINING_SKILL_PTS_MIN && getLevel(vocation) < LEVEL_FOR_TRAINING_MODE)
-			return false;
 		if(newValue < TRAINING_SKILL_PTS_MIN || newValue > TRAINING_SKILL_PTS_MAX)
 			return false;
 		
@@ -126,9 +121,17 @@ var Simulator = (function($) {
 	
 	//スキルポイント合計に対する必要レベル取得
 	function requiredLevel(vocation) {
-		var total = totalSkillPts(vocation) - getTrainingSkillPt(vocation);
+		var trainingSkillPt = getTrainingSkillPt(vocation);
+		var total = totalSkillPts(vocation) - trainingSkillPt;
+		
 		for(var l = LEVEL_MIN; l <= LEVEL_MAX; l++) {
-			if(skillPtsGiven[l] >= total) return l;
+			if(skillPtsGiven[l] >= total) {
+				//特訓スキルポイントが1以上の場合、最低レベル50必要
+				if(trainingSkillPt > TRAINING_SKILL_PTS_MIN && l < LEVEL_FOR_TRAINING_MODE)
+					return LEVEL_FOR_TRAINING_MODE;
+				else
+					return l;
+			}
 		}
 		return NaN;
 	}
@@ -264,13 +267,8 @@ var SimulatorUI = (function($) {
 		if(additionalSkillPts > 0)
 			$skillPtsText.append('<small> + ' + additionalSkillPts + '</small>');
 		
-		//特訓スキルポイント レベルによる使用可否
-		$('#' + vocation + ' .training_pt').spinner(
-			sim.getLevel(vocation) >= sim.LEVEL_FOR_TRAINING_MODE ? 'enable' : 'disable'
-		);
-		
 		//Lv不足の処理
-		var isLevelError = totalSkillPts > (maxSkillPts + additionalSkillPts);
+		var isLevelError = sim.getLevel(vocation) < sim.requiredLevel(vocation);
 		
 		$levelH2.toggleClass(CLASSNAME_ERROR, isLevelError);
 		$skillPtsText.toggleClass(CLASSNAME_ERROR, isLevelError);
@@ -386,6 +384,8 @@ var SimulatorUI = (function($) {
 					
 					if(sim.updateTrainingSkillPt(vocation, parseInt(ui.value))) {
 						refreshVocationInfo(vocation);
+						refreshTotalRequiredExp();
+						refreshTotalExpRemain();
 					} else {
 						return false;
 					}
@@ -399,6 +399,8 @@ var SimulatorUI = (function($) {
 					}
 					if(sim.updateTrainingSkillPt(vocation, parseInt($(this).val()))) {
 						refreshVocationInfo(vocation);
+						refreshTotalRequiredExp();
+						refreshTotalExpRemain();
 						refreshSaveUrl();
 					} else {
 						$(this).val(sim.getTraningSkillPt(vocation));
