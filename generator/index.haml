@@ -1,3 +1,4 @@
+- VERSION = '2.1'
 !!! 5
 %html
 	%head
@@ -11,13 +12,13 @@
 		- @title = 'DQ10 スキルシミュレータ'
 		%title= @title
 		
-		%link{:rel => 'stylesheet', :type => 'text/css', :href => './dq10skill.css'}/
+		%link{:rel => 'stylesheet', :type => 'text/css', :href => "./dq10skill.css?ver=#{VERSION}"}/
 		%link{:rel => 'stylesheet', :type => 'text/css', :href => 'css/smoothness/jquery-ui-1.9.1.custom.min.css'}/
 		
 		%script{:type => 'text/javascript', :src => 'js/jquery-1.8.2.js'}
 		%script{:type => 'text/javascript', :src => 'js/jquery.socialbutton-1.9.0.js'}
 		%script{:type => 'text/javascript', :src => 'js/jquery-ui-1.9.1.custom.min.js'}
-		%script{:type => 'text/javascript', :src => './dq10skill.js'}
+		%script{:type => 'text/javascript', :src => "./dq10skill.js?ver=#{VERSION}"}
 		:javascript
 			var _gaq = _gaq || [];
 			_gaq.push(['_setAccount', 'UA-5127088-4']);
