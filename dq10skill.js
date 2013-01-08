@@ -267,11 +267,6 @@ var SimulatorUI = (function($) {
 		if(additionalSkillPts > 0)
 			$skillPtsText.append('<small> + ' + additionalSkillPts + '</small>');
 		
-		//特訓スキルポイント レベルによる使用可否
-		$('#' + vocation + ' .training_pt').spinner(
-			sim.getLevel(vocation) >= sim.LEVEL_FOR_TRAINING_MODE ? 'enable' : 'disable'
-		);
-		
 		//Lv不足の処理
 		var isLevelError = totalSkillPts > (maxSkillPts + additionalSkillPts);
 		
