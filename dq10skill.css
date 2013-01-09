@@ -68,7 +68,6 @@ a :hover {
   font-size: 0.8em;
   margin: 0.5em 1em 0 0;
   border-collapse: collapse;
-  /*float: right;*/
   position: absolute;
   top: 0;
   right: 0;
@@ -91,7 +90,6 @@ a :hover {
   border-radius: 5px;
   clear: both;
   width: 65.5em;
-  /* height: 20em; */
   margin: 3px 0;
   padding: 2px;
   overflow: hidden;
