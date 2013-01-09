@@ -207,6 +207,12 @@ tr.enabled > td {
 .skill_table tr+tr:hover {
 	background-color: #edd;
 }
+.skill_table tr+tr:hover td {
+	color: #877;
+}
+.skill_table tr+tr.enabled:hover td {
+	color: #211;
+}
 
 /* フッタ */
 #footer {
