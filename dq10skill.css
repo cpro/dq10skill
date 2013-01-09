@@ -1,255 +1,260 @@
+@charset "UTF-8";
 body {
-	background-color: #fcfcfd;
-	color: #404044;
-	font-family: "メイリオ", sans-serif;
-	font-size: 100%;
-	padding: 5.5em 0 0 0;
+  background-color: #fcfcfd;
+  color: #404044;
+  font-family: "メイリオ", sans-serif;
+  font-size: 100%;
+  padding: 5.5em 0 0 0;
 }
+
 a {
-	text-decoration: none;
+  text-decoration: none;
 }
-a:hover {
-	text-decoration: underline;
+a :hover {
+  text-decoration: underline;
 }
+
 .error {
-	color: red;
+  color: red;
 }
 
 /* ヘッダ */
 #header {
-	background-color: #fcfcfd;
-	width: 100%;
-	height: 5em;
-	position: fixed;
-	top: 0;
-	left: 0;
-	border-bottom: 3px solid #dcc;
-	z-index: 99;
+  background-color: #fcfcfd;
+  width: 100%;
+  height: 5em;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-bottom: 3px solid #ddcccc;
+  z-index: 99;
+  /* ヘッダ部 SNSボタン各種 */
+  /* 合計表示欄・保存URLテキストボックス */
 }
-
 #header #headerleft {
-	float: left;
-	padding: 2px 10px;
+  float: left;
+  padding: 2px 10px;
 }
-
 #header h1 {
-	font-size: 110%;
+  font-size: 110%;
 }
-
-/* ヘッダ部 SNSボタン各種 */
 #header #snsbuttons {
-	margin-top: 0.8em;
+  margin-top: 0.8em;
 }
 #header #snsbuttons .snsbutton {
-	display: inline-block;
-	position: relative;
-	height: 21px;
-	overflow: hidden;
+  display: inline-block;
+  position: relative;
+  height: 21px;
+  overflow: hidden;
 }
 #header #snsbuttons .snsbutton#tw-share {
-	width: 100px;
+  width: 100px;
 }
 #header #snsbuttons .snsbutton#g-plusone {
-	width: 65px;
+  width: 65px;
 }
 #header #snsbuttons .snsbutton#fb-like {
-	width: 105px;
+  width: 105px;
 }
 #header #tw-saveurl {
-	font-size: 11px;
-	height: 18px;
-	overflow: hidden;
+  font-size: 11px;
+  height: 18px;
+  overflow: hidden;
 }
-#tw-saveurl .ui-button-text {
-	padding: .2em .5em;
+#header #tw-saveurl .ui-button-text {
+  padding: 0.2em 0.5em;
 }
-
-/* 合計表示欄・保存URLテキストボックス */
 #header table#total {
-	font-size: 0.8em;
-	margin: 0.5em 1em 0 0;
-	border-collapse: collapse;
-	/*float: right;*/
-	position: absolute;
-	top: 0;
-	right: 0;
+  font-size: 0.8em;
+  margin: 0.5em 1em 0 0;
+  border-collapse: collapse;
+  /*float: right;*/
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 #header table#total td {
-	padding: 1px 1px 0 1px;
-	white-space: nowrap;
+  padding: 1px 1px 0 1px;
+  white-space: nowrap;
 }
 #header table#total td.total_pts {
-	text-align: right;
-	margin-right: 5px;
+  text-align: right;
+  margin-right: 5px;
 }
 #header #save_url {
-	text-align: right;
+  text-align: right;
 }
 
 /* 職業ボックス */
 .class_group {
-	border: 2px solid #99a;
-	border-radius: 5px;
-	clear: both;
-	width: 65.5em;
-	/* height: 20em; */
-	margin: 3px 0;
-	padding: 2px;
-	overflow: hidden;
+  border: 2px solid #9999aa;
+  border-radius: 5px;
+  clear: both;
+  width: 65.5em;
+  /* height: 20em; */
+  margin: 3px 0;
+  padding: 2px;
+  overflow: hidden;
 }
 
 /* 職業情報欄 */
 .class_info {
-	font-size: 70%;
-	float: left;
-	width: 12em;
-	height: 20em;
-	position: relative;
-	text-align: center;
-	border-right: 1px solid #99a;
-	vertical-align: top;
+  font-size: 70%;
+  float: left;
+  width: 12em;
+  height: 20em;
+  position: relative;
+  text-align: center;
+  border-right: 1px solid #9999aa;
+  vertical-align: top;
 }
 .class_info h2 {
-	font-size: 140%;
-	margin: 0.8em 0;
+  font-size: 140%;
+  margin: 0.8em 0;
 }
 .class_info dt {
-	font-weight: normal;
+  font-weight: normal;
 }
-.class_info dt.label_lv, div.class_info dd.lv_select {
-	display: inline;
+.class_info dt.label_lv, .class_info dd.lv_select {
+  display: inline;
 }
 .class_info dt, .class_info dd {
-	margin: 0;
+  margin: 0;
 }
-.lv_select select {
-	text-align: right;
+.class_info .lv_select select {
+  text-align: right;
 }
 .class_info .pts {
-	font-weight: bold;
-	font-size: 140%;
+  font-weight: bold;
+  font-size: 140%;
 }
 .class_info .exp {
-	font-size: 120%;
+  font-size: 120%;
 }
 .class_info .training_pt {
-	width: 2em;
-	text-align: right;
+  width: 2em;
+  text-align: right;
 }
 
 /* 折りたたみ/展開ボタン */
 p.fold, p.unfold {
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	left: 1em;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 1em;
 }
+
 p.fold {
-	bottom: 2px;
+  bottom: 2px;
 }
+
 p.unfold {
-	top: 2px;
+  top: 2px;
 }
+
 .fold:hover, .unfold:hover {
-	cursor: pointer;
-	color: #d66;
+  cursor: pointer;
+  color: #d66;
 }
+
 span.fold, span.unfold {
-	margin: 0 0.5em;
+  margin: 0 0.5em;
 }
+
 #toggle_buttons {
-	font-size: 75%;
-	display: inline;
+  font-size: 75%;
+  display: inline;
 }
 
 /* スキル一覧 */
 .skill_table {
-	font-size: 70%;
-	width: 16em;
-	border-collapse: collapse;
-	display: inline-block;
+  font-size: 70%;
+  width: 16em;
+  border-collapse: collapse;
+  display: inline-block;
 }
 .skill_table caption {
-	font-weight: bold;
-	font-size: 120%;
+  font-weight: bold;
+  font-size: 120%;
 }
 .skill_table .skill_pt {
-	width: 2em;
-	text-align: right;
+  width: 2em;
+  text-align: right;
 }
 .skill_table .skill_name {
-	width: 14em;
+  width: 14em;
 }
 .skill_table td {
-	padding: 1px 3px 0 3px;
-	color: #aab;
-	cursor: pointer;
+  padding: 1px 3px 0 3px;
+  color: #aab;
+  cursor: pointer;
 }
 .skill_table th {
-	padding: 1px 3px 2px 3px;
+  padding: 1px 3px 2px 3px;
 }
 .skill_table .console {
-	text-align: center;
+  text-align: center;
 }
 .skill_table .console .ptspinner {
-	width: 2em;
-	text-align: right;
+  width: 2em;
+  text-align: right;
 }
 .skill_table .reset {
-	width: 20px;
-	height: 20px;
-	vertical-align: bottom;
+  width: 20px;
+  height: 20px;
+  vertical-align: bottom;
 }
-tr.enabled > td {
-	color: black;
-	font-weight: bold;
+.skill_table tr.enabled > td {
+  color: black;
+  font-weight: bold;
 }
-.skill_table tr+tr:hover {
-	background-color: #edd;
+.skill_table tr + tr:hover {
+  background-color: #edd;
 }
-.skill_table tr+tr:hover td {
-	color: #877;
+.skill_table tr + tr:hover td {
+  color: #877;
 }
-.skill_table tr+tr.enabled:hover td {
-	color: #211;
+.skill_table tr + tr.enabled:hover td {
+  color: #211;
 }
 
 /* フッタ */
 #footer {
-	font-size: 80%;
-	width: 80.5em;
+  font-size: 80%;
+  width: 80.5em;
 }
+
 #contact {
-	font-style: normal;
+  font-style: normal;
 }
 
 /* サイドバー広告 */
 #ad_sidebar {
-	position: absolute;
-	left: 67em;
-	top: 5.7em;
-	z-index: 1;
+  position: absolute;
+  left: 67em;
+  top: 5.7em;
+  z-index: 1;
 }
 #ad_sidebar ul {
-	font-size: 80%;
-	margin: 0;
-	padding-left: 2em;
+  font-size: 80%;
+  margin: 0;
+  padding-left: 2em;
 }
 #ad_sidebar h2 {
-	font-size: 90%;
-	margin: 0;
-	border-bottom: 1px solid #99a;
+  font-size: 90%;
+  margin: 0;
+  border-bottom: 1px solid #9999aa;
 }
 #ad_sidebar div.amazonitem {
-	position: relative;
-	width: 160px;
-	float: left;
-	font-size: 70%;
-	line-height: 100%;
-	text-align: center;
+  position: relative;
+  width: 160px;
+  float: left;
+  font-size: 70%;
+  line-height: 100%;
+  text-align: center;
 }
 
 /* ベータ版注意事項 */
 #beta_notice {
-	font-size: 90%;
+  font-size: 90%;
 }
