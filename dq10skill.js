@@ -520,7 +520,8 @@ var SimulatorUI = (function($) {
 					var hintText = skill.desc;
 					if(skill.mp != null)
 						hintText += '\n（消費MP: ' + skill.mp.toString() + '）';
-					
+					if(skill.gold)
+						hintText += '\n（' + skill.gold.toString() + 'G）';
 					$('.' + skillCategory + '_' + skillIndex.toString()).attr('title', hintText);
 				}
 			}
