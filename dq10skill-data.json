@@ -420,51 +420,61 @@
 	"vocations": {
 		"warrior": {
 			"name": "戦士",
+			"abbr": "戦士",
 			"skills": ["sword", "twohandedsword", "axe", "shield", "courage"],
 			"expTable": 1
 		},
 		"priest": {
 			"name": "僧侶",
+			"abbr": "僧侶",
 			"skills": ["spear", "stick", "staff", "shield", "faith"],
 			"expTable": 1
 		},
 		"mage": {
 			"name": "魔法使い",
+			"abbr": "魔使",
 			"skills": ["wand", "knife", "whip", "shield", "spellcraft"],
 			"expTable": 1
 		},
 		"martialartist": {
 			"name": "武闘家",
+			"abbr": "武闘",
 			"skills": ["claw", "staff", "fan", "fisticuffs", "focus"],
 			"expTable": 1
 		},
 		"thief": {
 			"name": "盗賊",
+			"abbr": "盗賊",
 			"skills": ["knife", "whip", "claw", "fisticuffs", "acquisitiveness"],
 			"expTable": 1
 		},
 		"minstrel": {
 			"name": "旅芸人",
+			"abbr": "旅芸",
 			"skills": ["fan", "staff", "knife", "shield", "litheness"],
 			"expTable": 1
 		},
 		"ranger": {
 			"name": "レンジャー",
+			"abbr": "レン",
 			"skills": ["bow", "boomerang", "axe", "fisticuffs", "ruggedness"],
 			"expTable": 2
 		},
 		"paladin": {
 			"name": "パラディン",
+			"abbr": "パラ",
 			"skills": ["hammer", "spear", "stick", "shield", "virtue"],
 			"expTable": 2
 		},
 		"armamentalist": {
 			"name": "魔法戦士",
+			"abbr": "魔戦",
 			"skills": ["sword", "wand", "bow", "shield", "fource"],
 			"expTable": 2
 		},
 		"luminary": {
 			"name": "スーパースター",
+			"abbr": "スパ",
 			"skills": ["whip", "fan", "stick", "fisticuffs", "jenesaisquoi"],
 			"expTable": 2
 		}
@@ -473,11 +483,13 @@
 		"_description": "今後予想される追加職業。判明し次第上に移動",
 		"gladiator": {
 			"name": "バトルマスター",
+			"abbr": "バト",
 			"skills": [],
 			"expTable": 2
 		},
 		"sage": {
 			"name": "賢者",
+			"abbr": "賢者",
 			"skills": [],
 			"expTable": 2
 		}
