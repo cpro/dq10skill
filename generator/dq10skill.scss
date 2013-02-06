@@ -60,6 +60,38 @@ a {
 		}
 	}
 	
+	#foldbuttons {
+			font-size: 11px;
+		.button-container {
+			display: inline-block;
+		}
+		.button-container#foldbuttons-all {
+			width: 9.5em;
+		}
+		.button-container#foldbuttons-vocation {
+			width: 16.5em;
+		}
+		.button-container#foldbuttons-skillCategory {
+			width: 27em;
+		}
+		
+		a {
+			overflow: hidden;
+			white-space: nowrap;
+			.ui-button-text {
+				padding: .2em .3em;
+			}
+		}
+		a.button-for-all {
+			width: 8.5em;
+			text-align: left;
+		}
+		a.button-each{
+			width: 2.7em;
+			text-align: center;
+		}
+	}
+	
 	#tw-saveurl {
 		font-size: 11px;
 		height: 18px;

@@ -47,6 +47,27 @@ a {
       width: 65px; }
     #header #snsbuttons .snsbutton#fb-like {
       width: 105px; }
+  #header #foldbuttons {
+    font-size: 11px; }
+    #header #foldbuttons .button-container {
+      display: inline-block; }
+    #header #foldbuttons .button-container#foldbuttons-all {
+      width: 9.5em; }
+    #header #foldbuttons .button-container#foldbuttons-vocation {
+      width: 16.5em; }
+    #header #foldbuttons .button-container#foldbuttons-skillCategory {
+      width: 27em; }
+    #header #foldbuttons a {
+      overflow: hidden;
+      white-space: nowrap; }
+      #header #foldbuttons a .ui-button-text {
+        padding: 0.2em 0.3em; }
+    #header #foldbuttons a.button-for-all {
+      width: 8.5em;
+      text-align: left; }
+    #header #foldbuttons a.button-each {
+      width: 2.7em;
+      text-align: center; }
   #header #tw-saveurl {
     font-size: 11px;
     height: 18px;
