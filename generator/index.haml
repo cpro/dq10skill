@@ -37,6 +37,14 @@
 					.snsbutton#tw-share
 					.snsbutton#fb-like
 					.snsbutton#g-plusone
+				#foldbuttons
+					%a.button-for-all< ▲すべてたたむ
+					- data['vocationOrder'].each do |vocation|
+						%a.button-each< #{data['vocations'][vocation]['abbr']}
+					%br
+					%a.button-for-all< ▼すべてひろげる
+					- data['skillCategoryOrder'].each do |skillCategory|
+						%a.button-each< #{data['skillCategories'][skillCategory]['abbr']}
 			%table#total
 				%tr
 					%td 獲得経験値合計:
