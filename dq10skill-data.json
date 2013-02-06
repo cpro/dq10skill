@@ -69,6 +69,7 @@
 		},
 
 		"courage": {
+			"unique": true,
 			"name": "ゆうかん",
 			"abbr": "",
 			"skills": [
@@ -138,6 +139,7 @@
 
 		"faith": {
 			"name": "しんこう心",
+			"unique": true,
 			"abbr": "",
 			"skills": [
 				{"pt":   8, "name": "おはらい", "desc": "仲間ひとりの\n呪いを解く", "mp": 2},
@@ -205,6 +207,7 @@
 		},
 
 		"spellcraft": {
+			"unique": true,
 			"name": "まほう",
 			"abbr": "",
 			"skills": [
@@ -273,6 +276,7 @@
 		},
 
 		"focus": {
+			"unique": true,
 			"name": "きあい",
 			"abbr": "",
 			"skills": [
@@ -290,6 +294,7 @@
 		},
 
 		"acquisitiveness": {
+			"unique": true,
 			"name": "おたから",
 			"abbr": "",
 			"skills": [
@@ -307,6 +312,7 @@
 		},
 
 		"litheness": {
+			"unique": true,
 			"name": "きょくげい",
 			"abbr": "",
 			"skills": [
@@ -341,6 +347,7 @@
 		},
 
 		"virtue": {
+			"unique": true,
 			"name": "はくあい",
 			"abbr": "",
 			"skills": [
@@ -392,6 +399,7 @@
 		},
 
 		"ruggedness": {
+			"unique": true,
 			"name": "サバイバル",
 			"abbr": "",
 			"skills": [
@@ -409,6 +417,7 @@
 		},
 		
 		"fource": {
+			"unique": true,
 			"name": "フォース",
 			"abbr": "",
 			"skills": [
