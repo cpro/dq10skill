@@ -587,20 +587,20 @@ var SimulatorUI = (function($) {
 			});
 			
 			//すべておりたたむ・すべてひろげるボタン追加
-			$('#fold-all').button().click(function(e) {
+			$('#fold-all').click(function(e) {
 				$('.class_info .fold').click();
 			});
-			$('#unfold-all').button().click(function(e) {
+			$('#unfold-all').click(function(e) {
 				$('.class_info .unfold').click();
 			});
 			//特定職業のみひろげるボタン追加
-			$('#foldbuttons-vocation a').button().click(function(e) {
+			$('#foldbuttons-vocation a').click(function(e) {
 				var vocation = $(this).attr('id').replace('fold-', '');
 				$('#' + vocation + ' .unfold').click();
 				$('.class_info .fold').not('#' + vocation + ' .fold').click();
 			});
 			//特定スキルを持つ職業のみひろげるボタン追加
-			$('#foldbuttons-skillCategory a').button().click(function(e) {
+			$('#foldbuttons-skillCategory a').click(function(e) {
 				var skillCategory = $(this).attr('id').replace('fold-', '');
 				var vocationsHaveSkill = [];
 				for(var vocation in sim.vocations) {
