@@ -61,7 +61,7 @@ a {
 	}
 	
 	#foldbuttons {
-			font-size: 11px;
+			font-size: 10px;
 		.button-container {
 			display: inline-block;
 		}
@@ -76,18 +76,19 @@ a {
 		}
 		
 		a {
+			display: inline-block;
 			overflow: hidden;
 			white-space: nowrap;
-			.ui-button-text {
-				padding: .2em .3em;
-			}
+			padding: 0.05em 0.3em;
+			margin-bottom: 1px;
+			background-color: #aab;
 		}
 		a.button-for-all {
 			width: 8.5em;
 			text-align: left;
 		}
 		a.button-each{
-			width: 2.7em;
+			width: 2.0em;
 			text-align: center;
 		}
 	}

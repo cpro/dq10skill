@@ -39,14 +39,14 @@
 					.snsbutton#g-plusone
 				#foldbuttons
 					.button-container#foldbuttons-all
-						%a.button-for-all#fold-all ▲すべてたたむ
-						%a.button-for-all#unfold-all ▼すべてひろげる
+						%a.button-for-all.ui-corner-all#fold-all ▲すべてたたむ
+						%a.button-for-all.ui-corner-all#unfold-all ▼すべてひろげる
 					.button-container#foldbuttons-vocation
 						- data['vocationOrder'].each do |vocation|
-							%a.button-each{id: "fold-#{vocation}"}> #{data['vocations'][vocation]['abbr']}
+							%a.button-each.ui-corner-all{id: "fold-#{vocation}"} #{data['vocations'][vocation]['abbr']}
 					.button-container#foldbuttons-skillCategory
 						- data['skillCategoryOrder'].each do |skillCategory|
-							%a.button-each{id: "fold-#{skillCategory}"}> #{data['skillCategories'][skillCategory]['abbr']}
+							%a.button-each.ui-corner-all{id: "fold-#{skillCategory}"} #{data['skillCategories'][skillCategory]['abbr']}
 			%table#total
 				%tr
 					%td 獲得経験値合計:

@@ -48,7 +48,7 @@ a {
     #header #snsbuttons .snsbutton#fb-like {
       width: 105px; }
   #header #foldbuttons {
-    font-size: 11px; }
+    font-size: 10px; }
     #header #foldbuttons .button-container {
       display: inline-block; }
     #header #foldbuttons .button-container#foldbuttons-all {
@@ -58,15 +58,17 @@ a {
     #header #foldbuttons .button-container#foldbuttons-skillCategory {
       width: 27em; }
     #header #foldbuttons a {
+      display: inline-block;
       overflow: hidden;
-      white-space: nowrap; }
-      #header #foldbuttons a .ui-button-text {
-        padding: 0.2em 0.3em; }
+      white-space: nowrap;
+      padding: 0.05em 0.3em;
+      margin-bottom: 1px;
+      background-color: #aab; }
     #header #foldbuttons a.button-for-all {
       width: 8.5em;
       text-align: left; }
     #header #foldbuttons a.button-each {
-      width: 2.7em;
+      width: 2.0em;
       text-align: center; }
   #header #tw-saveurl {
     font-size: 11px;
