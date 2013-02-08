@@ -589,9 +589,11 @@ var SimulatorUI = (function($) {
 			//すべておりたたむ・すべてひろげるボタン追加
 			$('#fold-all').click(function(e) {
 				$('.class_info .fold').click();
+				$('body').animate({scrollTop: 0});
 			});
 			$('#unfold-all').click(function(e) {
 				$('.class_info .unfold').click();
+				$('body').animate({scrollTop: 0});
 			});
 			
 			var bodyTop = $('#body_content').offset().top;
@@ -600,7 +602,6 @@ var SimulatorUI = (function($) {
 			$('#foldbuttons-vocation a').click(function(e) {
 				var vocation = $(this).attr('id').replace('fold-', '');
 				$('#' + vocation + ' .unfold').click();
-				$('.class_info .fold').not('#' + vocation + ' .fold').click();
 				
 				$('body').animate({scrollTop: $('#' + vocation).offset().top - bodyTop});
 			});
