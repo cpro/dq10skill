@@ -61,35 +61,45 @@ a {
 	}
 	
 	#foldbuttons {
-			font-size: 10px;
+		font-size: 11px;
+		height: 11px;
+		
 		.button-container {
 			display: inline-block;
-		}
-		.button-container#foldbuttons-all {
-			width: 9.5em;
-		}
-		.button-container#foldbuttons-vocation {
-			width: 16.5em;
-		}
-		.button-container#foldbuttons-skillCategory {
-			width: 27em;
+			
+			&#foldbuttons-all {
+				width: 100px;
+			}
+			&#foldbuttons-vocation {
+				width: 216px;
+			}
+			&#foldbuttons-skillCategory {
+				width: 290px;
+			}
 		}
 		
 		a {
 			display: inline-block;
 			overflow: hidden;
 			white-space: nowrap;
-			padding: 0.05em 0.3em;
+			padding: 0px 3px;
 			margin-bottom: 1px;
-			background-color: #aab;
-		}
-		a.button-for-all {
-			width: 8.5em;
-			text-align: left;
-		}
-		a.button-each{
-			width: 2.0em;
-			text-align: center;
+			border: 1px solid #aab;
+			background-color: #f0f0f7;
+			
+			&:hover {
+				cursor: pointer;
+				border-color: #445;
+				color: black;
+			}
+			&.button-for-all {
+				width: 90px;
+				text-align: left;
+			}
+			&.button-each{
+				width: 24px;
+				text-align: center;
+			}
 		}
 	}
 	
