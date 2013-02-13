@@ -659,11 +659,9 @@ var Base64Param = (function($) {
 		'ranger',        //レンジャー
 		'paladin',       //パラディン
 		'armamentalist', //魔法戦士
-		'luminary'       //スーパースター
-		/* ,
+		'luminary',      //スーパースター
 		'gladiator',     //バトルマスター
-		'sage',          //賢者
-		*/
+		'sage'           //賢者
 	];
 	
 	var EN_CHAR = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
@@ -710,7 +708,7 @@ var Base64Param = (function($) {
 			BITS_LEVEL + 
 			BITS_TRAINING + 
 			BITS_SKILL * sim.vocations[VOCATIONS_DATA_ORDER[0]].skills.length
-		) * VOCATIONS_DATA_ORDER.length;
+		) * 10 //1.3VU時点の職業数
 		
 		var paramArray = [];
 		var i = 0;
