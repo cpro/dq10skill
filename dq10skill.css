@@ -74,19 +74,21 @@ a {
         display: inline-block;
         list-style-type: none;
         margin: 0;
-        padding: 0; }
+        padding: 0;
+        letter-spacing: -.40em; }
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-all {
-          width: 100px; }
+          width: 99px; }
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-vocation {
-          width: 216px; }
+          width: 198px; }
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-skillCategory {
-          width: 290px; }
+          width: 264px; }
         #header #consoleblock #foldbuttons ul.button-container li {
           display: inline-block;
+          letter-spacing: normal;
           height: 16px;
           overflow: hidden;
           white-space: nowrap;
-          margin-bottom: 1px;
+          margin: 0 1px 1px 0;
           border: 1px solid #aaaabb;
           background-color: #f0f0f7; }
           #header #consoleblock #foldbuttons ul.button-container li:hover {

@@ -94,27 +94,34 @@ a {
 			float: left;
 			
 			ul.button-container {
+				$width-all: 96px;
+				$width-each: 30px;
+				$side-padding-a: 3px;
+				$height-button: 16px;
+				
 				display: inline-block;
 				list-style-type: none;
 				margin: 0;
 				padding: 0;
+				letter-spacing: -.40em;
 				
 				&#foldbuttons-all {
-					width: 100px;
+					width: ($width-all + 2px + 1px) * 1;
 				}
 				&#foldbuttons-vocation {
-					width: 216px;
+					width: ($width-each + 2px + 1px) * 6;
 				}
 				&#foldbuttons-skillCategory {
-					width: 290px;
+					width: ($width-each + 2px + 1px) * 8;
 				}
 				
 				li {
 					display: inline-block;
-					height: 16px;
+					letter-spacing: normal;
+					height: $height-button;
 					overflow: hidden;
 					white-space: nowrap;
-					margin-bottom: 1px;
+					margin: 0 1px 1px 0;
 					border: 1px solid #aab;
 					background-color: #f0f0f7;
 					
@@ -124,23 +131,23 @@ a {
 						color: black;
 					}
 					&.button-for-all {
-						width: 96px;
+						width: $width-all;
 						a {
-							width: 90px;
+							width: $width-all - ($side-padding-a * 2);
 							text-align: left;
 						}
 					}
 					&.button-each{
-						width: 30px;
+						width: $width-each;
 						a {
-							width: 24px;
+							width: $width-each - ($side-padding-a * 2);
 							text-align: center;
 						}
 					}
 					a {
 						display: block;
-						padding: 0 3px;
-						height: 16px;
+						padding: 0 $side-padding-a;
+						height: $height-button;
 					}
 				}
 			}
