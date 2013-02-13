@@ -1,4 +1,4 @@
-- VERSION = '2.2'
+- VERSION = '3.0'
 !!! 5
 %html
 	%head
@@ -30,46 +30,59 @@
 			})();
 	%body
 		#header
-			#headerleft
+			#titleblock
 				%h1<
 					%a{:href => @home_uri}= @title
 				#snsbuttons
 					.snsbutton#tw-share
 					.snsbutton#fb-like
 					.snsbutton#g-plusone
-					%p#toggle_buttons
-			%table#total
-				%tr
-					%td 獲得経験値合計:
-					%td.total_pts#total_exp 0
-					%td さいだいHP:
-					%td.total_pts#total_maxhp 0
-					%td ちから:
-					%td.total_pts#total_pow 0
-					%td きようさ:
-					%td.total_pts#total_dex 0
-					%td こうげき魔力:
-					%td.total_pts#total_magic 0
-					%td みりょく:
-					%td.total_pts#total_charm 0
-				%tr
-					%td 不足経験値合計:
-					%td.total_pts#total_exp_remain 0
-					%td さいだいMP:
-					%td.total_pts#total_maxmp 0
-					%td みのまもり:
-					%td.total_pts#total_def 0
-					%td すばやさ:
-					%td.total_pts#total_spd 0
-					%td かいふく魔力:
-					%td.total_pts#total_heal 0
-					%td
-					%td.total_pts
-				%tr
-					%td#save_url{:colspan => 12}
-						保存用URL:
-						%input#url_text.ui-widget-content.ui-corner-all{:type => 'text', :size => 60}>/
-						%a#tw-saveurl{title: '保存用URLをツイートする'} ツイート
+				#save_url
+					保存用URL:
+					%input#url_text.ui-widget-content.ui-corner-all{:type => 'text', :size => 60}>/
+					%a#tw-saveurl{title: '保存用URLをツイートする'} ツイート
+			#consoleblock
+				#foldbuttons
+					%ul.button-container#foldbuttons-all
+						%li.button-for-all.ui-corner-all<
+							%a#fold-all ▲すべてたたむ
+						%li.button-for-all.ui-corner-all<
+							%a#unfold-all ▼すべてひろげる
+					%ul.button-container#foldbuttons-vocation
+						- data['vocationOrder'].each do |vocation|
+							%li.button-each.ui-corner-all<
+								%a{id: "fold-#{vocation}"} #{data['vocations'][vocation]['abbr']}
+					%ul.button-container#foldbuttons-skillCategory
+						- data['skillCategoryOrder'].each do |skillCategory|
+							%li.button-each.ui-corner-all<
+								%a{id: "fold-#{skillCategory}"} #{data['skillCategories'][skillCategory]['abbr']}
+				%table#total
+					%tr
+						%th 獲得経験値合計:
+						%td.total_pts#total_exp 0
+						%th さいだいHP:
+						%td.total_pts#total_maxhp 0
+						%th ちから:
+						%td.total_pts#total_pow 0
+						%th きようさ:
+						%td.total_pts#total_dex 0
+						%th こうげき魔力:
+						%td.total_pts#total_magic 0
+						%th みりょく:
+						%td.total_pts#total_charm 0
+					%tr
+						%th 不足経験値合計:
+						%td.total_pts#total_exp_remain 0
+						%th さいだいMP:
+						%td.total_pts#total_maxmp 0
+						%th みのまもり:
+						%td.total_pts#total_def 0
+						%th すばやさ:
+						%td.total_pts#total_spd 0
+						%th かいふく魔力:
+						%td.total_pts#total_heal 0
+						%th
+						%td.total_pts
 		#body_content
 			-# %ul#beta_notice{:style => 'font-size:90%'}
 			-# 	%li<
@@ -124,11 +137,14 @@
 							%li プルダウンで職業レベルを選択。括弧内はそのレベルの累計スキルポイント。
 							%li スキルポイントはスキル一覧の項目をクリックすると必要なポイントが自動入力されます。上下ボタン・キーボードの上下キーで1ずつ調整、PageUp/PageDownキーで10ずつ上下します。数値の直接入力も可能。
 							%li 「保存用URL」欄に表示されるURLは、アクセスすることで現在の状態を再現できます。メモ用・掲示板に貼る用などにどうぞ。
-							%li レベル欄あたりにカーソルを持っていくと「おりたたむ」ボタンが出てきて、クリックすると簡易表示になります。そのまま操作も可能。「すべておりたたむ」でレベル・スキルを一覧するのがおすすめです。
+							%li レベル欄あたりにカーソルを持っていくと「おりたたむ」ボタンが出てきて、クリックすると簡易表示になります。そのまま操作も可能。「すべてたたむ」でレベル・スキルを一覧するのがおすすめです。
+							%li タイトル下の職業ごとのボタンをクリックすると、その職業の位置にスクロールします。折りたたまれていた場合は展開されます。
+							%li 武器スキルのボタンをクリックすると、その武器スキルを持つ職業が展開され、それ以外がすべて折りたたまれます。特定の武器スキルについて振り分けを検討するのにご利用ください。
 							%li 特訓モードのスキルポイントを1以上にした場合、最低でもレベル50必要なものとして計算します。
 					%li
 						履歴:
 						%ul
+							%li 2013/2/13 v3.0 職業・スキルの展開/折りたたみボタンを追加、ヘッダのレイアウト変更。
 							%li 2013/1/21 v2.2 スーパースターのスキル詳細追加、消費ゴールドの表示
 							%li 2013/1/8 v2.1.1 最大値を超えるポイントを入力したときエラー表示にならないバグ修正
 							%li 2013/1/8 v2.1 特訓スキルポイントのレベルによる使用制限を廃止。スクリプト更新時にブラウザのキャッシュが原因で起こる問題を抑制。

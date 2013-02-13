@@ -2,6 +2,7 @@
 	"skillCategories": {
 		"sword": {
 			"name": "片手剣",
+			"abbr": "片剣",
 			"skills": [
 				{"pt":   3, "name": "かえん斬り", "desc": "炎のチカラを\n剣に宿して\n敵を斬りつける", "mp": 2},
 				{"pt":   7, "name": "装備時こうげき力+5", "desc": "片手剣装備時の\nこうげき力が\n５増える", "mp": null},
@@ -18,6 +19,7 @@
 
 		"twohandedsword": {
 			"name": "両手剣",
+			"abbr": "両剣",
 			"skills": [
 				{"pt":   3, "name": "ブレードガード", "desc": "武器ガード率が\n大幅に上がる\n守りのかまえ", "mp": 2},
 				{"pt":   7, "name": "装備時こうげき力+10", "desc": "両手剣装備時の\nこうげき力が\n１０増える", "mp": null},
@@ -34,6 +36,7 @@
 
 		"axe": {
 			"name": "オノ",
+			"abbr": "オノ",
 			"skills": [
 				{"pt":   3, "name": "装備時こうげき力+5", "desc": "オノ装備時の\nこうげき力が\n５増える", "mp": null},
 				{"pt":   7, "name": "たいぼく斬", "desc": "植物系の敵に\n威力を発揮する\n頼もしいひと振り", "mp": 1},
@@ -50,6 +53,7 @@
 
 		"shield": {
 			"name": "盾",
+			"abbr": "盾",
 			"skills": [
 				{"pt":   6, "name": "装備時盾ガード率+1%", "desc": "盾装備時\n盾ガードを\nしやすくなる", "mp": null},
 				{"pt":  12, "name": "ぼうぎょ", "desc": "守りを固めて\nダメージを\nすこし減らす", "mp": 2},
@@ -65,7 +69,9 @@
 		},
 
 		"courage": {
+			"unique": true,
 			"name": "ゆうかん",
+			"abbr": "",
 			"skills": [
 				{"pt":   8, "name": "かばう（専）", "desc": "仲間のかわりに\nダメージをうける\n戦士専用特技", "mp": 0},
 				{"pt":  16, "name": "常時みのまもり+5", "desc": "常時\nみのまもりが\n５増える", "mp": null, "def": 5},
@@ -82,6 +88,7 @@
 
 		"spear": {
 			"name": "ヤリ",
+			"abbr": "ヤリ",
 			"skills": [
 				{"pt":   3, "name": "装備時こうげき力+10", "desc": "ヤリ装備時の\nこうげき力が\n１０増える", "mp": null},
 				{"pt":   7, "name": "けもの突き", "desc": "獣系の敵に\n威力を発揮する\n荒々しい突き", "mp": 1},
@@ -98,6 +105,7 @@
 
 		"stick": {
 			"name": "スティック",
+			"abbr": "ステ",
 			"skills": [
 				{"pt":   3, "name": "装備時MP吸収率+2%", "desc": "スティック攻撃時\n吸収できる\nＭＰが増える", "mp": null},
 				{"pt":   7, "name": "マジステッキ", "desc": "マジでステキに\nみりょくアップ", "mp": 2},
@@ -114,6 +122,7 @@
 
 		"staff": {
 			"name": "棍",
+			"abbr": "棍",
 			"skills": [
 				{"pt":   3, "name": "装備時こうげき力+10", "desc": "棍装備時の\nこうげき力が\n１０増える", "mp": null},
 				{"pt":   7, "name": "足ばらい", "desc": "周囲の敵の\n足元をはらって\nすっころばす", "mp": 2},
@@ -130,6 +139,8 @@
 
 		"faith": {
 			"name": "しんこう心",
+			"unique": true,
+			"abbr": "",
 			"skills": [
 				{"pt":   8, "name": "おはらい", "desc": "仲間ひとりの\n呪いを解く", "mp": 2},
 				{"pt":  16, "name": "常時かいふく魔力+10", "desc": "常時\nかいふく魔力が\n１０増える", "mp": null, "heal": 10},
@@ -146,6 +157,7 @@
 
 		"wand": {
 			"name": "両手杖",
+			"abbr": "両杖",
 			"skills": [
 				{"pt":   3, "name": "装備時MP吸収率+2%", "desc": "両手杖での攻撃時\n吸収できる\nＭＰが増える", "mp": null},
 				{"pt":   7, "name": "悪魔ばらい", "desc": "悪魔系の敵に\n威力を発揮し\nさらにマヒさせる", "mp": 1},
@@ -162,6 +174,7 @@
 
 		"knife": {
 			"name": "短剣",
+			"abbr": "短剣",
 			"skills": [
 				{"pt":   3, "name": "キラーブーン", "desc": "虫系の敵に\n威力を発揮する\nすばやい剣技", "mp": 1},
 				{"pt":   7, "name": "装備時こうげき力+5", "desc": "短剣装備時の\nこうげき力が\n５増える", "mp": null},
@@ -178,6 +191,7 @@
 
 		"whip": {
 			"name": "ムチ",
+			"abbr": "ムチ",
 			"skills": [
 				{"pt":   3, "name": "らせん打ち", "desc": "敵１体を\nたまに混乱させる\nムチさばき", "mp": 3},
 				{"pt":   7, "name": "装備時こうげき力+5", "desc": "ムチ装備時の\nこうげき力が\n５増える", "mp": null},
@@ -193,7 +207,9 @@
 		},
 
 		"spellcraft": {
+			"unique": true,
 			"name": "まほう",
+			"abbr": "",
 			"skills": [
 				{"pt":   8, "name": "魔結界", "desc": "魔法の結界で\n攻撃呪文から\n自分の身を守る", "mp": 5},
 				{"pt":  18, "name": "常時こうげき魔力+10", "desc": "常時\nこうげき魔力が\n１０増える", "mp": null, "magic": 10},
@@ -210,6 +226,7 @@
 
 		"claw": {
 			"name": "ツメ",
+			"abbr": "ツメ",
 			"skills": [
 				{"pt":   3, "name": "ウィングブロウ", "desc": "風のやいばを\n巻きおこし\n敵１体を攻撃", "mp": 3},
 				{"pt":   7, "name": "装備時こうげき力+5", "desc": "ツメ装備時の\nこうげき力が\n５増える", "mp": null},
@@ -226,6 +243,7 @@
 
 		"fan": {
 			"name": "扇",
+			"abbr": "扇",
 			"skills": [
 				{"pt":   3, "name": "装備時こうげき力+5", "desc": "扇装備時の\nこうげき力が\n５増える", "mp": null},
 				{"pt":   7, "name": "花ふぶき", "desc": "花びらを散らし\n周囲の敵を\n幻惑にかける", "mp": 2},
@@ -242,6 +260,7 @@
 
 		"fisticuffs": {
 			"name": "格闘",
+			"abbr": "格闘",
 			"skills": [
 				{"pt":   3, "name": "素手時こうげき力+10", "desc": "格闘の時の\nこうげき力が\n１０増える", "mp": null},
 				{"pt":   7, "name": "石つぶて", "desc": "石のつぶてを\n敵１体に\nぶつける", "mp": 1},
@@ -257,7 +276,9 @@
 		},
 
 		"focus": {
+			"unique": true,
 			"name": "きあい",
+			"abbr": "",
 			"skills": [
 				{"pt":   4, "name": "ためる（専）", "desc": "チカラをためて\nテンションアップ\n武闘家専用特技", "mp": 0},
 				{"pt":  12, "name": "常時きようさ+20", "desc": "常時\nきようさが\n２０増える", "mp": null, "dex": 20},
@@ -273,7 +294,9 @@
 		},
 
 		"acquisitiveness": {
+			"unique": true,
 			"name": "おたから",
+			"abbr": "",
 			"skills": [
 				{"pt":   8, "name": "ぬすむ（専）", "desc": "一定の確率で\nアイテムをぬすむ\n盗賊専用特技", "mp": 0},
 				{"pt":  18, "name": "みやぶる", "desc": "敵１体の正体を\n討伐モンスター\nリストに書き込む", "mp": 0},
@@ -289,7 +312,9 @@
 		},
 
 		"litheness": {
+			"unique": true,
 			"name": "きょくげい",
+			"abbr": "",
 			"skills": [
 				{"pt":   4, "name": "ボケ", "desc": "ボケたおして\n周囲の敵を\nわらわせる", "mp": 2},
 				{"pt":  12, "name": "常時みりょく+20", "desc": "常時\nみりょくが\n２０増える", "mp": null, "charm": 20},
@@ -306,6 +331,7 @@
 
 		"hammer": {
 			"name": "ハンマー",
+			"abbr": "ハン",
 			"skills": [
 				{"pt":   3, "name": "ウェイトブレイク", "desc": "敵１体の\n重さを減らす\n不思議ないちげき", "mp": 2},
 				{"pt":   7, "name": "ドラムクラッシュ", "desc": "物質系の敵に\n威力を発揮する\nチカラ強い打撃技", "mp": 1},
@@ -321,7 +347,9 @@
 		},
 
 		"virtue": {
+			"unique": true,
 			"name": "はくあい",
+			"abbr": "",
 			"skills": [
 				{"pt":   2, "name": "やいばのぼうぎょ", "desc": "やいばに\n全身を包んで\n自分の身を守る", "mp": 3},
 				{"pt":  12, "name": "常時みのまもり+10", "desc": "常時\nみのまもりが\n１０増える", "mp": null, "def": 10},
@@ -338,6 +366,7 @@
 
 		"bow": {
 			"name": "弓",
+			"abbr": "弓",
 			"skills": [
 				{"pt":   3, "name": "装備時こうげき力+5", "desc": "弓装備時の\nこうげき力が\n５増える", "mp": null},
 				{"pt":   7, "name": "マジックアロー", "desc": "攻撃呪文に\n弱くなる矢を\n敵１体に放つ", "mp": 3},
@@ -354,6 +383,7 @@
 
 		"boomerang": {
 			"name": "ブーメラン",
+			"abbr": "ブメ",
 			"skills": [
 				{"pt":   3, "name": "スライムブロウ", "desc": "スライム系の敵に\n威力を発揮する\nブーメランの妙技", "mp": 1},
 				{"pt":   7, "name": "装備時こうげき力+5", "desc": "ブーメラン装備時\nこうげき力が\n５増える", "mp": null},
@@ -369,7 +399,9 @@
 		},
 
 		"ruggedness": {
+			"unique": true,
 			"name": "サバイバル",
+			"abbr": "",
 			"skills": [
 				{"pt":   2, "name": "みのがす", "desc": "優しい心で\n弱い敵を\n逃がしてあげる", "mp": 2},
 				{"pt":  12, "name": "常時きようさ+20", "desc": "常時\nきようさが\n２０増える", "mp": null, "dex": 20},
@@ -385,7 +417,9 @@
 		},
 		
 		"fource": {
+			"unique": true,
 			"name": "フォース",
+			"abbr": "",
 			"skills": [
 				{"pt":   4, "name": "ファイアフォース（専）", "desc": "こうげきに\n炎のチカラを宿す\n魔法戦士専用特技", "mp": 2},
 				{"pt":  10, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
@@ -402,6 +436,7 @@
 		
 		"jenesaisquoi": {
 			"name": "オーラ",
+			"abbr": "",
 			"skills": [
 				{"pt":   4, "name": "サインぜめ（専）", "desc": "色紙代をはらって\n敵１体サイン攻撃\nスパスタ専用特技", "mp": null, "gold": 25},
 				{"pt":  10, "name": "常時みりょく+20", "desc": "常時\nみりょくが\n２０増える", "mp": null, "charm": 20},
@@ -416,55 +451,70 @@
 			]
 		}
 	},
+	"skillCategoryOrder": [
+		"sword", "twohandedsword", "axe", "spear", "stick", "staff", "wand",
+		"knife", "whip", "claw", "fan", "hammer", "bow", "boomerang",
+		"fisticuffs", "shield"
+	],
 	
 	"vocations": {
 		"warrior": {
 			"name": "戦士",
+			"abbr": "戦士",
 			"skills": ["sword", "twohandedsword", "axe", "shield", "courage"],
 			"expTable": 1
 		},
 		"priest": {
 			"name": "僧侶",
+			"abbr": "僧侶",
 			"skills": ["spear", "stick", "staff", "shield", "faith"],
 			"expTable": 1
 		},
 		"mage": {
 			"name": "魔法使い",
+			"abbr": "魔使",
 			"skills": ["wand", "knife", "whip", "shield", "spellcraft"],
 			"expTable": 1
 		},
 		"martialartist": {
 			"name": "武闘家",
+			"abbr": "武闘",
 			"skills": ["claw", "staff", "fan", "fisticuffs", "focus"],
 			"expTable": 1
 		},
 		"thief": {
 			"name": "盗賊",
+			"abbr": "盗賊",
 			"skills": ["knife", "whip", "claw", "fisticuffs", "acquisitiveness"],
 			"expTable": 1
 		},
 		"minstrel": {
 			"name": "旅芸人",
+			"abbr": "旅芸",
 			"skills": ["fan", "staff", "knife", "shield", "litheness"],
 			"expTable": 1
 		},
 		"ranger": {
 			"name": "レンジャー",
+			"abbr": "レン",
 			"skills": ["bow", "boomerang", "axe", "fisticuffs", "ruggedness"],
 			"expTable": 2
 		},
 		"paladin": {
 			"name": "パラディン",
+			"abbr": "パラ",
 			"skills": ["hammer", "spear", "stick", "shield", "virtue"],
 			"expTable": 2
 		},
 		"armamentalist": {
 			"name": "魔法戦士",
+			"abbr": "魔戦",
 			"skills": ["sword", "wand", "bow", "shield", "fource"],
 			"expTable": 2
 		},
 		"luminary": {
 			"name": "スーパースター",
+			"abbr": "スパ",
 			"skills": ["whip", "fan", "stick", "fisticuffs", "jenesaisquoi"],
 			"expTable": 2
 		}
@@ -473,11 +523,13 @@
 		"_description": "今後予想される追加職業。判明し次第上に移動",
 		"gladiator": {
 			"name": "バトルマスター",
+			"abbr": "バト",
 			"skills": [],
 			"expTable": 2
 		},
 		"sage": {
 			"name": "賢者",
+			"abbr": "賢者",
 			"skills": [],
 			"expTable": 2
 		}
