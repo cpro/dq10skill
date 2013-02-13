@@ -220,6 +220,7 @@ var Simulator = (function($) {
 		skillPtsGiven: skillPtsGiven,
 		expRequired: expRequired,
 		trainingPts: trainingPts,
+		vocationOrder: allData.vocationOrder,
 		
 		//定数
 		SKILL_PTS_MIN: SKILL_PTS_MIN,
@@ -609,7 +610,9 @@ var SimulatorUI = (function($) {
 			$('#foldbuttons-skillCategory a').click(function(e) {
 				var skillCategory = $(this).attr('id').replace('fold-', '');
 				var vocationsHaveSkill = [];
-				for(var vocation in sim.vocations) {
+				for(var i = 0; i < sim.vocationOrder.length; i++) {
+					var vocation = sim.vocationOrder[i];
+					
 					if($.inArray(skillCategory, sim.vocations[vocation]['skills']) >= 0)
 						vocationsHaveSkill.push(vocation);
 				}
