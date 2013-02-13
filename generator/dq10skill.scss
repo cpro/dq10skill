@@ -62,10 +62,12 @@ a {
 	
 	#foldbuttons {
 		font-size: 11px;
-		height: 11px;
 		
-		.button-container {
+		ul.button-container {
 			display: inline-block;
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
 			
 			&#foldbuttons-all {
 				width: 100px;
@@ -76,31 +78,43 @@ a {
 			&#foldbuttons-skillCategory {
 				width: 290px;
 			}
+			
+			li {
+				display: inline-block;
+				height: 16px;
+				overflow: hidden;
+				white-space: nowrap;
+				margin-bottom: 1px;
+				border: 1px solid #aab;
+				background-color: #f0f0f7;
+				
+				&:hover {
+					cursor: pointer;
+					border-color: #445;
+					color: black;
+				}
+				&.button-for-all {
+					width: 96px;
+					a {
+						width: 90px;
+						text-align: left;
+					}
+				}
+				&.button-each{
+					width: 30px;
+					a {
+						width: 24px;
+						text-align: center;
+					}
+				}
+				a {
+					display: block;
+					padding: 0 3px;
+					height: 16px;
+				}
+			}
 		}
 		
-		a {
-			display: inline-block;
-			overflow: hidden;
-			white-space: nowrap;
-			padding: 0px 3px;
-			margin-bottom: 1px;
-			border: 1px solid #aab;
-			background-color: #f0f0f7;
-			
-			&:hover {
-				cursor: pointer;
-				border-color: #445;
-				color: black;
-			}
-			&.button-for-all {
-				width: 90px;
-				text-align: left;
-			}
-			&.button-each{
-				width: 24px;
-				text-align: center;
-			}
-		}
 	}
 	
 	#tw-saveurl {

@@ -38,15 +38,19 @@
 					.snsbutton#fb-like
 					.snsbutton#g-plusone
 				#foldbuttons
-					.button-container#foldbuttons-all
-						%a.button-for-all.ui-corner-all#fold-all ▲すべてたたむ
-						%a.button-for-all.ui-corner-all#unfold-all ▼すべてひろげる
-					.button-container#foldbuttons-vocation
+					%ul.button-container#foldbuttons-all
+						%li.button-for-all.ui-corner-all<
+							%a#fold-all ▲すべてたたむ
+						%li.button-for-all.ui-corner-all<
+							%a#unfold-all ▼すべてひろげる
+					%ul.button-container#foldbuttons-vocation
 						- data['vocationOrder'].each do |vocation|
-							%a.button-each.ui-corner-all{id: "fold-#{vocation}"} #{data['vocations'][vocation]['abbr']}
-					.button-container#foldbuttons-skillCategory
+							%li.button-each.ui-corner-all<
+								%a{id: "fold-#{vocation}"} #{data['vocations'][vocation]['abbr']}
+					%ul.button-container#foldbuttons-skillCategory
 						- data['skillCategoryOrder'].each do |skillCategory|
-							%a.button-each.ui-corner-all{id: "fold-#{skillCategory}"} #{data['skillCategories'][skillCategory]['abbr']}
+							%li.button-each.ui-corner-all<
+								%a{id: "fold-#{skillCategory}"} #{data['skillCategories'][skillCategory]['abbr']}
 			%table#total
 				%tr
 					%td 獲得経験値合計:
