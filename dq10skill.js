@@ -220,6 +220,7 @@ var Simulator = (function($) {
 		skillPtsGiven: skillPtsGiven,
 		expRequired: expRequired,
 		trainingPts: trainingPts,
+		vocationOrder: allData.vocationOrder,
 		
 		//定数
 		SKILL_PTS_MIN: SKILL_PTS_MIN,
@@ -560,15 +561,15 @@ var SimulatorUI = (function($) {
 		
 		//おりたたむ・ひろげるボタン追加
 		function() {
-			var HEIGHT_FOLDED = '2.8em';
+			var HEIGHT_FOLDED = '2.5em';
 			var HEIGHT_UNFOLDED = $('.class_group').height() + 'px';
 			
 			var $foldButton = $('<p>▲おりたたむ</p>').addClass('fold').hide().click(function() {
-				$(this).parents('.class_group').animate({height: HEIGHT_FOLDED}).addClass('folded').removeClass('unfolded');
+				$(this).parents('.class_group').animate({height: HEIGHT_FOLDED}, 0).addClass('folded').removeClass('unfolded');
 				$(this).hide();
 			});
 			var $unfoldButton = $('<p>▼ひろげる</p>').addClass('unfold').hide().click(function() {
-				$(this).parents('.class_group').animate({height: HEIGHT_UNFOLDED}).addClass('unfolded').removeClass('folded');
+				$(this).parents('.class_group').animate({height: HEIGHT_UNFOLDED}, 0).addClass('unfolded').removeClass('folded');
 				$(this).hide();
 			});
 			$('.class_info').append($foldButton).append($unfoldButton);
@@ -587,13 +588,49 @@ var SimulatorUI = (function($) {
 			});
 			
 			//すべておりたたむ・すべてひろげるボタン追加
-			var $foldAllButton = $('<span>▲すべておりたたむ</span>').addClass('fold').click(function() {
+			$('#fold-all').click(function(e) {
 				$('.class_info .fold').click();
+				$('body').animate({scrollTop: 0});
 			});
-			var $unfoldAllButton = $('<span>▼すべてひろげる</span>').addClass('unfold').click(function() {
+			$('#unfold-all').click(function(e) {
 				$('.class_info .unfold').click();
+				$('body').animate({scrollTop: 0});
 			});
-			$('#toggle_buttons').append($foldAllButton).append($unfoldAllButton);
+			
+			var bodyTop = $('#body_content').offset().top;
+			
+			//特定職業のみひろげるボタン追加
+			$('#foldbuttons-vocation a').click(function(e) {
+				var vocation = $(this).attr('id').replace('fold-', '');
+				$('#' + vocation + ' .unfold').click();
+				
+				$('body').animate({scrollTop: $('#' + vocation).offset().top - bodyTop});
+			});
+			//特定スキルを持つ職業のみひろげるボタン追加
+			$('#foldbuttons-skillCategory a').click(function(e) {
+				var skillCategory = $(this).attr('id').replace('fold-', '');
+				var vocationsHaveSkill = [];
+				for(var i = 0; i < sim.vocationOrder.length; i++) {
+					var vocation = sim.vocationOrder[i];
+					
+					if($.inArray(skillCategory, sim.vocations[vocation]['skills']) >= 0)
+						vocationsHaveSkill.push(vocation);
+				}
+				
+				var $folded = $('.class_info .fold');
+				var $unfolded = $('');
+				for(var i = 0; i < vocationsHaveSkill.length; i++) {
+					var vocation = vocationsHaveSkill[i];
+					
+					$folded = $folded.not('#' + vocation + ' .fold');
+					$unfolded = $unfolded.add('#' + vocation + ' .unfold');
+				}
+				
+				$unfolded.click();
+				$folded.click();
+				
+				$('body').animate({scrollTop: $('#' + vocationsHaveSkill[0]).offset().top - bodyTop});
+			});
 		}
 	];
 	

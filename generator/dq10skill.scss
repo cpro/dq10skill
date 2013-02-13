@@ -1,9 +1,13 @@
+@charset "UTF-8";
+
+$header-height: 95px;
+
 body {
 	background-color: #fcfcfd;
 	color: #404044;
 	font-family: "メイリオ", sans-serif;
 	font-size: 100%;
-	padding: 5.5em 0 0 0;
+	padding: $header-height + 5px 0 0 0;
 }
 a {
 	text-decoration: none;
@@ -19,72 +23,163 @@ a {
 #header {
 	background-color: #fcfcfd;
 	width: 100%;
-	height: 5em;
+	height: $header-height;
 	position: fixed;
 	top: 0;
 	left: 0;
 	border-bottom: 3px solid #dcc;
 	z-index: 99;
 
-	#headerleft {
-		float: left;
-		padding: 2px 10px;
-	}
+	#titleblock {
+		height: 25px;
+		width: auto;
+		margin: 15px 0 10px 0;
+		padding: 0 10px;
+		
+		h1 {
+			font-size: 18px;
+			margin: 0 10px 0 0;
+			height: 25px;
+			float: left;
+		}
 
-	h1 {
-		font-size: 110%;
-	}
-
-	/* ヘッダ部 SNSボタン各種 */
-	#snsbuttons {
-		margin-top: 0.8em;
-		.snsbutton {
-			display: inline-block;
-			position: relative;
+		/* ヘッダ部 SNSボタン各種 */
+		#snsbuttons {
+			padding: 2px 0;
 			height: 21px;
-			overflow: hidden;
+			float: left;
+			
+			.snsbutton {
+				display: inline-block;
+				position: relative;
+				height: 21px;
+				overflow: hidden;
+				
+				&#tw-share {
+					width: 100px;
+				}
+				&#g-plusone {
+					width: 65px;
+				}
+				&#fb-like {
+					width: 105px;
+				}
+			}
 		}
-		.snsbutton#tw-share {
-			width: 100px;
-		}
-		.snsbutton#g-plusone {
-			width: 65px;
-		}
-		.snsbutton#fb-like {
-			width: 105px;
+	
+		#save_url {
+			padding: 2px 0;
+			height: 21px;
+			text-align: right;
+			font-size: 12px;
+			
+			#tw-saveurl {
+				font-size: 11px;
+				height: 18px;
+				overflow: hidden;
+				
+				.ui-button-text {
+					padding: .2em .5em;
+				}
+			}
 		}
 	}
 	
-	#tw-saveurl {
-		font-size: 11px;
-		height: 18px;
-		overflow: hidden;
+	#consoleblock {
+		width: auto;
+		height: 40px;
+		padding: 0 10px;
+		position: relative;
 		
-		.ui-button-text {
-			padding: .2em .5em;
+		#foldbuttons {
+			font-size: 11px;
+			float: left;
+			
+			ul.button-container {
+				$width-all: 96px;
+				$width-each: 30px;
+				$side-padding-a: 3px;
+				$height-button: 16px;
+				
+				display: inline-block;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				letter-spacing: -.40em;
+				
+				&#foldbuttons-all {
+					width: ($width-all + 2px + 1px) * 1;
+				}
+				&#foldbuttons-vocation {
+					width: ($width-each + 2px + 1px) * 6;
+				}
+				&#foldbuttons-skillCategory {
+					width: ($width-each + 2px + 1px) * 8;
+				}
+				
+				li {
+					display: inline-block;
+					letter-spacing: normal;
+					height: $height-button;
+					overflow: hidden;
+					white-space: nowrap;
+					margin: 0 1px 1px 0;
+					border: 1px solid #aab;
+					background-color: #f0f0f7;
+					
+					&:hover {
+						cursor: pointer;
+						border-color: #445;
+						color: black;
+					}
+					&.button-for-all {
+						width: $width-all;
+						a {
+							width: $width-all - ($side-padding-a * 2);
+							text-align: left;
+						}
+					}
+					&.button-each{
+						width: $width-each;
+						a {
+							width: $width-each - ($side-padding-a * 2);
+							text-align: center;
+						}
+					}
+					a {
+						display: block;
+						padding: 0 $side-padding-a;
+						height: $height-button;
+					}
+				}
+			}
 		}
-	}
 
-	/* 合計表示欄・保存URLテキストボックス */
-	table#total {
-		font-size: 0.8em;
-		margin: 0.5em 1em 0 0;
-		border-collapse: collapse;
-		position: absolute;
-		top: 0;
-		right: 0;
-		
-		td {
-			padding: 1px 1px 0 1px;
-			white-space: nowrap;
+		/* 合計表示欄 */
+		table#total {
+			margin: 0;
+			border-collapse: collapse;
+			position: absolute;
+			bottom: 0;
+			right: 10px;
+			
+			td, th {
+				padding: 0;
+				margin: 0;
+				white-space: nowrap;
+				vertical-align: middle;
+				height: 16px;
+				text-align: right;
+				padding-right: 5px;
+			}
+			th {
+				font-size: 12px;
+				font-weight: normal;
+			}
+			td.total_pts {
+				font-size: 14px;
+			}
 		}
-		td.total_pts {
-			text-align: right;
-			margin-right: 5px;
-		}
-	}
-	#save_url {
-		text-align: right;
 	}
 }
 
@@ -231,7 +326,7 @@ span.fold, span.unfold {
 #ad_sidebar {
 	position: absolute;
 	left: 67em;
-	top: 5.7em;
+	top: $header-height + 5px;
 	z-index: 1;
 	
 	ul {

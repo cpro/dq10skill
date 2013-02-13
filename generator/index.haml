@@ -30,46 +30,59 @@
 			})();
 	%body
 		#header
-			#headerleft
+			#titleblock
 				%h1<
 					%a{:href => @home_uri}= @title
 				#snsbuttons
 					.snsbutton#tw-share
 					.snsbutton#fb-like
 					.snsbutton#g-plusone
-					%p#toggle_buttons
-			%table#total
-				%tr
-					%td 獲得経験値合計:
-					%td.total_pts#total_exp 0
-					%td さいだいHP:
-					%td.total_pts#total_maxhp 0
-					%td ちから:
-					%td.total_pts#total_pow 0
-					%td きようさ:
-					%td.total_pts#total_dex 0
-					%td こうげき魔力:
-					%td.total_pts#total_magic 0
-					%td みりょく:
-					%td.total_pts#total_charm 0
-				%tr
-					%td 不足経験値合計:
-					%td.total_pts#total_exp_remain 0
-					%td さいだいMP:
-					%td.total_pts#total_maxmp 0
-					%td みのまもり:
-					%td.total_pts#total_def 0
-					%td すばやさ:
-					%td.total_pts#total_spd 0
-					%td かいふく魔力:
-					%td.total_pts#total_heal 0
-					%td
-					%td.total_pts
-				%tr
-					%td#save_url{:colspan => 12}
-						保存用URL:
-						%input#url_text.ui-widget-content.ui-corner-all{:type => 'text', :size => 60}>/
-						%a#tw-saveurl{title: '保存用URLをツイートする'} ツイート
+				#save_url
+					保存用URL:
+					%input#url_text.ui-widget-content.ui-corner-all{:type => 'text', :size => 60}>/
+					%a#tw-saveurl{title: '保存用URLをツイートする'} ツイート
+			#consoleblock
+				#foldbuttons
+					%ul.button-container#foldbuttons-all
+						%li.button-for-all.ui-corner-all<
+							%a#fold-all ▲すべてたたむ
+						%li.button-for-all.ui-corner-all<
+							%a#unfold-all ▼すべてひろげる
+					%ul.button-container#foldbuttons-vocation
+						- data['vocationOrder'].each do |vocation|
+							%li.button-each.ui-corner-all<
+								%a{id: "fold-#{vocation}"} #{data['vocations'][vocation]['abbr']}
+					%ul.button-container#foldbuttons-skillCategory
+						- data['skillCategoryOrder'].each do |skillCategory|
+							%li.button-each.ui-corner-all<
+								%a{id: "fold-#{skillCategory}"} #{data['skillCategories'][skillCategory]['abbr']}
+				%table#total
+					%tr
+						%th 獲得経験値合計:
+						%td.total_pts#total_exp 0
+						%th さいだいHP:
+						%td.total_pts#total_maxhp 0
+						%th ちから:
+						%td.total_pts#total_pow 0
+						%th きようさ:
+						%td.total_pts#total_dex 0
+						%th こうげき魔力:
+						%td.total_pts#total_magic 0
+						%th みりょく:
+						%td.total_pts#total_charm 0
+					%tr
+						%th 不足経験値合計:
+						%td.total_pts#total_exp_remain 0
+						%th さいだいMP:
+						%td.total_pts#total_maxmp 0
+						%th みのまもり:
+						%td.total_pts#total_def 0
+						%th すばやさ:
+						%td.total_pts#total_spd 0
+						%th かいふく魔力:
+						%td.total_pts#total_heal 0
+						%th
+						%td.total_pts
 		#body_content
 			-# %ul#beta_notice{:style => 'font-size:90%'}
 			-# 	%li<

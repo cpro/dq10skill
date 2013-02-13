@@ -28,50 +28,85 @@
   </head>
   <body>
     <div id='header'>
-      <div id='headerleft'>
+      <div id='titleblock'>
         <h1><a href='http://cpro.jp/dq10/skillsimulator/'>DQ10 スキルシミュレータ</a></h1>
         <div id='snsbuttons'>
           <div class='snsbutton' id='tw-share'></div>
           <div class='snsbutton' id='fb-like'></div>
           <div class='snsbutton' id='g-plusone'></div>
-          <p id='toggle_buttons'></p>
+        </div>
+        <div id='save_url'>
+          保存用URL:<input class='ui-widget-content ui-corner-all' id='url_text' size='60' type='text' /><a id='tw-saveurl' title='保存用URLをツイートする'>ツイート</a>
         </div>
       </div>
-      <table id='total'>
-        <tr>
-          <td>獲得経験値合計:</td>
-          <td class='total_pts' id='total_exp'>0</td>
-          <td>さいだいHP:</td>
-          <td class='total_pts' id='total_maxhp'>0</td>
-          <td>ちから:</td>
-          <td class='total_pts' id='total_pow'>0</td>
-          <td>きようさ:</td>
-          <td class='total_pts' id='total_dex'>0</td>
-          <td>こうげき魔力:</td>
-          <td class='total_pts' id='total_magic'>0</td>
-          <td>みりょく:</td>
-          <td class='total_pts' id='total_charm'>0</td>
-        </tr>
-        <tr>
-          <td>不足経験値合計:</td>
-          <td class='total_pts' id='total_exp_remain'>0</td>
-          <td>さいだいMP:</td>
-          <td class='total_pts' id='total_maxmp'>0</td>
-          <td>みのまもり:</td>
-          <td class='total_pts' id='total_def'>0</td>
-          <td>すばやさ:</td>
-          <td class='total_pts' id='total_spd'>0</td>
-          <td>かいふく魔力:</td>
-          <td class='total_pts' id='total_heal'>0</td>
-          <td></td>
-          <td class='total_pts'></td>
-        </tr>
-        <tr>
-          <td colspan='12' id='save_url'>
-            保存用URL:<input class='ui-widget-content ui-corner-all' id='url_text' size='60' type='text' /><a id='tw-saveurl' title='保存用URLをツイートする'>ツイート</a>
-          </td>
-        </tr>
-      </table>
+      <div id='consoleblock'>
+        <div id='foldbuttons'>
+          <ul class='button-container' id='foldbuttons-all'>
+            <li class='button-for-all ui-corner-all'><a id='fold-all'>▲すべてたたむ</a></li>
+            <li class='button-for-all ui-corner-all'><a id='unfold-all'>▼すべてひろげる</a></li>
+          </ul>
+          <ul class='button-container' id='foldbuttons-vocation'>
+            <li class='button-each ui-corner-all'><a id='fold-warrior'>戦士</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-priest'>僧侶</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-mage'>魔使</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-martialartist'>武闘</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-thief'>盗賊</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-minstrel'>旅芸</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-paladin'>パラ</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-armamentalist'>魔戦</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-ranger'>レン</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-luminary'>スパ</a></li>
+          </ul>
+          <ul class='button-container' id='foldbuttons-skillCategory'>
+            <li class='button-each ui-corner-all'><a id='fold-sword'>片剣</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-twohandedsword'>両剣</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-axe'>オノ</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-spear'>ヤリ</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-stick'>ステ</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-staff'>棍</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-wand'>両杖</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-knife'>短剣</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-whip'>ムチ</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-claw'>ツメ</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-fan'>扇</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-hammer'>ハン</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-bow'>弓</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-boomerang'>ブメ</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-fisticuffs'>格闘</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-shield'>盾</a></li>
+          </ul>
+        </div>
+        <table id='total'>
+          <tr>
+            <th>獲得経験値合計:</th>
+            <td class='total_pts' id='total_exp'>0</td>
+            <th>さいだいHP:</th>
+            <td class='total_pts' id='total_maxhp'>0</td>
+            <th>ちから:</th>
+            <td class='total_pts' id='total_pow'>0</td>
+            <th>きようさ:</th>
+            <td class='total_pts' id='total_dex'>0</td>
+            <th>こうげき魔力:</th>
+            <td class='total_pts' id='total_magic'>0</td>
+            <th>みりょく:</th>
+            <td class='total_pts' id='total_charm'>0</td>
+          </tr>
+          <tr>
+            <th>不足経験値合計:</th>
+            <td class='total_pts' id='total_exp_remain'>0</td>
+            <th>さいだいMP:</th>
+            <td class='total_pts' id='total_maxmp'>0</td>
+            <th>みのまもり:</th>
+            <td class='total_pts' id='total_def'>0</td>
+            <th>すばやさ:</th>
+            <td class='total_pts' id='total_spd'>0</td>
+            <th>かいふく魔力:</th>
+            <td class='total_pts' id='total_heal'>0</td>
+            <th></th>
+            <td class='total_pts'></td>
+          </tr>
+        </table>
+      </div>
     </div>
     <div id='body_content'>
       <div class='class_group' id='warrior'>
