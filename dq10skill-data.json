@@ -449,6 +449,42 @@
 				{"pt":  82, "name": "ベストスマイル（専）", "desc": "最高のほほえみで\n経験値アップ\nスパスタ専用特技", "mp": 12},
 				{"pt": 100, "name": "ゴールドシャワー（専）", "desc": "ゴールドを使って\nセレブなダメージ\nスパスタ専用特技", "mp": null, "gold": 1000}
 			]
+		},
+		
+		"guts": {
+			"unique": true,
+			"name": "とうこん",
+			"abbr": "",
+			"skills": [
+				{"pt":   4, "name": "（不明）", "desc": "", "mp": null},
+				{"pt":  10, "name": "（不明）", "desc": "", "mp": null},
+				{"pt":  16, "name": "（不明）", "desc": "", "mp": null},
+				{"pt":  22, "name": "（不明）", "desc": "", "mp": null},
+				{"pt":  32, "name": "（不明）", "desc": "", "mp": null},
+				{"pt":  42, "name": "（不明）", "desc": "", "mp": null},
+				{"pt":  55, "name": "（不明）", "desc": "", "mp": null},
+				{"pt":  68, "name": "（不明）", "desc": "", "mp": null},
+				{"pt":  82, "name": "（不明）", "desc": "", "mp": null},
+				{"pt": 100, "name": "（不明）", "desc": "", "mp": null}
+			]
+		},
+		
+		"enlightenment": {
+			"unique": true,
+			"name": "さとり",
+			"abbr": "",
+			"skills": [
+				{"pt":   4, "name": "（不明）", "desc": "", "mp": null},
+				{"pt":  10, "name": "（不明）", "desc": "", "mp": null},
+				{"pt":  16, "name": "（不明）", "desc": "", "mp": null},
+				{"pt":  22, "name": "（不明）", "desc": "", "mp": null},
+				{"pt":  32, "name": "（不明）", "desc": "", "mp": null},
+				{"pt":  42, "name": "（不明）", "desc": "", "mp": null},
+				{"pt":  55, "name": "（不明）", "desc": "", "mp": null},
+				{"pt":  68, "name": "（不明）", "desc": "", "mp": null},
+				{"pt":  82, "name": "（不明）", "desc": "", "mp": null},
+				{"pt": 100, "name": "（不明）", "desc": "", "mp": null}
+			]
 		}
 	},
 	"skillCategoryOrder": [
@@ -524,13 +560,13 @@
 		"gladiator": {
 			"name": "バトルマスター",
 			"abbr": "バト",
-			"skills": [],
+			"skills": ["twohandedsword", "sword", "hammer", "fisticuffs", "guts"],
 			"expTable": 2
 		},
 		"sage": {
 			"name": "賢者",
 			"abbr": "賢者",
-			"skills": [],
+			"skills": ["wand", "bow", "boomerang", "shield", "enlightenment"],
 			"expTable": 2
 		}
 	},
