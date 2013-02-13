@@ -28,14 +28,11 @@ a {
 	border-bottom: 3px solid #dcc;
 	z-index: 99;
 
-	#headerleft {
-		float: left;
-		padding: 2px 10px;
-	}
-
 	#titleblock {
 		height: 25px;
+		width: auto;
 		margin: 15px 0 10px 0;
+		padding: 0 10px;
 		
 		h1 {
 			font-size: 18px;
@@ -48,6 +45,7 @@ a {
 		#snsbuttons {
 			padding: 2px 0;
 			height: 21px;
+			float: left;
 			
 			.snsbutton {
 				display: inline-block;
@@ -66,95 +64,113 @@ a {
 				}
 			}
 		}
-	}
 	
-	#foldbuttons {
-		font-size: 11px;
-		
-		ul.button-container {
-			display: inline-block;
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
-			
-			&#foldbuttons-all {
-				width: 100px;
-			}
-			&#foldbuttons-vocation {
-				width: 216px;
-			}
-			&#foldbuttons-skillCategory {
-				width: 290px;
-			}
-			
-			li {
-				display: inline-block;
-				height: 16px;
-				overflow: hidden;
-				white-space: nowrap;
-				margin-bottom: 1px;
-				border: 1px solid #aab;
-				background-color: #f0f0f7;
-				
-				&:hover {
-					cursor: pointer;
-					border-color: #445;
-					color: black;
-				}
-				&.button-for-all {
-					width: 96px;
-					a {
-						width: 90px;
-						text-align: left;
-					}
-				}
-				&.button-each{
-					width: 30px;
-					a {
-						width: 24px;
-						text-align: center;
-					}
-				}
-				a {
-					display: block;
-					padding: 0 3px;
-					height: 16px;
-				}
-			}
-		}
-		
-	}
-	
-	#tw-saveurl {
-		font-size: 11px;
-		height: 18px;
-		overflow: hidden;
-		
-		.ui-button-text {
-			padding: .2em .5em;
-		}
-	}
-
-	/* 合計表示欄・保存URLテキストボックス */
-	table#total {
-		font-size: 0.8em;
-		margin: 0.5em 1em 0 0;
-		border-collapse: collapse;
-		position: absolute;
-		top: 0;
-		right: 0;
-		
-		td {
-			padding: 1px 1px 0 1px;
-			white-space: nowrap;
-		}
-		td.total_pts {
+		#save_url {
+			padding: 2px 0;
+			height: 21px;
 			text-align: right;
-			margin-right: 5px;
+			font-size: 12px;
+			
+			#tw-saveurl {
+				font-size: 11px;
+				height: 18px;
+				overflow: hidden;
+				
+				.ui-button-text {
+					padding: .2em .5em;
+				}
+			}
 		}
 	}
-	#save_url {
-		text-align: right;
+	
+	#consoleblock {
+		width: auto;
+		height: 40px;
+		padding: 0 10px;
+		position: relative;
+		
+		#foldbuttons {
+			font-size: 11px;
+			float: left;
+			
+			ul.button-container {
+				display: inline-block;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				
+				&#foldbuttons-all {
+					width: 100px;
+				}
+				&#foldbuttons-vocation {
+					width: 216px;
+				}
+				&#foldbuttons-skillCategory {
+					width: 290px;
+				}
+				
+				li {
+					display: inline-block;
+					height: 16px;
+					overflow: hidden;
+					white-space: nowrap;
+					margin-bottom: 1px;
+					border: 1px solid #aab;
+					background-color: #f0f0f7;
+					
+					&:hover {
+						cursor: pointer;
+						border-color: #445;
+						color: black;
+					}
+					&.button-for-all {
+						width: 96px;
+						a {
+							width: 90px;
+							text-align: left;
+						}
+					}
+					&.button-each{
+						width: 30px;
+						a {
+							width: 24px;
+							text-align: center;
+						}
+					}
+					a {
+						display: block;
+						padding: 0 3px;
+						height: 16px;
+					}
+				}
+			}
+		}
+
+		/* 合計表示欄 */
+		table#total {
+			margin: 0;
+			border-collapse: collapse;
+			position: absolute;
+			bottom: 0;
+			right: 10px;
+			
+			td, th {
+				padding: 0;
+				margin: 0;
+				white-space: nowrap;
+				vertical-align: middle;
+				height: 16px;
+				text-align: right;
+				padding-right: 5px;
+			}
+			th {
+				font-size: 12px;
+				font-weight: normal;
+			}
+			td.total_pts {
+				font-size: 14px;
+			}
+		}
 	}
 }
 

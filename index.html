@@ -28,15 +28,18 @@
   </head>
   <body>
     <div id='header'>
-      <div id='headerleft'>
-        <div id='titleblock'>
-          <h1><a href='http://cpro.jp/dq10/skillsimulator/'>DQ10 スキルシミュレータ</a></h1>
-          <div id='snsbuttons'>
-            <div class='snsbutton' id='tw-share'></div>
-            <div class='snsbutton' id='fb-like'></div>
-            <div class='snsbutton' id='g-plusone'></div>
-          </div>
+      <div id='titleblock'>
+        <h1><a href='http://cpro.jp/dq10/skillsimulator/'>DQ10 スキルシミュレータ</a></h1>
+        <div id='snsbuttons'>
+          <div class='snsbutton' id='tw-share'></div>
+          <div class='snsbutton' id='fb-like'></div>
+          <div class='snsbutton' id='g-plusone'></div>
         </div>
+        <div id='save_url'>
+          保存用URL:<input class='ui-widget-content ui-corner-all' id='url_text' size='60' type='text' /><a id='tw-saveurl' title='保存用URLをツイートする'>ツイート</a>
+        </div>
+      </div>
+      <div id='consoleblock'>
         <div id='foldbuttons'>
           <ul class='button-container' id='foldbuttons-all'>
             <li class='button-for-all ui-corner-all'><a id='fold-all'>▲すべてたたむ</a></li>
@@ -73,42 +76,37 @@
             <li class='button-each ui-corner-all'><a id='fold-shield'>盾</a></li>
           </ul>
         </div>
+        <table id='total'>
+          <tr>
+            <th>獲得経験値合計:</th>
+            <td class='total_pts' id='total_exp'>0</td>
+            <th>さいだいHP:</th>
+            <td class='total_pts' id='total_maxhp'>0</td>
+            <th>ちから:</th>
+            <td class='total_pts' id='total_pow'>0</td>
+            <th>きようさ:</th>
+            <td class='total_pts' id='total_dex'>0</td>
+            <th>こうげき魔力:</th>
+            <td class='total_pts' id='total_magic'>0</td>
+            <th>みりょく:</th>
+            <td class='total_pts' id='total_charm'>0</td>
+          </tr>
+          <tr>
+            <th>不足経験値合計:</th>
+            <td class='total_pts' id='total_exp_remain'>0</td>
+            <th>さいだいMP:</th>
+            <td class='total_pts' id='total_maxmp'>0</td>
+            <th>みのまもり:</th>
+            <td class='total_pts' id='total_def'>0</td>
+            <th>すばやさ:</th>
+            <td class='total_pts' id='total_spd'>0</td>
+            <th>かいふく魔力:</th>
+            <td class='total_pts' id='total_heal'>0</td>
+            <th></th>
+            <td class='total_pts'></td>
+          </tr>
+        </table>
       </div>
-      <table id='total'>
-        <tr>
-          <td>獲得経験値合計:</td>
-          <td class='total_pts' id='total_exp'>0</td>
-          <td>さいだいHP:</td>
-          <td class='total_pts' id='total_maxhp'>0</td>
-          <td>ちから:</td>
-          <td class='total_pts' id='total_pow'>0</td>
-          <td>きようさ:</td>
-          <td class='total_pts' id='total_dex'>0</td>
-          <td>こうげき魔力:</td>
-          <td class='total_pts' id='total_magic'>0</td>
-          <td>みりょく:</td>
-          <td class='total_pts' id='total_charm'>0</td>
-        </tr>
-        <tr>
-          <td>不足経験値合計:</td>
-          <td class='total_pts' id='total_exp_remain'>0</td>
-          <td>さいだいMP:</td>
-          <td class='total_pts' id='total_maxmp'>0</td>
-          <td>みのまもり:</td>
-          <td class='total_pts' id='total_def'>0</td>
-          <td>すばやさ:</td>
-          <td class='total_pts' id='total_spd'>0</td>
-          <td>かいふく魔力:</td>
-          <td class='total_pts' id='total_heal'>0</td>
-          <td></td>
-          <td class='total_pts'></td>
-        </tr>
-        <tr>
-          <td colspan='12' id='save_url'>
-            保存用URL:<input class='ui-widget-content ui-corner-all' id='url_text' size='60' type='text' /><a id='tw-saveurl' title='保存用URLをツイートする'>ツイート</a>
-          </td>
-        </tr>
-      </table>
     </div>
     <div id='body_content'>
       <div class='class_group' id='warrior'>
