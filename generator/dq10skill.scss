@@ -33,30 +33,38 @@ a {
 		padding: 2px 10px;
 	}
 
-	h1 {
-		display: inline-block;
-		vertical-align: middle;
-		font-size: 110%;
-	}
+	#titleblock {
+		height: 25px;
+		margin: 15px 0 10px 0;
+		
+		h1 {
+			font-size: 18px;
+			margin: 0 10px 0 0;
+			height: 25px;
+			float: left;
+		}
 
-	/* ヘッダ部 SNSボタン各種 */
-	#snsbuttons {
-		display: inline-block;
-		vertical-align: middle;
-		.snsbutton {
-			display: inline-block;
-			position: relative;
+		/* ヘッダ部 SNSボタン各種 */
+		#snsbuttons {
+			padding: 2px 0;
 			height: 21px;
-			overflow: hidden;
-		}
-		.snsbutton#tw-share {
-			width: 100px;
-		}
-		.snsbutton#g-plusone {
-			width: 65px;
-		}
-		.snsbutton#fb-like {
-			width: 105px;
+			
+			.snsbutton {
+				display: inline-block;
+				position: relative;
+				height: 21px;
+				overflow: hidden;
+				
+				&#tw-share {
+					width: 100px;
+				}
+				&#g-plusone {
+					width: 65px;
+				}
+				&#fb-like {
+					width: 105px;
+				}
+			}
 		}
 	}
 	

@@ -24,29 +24,33 @@ a {
   left: 0;
   border-bottom: 3px solid #ddcccc;
   z-index: 99;
-  /* ヘッダ部 SNSボタン各種 */
   /* 合計表示欄・保存URLテキストボックス */ }
   #header #headerleft {
     float: left;
     padding: 2px 10px; }
-  #header h1 {
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 110%; }
-  #header #snsbuttons {
-    display: inline-block;
-    vertical-align: middle; }
-    #header #snsbuttons .snsbutton {
-      display: inline-block;
-      position: relative;
-      height: 21px;
-      overflow: hidden; }
-    #header #snsbuttons .snsbutton#tw-share {
-      width: 100px; }
-    #header #snsbuttons .snsbutton#g-plusone {
-      width: 65px; }
-    #header #snsbuttons .snsbutton#fb-like {
-      width: 105px; }
+  #header #titleblock {
+    height: 25px;
+    margin: 15px 0 10px 0;
+    /* ヘッダ部 SNSボタン各種 */ }
+    #header #titleblock h1 {
+      font-size: 18px;
+      margin: 0 10px 0 0;
+      height: 25px;
+      float: left; }
+    #header #titleblock #snsbuttons {
+      padding: 2px 0;
+      height: 21px; }
+      #header #titleblock #snsbuttons .snsbutton {
+        display: inline-block;
+        position: relative;
+        height: 21px;
+        overflow: hidden; }
+        #header #titleblock #snsbuttons .snsbutton#tw-share {
+          width: 100px; }
+        #header #titleblock #snsbuttons .snsbutton#g-plusone {
+          width: 65px; }
+        #header #titleblock #snsbuttons .snsbutton#fb-like {
+          width: 105px; }
   #header #foldbuttons {
     font-size: 11px; }
     #header #foldbuttons ul.button-container {

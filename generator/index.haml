@@ -31,12 +31,13 @@
 	%body
 		#header
 			#headerleft
-				%h1<
-					%a{:href => @home_uri}= @title
-				#snsbuttons
-					.snsbutton#tw-share
-					.snsbutton#fb-like
-					.snsbutton#g-plusone
+				#titleblock
+					%h1<
+						%a{:href => @home_uri}= @title
+					#snsbuttons
+						.snsbutton#tw-share
+						.snsbutton#fb-like
+						.snsbutton#g-plusone
 				#foldbuttons
 					%ul.button-container#foldbuttons-all
 						%li.button-for-all.ui-corner-all<
