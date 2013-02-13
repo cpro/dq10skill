@@ -553,10 +553,7 @@
 			"abbr": "スパ",
 			"skills": ["whip", "fan", "stick", "fisticuffs", "jenesaisquoi"],
 			"expTable": 2
-		}
-	},
-	"_vocations_coming": {
-		"_description": "今後予想される追加職業。判明し次第上に移動",
+		},
 		"gladiator": {
 			"name": "バトルマスター",
 			"abbr": "バト",
@@ -570,10 +567,13 @@
 			"expTable": 2
 		}
 	},
+	"_vocations_coming": {
+		"_description": "今後予想される追加職業。判明し次第上に移動"
+	},
 	
 	"vocationOrder": [
 		"warrior", "priest", "mage", "martialartist", "thief", "minstrel",
-		"paladin", "armamentalist", "ranger", "luminary"
+		"gladiator", "paladin", "armamentalist", "ranger", "sage", "luminary"
 	],
 	
 	"skillPtsGiven": [null,
