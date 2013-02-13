@@ -1,11 +1,13 @@
 @charset "UTF-8";
 
+$header-height: 95px;
+
 body {
 	background-color: #fcfcfd;
 	color: #404044;
 	font-family: "メイリオ", sans-serif;
 	font-size: 100%;
-	padding: 5.5em 0 0 0;
+	padding: $header-height + 5px 0 0 0;
 }
 a {
 	text-decoration: none;
@@ -21,7 +23,7 @@ a {
 #header {
 	background-color: #fcfcfd;
 	width: 100%;
-	height: 5em;
+	height: $header-height;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -324,7 +326,7 @@ span.fold, span.unfold {
 #ad_sidebar {
 	position: absolute;
 	left: 67em;
-	top: 5.7em;
+	top: $header-height + 5px;
 	z-index: 1;
 	
 	ul {

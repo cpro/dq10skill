@@ -4,7 +4,7 @@ body {
   color: #404044;
   font-family: "メイリオ", sans-serif;
   font-size: 100%;
-  padding: 5.5em 0 0 0; }
+  padding: 100px 0 0 0; }
 
 a {
   text-decoration: none; }
@@ -18,7 +18,7 @@ a {
 #header {
   background-color: #fcfcfd;
   width: 100%;
-  height: 5em;
+  height: 95px;
   position: fixed;
   top: 0;
   left: 0;
@@ -244,7 +244,7 @@ span.fold, span.unfold {
 #ad_sidebar {
   position: absolute;
   left: 67em;
-  top: 5.7em;
+  top: 100px;
   z-index: 1; }
   #ad_sidebar ul {
     font-size: 80%;
