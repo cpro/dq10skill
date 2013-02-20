@@ -569,7 +569,7 @@ var SimulatorUI = (function($) {
 				$(this).hide();
 			});
 			var $unfoldButton = $('<p>▼ひろげる</p>').addClass('unfold').hide().click(function() {
-				$(this).parents('.class_group').animate({height: HEIGHT_UNFOLDED}, 0).addClass('unfolded').removeClass('folded');
+				$(this).parents('.class_group').animate({height: HEIGHT_UNFOLDED}).addClass('unfolded').removeClass('folded');
 				$(this).hide();
 			});
 			$('.class_info').append($foldButton).append($unfoldButton);
@@ -602,9 +602,8 @@ var SimulatorUI = (function($) {
 			//特定職業のみひろげるボタン追加
 			$('#foldbuttons-vocation a').click(function(e) {
 				var vocation = $(this).attr('id').replace('fold-', '');
-				$('#' + vocation + ' .unfold').click();
-				
 				$('body, html').animate({scrollTop: $('#' + vocation).offset().top - bodyTop});
+				$('#' + vocation + ' .unfold').click();
 			});
 			//特定スキルを持つ職業のみひろげるボタン追加
 			$('#foldbuttons-skillCategory a').click(function(e) {
@@ -626,10 +625,9 @@ var SimulatorUI = (function($) {
 					$unfolded = $unfolded.add('#' + vocation + ' .unfold');
 				}
 				
-				$unfolded.click();
 				$folded.click();
-				
 				$('body, html').animate({scrollTop: $('#' + vocationsHaveSkill[0]).offset().top - bodyTop});
+				$unfolded.click();
 			});
 		}
 	];
