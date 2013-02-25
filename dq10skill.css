@@ -54,6 +54,7 @@ a {
       padding: 2px 0;
       height: 21px;
       text-align: right;
+      white-space: nowrap;
       font-size: 12px; }
       #header #titleblock #save_url #tw-saveurl {
         font-size: 11px;
