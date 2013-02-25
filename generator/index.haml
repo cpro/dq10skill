@@ -52,10 +52,6 @@
 						- data['vocationOrder'].each do |vocation|
 							%li.button-each.ui-corner-all<
 								%a{id: "fold-#{vocation}"} #{data['vocations'][vocation]['abbr']}
-					%ul.button-container#foldbuttons-skillCategory
-						- data['skillCategoryOrder'].each do |skillCategory|
-							%li.button-each.ui-corner-all<
-								%a{id: "fold-#{skillCategory}"} #{data['skillCategories'][skillCategory]['abbr']}
 				%table#total
 					%tr
 						%th 獲得経験値合計:
