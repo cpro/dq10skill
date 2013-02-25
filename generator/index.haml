@@ -110,9 +110,9 @@
 					- data['vocations'][vocation]['skills'].each do |skillCategory|
 						- cat = data['skillCategories'][skillCategory]
 						%table{:class => [skillCategory, 'skill_table']}>
-							%caption<
+							%caption
 								= cat['name'] + ': '
-								%span.skill_total> 0
+								%span.skill_total 0
 							%tr
 								%th.console{:colspan => 2}
 									%input.ptspinner
