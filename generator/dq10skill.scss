@@ -91,10 +91,12 @@ a {
 		height: 40px;
 		padding: 0 10px;
 		position: relative;
+		white-space: nowrap;
 		
 		#foldbuttons {
 			font-size: 11px;
-			float: left;
+			display: inline-block;
+			vertical-align: top;
 			
 			ul.button-container {
 				$width-all: 96px;
@@ -106,7 +108,6 @@ a {
 				list-style-type: none;
 				margin: 0;
 				padding: 0;
-				letter-spacing: -.40em;
 				
 				&#foldbuttons-all {
 					width: ($width-all + 2px + 1px) * 1;
@@ -119,12 +120,11 @@ a {
 				}
 				
 				li {
-					display: inline-block;
-					letter-spacing: normal;
+					float: left;
 					height: $height-button;
 					overflow: hidden;
 					white-space: nowrap;
-					margin: 0 1px 1px 0;
+					margin: 0 1px 3px 0;
 					border: 1px solid #aab;
 					background-color: #f0f0f7;
 					
@@ -158,15 +158,15 @@ a {
 
 		/* 合計表示欄 */
 		table#total {
+			clear: both;
 			margin: 0;
 			border-collapse: collapse;
-			position: absolute;
-			bottom: 0;
-			right: 10px;
 			border-collapse: separate;
 			border-spacing: 0;
 			border-left: 1px solid #aab;
 			border-top: 1px solid #aab;
+			display: inline-block;
+			vertical-align: top;
 			
 			td, th {
 				margin: 0;

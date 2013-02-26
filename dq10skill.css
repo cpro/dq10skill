@@ -67,16 +67,17 @@ a {
     height: 40px;
     padding: 0 10px;
     position: relative;
+    white-space: nowrap;
     /* 合計表示欄 */ }
     #header #consoleblock #foldbuttons {
       font-size: 11px;
-      float: left; }
+      display: inline-block;
+      vertical-align: top; }
       #header #consoleblock #foldbuttons ul.button-container {
         display: inline-block;
         list-style-type: none;
         margin: 0;
-        padding: 0;
-        letter-spacing: -.40em; }
+        padding: 0; }
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-all {
           width: 99px; }
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-vocation {
@@ -84,12 +85,11 @@ a {
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-skillCategory {
           width: 264px; }
         #header #consoleblock #foldbuttons ul.button-container li {
-          display: inline-block;
-          letter-spacing: normal;
+          float: left;
           height: 16px;
           overflow: hidden;
           white-space: nowrap;
-          margin: 0 1px 1px 0;
+          margin: 0 1px 3px 0;
           border: 1px solid #aaaabb;
           background-color: #f0f0f7; }
           #header #consoleblock #foldbuttons ul.button-container li:hover {
@@ -111,15 +111,15 @@ a {
             padding: 0 3px;
             height: 16px; }
     #header #consoleblock table#total {
+      clear: both;
       margin: 0;
       border-collapse: collapse;
-      position: absolute;
-      bottom: 0;
-      right: 10px;
       border-collapse: separate;
       border-spacing: 0;
       border-left: 1px solid #aaaabb;
-      border-top: 1px solid #aaaabb; }
+      border-top: 1px solid #aaaabb;
+      display: inline-block;
+      vertical-align: top; }
       #header #consoleblock table#total td, #header #consoleblock table#total th {
         margin: 0;
         white-space: nowrap;
