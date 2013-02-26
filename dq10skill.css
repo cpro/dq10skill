@@ -121,20 +121,21 @@ a {
       border-left: 1px solid #aaaabb;
       border-top: 1px solid #aaaabb; }
       #header #consoleblock table#total td, #header #consoleblock table#total th {
-        padding: 0 4px 0 3px;
         margin: 0;
         white-space: nowrap;
         vertical-align: bottom;
         height: 16px;
         text-align: right;
-        border-right: 1px solid #aaaabb;
         border-bottom: 1px solid #aaaabb; }
       #header #consoleblock table#total th {
         font-size: 11px;
-        font-weight: normal; }
+        font-weight: normal;
+        padding: 0 0 0 3px; }
       #header #consoleblock table#total td.total_pts {
+        padding: 0 4px 0 3px;
         font-size: 12px;
-        width: 22px; }
+        width: 22px;
+        border-right: 1px solid #aaaabb; }
         #header #consoleblock table#total td.total_pts#total_exp, #header #consoleblock table#total td.total_pts#total_exp_remain {
           width: 64px; }
 
