@@ -52,33 +52,33 @@
 						- data['vocationOrder'].each do |vocation|
 							%li.button-each.ui-corner-all<
 								%a{id: "fold-#{vocation}"} #{data['vocations'][vocation]['abbr']}
-				%table#total
+				%table#total.ui-corner-all
 					%tr
-						%th 獲得経験値合計:
+						%th.ui-corner-tl 獲得経験値合計
 						%td.total_pts#total_exp 0
-						%th 最大HP:
+						%th 最大HP
 						%td.total_pts#total_maxhp 0
-						%th 力:
+						%th 力
 						%td.total_pts#total_pow 0
-						%th 器用:
+						%th 器用
 						%td.total_pts#total_dex 0
-						%th 攻魔:
+						%th 攻魔
 						%td.total_pts#total_magic 0
-						%th 魅力:
-						%td.total_pts#total_charm 0
+						%th 魅力
+						%td.total_pts#total_charm.ui-corner-tr 0
 					%tr
-						%th 不足経験値合計:
+						%th.ui-corner-bl 不足経験値合計
 						%td.total_pts#total_exp_remain 0
-						%th 最大MP:
+						%th 最大MP
 						%td.total_pts#total_maxmp 0
-						%th 身守:
+						%th 身守
 						%td.total_pts#total_def 0
-						%th 素早:
+						%th 素早
 						%td.total_pts#total_spd 0
-						%th 回魔:
+						%th 回魔
 						%td.total_pts#total_heal 0
 						%th
-						%td.total_pts
+						%td.total_pts.ui-corner-br
 		#body_content
 			%ul#beta_notice{:style => 'font-size:90%'}
 				%li バージョン1.3で予定されている新職業・Lv61以上の設定についてはテスト用の仮のものです。実際のシミュレーションには使用できないのでご注意ください。
