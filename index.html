@@ -7,12 +7,12 @@
     <link href='http://cpro.jp/dq10/skillsimulator/beta/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
     <title>DQ10 スキルシミュレータ（v1.3用テスト版）</title>
-    <link href='./dq10skill.css?ver=3.1beta1c' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=3.1beta2' rel='stylesheet' type='text/css'>
     <link href='css/smoothness/jquery-ui-1.9.1.custom.min.css' rel='stylesheet' type='text/css'>
     <script src='js/jquery-1.8.2.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.0.js' type='text/javascript'></script>
     <script src='js/jquery-ui-1.9.1.custom.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=3.1beta1c' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=3.1beta2' type='text/javascript'></script>
     <script>
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-5127088-4']);
@@ -1580,16 +1580,17 @@
             <ul>
               <li>プルダウンで職業レベルを選択。括弧内はそのレベルの累計スキルポイント。</li>
               <li>スキルポイントはスキル一覧の項目をクリックすると必要なポイントが自動入力されます。上下ボタン・キーボードの上下キーで1ずつ調整、PageUp/PageDownキーで10ずつ上下します。数値の直接入力も可能。</li>
+              <li>スキルポイント欄右のリセットボタンをクリックするとポイントを0にします。ダブルクリックすると複数の職で振ったそのスキルのポイントをすべて0にします。</li>
               <li>「保存用URL」欄に表示されるURLは、アクセスすることで現在の状態を再現できます。メモ用・掲示板に貼る用などにどうぞ。</li>
               <li>レベル欄あたりにカーソルを持っていくと「おりたたむ」ボタンが出てきて、クリックすると簡易表示になります。そのまま操作も可能。「すべてたたむ」でレベル・スキルを一覧するのがおすすめです。</li>
               <li>タイトル下の職業ごとのボタンをクリックすると、その職業の位置にスクロールします。折りたたまれていた場合は展開されます。</li>
-              <li>武器スキルのボタンをクリックすると、その武器スキルを持つ職業が展開され、それ以外がすべて折りたたまれます。特定の武器スキルについて振り分けを検討するのにご利用ください。</li>
               <li>特訓モードのスキルポイントを1以上にした場合、最低でもレベル50必要なものとして計算します。</li>
             </ul>
           </li>
           <li>
             履歴:
             <ul>
+              <li>2013/2/27 v3.1beta2 ページ上部のレイアウト見直し、すべて振りなおす機能追加、武器スキルの展開/折りたたみボタン廃止</li>
               <li>2013/2/20 v3.1beta1 1.3の新職業・レベル上限を暫定追加、展開/折りたたみの微調整</li>
               <li>2014/2/14 v3.0.1 Chrome以外で自動スクロールしないバグの修正</li>
               <li>2013/2/13 v3.0 職業・スキルの展開/折りたたみボタンを追加、ヘッダのレイアウト変更。</li>
