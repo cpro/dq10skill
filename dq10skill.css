@@ -28,28 +28,12 @@ a {
     height: 25px;
     width: auto;
     margin: 15px 0 10px 0;
-    padding: 0 10px;
-    /* ヘッダ部 SNSボタン各種 */ }
+    padding: 0 10px; }
     #header #titleblock h1 {
       font-size: 18px;
       margin: 0 10px 0 0;
       height: 25px;
       float: left; }
-    #header #titleblock #snsbuttons {
-      padding: 2px 0;
-      height: 21px;
-      float: left; }
-      #header #titleblock #snsbuttons .snsbutton {
-        display: inline-block;
-        position: relative;
-        height: 21px;
-        overflow: hidden; }
-        #header #titleblock #snsbuttons .snsbutton#tw-share {
-          width: 100px; }
-        #header #titleblock #snsbuttons .snsbutton#g-plusone {
-          width: 65px; }
-        #header #titleblock #snsbuttons .snsbutton#fb-like {
-          width: 105px; }
     #header #titleblock #save_url {
       padding: 2px 0;
       height: 21px;
@@ -64,15 +48,18 @@ a {
           padding: 0.2em 0.5em; }
   #header #consoleblock {
     width: auto;
-    height: 40px;
-    padding: 0 10px;
+    height: 39px;
+    padding: 0;
     position: relative;
     white-space: nowrap;
-    /* 合計表示欄 */ }
+    /* 合計表示欄 */
+    /* ヘッダ部 SNSボタン各種 */ }
     #header #consoleblock #foldbuttons {
       font-size: 11px;
-      display: inline-block;
-      vertical-align: top; }
+      position: absolute;
+      top: 0;
+      left: 10px;
+      z-index: 102; }
       #header #consoleblock #foldbuttons ul.button-container {
         display: inline-block;
         list-style-type: none;
@@ -111,15 +98,17 @@ a {
             padding: 0 3px;
             height: 16px; }
     #header #consoleblock table#total {
-      clear: both;
       margin: 0;
       border-collapse: collapse;
       border-collapse: separate;
       border-spacing: 0;
       border-left: 1px solid #aaaabb;
       border-top: 1px solid #aaaabb;
-      display: inline-block;
-      vertical-align: top; }
+      background-color: #fcfcfd;
+      position: absolute;
+      top: 0;
+      left: 314px;
+      z-index: 102; }
       #header #consoleblock table#total td, #header #consoleblock table#total th {
         margin: 0;
         white-space: nowrap;
@@ -138,6 +127,25 @@ a {
         border-right: 1px solid #aaaabb; }
         #header #consoleblock table#total td.total_pts#total_exp, #header #consoleblock table#total td.total_pts#total_exp_remain {
           width: 64px; }
+    #header #consoleblock #snsbuttons {
+      padding: 2px 0;
+      height: 21px;
+      position: absolute;
+      bottom: 0;
+      right: 10px;
+      z-index: 101; }
+      #header #consoleblock #snsbuttons .snsbutton {
+        display: inline-block;
+        position: relative;
+        height: 21px;
+        overflow: hidden;
+        vertical-align: top; }
+        #header #consoleblock #snsbuttons .snsbutton#tw-share {
+          width: 100px; }
+        #header #consoleblock #snsbuttons .snsbutton#g-plusone {
+          width: 65px; }
+        #header #consoleblock #snsbuttons .snsbutton#fb-like {
+          width: 105px; }
 
 /* 職業ボックス */
 .class_group {

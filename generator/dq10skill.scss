@@ -42,30 +42,6 @@ a {
 			height: 25px;
 			float: left;
 		}
-
-		/* ヘッダ部 SNSボタン各種 */
-		#snsbuttons {
-			padding: 2px 0;
-			height: 21px;
-			float: left;
-			
-			.snsbutton {
-				display: inline-block;
-				position: relative;
-				height: 21px;
-				overflow: hidden;
-				
-				&#tw-share {
-					width: 100px;
-				}
-				&#g-plusone {
-					width: 65px;
-				}
-				&#fb-like {
-					width: 105px;
-				}
-			}
-		}
 	
 		#save_url {
 			padding: 2px 0;
@@ -88,15 +64,17 @@ a {
 	
 	#consoleblock {
 		width: auto;
-		height: 40px;
-		padding: 0 10px;
+		height: 39px;
+		padding: 0;
 		position: relative;
 		white-space: nowrap;
 		
 		#foldbuttons {
 			font-size: 11px;
-			display: inline-block;
-			vertical-align: top;
+			position: absolute;
+			top: 0;
+			left: 10px;
+			z-index: 102;
 			
 			ul.button-container {
 				$width-all: 96px;
@@ -158,15 +136,17 @@ a {
 
 		/* 合計表示欄 */
 		table#total {
-			clear: both;
 			margin: 0;
 			border-collapse: collapse;
 			border-collapse: separate;
 			border-spacing: 0;
 			border-left: 1px solid #aab;
 			border-top: 1px solid #aab;
-			display: inline-block;
-			vertical-align: top;
+			background-color: #fcfcfd;
+			position: absolute;
+			top: 0;
+			left: 10px + 96px + 33px * 6 + 10px;
+			z-index: 102;
 			
 			td, th {
 				margin: 0;
@@ -189,6 +169,34 @@ a {
 				
 				&#total_exp, &#total_exp_remain {
 					width: 64px;
+				}
+			}
+		}
+
+		/* ヘッダ部 SNSボタン各種 */
+		#snsbuttons {
+			padding: 2px 0;
+			height: 21px;
+			position: absolute;
+			bottom: 0;
+			right: 10px;
+			z-index: 101;
+			
+			.snsbutton {
+				display: inline-block;
+				position: relative;
+				height: 21px;
+				overflow: hidden;
+				vertical-align: top;
+				
+				&#tw-share {
+					width: 100px;
+				}
+				&#g-plusone {
+					width: 65px;
+				}
+				&#fb-like {
+					width: 105px;
 				}
 			}
 		}
