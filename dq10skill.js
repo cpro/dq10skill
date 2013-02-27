@@ -114,6 +114,14 @@ var Simulator = (function($) {
 		return total;
 	}
 	
+	//特定スキルすべてを振り直し（0にセット）
+	function clearPtsOfSameSkills(skill) {
+		for(var vocation in skillPts) {
+			if(skillPts[vocation][skill])
+				updateSkillPt(vocation, skill, 0);
+		}
+	}
+	
 	//職業レベルに対するスキルポイント最大値
 	function maxSkillPts(vocation) {
 		return skillPtsGiven[levels[vocation]];
@@ -206,6 +214,7 @@ var Simulator = (function($) {
 		updateTrainingSkillPt : updateTrainingSkillPt,
 		totalSkillPts: totalSkillPts,
 		totalOfSameSkills: totalOfSameSkills,
+		clearPtsOfSameSkills: clearPtsOfSameSkills,
 		maxSkillPts: maxSkillPts,
 		requiredLevel: requiredLevel,
 		requiredExp: requiredExp,
@@ -474,6 +483,21 @@ var SimulatorUI = (function($) {
 				sim.updateSkillPt(vocation, skill, 0);
 				$('#' + vocation + ' .' + skill + ' .ptspinner').spinner('value', sim.getSkillPt(vocation, skill));
 				refreshSkillList(skill);
+				refreshAllVocationInfo();
+				refreshTotalExpRemain();
+				refreshTotalPassive();
+				refreshSaveUrl();
+			}).dblclick(function (e) {
+				//ダブルクリック時に各職業の該当スキルをすべて振り直し
+				var skillCategory = $(this).parents('.skill_table').attr('class').split(' ')[0];
+				var skillName = sim.skillCategories[skillCategory].name;
+				
+				if(!window.confirm('スキル「' + skillName + '」をすべて振りなおします。'))
+					return;
+				
+				sim.clearPtsOfSameSkills(skillCategory);
+				$('.' + skillCategory + ' .ptspinner').spinner('value', 0);
+				refreshSkillList(skillCategory);
 				refreshAllVocationInfo();
 				refreshTotalExpRemain();
 				refreshTotalPassive();
