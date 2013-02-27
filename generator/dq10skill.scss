@@ -1,9 +1,10 @@
 @charset "UTF-8";
 
 $header-height: 95px;
+$main-background-color: #fcfcfd;
 
 body {
-	background-color: #fcfcfd;
+	background-color: $main-background-color;
 	color: #404044;
 	font-family: "メイリオ", sans-serif;
 	font-size: 100%;
@@ -11,8 +12,11 @@ body {
 }
 a {
 	text-decoration: none;
-	:hover {
+	&:hover {
 		text-decoration: underline;
+	}
+	img {
+		border-style: none;
 	}
 }
 .error {
@@ -21,7 +25,7 @@ a {
 
 /* ヘッダ */
 #header {
-	background-color: #fcfcfd;
+	background-color: $main-background-color;
 	width: 100%;
 	height: $header-height;
 	position: fixed;
@@ -142,7 +146,7 @@ a {
 			border-spacing: 0;
 			border-left: 1px solid #aab;
 			border-top: 1px solid #aab;
-			background-color: #fcfcfd;
+			background-color: $main-background-color;
 			position: absolute;
 			top: 0;
 			left: 10px + 96px + 33px * 6 + 10px;
