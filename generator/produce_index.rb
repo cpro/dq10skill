@@ -57,9 +57,9 @@ if refresh_item_cache or !File.exist?(ITEM_CACHE_PATH)
     
     item = response.item_lookup_response.items.item
     {
-      img_url: item.medium_image.url.to_s,
-      img_height: item.medium_image.height.to_s,
-      img_width: item.medium_image.width.to_s,
+      img_url: item.medium_image && item.medium_image.url.to_s,
+      img_height: item.medium_image && item.medium_image.height.to_s,
+      img_width: item.medium_image && item.medium_image.width.to_s,
       item_url: item.detail_page_url.to_s,
       item_title: item.item_attributes.title.to_s
     }
