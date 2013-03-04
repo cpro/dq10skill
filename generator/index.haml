@@ -2,23 +2,23 @@
 !!! 5
 %html
 	%head
-		%meta{:charset => 'UTF-8'}/
-		%meta{'http-equiv' => 'Content-Style-Type', :content => 'text/css'}/
-		%meta{'http-equiv' => 'Content-Script-Type', :content => 'text/javascript'}/
+		%meta{charset: 'UTF-8'}/
+		%meta{'http-equiv' => 'Content-Style-Type', content: 'text/css'}/
+		%meta{'http-equiv' => 'Content-Script-Type', content: 'text/javascript'}/
 		- @home_uri = 'http://cpro.jp/dq10/skillsimulator/beta/'
-		%link{:rel => 'canonical', :href => @home_uri}/
-		%meta{:name => 'description', :content => 'ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。'}/
+		%link{rel: 'canonical', href: @home_uri}/
+		%meta{name: 'description', content: 'ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。'}/
 		
 		- @title = 'DQ10 スキルシミュレータ（v1.3用テスト版）'
 		%title= @title
 		
-		%link{:rel => 'stylesheet', :type => 'text/css', :href => "./dq10skill.css?ver=#{VERSION}"}/
-		%link{:rel => 'stylesheet', :type => 'text/css', :href => 'css/smoothness/jquery-ui-1.9.1.custom.min.css'}/
+		%link{rel: 'stylesheet', type: 'text/css', href: "./dq10skill.css?ver=#{VERSION}"}/
+		%link{rel: 'stylesheet', type: 'text/css', href: 'css/smoothness/jquery-ui-1.9.1.custom.min.css'}/
 		
-		%script{:type => 'text/javascript', :src => 'js/jquery-1.8.2.js'}
-		%script{:type => 'text/javascript', :src => 'js/jquery.socialbutton-1.9.0.js'}
-		%script{:type => 'text/javascript', :src => 'js/jquery-ui-1.9.1.custom.min.js'}
-		%script{:type => 'text/javascript', :src => "./dq10skill.js?ver=#{VERSION}"}
+		%script{type: 'text/javascript', src: 'js/jquery-1.8.2.js'}
+		%script{type: 'text/javascript', src: 'js/jquery.socialbutton-1.9.0.js'}
+		%script{type: 'text/javascript', src: 'js/jquery-ui-1.9.1.custom.min.js'}
+		%script{type: 'text/javascript', src: "./dq10skill.js?ver=#{VERSION}"}
 		:javascript
 			var _gaq = _gaq || [];
 			_gaq.push(['_setAccount', 'UA-5127088-4']);
@@ -32,10 +32,10 @@
 		#header
 			#titleblock
 				%h1<
-					%a{:href => @home_uri}= @title
+					%a{href: @home_uri}= @title
 				#save_url
 					保存用URL:
-					%input#url_text.ui-widget-content.ui-corner-all{:type => 'text', :size => 45}>/
+					%input#url_text.ui-widget-content.ui-corner-all{type: 'text', size: 45}>/
 					%a#tw-saveurl{title: '保存用URLをツイートする'} ツイート
 			#consoleblock
 				#foldbuttons
@@ -80,10 +80,10 @@
 					.snsbutton#fb-like
 					.snsbutton#g-plusone
 		#body_content
-			%ul#beta_notice{:style => 'font-size:90%'}
+			%ul#beta_notice{style: 'font-size:90%'}
 				%li バージョン1.3で予定されている新職業・Lv61以上の設定についてはテスト用の仮のものです。実際のシミュレーションには使用できないのでご注意ください。
 			- data['vocationOrder'].each do |vocation|
-				%div.class_group{:id => vocation}
+				%div.class_group{id: vocation}
 					.class_info
 						%h2<
 							= data['vocations'][vocation]['name'] + ' Lv '
@@ -100,25 +100,25 @@
 							%dd<
 								%label{for: "training-#{vocation}"}> 特訓
 								%input.training_pt{id: "training-#{vocation}"}>
-							%dt.error{:style => 'display:none'}<
+							%dt.error{style: 'display:none'}<
 								必要レベル:
 								%span.req_lv>< 1
-							%dd.error{:style => 'display:none'}
+							%dd.error{style: 'display:none'}
 								= '（あと '
 								%span.exp_remain> 0
 								= ' exp）'
 					- data['vocations'][vocation]['skills'].each do |skillCategory|
 						- cat = data['skillCategories'][skillCategory]
-						%table{:class => [skillCategory, 'skill_table']}>
+						%table{class: [skillCategory, 'skill_table']}>
 							%caption
 								= cat['name'] + ': '
 								%span.skill_total 0
 							%tr
-								%th.console{:colspan => 2}
+								%th.console{colspan: 2}
 									%input.ptspinner
 									%button.reset リセット
 							- cat['skills'].each_with_index do |skill, i|
-								%tr{:class => [skillCategory, i].join('_')}<
+								%tr{class: [skillCategory, i].join('_')}<
 									%td.skill_pt>= skill['pt']
 									-# - hint = skill['desc'] + (skill['mp'] ? "\n（消費MP: #{skill['mp']}）" : '')
 									%td.skill_name= skill['name']
@@ -185,11 +185,11 @@
 			%h2 DQ10ツールリンク
 			%ul
 				%li<
-					%a{:href => 'http://dqx-bazaar.herokuapp.com/', :target => '_blank'} ドラクエ10アイテム価格調査隊
+					%a{href: 'http://dqx-bazaar.herokuapp.com/', target: '_blank'} ドラクエ10アイテム価格調査隊
 				%li<
-					%a{:href => 'http://www.d-quest-10.com/', :target => '_blank'} ドラクエ10・モンスター完全図鑑
+					%a{href: 'http://www.d-quest-10.com/', target: '_blank'} ドラクエ10・モンスター完全図鑑
 				%li<
-					%a{:href => 'http://www4.atpages.jp/studiogobli/php/dqxm/', :target => '_blank'} DQ10 ソロ用
+					%a{href: 'http://www4.atpages.jp/studiogobli/php/dqxm/', target: '_blank'} DQ10 ソロ用
 			- item_list.each do |item|
 				.amazonitem
 					%a{href: item[:item_url], target: '_blank'}<
