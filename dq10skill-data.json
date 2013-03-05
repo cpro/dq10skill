@@ -456,16 +456,16 @@
 			"name": "とうこん",
 			"abbr": "",
 			"skills": [
-				{"pt":   4, "name": "（不明）", "desc": "", "mp": null},
-				{"pt":  10, "name": "（不明）", "desc": "", "mp": null},
-				{"pt":  16, "name": "（不明）", "desc": "", "mp": null},
-				{"pt":  22, "name": "（不明）", "desc": "", "mp": null},
-				{"pt":  32, "name": "（不明）", "desc": "", "mp": null},
-				{"pt":  42, "name": "（不明）", "desc": "", "mp": null},
-				{"pt":  55, "name": "（不明）", "desc": "", "mp": null},
-				{"pt":  68, "name": "（不明）", "desc": "", "mp": null},
-				{"pt":  82, "name": "（不明）", "desc": "", "mp": null},
-				{"pt": 100, "name": "（不明）", "desc": "", "mp": null}
+				{"pt":   4, "name": "とうこん討ち（専）", "desc": "", "mp": null},
+				{"pt":  10, "name": "常時きようさ+20", "desc": "", "mp": null, "dex": 20},
+				{"pt":  16, "name": "常時ちから+5", "desc": "", "mp": null, "pow": 5},
+				{"pt":  22, "name": "すてみ（専）", "desc": "", "mp": null},
+				{"pt":  32, "name": "常時すばやさ+30", "desc": "", "mp": null, "spd": 30},
+				{"pt":  42, "name": "もろばぎり（専）", "desc": "", "mp": null},
+				{"pt":  55, "name": "常時ちから+5", "desc": "", "mp": null, "pow": 5},
+				{"pt":  68, "name": "無心こうげき（専）", "desc": "", "mp": null},
+				{"pt":  82, "name": "常時ちから+5", "desc": "", "mp": null, "pow": 5},
+				{"pt": 100, "name": "天下無双（専）", "desc": "", "mp": null}
 			]
 		},
 		
@@ -474,16 +474,16 @@
 			"name": "さとり",
 			"abbr": "",
 			"skills": [
-				{"pt":   4, "name": "（不明）", "desc": "", "mp": null},
-				{"pt":  10, "name": "（不明）", "desc": "", "mp": null},
-				{"pt":  16, "name": "（不明）", "desc": "", "mp": null},
-				{"pt":  22, "name": "（不明）", "desc": "", "mp": null},
-				{"pt":  32, "name": "（不明）", "desc": "", "mp": null},
-				{"pt":  42, "name": "（不明）", "desc": "", "mp": null},
-				{"pt":  55, "name": "（不明）", "desc": "", "mp": null},
-				{"pt":  68, "name": "（不明）", "desc": "", "mp": null},
-				{"pt":  82, "name": "（不明）", "desc": "", "mp": null},
-				{"pt": 100, "name": "（不明）", "desc": "", "mp": null}
+				{"pt":   4, "name": "いやしの雨（専）", "desc": "", "mp": null},
+				{"pt":  10, "name": "常時かいふく魔力+10", "desc": "", "mp": null, "heal": 10},
+				{"pt":  16, "name": "常時こうげき魔力+10", "desc": "", "mp": null, "magic": 10},
+				{"pt":  22, "name": "まどうのしょ（専）", "desc": "", "mp": null},
+				{"pt":  32, "name": "常時さいだいMP+10", "desc": "", "mp": null, "maxmp": 10},
+				{"pt":  42, "name": "常時かいふく魔力+10", "desc": "", "mp": null, "heal": 10},
+				{"pt":  55, "name": "しんぴのさとり", "desc": "", "mp": null},
+				{"pt":  68, "name": "常時こうげき魔力+10", "desc": "", "mp": null, "magic": 10},
+				{"pt":  82, "name": "常時さいだいMP+20", "desc": "", "mp": null, "maxmp": 20},
+				{"pt": 100, "name": "零の洗礼（専）", "desc": "", "mp": null}
 			]
 		}
 	},
@@ -583,7 +583,7 @@
 		 58,  63,  63,  68,  72,  72,  76,  79,  79,  83,
 		 87,  87,  90,  93,  93,  97, 100, 100, 103, 107,
 		107, 110, 113, 113, 116, 118, 119, 122, 124, 126,
-		128, 130, 132, 134, 136
+		129, 131, 132, 134, 136
 	],
 	
 	"expRequired": {
