@@ -1,9 +1,10 @@
 @charset "UTF-8";
 
-$header-height: 95px;
+$header-height: 90px;
+$main-background-color: #fcfcfd;
 
 body {
-	background-color: #fcfcfd;
+	background-color: $main-background-color;
 	color: #404044;
 	font-family: "メイリオ", sans-serif;
 	font-size: 100%;
@@ -11,8 +12,11 @@ body {
 }
 a {
 	text-decoration: none;
-	:hover {
+	&:hover {
 		text-decoration: underline;
+	}
+	img {
+		border-style: none;
 	}
 }
 .error {
@@ -21,7 +25,7 @@ a {
 
 /* ヘッダ */
 #header {
-	background-color: #fcfcfd;
+	background-color: $main-background-color;
 	width: 100%;
 	height: $header-height;
 	position: fixed;
@@ -33,7 +37,7 @@ a {
 	#titleblock {
 		height: 25px;
 		width: auto;
-		margin: 15px 0 10px 0;
+		margin: 15px 0 7px 0;
 		padding: 0 10px;
 		
 		h1 {
@@ -42,35 +46,12 @@ a {
 			height: 25px;
 			float: left;
 		}
-
-		/* ヘッダ部 SNSボタン各種 */
-		#snsbuttons {
-			padding: 2px 0;
-			height: 21px;
-			float: left;
-			
-			.snsbutton {
-				display: inline-block;
-				position: relative;
-				height: 21px;
-				overflow: hidden;
-				
-				&#tw-share {
-					width: 100px;
-				}
-				&#g-plusone {
-					width: 65px;
-				}
-				&#fb-like {
-					width: 105px;
-				}
-			}
-		}
 	
 		#save_url {
 			padding: 2px 0;
 			height: 21px;
 			text-align: right;
+			white-space: nowrap;
 			font-size: 12px;
 			
 			#tw-saveurl {
@@ -87,13 +68,17 @@ a {
 	
 	#consoleblock {
 		width: auto;
-		height: 40px;
-		padding: 0 10px;
+		height: 39px;
+		padding: 0;
 		position: relative;
+		white-space: nowrap;
 		
 		#foldbuttons {
 			font-size: 11px;
-			float: left;
+			position: absolute;
+			top: 0;
+			left: 10px;
+			z-index: 102;
 			
 			ul.button-container {
 				$width-all: 96px;
@@ -105,7 +90,6 @@ a {
 				list-style-type: none;
 				margin: 0;
 				padding: 0;
-				letter-spacing: -.40em;
 				
 				&#foldbuttons-all {
 					width: ($width-all + 2px + 1px) * 1;
@@ -118,12 +102,11 @@ a {
 				}
 				
 				li {
-					display: inline-block;
-					letter-spacing: normal;
+					float: left;
 					height: $height-button;
 					overflow: hidden;
 					white-space: nowrap;
-					margin: 0 1px 1px 0;
+					margin: 0 1px 3px 0;
 					border: 1px solid #aab;
 					background-color: #f0f0f7;
 					
@@ -159,25 +142,66 @@ a {
 		table#total {
 			margin: 0;
 			border-collapse: collapse;
+			border-collapse: separate;
+			border-spacing: 0;
+			border-left: 1px solid #aab;
+			border-top: 1px solid #aab;
+			background-color: $main-background-color;
+			position: absolute;
+			top: 0;
+			left: 10px + 96px + 33px * 6 + 10px;
+			z-index: 102;
+			
+			td, th {
+				margin: 0;
+				white-space: nowrap;
+				vertical-align: bottom;
+				height: 16px;
+				text-align: right;
+				border-bottom: 1px solid #aab;
+			}
+			th {
+				font-size: 11px;
+				font-weight: normal;
+				padding: 0 0 0 3px;
+			}
+			td.total_pts {
+				padding: 0 4px 0 3px;
+				font-size: 12px;
+				width: 22px;
+				border-right: 1px solid #aab;
+				
+				&#total_exp, &#total_exp_remain {
+					width: 64px;
+				}
+			}
+		}
+
+		/* ヘッダ部 SNSボタン各種 */
+		#snsbuttons {
+			padding: 2px 0;
+			height: 21px;
 			position: absolute;
 			bottom: 0;
 			right: 10px;
+			z-index: 101;
 			
-			td, th {
-				padding: 0;
-				margin: 0;
-				white-space: nowrap;
-				vertical-align: middle;
-				height: 16px;
-				text-align: right;
-				padding-right: 5px;
-			}
-			th {
-				font-size: 12px;
-				font-weight: normal;
-			}
-			td.total_pts {
-				font-size: 14px;
+			.snsbutton {
+				display: inline-block;
+				position: relative;
+				height: 21px;
+				overflow: hidden;
+				vertical-align: top;
+				
+				&#tw-share {
+					width: 100px;
+				}
+				&#g-plusone {
+					width: 65px;
+				}
+				&#fb-like {
+					width: 105px;
+				}
 			}
 		}
 	}

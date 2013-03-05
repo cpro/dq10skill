@@ -4,15 +4,15 @@
     <meta charset='UTF-8'>
     <meta content='text/css' http-equiv='Content-Style-Type'>
     <meta content='text/javascript' http-equiv='Content-Script-Type'>
-    <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical'>
+    <link href='http://cpro.jp/dq10/skillsimulator/beta/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
-    <title>DQ10 スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=3.0.1' rel='stylesheet' type='text/css'>
+    <title>DQ10 スキルシミュレータ（v1.3用テスト版）</title>
+    <link href='./dq10skill.css?ver=3.1beta2' rel='stylesheet' type='text/css'>
     <link href='css/smoothness/jquery-ui-1.9.1.custom.min.css' rel='stylesheet' type='text/css'>
     <script src='js/jquery-1.8.2.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.0.js' type='text/javascript'></script>
     <script src='js/jquery-ui-1.9.1.custom.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=3.0.1' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=3.1beta2' type='text/javascript'></script>
     <script>
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-5127088-4']);
@@ -27,14 +27,9 @@
   <body>
     <div id='header'>
       <div id='titleblock'>
-        <h1><a href='http://cpro.jp/dq10/skillsimulator/'>DQ10 スキルシミュレータ</a></h1>
-        <div id='snsbuttons'>
-          <div class='snsbutton' id='tw-share'></div>
-          <div class='snsbutton' id='fb-like'></div>
-          <div class='snsbutton' id='g-plusone'></div>
-        </div>
+        <h1><a href='http://cpro.jp/dq10/skillsimulator/beta/'>DQ10 スキルシミュレータ（v1.3用テスト版）</a></h1>
         <div id='save_url'>
-          保存用URL:<input class='ui-widget-content ui-corner-all' id='url_text' size='60' type='text'><a id='tw-saveurl' title='保存用URLをツイートする'>ツイート</a>
+          保存用URL:<input class='ui-widget-content ui-corner-all' id='url_text' size='45' type='text'><a id='tw-saveurl' title='保存用URLをツイートする'>ツイート</a>
         </div>
       </div>
       <div id='consoleblock'>
@@ -50,63 +45,55 @@
             <li class='button-each ui-corner-all'><a id='fold-martialartist'>武闘</a></li>
             <li class='button-each ui-corner-all'><a id='fold-thief'>盗賊</a></li>
             <li class='button-each ui-corner-all'><a id='fold-minstrel'>旅芸</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-gladiator'>バト</a></li>
             <li class='button-each ui-corner-all'><a id='fold-paladin'>パラ</a></li>
             <li class='button-each ui-corner-all'><a id='fold-armamentalist'>魔戦</a></li>
             <li class='button-each ui-corner-all'><a id='fold-ranger'>レン</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-sage'>賢者</a></li>
             <li class='button-each ui-corner-all'><a id='fold-luminary'>スパ</a></li>
           </ul>
-          <ul class='button-container' id='foldbuttons-skillCategory'>
-            <li class='button-each ui-corner-all'><a id='fold-sword'>片剣</a></li>
-            <li class='button-each ui-corner-all'><a id='fold-twohandedsword'>両剣</a></li>
-            <li class='button-each ui-corner-all'><a id='fold-axe'>オノ</a></li>
-            <li class='button-each ui-corner-all'><a id='fold-spear'>ヤリ</a></li>
-            <li class='button-each ui-corner-all'><a id='fold-stick'>ステ</a></li>
-            <li class='button-each ui-corner-all'><a id='fold-staff'>棍</a></li>
-            <li class='button-each ui-corner-all'><a id='fold-wand'>両杖</a></li>
-            <li class='button-each ui-corner-all'><a id='fold-knife'>短剣</a></li>
-            <li class='button-each ui-corner-all'><a id='fold-whip'>ムチ</a></li>
-            <li class='button-each ui-corner-all'><a id='fold-claw'>ツメ</a></li>
-            <li class='button-each ui-corner-all'><a id='fold-fan'>扇</a></li>
-            <li class='button-each ui-corner-all'><a id='fold-hammer'>ハン</a></li>
-            <li class='button-each ui-corner-all'><a id='fold-bow'>弓</a></li>
-            <li class='button-each ui-corner-all'><a id='fold-boomerang'>ブメ</a></li>
-            <li class='button-each ui-corner-all'><a id='fold-fisticuffs'>格闘</a></li>
-            <li class='button-each ui-corner-all'><a id='fold-shield'>盾</a></li>
-          </ul>
         </div>
-        <table id='total'>
+        <table class='ui-corner-all' id='total'>
           <tr>
-            <th>獲得経験値合計:</th>
+            <th class='ui-corner-tl'>総獲得経験値:</th>
             <td class='total_pts' id='total_exp'>0</td>
-            <th>さいだいHP:</th>
+            <th>最大HP:</th>
             <td class='total_pts' id='total_maxhp'>0</td>
-            <th>ちから:</th>
+            <th>力:</th>
             <td class='total_pts' id='total_pow'>0</td>
-            <th>きようさ:</th>
+            <th>器用:</th>
             <td class='total_pts' id='total_dex'>0</td>
-            <th>こうげき魔力:</th>
+            <th>攻魔:</th>
             <td class='total_pts' id='total_magic'>0</td>
-            <th>みりょく:</th>
-            <td class='total_pts' id='total_charm'>0</td>
+            <th>魅力:</th>
+            <td class='total_pts ui-corner-tr' id='total_charm'>0</td>
           </tr>
           <tr>
-            <th>不足経験値合計:</th>
+            <th class='ui-corner-bl'>総不足経験値:</th>
             <td class='total_pts' id='total_exp_remain'>0</td>
-            <th>さいだいMP:</th>
+            <th>最大MP:</th>
             <td class='total_pts' id='total_maxmp'>0</td>
-            <th>みのまもり:</th>
+            <th>身守:</th>
             <td class='total_pts' id='total_def'>0</td>
-            <th>すばやさ:</th>
+            <th>素早:</th>
             <td class='total_pts' id='total_spd'>0</td>
-            <th>かいふく魔力:</th>
+            <th>回魔:</th>
             <td class='total_pts' id='total_heal'>0</td>
             <th></th>
-            <td class='total_pts'></td>
+            <td class='total_pts ui-corner-br'></td>
           </tr>
         </table>
+        <div id='snsbuttons'>
+          <div class='snsbutton' id='tw-share'></div>
+          <div class='snsbutton' id='fb-like'></div>
+          <div class='snsbutton' id='g-plusone'></div>
+        </div>
       </div>
     </div>
     <div id='body_content'>
+      <ul id='beta_notice' style='font-size:90%'>
+        <li>バージョン1.3で予定されている新職業・Lv61以上の設定についてはテスト用の仮のものです。実際のシミュレーションには使用できないのでご注意ください。</li>
+      </ul>
       <div class='class_group' id='warrior'>
         <div class='class_info'>
           <h2>戦士 Lv<span class='lv_h2'>1</span></h2>
@@ -125,7 +112,10 @@
             </dd>
           </dl>
         </div><table class='sword skill_table'>
-          <caption>片手剣:<span class='skill_total'>0</span></caption>
+          <caption>
+            片手剣:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -143,7 +133,10 @@
           <tr class='sword_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
           <tr class='sword_9'><td class='skill_pt'>100</td><td class='skill_name'>ギガスラッシュ</td></tr>
         </table><table class='twohandedsword skill_table'>
-          <caption>両手剣:<span class='skill_total'>0</span></caption>
+          <caption>
+            両手剣:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -161,7 +154,10 @@
           <tr class='twohandedsword_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
           <tr class='twohandedsword_9'><td class='skill_pt'>100</td><td class='skill_name'>渾身斬り</td></tr>
         </table><table class='axe skill_table'>
-          <caption>オノ:<span class='skill_total'>0</span></caption>
+          <caption>
+            オノ:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -179,7 +175,10 @@
           <tr class='axe_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
           <tr class='axe_9'><td class='skill_pt'>100</td><td class='skill_name'>オノむそう</td></tr>
         </table><table class='shield skill_table'>
-          <caption>盾:<span class='skill_total'>0</span></caption>
+          <caption>
+            盾:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -197,7 +196,10 @@
           <tr class='shield_8'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
           <tr class='shield_9'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
         </table><table class='courage skill_table'>
-          <caption>ゆうかん:<span class='skill_total'>0</span></caption>
+          <caption>
+            ゆうかん:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -233,7 +235,10 @@
             </dd>
           </dl>
         </div><table class='spear skill_table'>
-          <caption>ヤリ:<span class='skill_total'>0</span></caption>
+          <caption>
+            ヤリ:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -251,7 +256,10 @@
           <tr class='spear_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
           <tr class='spear_9'><td class='skill_pt'>100</td><td class='skill_name'>狼牙突き</td></tr>
         </table><table class='stick skill_table'>
-          <caption>スティック:<span class='skill_total'>0</span></caption>
+          <caption>
+            スティック:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -269,7 +277,10 @@
           <tr class='stick_8'><td class='skill_pt'>84</td><td class='skill_name'>装備時かいふく魔力+30</td></tr>
           <tr class='stick_9'><td class='skill_pt'>100</td><td class='skill_name'>キラキラポーン</td></tr>
         </table><table class='staff skill_table'>
-          <caption>棍:<span class='skill_total'>0</span></caption>
+          <caption>
+            棍:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -287,7 +298,10 @@
           <tr class='staff_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
           <tr class='staff_9'><td class='skill_pt'>100</td><td class='skill_name'>天地のかまえ</td></tr>
         </table><table class='shield skill_table'>
-          <caption>盾:<span class='skill_total'>0</span></caption>
+          <caption>
+            盾:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -305,7 +319,10 @@
           <tr class='shield_8'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
           <tr class='shield_9'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
         </table><table class='faith skill_table'>
-          <caption>しんこう心:<span class='skill_total'>0</span></caption>
+          <caption>
+            しんこう心:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -341,7 +358,10 @@
             </dd>
           </dl>
         </div><table class='wand skill_table'>
-          <caption>両手杖:<span class='skill_total'>0</span></caption>
+          <caption>
+            両手杖:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -359,7 +379,10 @@
           <tr class='wand_8'><td class='skill_pt'>84</td><td class='skill_name'>装備時さいだいMP+100</td></tr>
           <tr class='wand_9'><td class='skill_pt'>100</td><td class='skill_name'>戦闘勝利時MP中回復</td></tr>
         </table><table class='knife skill_table'>
-          <caption>短剣:<span class='skill_total'>0</span></caption>
+          <caption>
+            短剣:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -377,7 +400,10 @@
           <tr class='knife_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
           <tr class='knife_9'><td class='skill_pt'>100</td><td class='skill_name'>タナトスハント</td></tr>
         </table><table class='whip skill_table'>
-          <caption>ムチ:<span class='skill_total'>0</span></caption>
+          <caption>
+            ムチ:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -395,7 +421,10 @@
           <tr class='whip_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時効果範囲+2m</td></tr>
           <tr class='whip_9'><td class='skill_pt'>100</td><td class='skill_name'>双竜打ち</td></tr>
         </table><table class='shield skill_table'>
-          <caption>盾:<span class='skill_total'>0</span></caption>
+          <caption>
+            盾:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -413,7 +442,10 @@
           <tr class='shield_8'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
           <tr class='shield_9'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
         </table><table class='spellcraft skill_table'>
-          <caption>まほう:<span class='skill_total'>0</span></caption>
+          <caption>
+            まほう:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -449,7 +481,10 @@
             </dd>
           </dl>
         </div><table class='claw skill_table'>
-          <caption>ツメ:<span class='skill_total'>0</span></caption>
+          <caption>
+            ツメ:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -467,7 +502,10 @@
           <tr class='claw_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+5</td></tr>
           <tr class='claw_9'><td class='skill_pt'>100</td><td class='skill_name'>ゴールドフィンガー</td></tr>
         </table><table class='staff skill_table'>
-          <caption>棍:<span class='skill_total'>0</span></caption>
+          <caption>
+            棍:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -485,7 +523,10 @@
           <tr class='staff_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
           <tr class='staff_9'><td class='skill_pt'>100</td><td class='skill_name'>天地のかまえ</td></tr>
         </table><table class='fan skill_table'>
-          <caption>扇:<span class='skill_total'>0</span></caption>
+          <caption>
+            扇:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -503,7 +544,10 @@
           <tr class='fan_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
           <tr class='fan_9'><td class='skill_pt'>100</td><td class='skill_name'>アゲハ乱舞</td></tr>
         </table><table class='fisticuffs skill_table'>
-          <caption>格闘:<span class='skill_total'>0</span></caption>
+          <caption>
+            格闘:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -521,7 +565,10 @@
           <tr class='fisticuffs_8'><td class='skill_pt'>77</td><td class='skill_name'>素手時こうげき力+40</td></tr>
           <tr class='fisticuffs_9'><td class='skill_pt'>100</td><td class='skill_name'>ばくれつけん</td></tr>
         </table><table class='focus skill_table'>
-          <caption>きあい:<span class='skill_total'>0</span></caption>
+          <caption>
+            きあい:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -557,7 +604,10 @@
             </dd>
           </dl>
         </div><table class='knife skill_table'>
-          <caption>短剣:<span class='skill_total'>0</span></caption>
+          <caption>
+            短剣:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -575,7 +625,10 @@
           <tr class='knife_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
           <tr class='knife_9'><td class='skill_pt'>100</td><td class='skill_name'>タナトスハント</td></tr>
         </table><table class='whip skill_table'>
-          <caption>ムチ:<span class='skill_total'>0</span></caption>
+          <caption>
+            ムチ:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -593,7 +646,10 @@
           <tr class='whip_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時効果範囲+2m</td></tr>
           <tr class='whip_9'><td class='skill_pt'>100</td><td class='skill_name'>双竜打ち</td></tr>
         </table><table class='claw skill_table'>
-          <caption>ツメ:<span class='skill_total'>0</span></caption>
+          <caption>
+            ツメ:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -611,7 +667,10 @@
           <tr class='claw_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+5</td></tr>
           <tr class='claw_9'><td class='skill_pt'>100</td><td class='skill_name'>ゴールドフィンガー</td></tr>
         </table><table class='fisticuffs skill_table'>
-          <caption>格闘:<span class='skill_total'>0</span></caption>
+          <caption>
+            格闘:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -629,7 +688,10 @@
           <tr class='fisticuffs_8'><td class='skill_pt'>77</td><td class='skill_name'>素手時こうげき力+40</td></tr>
           <tr class='fisticuffs_9'><td class='skill_pt'>100</td><td class='skill_name'>ばくれつけん</td></tr>
         </table><table class='acquisitiveness skill_table'>
-          <caption>おたから:<span class='skill_total'>0</span></caption>
+          <caption>
+            おたから:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -665,7 +727,10 @@
             </dd>
           </dl>
         </div><table class='fan skill_table'>
-          <caption>扇:<span class='skill_total'>0</span></caption>
+          <caption>
+            扇:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -683,7 +748,10 @@
           <tr class='fan_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
           <tr class='fan_9'><td class='skill_pt'>100</td><td class='skill_name'>アゲハ乱舞</td></tr>
         </table><table class='staff skill_table'>
-          <caption>棍:<span class='skill_total'>0</span></caption>
+          <caption>
+            棍:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -701,7 +769,10 @@
           <tr class='staff_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
           <tr class='staff_9'><td class='skill_pt'>100</td><td class='skill_name'>天地のかまえ</td></tr>
         </table><table class='knife skill_table'>
-          <caption>短剣:<span class='skill_total'>0</span></caption>
+          <caption>
+            短剣:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -719,7 +790,10 @@
           <tr class='knife_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
           <tr class='knife_9'><td class='skill_pt'>100</td><td class='skill_name'>タナトスハント</td></tr>
         </table><table class='shield skill_table'>
-          <caption>盾:<span class='skill_total'>0</span></caption>
+          <caption>
+            盾:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -737,7 +811,10 @@
           <tr class='shield_8'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
           <tr class='shield_9'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
         </table><table class='litheness skill_table'>
-          <caption>きょくげい:<span class='skill_total'>0</span></caption>
+          <caption>
+            きょくげい:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -754,6 +831,129 @@
           <tr class='litheness_7'><td class='skill_pt'>78</td><td class='skill_name'>常時かいふく魔力+10</td></tr>
           <tr class='litheness_8'><td class='skill_pt'>82</td><td class='skill_name'>常時きようさ+20</td></tr>
           <tr class='litheness_9'><td class='skill_pt'>100</td><td class='skill_name'>ハッスルダンス（専）</td></tr>
+        </table></div>
+      <div class='class_group' id='gladiator'>
+        <div class='class_info'>
+          <h2>バトルマスター Lv<span class='lv_h2'>1</span></h2>
+          <dl>
+            <dt class='label_lv'><label for='lv-gladiator'>レベル</label></dt>
+            <dd class='lv_select'>
+              <select id='lv-gladiator' size='1'></select>
+            </dd>
+            <dt>獲得経験値:</dt>
+            <dd class='exp'>0</dd>
+            <dt>スキルポイント:</dt>
+            <dd class='pts'>0 / 0</dd>
+            <dd><label for='training-gladiator'>特訓</label><input class='training_pt' id='training-gladiator'></dd>
+            <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
+            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
+            </dd>
+          </dl>
+        </div><table class='sword skill_table'>
+          <caption>
+            片手剣:
+            <span class='skill_total'>0</span>
+          </caption>
+          <tr>
+            <th class='console' colspan='2'>
+              <input class='ptspinner'>
+              <button class='reset'>リセット</button>
+            </th>
+          </tr>
+          <tr class='sword_0'><td class='skill_pt'>3</td><td class='skill_name'>かえん斬り</td></tr>
+          <tr class='sword_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='sword_2'><td class='skill_pt'>13</td><td class='skill_name'>ドラゴン斬り</td></tr>
+          <tr class='sword_3'><td class='skill_pt'>22</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='sword_4'><td class='skill_pt'>35</td><td class='skill_name'>ミラクルソード</td></tr>
+          <tr class='sword_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='sword_6'><td class='skill_pt'>58</td><td class='skill_name'>はやぶさ斬り</td></tr>
+          <tr class='sword_7'><td class='skill_pt'>76</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+          <tr class='sword_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='sword_9'><td class='skill_pt'>100</td><td class='skill_name'>ギガスラッシュ</td></tr>
+        </table><table class='twohandedsword skill_table'>
+          <caption>
+            両手剣:
+            <span class='skill_total'>0</span>
+          </caption>
+          <tr>
+            <th class='console' colspan='2'>
+              <input class='ptspinner'>
+              <button class='reset'>リセット</button>
+            </th>
+          </tr>
+          <tr class='twohandedsword_0'><td class='skill_pt'>3</td><td class='skill_name'>ブレードガード</td></tr>
+          <tr class='twohandedsword_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='twohandedsword_2'><td class='skill_pt'>13</td><td class='skill_name'>ドラゴンスラッシュ</td></tr>
+          <tr class='twohandedsword_3'><td class='skill_pt'>22</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='twohandedsword_4'><td class='skill_pt'>35</td><td class='skill_name'>ぶんまわし</td></tr>
+          <tr class='twohandedsword_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+          <tr class='twohandedsword_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='twohandedsword_7'><td class='skill_pt'>76</td><td class='skill_name'>フリーズブレード</td></tr>
+          <tr class='twohandedsword_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
+          <tr class='twohandedsword_9'><td class='skill_pt'>100</td><td class='skill_name'>渾身斬り</td></tr>
+        </table><table class='hammer skill_table'>
+          <caption>
+            ハンマー:
+            <span class='skill_total'>0</span>
+          </caption>
+          <tr>
+            <th class='console' colspan='2'>
+              <input class='ptspinner'>
+              <button class='reset'>リセット</button>
+            </th>
+          </tr>
+          <tr class='hammer_0'><td class='skill_pt'>3</td><td class='skill_name'>ウェイトブレイク</td></tr>
+          <tr class='hammer_1'><td class='skill_pt'>7</td><td class='skill_name'>ドラムクラッシュ</td></tr>
+          <tr class='hammer_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='hammer_3'><td class='skill_pt'>22</td><td class='skill_name'>シールドブレイク</td></tr>
+          <tr class='hammer_4'><td class='skill_pt'>35</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='hammer_5'><td class='skill_pt'>42</td><td class='skill_name'>MPブレイク</td></tr>
+          <tr class='hammer_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='hammer_7'><td class='skill_pt'>76</td><td class='skill_name'>キャンセルショット</td></tr>
+          <tr class='hammer_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='hammer_9'><td class='skill_pt'>100</td><td class='skill_name'>ランドインパクト</td></tr>
+        </table><table class='fisticuffs skill_table'>
+          <caption>
+            格闘:
+            <span class='skill_total'>0</span>
+          </caption>
+          <tr>
+            <th class='console' colspan='2'>
+              <input class='ptspinner'>
+              <button class='reset'>リセット</button>
+            </th>
+          </tr>
+          <tr class='fisticuffs_0'><td class='skill_pt'>3</td><td class='skill_name'>素手時こうげき力+10</td></tr>
+          <tr class='fisticuffs_1'><td class='skill_pt'>7</td><td class='skill_name'>石つぶて</td></tr>
+          <tr class='fisticuffs_2'><td class='skill_pt'>12</td><td class='skill_name'>素手時かいしん率+2%</td></tr>
+          <tr class='fisticuffs_3'><td class='skill_pt'>18</td><td class='skill_name'>かまいたち</td></tr>
+          <tr class='fisticuffs_4'><td class='skill_pt'>25</td><td class='skill_name'>素手時こうげき力+20</td></tr>
+          <tr class='fisticuffs_5'><td class='skill_pt'>30</td><td class='skill_name'>せいけん突き</td></tr>
+          <tr class='fisticuffs_6'><td class='skill_pt'>42</td><td class='skill_name'>素手時みかわし率+2%</td></tr>
+          <tr class='fisticuffs_7'><td class='skill_pt'>60</td><td class='skill_name'>ムーンサルト</td></tr>
+          <tr class='fisticuffs_8'><td class='skill_pt'>77</td><td class='skill_name'>素手時こうげき力+40</td></tr>
+          <tr class='fisticuffs_9'><td class='skill_pt'>100</td><td class='skill_name'>ばくれつけん</td></tr>
+        </table><table class='guts skill_table'>
+          <caption>
+            とうこん:
+            <span class='skill_total'>0</span>
+          </caption>
+          <tr>
+            <th class='console' colspan='2'>
+              <input class='ptspinner'>
+              <button class='reset'>リセット</button>
+            </th>
+          </tr>
+          <tr class='guts_0'><td class='skill_pt'>4</td><td class='skill_name'>とうこん討ち（専）</td></tr>
+          <tr class='guts_1'><td class='skill_pt'>10</td><td class='skill_name'>常時きようさ+20</td></tr>
+          <tr class='guts_2'><td class='skill_pt'>16</td><td class='skill_name'>常時ちから+5</td></tr>
+          <tr class='guts_3'><td class='skill_pt'>22</td><td class='skill_name'>すてみ（専）</td></tr>
+          <tr class='guts_4'><td class='skill_pt'>32</td><td class='skill_name'>常時すばやさ+30</td></tr>
+          <tr class='guts_5'><td class='skill_pt'>42</td><td class='skill_name'>もろばぎり（専）</td></tr>
+          <tr class='guts_6'><td class='skill_pt'>55</td><td class='skill_name'>常時ちから+5</td></tr>
+          <tr class='guts_7'><td class='skill_pt'>68</td><td class='skill_name'>無心こうげき（専）</td></tr>
+          <tr class='guts_8'><td class='skill_pt'>82</td><td class='skill_name'>常時ちから+5</td></tr>
+          <tr class='guts_9'><td class='skill_pt'>100</td><td class='skill_name'>天下無双（専）</td></tr>
         </table></div>
       <div class='class_group' id='paladin'>
         <div class='class_info'>
@@ -773,7 +973,10 @@
             </dd>
           </dl>
         </div><table class='hammer skill_table'>
-          <caption>ハンマー:<span class='skill_total'>0</span></caption>
+          <caption>
+            ハンマー:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -791,7 +994,10 @@
           <tr class='hammer_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
           <tr class='hammer_9'><td class='skill_pt'>100</td><td class='skill_name'>ランドインパクト</td></tr>
         </table><table class='spear skill_table'>
-          <caption>ヤリ:<span class='skill_total'>0</span></caption>
+          <caption>
+            ヤリ:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -809,7 +1015,10 @@
           <tr class='spear_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
           <tr class='spear_9'><td class='skill_pt'>100</td><td class='skill_name'>狼牙突き</td></tr>
         </table><table class='stick skill_table'>
-          <caption>スティック:<span class='skill_total'>0</span></caption>
+          <caption>
+            スティック:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -827,7 +1036,10 @@
           <tr class='stick_8'><td class='skill_pt'>84</td><td class='skill_name'>装備時かいふく魔力+30</td></tr>
           <tr class='stick_9'><td class='skill_pt'>100</td><td class='skill_name'>キラキラポーン</td></tr>
         </table><table class='shield skill_table'>
-          <caption>盾:<span class='skill_total'>0</span></caption>
+          <caption>
+            盾:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -845,7 +1057,10 @@
           <tr class='shield_8'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
           <tr class='shield_9'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
         </table><table class='virtue skill_table'>
-          <caption>はくあい:<span class='skill_total'>0</span></caption>
+          <caption>
+            はくあい:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -881,7 +1096,10 @@
             </dd>
           </dl>
         </div><table class='sword skill_table'>
-          <caption>片手剣:<span class='skill_total'>0</span></caption>
+          <caption>
+            片手剣:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -899,7 +1117,10 @@
           <tr class='sword_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
           <tr class='sword_9'><td class='skill_pt'>100</td><td class='skill_name'>ギガスラッシュ</td></tr>
         </table><table class='wand skill_table'>
-          <caption>両手杖:<span class='skill_total'>0</span></caption>
+          <caption>
+            両手杖:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -917,7 +1138,10 @@
           <tr class='wand_8'><td class='skill_pt'>84</td><td class='skill_name'>装備時さいだいMP+100</td></tr>
           <tr class='wand_9'><td class='skill_pt'>100</td><td class='skill_name'>戦闘勝利時MP中回復</td></tr>
         </table><table class='bow skill_table'>
-          <caption>弓:<span class='skill_total'>0</span></caption>
+          <caption>
+            弓:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -935,7 +1159,10 @@
           <tr class='bow_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
           <tr class='bow_9'><td class='skill_pt'>100</td><td class='skill_name'>天使の矢</td></tr>
         </table><table class='shield skill_table'>
-          <caption>盾:<span class='skill_total'>0</span></caption>
+          <caption>
+            盾:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -953,7 +1180,10 @@
           <tr class='shield_8'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
           <tr class='shield_9'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
         </table><table class='fource skill_table'>
-          <caption>フォース:<span class='skill_total'>0</span></caption>
+          <caption>
+            フォース:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -989,7 +1219,10 @@
             </dd>
           </dl>
         </div><table class='bow skill_table'>
-          <caption>弓:<span class='skill_total'>0</span></caption>
+          <caption>
+            弓:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -1007,7 +1240,10 @@
           <tr class='bow_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
           <tr class='bow_9'><td class='skill_pt'>100</td><td class='skill_name'>天使の矢</td></tr>
         </table><table class='boomerang skill_table'>
-          <caption>ブーメラン:<span class='skill_total'>0</span></caption>
+          <caption>
+            ブーメラン:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -1025,7 +1261,10 @@
           <tr class='boomerang_8'><td class='skill_pt'>88</td><td class='skill_name'>バーニングバード</td></tr>
           <tr class='boomerang_9'><td class='skill_pt'>100</td><td class='skill_name'>デュアルカッター</td></tr>
         </table><table class='axe skill_table'>
-          <caption>オノ:<span class='skill_total'>0</span></caption>
+          <caption>
+            オノ:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -1043,7 +1282,10 @@
           <tr class='axe_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
           <tr class='axe_9'><td class='skill_pt'>100</td><td class='skill_name'>オノむそう</td></tr>
         </table><table class='fisticuffs skill_table'>
-          <caption>格闘:<span class='skill_total'>0</span></caption>
+          <caption>
+            格闘:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -1061,7 +1303,10 @@
           <tr class='fisticuffs_8'><td class='skill_pt'>77</td><td class='skill_name'>素手時こうげき力+40</td></tr>
           <tr class='fisticuffs_9'><td class='skill_pt'>100</td><td class='skill_name'>ばくれつけん</td></tr>
         </table><table class='ruggedness skill_table'>
-          <caption>サバイバル:<span class='skill_total'>0</span></caption>
+          <caption>
+            サバイバル:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -1078,6 +1323,129 @@
           <tr class='ruggedness_7'><td class='skill_pt'>78</td><td class='skill_name'>常時かいふく魔力+20</td></tr>
           <tr class='ruggedness_8'><td class='skill_pt'>82</td><td class='skill_name'>常時きようさ+20</td></tr>
           <tr class='ruggedness_9'><td class='skill_pt'>100</td><td class='skill_name'>オオカミアタック（専）</td></tr>
+        </table></div>
+      <div class='class_group' id='sage'>
+        <div class='class_info'>
+          <h2>賢者 Lv<span class='lv_h2'>1</span></h2>
+          <dl>
+            <dt class='label_lv'><label for='lv-sage'>レベル</label></dt>
+            <dd class='lv_select'>
+              <select id='lv-sage' size='1'></select>
+            </dd>
+            <dt>獲得経験値:</dt>
+            <dd class='exp'>0</dd>
+            <dt>スキルポイント:</dt>
+            <dd class='pts'>0 / 0</dd>
+            <dd><label for='training-sage'>特訓</label><input class='training_pt' id='training-sage'></dd>
+            <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
+            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
+            </dd>
+          </dl>
+        </div><table class='wand skill_table'>
+          <caption>
+            両手杖:
+            <span class='skill_total'>0</span>
+          </caption>
+          <tr>
+            <th class='console' colspan='2'>
+              <input class='ptspinner'>
+              <button class='reset'>リセット</button>
+            </th>
+          </tr>
+          <tr class='wand_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時MP吸収率+2%</td></tr>
+          <tr class='wand_1'><td class='skill_pt'>7</td><td class='skill_name'>悪魔ばらい</td></tr>
+          <tr class='wand_2'><td class='skill_pt'>13</td><td class='skill_name'>戦闘勝利時MP小回復</td></tr>
+          <tr class='wand_3'><td class='skill_pt'>21</td><td class='skill_name'>早詠みの杖</td></tr>
+          <tr class='wand_4'><td class='skill_pt'>31</td><td class='skill_name'>装備時こうげき魔力+30</td></tr>
+          <tr class='wand_5'><td class='skill_pt'>44</td><td class='skill_name'>しゅくふくの杖</td></tr>
+          <tr class='wand_6'><td class='skill_pt'>57</td><td class='skill_name'>装備時こうげき魔力+30</td></tr>
+          <tr class='wand_7'><td class='skill_pt'>70</td><td class='skill_name'>暴走魔法陣</td></tr>
+          <tr class='wand_8'><td class='skill_pt'>84</td><td class='skill_name'>装備時さいだいMP+100</td></tr>
+          <tr class='wand_9'><td class='skill_pt'>100</td><td class='skill_name'>戦闘勝利時MP中回復</td></tr>
+        </table><table class='bow skill_table'>
+          <caption>
+            弓:
+            <span class='skill_total'>0</span>
+          </caption>
+          <tr>
+            <th class='console' colspan='2'>
+              <input class='ptspinner'>
+              <button class='reset'>リセット</button>
+            </th>
+          </tr>
+          <tr class='bow_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='bow_1'><td class='skill_pt'>7</td><td class='skill_name'>マジックアロー</td></tr>
+          <tr class='bow_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時射程距離+2m</td></tr>
+          <tr class='bow_3'><td class='skill_pt'>22</td><td class='skill_name'>バードシュート</td></tr>
+          <tr class='bow_4'><td class='skill_pt'>35</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='bow_5'><td class='skill_pt'>42</td><td class='skill_name'>サンダーボルト</td></tr>
+          <tr class='bow_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時射程距離+2m</td></tr>
+          <tr class='bow_7'><td class='skill_pt'>76</td><td class='skill_name'>さみだれうち</td></tr>
+          <tr class='bow_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='bow_9'><td class='skill_pt'>100</td><td class='skill_name'>天使の矢</td></tr>
+        </table><table class='boomerang skill_table'>
+          <caption>
+            ブーメラン:
+            <span class='skill_total'>0</span>
+          </caption>
+          <tr>
+            <th class='console' colspan='2'>
+              <input class='ptspinner'>
+              <button class='reset'>リセット</button>
+            </th>
+          </tr>
+          <tr class='boomerang_0'><td class='skill_pt'>3</td><td class='skill_name'>スライムブロウ</td></tr>
+          <tr class='boomerang_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='boomerang_2'><td class='skill_pt'>13</td><td class='skill_name'>メタルウィング</td></tr>
+          <tr class='boomerang_3'><td class='skill_pt'>22</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='boomerang_4'><td class='skill_pt'>35</td><td class='skill_name'>パワフルスロー</td></tr>
+          <tr class='boomerang_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時命中+20%</td></tr>
+          <tr class='boomerang_6'><td class='skill_pt'>58</td><td class='skill_name'>シャインスコール</td></tr>
+          <tr class='boomerang_7'><td class='skill_pt'>76</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='boomerang_8'><td class='skill_pt'>88</td><td class='skill_name'>バーニングバード</td></tr>
+          <tr class='boomerang_9'><td class='skill_pt'>100</td><td class='skill_name'>デュアルカッター</td></tr>
+        </table><table class='shield skill_table'>
+          <caption>
+            盾:
+            <span class='skill_total'>0</span>
+          </caption>
+          <tr>
+            <th class='console' colspan='2'>
+              <input class='ptspinner'>
+              <button class='reset'>リセット</button>
+            </th>
+          </tr>
+          <tr class='shield_0'><td class='skill_pt'>6</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_1'><td class='skill_pt'>12</td><td class='skill_name'>ぼうぎょ</td></tr>
+          <tr class='shield_2'><td class='skill_pt'>18</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_3'><td class='skill_pt'>25</td><td class='skill_name'>ビッグシールド</td></tr>
+          <tr class='shield_4'><td class='skill_pt'>32</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_5'><td class='skill_pt'>40</td><td class='skill_name'>シールドアタック</td></tr>
+          <tr class='shield_6'><td class='skill_pt'>52</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+          <tr class='shield_7'><td class='skill_pt'>66</td><td class='skill_name'>まもりのたて</td></tr>
+          <tr class='shield_8'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
+          <tr class='shield_9'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
+        </table><table class='enlightenment skill_table'>
+          <caption>
+            さとり:
+            <span class='skill_total'>0</span>
+          </caption>
+          <tr>
+            <th class='console' colspan='2'>
+              <input class='ptspinner'>
+              <button class='reset'>リセット</button>
+            </th>
+          </tr>
+          <tr class='enlightenment_0'><td class='skill_pt'>4</td><td class='skill_name'>いやしの雨（専）</td></tr>
+          <tr class='enlightenment_1'><td class='skill_pt'>10</td><td class='skill_name'>常時かいふく魔力+10</td></tr>
+          <tr class='enlightenment_2'><td class='skill_pt'>16</td><td class='skill_name'>常時こうげき魔力+10</td></tr>
+          <tr class='enlightenment_3'><td class='skill_pt'>22</td><td class='skill_name'>まどうのしょ（専）</td></tr>
+          <tr class='enlightenment_4'><td class='skill_pt'>32</td><td class='skill_name'>常時さいだいMP+10</td></tr>
+          <tr class='enlightenment_5'><td class='skill_pt'>42</td><td class='skill_name'>常時かいふく魔力+10</td></tr>
+          <tr class='enlightenment_6'><td class='skill_pt'>55</td><td class='skill_name'>しんぴのさとり</td></tr>
+          <tr class='enlightenment_7'><td class='skill_pt'>68</td><td class='skill_name'>常時こうげき魔力+10</td></tr>
+          <tr class='enlightenment_8'><td class='skill_pt'>82</td><td class='skill_name'>常時さいだいMP+20</td></tr>
+          <tr class='enlightenment_9'><td class='skill_pt'>100</td><td class='skill_name'>零の洗礼（専）</td></tr>
         </table></div>
       <div class='class_group' id='luminary'>
         <div class='class_info'>
@@ -1097,7 +1465,10 @@
             </dd>
           </dl>
         </div><table class='whip skill_table'>
-          <caption>ムチ:<span class='skill_total'>0</span></caption>
+          <caption>
+            ムチ:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -1115,7 +1486,10 @@
           <tr class='whip_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時効果範囲+2m</td></tr>
           <tr class='whip_9'><td class='skill_pt'>100</td><td class='skill_name'>双竜打ち</td></tr>
         </table><table class='fan skill_table'>
-          <caption>扇:<span class='skill_total'>0</span></caption>
+          <caption>
+            扇:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -1133,7 +1507,10 @@
           <tr class='fan_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
           <tr class='fan_9'><td class='skill_pt'>100</td><td class='skill_name'>アゲハ乱舞</td></tr>
         </table><table class='stick skill_table'>
-          <caption>スティック:<span class='skill_total'>0</span></caption>
+          <caption>
+            スティック:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -1151,7 +1528,10 @@
           <tr class='stick_8'><td class='skill_pt'>84</td><td class='skill_name'>装備時かいふく魔力+30</td></tr>
           <tr class='stick_9'><td class='skill_pt'>100</td><td class='skill_name'>キラキラポーン</td></tr>
         </table><table class='fisticuffs skill_table'>
-          <caption>格闘:<span class='skill_total'>0</span></caption>
+          <caption>
+            格闘:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -1169,7 +1549,10 @@
           <tr class='fisticuffs_8'><td class='skill_pt'>77</td><td class='skill_name'>素手時こうげき力+40</td></tr>
           <tr class='fisticuffs_9'><td class='skill_pt'>100</td><td class='skill_name'>ばくれつけん</td></tr>
         </table><table class='jenesaisquoi skill_table'>
-          <caption>オーラ:<span class='skill_total'>0</span></caption>
+          <caption>
+            オーラ:
+            <span class='skill_total'>0</span>
+          </caption>
           <tr>
             <th class='console' colspan='2'>
               <input class='ptspinner'>
@@ -1197,17 +1580,19 @@
             <ul>
               <li>プルダウンで職業レベルを選択。括弧内はそのレベルの累計スキルポイント。</li>
               <li>スキルポイントはスキル一覧の項目をクリックすると必要なポイントが自動入力されます。上下ボタン・キーボードの上下キーで1ずつ調整、PageUp/PageDownキーで10ずつ上下します。数値の直接入力も可能。</li>
+              <li>スキルポイント欄右のリセットボタンをクリックするとポイントを0にします。ダブルクリックすると複数の職で振ったそのスキルのポイントをすべて0にします。</li>
               <li>「保存用URL」欄に表示されるURLは、アクセスすることで現在の状態を再現できます。メモ用・掲示板に貼る用などにどうぞ。</li>
               <li>レベル欄あたりにカーソルを持っていくと「おりたたむ」ボタンが出てきて、クリックすると簡易表示になります。そのまま操作も可能。「すべてたたむ」でレベル・スキルを一覧するのがおすすめです。</li>
               <li>タイトル下の職業ごとのボタンをクリックすると、その職業の位置にスクロールします。折りたたまれていた場合は展開されます。</li>
-              <li>武器スキルのボタンをクリックすると、その武器スキルを持つ職業が展開され、それ以外がすべて折りたたまれます。特定の武器スキルについて振り分けを検討するのにご利用ください。</li>
               <li>特訓モードのスキルポイントを1以上にした場合、最低でもレベル50必要なものとして計算します。</li>
             </ul>
           </li>
           <li>
             履歴:
             <ul>
-              <li>2014/2/14 v3.0.1 Chrome以外で自動スクロールしないバグの修正</li>
+              <li>2013/2/27 v3.1beta2 ページ上部のレイアウト見直し、すべて振りなおす機能追加、武器スキルの展開/折りたたみボタン廃止</li>
+              <li>2013/2/20 v3.1beta1 1.3の新職業・レベル上限を暫定追加、展開/折りたたみの微調整</li>
+              <li>2013/2/14 v3.0.1 Chrome以外で自動スクロールしないバグの修正</li>
               <li>2013/2/13 v3.0 職業・スキルの展開/折りたたみボタンを追加、ヘッダのレイアウト変更。</li>
               <li>2013/1/21 v2.2 スーパースターのスキル詳細追加、消費ゴールドの表示</li>
               <li>2013/1/8 v2.1.1 最大値を超えるポイントを入力したときエラー表示にならないバグ修正</li>
@@ -1249,7 +1634,7 @@
               <li><del>設定値の再現URLを生成・読込</del>(v0.5)</li>
             </ul>
           </li>
-          <li>ご意見・ご要望は下記まで。</li>
+          <li>ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。</li>
         </ul>
         <address><p class='contact'>連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a></p></address>
       </div>
@@ -1257,8 +1642,8 @@
     <div id='ad_sidebar'>
       <h2>DQ10ツールリンク</h2>
       <ul>
-        <li><a href='http://dqx.herokuapp.com/' target='_blank'>DQXレシピ君</a></li>
         <li><a href='http://dqx-bazaar.herokuapp.com/' target='_blank'>ドラクエ10アイテム価格調査隊</a></li>
+        <li><a href='http://www.d-quest-10.com/' target='_blank'>ドラクエ10・モンスター完全図鑑</a></li>
         <li><a href='http://www4.atpages.jp/studiogobli/php/dqxm/' target='_blank'>DQ10 ソロ用</a></li>
       </ul>
       <div class='amazonitem'>

@@ -6,7 +6,7 @@ var Simulator = (function($) {
 	var SKILL_PTS_MIN = 0;
 	var SKILL_PTS_MAX = 100;
 	var LEVEL_MIN = 1;
-	var LEVEL_MAX = 60;
+	var LEVEL_MAX = 65;
 	var TRAINING_SKILL_PTS_MIN = 0;
 	var TRAINING_SKILL_PTS_MAX = 4;
 	var LEVEL_FOR_TRAINING_MODE = 50;
@@ -114,6 +114,14 @@ var Simulator = (function($) {
 		return total;
 	}
 	
+	//特定スキルすべてを振り直し（0にセット）
+	function clearPtsOfSameSkills(skill) {
+		for(var vocation in skillPts) {
+			if(skillPts[vocation][skill])
+				updateSkillPt(vocation, skill, 0);
+		}
+	}
+	
 	//職業レベルに対するスキルポイント最大値
 	function maxSkillPts(vocation) {
 		return skillPtsGiven[levels[vocation]];
@@ -206,6 +214,7 @@ var Simulator = (function($) {
 		updateTrainingSkillPt : updateTrainingSkillPt,
 		totalSkillPts: totalSkillPts,
 		totalOfSameSkills: totalOfSameSkills,
+		clearPtsOfSameSkills: clearPtsOfSameSkills,
 		maxSkillPts: maxSkillPts,
 		requiredLevel: requiredLevel,
 		requiredExp: requiredExp,
@@ -337,7 +346,7 @@ var SimulatorUI = (function($) {
 		$('#url_text').val(url);
 		
 		var params = {
-			text: 'DQ10 現在のスキル構成:',
+			text: 'DQ10 スキル構成（予想）:',
 			hashtags: 'DQ10, DQX, dq10_skillsim',
 			url: url,
 			original_referer: window.location.href,
@@ -478,6 +487,21 @@ var SimulatorUI = (function($) {
 				refreshTotalExpRemain();
 				refreshTotalPassive();
 				refreshSaveUrl();
+			}).dblclick(function (e) {
+				//ダブルクリック時に各職業の該当スキルをすべて振り直し
+				var skillCategory = $(this).parents('.skill_table').attr('class').split(' ')[0];
+				var skillName = sim.skillCategories[skillCategory].name;
+				
+				if(!window.confirm('スキル「' + skillName + '」をすべて振りなおします。'))
+					return;
+				
+				sim.clearPtsOfSameSkills(skillCategory);
+				$('.' + skillCategory + ' .ptspinner').spinner('value', 0);
+				refreshSkillList(skillCategory);
+				refreshAllVocationInfo();
+				refreshTotalExpRemain();
+				refreshTotalPassive();
+				refreshSaveUrl();
 			});
 		},
 		
@@ -569,7 +593,7 @@ var SimulatorUI = (function($) {
 				$(this).hide();
 			});
 			var $unfoldButton = $('<p>▼ひろげる</p>').addClass('unfold').hide().click(function() {
-				$(this).parents('.class_group').animate({height: HEIGHT_UNFOLDED}, 0).addClass('unfolded').removeClass('folded');
+				$(this).parents('.class_group').animate({height: HEIGHT_UNFOLDED}).addClass('unfolded').removeClass('folded');
 				$(this).hide();
 			});
 			$('.class_info').append($foldButton).append($unfoldButton);
@@ -602,9 +626,8 @@ var SimulatorUI = (function($) {
 			//特定職業のみひろげるボタン追加
 			$('#foldbuttons-vocation a').click(function(e) {
 				var vocation = $(this).attr('id').replace('fold-', '');
-				$('#' + vocation + ' .unfold').click();
-				
 				$('body, html').animate({scrollTop: $('#' + vocation).offset().top - bodyTop});
+				$('#' + vocation + ' .unfold').click();
 			});
 			//特定スキルを持つ職業のみひろげるボタン追加
 			$('#foldbuttons-skillCategory a').click(function(e) {
@@ -626,10 +649,9 @@ var SimulatorUI = (function($) {
 					$unfolded = $unfolded.add('#' + vocation + ' .unfold');
 				}
 				
-				$unfolded.click();
 				$folded.click();
-				
 				$('body, html').animate({scrollTop: $('#' + vocationsHaveSkill[0]).offset().top - bodyTop});
+				$unfolded.click();
 			});
 		}
 	];
@@ -659,11 +681,9 @@ var Base64Param = (function($) {
 		'ranger',        //レンジャー
 		'paladin',       //パラディン
 		'armamentalist', //魔法戦士
-		'luminary'       //スーパースター
-		/* ,
+		'luminary',      //スーパースター
 		'gladiator',     //バトルマスター
-		'sage',          //賢者
-		*/
+		'sage'           //賢者
 	];
 	
 	var EN_CHAR = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
@@ -710,7 +730,7 @@ var Base64Param = (function($) {
 			BITS_LEVEL + 
 			BITS_TRAINING + 
 			BITS_SKILL * sim.vocations[VOCATIONS_DATA_ORDER[0]].skills.length
-		) * VOCATIONS_DATA_ORDER.length;
+		) * 10 //1.3VU時点の職業数
 		
 		var paramArray = [];
 		var i = 0;
@@ -790,18 +810,18 @@ jQuery(function($) {
 	
 	$('#tw-share').socialbutton('twitter', {
 		button: 'horizontal',
-		url: 'http://cpro.jp/dq10/skillsimulator/',
+		url: 'http://cpro.jp/dq10/skillsimulator/beta/',
 		lang: 'ja',
 		hashtags: 'DQ10, DQX, dq10_skillsim'
 	});
 	$('#fb-like').socialbutton('facebook_like', {
 		button: 'button_count',
-		url: 'http://cpro.jp/dq10/skillsimulator/',
+		url: 'http://cpro.jp/dq10/skillsimulator/beta/',
 		locale: 'ja_JP'
 	});
 	$('#g-plusone').socialbutton('google_plusone', {
 		lang: 'ja',
 		size: 'medium',
-		url: 'http://cpro.jp/dq10/skillsimulator/'
+		url: 'http://cpro.jp/dq10/skillsimulator/beta/'
 	});
 });

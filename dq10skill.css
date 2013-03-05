@@ -4,12 +4,14 @@ body {
   color: #404044;
   font-family: "メイリオ", sans-serif;
   font-size: 100%;
-  padding: 100px 0 0 0; }
+  padding: 95px 0 0 0; }
 
 a {
   text-decoration: none; }
-  a :hover {
+  a:hover {
     text-decoration: underline; }
+  a img {
+    border-style: none; }
 
 .error {
   color: red; }
@@ -18,7 +20,7 @@ a {
 #header {
   background-color: #fcfcfd;
   width: 100%;
-  height: 95px;
+  height: 90px;
   position: fixed;
   top: 0;
   left: 0;
@@ -27,33 +29,18 @@ a {
   #header #titleblock {
     height: 25px;
     width: auto;
-    margin: 15px 0 10px 0;
-    padding: 0 10px;
-    /* ヘッダ部 SNSボタン各種 */ }
+    margin: 15px 0 7px 0;
+    padding: 0 10px; }
     #header #titleblock h1 {
       font-size: 18px;
       margin: 0 10px 0 0;
       height: 25px;
       float: left; }
-    #header #titleblock #snsbuttons {
-      padding: 2px 0;
-      height: 21px;
-      float: left; }
-      #header #titleblock #snsbuttons .snsbutton {
-        display: inline-block;
-        position: relative;
-        height: 21px;
-        overflow: hidden; }
-        #header #titleblock #snsbuttons .snsbutton#tw-share {
-          width: 100px; }
-        #header #titleblock #snsbuttons .snsbutton#g-plusone {
-          width: 65px; }
-        #header #titleblock #snsbuttons .snsbutton#fb-like {
-          width: 105px; }
     #header #titleblock #save_url {
       padding: 2px 0;
       height: 21px;
       text-align: right;
+      white-space: nowrap;
       font-size: 12px; }
       #header #titleblock #save_url #tw-saveurl {
         font-size: 11px;
@@ -63,19 +50,23 @@ a {
           padding: 0.2em 0.5em; }
   #header #consoleblock {
     width: auto;
-    height: 40px;
-    padding: 0 10px;
+    height: 39px;
+    padding: 0;
     position: relative;
-    /* 合計表示欄 */ }
+    white-space: nowrap;
+    /* 合計表示欄 */
+    /* ヘッダ部 SNSボタン各種 */ }
     #header #consoleblock #foldbuttons {
       font-size: 11px;
-      float: left; }
+      position: absolute;
+      top: 0;
+      left: 10px;
+      z-index: 102; }
       #header #consoleblock #foldbuttons ul.button-container {
         display: inline-block;
         list-style-type: none;
         margin: 0;
-        padding: 0;
-        letter-spacing: -.40em; }
+        padding: 0; }
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-all {
           width: 99px; }
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-vocation {
@@ -83,12 +74,11 @@ a {
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-skillCategory {
           width: 264px; }
         #header #consoleblock #foldbuttons ul.button-container li {
-          display: inline-block;
-          letter-spacing: normal;
+          float: left;
           height: 16px;
           overflow: hidden;
           white-space: nowrap;
-          margin: 0 1px 1px 0;
+          margin: 0 1px 3px 0;
           border: 1px solid #aaaabb;
           background-color: #f0f0f7; }
           #header #consoleblock #foldbuttons ul.button-container li:hover {
@@ -112,22 +102,52 @@ a {
     #header #consoleblock table#total {
       margin: 0;
       border-collapse: collapse;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-left: 1px solid #aaaabb;
+      border-top: 1px solid #aaaabb;
+      background-color: #fcfcfd;
       position: absolute;
-      bottom: 0;
-      right: 10px; }
+      top: 0;
+      left: 314px;
+      z-index: 102; }
       #header #consoleblock table#total td, #header #consoleblock table#total th {
-        padding: 0;
         margin: 0;
         white-space: nowrap;
-        vertical-align: middle;
+        vertical-align: bottom;
         height: 16px;
         text-align: right;
-        padding-right: 5px; }
+        border-bottom: 1px solid #aaaabb; }
       #header #consoleblock table#total th {
-        font-size: 12px;
-        font-weight: normal; }
+        font-size: 11px;
+        font-weight: normal;
+        padding: 0 0 0 3px; }
       #header #consoleblock table#total td.total_pts {
-        font-size: 14px; }
+        padding: 0 4px 0 3px;
+        font-size: 12px;
+        width: 22px;
+        border-right: 1px solid #aaaabb; }
+        #header #consoleblock table#total td.total_pts#total_exp, #header #consoleblock table#total td.total_pts#total_exp_remain {
+          width: 64px; }
+    #header #consoleblock #snsbuttons {
+      padding: 2px 0;
+      height: 21px;
+      position: absolute;
+      bottom: 0;
+      right: 10px;
+      z-index: 101; }
+      #header #consoleblock #snsbuttons .snsbutton {
+        display: inline-block;
+        position: relative;
+        height: 21px;
+        overflow: hidden;
+        vertical-align: top; }
+        #header #consoleblock #snsbuttons .snsbutton#tw-share {
+          width: 100px; }
+        #header #consoleblock #snsbuttons .snsbutton#g-plusone {
+          width: 65px; }
+        #header #consoleblock #snsbuttons .snsbutton#fb-like {
+          width: 105px; }
 
 /* 職業ボックス */
 .class_group {
@@ -244,7 +264,7 @@ span.fold, span.unfold {
 #ad_sidebar {
   position: absolute;
   left: 67em;
-  top: 100px;
+  top: 95px;
   z-index: 1; }
   #ad_sidebar ul {
     font-size: 80%;
