@@ -1,24 +1,24 @@
-- VERSION = '3.0.1'
+- VERSION = '3.1'
 !!! 5
 %html
 	%head
-		%meta{:charset => 'UTF-8'}/
-		%meta{'http-equiv' => 'Content-Style-Type', :content => 'text/css'}/
-		%meta{'http-equiv' => 'Content-Script-Type', :content => 'text/javascript'}/
+		%meta{charset: 'UTF-8'}/
+		%meta{'http-equiv' => 'Content-Style-Type', content: 'text/css'}/
+		%meta{'http-equiv' => 'Content-Script-Type', content: 'text/javascript'}/
 		- @home_uri = 'http://cpro.jp/dq10/skillsimulator/'
-		%link{:rel => 'canonical', :href => @home_uri}/
-		%meta{:name => 'description', :content => 'ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。'}/
+		%link{rel: 'canonical', href: @home_uri}/
+		%meta{name: 'description', content: 'ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。'}/
 		
 		- @title = 'DQ10 スキルシミュレータ'
 		%title= @title
 		
-		%link{:rel => 'stylesheet', :type => 'text/css', :href => "./dq10skill.css?ver=#{VERSION}"}/
-		%link{:rel => 'stylesheet', :type => 'text/css', :href => 'css/smoothness/jquery-ui-1.9.1.custom.min.css'}/
+		%link{rel: 'stylesheet', type: 'text/css', href: "./dq10skill.css?ver=#{VERSION}"}/
+		%link{rel: 'stylesheet', type: 'text/css', href: 'css/smoothness/jquery-ui-1.9.1.custom.min.css'}/
 		
-		%script{:type => 'text/javascript', :src => 'js/jquery-1.8.2.js'}
-		%script{:type => 'text/javascript', :src => 'js/jquery.socialbutton-1.9.0.js'}
-		%script{:type => 'text/javascript', :src => 'js/jquery-ui-1.9.1.custom.min.js'}
-		%script{:type => 'text/javascript', :src => "./dq10skill.js?ver=#{VERSION}"}
+		%script{type: 'text/javascript', src: 'js/jquery-1.8.2.js'}
+		%script{type: 'text/javascript', src: 'js/jquery.socialbutton-1.9.0.js'}
+		%script{type: 'text/javascript', src: 'js/jquery-ui-1.9.1.custom.min.js'}
+		%script{type: 'text/javascript', src: "./dq10skill.js?ver=#{VERSION}"}
 		:javascript
 			var _gaq = _gaq || [];
 			_gaq.push(['_setAccount', 'UA-5127088-4']);
@@ -32,14 +32,10 @@
 		#header
 			#titleblock
 				%h1<
-					%a{:href => @home_uri}= @title
-				#snsbuttons
-					.snsbutton#tw-share
-					.snsbutton#fb-like
-					.snsbutton#g-plusone
+					%a{href: @home_uri}= @title
 				#save_url
 					保存用URL:
-					%input#url_text.ui-widget-content.ui-corner-all{:type => 'text', :size => 60}>/
+					%input#url_text.ui-widget-content.ui-corner-all{type: 'text', size: 45}>/
 					%a#tw-saveurl{title: '保存用URLをツイートする'} ツイート
 			#consoleblock
 				#foldbuttons
@@ -52,42 +48,40 @@
 						- data['vocationOrder'].each do |vocation|
 							%li.button-each.ui-corner-all<
 								%a{id: "fold-#{vocation}"} #{data['vocations'][vocation]['abbr']}
-					%ul.button-container#foldbuttons-skillCategory
-						- data['skillCategoryOrder'].each do |skillCategory|
-							%li.button-each.ui-corner-all<
-								%a{id: "fold-#{skillCategory}"} #{data['skillCategories'][skillCategory]['abbr']}
-				%table#total
+				%table#total.ui-corner-all
 					%tr
-						%th 獲得経験値合計:
+						%th.ui-corner-tl 総獲得経験値:
 						%td.total_pts#total_exp 0
-						%th さいだいHP:
+						%th 最大HP:
 						%td.total_pts#total_maxhp 0
-						%th ちから:
+						%th 力:
 						%td.total_pts#total_pow 0
-						%th きようさ:
+						%th 器用:
 						%td.total_pts#total_dex 0
-						%th こうげき魔力:
+						%th 攻魔:
 						%td.total_pts#total_magic 0
-						%th みりょく:
-						%td.total_pts#total_charm 0
+						%th 魅力:
+						%td.total_pts#total_charm.ui-corner-tr 0
 					%tr
-						%th 不足経験値合計:
+						%th.ui-corner-bl 総不足経験値:
 						%td.total_pts#total_exp_remain 0
-						%th さいだいMP:
+						%th 最大MP:
 						%td.total_pts#total_maxmp 0
-						%th みのまもり:
+						%th 身守:
 						%td.total_pts#total_def 0
-						%th すばやさ:
+						%th 素早:
 						%td.total_pts#total_spd 0
-						%th かいふく魔力:
+						%th 回魔:
 						%td.total_pts#total_heal 0
 						%th
-						%td.total_pts
+						%td.total_pts.ui-corner-br
+				#snsbuttons
+					.snsbutton#tw-share
+					.snsbutton#fb-like
+					.snsbutton#g-plusone
 		#body_content
-			-# %ul#beta_notice{:style => 'font-size:90%'}
-			-# 	%li<
 			- data['vocationOrder'].each do |vocation|
-				%div.class_group{:id => vocation}
+				%div.class_group{id: vocation}
 					.class_info
 						%h2<
 							= data['vocations'][vocation]['name'] + ' Lv '
@@ -104,25 +98,25 @@
 							%dd<
 								%label{for: "training-#{vocation}"}> 特訓
 								%input.training_pt{id: "training-#{vocation}"}>
-							%dt.error{:style => 'display:none'}<
+							%dt.error{style: 'display:none'}<
 								必要レベル:
 								%span.req_lv>< 1
-							%dd.error{:style => 'display:none'}
+							%dd.error{style: 'display:none'}
 								= '（あと '
 								%span.exp_remain> 0
 								= ' exp）'
 					- data['vocations'][vocation]['skills'].each do |skillCategory|
 						- cat = data['skillCategories'][skillCategory]
-						%table{:class => [skillCategory, 'skill_table']}>
-							%caption<
+						%table{class: [skillCategory, 'skill_table']}>
+							%caption
 								= cat['name'] + ': '
-								%span.skill_total> 0
+								%span.skill_total 0
 							%tr
-								%th.console{:colspan => 2}
+								%th.console{colspan: 2}
 									%input.ptspinner
 									%button.reset リセット
 							- cat['skills'].each_with_index do |skill, i|
-								%tr{:class => [skillCategory, i].join('_')}<
+								%tr{class: [skillCategory, i].join('_')}<
 									%td.skill_pt>= skill['pt']
 									-# - hint = skill['desc'] + (skill['mp'] ? "\n（消費MP: #{skill['mp']}）" : '')
 									%td.skill_name= skill['name']
@@ -130,21 +124,29 @@
 				%ul
 					%li スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』のスキルポイント割り振りを検討するためのシミュレータです。
 					%li 要JavaScript。Google Chrome, Firefox, IE8以上で動作確認。IE対応は後回しになりがちです。
-					%li 追加職Lv57-60の必要経験値は、今のところ初期職の実測値に1.333をかけた推測値です。1-2程度の誤差が見込まれます。
+					%li Lv61-65の獲得スキルポイントは、<a href="http://twitter.com/ren_210/status/308863069671526401" target="_blank">ツイッターでの報告</a>をもとにした未検証のものです。
+					-# %li 追加職Lv57-60の必要経験値は、今のところ初期職の実測値に1.333をかけた推測値です。1-2程度の誤差が見込まれます。
 					%li
 						使い方:
 						%ul
 							%li プルダウンで職業レベルを選択。括弧内はそのレベルの累計スキルポイント。
 							%li スキルポイントはスキル一覧の項目をクリックすると必要なポイントが自動入力されます。上下ボタン・キーボードの上下キーで1ずつ調整、PageUp/PageDownキーで10ずつ上下します。数値の直接入力も可能。
+							%li スキルポイント欄右のリセットボタンをクリックするとポイントを0にします。ダブルクリックすると複数の職で振ったそのスキルのポイントをすべて0にします。
 							%li 「保存用URL」欄に表示されるURLは、アクセスすることで現在の状態を再現できます。メモ用・掲示板に貼る用などにどうぞ。
 							%li レベル欄あたりにカーソルを持っていくと「おりたたむ」ボタンが出てきて、クリックすると簡易表示になります。そのまま操作も可能。「すべてたたむ」でレベル・スキルを一覧するのがおすすめです。
 							%li タイトル下の職業ごとのボタンをクリックすると、その職業の位置にスクロールします。折りたたまれていた場合は展開されます。
-							%li 武器スキルのボタンをクリックすると、その武器スキルを持つ職業が展開され、それ以外がすべて折りたたまれます。特定の武器スキルについて振り分けを検討するのにご利用ください。
 							%li 特訓モードのスキルポイントを1以上にした場合、最低でもレベル50必要なものとして計算します。
 					%li
 						履歴:
 						%ul
-							%li 2014/2/14 v3.0.1 Chrome以外で自動スクロールしないバグの修正
+							%li
+								2013/3/5 v3.1 大型バージョンアップ (1.3) に対応、およびインタフェースの改善。
+								%ul
+									%li 新職業追加、レベルキャップ60→65。
+									%li スキル単位の振り直し機能追加。リセットボタンをダブルクリックするとそのスキルをすべての職で0に。
+									%li 武器スキルの展開/折りたたみボタン廃止。
+									%li ページ上部のレイアウト変更。横に狭い解像度でも操作不能にならないよう調整。
+							%li 2013/2/14 v3.0.1 Chrome以外で自動スクロールしないバグの修正
 							%li 2013/2/13 v3.0 職業・スキルの展開/折りたたみボタンを追加、ヘッダのレイアウト変更。
 							%li 2013/1/21 v2.2 スーパースターのスキル詳細追加、消費ゴールドの表示
 							%li 2013/1/8 v2.1.1 最大値を超えるポイントを入力したときエラー表示にならないバグ修正
@@ -174,24 +176,20 @@
 					%li
 						ToDo:
 						%ul
-							%li <del>Lv57-60の必要経験値入力</del>(v2.0.1)
-							%li <del>魔法戦士・スーパースターのスキル詳細入力</del>(v2.0.1/v2.2)
-							%li <del>スキル一覧ポイント時にスキル詳細をヒント表示する</del>(v1.1)
-							%li <del>スキル一覧クリックでスキルポイントを自動設定する</del>(v0.2)
-							%li <del>パッシブ合計を表示する</del>(v0.5)
-							%li <del>設定値の再現URLを生成・読込</del>(v0.5)
-					%li ご意見・ご要望は下記まで。
+							%li Lv61-65の必要経験値入力
+							%li バトルマスター・賢者のスキル詳細入力
+					%li ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。
 				%address<
 					%p.contact 連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a>
 		#ad_sidebar
 			%h2 DQ10ツールリンク
 			%ul
 				%li<
-					%a{:href => 'http://dqx.herokuapp.com/', :target => '_blank'} DQXレシピ君
+					%a{href: 'http://dqx-bazaar.herokuapp.com/', target: '_blank'} ドラクエ10アイテム価格調査隊
 				%li<
-					%a{:href => 'http://dqx-bazaar.herokuapp.com/', :target => '_blank'} ドラクエ10アイテム価格調査隊
+					%a{href: 'http://www.d-quest-10.com/', target: '_blank'} ドラクエ10・モンスター完全図鑑
 				%li<
-					%a{:href => 'http://www4.atpages.jp/studiogobli/php/dqxm/', :target => '_blank'} DQ10 ソロ用
+					%a{href: 'http://www4.atpages.jp/studiogobli/php/dqxm/', target: '_blank'} DQ10 ソロ用
 			- item_list.each do |item|
 				.amazonitem
 					%a{href: item[:item_url], target: '_blank'}<
