@@ -346,7 +346,7 @@ var SimulatorUI = (function($) {
 		$('#url_text').val(url);
 		
 		var params = {
-			text: 'DQ10 スキル構成（予想）:',
+			text: 'DQ10 現在のスキル構成:',
 			hashtags: 'DQ10, DQX, dq10_skillsim',
 			url: url,
 			original_referer: window.location.href,
@@ -810,18 +810,18 @@ jQuery(function($) {
 	
 	$('#tw-share').socialbutton('twitter', {
 		button: 'horizontal',
-		url: 'http://cpro.jp/dq10/skillsimulator/beta/',
+		url: 'http://cpro.jp/dq10/skillsimulator/',
 		lang: 'ja',
 		hashtags: 'DQ10, DQX, dq10_skillsim'
 	});
 	$('#fb-like').socialbutton('facebook_like', {
 		button: 'button_count',
-		url: 'http://cpro.jp/dq10/skillsimulator/beta/',
+		url: 'http://cpro.jp/dq10/skillsimulator/',
 		locale: 'ja_JP'
 	});
 	$('#g-plusone').socialbutton('google_plusone', {
 		lang: 'ja',
 		size: 'medium',
-		url: 'http://cpro.jp/dq10/skillsimulator/beta/'
+		url: 'http://cpro.jp/dq10/skillsimulator/'
 	});
 });
