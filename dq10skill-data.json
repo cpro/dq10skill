@@ -557,13 +557,13 @@
 		"gladiator": {
 			"name": "バトルマスター",
 			"abbr": "バト",
-			"skills": ["sword", "twohandedsword", "hammer", "fisticuffs", "guts"],
+			"skills": ["twohandedsword", "sword", "hammer", "fisticuffs", "guts"],
 			"expTable": 2
 		},
 		"sage": {
 			"name": "賢者",
 			"abbr": "賢者",
-			"skills": ["wand", "bow", "boomerang", "shield", "enlightenment"],
+			"skills": ["boomerang", "wand", "bow", "shield", "enlightenment"],
 			"expTable": 2
 		}
 	},
