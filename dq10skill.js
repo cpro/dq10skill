@@ -8,7 +8,7 @@ var Simulator = (function($) {
 	var LEVEL_MIN = 1;
 	var LEVEL_MAX = 65;
 	var TRAINING_SKILL_PTS_MIN = 0;
-	var TRAINING_SKILL_PTS_MAX = 4;
+	var TRAINING_SKILL_PTS_MAX = 5;
 	var LEVEL_FOR_TRAINING_MODE = 50;
 	
 	var DATA_JSON_URI = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'dq10skill-data.json';
