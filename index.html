@@ -7,12 +7,12 @@
     <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
     <title>DQ10 スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=3.1' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=3.2' rel='stylesheet' type='text/css'>
     <link href='css/smoothness/jquery-ui-1.9.1.custom.min.css' rel='stylesheet' type='text/css'>
     <script src='js/jquery-1.8.2.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.0.js' type='text/javascript'></script>
     <script src='js/jquery-ui-1.9.1.custom.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=3.1' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=3.2' type='text/javascript'></script>
     <script>
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-5127088-4']);
@@ -1571,7 +1571,7 @@
         <ul>
           <li>スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』のスキルポイント割り振りを検討するためのシミュレータです。</li>
           <li>要JavaScript。Google Chrome, Firefox, IE8以上で動作確認。IE対応は後回しになりがちです。</li>
-          <li>追加職Lv61-65の必要経験値は、今のところ初期職の実測値に1.333をかけた推測値です。1-2程度の誤差が見込まれます。</li>
+          <li>Lv66-70の獲得スキルポイントは、<a href="http://twitter.com/ren_210/status/334953851033632768" target="_blank">ツイッターでの報告</a>をもとにした未検証のものです。</li>
           <li>
             使い方:
             <ul>
@@ -1587,6 +1587,14 @@
           <li>
             履歴:
             <ul>
+              <li>
+                2013/5/16 v3.2 大型バージョンアップ (1.4) に対応。
+                <ul>
+                  <li>レベルキャップ65→70。</li>
+                  <li>特訓スキルポイントの上限4→5。</li>
+                  <li>ギガスラッシュ・ぼうぎょの消費MP変更。</li>
+                </ul>
+              </li>
               <li>2013/3/19 v3.1.3 Lv62以降の経験値テーブル入力。</li>
               <li>2013/3/6 v3.1.2 とうこん・さとりのスキル詳細追加。</li>
               <li>2013/3/6 v3.1.1 新職業の武器スキルの並び順をゲーム内のものに合わせる。</li>
@@ -1633,8 +1641,8 @@
           <li>
             ToDo:
             <ul>
-              <li><del>Lv61-65の必要経験値入力</del> (v3.1.3)</li>
-              <li><del>バトルマスター・賢者のスキル詳細入力</del> (v3.1.2)</li>
+              <li>Lv66-70の必要経験値入力</li>
+              <li>性質の変化したスキル（おうぎのまい等）の説明文の変更</li>
             </ul>
           </li>
           <li>ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。</li>
@@ -1648,6 +1656,7 @@
         <li><a href='http://dqx-bazaar.herokuapp.com/' target='_blank'>ドラクエ10アイテム価格調査隊</a></li>
         <li><a href='http://www.d-quest-10.com/' target='_blank'>ドラクエ10・モンスター完全図鑑</a></li>
         <li><a href='http://www4.atpages.jp/studiogobli/php/dqxm/' target='_blank'>DQ10 ソロ用</a></li>
+        <li><a href='http://yujuko.sakura.ne.jp/dq/ParaWt.html' target='_blank'>DQX - 重さチェッカー</a></li>
       </ul>
       <div class='amazonitem'>
         <a href='http://www.amazon.co.jp/%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88X-%E7%9B%AE%E8%A6%9A%E3%82%81%E3%81%97%E4%BA%94%E3%81%A4%E3%81%AE%E7%A8%AE%E6%97%8F-%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3/dp/B009CNIO0O%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB009CNIO0O' target='_blank'><img alt='ドラゴンクエストX 目覚めし五つの種族 オンライン' height='160' src='http://ecx.images-amazon.com/images/I/512YOiKKjjL._SL160_.jpg' title='ドラゴンクエストX 目覚めし五つの種族 オンライン' width='107'><br>ドラゴンクエストX 目覚めし五つの種族 オンライン</a>
