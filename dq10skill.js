@@ -473,6 +473,13 @@ var SimulatorUI = (function($) {
 			$spinner.click(function(e) {
 				$(this).select();
 			});
+			//テキストボックスでEnter押下時更新して選択状態に
+			$spinner.keypress(function(e) {
+				if(e.which == 13) {
+					$('#url_text').focus();
+					$(this).focus().select();
+				}
+			});
 		},
 		
 		//リセットボタン設定
