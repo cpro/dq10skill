@@ -7,12 +7,12 @@
     <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
     <title>DQ10 スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=3.2' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=3.3' rel='stylesheet' type='text/css'>
     <link href='css/smoothness/jquery-ui-1.9.1.custom.min.css' rel='stylesheet' type='text/css'>
     <script src='js/jquery-1.8.2.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.0.js' type='text/javascript'></script>
     <script src='js/jquery-ui-1.9.1.custom.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=3.2' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=3.3' type='text/javascript'></script>
     <script>
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-5127088-4']);
@@ -1587,6 +1587,7 @@
           <li>
             履歴:
             <ul>
+              <li>2013/5/22 v3.3 スキルポイント入力欄のインタフェース改善、一部スキルの説明文変更に対応。</li>
               <li>
                 2013/5/16 v3.2 大型バージョンアップ (1.4) に対応。
                 <ul>
@@ -1642,7 +1643,7 @@
             ToDo:
             <ul>
               <li>Lv66-70の必要経験値入力</li>
-              <li>性質の変化したスキル（おうぎのまい等）の説明文の変更</li>
+              <li><del>性質の変化したスキル（おうぎのまい等）の説明文の変更</del> (v3.3)</li>
             </ul>
           </li>
           <li>ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。</li>
@@ -1662,6 +1663,12 @@
         <a href='http://www.amazon.co.jp/%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88X-%E7%9B%AE%E8%A6%9A%E3%82%81%E3%81%97%E4%BA%94%E3%81%A4%E3%81%AE%E7%A8%AE%E6%97%8F-%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3/dp/B009CNIO0O%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB009CNIO0O' target='_blank'><img alt='ドラゴンクエストX 目覚めし五つの種族 オンライン' height='160' src='http://ecx.images-amazon.com/images/I/512YOiKKjjL._SL160_.jpg' title='ドラゴンクエストX 目覚めし五つの種族 オンライン' width='107'><br>ドラゴンクエストX 目覚めし五つの種族 オンライン</a>
       </div>
       <div class='amazonitem'>
+        <a href='http://www.amazon.co.jp/%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9-%E3%82%B9%E3%83%9E%E3%82%A4%E3%83%AB%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%A0-%E5%86%86%E5%BA%A7%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3sl-%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%A0/dp/B00AMSFORY%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00AMSFORY' target='_blank'><img alt='スマイルスライム 円座クッションsl (スライム)' height='140' src='http://ecx.images-amazon.com/images/I/51hca-Q2cvL._SL160_.jpg' title='スマイルスライム 円座クッションsl (スライム)' width='160'><br>スマイルスライム 円座クッションsl (スライム)</a>
+      </div>
+      <div class='amazonitem'>
+        <a href='http://www.amazon.co.jp/%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88-%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A2%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%BA%E3%82%AE%E3%83%A3%E3%83%A9%E3%83%AA%E3%83%BC-km-%E3%82%AD%E3%83%A9%E3%83%BC%E3%83%9E%E3%82%B7%E3%83%B3/dp/B00CB9YFTK%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00CB9YFTK' target='_blank'><img alt='ドラゴンクエスト メタリックモンスターズギャラリー km (キラーマシン)' height='143' src='http://ecx.images-amazon.com/images/I/51Zw0xX1LwL._SL160_.jpg' title='ドラゴンクエスト メタリックモンスターズギャラリー km (キラーマシン)' width='160'><br>ドラゴンクエスト メタリックモンスターズギャラリー km (キラーマシン)</a>
+      </div>
+      <div class='amazonitem'>
         <a href='http://www.amazon.co.jp/%E3%80%90Wii-Wii%E3%80%91%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88-%E3%83%A1%E3%82%BF%E3%83%AB%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%A0%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89-PC%E3%81%AB%E3%82%82%E5%AF%BE%E5%BF%9C-%E3%82%A2%E3%82%A4%E3%83%86%E3%83%A0%E3%82%B3%E3%83%BC%E3%83%89%E5%90%8C%E6%A2%B1/dp/B00BLZKDT6%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00BLZKDT6' target='_blank'><img alt='【Wii U/Wii】ドラゴンクエスト メタルスライムキーボード (PCにも対応)(アイテムコード同梱)' height='160' src='http://ecx.images-amazon.com/images/I/41waNQ8Si5L._SL160_.jpg' title='【Wii U/Wii】ドラゴンクエスト メタルスライムキーボード (PCにも対応)(アイテムコード同梱)' width='160'><br>【Wii U/Wii】ドラゴンクエスト メタルスライムキーボード (PCにも対応)(アイテムコード同梱)</a>
       </div>
       <div class='amazonitem'>
@@ -1671,7 +1678,7 @@
         <a href='http://www.amazon.co.jp/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88X-%E3%81%BF%E3%81%A1%E3%81%8F%E3%81%95%E5%86%92%E9%99%BA%E3%82%AC%E3%82%A4%E3%83%89-%E5%86%92%E9%99%BA%E8%80%85%E3%81%8A%E3%81%86%E3%81%88%E3%82%93%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9/dp/4757538103%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4757538103' target='_blank'><img alt='ドラゴンクエストX みちくさ冒険ガイド (冒険者おうえんシリーズ)' height='160' src='http://ecx.images-amazon.com/images/I/618KtRSKO-L._SL160_.jpg' title='ドラゴンクエストX みちくさ冒険ガイド (冒険者おうえんシリーズ)' width='131'><br>ドラゴンクエストX みちくさ冒険ガイド (冒険者おうえんシリーズ)</a>
       </div>
       <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/%E4%BB%BB%E5%A4%A9%E5%A0%82-Wii-U-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%82%BB%E3%83%83%E3%83%88-WUP-S-KAFC/dp/B009K1ECXQ%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB009K1ECXQ' target='_blank'><img alt='Wii U プレミアムセット (WUP-S-KAFC)' height='134' src='http://ecx.images-amazon.com/images/I/416M011NOXL._SL160_.jpg' title='Wii U プレミアムセット (WUP-S-KAFC)' width='160'><br>Wii U プレミアムセット (WUP-S-KAFC)</a>
+        <a href='http://www.amazon.co.jp/%E4%BB%BB%E5%A4%A9%E5%A0%82-Wii-U-%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%82%BB%E3%83%83%E3%83%88-WUP-S-KAFC/dp/B009K1ECXQ%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB009K1ECXQ' target='_blank'><img alt='Wii U プレミアムセット (WUP-S-KAFC)' height='134' src='http://ecx.images-amazon.com/images/I/41yM800M22L._SL160_.jpg' title='Wii U プレミアムセット (WUP-S-KAFC)' width='160'><br>Wii U プレミアムセット (WUP-S-KAFC)</a>
       </div>
       <div class='amazonitem'>
         <a href='http://www.amazon.co.jp/%E4%BA%A4%E9%9F%BF%E7%B5%84%E6%9B%B2%E3%80%8C%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88X%E3%80%8D%E7%9B%AE%E8%A6%9A%E3%82%81%E3%81%97%E4%BA%94%E3%81%A4%E3%81%AE%E7%A8%AE%E6%97%8F-%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%BA%A4%E9%9F%BF%E6%A5%BD%E5%9B%A3-%E3%81%99%E3%81%8E%E3%82%84%E3%81%BE%E3%81%93%E3%81%86%E3%81%84%E3%81%A1/dp/B008Z1E48K%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB008Z1E48K' target='_blank'><img alt='交響組曲「ドラゴンクエストX」目覚めし五つの種族' height='159' src='http://ecx.images-amazon.com/images/I/614CeAhdA9L._SL160_.jpg' title='交響組曲「ドラゴンクエストX」目覚めし五つの種族' width='160'><br>交響組曲「ドラゴンクエストX」目覚めし五つの種族</a>
@@ -1686,13 +1693,7 @@
         <a href='http://www.amazon.co.jp/%E4%BB%BB%E5%A4%A9%E5%A0%82-4902370517835-%E3%82%AF%E3%83%A9%E3%82%B7%E3%83%83%E3%82%AF%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9-PRO-%E3%82%AF%E3%83%AD/dp/B002C1AUP0%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB002C1AUP0' target='_blank'><img alt='クラシックコントローラ PRO(クロ)' height='153' src='http://ecx.images-amazon.com/images/I/51Ei4Ro4L%2BL._SL160_.jpg' title='クラシックコントローラ PRO(クロ)' width='160'><br>クラシックコントローラ PRO(クロ)</a>
       </div>
       <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/%E4%BB%BB%E5%A4%A9%E5%A0%82-LL-Red-Black-SPR-S-RKAA/dp/B008DRIR20%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB008DRIR20' target='_blank'><img alt='ニンテンドー3DS LL レッドXブラック (SPR-S-RKAA)' height='115' src='http://ecx.images-amazon.com/images/I/41FMQfoPLVL._SL160_.jpg' title='ニンテンドー3DS LL レッドXブラック (SPR-S-RKAA)' width='160'><br>ニンテンドー3DS LL レッドXブラック (SPR-S-RKAA)</a>
-      </div>
-      <div class='amazonitem'>
         <a href='http://www.amazon.co.jp/%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88-%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A2%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%BA-%E3%82%AE%E3%83%A3%E3%83%A9%E3%83%AA%E3%83%BC-%E3%81%AF%E3%81%90%E3%82%8C%E3%83%A1%E3%82%BF%E3%83%AB/dp/B000MSMM06%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB000MSMM06' target='_blank'><img alt='ドラゴンクエスト メタリックモンスターズ ギャラリー はぐれメタル' height='90' src='http://ecx.images-amazon.com/images/I/31idtDbkUHL._SL160_.jpg' title='ドラゴンクエスト メタリックモンスターズ ギャラリー はぐれメタル' width='160'><br>ドラゴンクエスト メタリックモンスターズ ギャラリー はぐれメタル</a>
-      </div>
-      <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/%E4%BB%BB%E5%A4%A9%E5%A0%82-%E3%83%8B%E3%83%B3%E3%83%86%E3%83%B3%E3%83%89%E3%83%BC%E3%83%97%E3%83%AA%E3%83%9A%E3%82%A4%E3%83%89%E3%82%AB%E3%83%BC%E3%83%893000%E5%86%86/dp/B0050MLQOC%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB0050MLQOC' target='_blank'><img alt='ニンテンドープリペイドカード3000円' height='73' src='http://ecx.images-amazon.com/images/I/31WtgxsPttL._SL160_.jpg' title='ニンテンドープリペイドカード3000円' width='160'><br>ニンテンドープリペイドカード3000円</a>
       </div>
       <div class='amazonitem'>
         <a href='http://www.amazon.co.jp/%E3%83%AD%E3%82%B8%E3%82%AF%E3%83%BC%E3%83%AB-K270-LOGICOOL-%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89-Unifying%E5%AF%BE%E5%BF%9C%E3%83%AC%E3%82%B7%E3%83%BC%E3%83%90%E3%83%BC%E6%8E%A1%E7%94%A8/dp/B004W1KCCO%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB004W1KCCO' target='_blank'><img alt='LOGICOOL ワイヤレスキーボード Unifying対応レシーバー採用 K270' height='96' src='http://ecx.images-amazon.com/images/I/41IQBT37oiL._SL160_.jpg' title='LOGICOOL ワイヤレスキーボード Unifying対応レシーバー採用 K270' width='160'><br>LOGICOOL ワイヤレスキーボード Unifying対応レシーバー採用 K270</a>
