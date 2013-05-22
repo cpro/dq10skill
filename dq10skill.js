@@ -469,6 +469,10 @@ var SimulatorUI = (function($) {
 					refreshSaveUrl();
 				}
 			});
+			//テキストボックスクリック時数値を選択状態に
+			$spinner.click(function(e) {
+				$(this).select();
+			});
 		},
 		
 		//リセットボタン設定
