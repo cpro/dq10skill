@@ -469,6 +469,17 @@ var SimulatorUI = (function($) {
 					refreshSaveUrl();
 				}
 			});
+			//テキストボックスクリック時数値を選択状態に
+			$spinner.click(function(e) {
+				$(this).select();
+			});
+			//テキストボックスでEnter押下時更新して選択状態に
+			$spinner.keypress(function(e) {
+				if(e.which == 13) {
+					$('#url_text').focus();
+					$(this).focus().select();
+				}
+			});
 		},
 		
 		//リセットボタン設定
