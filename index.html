@@ -7,12 +7,12 @@
     <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
     <title>DQ10 スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=3.3' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=3.3.1' rel='stylesheet' type='text/css'>
     <link href='css/smoothness/jquery-ui-1.9.1.custom.min.css' rel='stylesheet' type='text/css'>
     <script src='js/jquery-1.8.2.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.0.js' type='text/javascript'></script>
     <script src='js/jquery-ui-1.9.1.custom.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=3.3' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=3.3.1' type='text/javascript'></script>
     <script>
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-5127088-4']);
@@ -1571,7 +1571,7 @@
         <ul>
           <li>スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』のスキルポイント割り振りを検討するためのシミュレータです。</li>
           <li>要JavaScript。Google Chrome, Firefox, IE8以上で動作確認。IE対応は後回しになりがちです。</li>
-          <li>Lv66-70の獲得スキルポイントは、<a href="http://twitter.com/ren_210/status/334953851033632768" target="_blank">ツイッターでの報告</a>をもとにした未検証のものです。</li>
+          <li>Lv66-70の必要経験値は、初期職・追加職それぞれの実測値から算出した推測値を含みます（係数：1.333）。1-2程度の誤差を見込んでください。</li>
           <li>
             使い方:
             <ul>
@@ -1587,6 +1587,7 @@
           <li>
             履歴:
             <ul>
+              <li>2013/6/4 v3.3.1 Lv66以降の経験値テーブル入力。</li>
               <li>2013/5/22 v3.3 スキルポイント入力欄のインタフェース改善、一部スキルの説明文変更に対応。</li>
               <li>
                 2013/5/16 v3.2 大型バージョンアップ (1.4) に対応。
@@ -1642,7 +1643,7 @@
           <li>
             ToDo:
             <ul>
-              <li>Lv66-70の必要経験値入力</li>
+              <li><del>Lv66-70の必要経験値入力</del> (v3.3.1)</li>
               <li><del>性質の変化したスキル（おうぎのまい等）の説明文の変更</del> (v3.3)</li>
             </ul>
           </li>
