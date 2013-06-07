@@ -664,6 +664,27 @@ var SimulatorUI = (function($) {
 				$('body, html').animate({scrollTop: $('#' + vocationsHaveSkill[0]).offset().top - bodyTop});
 				$unfolded.click();
 			});
+		},
+		
+		//レベル一括設定
+		function() {
+			//セレクトボックス初期化
+			var $select = $('#setalllevel>select');
+			for(var i = sim.LEVEL_MIN; i <= sim.LEVEL_MAX; i++) {
+				$select.append($("<option />").val(i).text(i.toString()));
+			}
+			$select.val(sim.LEVEL_MAX);
+			
+			$('#setalllevel>button').button().click(function(e) {
+				for(var vocation in sim.vocations) {
+					sim.updateLevel(vocation, $select.val());
+				}
+				refreshAllVocationInfo();
+				refreshTotalRequiredExp();
+				refreshTotalExpRemain();
+				refreshControls();
+				refreshSaveUrl();
+			});
 		}
 	];
 	
