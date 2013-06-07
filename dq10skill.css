@@ -252,6 +252,23 @@ span.fold, span.unfold {
   .skill_table tr + tr.enabled:hover td {
     color: #211; }
 
+/* フッタコンソール */
+#footconsole {
+  border: 2px solid #9999aa;
+  border-radius: 5px;
+  width: 65.5em;
+  margin: 3px 0;
+  padding: 2px;
+  /* レベル一括設定 */ }
+  #footconsole #setalllevel {
+    font-size: 80%;
+    margin: 0;
+    padding: 0 10px; }
+    #footconsole #setalllevel .ui-widget {
+      font-size: 1em; }
+    #footconsole #setalllevel .ui-button-text {
+      padding: 0.2em 0.5em; }
+
 /* フッタ */
 #footer {
   font-size: 80%;

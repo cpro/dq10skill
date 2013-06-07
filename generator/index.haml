@@ -120,11 +120,12 @@
 									%td.skill_pt>= skill['pt']
 									-# - hint = skill['desc'] + (skill['mp'] ? "\n（消費MP: #{skill['mp']}）" : '')
 									%td.skill_name= skill['name']
-			#footer
+			#footconsole
 				%p#setalllevel
 					レベル一括設定
 					%select{size: 1}
 					%button 設定
+			#footer
 				%ul
 					%li スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』のスキルポイント割り振りを検討するためのシミュレータです。
 					%li 要JavaScript。Google Chrome, Firefox, IE8以上で動作確認。IE対応は後回しになりがちです。
