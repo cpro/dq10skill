@@ -271,12 +271,12 @@ var SimulatorUI = (function($) {
 		//必要経験値
 		$('#' + vocation + ' .exp').text(numToFormedStr(sim.requiredExp(vocation, currentLevel)));
 		
-		//スキルポイント 現在値 / 最大値
-		var totalSkillPts = sim.totalSkillPts(vocation);
+		//スキルポイント 残り / 最大値
 		var maxSkillPts = sim.maxSkillPts(vocation);
 		var additionalSkillPts = sim.getTrainingSkillPt(vocation);
+		var remainingSkillPts = maxSkillPts + additionalSkillPts - sim.totalSkillPts(vocation);
 		var $skillPtsText = $('#' + vocation + ' .pts');
-		$skillPtsText.text(totalSkillPts + ' / ' + maxSkillPts);
+		$skillPtsText.text(remainingSkillPts + ' / ' + maxSkillPts);
 		if(additionalSkillPts > 0)
 			$skillPtsText.append('<small> + ' + additionalSkillPts + '</small>');
 		
