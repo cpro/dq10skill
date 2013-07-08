@@ -728,23 +728,24 @@ var Base64Param = (function($) {
 	
 	function encode() {
 		//2進にして結合する
-		var binArray = [];
+		var bitArray = [];
+		var bitPushFunction =  function(bit) { bitArray.push(bit) }
 		for(var vocation in sim.vocations) {
-			binArray.push(numberToBin(sim.getLevel(vocation), BITS_LEVEL));
-			binArray.push(numberToBin(sim.getTrainingSkillPt(vocation), BITS_TRAINING));
+			numberToBits(sim.getLevel(vocation), BITS_LEVEL, bitPushFunction);
+			numberToBits(sim.getTrainingSkillPt(vocation), BITS_TRAINING, bitPushFunction);
 			
 			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
 				var skill = sim.vocations[vocation].skills[s];
-				binArray.push(numberToBin(sim.getSkillPt(vocation, skill), BITS_SKILL));
+				numberToBits(sim.getSkillPt(vocation, skill), BITS_SKILL, bitPushFunction);
 			}
 		}
 		
-		var binStr = binArray.join('');
-		for(var i = (binStr.length - 1) % 6 + 1 ; i < 6; i++) binStr += '0'; //末尾0補完
+		for(var i = (bitArray.length - 1) % 6 + 1 ; i < 6; i++) bitArray.push(0); //末尾0補完
 		
 		var enStr = '';
-		for(var i = 0; i < binStr.length; i += 6) {
-			enStr += EN_CHAR.charAt(parseInt(binStr.substring(i, i + 6), 2));
+		for(var i = 0; i < bitArray.length; i += 6) {
+			bitArrayToNum
+			enStr += EN_CHAR.charAt(bitArrayToNum(bitArray.slice(i, i + 6)));
 		}
 		
 		return enStr;
@@ -818,13 +819,26 @@ var Base64Param = (function($) {
 		for(var i = binStr.length; i < digits; i++) binStr = '0' + binStr;
 		return binStr;
 	}
+	function numberToBits(num, digits, callback) {
+		for(var i = digits - 1; i >= 0; i--) {
+			callback(num >> i & 1);
+		}
+	}
+	function bitArrayToNum(bitArray) {
+		var num = 0;
+		for(var i = 0; i < bitArray.length; i++) {
+			num |= (bitArray[i] << (bitArray.length - i - 1))
+		}
+		return num;
+	}
 	
 	//API
 	return {
 		encode: encode,
 		decode: decode,
 		validate: validate,
-		applyDecodedArray: applyDecodedArray
+		applyDecodedArray: applyDecodedArray,
+		numberToBits: numberToBits
 	};
 })(jQuery);
 
