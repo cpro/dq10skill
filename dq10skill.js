@@ -811,12 +811,6 @@ var Base64Param = (function($) {
 		return str.match(/^[A-Za-z0-9-_]+$/);
 	}
 	
-	function numberToBin(num, digits) {
-		var binStr = '';
-		binStr = Number(num).toString(2);
-		for(var i = binStr.length; i < digits; i++) binStr = '0' + binStr;
-		return binStr;
-	}
 	function numberToBits(num, digits, callback) {
 		for(var i = digits - 1; i >= 0; i--) {
 			callback(num >> i & 1);
