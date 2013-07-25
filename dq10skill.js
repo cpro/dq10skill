@@ -719,6 +719,7 @@ var Base64Param = (function($) {
 	];
 	
 	var EN_CHAR = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+	var BITS_ENCODE = 6; //6ビットごとに区切ってエンコード
 	var BITS_LEVEL = 8; //レベルは8ビット確保
 	var BITS_SKILL = 7; //スキルは7ビット
 	var BITS_TRAINING = 7; //特訓スキルポイント7ビット
@@ -729,22 +730,21 @@ var Base64Param = (function($) {
 	function encode() {
 		//2進にして結合する
 		var bitArray = [];
-		var bitPushFunction =  function(bit) { bitArray.push(bit) }
 		for(var vocation in sim.vocations) {
-			numberToBits(sim.getLevel(vocation), BITS_LEVEL, bitPushFunction);
-			numberToBits(sim.getTrainingSkillPt(vocation), BITS_TRAINING, bitPushFunction);
+			bitArray = bitArray.concat(numToBitArray(numToBitArray(sim.getLevel(vocation), BITS_LEVEL)));
+			bitArray = bitArray.concat(numToBitArray(sim.getTrainingSkillPt(vocation), BITS_TRAINING));
 			
 			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
 				var skill = sim.vocations[vocation].skills[s];
-				numberToBits(sim.getSkillPt(vocation, skill), BITS_SKILL, bitPushFunction);
+				bitArray = bitArray.concat(numToBitArray(sim.getSkillPt(vocation, skill), BITS_SKILL));
 			}
 		}
 		
-		for(var i = (bitArray.length - 1) % 6 + 1 ; i < 6; i++) bitArray.push(0); //末尾0補完
+		for(var i = (bitArray.length - 1) % BITS_ENCODE + 1 ; i < BITS_ENCODE; i++) bitArray.push(0); //末尾0補完
 		
 		var enStr = '';
-		for(var i = 0; i < bitArray.length; i += 6) {
-			enStr += EN_CHAR.charAt(bitArrayToNum(bitArray.slice(i, i + 6)));
+		for(var i = 0; i < bitArray.length; i += BITS_ENCODE) {
+			enStr += EN_CHAR.charAt(bitArrayToNum(bitArray.slice(i, i + BITS_ENCODE)));
 		}
 		
 		return enStr;
@@ -753,7 +753,7 @@ var Base64Param = (function($) {
 	function decode(str) {
 		var bitArray = [];
 		for(var i = 0; i < str.length; i++) {
-			numberToBits(EN_CHAR.indexOf(str.charAt(i)),6, function(bit) { bitArray.push(bit) });
+			bitArray = bitArray.concat(numToBitArray(EN_CHAR.indexOf(str.charAt(i)), BITS_ENCODE));
 		}
 		
 		//特訓ポイントを含むかどうか: ビット列の長さで判断
@@ -811,10 +811,12 @@ var Base64Param = (function($) {
 		return str.match(/^[A-Za-z0-9-_]+$/);
 	}
 	
-	function numberToBits(num, digits, callback) {
+	function numToBitArray(num, digits) {
+		var bitArray = [];
 		for(var i = digits - 1; i >= 0; i--) {
-			callback(num >> i & 1);
+			bitArray.push(num >> i & 1);
 		}
+		return bitArray;
 	}
 	function bitArrayToNum(bitArray) {
 		var num = 0;
