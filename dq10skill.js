@@ -731,7 +731,7 @@ var Base64Param = (function($) {
 		//2進にして結合する
 		var bitArray = [];
 		for(var vocation in sim.vocations) {
-			bitArray = bitArray.concat(numToBitArray(numToBitArray(sim.getLevel(vocation), BITS_LEVEL)));
+			bitArray = bitArray.concat(numToBitArray(sim.getLevel(vocation), BITS_LEVEL));
 			bitArray = bitArray.concat(numToBitArray(sim.getTrainingSkillPt(vocation), BITS_TRAINING));
 			
 			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
