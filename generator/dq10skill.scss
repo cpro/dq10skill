@@ -216,6 +216,10 @@ a {
 	margin: 3px 0;
 	padding: 2px;
 	overflow: hidden;
+	
+	&:nth-child(even) {
+		background-color: #f6f6f7;
+	}
 }
 
 /* 職業情報欄 */
@@ -303,7 +307,7 @@ span.fold, span.unfold {
 	}
 	td {
 		padding: 1px 3px 0 3px;
-		color: #aab;
+		color: #889;
 		cursor: pointer;
 	}
 	th {

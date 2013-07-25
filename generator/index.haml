@@ -1,4 +1,4 @@
-- VERSION = '3.5'
+- VERSION = '3.6'
 !!! 5
 %html
 	%head
@@ -36,7 +36,7 @@
 				#save_url
 					保存用URL:
 					%input#url_text.ui-widget-content.ui-corner-all{type: 'text', size: 45}>/
-					%a#tw-saveurl{title: '保存用URLをツイートする'} ツイート
+					%a#tw-saveurl 保存用URLをツイート
 			#consoleblock
 				#foldbuttons
 					%ul.button-container#foldbuttons-all
@@ -129,8 +129,8 @@
 				%ul
 					%li スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』のスキルポイント割り振りを検討するためのシミュレータです。
 					%li 要JavaScript。Google Chrome, Firefox, IE8以上で動作確認。IE対応は後回しになりがちです。
-					-# %li Lv66-70の獲得スキルポイントは、<a href="http://twitter.com/ren_210/status/334953851033632768" target="_blank">ツイッターでの報告</a>をもとにした未検証のものです。
-					%li Lv66-70の必要経験値は、初期職・追加職それぞれの実測値から算出した推測値を含みます（係数：1.333）。1-2程度の誤差を見込んでください。
+					%li Lv71-75の獲得スキルポイントは、<a href="http://twitter.com/oteu_kyokugen/status/360318972341661696" target="_blank">ツイッターでの報告</a>をもとにした未検証のものです。
+					%li Lv66以降の必要経験値は、初期職の実測値から算出した推測値を含みます（係数：1.333）。1-2程度の誤差を見込んでください。
 					%li
 						使い方:
 						%ul
@@ -145,6 +145,12 @@
 					%li
 						履歴:
 						%ul
+							%li
+								2013/7/25 v3.6 大型バージョンアップ (1.5) に対応。
+								%ul
+									%li レベルキャップ70→75。
+									%li スタイル微調整。職業欄の背景色を交互にグレーに。
+									%li URL周りの内部処理を整理。
 							%li 2013/6/24 v3.5 スキルポイント合計表示を使用ポイント数の合計から残りポイント数に変更。
 							%li 2013/6/7 v3.4 レベル一括設定機能を追加。
 							%li 2013/6/4 v3.3.1 Lv66以降の経験値テーブル入力。
