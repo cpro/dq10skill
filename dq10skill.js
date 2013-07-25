@@ -744,7 +744,6 @@ var Base64Param = (function($) {
 		
 		var enStr = '';
 		for(var i = 0; i < bitArray.length; i += 6) {
-			bitArrayToNum
 			enStr += EN_CHAR.charAt(bitArrayToNum(bitArray.slice(i, i + 6)));
 		}
 		
@@ -826,7 +825,7 @@ var Base64Param = (function($) {
 	function bitArrayToNum(bitArray) {
 		var num = 0;
 		for(var i = 0; i < bitArray.length; i++) {
-			num |= (bitArray[i] << (bitArray.length - i - 1))
+			num = num << 1 | bitArray[i]
 		}
 		return num;
 	}
@@ -836,8 +835,7 @@ var Base64Param = (function($) {
 		encode: encode,
 		decode: decode,
 		validate: validate,
-		applyDecodedArray: applyDecodedArray,
-		numberToBits: numberToBits
+		applyDecodedArray: applyDecodedArray
 	};
 })(jQuery);
 
