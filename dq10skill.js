@@ -695,6 +695,17 @@ var SimulatorUI = (function($) {
 				refreshControls();
 				refreshSaveUrl();
 			});
+		},
+		
+		//全スキルをリセット
+		function() {
+			$('#clearallskills>button').button().click(function(e) {
+				if(!window.confirm('全職業のすべてのスキルを振りなおします。\n（レベル・特訓のポイントは変わりません）'))
+					return;
+				
+				sim.clearAllSkills();
+				refreshAll();
+			});
 		}
 	];
 	

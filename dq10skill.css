@@ -259,16 +259,21 @@ span.fold, span.unfold {
   border: 2px solid #9999aa;
   border-radius: 5px;
   width: 65.5em;
+  overflow: auto;
   margin: 3px 0;
   padding: 2px;
   /* レベル一括設定 */ }
-  #footconsole #setalllevel {
+  #footconsole p {
+    float: left;
     font-size: 80%;
     margin: 0;
-    padding: 0 10px; }
-    #footconsole #setalllevel .ui-widget {
+    padding: 0 10px;
+    border-right: 1px solid #9999aa; }
+    #footconsole p:last-child {
+      border-right: none; }
+    #footconsole p .ui-widget {
       font-size: 1em; }
-    #footconsole #setalllevel .ui-button-text {
+    #footconsole p .ui-button-text {
       padding: 0.2em 0.5em; }
 
 /* フッタ */

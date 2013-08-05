@@ -346,14 +346,19 @@ span.fold, span.unfold {
 	border: 2px solid #99a;
 	border-radius: 5px;
 	width: 65.5em;
+	overflow: auto;
 	margin: 3px 0;
 	padding: 2px;
 	
-	/* レベル一括設定 */
-	#setalllevel {
+	p {
+		float: left;
 		font-size: 80%;
 		margin: 0;
 		padding: 0 10px;
+		border-right: 1px solid #99a;
+		&:last-child {
+			border-right: none;
+		}
 		
 		.ui-widget {
 			font-size: 1em;
@@ -361,6 +366,10 @@ span.fold, span.unfold {
 		.ui-button-text {
 			padding: .2em .5em;
 		}
+	}
+	
+	/* レベル一括設定 */
+	#setalllevel {
 	}
 }
 
