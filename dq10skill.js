@@ -122,6 +122,15 @@ var Simulator = (function($) {
 		}
 	}
 	
+	//すべてのスキルを振り直し（0にセット）
+	function clearAllSkills() {
+		for(var vocation in skillPts) {
+			for(var skill in skillPts[vocation]) {
+				skillPts[vocation][skill] = 0;
+			}
+		}
+	}
+	
 	//職業レベルに対するスキルポイント最大値
 	function maxSkillPts(vocation) {
 		return skillPtsGiven[levels[vocation]];
@@ -215,6 +224,7 @@ var Simulator = (function($) {
 		totalSkillPts: totalSkillPts,
 		totalOfSameSkills: totalOfSameSkills,
 		clearPtsOfSameSkills: clearPtsOfSameSkills,
+		clearAllSkills: clearAllSkills,
 		maxSkillPts: maxSkillPts,
 		requiredLevel: requiredLevel,
 		requiredExp: requiredExp,
