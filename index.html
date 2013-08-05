@@ -7,12 +7,12 @@
     <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
     <title>DQ10 スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=3.6.1' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=3.7' rel='stylesheet' type='text/css'>
     <link href='css/smoothness/jquery-ui-1.9.1.custom.min.css' rel='stylesheet' type='text/css'>
     <script src='js/jquery-1.8.2.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.0.js' type='text/javascript'></script>
     <script src='js/jquery-ui-1.9.1.custom.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=3.6.1' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=3.7' type='text/javascript'></script>
     <script>
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-5127088-4']);
@@ -1588,17 +1588,25 @@
             <ul>
               <li>プルダウンで職業レベルを選択。括弧内はそのレベルの累計スキルポイント。</li>
               <li>スキルポイントはスキル一覧の項目をクリックすると必要なポイントが自動入力されます。上下ボタン・キーボードの上下キーで1ずつ調整、PageUp/PageDownキーで10ずつ上下します。数値の直接入力も可能。</li>
-              <li>スキルポイント欄右のリセットボタンをクリックするとポイントを0にします。ダブルクリックすると複数の職で振ったそのスキルのポイントをすべて0にします。</li>
+              <li>
+                スキルポイント欄右のリセットボタンをクリックするとポイントを0にします。
+                <ul>
+                  <li>ダブルクリックすると複数の職で振ったそのスキルのポイントをすべて0にします。</li>
+                  <li>職業欄下部の「全スキルをリセット」で、全職業で振ったスキルのポイントをすべて0にします。レベルと特訓は変化しません。</li>
+                </ul>
+              </li>
               <li>「保存用URL」欄に表示されるURLは、アクセスすることで現在の状態を再現できます。メモ用・掲示板に貼る用などにどうぞ。</li>
               <li>レベル欄あたりにカーソルを持っていくと「おりたたむ」ボタンが出てきて、クリックすると簡易表示になります。そのまま操作も可能。「すべてたたむ」でレベル・スキルを一覧するのがおすすめです。</li>
               <li>タイトル下の職業ごとのボタンをクリックすると、その職業の位置にスクロールします。折りたたまれていた場合は展開されます。</li>
               <li>特訓モードのスキルポイントを1以上にした場合、最低でもレベル50必要なものとして計算します。</li>
               <li>「レベル一括設定」でレベルを選択し設定ボタンをクリックすると、全職業のレベルを一度に変更できます。</li>
+              <li>レベルと特訓のスキルポイントはそのままに</li>
             </ul>
           </li>
           <li>
             履歴:
             <ul>
+              <li>2013/8/5 v3.7 全スキルリセット機能を追加。</li>
               <li>
                 2013/7/25 v3.6 大型バージョンアップ (1.5) に対応。
                 <ul>
@@ -1686,7 +1694,7 @@
         <a href='http://www.amazon.co.jp/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88X-%E3%83%95%E3%82%A1%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3-%E3%83%8F%E3%82%A6%E3%82%B8%E3%83%B3%E3%82%B0%E3%81%8A%E3%81%97%E3%82%83%E3%82%8C%E3%82%AB%E3%82%BF%E3%83%AD%E3%82%B0-2013%E5%A4%8F%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3-%E5%86%92%E9%99%BA%E8%80%85%E3%81%8A%E3%81%86%E3%81%88%E3%82%93%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA/dp/4757540221%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4757540221' target='_blank'><img alt='ドラゴンクエストX ファッション&amp;amp;ハウジングおしゃれカタログ 2013夏コレクション (冒険者おうえんシリーズ)' height='160' src='http://ecx.images-amazon.com/images/I/51OmvOZIWbL._SL160_.jpg' title='ドラゴンクエストX ファッション&amp;amp;ハウジングおしゃれカタログ 2013夏コレクション (冒険者おうえんシリーズ)' width='131'><br>ドラゴンクエストX ファッション&amp;ハウジングおしゃれカタログ 2013夏コレクション (冒険者おうえんシリーズ)</a>
       </div>
       <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88X-%E7%9B%AE%E8%A6%9A%E3%82%81%E3%81%97%E4%BA%94%E3%81%A4%E3%81%AE%E7%A8%AE%E6%97%8F-%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3/dp/B00DIQRUFQ%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00DIQRUFQ' target='_blank'><img alt='Windows版 ドラゴンクエストX 目覚めし五つの種族 オンライン' height='120' src='http://ecx.images-amazon.com/images/I/41%2BxFRCw8iL._SL160_.jpg' title='Windows版 ドラゴンクエストX 目覚めし五つの種族 オンライン' width='160'><br>Windows版 ドラゴンクエストX 目覚めし五つの種族 オンライン</a>
+        <a href='http://www.amazon.co.jp/%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88X-%E7%9B%AE%E8%A6%9A%E3%82%81%E3%81%97%E4%BA%94%E3%81%A4%E3%81%AE%E7%A8%AE%E6%97%8F-%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3/dp/B00DIQRUFQ%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00DIQRUFQ' target='_blank'><img alt='Windows版 ドラゴンクエストX 目覚めし五つの種族 オンライン' height='160' src='http://ecx.images-amazon.com/images/I/51BV9cWeBBL._SL160_.jpg' title='Windows版 ドラゴンクエストX 目覚めし五つの種族 オンライン' width='120'><br>Windows版 ドラゴンクエストX 目覚めし五つの種族 オンライン</a>
       </div>
       <div class='amazonitem'>
         <a href='http://www.amazon.co.jp/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88X-%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9-forPC-%E9%A3%BE%E3%82%8C%E3%82%8B%E3%83%8F%E3%82%A6%E3%82%B8%E3%83%B3%E3%82%B0%E7%94%A8%E7%89%B9%E5%85%B8%E3%81%A8%E3%81%97%E3%81%A6%E3%80%81%E3%82%B2%E3%83%BC%E3%83%A0%E5%86%85%E8%87%AA%E5%AE%85%E3%81%AE%E5%BA%AD%E3%81%AB%E5%AE%B6%E5%85%B7%E3%80%8C%E3%81%AF%E3%81%90%E3%82%8C%E3%83%A1%E3%82%BF%E3%83%AB%E3%81%AE%E5%83%8F%E3%83%BB%E5%BA%AD%E3%80%8D%E3%81%8C%E6%89%8B%E3%81%AB%E5%85%A5%E3%82%8B%E7%89%B9%E5%85%B8%E3%82%A2%E3%82%A4%E3%83%86%E3%83%A0%E3%82%B3%E3%83%BC%E3%83%89%E4%BB%98%E3%81%8D-%E5%90%8C%E6%A2%B1/dp/B00E1C0B8Y%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00E1C0B8Y' target='_blank'><img alt='ドラゴンクエストX ゲームコントローラ forPC (飾れるハウジング用特典として、ゲーム内自宅の庭に家具「はぐれメタルの像・庭」が手に入る特典アイテムコード付き! 同梱)' height='160' src='http://ecx.images-amazon.com/images/I/41xtKDaOWpL._SL160_.jpg' title='ドラゴンクエストX ゲームコントローラ forPC (飾れるハウジング用特典として、ゲーム内自宅の庭に家具「はぐれメタルの像・庭」が手に入る特典アイテムコード付き! 同梱)' width='136'><br>ドラゴンクエストX ゲームコントローラ forPC (飾れるハウジング用特典として、ゲーム内自宅の庭に家具「はぐれメタルの像・庭」が手に入る特典アイテムコード付き! 同梱)</a>
