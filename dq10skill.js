@@ -699,7 +699,9 @@ var SimulatorUI = (function($) {
 		
 		//全スキルをリセット
 		function() {
-			$('#clearallskills>button').button().click(function(e) {
+			$('#clearallskills>button').button({
+				icons: { primary: 'ui-icon-refresh' },
+			}).click(function(e) {
 				if(!window.confirm('全職業のすべてのスキルを振りなおします。\n（レベル・特訓のポイントは変わりません）'))
 					return;
 				

@@ -366,6 +366,10 @@ span.fold, span.unfold {
 		.ui-button-text {
 			padding: .2em .5em;
 		}
+		
+		&#clearallskills .ui-button-text {
+			padding-left: 2em;
+		}
 	}
 	
 	/* レベル一括設定 */

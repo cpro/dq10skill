@@ -275,6 +275,8 @@ span.fold, span.unfold {
       font-size: 1em; }
     #footconsole p .ui-button-text {
       padding: 0.2em 0.5em; }
+    #footconsole p#clearallskills .ui-button-text {
+      padding-left: 2em; }
 
 /* フッタ */
 #footer {
