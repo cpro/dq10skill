@@ -122,6 +122,15 @@ var Simulator = (function($) {
 		}
 	}
 	
+	//すべてのスキルを振り直し（0にセット）
+	function clearAllSkills() {
+		for(var vocation in skillPts) {
+			for(var skill in skillPts[vocation]) {
+				skillPts[vocation][skill] = 0;
+			}
+		}
+	}
+	
 	//職業レベルに対するスキルポイント最大値
 	function maxSkillPts(vocation) {
 		return skillPtsGiven[levels[vocation]];
@@ -215,6 +224,7 @@ var Simulator = (function($) {
 		totalSkillPts: totalSkillPts,
 		totalOfSameSkills: totalOfSameSkills,
 		clearPtsOfSameSkills: clearPtsOfSameSkills,
+		clearAllSkills: clearAllSkills,
 		maxSkillPts: maxSkillPts,
 		requiredLevel: requiredLevel,
 		requiredExp: requiredExp,
@@ -684,6 +694,19 @@ var SimulatorUI = (function($) {
 				refreshTotalExpRemain();
 				refreshControls();
 				refreshSaveUrl();
+			});
+		},
+		
+		//全スキルをリセット
+		function() {
+			$('#clearallskills>button').button({
+				icons: { primary: 'ui-icon-refresh' },
+			}).click(function(e) {
+				if(!window.confirm('全職業のすべてのスキルを振りなおします。\n（レベル・特訓のポイントは変わりません）'))
+					return;
+				
+				sim.clearAllSkills();
+				refreshAll();
 			});
 		}
 	];
