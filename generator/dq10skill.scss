@@ -342,6 +342,16 @@ span.fold, span.unfold {
 	
 	&.selected {
 		background-color: #e0e0f0;
+		
+		tr+tr:hover {
+			background-color: #ccd;
+			td {
+				color: #667;
+			}
+		}
+		tr+tr.enabled:hover td {
+			color: #112;
+		}
 	}
 }
 

@@ -255,6 +255,12 @@ span.fold, span.unfold {
     color: #211; }
   .skill_table.selected {
     background-color: #e0e0f0; }
+    .skill_table.selected tr + tr:hover {
+      background-color: #ccd; }
+      .skill_table.selected tr + tr:hover td {
+        color: #667; }
+    .skill_table.selected tr + tr.enabled:hover td {
+      color: #112; }
 
 /* フッタコンソール */
 #footconsole {
