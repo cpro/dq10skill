@@ -341,8 +341,6 @@ span.fold, span.unfold {
 	}
 	
 	&.selected {
-		background-color: #e0e0f0;
-		
 		tr+tr:hover {
 			background-color: #ccd;
 			td {
@@ -353,6 +351,13 @@ span.fold, span.unfold {
 			color: #112;
 		}
 	}
+}
+
+.class_group .skill_table.selected {
+	background-color: #efeff4;
+}
+.class_group:nth-child(even) .skill_table.selected {
+	background-color: #e4e4f0;
 }
 
 /* フッタコンソール */
