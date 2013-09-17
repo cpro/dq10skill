@@ -339,6 +339,10 @@ span.fold, span.unfold {
 	tr+tr.enabled:hover td {
 		color: #211;
 	}
+	
+	&.selected {
+		background-color: #e0e0f0;
+	}
 }
 
 /* フッタコンソール */
