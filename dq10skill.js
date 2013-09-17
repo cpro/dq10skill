@@ -549,8 +549,6 @@ var SimulatorUI = (function($) {
 								refreshTotalExpRemain();
 								refreshTotalPassive();
 								refreshSaveUrl();
-								
-								return false;
 							});
 						});
 					})(vocation, skill);
