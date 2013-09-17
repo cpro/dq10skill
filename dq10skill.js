@@ -713,8 +713,9 @@ var SimulatorUI = (function($) {
 		//スキル選択時に同スキルを強調
 		function() {
 			$('.skill_table').click(function(e) {
+				var skill = $(this).attr('class').split(' ')[0];
 				$('.skill_table').removeClass('selected')
-				$('.' + $(this).attr('class').split(' ')[0]).addClass('selected')
+				$('.' + skill).addClass('selected')
 			});
 		}
 	];
