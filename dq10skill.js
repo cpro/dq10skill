@@ -708,6 +708,14 @@ var SimulatorUI = (function($) {
 				sim.clearAllSkills();
 				refreshAll();
 			});
+		},
+		
+		//スキル選択時に同スキルを強調
+		function() {
+			$('.skill_table').click(function(e) {
+				$('.skill_table').css('background-color', '')
+				$('.' + $(this).attr('class').split(' ')[0]).css('background-color', '#e0e0f0')
+			});
 		}
 	];
 	
