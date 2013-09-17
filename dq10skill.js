@@ -549,8 +549,6 @@ var SimulatorUI = (function($) {
 								refreshTotalExpRemain();
 								refreshTotalPassive();
 								refreshSaveUrl();
-								
-								return false;
 							});
 						});
 					})(vocation, skill);
@@ -707,6 +705,15 @@ var SimulatorUI = (function($) {
 				
 				sim.clearAllSkills();
 				refreshAll();
+			});
+		},
+		
+		//スキル選択時に同スキルを強調
+		function() {
+			$('.skill_table').click(function(e) {
+				var skill = $(this).attr('class').split(' ')[0];
+				$('.skill_table').removeClass('selected')
+				$('.' + skill).addClass('selected')
 			});
 		}
 	];
