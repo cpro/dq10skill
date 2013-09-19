@@ -568,7 +568,13 @@
 		}
 	},
 	"_vocations_coming": {
-		"_description": "今後予想される追加職業。判明し次第上に移動"
+		"_description": "今後予想される追加職業。判明し次第上に移動",
+		"monstermaster": {
+			"name": "まもの使い",
+			"abbr": "まも",
+			"skills": ["axe", "claw", "whip", "fisticuffs", ""],
+			"expTable": 2
+		}
 	},
 	
 	"vocationOrder": [
