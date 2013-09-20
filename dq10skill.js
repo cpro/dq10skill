@@ -745,7 +745,8 @@ var Base64Param = (function($) {
 		'armamentalist', //魔法戦士
 		'luminary',      //スーパースター
 		'gladiator',     //バトルマスター
-		'sage'           //賢者
+		'sage',          //賢者
+		'monstermaster'  //まもの使い
 	];
 	
 	var EN_CHAR = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
