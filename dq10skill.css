@@ -70,7 +70,7 @@ a {
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-all {
           width: 99px; }
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-vocation {
-          width: 198px; }
+          width: 231px; }
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-skillCategory {
           width: 264px; }
         #header #consoleblock #foldbuttons ul.button-container li {
@@ -109,7 +109,7 @@ a {
       background-color: #fcfcfd;
       position: absolute;
       top: 0;
-      left: 314px;
+      left: 347px;
       z-index: 102; }
       #header #consoleblock table#total td, #header #consoleblock table#total th {
         margin: 0;

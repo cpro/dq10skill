@@ -583,10 +583,7 @@
 			"abbr": "賢者",
 			"skills": ["boomerang", "wand", "bow", "shield", "enlightenment"],
 			"expTable": 2
-		}
-	},
-	"_vocations_coming": {
-		"_description": "今後予想される追加職業。判明し次第上に移動",
+		},
 		"monstermaster": {
 			"name": "まもの使い",
 			"abbr": "まも",
@@ -594,10 +591,14 @@
 			"expTable": 2
 		}
 	},
+	"_vocations_coming": {
+		"_description": "今後予想される追加職業。判明し次第上に移動"
+	},
 	
 	"vocationOrder": [
 		"warrior", "priest", "mage", "martialartist", "thief", "minstrel",
-		"gladiator", "paladin", "armamentalist", "ranger", "sage", "luminary"
+		"gladiator", "paladin", "armamentalist", "ranger", "sage", "luminary",
+		"monstermaster"
 	],
 	
 	"skillPtsGiven": [null,
