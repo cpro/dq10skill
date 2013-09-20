@@ -485,6 +485,24 @@
 				{"pt":  82, "name": "常時さいだいMP+20", "desc": "常時\nさいだいＭＰが\n２０増える", "mp": null, "maxmp": 20},
 				{"pt": 100, "name": "零の洗礼（専）", "desc": "敵にかかっている\nよい効果を解除\n賢者専用特技", "mp": 10}
 			]
+		},
+		
+		"unknown1": {
+			"unique": true,
+			"name": "不明",
+			"abbr": "",
+			"skills": [
+				{"pt":   4, "name": "（不明）"},
+				{"pt":  10, "name": "（不明）"},
+				{"pt":  16, "name": "（不明）"},
+				{"pt":  22, "name": "（不明）"},
+				{"pt":  32, "name": "（不明）"},
+				{"pt":  42, "name": "（不明）"},
+				{"pt":  55, "name": "（不明）"},
+				{"pt":  68, "name": "（不明）"},
+				{"pt":  82, "name": "（不明）"},
+				{"pt": 100, "name": "（不明）"}
+			]
 		}
 	},
 	"skillCategoryOrder": [
@@ -572,7 +590,7 @@
 		"monstermaster": {
 			"name": "まもの使い",
 			"abbr": "まも",
-			"skills": ["axe", "claw", "whip", "fisticuffs", ""],
+			"skills": ["axe", "claw", "whip", "fisticuffs", "unknown1"],
 			"expTable": 2
 		}
 	},
