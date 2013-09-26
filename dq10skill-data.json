@@ -587,7 +587,7 @@
 		"monstermaster": {
 			"name": "まもの使い",
 			"abbr": "まも",
-			"skills": ["axe", "claw", "whip", "fisticuffs", "unknown1"],
+			"skills": ["axe", "claw", "whip", "twohandedsword", "unknown1"],
 			"expTable": 2
 		}
 	},
