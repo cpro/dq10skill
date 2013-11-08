@@ -35,6 +35,14 @@ var SKILLS = {
 	'賢者': ['ブーメラン', '両手杖', '弓', '盾', 'さとり'],
 	'スーパースター': ['ムチ', '扇', 'スティック', '格闘', 'オーラ']
 }
+var TRAINING_TABLE = [
+	{stamp:    0, skillPt: 0},
+	{stamp:  100, skillPt: 1},
+	{stamp:  300, skillPt: 2},
+	{stamp:  600, skillPt: 3},
+	{stamp: 1000, skillPt: 4},
+	{stamp: 1500, skillPt: 5}
+];
 
 var HirobaStatus = (function($) {
 	var status = {};
@@ -60,18 +68,13 @@ var HirobaStatus = (function($) {
 					break;
 				case 'col4':
 					var trainingPt = parseInt($(this).text().trim());
-					if(trainingPt >= 1500)
-						status[vocation].trainingSkillPt = 5;
-					else if(trainingPt >= 1000)
-						status[vocation].trainingSkillPt = 4;
-					else if(trainingPt >= 600)
-						status[vocation].trainingSkillPt = 3;
-					else if(trainingPt >= 300)
-						status[vocation].trainingSkillPt = 2;
-					else if(trainingPt >= 100)
-						status[vocation].trainingSkillPt = 1;
-					else
-						status[vocation].trainingSkillPt = 0;
+					var trainingSkillPt = 0;
+					
+					for(var i = 0; i < TRAINING_TABLE.length; i++) {
+						if(trainingPt < TRAINING_TABLE[i].stamp) break;
+						trainingSkillPt = TRAINING_TABLE[i].skillPt;
+					}
+					status[vocation].trainingSkillPt = trainingSkillPt;
 					break;
 			}
 		});
