@@ -59,7 +59,7 @@ var HirobaStatus = (function($) {
 				case 'col3': //次のレベルまで
 					break;
 				case 'col4':
-					var trainingPt = parseInt($(this).text().trim());
+					var trainingPt = parseInt($(this).text().trim().replace(',', ''));
 					if(trainingPt >= 1500)
 						status[vocation].trainingSkillPt = 5;
 					else if(trainingPt >= 1000)
