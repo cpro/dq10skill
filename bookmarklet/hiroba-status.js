@@ -67,11 +67,11 @@ var HirobaStatus = (function($) {
 				case 'col3': //次のレベルまで
 					break;
 				case 'col4':
-					var trainingPt = parseInt($(this).text().trim());
+					var trainingStamp = parseInt($(this).text().trim());
 					var trainingSkillPt = 0;
 					
 					for(var i = 0; i < TRAINING_TABLE.length; i++) {
-						if(trainingPt < TRAINING_TABLE[i].stamp) break;
+						if(trainingStamp < TRAINING_TABLE[i].stamp) break;
 						trainingSkillPt = TRAINING_TABLE[i].skillPt;
 					}
 					status[vocation].trainingSkillPt = trainingSkillPt;
