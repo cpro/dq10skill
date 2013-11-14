@@ -7,7 +7,7 @@ if(window.location.href != HIROBA_STATUS_URL) {
 	return;
 }
 
-var vocations = [
+var VOCATIONS = [
 	'戦士',
 	'僧侶',
 	'魔法使い',
@@ -21,7 +21,7 @@ var vocations = [
 	'バトルマスター',
 	'賢者'
 ];
-var skills = {
+var SKILLS = {
 	'戦士': ['片手剣', '両手剣', 'オノ', '盾', 'ゆうかん'],
 	'僧侶': ['ヤリ', 'スティック', '棍', '盾', 'しんこう心'],
 	'魔法使い': ['両手杖', '短剣', 'ムチ', '盾', 'まほう'],
@@ -35,13 +35,21 @@ var skills = {
 	'賢者': ['ブーメラン', '両手杖', '弓', '盾', 'さとり'],
 	'スーパースター': ['ムチ', '扇', 'スティック', '格闘', 'オーラ']
 }
+var TRAINING_TABLE = [
+	{stamp:    0, skillPt: 0},
+	{stamp:  100, skillPt: 1},
+	{stamp:  300, skillPt: 2},
+	{stamp:  600, skillPt: 3},
+	{stamp: 1000, skillPt: 4},
+	{stamp: 1500, skillPt: 5}
+];
 
 var HirobaStatus = (function($) {
 	var status = {};
 	
 	function initStatus() {
-		for(var i = 0; i < vocations.length; i++) {
-			var vocation = vocations[i];
+		for(var i = 0; i < VOCATIONS.length; i++) {
+			var vocation = VOCATIONS[i];
 			status[vocation] = { skill: {} };
 		}
 	}
@@ -59,19 +67,14 @@ var HirobaStatus = (function($) {
 				case 'col3': //次のレベルまで
 					break;
 				case 'col4':
-					var trainingPt = parseInt($(this).text().trim());
-					if(trainingPt >= 1500)
-						status[vocation].trainingSkillPt = 5;
-					else if(trainingPt >= 1000)
-						status[vocation].trainingSkillPt = 4;
-					else if(trainingPt >= 600)
-						status[vocation].trainingSkillPt = 3;
-					else if(trainingPt >= 300)
-						status[vocation].trainingSkillPt = 2;
-					else if(trainingPt >= 100)
-						status[vocation].trainingSkillPt = 1;
-					else
-						status[vocation].trainingSkillPt = 0;
+					var trainingStamp = parseInt($(this).text().trim());
+					var trainingSkillPt = 0;
+					
+					for(var i = 0; i < TRAINING_TABLE.length; i++) {
+						if(trainingStamp < TRAINING_TABLE[i].stamp) break;
+						trainingSkillPt = TRAINING_TABLE[i].skillPt;
+					}
+					status[vocation].trainingSkillPt = trainingSkillPt;
 					break;
 			}
 		});
@@ -109,14 +112,14 @@ var Base64Param = (function() {
 	function encode(status) {
 		//2進にして結合する
 		var bitArray = [];
-		for(var i = 0; i < vocations.length; i++) {
-			var vocation = vocations[i];
+		for(var i = 0; i < VOCATIONS.length; i++) {
+			var vocation = VOCATIONS[i];
 			
 			bitArray = bitArray.concat(numToBitArray(status[vocation].level, BITS_LEVEL));
 			bitArray = bitArray.concat(numToBitArray(status[vocation].trainingSkillPt, BITS_TRAINING));
 			
-			for(var s = 0; s < skills[vocation].length; s++) {
-				var skillName = skills[vocation][s];
+			for(var s = 0; s < SKILLS[vocation].length; s++) {
+				var skillName = SKILLS[vocation][s];
 				bitArray = bitArray.concat(numToBitArray(status[vocation].skill[skillName], BITS_SKILL));
 			}
 		}
