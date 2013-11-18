@@ -6,6 +6,10 @@
     <meta content='text/javascript' http-equiv='Content-Script-Type'>
     <title>広場からデータを取り込む - DQ10 スキルシミュレータ</title>
     <link href='./dq10skill.css' rel='stylesheet' type='text/css'>
+    <link href='css/smoothness/jquery-ui-1.9.1.custom.min.css' rel='stylesheet' type='text/css'>
+    <script src='js/jquery-1.8.2.js' type='text/javascript'></script>
+    <script src='js/jquery-ui-1.9.1.custom.min.js' type='text/javascript'></script>
+    <script src='js/jquery.socialbutton-1.9.0.js' type='text/javascript'></script>
     <script>
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-5127088-4']);
@@ -16,26 +20,63 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
+    <script>
+      jQuery(function($) {
+      	$('#bookmarklet').button();
+      	
+      	$('#tw-share').socialbutton('twitter', {
+      		button: 'horizontal',
+      		url: 'http://cpro.jp/dq10/skillsimulator/hiroba-import.html',
+      		lang: 'ja',
+      		hashtags: 'DQ10, DQX, dq10_skillsim'
+      	});
+      	$('#fb-like').socialbutton('facebook_like', {
+      		button: 'button_count',
+      		url: 'http://cpro.jp/dq10/skillsimulator/hiroba-import.html',
+      		locale: 'ja_JP'
+      	});
+      	$('#g-plusone').socialbutton('google_plusone', {
+      		lang: 'ja',
+      		size: 'medium',
+      		url: 'http://cpro.jp/dq10/skillsimulator/hiroba-import.html'
+      	});
+      });
+    </script>
   </head>
   <body>
-    <h1>冒険者の広場からスキルシミュレータにデータを取り込む</h1>
-    <p>バージョン1.5後期から冒険者の広場に実装されたスキル振り分け状態の表示を、ブックマークレットを利用してスキルシミュレータに取り込むことができます。</p>
-    <h2>使い方</h2>
-    <p>
-      <big><a href="javascript:(function(){var d=document;var s=d.createElement('script');s.src='http://cpro.jp/dq10/skillsimulator/bookmarklet/hiroba-status.js';d.getElementsByTagName('head')[0].appendChild(s);})();">広場からスキルシミュレータに取り込む</a></big>
-    </p>
-    <p>上記のリンクをブックマークレットとして登録します。リンクを右クリックして「お気に入りに追加」「このリンクをブックマーク」等を選択してください。ブラウザによってはリンクをブックマークバーへドラッグ・ドロップするだけで登録できます。</p>
-    <p><a href="http://hiroba.dqx.jp/sc/home/status/detail/" target="_blank">冒険者の広場のスキルポイント詳細ページ</a>をログインした状態で開き、上記のブックマークレットを実行すると、広場のステータスを再現した状態でスキルシミュレータを開きます。</p>
-    <h2>解説</h2>
-    <ul>
-      <li>このブックマークレットは <a href="http://cpro.jp/dq10/skillsimulator/bookmarklet/hiroba-status.js" target="_blank">http://cpro.jp/dq10/skillsimulator/bookmarklet/hiroba-status.js</a> にあるスクリプトが本体で、これを外部スクリプトとして読み込み・実行しています。各職業のレベル・特訓スタンプ数・スキルポイントの振り分け状態以外は送信していません（というか、保存用URLを生成してアクセスしているだけです）が、ご利用は自己責任でお願いします。</li>
-      <li>本体スクリプトの動作は予告なく変更されることがあります。</li>
-      <li>広場の仕様変更によって動作しなくなることがあります。なるべく早く対応したいと思いますが保証はできません。</li>
-      <li>ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。</li>
-    </ul>
-    <address><p class='contact'>連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a></p></address>
-    <p>
-      <a href='http://cpro.jp/dq10/skillsimulator/'>スキルシミュレータに戻る</a>
-    </p>
+    <div id='header'>
+      <div id='titleblock'>
+        <h1>冒険者の広場からスキルシミュレータにデータを取り込む</h1>
+      </div>
+      <div id='consoleblock'>
+        <div id='snsbuttons'>
+          <div class='snsbutton' id='tw-share'></div>
+          <div class='snsbutton' id='fb-like'></div>
+          <div class='snsbutton' id='g-plusone'></div>
+        </div>
+      </div>
+    </div>
+    <div id='body_content'>
+      <div id='footer'>
+        <p>バージョン1.5後期から冒険者の広場に実装されたスキル振り分け状態の表示を、ブックマークレットを利用してスキルシミュレータに取り込むことができます。</p>
+        <h2>使い方</h2>
+        <p>
+          <big><a href="javascript:(function(){var d=document;var s=d.createElement('script');s.src='http://cpro.jp/dq10/skillsimulator/bookmarklet/hiroba-status.js';d.getElementsByTagName('head')[0].appendChild(s);})();" id='bookmarklet'>広場からスキルシミュレータに取り込む</a></big>
+        </p>
+        <p>上記のリンクをブックマークレットとして登録します。リンクを右クリックして「お気に入りに追加」「このリンクをブックマーク」等を選択してください。ブラウザによってはリンクをブックマークバーへドラッグ・ドロップするだけで登録できます。</p>
+        <p><a href="http://hiroba.dqx.jp/sc/home/status/detail/" target="_blank">冒険者の広場のスキルポイント詳細ページ</a>をログインした状態で開き、上記のブックマークレットを実行すると、広場のステータスを再現した状態でスキルシミュレータを開きます。</p>
+        <h2>解説</h2>
+        <ul>
+          <li>このブックマークレットは <a href="http://cpro.jp/dq10/skillsimulator/bookmarklet/hiroba-status.js" target="_blank">http://cpro.jp/dq10/skillsimulator/bookmarklet/hiroba-status.js</a> にあるスクリプトが本体で、これを外部スクリプトとして読み込み・実行しています。各職業のレベル・特訓スタンプ数・スキルポイントの振り分け状態以外は送信していません（というか、保存用URLを生成してアクセスしているだけです）が、ご利用は自己責任でお願いします。</li>
+          <li>本体スクリプトの動作は予告なく変更されることがあります。</li>
+          <li>広場の仕様変更によって動作しなくなることがあります。なるべく早く対応したいと思いますが保証はできません。</li>
+          <li>ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。</li>
+        </ul>
+        <address><p class='contact'>連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a></p></address>
+        <p>
+          <a href='http://cpro.jp/dq10/skillsimulator/'>スキルシミュレータに戻る</a>
+        </p>
+      </div>
+    </div>
   </body>
 </html>
