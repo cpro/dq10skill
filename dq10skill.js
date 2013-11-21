@@ -560,7 +560,7 @@ var SimulatorUI = (function($) {
 				for(var skillIndex = 0; skillIndex < sim.skillCategories[skillCategory].skills.length; skillIndex++) {
 					var skill = sim.skillCategories[skillCategory].skills[skillIndex];
 					var hintText = skill.desc;
-					if(skill.mp != null)
+					if(skill.mp !== null)
 						hintText += '\n（消費MP: ' + skill.mp.toString() + '）';
 					if(skill.gold)
 						hintText += '\n（' + skill.gold.toString() + 'G）';
