@@ -352,7 +352,7 @@ var SimulatorUI = (function($) {
 	}
 	
 	function refreshSaveUrl() {
-		var url = window.location.href.replace(window.location.search, "") + '?' + Base64Param.encode()
+		var url = window.location.href.replace(window.location.search, "") + '?' + Base64Param.encode();
 		$('#url_text').val(url);
 		
 		var params = {
@@ -361,7 +361,7 @@ var SimulatorUI = (function($) {
 			url: url,
 			original_referer: window.location.href,
 			tw_p: 'tweetbutton'
-		}
+		};
 		$('#tw-saveurl').attr('href', 'https://twitter.com/intent/tweet?' + $.param(params));
 	}
 	
@@ -712,8 +712,8 @@ var SimulatorUI = (function($) {
 		function() {
 			$('.skill_table').click(function(e) {
 				var skill = $(this).attr('class').split(' ')[0];
-				$('.skill_table').removeClass('selected')
-				$('.' + skill).addClass('selected')
+				$('.skill_table').removeClass('selected');
+				$('.' + skill).addClass('selected');
 			});
 		}
 	];
@@ -788,10 +788,10 @@ var Base64Param = (function($) {
 		
 		//特訓ポイントを含むかどうか: ビット列の長さで判断
 		isIncludingTrainingPts = bitArray.length >= (
-			BITS_LEVEL + 
-			BITS_TRAINING + 
+			BITS_LEVEL +
+			BITS_TRAINING +
 			BITS_SKILL * sim.vocations[VOCATIONS_DATA_ORDER[0]].skills.length
-		) * 10 //1.2VU（特訓モード実装）時点の職業数
+		) * 10; //1.2VU（特訓モード実装）時点の職業数
 		
 		var paramArray = [];
 		var i = 0;
@@ -820,7 +820,7 @@ var Base64Param = (function($) {
 				count += 1; //各スキルポイント
 			}
 		}
-		if(decodedArray.length != count) 
+		if(decodedArray.length != count)
 			return;
 		
 		var i = 0;
@@ -851,7 +851,7 @@ var Base64Param = (function($) {
 	function bitArrayToNum(bitArray) {
 		var num = 0;
 		for(var i = 0; i < bitArray.length; i++) {
-			num = num << 1 | bitArray[i]
+			num = num << 1 | bitArray[i];
 		}
 		return num;
 	}
