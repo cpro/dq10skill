@@ -1,4 +1,4 @@
-- VERSION = '3.8'
+- VERSION = '3.8.1'
 !!! 5
 %html
 	%head
@@ -13,11 +13,11 @@
 		%title= @title
 		
 		%link{rel: 'stylesheet', type: 'text/css', href: "./dq10skill.css?ver=#{VERSION}"}/
-		%link{rel: 'stylesheet', type: 'text/css', href: 'css/smoothness/jquery-ui-1.9.1.custom.min.css'}/
+		%link{rel: 'stylesheet', type: 'text/css', href: 'http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css'}/
 		
-		%script{type: 'text/javascript', src: 'js/jquery-1.8.2.js'}
-		%script{type: 'text/javascript', src: 'js/jquery.socialbutton-1.9.0.js'}
-		%script{type: 'text/javascript', src: 'js/jquery-ui-1.9.1.custom.min.js'}
+		%script{type: 'text/javascript', src: 'http://code.jquery.com/jquery-1.10.2.min.js'}
+		%script{type: 'text/javascript', src: 'http://code.jquery.com/ui/1.10.3/jquery-ui.min.js'}
+		%script{type: 'text/javascript', src: 'js/jquery.socialbutton-1.9.1.min.js'}
 		%script{type: 'text/javascript', src: "./dq10skill.js?ver=#{VERSION}"}
 		:javascript
 			var _gaq = _gaq || [];
@@ -154,8 +154,8 @@
 					%li
 						履歴:
 						%ul
+							%li 2013/11/22 v3.8.1 スクリプトの整理、ライブラリを<a href="http://code.jquery.com/" target="_blank">jQuery CDN</a>からロードするよう変更。
 							%li 2013/11/7 冒険者の広場からデータを取り込むブックマークレットを作成。
-							%li 2013/9/17 v3.8 編集中のスキルを強調表示する機能追加。
 							%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
 					-# %li
 						ToDo:

@@ -386,8 +386,14 @@ span.fold, span.unfold {
 			padding: .2em .5em;
 		}
 		
-		&#clearallskills .ui-button-text {
-			padding-left: 2em;
+		&#clearallskills, &#hirobaimport {
+			.ui-button-text {
+				padding-left: 2em;
+			}
+		}
+
+		&#hirobaimport a {
+			margin: 2px;
 		}
 	}
 	
