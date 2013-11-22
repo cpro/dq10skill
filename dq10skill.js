@@ -706,6 +706,13 @@ var SimulatorUI = (function($) {
 			});
 		},
 		
+		//hiroba-import.htmlへのリンクボタン
+		function() {
+			$('#hirobaimport>a').button({
+				icons: { primary: 'ui-icon-arrowreturnthick-1-s'}
+			});
+		},
+		
 		//スキル選択時に同スキルを強調
 		function() {
 			$('.skill_table').click(function(e) {
