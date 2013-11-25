@@ -225,6 +225,7 @@ var Simulator = (function($) {
 					if(skills[i][status]) {
 						if(getSkillPt(vocation, skillCategory) < skills[i].pt) {
 							updateSkillPt(vocation, skillCategory, skills[i].pt);
+							break;
 						}
 					}
 				}
@@ -253,7 +254,7 @@ var Simulator = (function($) {
 		totalExpRemain: totalExpRemain,
 		totalStatus: totalStatus,
 		presetStatus: presetStatus,
-		
+
 		//プロパティ
 		skillCategories: skillCategories,
 		vocations: vocations,
