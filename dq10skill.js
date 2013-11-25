@@ -212,6 +212,26 @@ var Simulator = (function($) {
 		return total;
 	}
 	
+	//特定のパッシブスキルをすべて取得済みの状態にする
+	function presetStatus (status) {
+		for(var vocation in vocations) {
+			for(var s = 0; s < vocations[vocation].skills.length; s++) {
+				var skillCategory = vocations[vocation].skills[s];
+
+				if(!skillCategories[skillCategory].unique) continue;
+
+				var skills = skillCategories[skillCategory].skills;
+				for (var i = skills.length - 1; i >= 0; i--) {
+					if(skills[i][status]) {
+						if(getSkillPt(vocation, skillCategory) < skills[i].pt) {
+							updateSkillPt(vocation, skillCategory, skills[i].pt);
+						}
+					}
+				}
+			}
+		}
+	}
+
 	//API
 	return {
 		//メソッド
@@ -232,6 +252,7 @@ var Simulator = (function($) {
 		totalRequiredExp: totalRequiredExp,
 		totalExpRemain: totalExpRemain,
 		totalStatus: totalStatus,
+		presetStatus: presetStatus,
 		
 		//プロパティ
 		skillCategories: skillCategories,
