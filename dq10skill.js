@@ -212,6 +212,39 @@ var Simulator = (function($) {
 		return total;
 	}
 	
+	//特定のパッシブスキルをすべて取得済みの状態にする
+	//ステータスが変動した場合trueを返す
+	function presetStatus (status) {
+		var returnValue = false;
+
+		for(var vocation in vocations) {
+			for(var s = 0; s < vocations[vocation].skills.length; s++) {
+				var skillCategory = vocations[vocation].skills[s];
+
+				if(!skillCategories[skillCategory].unique) continue;
+
+				var skills = skillCategories[skillCategory].skills;
+				for (var i = skills.length - 1; i >= 0; i--) {
+					if(skills[i][status] && getSkillPt(vocation, skillCategory) < skills[i].pt) {
+						updateSkillPt(vocation, skillCategory, skills[i].pt);
+						returnValue = true;
+						break;
+					}
+				}
+			}
+		}
+
+		return returnValue;
+	}
+
+	//現在のレベルを取得スキルに対する必要レベルにそろえる
+	function bringUpLevelToRequired () {
+		for(var vocation in vocations) {
+			if(getLevel(vocation) < requiredLevel(vocation))
+				updateLevel(vocation, requiredLevel(vocation));
+		}
+	}
+
 	//API
 	return {
 		//メソッド
@@ -232,7 +265,9 @@ var Simulator = (function($) {
 		totalRequiredExp: totalRequiredExp,
 		totalExpRemain: totalExpRemain,
 		totalStatus: totalStatus,
-		
+		presetStatus: presetStatus,
+		bringUpLevelToRequired: bringUpLevelToRequired,
+
 		//プロパティ
 		skillCategories: skillCategories,
 		vocations: vocations,
@@ -719,6 +754,53 @@ var SimulatorUI = (function($) {
 				var skillCategory = $(this).attr('class').split(' ')[0];
 				$('.skill_table').removeClass('selected');
 				$('.' + skillCategory).addClass('selected');
+			});
+		},
+
+		//パッシブプリセット
+		function() {
+			//セレクトボックス初期化
+			var SELECT_TABLE = [
+				{val: 'pow',   text: 'ちから'},
+				{val: 'def',   text: 'みのまもり'},
+				{val: 'dex',   text: 'きようさ'},
+				{val: 'spd',   text: 'すばやさ'},
+				{val: 'magic', text: 'こうげき魔力'},
+				{val: 'heal',  text: 'かいふく魔力'},
+				{val: 'charm', text: 'みりょく'},
+				{val: 'maxhp', text: 'さいだいHP'},
+				{val: 'maxmp', text: 'さいだいMP'},
+				{val: 'maxhp;maxmp', text: 'さいだいHP・MP'}
+			];
+
+			var $select = $('#preset>select');
+			for(var i = 0; i < SELECT_TABLE.length; i++) {
+				$select.append($("<option />").val(SELECT_TABLE[i].val).text(SELECT_TABLE[i].text));
+			}
+			$select.val('maxhp;maxmp');
+
+			$('#preset>button').button().click(function(e) {
+				for (var v = 0; v < $select.val().split(';').length; v++) {
+					sim.presetStatus($select.val().split(';')[v]);
+				}
+				refreshAll();
+			});
+		},
+
+		//全スキルをリセット
+		function() {
+			$('#bringUpLevel>button').button({
+				icons: { primary: 'ui-icon-arrowthickstop-1-n' },
+			}).click(function(e) {
+				if(!window.confirm('全職業のレベルを現在の取得スキルに必要なところまで持ち上げます。'))
+					return;
+				
+				sim.bringUpLevelToRequired();
+				refreshAllVocationInfo();
+				refreshTotalRequiredExp();
+				refreshTotalExpRemain();
+				refreshControls();
+				refreshSaveUrl();
 			});
 		}
 	];
