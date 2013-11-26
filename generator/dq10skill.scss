@@ -379,26 +379,20 @@ span.fold, span.unfold {
 			border-right: none;
 		}
 		
+		.ui-button-text-icon-primary {
+			padding-left: 16px;
+		}
+
 		.ui-widget {
 			font-size: 1em;
 		}
 		.ui-button-text {
 			padding: .2em .5em;
 		}
-		
-		&#clearallskills, &#hirobaimport {
-			.ui-button-text {
-				padding-left: 2em;
-			}
-		}
 
 		&#hirobaimport a {
 			margin: 2px;
 		}
-	}
-	
-	/* レベル一括設定 */
-	#setalllevel {
 	}
 }
 

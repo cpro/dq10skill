@@ -267,7 +267,7 @@ var Simulator = (function($) {
 		totalStatus: totalStatus,
 		presetStatus: presetStatus,
 		bringUpLevelToRequired: bringUpLevelToRequired,
-		
+
 		//プロパティ
 		skillCategories: skillCategories,
 		vocations: vocations,
@@ -784,6 +784,23 @@ var SimulatorUI = (function($) {
 					sim.presetStatus($select.val().split(';')[v]);
 				}
 				refreshAll();
+			});
+		},
+
+		//全スキルをリセット
+		function() {
+			$('#bringUpLevel>button').button({
+				icons: { primary: 'ui-icon-arrowthickstop-1-n' },
+			}).click(function(e) {
+				if(!window.confirm('全職業のレベルを現在の取得スキルに必要なところまで持ち上げます。'))
+					return;
+				
+				sim.bringUpLevelToRequired();
+				refreshAllVocationInfo();
+				refreshTotalRequiredExp();
+				refreshTotalExpRemain();
+				refreshControls();
+				refreshSaveUrl();
 			});
 		}
 	];

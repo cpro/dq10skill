@@ -273,8 +273,7 @@ span.fold, span.unfold {
   width: 65.5em;
   overflow: auto;
   margin: 3px 0;
-  padding: 2px;
-  /* レベル一括設定 */ }
+  padding: 2px; }
   #footconsole p {
     float: left;
     font-size: 80%;
@@ -283,12 +282,12 @@ span.fold, span.unfold {
     border-right: 1px solid #9999aa; }
     #footconsole p:last-child {
       border-right: none; }
+    #footconsole p .ui-button-text-icon-primary {
+      padding-left: 16px; }
     #footconsole p .ui-widget {
       font-size: 1em; }
     #footconsole p .ui-button-text {
       padding: 0.2em 0.5em; }
-    #footconsole p#clearallskills .ui-button-text, #footconsole p#hirobaimport .ui-button-text {
-      padding-left: 2em; }
     #footconsole p#hirobaimport a {
       margin: 2px; }
 
