@@ -752,10 +752,10 @@ var SimulatorUI = (function($) {
 		function() {
 			//セレクトボックス初期化
 			var SELECT_TABLE = [
-				{val: 'pow', text: 'ちから'},
-				{val: 'def', text: 'みのまもり'},
-				{val: 'dex', text: 'きようさ'},
-				{val: 'spd', text: 'すばやさ'},
+				{val: 'pow',   text: 'ちから'},
+				{val: 'def',   text: 'みのまもり'},
+				{val: 'dex',   text: 'きようさ'},
+				{val: 'spd',   text: 'すばやさ'},
 				{val: 'magic', text: 'こうげき魔力'},
 				{val: 'heal',  text: 'かいふく魔力'},
 				{val: 'charm', text: 'みりょく'},
@@ -768,7 +768,8 @@ var SimulatorUI = (function($) {
 			for(var i = 0; i < SELECT_TABLE.length; i++) {
 				$select.append($("<option />").val(SELECT_TABLE[i].val).text(SELECT_TABLE[i].text));
 			}
-
+			$select.val('maxhp;maxmp');
+			
 			$('#preset>button').button().click(function(e) {
 				for (var v = 0; v < $select.val().split(';').length; v++) {
 					sim.presetStatus($select.val().split(';')[v]);
