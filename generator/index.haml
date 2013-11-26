@@ -75,10 +75,8 @@
 						%td.total_pts#total_heal 0
 						%th
 						%td.total_pts.ui-corner-br
-				#snsbuttons
-					.snsbutton#tw-share
-					.snsbutton#fb-like
-					.snsbutton#g-plusone
+				#hirobaimport
+					%a{href: 'hiroba-import.html', target: '_blank'} 冒険者の広場からデータを取り込む
 		#body_content
 			- data['vocationOrder'].each do |vocation|
 				%div.class_group{id: vocation}
@@ -133,8 +131,6 @@
 					%button 設定
 				%p#clearallskills
 					%button 全スキルをリセット
-				%p#hirobaimport
-					%a{href: 'hiroba-import.html', target: '_blank'} 冒険者の広場からデータを取り込む
 			#footer
 				%ul
 					%li スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』のスキルポイント割り振りを検討するためのシミュレータです。
@@ -181,6 +177,10 @@
 					%a{href: 'http://dq100buster.wiki.fc2.com/', target: '_blank'} DQ10 モンスター100匹討伐隊攻略wiki
 				%li<
 					%a{href: 'http://yujuko.sakura.ne.jp/dq/ParaWt.html', target: '_blank'} DQX - 重さチェッカー
+			#snsbuttons
+				.snsbutton#tw-share
+				.snsbutton#fb-like
+				.snsbutton#g-plusone
 			- item_list.each do |item|
 				.amazonitem
 					%a{href: item[:item_url], target: '_blank'}<
