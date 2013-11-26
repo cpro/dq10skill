@@ -54,8 +54,7 @@ a {
     padding: 0;
     position: relative;
     white-space: nowrap;
-    /* 合計表示欄 */
-    /* ヘッダ部 SNSボタン各種 */ }
+    /* 合計表示欄 */ }
     #header #consoleblock #foldbuttons {
       font-size: 11px;
       position: absolute;
@@ -129,25 +128,12 @@ a {
         border-right: 1px solid #aaaabb; }
         #header #consoleblock table#total td.total_pts#total_exp, #header #consoleblock table#total td.total_pts#total_exp_remain {
           width: 64px; }
-    #header #consoleblock #snsbuttons {
-      padding: 2px 0;
-      height: 21px;
+    #header #consoleblock #hirobaimport {
       position: absolute;
       bottom: 0;
       right: 10px;
-      z-index: 101; }
-      #header #consoleblock #snsbuttons .snsbutton {
-        display: inline-block;
-        position: relative;
-        height: 21px;
-        overflow: hidden;
-        vertical-align: top; }
-        #header #consoleblock #snsbuttons .snsbutton#tw-share {
-          width: 100px; }
-        #header #consoleblock #snsbuttons .snsbutton#g-plusone {
-          width: 65px; }
-        #header #consoleblock #snsbuttons .snsbutton#fb-like {
-          width: 105px; }
+      z-index: 101;
+      font-size: 12px; }
 
 /* 職業ボックス */
 .class_group {
@@ -288,8 +274,6 @@ span.fold, span.unfold {
       font-size: 1em; }
     #footconsole p .ui-button-text {
       padding: 0.2em 0.5em; }
-    #footconsole p#hirobaimport a {
-      margin: 2px; }
 
 /* フッタ */
 #footer {
@@ -320,6 +304,35 @@ span.fold, span.unfold {
     font-size: 70%;
     line-height: 100%;
     text-align: center; }
+
+/* ヘッダ部 SNSボタン各種 */
+#snsbuttons {
+  /*
+  padding: 2px 0;
+  height: 21px;
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  z-index: 101;
+  */
+  margin: 10px 0 5px 5px; }
+  #snsbuttons .snsbutton {
+    display: inline-block;
+    position: relative;
+    height: 21px;
+    overflow: hidden;
+    vertical-align: top;
+    /*
+    &#tw-share {
+    	width: 100px;
+    }
+    &#g-plusone {
+    	width: 65px;
+    }
+    &#fb-like {
+    	width: 105px;
+    }
+    */ }
 
 /* ベータ版注意事項 */
 #beta_notice {
