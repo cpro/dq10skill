@@ -1,4 +1,4 @@
-- VERSION = '3.8.1'
+- VERSION = '3.9'
 !!! 5
 %html
 	%head
@@ -75,10 +75,8 @@
 						%td.total_pts#total_heal 0
 						%th
 						%td.total_pts.ui-corner-br
-				#snsbuttons
-					.snsbutton#tw-share
-					.snsbutton#fb-like
-					.snsbutton#g-plusone
+				#hirobaimport
+					%a{href: 'hiroba-import.html', target: '_blank'} 冒険者の広場からデータを取り込む
 		#body_content
 			- data['vocationOrder'].each do |vocation|
 				%div.class_group{id: vocation}
@@ -125,10 +123,14 @@
 					レベル一括設定
 					%select{size: 1}
 					%button 設定
+				%p#bringUpLevel
+					%button 必要レベルまで上げる
+				%p#preset
+					パッシブ全取得
+					%select
+					%button 設定
 				%p#clearallskills
 					%button 全スキルをリセット
-				%p#hirobaimport
-					%a{href: 'hiroba-import.html', target: '_blank'} 冒険者の広場からデータを取り込む
 			#footer
 				%ul
 					%li スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』のスキルポイント割り振りを検討するためのシミュレータです。
@@ -150,10 +152,18 @@
 							%li タイトル下の職業ごとのボタンをクリックすると、その職業の位置にスクロールします。折りたたまれていた場合は展開されます。
 							%li 特訓モードのスキルポイントを1以上にした場合、最低でもレベル50必要なものとして計算します。
 							%li 「レベル一括設定」でレベルを選択し設定ボタンをクリックすると、全職業のレベルを一度に変更できます。
+							%li 「必要レベルまで上げる」ボタンをクリックすると、現在のレベルを取得済みのスキルに応じた必要レベルまで持ち上げます。
+							%li 「パッシブ全取得」でステータスの種類を選択し設定ボタンをクリックすると、「常時さいだいHP+30」などのいわゆるパッシブスキルをすべて取得した状態に設定します。ゼロからのスキル設計時、「とりあえずHPMPパッシブ」のような使い方が可能です。
 							%li ブックマークレットを利用して、冒険者の広場のスキルポイント詳細ページからデータを取り込めます。詳細は<a href="hiroba-import.html" target="_blank">解説ページを参照</a>してください。
 					%li
 						履歴:
 						%ul
+							%li
+								2013/11/26 v3.9
+								%ul
+									%li 「必要レベルまで上げる」機能追加。
+									%li 「パッシブ全取得」機能追加。
+									%li レイアウト変更。ツイートボタン2種の位置が近く間違いやすかったのを改善、広場取込ボタンを目立つ位置に。
 							%li 2013/11/22 v3.8.1 スクリプトの整理、ライブラリを<a href="http://code.jquery.com/" target="_blank">jQuery CDN</a>からロードするよう変更。
 							%li 2013/11/7 冒険者の広場からデータを取り込むブックマークレットを作成。
 							%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
@@ -175,6 +185,10 @@
 					%a{href: 'http://dq100buster.wiki.fc2.com/', target: '_blank'} DQ10 モンスター100匹討伐隊攻略wiki
 				%li<
 					%a{href: 'http://yujuko.sakura.ne.jp/dq/ParaWt.html', target: '_blank'} DQX - 重さチェッカー
+			#snsbuttons
+				.snsbutton#tw-share
+				.snsbutton#fb-like
+				.snsbutton#g-plusone
 			- item_list.each do |item|
 				.amazonitem
 					%a{href: item[:item_url], target: '_blank'}<
