@@ -237,6 +237,14 @@ var Simulator = (function($) {
 		return returnValue;
 	}
 
+	//現在のレベルを取得スキルに対する必要レベルにそろえる
+	function bringUpLevelToRequired () {
+		for(var vocation in vocations) {
+			if(getLevel(vocation) < requiredLevel(vocation))
+				updateLevel(vocation, requiredLevel(vocation));
+		}
+	}
+
 	//API
 	return {
 		//メソッド
@@ -258,7 +266,8 @@ var Simulator = (function($) {
 		totalExpRemain: totalExpRemain,
 		totalStatus: totalStatus,
 		presetStatus: presetStatus,
-
+		bringUpLevelToRequired: bringUpLevelToRequired,
+		
 		//プロパティ
 		skillCategories: skillCategories,
 		vocations: vocations,
@@ -769,7 +778,7 @@ var SimulatorUI = (function($) {
 				$select.append($("<option />").val(SELECT_TABLE[i].val).text(SELECT_TABLE[i].text));
 			}
 			$select.val('maxhp;maxmp');
-			
+
 			$('#preset>button').button().click(function(e) {
 				for (var v = 0; v < $select.val().split(';').length; v++) {
 					sim.presetStatus($select.val().split(';')[v]);
