@@ -7,12 +7,12 @@
     <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
     <title>DQ10 スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=3.8.1' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=3.9' rel='stylesheet' type='text/css'>
     <link href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css' rel='stylesheet' type='text/css'>
     <script src='http://code.jquery.com/jquery-1.10.2.min.js' type='text/javascript'></script>
     <script src='http://code.jquery.com/ui/1.10.3/jquery-ui.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=3.8.1' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=3.9' type='text/javascript'></script>
     <script>
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-5127088-4']);
@@ -1604,12 +1604,22 @@
               <li>タイトル下の職業ごとのボタンをクリックすると、その職業の位置にスクロールします。折りたたまれていた場合は展開されます。</li>
               <li>特訓モードのスキルポイントを1以上にした場合、最低でもレベル50必要なものとして計算します。</li>
               <li>「レベル一括設定」でレベルを選択し設定ボタンをクリックすると、全職業のレベルを一度に変更できます。</li>
+              <li>「必要レベルまで上げる」ボタンをクリックすると、現在のレベルを取得済みのスキルに応じた必要レベルまで持ち上げます。</li>
+              <li>「パッシブ全取得」でステータスの種類を選択し設定ボタンをクリックすると、「常時さいだいHP+30」などのいわゆるパッシブスキルをすべて取得した状態に設定します。ゼロからのスキル設計時、「とりあえずHPMPパッシブ」のような使い方が可能です。</li>
               <li>ブックマークレットを利用して、冒険者の広場のスキルポイント詳細ページからデータを取り込めます。詳細は<a href="hiroba-import.html" target="_blank">解説ページを参照</a>してください。</li>
             </ul>
           </li>
           <li>
             履歴:
             <ul>
+              <li>
+                2013/11/26 v3.9
+                <ul>
+                  <li>「必要レベルまで上げる」機能追加。</li>
+                  <li>「パッシブ全取得」機能追加。</li>
+                  <li>レイアウト変更。ツイートボタン2種の位置が近く間違いやすかったのを改善、広場取込ボタンを目立つ位置に。</li>
+                </ul>
+              </li>
               <li>2013/11/22 v3.8.1 スクリプトの整理、ライブラリを<a href="http://code.jquery.com/" target="_blank">jQuery CDN</a>からロードするよう変更。</li>
               <li>2013/11/7 冒険者の広場からデータを取り込むブックマークレットを作成。</li>
               <li>過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。</li>
