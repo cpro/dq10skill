@@ -746,6 +746,35 @@ var SimulatorUI = (function($) {
 				$('.skill_table').removeClass('selected');
 				$('.' + skillCategory).addClass('selected');
 			});
+		},
+
+		//パッシブプリセット
+		function() {
+			//セレクトボックス初期化
+			var SELECT_TABLE = [
+				{val: 'pow', text: 'ちから'},
+				{val: 'def', text: 'みのまもり'},
+				{val: 'dex', text: 'きようさ'},
+				{val: 'spd', text: 'すばやさ'},
+				{val: 'magic', text: 'こうげき魔力'},
+				{val: 'heal',  text: 'かいふく魔力'},
+				{val: 'charm', text: 'みりょく'},
+				{val: 'maxhp', text: 'さいだいHP'},
+				{val: 'maxmp', text: 'さいだいMP'},
+				{val: 'maxhp;maxmp', text: 'さいだいHP・MP'}
+			];
+
+			var $select = $('#preset>select');
+			for(var i = 0; i < SELECT_TABLE.length; i++) {
+				$select.append($("<option />").val(SELECT_TABLE[i].val).text(SELECT_TABLE[i].text));
+			}
+
+			$('#preset>button').button().click(function(e) {
+				for (var v = 0; v < $select.val().split(';').length; v++) {
+					sim.presetStatus($select.val().split(';')[v]);
+				}
+				refreshAll();
+			});
 		}
 	];
 	
