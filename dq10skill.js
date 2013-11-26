@@ -213,7 +213,10 @@ var Simulator = (function($) {
 	}
 	
 	//特定のパッシブスキルをすべて取得済みの状態にする
+	//ステータスが変動した場合trueを返す
 	function presetStatus (status) {
+		var returnValue = false;
+
 		for(var vocation in vocations) {
 			for(var s = 0; s < vocations[vocation].skills.length; s++) {
 				var skillCategory = vocations[vocation].skills[s];
@@ -222,15 +225,16 @@ var Simulator = (function($) {
 
 				var skills = skillCategories[skillCategory].skills;
 				for (var i = skills.length - 1; i >= 0; i--) {
-					if(skills[i][status]) {
-						if(getSkillPt(vocation, skillCategory) < skills[i].pt) {
-							updateSkillPt(vocation, skillCategory, skills[i].pt);
-							break;
-						}
+					if(skills[i][status] && getSkillPt(vocation, skillCategory) < skills[i].pt) {
+						updateSkillPt(vocation, skillCategory, skills[i].pt);
+						returnValue = true;
+						break;
 					}
 				}
 			}
 		}
+
+		return returnValue;
 	}
 
 	//API
