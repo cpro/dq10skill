@@ -1,0 +1,22 @@
+- VERSION = '0.1alpha1'
+!!! 5
+%html
+	%head
+		%meta{charset: 'UTF-8'}/
+		%meta{'http-equiv' => 'Content-Style-Type', content: 'text/css'}/
+		%meta{'http-equiv' => 'Content-Script-Type', content: 'text/javascript'}/
+		- @home_uri = 'http://cpro.jp/dq10/skillsimulator/beta/'
+		%link{rel: 'canonical', href: @home_uri}/
+		%meta{name: 'description', content: 'ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。まもの使いで仲間にしたモンスター用。'}/
+		
+		- @title = 'DQ10 仲間モンスター用スキルシミュレータ（V2対応テスト版）'
+		%title= @title
+		
+		%link{rel: 'stylesheet', type: 'text/css', href: "./dq10skill.css?ver=#{VERSION}"}/
+		%link{rel: 'stylesheet', type: 'text/css', href: 'http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css'}/
+		
+		%script{type: 'text/javascript', src: 'http://code.jquery.com/jquery-1.10.2.min.js'}
+		%script{type: 'text/javascript', src: 'http://code.jquery.com/ui/1.10.3/jquery-ui.min.js'}
+		%script{type: 'text/javascript', src: 'js/jquery.socialbutton-1.9.1.min.js'}
+		%script{type: 'text/javascript', src: "./dq10skill-monster.js?ver=#{VERSION}"}
+	%body
