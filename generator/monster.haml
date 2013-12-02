@@ -20,3 +20,67 @@
 		%script{type: 'text/javascript', src: 'js/jquery.socialbutton-1.9.1.min.js'}
 		%script{type: 'text/javascript', src: "./dq10skill-monster.js?ver=#{VERSION}"}
 	%body
+		#header
+			#titleblock
+				%h1<
+					%a{href: @home_uri}= @title
+				#save_url
+					保存用URL:
+					%input#url_text.ui-widget-content.ui-corner-all{type: 'text', size: 45}>/
+					%a#tw-saveurl 保存用URLをツイート
+			#consoleblock
+				#foldbuttons
+					%ul.button-container#foldbuttons-all
+						%li.button-for-all.ui-corner-all<
+							%a#fold-all ▲すべてたたむ
+						%li.button-for-all.ui-corner-all<
+							%a#unfold-all ▼すべてひろげる
+					%ul.button-container#foldbuttons-vocation
+				%table#total.ui-corner-all
+				#hirobaimport
+					%a{href: 'hiroba-import.html', target: '_blank'} 冒険者の広場からデータを取り込む
+		#body_content
+			#monsters
+			.class_group#monster_dummy
+				.class_info
+					%h2<
+						%span.monstertype> ダミー
+						= ' Lv '
+						%span.lv_h2> 1
+					%dl
+						%dt.label_lv<
+							%label{for: "lv-dummy"} レベル
+						%dd.lv_select
+							%select{size: 1, id: "lv-dummy"}
+						%dt 獲得経験値:
+						%dd.exp 0
+						%dt 残りスキルポイント:
+						%dd.pts 0 / 0
+						%dt.error{style: 'display:none'}<
+							必要レベル:
+							%span.req_lv>< 1
+						%dd.error{style: 'display:none'}
+							= '（あと '
+							%span.exp_remain> 0
+							= ' exp）'
+			#footconsole
+				%p#setalllevel
+					レベル一括設定
+					%select{size: 1}
+					%button 設定
+				%p#bringUpLevel
+					%button 必要レベルまで上げる
+				%p#clearallskills
+					%button 全スキルをリセット
+			#footer
+		#ad_sidebar
+			%h2 DQ10ツールリンク
+			%ul
+				%li<
+					%a{href: 'http://grooowl.com/r/dqx/', target: '_blank'} DQX相場情報
+				%li<
+					%a{href: 'http://www.d-quest-10.com/', target: '_blank'} ドラクエ10・モンスター完全図鑑
+				%li<
+					%a{href: 'http://dq100buster.wiki.fc2.com/', target: '_blank'} DQ10 モンスター100匹討伐隊攻略wiki
+				%li<
+					%a{href: 'http://yujuko.sakura.ne.jp/dq/ParaWt.html', target: '_blank'} DQX - 重さチェッカー

@@ -128,3 +128,31 @@ var Simulator = (function() {
 	};
 })();
 
+/* UI */
+var SimulatorUI = (function($) {
+	var CLASSNAME_SKILL_ENABLED = 'enabled';
+	var CLASSNAME_ERROR = 'error';
+	
+	var sim = Simulator;
+
+	//モンスターのエントリ追加
+	function drawMonsterEntry (monster) {
+		var $ent = $('#monster_dummy').clone();
+		$ent.find('.monstertype').text(monster.data.name);
+		$ent.find('.lv_h2').text(monster.level);
+
+		return $ent;
+	}
+
+	function refreshAll() {
+		$('#monsters').empty();
+		for(var i = 0; i < sim.monsters.length; i++) {
+			$('#monsters').append(drawMonsterEntry(sim.monsters[i]));
+		}
+	}
+
+	//API
+	return {
+		refreshAll: refreshAll
+	};
+})(jQuery);
