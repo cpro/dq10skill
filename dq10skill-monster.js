@@ -121,9 +121,11 @@ var Simulator = (function() {
 	//モンスター追加
 	function addMonster (monsterType) {
 		if(monsters.length >= MONSTER_MAX)
-			return false;
+			return null;
 
-		monsters.push(new Monster(monsterType));
+		var newMonster = new Monster(monsterType);
+		monsters.push(newMonster);
+		return newMonster;
 	}
 
 	//IDからモンスター取得
@@ -190,8 +192,6 @@ var SimulatorUI = (function($) {
 
 			$ent.append($table);
 		}
-
-
 
 		return $ent;
 	}
@@ -289,9 +289,11 @@ var SimulatorUI = (function($) {
 		return $(currentNode).parents('.skill_table').attr('class').split(' ')[0];
 	}
 
-	function setup($root) {
+	function setupEntry(monsterId) {
+		var $ent = $('#' + monsterId);
+
 		//レベル選択セレクトボックス項目設定
-		var $select = $root.find('.lv_select>select');
+		var $select = $ent.find('.lv_select>select');
 		for(var i = sim.LEVEL_MIN; i <= sim.LEVEL_MAX; i++) {
 			$select.append($("<option />").val(i).text(i.toString() + ' (' + sim.skillPtsGiven[i].toString() + ')'));
 		}
@@ -304,7 +306,7 @@ var SimulatorUI = (function($) {
 		});
 
 		//スピンボタン設定
-		$spinner = $root.find('.ptspinner');
+		$spinner = $ent.find('.ptspinner');
 		$spinner.spinner({
 			min: sim.SKILL_PTS_MIN,
 			max: sim.SKILL_PTS_MAX,
@@ -355,7 +357,7 @@ var SimulatorUI = (function($) {
 		});
 
 		//リセットボタン設定
-		$reset = $root.find('.reset').button({
+		$reset = $ent.find('.reset').button({
 			icons: { primary: 'ui-icon-refresh' },
 			text: false
 		}).click(function (e) {
@@ -371,7 +373,7 @@ var SimulatorUI = (function($) {
 		});
 		
 		//スキルテーブル項目クリック時
-		$root.find('.skill_table tr[class]').click(function() {
+		$ent.find('.skill_table tr[class]').click(function() {
 			var monsterId = getCurrentMonsterId(this);
 			var skillCategory = getCurrentSkillCategory(this);
 			var skillIndex = parseInt($(this).attr('class').replace(skillCategory + '_', ''));
@@ -387,6 +389,21 @@ var SimulatorUI = (function($) {
 			refreshMonsterInfo(monsterId);
 			refreshSaveUrl();
 		});
+
+		//おりたたむ・ひろげるボタン追加
+		var HEIGHT_FOLDED = '2.5em';
+		var HEIGHT_UNFOLDED = $('.class_group').height() + 'px';
+		
+		var $foldButton = $('<p>▲おりたたむ</p>').addClass('fold').hide().click(function() {
+			$(this).parents('.class_group').animate({height: HEIGHT_FOLDED}, 0).addClass('folded').removeClass('unfolded');
+			$(this).hide();
+		});
+		var $unfoldButton = $('<p>▼ひろげる</p>').addClass('unfold').hide().click(function() {
+			$(this).parents('.class_group').animate({height: HEIGHT_UNFOLDED}).addClass('unfolded').removeClass('folded');
+			$(this).hide();
+		});
+		$ent.find('.class_info').append($foldButton).append($unfoldButton);
+		$ent.find('.class_group').addClass('unfolded');
 		
 		//ヒントテキスト設定
 		for(var skillCategory in sim.skillCategories) {
@@ -401,6 +418,20 @@ var SimulatorUI = (function($) {
 			}
 		}
 		
+		//職業情報欄ポイント時のみ表示する
+		$('.class_info').hover(function() {
+			if($(this).parents('.class_group').hasClass('folded')) {
+				$(this).children('.unfold').show();
+			}
+			if($(this).parents('.class_group').hasClass('unfolded')) {
+				$(this).children('.fold').show();
+			}
+		}, function() {
+			$(this).children('.fold, .unfold').hide();
+		});
+	}
+
+	function setupConsole() {
 		//URLテキストボックスクリック時
 		$('#url_text').click(function() {
 			$(this).select();
@@ -428,33 +459,6 @@ var SimulatorUI = (function($) {
 			return false;
 		});
 
-		//おりたたむ・ひろげるボタン追加
-		var HEIGHT_FOLDED = '2.5em';
-		var HEIGHT_UNFOLDED = $('.class_group').height() + 'px';
-		
-		var $foldButton = $('<p>▲おりたたむ</p>').addClass('fold').hide().click(function() {
-			$(this).parents('.class_group').animate({height: HEIGHT_FOLDED}, 0).addClass('folded').removeClass('unfolded');
-			$(this).hide();
-		});
-		var $unfoldButton = $('<p>▼ひろげる</p>').addClass('unfold').hide().click(function() {
-			$(this).parents('.class_group').animate({height: HEIGHT_UNFOLDED}).addClass('unfolded').removeClass('folded');
-			$(this).hide();
-		});
-		$('.class_info').append($foldButton).append($unfoldButton);
-		$('.class_group').addClass('unfolded');
-		
-		//職業情報欄ポイント時のみ表示する
-		$('.class_info').hover(function() {
-			if($(this).parents('.class_group').hasClass('folded')) {
-				$(this).children('.unfold').show();
-			}
-			if($(this).parents('.class_group').hasClass('unfolded')) {
-				$(this).children('.fold').show();
-			}
-		}, function() {
-			$(this).children('.fold, .unfold').hide();
-		});
-		
 		//すべておりたたむ・すべてひろげるボタン追加
 		$('#fold-all').click(function(e) {
 			$('.class_info .fold').click();
@@ -480,15 +484,27 @@ var SimulatorUI = (function($) {
 			refreshAll();
 		});
 
-		refreshAll();
+		$('#appendbuttons a').click(function(e) {
+			var monsterType = $(this).attr('id').replace('append-', '');
+			var monster = sim.addMonster(monsterType);
+			if(monster === null) return;
+
+			$('#monsters').append(drawMonsterEntry(monster));
+			setupEntry(monster.id);
+			refreshEntry(monster.id);
+		});
 	}
 
 	function setupAll() {
+		setupConsole();
+
 		$('#monsters').empty();
 		for(var i = 0; i < sim.monsters.length; i++) {
 			$('#monsters').append(drawMonsterEntry(sim.monsters[i]));
 		}
-		setup($('#monsters'));
+		setupEntry('monsters');
+
+		refreshAll();
 	}
 
 	//数値を3桁区切りに整形
