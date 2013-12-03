@@ -123,8 +123,20 @@ var Simulator = (function() {
 
 	//API
 	return {
+		//メソッド
 		addMonster: addMonster,
-		monsters: monsters
+
+		//プロパティ
+		skillCategories: skillCategories,
+		skillPtsGiven: skillPtsGiven,
+		expRequired: expRequired,
+		monsters: monsters,
+		
+		//定数
+		SKILL_PTS_MIN: SKILL_PTS_MIN,
+		SKILL_PTS_MAX: SKILL_PTS_MAX,
+		LEVEL_MIN: LEVEL_MIN,
+		LEVEL_MAX: LEVEL_MAX
 	};
 })();
 
@@ -137,9 +149,33 @@ var SimulatorUI = (function($) {
 
 	//モンスターのエントリ追加
 	function drawMonsterEntry (monster) {
-		var $ent = $('#monster_dummy').clone();
+		var $ent = $('#monster_dummy').clone()
+			.attr('id', monster.monsterType)
+			.css('display', 'block');
 		$ent.find('.monstertype').text(monster.data.name);
-		$ent.find('.lv_h2').text(monster.level);
+
+		for(var c = 0; c < monster.data.skills.length; c++) {
+			var skillCategory = monster.data.skills[c];
+
+			var $table = $('<table />').addClass(skillCategory).addClass('skill_table');
+			$table.append('<caption>' +
+				sim.skillCategories[skillCategory].name +
+				': <span class="skill_total">0</span></caption>')
+				.append('<tr><th class="console" colspan="2"><input class="ptspinner" /><button class="reset">リセット</button></th></tr>');
+
+			for (var s = 0; s < sim.skillCategories[skillCategory].skills.length; s++) {
+				var skill = sim.skillCategories[skillCategory].skills[s];
+
+				var $trSkill = $('<tr />').addClass([skillCategory, s].join('_'))
+					.append('<td class="skill_pt">' + skill.pt + '</td>')
+					.append('<td class="skill_name">' + skill.name + '</td>')
+					.appendTo($table);
+			}
+
+			$ent.append($table);
+		}
+
+
 
 		return $ent;
 	}
@@ -149,6 +185,25 @@ var SimulatorUI = (function($) {
 		for(var i = 0; i < sim.monsters.length; i++) {
 			$('#monsters').append(drawMonsterEntry(sim.monsters[i]));
 		}
+		setup($('#monsters'));
+	}
+
+	function setup($root) {
+		//レベル選択セレクトボックス項目設定
+		var $select = $root.find('.lv_select>select');
+		for(var i = sim.LEVEL_MIN; i <= sim.LEVEL_MAX; i++) {
+			$select.append($("<option />").val(i).text(i.toString() + ' (' + sim.skillPtsGiven[i].toString() + ')'));
+		}
+		//レベル選択セレクトボックス変更時
+		$select.change(function() {
+			var vocation = getCurrentVocation(this);
+			sim.updateLevel(vocation, $(this).val());
+			refreshVocationInfo(vocation);
+			refreshTotalRequiredExp();
+			refreshTotalExpRemain();
+			refreshSaveUrl();
+		});
+
 	}
 
 	//API
@@ -156,3 +211,11 @@ var SimulatorUI = (function($) {
 		refreshAll: refreshAll
 	};
 })(jQuery);
+
+//ロード時
+jQuery(function($) {
+	//テスト用コード
+	Simulator.addMonster('prisonyan');
+	Simulator.addMonster('slime');
+	SimulatorUI.refreshAll();
+});
