@@ -216,7 +216,7 @@ var SimulatorUI = (function($) {
 		
 		//スキルポイント 残り / 最大値
 		var maxSkillPts = monster.maxSkillPts();
-		var remainingSkillPts = maxSkillPts + monster.totalSkillPts();
+		var remainingSkillPts = maxSkillPts - monster.totalSkillPts();
 		var $skillPtsText = $('#' + monsterId + ' .pts');
 		$skillPtsText.text(remainingSkillPts + ' / ' + maxSkillPts);
 		
@@ -230,6 +230,54 @@ var SimulatorUI = (function($) {
 			$('#' + monsterId + ' .req_lv').text(numToFormedStr(requiredLevel));
 			$('#' + monsterId + ' .exp_remain').text(numToFormedStr(monster.requiredExpRemain()));
 		}
+	}
+	
+	function refreshAllMonsterInfo() {
+		for(var i = 0; i < sim.monsters.length; i++) {
+			refreshMonsterInfo(sim.monsters[i].id);
+		}
+	}
+	
+	function refreshSkillList(monsterId, skillCategory) {
+		$('#' + monsterId + ' tr[class^=' + skillCategory + '_]').removeClass(CLASSNAME_SKILL_ENABLED); //クリア
+		var monster = sim.getMonster(monsterId);
+
+		var skillPt = monster.getSkillPt(skillCategory);
+		var skills = sim.skillCategories[skillCategory].skills;
+		for(var s = 0; s < skills.length; s++) {
+			if(skillPt < skills[s].pt)
+				break;
+			
+			$('#' + monsterId + ' .' + skillCategory + '_' + s.toString()).addClass(CLASSNAME_SKILL_ENABLED);
+		}
+		$('#' + monsterId + ' .' + skillCategory + ' .skill_total').text(skillPt);
+	}
+	
+	function refreshControls() {
+		for(var i = 0; i < sim.monsters.length; i++) {
+			var monster = sim.getMonster(monsterId);
+
+			$('#' + monster.id + ' .lv_select>select').val(monster.getLevel());
+			
+			for(var s = 0; s < monster.data.skills.length; s++) {
+				var skillCategory = monster.data.skills[s];
+				$('#' + monster.id + ' .' + skillCategory + ' .ptspinner').spinner('value', monster.getSkillPt(skillCategory));
+			}
+		}
+	}
+	
+	function refreshSaveUrl() { /*
+		var url = window.location.href.replace(window.location.search, "") + '?' + Base64Param.encode();
+		$('#url_text').val(url);
+		
+		var params = {
+			text: 'DQ10 V2のスキル構成予定:',
+			hashtags: 'DQ10, dq10_skillsim',
+			url: url,
+			original_referer: window.location.href,
+			tw_p: 'tweetbutton'
+		};
+		$('#tw-saveurl').attr('href', 'https://twitter.com/intent/tweet?' + $.param(params)); */
 	}
 
 	function getCurrentMonsterId(currentNode) {
@@ -251,9 +299,58 @@ var SimulatorUI = (function($) {
 			var monsterId = getCurrentMonsterId(this);
 			sim.getMonster(monsterId).updateLevel($(this).val());
 			refreshMonsterInfo(monsterId);
-			//refreshTotalRequiredExp();
-			//refreshTotalExpRemain();
 			//refreshSaveUrl();
+		});
+
+		//スピンボタン設定
+		$spinner = $root.find('.ptspinner');
+		$spinner.spinner({
+			min: sim.SKILL_PTS_MIN,
+			max: sim.SKILL_PTS_MAX,
+			spin: function (e, ui) {
+				var monsterId = getCurrentMonsterId(this);
+				var skillCategory = getCurrentSkillCategory(this);
+				
+				if(sim.getMonster(monsterId).updateSkillPt(skillCategory, parseInt(ui.value))) {
+					refreshSkillList(monsterId, skillCategory);
+					refreshMonsterInfo(monsterId);
+					e.stopPropagation();
+				} else {
+					return false;
+				}
+			},
+			change: function (e, ui) {
+				var monsterId = getCurrentMonsterId(this);
+				var skillCategory = getCurrentSkillCategory(this);
+				var monster = sim.getMonster(monsterId);
+
+				if(isNaN($(this).val())) {
+					$(this).val(monster.getSkillPt(skillCategory));
+					return false;
+				}
+				if(monster.updateSkillPt(skillCategory, parseInt($(this).val()))) {
+					refreshSkillList(monsterId, skillCategory);
+					refreshMonsterInfo(monsterId);
+					refreshSaveUrl();
+				} else {
+					$(this).val(monster.getSkillPt(skillCategory));
+					return false;
+				}
+			},
+			stop: function (e, ui) {
+				refreshSaveUrl();
+			}
+		});
+		//テキストボックスクリック時数値を選択状態に
+		$spinner.click(function(e) {
+			$(this).select();
+		});
+		//テキストボックスでEnter押下時更新して選択状態に
+		$spinner.keypress(function(e) {
+			if(e.which == 13) {
+				$('#url_text').focus();
+				$(this).focus().select();
+			}
 		});
 
 	}
