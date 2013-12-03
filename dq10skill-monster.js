@@ -392,10 +392,12 @@ var SimulatorUI = (function($) {
 
 		//おりたたむ・ひろげるボタン追加
 		var HEIGHT_FOLDED = '2.5em';
-		var HEIGHT_UNFOLDED = $('.class_group').height() + 'px';
-		
+		var HEIGHT_UNFOLDED = $ent.find('.class_group').height() + 'px';
+		if($ent.hasClass('class_group'))
+			HEIGHT_UNFOLDED = $ent.height() + 'px';
+
 		var $foldButton = $('<p>▲おりたたむ</p>').addClass('fold').hide().click(function() {
-			$(this).parents('.class_group').animate({height: HEIGHT_FOLDED}, 0).addClass('folded').removeClass('unfolded');
+			$(this).parents('.class_group').animate({height: HEIGHT_FOLDED}).addClass('folded').removeClass('unfolded');
 			$(this).hide();
 		});
 		var $unfoldButton = $('<p>▼ひろげる</p>').addClass('unfold').hide().click(function() {
@@ -404,7 +406,8 @@ var SimulatorUI = (function($) {
 		});
 		$ent.find('.class_info').append($foldButton).append($unfoldButton);
 		$ent.find('.class_group').addClass('unfolded');
-		
+		if($ent.hasClass('class_group')) $ent.addClass('unfolded');
+
 		//ヒントテキスト設定
 		for(var skillCategory in sim.skillCategories) {
 			for(var skillIndex = 0; skillIndex < sim.skillCategories[skillCategory].skills.length; skillIndex++) {
@@ -419,7 +422,7 @@ var SimulatorUI = (function($) {
 		}
 		
 		//職業情報欄ポイント時のみ表示する
-		$('.class_info').hover(function() {
+		$ent.find('.class_info').hover(function() {
 			if($(this).parents('.class_group').hasClass('folded')) {
 				$(this).children('.unfold').show();
 			}
