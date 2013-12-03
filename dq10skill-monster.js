@@ -194,12 +194,19 @@ var SimulatorUI = (function($) {
 		return $ent;
 	}
 
-	function refreshAll() {
-		$('#monsters').empty();
-		for(var i = 0; i < sim.monsters.length; i++) {
-			$('#monsters').append(drawMonsterEntry(sim.monsters[i]));
+	function refreshEntry(monsterId) {
+		refreshMonsterInfo(monsterId);
+		for(var skillCategory in sim.skillCategories) {
+			refreshSkillList(monsterId, skillCategory);
 		}
-		setup($('#monsters'));
+		refreshControls(monsterId);
+		refreshSaveUrl();
+	}
+
+	function refreshAll() {
+		for(var i = 0; i < sim.monsters.length; i++) {
+			refreshEntry(sim.monsters[i].id);
+		}
 	}
 
 	function refreshMonsterInfo(monsterId) {
@@ -232,12 +239,6 @@ var SimulatorUI = (function($) {
 		}
 	}
 	
-	function refreshAllMonsterInfo() {
-		for(var i = 0; i < sim.monsters.length; i++) {
-			refreshMonsterInfo(sim.monsters[i].id);
-		}
-	}
-	
 	function refreshSkillList(monsterId, skillCategory) {
 		$('#' + monsterId + ' tr[class^=' + skillCategory + '_]').removeClass(CLASSNAME_SKILL_ENABLED); //クリア
 		var monster = sim.getMonster(monsterId);
@@ -253,16 +254,14 @@ var SimulatorUI = (function($) {
 		$('#' + monsterId + ' .' + skillCategory + ' .skill_total').text(skillPt);
 	}
 	
-	function refreshControls() {
-		for(var i = 0; i < sim.monsters.length; i++) {
-			var monster = sim.getMonster(monsterId);
+	function refreshControls(monsterId) {
+		var monster = sim.getMonster(monsterId);
 
-			$('#' + monster.id + ' .lv_select>select').val(monster.getLevel());
-			
-			for(var s = 0; s < monster.data.skills.length; s++) {
-				var skillCategory = monster.data.skills[s];
-				$('#' + monster.id + ' .' + skillCategory + ' .ptspinner').spinner('value', monster.getSkillPt(skillCategory));
-			}
+		$('#' + monsterId + ' .lv_select>select').val(monster.getLevel());
+		
+		for(var s = 0; s < monster.data.skills.length; s++) {
+			var skillCategory = monster.data.skills[s];
+			$('#' + monsterId + ' .' + skillCategory + ' .ptspinner').spinner('value', monster.getSkillPt(skillCategory));
 		}
 	}
 	
@@ -353,8 +352,143 @@ var SimulatorUI = (function($) {
 			}
 		});
 
+		//リセットボタン設定
+		$reset = $root.find('.reset').button({
+			icons: { primary: 'ui-icon-refresh' },
+			text: false
+		}).click(function (e) {
+			var monsterId = getCurrentMonsterId(this);
+			var skillCategory = getCurrentSkillCategory(this);
+			var monster = sim.getMonster(monsterId);
+			
+			monster.updateSkillPt(skillCategory, 0);
+			$('#' + monsterId + ' .' + skillCategory + ' .ptspinner').spinner('value', monster.getSkillPt(skillCategory));
+			refreshSkillList(monsterId, skillCategory);
+			refreshMonsterInfo(monsterId);
+			refreshSaveUrl();
+		});
+		
+		//スキルテーブル項目クリック時
+		$root.find('.skill_table tr[class]').click(function() {
+			var monsterId = getCurrentMonsterId(this);
+			var skillCategory = getCurrentSkillCategory(this);
+			var skillIndex = parseInt($(this).attr('class').replace(skillCategory + '_', ''));
+			var monster = sim.getMonster(monsterId);
+
+			var skillPt = monster.getSkillPt(skillCategory);
+			var requiredPt = sim.skillCategories[skillCategory].skills[skillIndex].pt;
+			
+			monster.updateSkillPt(skillCategory, requiredPt);
+			$('#' + monsterId + ' .' + skillCategory + ' .ptspinner').spinner('value', monster.getSkillPt(skillCategory));
+			
+			refreshSkillList(monsterId, skillCategory);
+			refreshMonsterInfo(monsterId);
+			refreshSaveUrl();
+		});
+		
+		//ヒントテキスト設定
+		for(var skillCategory in sim.skillCategories) {
+			for(var skillIndex = 0; skillIndex < sim.skillCategories[skillCategory].skills.length; skillIndex++) {
+				var skill = sim.skillCategories[skillCategory].skills[skillIndex];
+				var hintText = skill.desc;
+				if((skill.mp !== null) && (skill.mp !== undefined))
+					hintText += '\n（消費MP: ' + skill.mp.toString() + '）';
+				if(skill.gold)
+					hintText += '\n（' + skill.gold.toString() + 'G）';
+				$('.' + skillCategory + '_' + skillIndex.toString()).attr('title', hintText);
+			}
+		}
+		
+		//URLテキストボックスクリック時
+		$('#url_text').click(function() {
+			$(this).select();
+		});
+
+		//保存用URLツイートボタン設定
+		$('#tw-saveurl').button().click(function(e) {
+			var screenWidth = screen.width, screenHeight = screen.height;
+			var windowWidth = 550, windowHeight = 420;
+			var windowLeft = Math.round(screenWidth / 2 - windowWidth / 2);
+			var windowTop = windowHeight >= screenHeight ? 0 : Math.round(screenHeight / 2 - windowHeight / 2);
+			var windowParams = {
+				scrollbars: 'yes',
+				resizable: 'yes',
+				toolbar: 'no',
+				location: 'yes',
+				width: windowWidth,
+				height: windowHeight,
+				left: windowLeft,
+				top: windowTop
+			};
+			var windowParam = $.map(windowParams, function(val, key) { return key + '=' + val; }).join(',');
+			window.open(this.href, null, windowParam);
+			
+			return false;
+		});
+
+		//おりたたむ・ひろげるボタン追加
+		var HEIGHT_FOLDED = '2.5em';
+		var HEIGHT_UNFOLDED = $('.class_group').height() + 'px';
+		
+		var $foldButton = $('<p>▲おりたたむ</p>').addClass('fold').hide().click(function() {
+			$(this).parents('.class_group').animate({height: HEIGHT_FOLDED}, 0).addClass('folded').removeClass('unfolded');
+			$(this).hide();
+		});
+		var $unfoldButton = $('<p>▼ひろげる</p>').addClass('unfold').hide().click(function() {
+			$(this).parents('.class_group').animate({height: HEIGHT_UNFOLDED}).addClass('unfolded').removeClass('folded');
+			$(this).hide();
+		});
+		$('.class_info').append($foldButton).append($unfoldButton);
+		$('.class_group').addClass('unfolded');
+		
+		//職業情報欄ポイント時のみ表示する
+		$('.class_info').hover(function() {
+			if($(this).parents('.class_group').hasClass('folded')) {
+				$(this).children('.unfold').show();
+			}
+			if($(this).parents('.class_group').hasClass('unfolded')) {
+				$(this).children('.fold').show();
+			}
+		}, function() {
+			$(this).children('.fold, .unfold').hide();
+		});
+		
+		//すべておりたたむ・すべてひろげるボタン追加
+		$('#fold-all').click(function(e) {
+			$('.class_info .fold').click();
+			$('body, html').animate({scrollTop: 0});
+		});
+		$('#unfold-all').click(function(e) {
+			$('.class_info .unfold').click();
+			$('body, html').animate({scrollTop: 0});
+		});
+
+		//レベル一括設定
+		//セレクトボックス初期化
+		$select = $('#setalllevel>select');
+		for(i = sim.LEVEL_MIN; i <= sim.LEVEL_MAX; i++) {
+			$select.append($("<option />").val(i).text(i.toString()));
+		}
+		$select.val(sim.LEVEL_MAX);
+		
+		$('#setalllevel>button').button().click(function(e) {
+			for(i = 0; i < sim.monsters.length; i++) {
+				sim.monsters[i].updateLevel($select.val());
+			}
+			refreshAll();
+		});
+
+		refreshAll();
 	}
-	
+
+	function setupAll() {
+		$('#monsters').empty();
+		for(var i = 0; i < sim.monsters.length; i++) {
+			$('#monsters').append(drawMonsterEntry(sim.monsters[i]));
+		}
+		setup($('#monsters'));
+	}
+
 	//数値を3桁区切りに整形
 	function numToFormedStr(num) {
 		if(isNaN(num)) return 'N/A';
@@ -363,7 +497,7 @@ var SimulatorUI = (function($) {
 
 	//API
 	return {
-		refreshAll: refreshAll
+		setupAll: setupAll
 	};
 })(jQuery);
 
@@ -372,5 +506,5 @@ jQuery(function($) {
 	//テスト用コード
 	Simulator.addMonster('prisonyan');
 	Simulator.addMonster('slime');
-	SimulatorUI.refreshAll();
+	SimulatorUI.setupAll();
 });
