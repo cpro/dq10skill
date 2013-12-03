@@ -35,7 +35,10 @@
 							%a#fold-all ▲すべてたたむ
 						%li.button-for-all.ui-corner-all<
 							%a#unfold-all ▼すべてひろげる
-					%ul.button-container#foldbuttons-vocation
+					%ul.button-container#appendbuttons
+						- data['monsters'].each_pair do |monster, m_data|
+							%li.button-monster-append.ui-corner-all<
+								%a{id: "append-#{monster}"} #{m_data['name']}
 				%table#total.ui-corner-all
 				#hirobaimport
 					%a{href: 'hiroba-import.html', target: '_blank'} 冒険者の広場からデータを取り込む
@@ -68,9 +71,9 @@
 					レベル一括設定
 					%select{size: 1}
 					%button 設定
-				%p#bringUpLevel
+				-# %p#bringUpLevel
 					%button 必要レベルまで上げる
-				%p#clearallskills
+				-# %p#clearallskills
 					%button 全スキルをリセット
 			#footer
 		#ad_sidebar

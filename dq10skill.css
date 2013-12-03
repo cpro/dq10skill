@@ -72,6 +72,8 @@ a {
           width: 231px; }
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-skillCategory {
           width: 264px; }
+        #header #consoleblock #foldbuttons ul.button-container#appendbuttons {
+          width: 435px; }
         #header #consoleblock #foldbuttons ul.button-container li {
           float: left;
           height: 16px;
@@ -94,6 +96,11 @@ a {
             #header #consoleblock #foldbuttons ul.button-container li.button-each a {
               width: 24px;
               text-align: center; }
+          #header #consoleblock #foldbuttons ul.button-container li.button-monster-append {
+            width: 84px; }
+            #header #consoleblock #foldbuttons ul.button-container li.button-monster-append a {
+              width: 78px;
+              text-align: left; }
           #header #consoleblock #foldbuttons ul.button-container li a {
             display: block;
             padding: 0 3px;

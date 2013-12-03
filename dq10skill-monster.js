@@ -167,6 +167,8 @@ var SimulatorUI = (function($) {
 			.attr('id', monster.id)
 			.css('display', 'block');
 		$ent.find('.monstertype').text(monster.data.name);
+		$ent.find('#lv-dummy').attr('id', 'lv-' + monster.id);
+		$ent.find('.label_lv label').attr('for', 'lv-' + monster.id);
 
 		for(var c = 0; c < monster.data.skills.length; c++) {
 			var skillCategory = monster.data.skills[c];

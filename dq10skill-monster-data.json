@@ -84,6 +84,13 @@
 	},
 
 	"monsters": {
+		"slime": {
+			"name": "スライム",
+			"abbr": "スラ",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+
 		"prisonyan": {
 			"name": "プリズニャン",
 			"abbr": "プリ",
@@ -91,12 +98,48 @@
 			"expTable": 1
 		},
 
-		"slime": {
-			"name": "スライム",
+		"hoimislime": {
+			"name": "ホイミスライム",
+			"abbr": "スラ",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"chimera": {
+			"name": "キメラ",
+			"abbr": "スラ",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"slimeknight": {
+			"name": "スライムナイト",
+			"abbr": "スラ",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"battlerex": {
+			"name": "バトルレックス",
+			"abbr": "スラ",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"mormon": {
+			"name": "モーモン",
+			"abbr": "スラ",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"catmage": {
+			"name": "ねこまどう",
 			"abbr": "スラ",
 			"skills": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		}
+		
 	},
 
 	"skillPtsGiven": [null,

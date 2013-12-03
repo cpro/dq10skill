@@ -85,7 +85,8 @@ a {
 				$width-each: 30px;
 				$side-padding-a: 3px;
 				$height-button: 16px;
-				
+				$width-monster-append: 84px;
+
 				display: inline-block;
 				list-style-type: none;
 				margin: 0;
@@ -100,7 +101,10 @@ a {
 				&#foldbuttons-skillCategory {
 					width: ($width-each + 2px + 1px) * 8;
 				}
-				
+				&#appendbuttons {
+					width: ($width-monster-append + 2px + 1px) * 5;
+				}
+
 				li {
 					float: left;
 					height: $height-button;
@@ -127,6 +131,13 @@ a {
 						a {
 							width: $width-each - ($side-padding-a * 2);
 							text-align: center;
+						}
+					}
+					&.button-monster-append{
+						width: $width-monster-append;
+						a {
+							width: $width-monster-append - ($side-padding-a * 2);
+							text-align: left;
 						}
 					}
 					a {
