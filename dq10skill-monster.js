@@ -27,6 +27,9 @@ var Simulator = (function() {
 	var levels = {};
 	var monsters = [];
 	
+	//モンスターID管理
+	var lastId = 0;
+
 	/*モンスターオブジェクト */
 
 	//コンストラクタ
@@ -35,6 +38,8 @@ var Simulator = (function() {
 		this.monsterType = monsterType;
 		this.level = LEVEL_MIN;
 		this.skillPts = {};
+
+		this.id = monsterType + '_' + (lastId += 1).toString();
 
 		for(var s = 0; s < this.data.skills.length; s++) {
 			this.skillPts[this.data.skills[s]] = 0;
@@ -121,10 +126,19 @@ var Simulator = (function() {
 		monsters.push(new Monster(monsterType));
 	}
 
+	//IDからモンスター取得
+	function getMonster(monsterId) {
+		for(var i = 0; i < monsters.length; i++) {
+			if(monsters[i].id == monsterId) return monsters[i];
+		}
+		return null;
+	}
+
 	//API
 	return {
 		//メソッド
 		addMonster: addMonster,
+		getMonster: getMonster,
 
 		//プロパティ
 		skillCategories: skillCategories,
@@ -150,7 +164,7 @@ var SimulatorUI = (function($) {
 	//モンスターのエントリ追加
 	function drawMonsterEntry (monster) {
 		var $ent = $('#monster_dummy').clone()
-			.attr('id', monster.monsterType)
+			.attr('id', monster.id)
 			.css('display', 'block');
 		$ent.find('.monstertype').text(monster.data.name);
 
@@ -188,6 +202,44 @@ var SimulatorUI = (function($) {
 		setup($('#monsters'));
 	}
 
+	function refreshMonsterInfo(monsterId) {
+		var monster = sim.getMonster(monsterId);
+		var currentLevel = monster.getLevel();
+		var requiredLevel = monster.requiredLevel();
+		
+		//見出し中のレベル数値
+		$('#' + monsterId + ' .lv_h2').text(currentLevel);
+		var $levelH2 = $('#' + monsterId + ' h2');
+		
+		//必要経験値
+		$('#' + monsterId + ' .exp').text(numToFormedStr(monster.requiredExp(currentLevel)));
+		
+		//スキルポイント 残り / 最大値
+		var maxSkillPts = monster.maxSkillPts();
+		var remainingSkillPts = maxSkillPts + monster.totalSkillPts();
+		var $skillPtsText = $('#' + monsterId + ' .pts');
+		$skillPtsText.text(remainingSkillPts + ' / ' + maxSkillPts);
+		
+		//Lv不足の処理
+		var isLevelError = (isNaN(requiredLevel) || currentLevel < requiredLevel);
+		
+		$levelH2.toggleClass(CLASSNAME_ERROR, isLevelError);
+		$skillPtsText.toggleClass(CLASSNAME_ERROR, isLevelError);
+		$('#' + monsterId + ' .error').toggle(isLevelError);
+		if(isLevelError) {
+			$('#' + monsterId + ' .req_lv').text(numToFormedStr(requiredLevel));
+			$('#' + monsterId + ' .exp_remain').text(numToFormedStr(monster.requiredExpRemain()));
+		}
+	}
+
+	function getCurrentMonsterId(currentNode) {
+		return $(currentNode).parents('.class_group').attr('id');
+	}
+
+	function getCurrentSkillCategory(currentNode) {
+		return $(currentNode).parents('.skill_table').attr('class').split(' ')[0];
+	}
+
 	function setup($root) {
 		//レベル選択セレクトボックス項目設定
 		var $select = $root.find('.lv_select>select');
@@ -196,14 +248,20 @@ var SimulatorUI = (function($) {
 		}
 		//レベル選択セレクトボックス変更時
 		$select.change(function() {
-			var vocation = getCurrentVocation(this);
-			sim.updateLevel(vocation, $(this).val());
-			refreshVocationInfo(vocation);
-			refreshTotalRequiredExp();
-			refreshTotalExpRemain();
-			refreshSaveUrl();
+			var monsterId = getCurrentMonsterId(this);
+			sim.getMonster(monsterId).updateLevel($(this).val());
+			refreshMonsterInfo(monsterId);
+			//refreshTotalRequiredExp();
+			//refreshTotalExpRemain();
+			//refreshSaveUrl();
 		});
 
+	}
+	
+	//数値を3桁区切りに整形
+	function numToFormedStr(num) {
+		if(isNaN(num)) return 'N/A';
+		return num.toString().split(/(?=(?:\d{3})+$)/).join(',');
 	}
 
 	//API
