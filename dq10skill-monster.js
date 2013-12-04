@@ -136,11 +136,18 @@ var Simulator = (function() {
 		return null;
 	}
 
+	//指定IDのモンスター削除
+	function deleteMonster(monsterId) {
+		for(var i = 0; i < monsters.length; i++) {
+			if(monsters[i].id == monsterId) monsters.splice(i, 1);
+		}
+	}
 	//API
 	return {
 		//メソッド
 		addMonster: addMonster,
 		getMonster: getMonster,
+		deleteMonster: deleteMonster,
 
 		//プロパティ
 		skillCategories: skillCategories,
@@ -443,6 +450,8 @@ var SimulatorUI = (function($) {
 
 			if(!window.confirm(monster.data.name + ' Lv' + monster.getLevel().toString() + ' を削除します。よろしいですか？')) return;
 
+			sim.deleteMonster(monsterId);
+			$('#' + monsterId).remove();
 		});
 	}
 
