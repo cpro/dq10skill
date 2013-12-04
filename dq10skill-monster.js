@@ -130,26 +130,16 @@ var Simulator = (function() {
 
 	//IDからモンスター取得
 	function getMonster(monsterId) {
-		for(var i = 0; i < monsters.length; i++) {
-			if(monsters[i].id == monsterId) return monsters[i];
-		}
-		return null;
+		return monsters[indexOf(monsterId)];
 	}
 
 	//指定IDのモンスター削除
 	function deleteMonster(monsterId) {
-		for(var i = 0; i < monsters.length; i++) {
-			if(monsters[i].id == monsterId) monsters.splice(i, 1);
-		}
+		var i = indexOf(monsterId);
+		if(i) monsters.splice(i, 1);
 	}
 
-	function indexOf(monsterId) {
-		for(var i = 0; i < monsters.length; i++) {
-			if(monsters[i].id == monsterId) return i;
-		}
-		return null;
-	}
-
+	//指定IDのモンスターをひとつ下に並び替える
 	function movedownMonster(monsterId) {
 		var i = indexOf(monsterId);
 		if(i > monsters.length) return;
@@ -157,11 +147,19 @@ var Simulator = (function() {
 		monsters.splice(i, 2, monsters[i + 1], monsters[i]);
 	}
 
+	//指定IDのモンスターをひとつ上に並び替える
 	function moveupMonster(monsterId) {
 		var i = indexOf(monsterId);
 		if(i < 0) return;
 		
 		monsters.splice(i - 1, 2, monsters[i], monsters[i - 1]);
+	}
+
+	function indexOf(monsterId) {
+		for(var i = 0; i < monsters.length; i++) {
+			if(monsters[i].id == monsterId) return i;
+		}
+		return null;
 	}
 
 	//API
