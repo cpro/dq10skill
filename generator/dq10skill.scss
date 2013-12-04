@@ -198,18 +198,50 @@ a {
 	}
 }
 
-/* 職業ボックス */
-.class_group {
+/* エントリボックス */
+.class_group, .monster_ent {
 	border: 2px solid #99a;
 	border-radius: 5px;
 	clear: both;
-	width: 65.5em;
 	margin: 3px 0;
 	padding: 2px;
 	overflow: hidden;
 	
 	&:nth-child(even) {
 		background-color: #f6f6f7;
+	}
+}
+.class_group {
+	width: 65.5em;
+}
+.monster_ent {
+	width: 45.0em;
+}
+
+/* モンスター用 各エントリタイトル */
+.ent_title {
+	width: 98%;
+	margin: 0 auto 3px auto;
+	padding: 3px 0;
+	position: relative;
+	border-bottom: 1px solid #99a;
+
+	h2 {
+		font-size: 100%;
+		margin: 0 2em 0 0;
+		padding: 0;
+	}
+
+	.ent_title_console {
+		position: absolute;
+		top: 0;
+		right: 0;
+
+		button {
+			width: 20px;
+			height: 20px;
+			vertical-align: bottom;
+		}
 	}
 }
 
@@ -251,6 +283,9 @@ a {
 		width: 2em;
 		text-align: right;
 	}
+}
+.monster_ent .class_info {
+	height: 16em;
 }
 
 /* 折りたたみ/展開ボタン */

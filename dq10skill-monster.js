@@ -282,7 +282,7 @@ var SimulatorUI = (function($) {
 	}
 
 	function getCurrentMonsterId(currentNode) {
-		return $(currentNode).parents('.class_group').attr('id');
+		return $(currentNode).parents('.monster_ent').attr('id');
 	}
 
 	function getCurrentSkillCategory(currentNode) {
@@ -392,21 +392,21 @@ var SimulatorUI = (function($) {
 
 		//おりたたむ・ひろげるボタン追加
 		var HEIGHT_FOLDED = '2.5em';
-		var HEIGHT_UNFOLDED = $ent.find('.class_group').height() + 'px';
-		if($ent.hasClass('class_group'))
+		var HEIGHT_UNFOLDED = $ent.find('.monster_ent').height() + 'px';
+		if($ent.hasClass('monster_ent'))
 			HEIGHT_UNFOLDED = $ent.height() + 'px';
 
 		var $foldButton = $('<p>▲おりたたむ</p>').addClass('fold').hide().click(function() {
-			$(this).parents('.class_group').animate({height: HEIGHT_FOLDED}).addClass('folded').removeClass('unfolded');
+			$(this).parents('.monster_ent').animate({height: HEIGHT_FOLDED}).addClass('folded').removeClass('unfolded');
 			$(this).hide();
 		});
 		var $unfoldButton = $('<p>▼ひろげる</p>').addClass('unfold').hide().click(function() {
-			$(this).parents('.class_group').animate({height: HEIGHT_UNFOLDED}).addClass('unfolded').removeClass('folded');
+			$(this).parents('.monster_ent').animate({height: HEIGHT_UNFOLDED}).addClass('unfolded').removeClass('folded');
 			$(this).hide();
 		});
 		$ent.find('.class_info').append($foldButton).append($unfoldButton);
-		$ent.find('.class_group').addClass('unfolded');
-		if($ent.hasClass('class_group')) $ent.addClass('unfolded');
+		$ent.find('.monster_ent').addClass('unfolded');
+		if($ent.hasClass('monster_ent')) $ent.addClass('unfolded');
 
 		//ヒントテキスト設定
 		for(var skillCategory in sim.skillCategories) {
@@ -423,14 +423,26 @@ var SimulatorUI = (function($) {
 		
 		//職業情報欄ポイント時のみ表示する
 		$ent.find('.class_info').hover(function() {
-			if($(this).parents('.class_group').hasClass('folded')) {
+			if($(this).parents('.monster_ent').hasClass('folded')) {
 				$(this).children('.unfold').show();
 			}
-			if($(this).parents('.class_group').hasClass('unfolded')) {
+			if($(this).parents('.monster_ent').hasClass('unfolded')) {
 				$(this).children('.fold').show();
 			}
 		}, function() {
 			$(this).children('.fold, .unfold').hide();
+		});
+
+		//削除ボタン
+		$ent.find('.delete_entry').button({
+			icons: { primary: 'ui-icon-close' },
+			text: false
+		}).click(function (e) {
+			var monsterId = getCurrentMonsterId(this);
+			var monster = sim.getMonster(monsterId);
+
+			if(!window.confirm(monster.data.name + ' Lv' + monster.getLevel().toString() + ' を削除します。よろしいですか？')) return;
+
 		});
 	}
 

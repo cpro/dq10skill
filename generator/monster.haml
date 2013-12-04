@@ -44,12 +44,17 @@
 					%a{href: 'hiroba-import.html', target: '_blank'} 冒険者の広場からデータを取り込む
 		#body_content
 			#monsters
-			.class_group#monster_dummy{style: 'display:none'}
-				.class_info
+			.monster_ent#monster_dummy{style: 'display:none'}
+				.ent_title
 					%h2<
-						%span.monstertype> ダミー
-						= ' Lv '
+						<span class="monstertype"></span> Lv
 						%span.lv_h2> 1
+					.ent_title_console
+						%button.movedown 下へ
+						%button.moveup 上へ
+						&nbsp;
+						%button.delete_entry 削除
+				.class_info
 					%dl
 						%dt.label_lv<
 							%label{for: "lv-dummy"} レベル
