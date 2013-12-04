@@ -206,9 +206,12 @@ a {
 	margin: 3px 0;
 	padding: 2px;
 	overflow: hidden;
-	
+
 	&:nth-child(even) {
 		background-color: #f6f6f7;
+	}
+	&:nth-child(odd) {
+		background-color: $main-background-color;
 	}
 }
 .class_group {

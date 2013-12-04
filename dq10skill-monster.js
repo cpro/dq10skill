@@ -142,12 +142,36 @@ var Simulator = (function() {
 			if(monsters[i].id == monsterId) monsters.splice(i, 1);
 		}
 	}
+
+	function indexOf(monsterId) {
+		for(var i = 0; i < monsters.length; i++) {
+			if(monsters[i].id == monsterId) return i;
+		}
+		return null;
+	}
+
+	function movedownMonster(monsterId) {
+		var i = indexOf(monsterId);
+		if(i > monsters.length) return;
+
+		monsters.splice(i, 2, monsters[i + 1], monsters[i]);
+	}
+
+	function moveupMonster(monsterId) {
+		var i = indexOf(monsterId);
+		if(i < 0) return;
+		
+		monsters.splice(i - 1, 2, monsters[i], monsters[i - 1]);
+	}
+
 	//API
 	return {
 		//メソッド
 		addMonster: addMonster,
 		getMonster: getMonster,
 		deleteMonster: deleteMonster,
+		movedownMonster: movedownMonster,
+		moveupMonster : moveupMonster,
 
 		//プロパティ
 		skillCategories: skillCategories,
@@ -453,6 +477,48 @@ var SimulatorUI = (function($) {
 			sim.deleteMonster(monsterId);
 			$('#' + monsterId).remove();
 		});
+
+		//下へボタン
+		$ent.find('.movedown').button({
+			icons: { primary: 'ui-icon-triangle-1-s' },
+			text: false
+		}).click(function (e) {
+			var monsterId = getCurrentMonsterId(this);
+			var $ent = $('#' + monsterId);
+
+			if($ent.next().length === 0) return;
+
+			var zIndex = $ent.css('z-index');
+			var pos = $ent.position();
+
+			$ent.css({position: 'absolute', top: pos.top, left: pos.left, 'z-index': 1});
+			$ent.animate({top: $ent.next().position().top + $ent.next().height()}, function() {
+				$ent.insertAfter($ent.next());
+				$ent.css({position: 'relative', top: 0, left: 0, 'z-index': zIndex});
+				sim.movedownMonster(monsterId);
+			});
+		});
+		//上へボタン
+		$ent.find('.moveup').button({
+			icons: { primary: 'ui-icon-triangle-1-n' },
+			text: false
+		}).click(function (e) {
+			var monsterId = getCurrentMonsterId(this);
+			var $ent = $('#' + monsterId);
+
+			if($ent.prev().length === 0) return;
+
+			var zIndex = $ent.css('z-index');
+			var pos = $ent.position();
+
+			$ent.css({position: 'absolute', top: pos.top, left: pos.left, 'z-index': 1});
+			$ent.animate({top: $ent.prev().position().top}, function() {
+				$ent.insertBefore($ent.prev());
+				$ent.css({position: 'relative', top: 0, left: 0, 'z-index': zIndex});
+				sim.moveupMonster(monsterId);
+			});
+		});
+
 	}
 
 	function setupConsole() {

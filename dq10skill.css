@@ -152,6 +152,8 @@ a {
   overflow: hidden; }
   .class_group:nth-child(even), .monster_ent:nth-child(even) {
     background-color: #f6f6f7; }
+  .class_group:nth-child(odd), .monster_ent:nth-child(odd) {
+    background-color: #fcfcfd; }
 
 .class_group {
   width: 65.5em; }
