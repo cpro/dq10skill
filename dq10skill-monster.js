@@ -38,6 +38,7 @@ var Simulator = (function() {
 		this.monsterType = monsterType;
 		this.level = LEVEL_MIN;
 		this.skillPts = {};
+		this.indivName = this.data.defaultName;
 
 		this.id = monsterType + '_' + (lastId += 1).toString();
 
@@ -114,6 +115,15 @@ var Simulator = (function() {
 		if(required <= this.level) return 0;
 		var remain = this.requiredExp(required) - this.requiredExp(this.level);
 		return remain;
+	};
+
+	//個体名の取得
+	Monster.prototype.getIndividualName = function() {
+		return this.indivName;
+	};
+	//個体名の更新
+	Monster.prototype.updateIndividualName = function(newName) {
+		this.indivName = newName;
 	};
 
 	/* メソッド */
@@ -198,8 +208,14 @@ var SimulatorUI = (function($) {
 			.attr('id', monster.id)
 			.css('display', 'block');
 		$ent.find('.monstertype').text(monster.data.name);
-		$ent.find('#lv-dummy').attr('id', 'lv-' + monster.id);
-		$ent.find('.label_lv label').attr('for', 'lv-' + monster.id);
+		$ent.find('[id$=-dummy]').each(function() {
+			var dummyId = $(this).attr('id');
+			var newId = dummyId.replace('-dummy', '-' + monster.id);
+
+			$(this).attr('id', newId);
+			$ent.find('label[for=' + dummyId + ']').attr('for', newId);
+		});
+		$ent.find('.indiv_name input').val(monster.indivName);
 
 		for(var c = 0; c < monster.data.skills.length; c++) {
 			var skillCategory = monster.data.skills[c];
@@ -517,6 +533,13 @@ var SimulatorUI = (function($) {
 			});
 		});
 
+		//個体名テキストボックス
+		$ent.find('.indiv_name input').change(function(e) {
+			var monsterId = getCurrentMonsterId(this);
+			var monster = sim.getMonster(monsterId);
+
+			monster.updateIndividualName($(this).val());
+		});
 	}
 
 	function setupConsole() {
@@ -580,6 +603,8 @@ var SimulatorUI = (function($) {
 			$('#monsters').append(drawMonsterEntry(monster));
 			setupEntry(monster.id);
 			refreshEntry(monster.id);
+
+			$('#' + monster.id + ' .indiv_name input').focus().select();
 		});
 	}
 

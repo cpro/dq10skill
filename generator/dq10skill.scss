@@ -231,7 +231,7 @@ a {
 
 	h2 {
 		font-size: 100%;
-		margin: 0 2em 0 0;
+		margin: 0;
 		padding: 0;
 	}
 
@@ -243,7 +243,20 @@ a {
 		button {
 			width: 20px;
 			height: 20px;
-			vertical-align: bottom;
+		}
+
+		.indiv_name {
+			margin-right: 3px;
+
+			label {
+				font-size: 80%;
+				display: inline-block;
+				vertical-align: middle;
+			}
+			input {
+				display: inline-block;
+				vertical-align: middle;
+			}
 		}
 	}
 }

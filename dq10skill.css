@@ -170,7 +170,7 @@ a {
   border-bottom: 1px solid #9999aa; }
   .ent_title h2 {
     font-size: 100%;
-    margin: 0 2em 0 0;
+    margin: 0;
     padding: 0; }
   .ent_title .ent_title_console {
     position: absolute;
@@ -178,8 +178,16 @@ a {
     right: 0; }
     .ent_title .ent_title_console button {
       width: 20px;
-      height: 20px;
-      vertical-align: bottom; }
+      height: 20px; }
+    .ent_title .ent_title_console .indiv_name {
+      margin-right: 3px; }
+      .ent_title .ent_title_console .indiv_name label {
+        font-size: 80%;
+        display: inline-block;
+        vertical-align: middle; }
+      .ent_title .ent_title_console .indiv_name input {
+        display: inline-block;
+        vertical-align: middle; }
 
 /* 職業情報欄 */
 .class_info {
