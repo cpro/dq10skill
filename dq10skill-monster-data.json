@@ -87,6 +87,7 @@
 		"slime": {
 			"name": "スライム",
 			"abbr": "スラ",
+			"default": "スラリン",
 			"skills": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
@@ -94,6 +95,7 @@
 		"prisonyan": {
 			"name": "プリズニャン",
 			"abbr": "プリ",
+			"default": "プリズン",
 			"skills": ["martialnyarts", "hyad", "claw"],
 			"expTable": 1
 		},
@@ -101,6 +103,7 @@
 		"hoimislime": {
 			"name": "ホイミスライム",
 			"abbr": "スラ",
+			"default": "ホイミン",
 			"skills": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
@@ -108,6 +111,7 @@
 		"chimera": {
 			"name": "キメラ",
 			"abbr": "スラ",
+			"default": "メッキー",
 			"skills": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
@@ -115,6 +119,7 @@
 		"slimeknight": {
 			"name": "スライムナイト",
 			"abbr": "スラ",
+			"default": "ピエール",
 			"skills": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
@@ -122,6 +127,7 @@
 		"battlerex": {
 			"name": "バトルレックス",
 			"abbr": "スラ",
+			"default": "ドランゴ",
 			"skills": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
@@ -129,6 +135,7 @@
 		"mormon": {
 			"name": "モーモン",
 			"abbr": "スラ",
+			"default": "ももち",
 			"skills": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
@@ -136,6 +143,23 @@
 		"catmage": {
 			"name": "ねこまどう",
 			"abbr": "スラ",
+			"default": "モミャー",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"lizardman": {
+			"name": "リザードマン",
+			"abbr": "スラ",
+			"default": "リンガー",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"itazuramogura": {
+			"name": "いたずらもぐら",
+			"abbr": "スラ",
+			"default": "モグモグ",
 			"skills": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		}
