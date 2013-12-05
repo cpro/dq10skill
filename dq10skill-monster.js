@@ -139,13 +139,12 @@ var Simulator = (function() {
 	};
 	//転生回数の更新
 	Monster.prototype.updateRestartCount = function(newValue) {
-		var oldValue = this.restartCount;
 		if(newValue < RESTART_MIN || newValue > RESTART_MAX) {
-			return oldValue;
+			return false;
 		}
 		
 		this.restartCount = newValue;
-		return newValue;
+		return true;
 	};
 	//転生による特訓ポイントの取得
 	Monster.prototype.getRestartSkillPt = function() {
@@ -216,7 +215,9 @@ var Simulator = (function() {
 		SKILL_PTS_MIN: SKILL_PTS_MIN,
 		SKILL_PTS_MAX: SKILL_PTS_MAX,
 		LEVEL_MIN: LEVEL_MIN,
-		LEVEL_MAX: LEVEL_MAX
+		LEVEL_MAX: LEVEL_MAX,
+		RESTART_MIN: RESTART_MIN,
+		RESTART_MAX: RESTART_MAX
 	};
 })();
 
@@ -295,9 +296,12 @@ var SimulatorUI = (function($) {
 		
 		//スキルポイント 残り / 最大値
 		var maxSkillPts = monster.maxSkillPts();
-		var remainingSkillPts = maxSkillPts - monster.totalSkillPts();
+		var additionalSkillPts = monster.getRestartSkillPt();
+		var remainingSkillPts = maxSkillPts + additionalSkillPts - monster.totalSkillPts();
 		var $skillPtsText = $('#' + monsterId + ' .pts');
 		$skillPtsText.text(remainingSkillPts + ' / ' + maxSkillPts);
+		if(additionalSkillPts > 0)
+			$skillPtsText.append('<small> + ' + additionalSkillPts + '</small>');
 		
 		//Lv不足の処理
 		var isLevelError = (isNaN(requiredLevel) || currentLevel < requiredLevel);
@@ -330,6 +334,7 @@ var SimulatorUI = (function($) {
 		var monster = sim.getMonster(monsterId);
 
 		$('#' + monsterId + ' .lv_select>select').val(monster.getLevel());
+		$('#' + monsterId + ' .restart_count').val(monster.getRestartCount());
 		
 		for(var s = 0; s < monster.data.skills.length; s++) {
 			var skillCategory = monster.data.skills[s];
@@ -373,6 +378,42 @@ var SimulatorUI = (function($) {
 			sim.getMonster(monsterId).updateLevel($(this).val());
 			refreshMonsterInfo(monsterId);
 			//refreshSaveUrl();
+		});
+
+		//レベル転生回数スピンボタン設定
+		var $spinner = $('.restart_count');
+		$spinner.spinner({
+			min: sim.RESTART_MIN,
+			max: sim.RESTART_MAX,
+			spin: function (e, ui) {
+				var monsterId = getCurrentMonsterId(this);
+				var monster = sim.getMonster(monsterId);
+
+				if(monster.updateRestartCount(parseInt(ui.value))) {
+					refreshMonsterInfo(monsterId);
+				} else {
+					return false;
+				}
+			},
+			change: function (e, ui) {
+				var monsterId = getCurrentMonsterId(this);
+				var monster = sim.getMonster(monsterId);
+				
+				if(isNaN($(this).val())) {
+					$(this).val(monster.getRestartCount());
+					return false;
+				}
+				if(monster.updateRestartCount(parseInt($(this).val()))) {
+					refreshMonsterInfo(monsterId);
+					refreshSaveUrl();
+				} else {
+					$(this).val(monster.getRestartCount());
+					return false;
+				}
+			},
+			stop: function (e, ui) {
+				refreshSaveUrl();
+			}
 		});
 
 		//スピンボタン設定

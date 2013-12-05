@@ -215,7 +215,7 @@ a {
     font-size: 140%; }
   .class_info .exp {
     font-size: 120%; }
-  .class_info .training_pt {
+  .class_info .training_pt, .class_info .restart_count {
     width: 2em;
     text-align: right; }
 
