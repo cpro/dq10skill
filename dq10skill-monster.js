@@ -436,7 +436,7 @@ var SimulatorUI = (function($) {
 		});
 
 		//おりたたむ・ひろげるボタン追加
-		var HEIGHT_FOLDED = '2.5em';
+		var HEIGHT_FOLDED = '4.8em';
 		var HEIGHT_UNFOLDED = $ent.find('.monster_ent').height() + 'px';
 		if($ent.hasClass('monster_ent'))
 			HEIGHT_UNFOLDED = $ent.height() + 'px';
@@ -638,4 +638,21 @@ jQuery(function($) {
 	Simulator.addMonster('prisonyan');
 	Simulator.addMonster('slime');
 	SimulatorUI.setupAll();
+	
+	$('#tw-share').socialbutton('twitter', {
+		button: 'horizontal',
+		url: 'http://cpro.jp/dq10/skillsimulator/beta/monster.html',
+		lang: 'ja',
+		hashtags: 'DQ10, dq10_skillsim'
+	});
+	$('#fb-like').socialbutton('facebook_like', {
+		button: 'button_count',
+		url: 'http://cpro.jp/dq10/skillsimulator/beta/monster.html',
+		locale: 'ja_JP'
+	});
+	$('#g-plusone').socialbutton('google_plusone', {
+		lang: 'ja',
+		size: 'medium',
+		url: 'http://cpro.jp/dq10/skillsimulator/beta/monster.html'
+	});
 });

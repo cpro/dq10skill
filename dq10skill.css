@@ -159,7 +159,7 @@ a {
   width: 65.5em; }
 
 .monster_ent {
-  width: 45.0em; }
+  width: 65.5em; }
 
 /* モンスター用 各エントリタイトル */
 .ent_title {
@@ -301,7 +301,7 @@ span.fold, span.unfold {
 #footconsole {
   border: 2px solid #9999aa;
   border-radius: 5px;
-  width: 45.0em;
+  width: 65.5em;
   overflow: auto;
   margin: 3px 0;
   padding: 2px; }
@@ -320,6 +320,9 @@ span.fold, span.unfold {
     #footconsole p .ui-button-text {
       padding: 0.2em 0.5em; }
 
+#body-for-monster #footconsole {
+  width: 65.5em; }
+
 /* フッタ */
 #footer {
   font-size: 80%;
@@ -331,7 +334,7 @@ span.fold, span.unfold {
 /* サイドバー広告 */
 #ad_sidebar {
   position: absolute;
-  left: 47em;
+  left: 67em;
   top: 95px;
   z-index: 1; }
   #ad_sidebar ul {
@@ -349,6 +352,9 @@ span.fold, span.unfold {
     font-size: 70%;
     line-height: 100%;
     text-align: center; }
+
+#body-for-monster #ad_sidebar {
+  left: 67em; }
 
 /* ヘッダ部 SNSボタン各種 */
 #snsbuttons {
