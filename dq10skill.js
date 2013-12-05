@@ -391,7 +391,7 @@ var SimulatorUI = (function($) {
 		$('#url_text').val(url);
 		
 		var params = {
-			text: 'DQ10 V2のスキル構成予定:',
+			text: 'DQ10 現在のスキル構成:',
 			hashtags: 'DQ10, dq10_skillsim',
 			url: url,
 			original_referer: window.location.href,
