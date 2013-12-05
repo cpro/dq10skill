@@ -148,6 +148,14 @@
 			"skills": ["slappler", "slafource", "boomerang"],
 			"expTable": 1
 		},
+		
+		"mormon": {
+			"name": "モーモン",
+			"abbr": "スラ",
+			"defaultName": "ももち",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
 
 		"prisonyan": {
 			"name": "プリズニャン",
@@ -165,14 +173,6 @@
 			"expTable": 1
 		},
 		
-		"chimera": {
-			"name": "キメラ",
-			"abbr": "スラ",
-			"defaultName": "メッキー",
-			"skills": ["unknown1", "unknown2", "unknown3"],
-			"expTable": 1
-		},
-		
 		"slimeknight": {
 			"name": "スライムナイト",
 			"abbr": "スラ",
@@ -181,18 +181,10 @@
 			"expTable": 1
 		},
 		
-		"battlerex": {
-			"name": "バトルレックス",
+		"chimera": {
+			"name": "キメラ",
 			"abbr": "スラ",
-			"defaultName": "ドランゴ",
-			"skills": ["unknown1", "unknown2", "unknown3"],
-			"expTable": 1
-		},
-		
-		"mormon": {
-			"name": "モーモン",
-			"abbr": "スラ",
-			"defaultName": "ももち",
+			"defaultName": "メッキー",
 			"skills": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
@@ -209,6 +201,14 @@
 			"name": "リザードマン",
 			"abbr": "スラ",
 			"defaultName": "リンガー",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"battlerex": {
+			"name": "バトルレックス",
+			"abbr": "スラ",
+			"defaultName": "ドランゴ",
 			"skills": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
