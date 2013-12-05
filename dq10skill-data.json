@@ -488,21 +488,21 @@
 			]
 		},
 		
-		"unknown1": {
+		"monstermaster": {
 			"unique": true,
-			"name": "不明",
+			"name": "まものマスター",
 			"abbr": "",
 			"skills": [
-				{"pt":   4, "name": "（不明）"},
-				{"pt":  10, "name": "（不明）"},
-				{"pt":  16, "name": "（不明）"},
-				{"pt":  22, "name": "（不明）"},
-				{"pt":  32, "name": "（不明）"},
-				{"pt":  42, "name": "（不明）"},
-				{"pt":  55, "name": "（不明）"},
-				{"pt":  68, "name": "（不明）"},
-				{"pt":  82, "name": "（不明）"},
-				{"pt": 100, "name": "（不明）"}
+				{"pt":   2, "name": "スカウト成功率アップ"},
+				{"pt":  12, "name": "かわいがる（専）"},
+				{"pt":  26, "name": "常時みのまもり+5", "desc": "常時\nみのまもりが\n５増える", "mp": null, "def": 5},
+				{"pt":  40, "name": "ブレスクラッシュ（専）"},
+				{"pt":  48, "name": "常時ちから+5", "desc": "常時\nちからが\n５増える", "mp": null, "pow": 5},
+				{"pt":  56, "name": "HPリンク（専）"},
+				{"pt":  70, "name": "常時さいだいHP+10", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
+				{"pt":  80, "name": "MPリンク（専）"},
+				{"pt":  90, "name": "常時さいだいMP+10", "desc": "常時\nさいだいＭＰが\n１０増える", "mp": null, "maxmp": 10},
+				{"pt": 100, "name": "エモノ呼び（専）"}
 			]
 		}
 	},
@@ -588,7 +588,7 @@
 		"monstermaster": {
 			"name": "まもの使い",
 			"abbr": "まも",
-			"skills": ["axe", "claw", "whip", "twohandedsword", "unknown1"],
+			"skills": ["whip", "claw", "twohandedsword", "axe", "monstermaster"],
 			"expTable": 2
 		}
 	},
