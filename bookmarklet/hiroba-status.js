@@ -19,7 +19,8 @@ var VOCATIONS = [
 	'魔法戦士',
 	'スーパースター',
 	'バトルマスター',
-	'賢者'
+	'賢者',
+	'まもの使い'
 ];
 var SKILLS = {
 	'戦士': ['片手剣', '両手剣', 'オノ', '盾', 'ゆうかん'],
@@ -33,8 +34,9 @@ var SKILLS = {
 	'魔法戦士': ['片手剣', '両手杖', '弓', '盾', 'フォース'],
 	'レンジャー': ['弓', 'ブーメラン', 'オノ', '格闘', 'サバイバル'],
 	'賢者': ['ブーメラン', '両手杖', '弓', '盾', 'さとり'],
-	'スーパースター': ['ムチ', '扇', 'スティック', '格闘', 'オーラ']
-}
+	'スーパースター': ['ムチ', '扇', 'スティック', '格闘', 'オーラ'],
+	'まもの使い': ['ムチ', 'ツメ', '両手剣', 'オノ', 'まものマスター']
+};
 var TRAINING_TABLE = [
 	{stamp:    0, skillPt: 0},
 	{stamp:  100, skillPt: 1},
@@ -50,7 +52,11 @@ var HirobaStatus = (function($) {
 	function initStatus() {
 		for(var i = 0; i < VOCATIONS.length; i++) {
 			var vocation = VOCATIONS[i];
-			status[vocation] = { skill: {} };
+			status[vocation] = {
+				skill: {},
+				level: 1,
+				trainingSkillPt: 0
+			};
 		}
 	}
 	
