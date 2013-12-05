@@ -1,0 +1,133 @@
+- VERSION = '0.1alpha1'
+!!! 5
+%html
+	%head
+		%meta{charset: 'UTF-8'}/
+		%meta{'http-equiv' => 'Content-Style-Type', content: 'text/css'}/
+		%meta{'http-equiv' => 'Content-Script-Type', content: 'text/javascript'}/
+		- @home_uri = 'http://cpro.jp/dq10/skillsimulator/beta/monster.html'
+		%link{rel: 'canonical', href: @home_uri}/
+		%meta{name: 'description', content: 'ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。まもの使いで仲間にしたモンスター用。'}/
+		
+		- @title = 'DQ10 仲間モンスター用スキルシミュレータ（V2対応テスト版）'
+		%title= @title
+		
+		%link{rel: 'stylesheet', type: 'text/css', href: "./dq10skill.css?ver=#{VERSION}"}/
+		%link{rel: 'stylesheet', type: 'text/css', href: 'http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css'}/
+		
+		%script{type: 'text/javascript', src: 'http://code.jquery.com/jquery-1.10.2.min.js'}
+		%script{type: 'text/javascript', src: 'http://code.jquery.com/ui/1.10.3/jquery-ui.min.js'}
+		%script{type: 'text/javascript', src: 'js/jquery.socialbutton-1.9.1.min.js'}
+		%script{type: 'text/javascript', src: "./dq10skill-monster.js?ver=#{VERSION}"}
+	%body#body-for-monster
+		#header
+			#titleblock
+				%h1<
+					%a{href: @home_uri}= @title
+				#save_url
+					保存用URL:
+					%input#url_text.ui-widget-content.ui-corner-all{type: 'text', size: 45}>/
+					%a#tw-saveurl 保存用URLをツイート
+			#consoleblock
+				#foldbuttons
+					%ul.button-container#foldbuttons-all
+						%li.button-for-all.ui-corner-all<
+							%a#fold-all ▲すべてたたむ
+						%li.button-for-all.ui-corner-all<
+							%a#unfold-all ▼すべてひろげる
+					%ul.button-container#appendbuttons
+						- data['monsters'].each_pair do |monster, m_data|
+							%li.button-monster-append.ui-corner-all<
+								%a{id: "append-#{monster}"} #{m_data['name']}
+				%table#total.ui-corner-all
+		#body_content
+			#monsters
+			.monster_ent#monster_dummy{style: 'display:none'}
+				.ent_title
+					%h2<
+						<span class="monstertype"></span> Lv
+						%span.lv_h2> 1
+					.ent_title_console
+						%span.indiv_name
+							%label{for: "indiv_name-dummy"} 名前:
+							%input#indiv_name-dummy.ui-widget-content.ui-corner-all{type: 'text', size: 20}>/
+						%button.movedown 下へ
+						%button.moveup 上へ
+						&nbsp;
+						%button.delete_entry 削除
+				.class_info
+					%dl
+						%dt.label_lv<
+							%label{for: "lv-dummy"} レベル
+						%dd.lv_select
+							%select{size: 1, id: "lv-dummy"}
+						%dt 獲得経験値:
+						%dd.exp 0
+						%dt 残りスキルポイント:
+						%dd.pts 0 / 0
+						%dt.error{style: 'display:none'}<
+							必要レベル:
+							%span.req_lv>< 1
+						%dd.error{style: 'display:none'}
+							= '（あと '
+							%span.exp_remain> 0
+							= ' exp）'
+			#footconsole
+				%p#setalllevel
+					レベル一括設定
+					%select{size: 1}
+					%button 設定
+				-# %p#bringUpLevel
+					%button 必要レベルまで上げる
+				-# %p#clearallskills
+					%button 全スキルをリセット
+			#footer
+				%ul
+					%li スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』のスキルポイント割り振りを検討するためのシミュレータです。
+					%li 要JavaScript。Google Chrome, Firefox, IE8以上で動作確認。IE対応は後回しになりがちです。
+					%li
+						使い方:
+						%ul
+							%li ページ上部のモンスター名のボタンをクリックすることで、仲間モンスターの欄をひとつ増やします。
+							%li 各欄の右上にある×ボタンで仲間モンスターを削除します。▼と▲でそれぞれ上下に並べ替えます。
+							%li プルダウンで仲間モンスターのレベルを選択。括弧内はそのレベルの累計スキルポイント。
+							%li スキルポイントはスキル一覧の項目をクリックすると必要なポイントが自動入力されます。上下ボタン・キーボードの上下キーで1ずつ調整、PageUp/PageDownキーで10ずつ上下します。数値の直接入力も可能。
+							%li スキルポイント欄右のリセットボタンをクリックするとポイントを0にします。
+							-# %li 「保存用URL」欄に表示されるURLは、アクセスすることで現在の状態を再現できます。メモ用・掲示板に貼る用などにどうぞ。
+							%li レベル欄あたりにカーソルを持っていくと「おりたたむ」ボタンが出てきて、クリックすると簡易表示になります。そのまま操作も可能。「すべてたたむ」でレベル・スキルを一覧するのがおすすめです。
+							%li 「レベル一括設定」でレベルを選択し設定ボタンをクリックすると、全職業のレベルを一度に変更できます。
+							-# %li 「必要レベルまで上げる」ボタンをクリックすると、現在のレベルを取得済みのスキルに応じた必要レベルまで持ち上げます。
+						%li
+							履歴:
+							%ul
+								%li 2013/12/5 v0.1alpha1 テスト版公開。
+								%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
+					%li
+						ToDo:
+						%ul
+							%li レベル転生の調査・実装
+							%li 獲得スキルポイント・必要経験値の調査
+					%li ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。
+				%address<
+					%p.contact 連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a>
+		#ad_sidebar
+			%h2 DQ10ツールリンク
+			%ul
+				%li<
+					%a{href: 'http://grooowl.com/r/dqx/', target: '_blank'} DQX相場情報
+				%li<
+					%a{href: 'http://www.d-quest-10.com/', target: '_blank'} ドラクエ10・モンスター完全図鑑
+				%li<
+					%a{href: 'http://dq100buster.wiki.fc2.com/', target: '_blank'} DQ10 モンスター100匹討伐隊攻略wiki
+				%li<
+					%a{href: 'http://yujuko.sakura.ne.jp/dq/ParaWt.html', target: '_blank'} DQX - 重さチェッカー
+			#snsbuttons
+				.snsbutton#tw-share
+				.snsbutton#fb-like
+				.snsbutton#g-plusone
+			- item_list.each do |item|
+				.amazonitem
+					%a{href: item[:item_url], target: '_blank'}<
+						%img{src: item[:img_url], width: item[:img_width], height: item[:img_height], alt: item[:item_title], title: item[:item_title]}>/
+						%br>/
+						=item[:item_title]

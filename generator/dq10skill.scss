@@ -2,6 +2,8 @@
 
 $header-height: 90px;
 $main-background-color: #fcfcfd;
+$body-content-width: 65.5em;
+$body-content-width-monster: 65.5em;
 
 body {
 	background-color: $main-background-color;
@@ -85,7 +87,8 @@ a {
 				$width-each: 30px;
 				$side-padding-a: 3px;
 				$height-button: 16px;
-				
+				$width-monster-append: 84px;
+
 				display: inline-block;
 				list-style-type: none;
 				margin: 0;
@@ -95,12 +98,15 @@ a {
 					width: ($width-all + 2px + 1px) * 1;
 				}
 				&#foldbuttons-vocation {
-					width: ($width-each + 2px + 1px) * 6;
+					width: ($width-each + 2px + 1px) * 7;
 				}
 				&#foldbuttons-skillCategory {
 					width: ($width-each + 2px + 1px) * 8;
 				}
-				
+				&#appendbuttons {
+					width: ($width-monster-append + 2px + 1px) * 5;
+				}
+
 				li {
 					float: left;
 					height: $height-button;
@@ -129,6 +135,13 @@ a {
 							text-align: center;
 						}
 					}
+					&.button-monster-append{
+						width: $width-monster-append;
+						a {
+							width: $width-monster-append - ($side-padding-a * 2);
+							text-align: left;
+						}
+					}
 					a {
 						display: block;
 						padding: 0 $side-padding-a;
@@ -149,7 +162,7 @@ a {
 			background-color: $main-background-color;
 			position: absolute;
 			top: 0;
-			left: 10px + 96px + 33px * 6 + 10px;
+			left: 10px + 96px + 33px * 7 + 10px;
 			z-index: 102;
 			
 			td, th {
@@ -187,18 +200,66 @@ a {
 	}
 }
 
-/* 職業ボックス */
-.class_group {
+/* エントリボックス */
+.class_group, .monster_ent {
 	border: 2px solid #99a;
 	border-radius: 5px;
 	clear: both;
-	width: 65.5em;
 	margin: 3px 0;
 	padding: 2px;
 	overflow: hidden;
-	
+
 	&:nth-child(even) {
 		background-color: #f6f6f7;
+	}
+	&:nth-child(odd) {
+		background-color: $main-background-color;
+	}
+}
+.class_group {
+	width: $body-content-width;
+}
+.monster_ent {
+	width: $body-content-width-monster;
+}
+
+/* モンスター用 各エントリタイトル */
+.ent_title {
+	width: 98%;
+	margin: 0 auto 3px auto;
+	padding: 3px 0;
+	position: relative;
+	border-bottom: 1px solid #99a;
+
+	h2 {
+		font-size: 100%;
+		margin: 0;
+		padding: 0;
+	}
+
+	.ent_title_console {
+		position: absolute;
+		top: 0;
+		right: 0;
+
+		button {
+			width: 20px;
+			height: 20px;
+		}
+
+		.indiv_name {
+			margin-right: 3px;
+
+			label {
+				font-size: 80%;
+				display: inline-block;
+				vertical-align: middle;
+			}
+			input {
+				display: inline-block;
+				vertical-align: middle;
+			}
+		}
 	}
 }
 
@@ -240,6 +301,9 @@ a {
 		width: 2em;
 		text-align: right;
 	}
+}
+.monster_ent .class_info {
+	height: 16em;
 }
 
 /* 折りたたみ/展開ボタン */
@@ -344,7 +408,7 @@ span.fold, span.unfold {
 #footconsole {
 	border: 2px solid #99a;
 	border-radius: 5px;
-	width: 65.5em;
+	width: $body-content-width;
 	overflow: auto;
 	margin: 3px 0;
 	padding: 2px;
@@ -371,6 +435,9 @@ span.fold, span.unfold {
 		}
 	}
 }
+#body-for-monster #footconsole {
+	width: $body-content-width-monster;
+}
 
 /* フッタ */
 #footer {
@@ -384,7 +451,7 @@ span.fold, span.unfold {
 /* サイドバー広告 */
 #ad_sidebar {
 	position: absolute;
-	left: 67em;
+	left: $body-content-width + 1.5em;
 	top: $header-height + 5px;
 	z-index: 1;
 	
@@ -406,6 +473,9 @@ span.fold, span.unfold {
 		line-height: 100%;
 		text-align: center;
 	}
+}
+#body-for-monster #ad_sidebar {
+	left: $body-content-width-monster + 1.5em;
 }
 
 /* ヘッダ部 SNSボタン各種 */

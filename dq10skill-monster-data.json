@@ -1,0 +1,244 @@
+{
+	"skillCategories": {
+		"martialnyarts": {
+			"name": "マーシャルニャーツ",
+			"skills": [
+				{"pt":  3, "name": "ぽかぽかニャー", "desc": "ゴロゴロして自分のMPを10～回復"},
+				{"pt":  7, "name": "かいしん率+5%"},
+				{"pt": 12, "name": "常時すばやさ+60", "spd": 60},
+				{"pt": 18, "name": "ツメとぐニャー", "desc": "ツメをといで自分の攻撃力をかなリ上げる"},
+				{"pt": 25, "name": "かいしん率+5%"},
+				{"pt": 32, "name": "常時すばやさ+100", "spd": 100},
+				{"pt": 40, "name": "タマげたニャー", "desc": "敵1体に巨大な爆弾をほうりなげる大技"}
+			]
+		},
+
+		"hyad": {
+			"name": "ヒャドの心得",
+			"skills": [
+				{"pt":  3, "name": "ヒャド"},
+				{"pt":  7, "name": "常時こうげき魔力+60", "magic": 60},
+				{"pt": 12, "name": "ヒャダルコ"},
+				{"pt": 18, "name": "さいだいMP+50", "maxmp": 50},
+				{"pt": 25, "name": "ヒャドの威力+20%"},
+				{"pt": 32, "name": "常時こうげき魔力+100", "magic": 100},
+				{"pt": 40, "name": "マヒャド"}
+			]
+		},
+
+		"claw": {
+			"name": "ツメ",
+			"abbr": "ツメ",
+			"skills": [
+				{"pt":  3, "name": "装備時こうげき力+10", "desc": "ツメ装備時の\nこうげき力が\n１０増える", "mp": null},
+				{"pt":  7, "name": "裂鋼拳", "desc": "マシン系の敵に\n威力を発揮する\n鋼鉄を切り裂く拳", "mp": 1},
+				{"pt": 12, "name": "装備時こうげき力+20", "desc": "ツメ装備時の\nこうげき力が\n２０増える", "mp": null},
+				{"pt": 18, "name": "必中拳", "desc": "身かわしや\nガードをされずに\n攻撃が必ずヒット", "mp": 2},
+				{"pt": 25, "name": "装備時かいしん率+5%", "desc": "ツメでの攻撃時\n会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt": 32, "name": "装備時こうげき力+40", "desc": "ツメ装備時の\nこうげき力が\n４０増える", "mp": null},
+				{"pt": 40, "name": "タイガークロー", "desc": "敵１体を\n３回連続で\nはげしく切り裂く", "mp": 5}
+			]
+		},
+
+		"slappler": {
+			"name": "スラップラー",
+			"abbr": "",
+			"skills": [
+				{"pt":   3, "name": "スラストライク"},
+				{"pt":   7, "name": "常時かいしん率+10%"},
+				{"pt":  12, "name": "スラフラッシュ"},
+				{"pt":  18, "name": "常時さいだいHP+30"},
+				{"pt":  25, "name": "ミラクルストライク"},
+				{"pt":  32, "name": "常時すばやさ+100"},
+				{"pt":  40, "name": "キングスタンプ"}
+			]
+		},
+
+		"slafource": {
+			"name": "スラフォース",
+			"abbr": "",
+			"skills": [
+				{"pt":   3, "name": "ピオリム"},
+				{"pt":   7, "name": "常時すばやさ+40"},
+				{"pt":  12, "name": "ザオ"},
+				{"pt":  18, "name": "常時さいだいMP+50"},
+				{"pt":  25, "name": "べホイミ"},
+				{"pt":  32, "name": "常時回復魔力+100"},
+				{"pt":  40, "name": "バイキルト"}
+			]
+		},
+
+		"boomerang": {
+			"name": "ブーメラン",
+			"abbr": "",
+			"skills": [
+				{"pt":   3, "name": "装備時こうげき力+10", "desc": "ブーメラン装備時\nこうげき力が\n１０増える", "mp": null},
+				{"pt":   7, "name": "スライムブロウ", "desc": "スライム系の敵に\n威力を発揮する\nブーメランの妙技", "mp": 1},
+				{"pt":  12, "name": "装備時こうげき力+15", "desc": "ブーメラン装備時\nこうげき力が\n２０増える", "mp": null},
+				{"pt":  18, "name": "パワフルスロー", "desc": "全力で投げつけ\n範囲内の敵に\n等しくダメージ", "mp": 3},
+				{"pt":  25, "name": "装備時命中+20%", "desc": "ブーメランでの\n攻撃が　さらに\n当たりやすくなる", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+25", "desc": "ブーメラン装備時\nこうげき力が\n２５増える", "mp": null},
+				{"pt":  40, "name": "バーニングバード", "desc": "炎に包まれた\nブーメランが\n敵をめった切り", "mp": 6}
+			]
+		},
+
+		"unknown1": {
+			"name": "不明",
+			"abbr": "",
+			"skills": [
+				{"pt":   3, "name": "（不明）"},
+				{"pt":   7, "name": "（不明）"},
+				{"pt":  12, "name": "（不明）"},
+				{"pt":  18, "name": "（不明）"},
+				{"pt":  25, "name": "（不明）"},
+				{"pt":  32, "name": "（不明）"},
+				{"pt":  40, "name": "（不明）"}
+			]
+		},
+
+		"unknown2": {
+			"name": "不明",
+			"abbr": "",
+			"skills": [
+				{"pt":   3, "name": "（不明）"},
+				{"pt":   7, "name": "（不明）"},
+				{"pt":  12, "name": "（不明）"},
+				{"pt":  18, "name": "（不明）"},
+				{"pt":  25, "name": "（不明）"},
+				{"pt":  32, "name": "（不明）"},
+				{"pt":  40, "name": "（不明）"}
+			]
+		},
+
+		"unknown3": {
+			"name": "不明",
+			"abbr": "",
+			"skills": [
+				{"pt":   3, "name": "（不明）"},
+				{"pt":   7, "name": "（不明）"},
+				{"pt":  12, "name": "（不明）"},
+				{"pt":  18, "name": "（不明）"},
+				{"pt":  25, "name": "（不明）"},
+				{"pt":  32, "name": "（不明）"},
+				{"pt":  40, "name": "（不明）"}
+			]
+		},
+
+		"enhancepower": {
+			"name": "ちからアップ",
+			"additional": true,
+			"abbr": "",
+			"skills": [
+				{"pt":   3, "name": "常時ちから+5"},
+				{"pt":   7, "name": "常時ちから+10"},
+				{"pt":  12, "name": "開幕10%バイシオン"},
+				{"pt":  18, "name": "常時かいしん率+5%"},
+				{"pt":  25, "name": "常時ちから+15"},
+				{"pt":  32, "name": "ときどきテンションアップ"},
+				{"pt":  40, "name": "常時ちから+20"}
+			]
+		}
+	},
+
+	"monsters": {
+		"slime": {
+			"name": "スライム",
+			"abbr": "スラ",
+			"defaultName": "スラリン",
+			"skills": ["slappler", "slafource", "boomerang"],
+			"expTable": 1
+		},
+		
+		"mormon": {
+			"name": "モーモン",
+			"abbr": "スラ",
+			"defaultName": "ももち",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+
+		"prisonyan": {
+			"name": "プリズニャン",
+			"abbr": "プリ",
+			"defaultName": "プリズン",
+			"skills": ["martialnyarts", "hyad", "claw"],
+			"expTable": 1
+		},
+
+		"hoimislime": {
+			"name": "ホイミスライム",
+			"abbr": "スラ",
+			"defaultName": "ホイミン",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"slimeknight": {
+			"name": "スライムナイト",
+			"abbr": "スラ",
+			"defaultName": "ピエール",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"chimera": {
+			"name": "キメラ",
+			"abbr": "スラ",
+			"defaultName": "メッキー",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"catmage": {
+			"name": "ねこまどう",
+			"abbr": "スラ",
+			"defaultName": "モミャー",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"lizardman": {
+			"name": "リザードマン",
+			"abbr": "スラ",
+			"defaultName": "リンガー",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"battlerex": {
+			"name": "バトルレックス",
+			"abbr": "スラ",
+			"defaultName": "ドランゴ",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"itazuramogura": {
+			"name": "いたずらもぐら",
+			"abbr": "スラ",
+			"defaultName": "モグモグ",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		}
+		
+	},
+
+	"skillPtsGiven": [null,
+		  0,   0,   0,   0,   0,   0,   0,   0,   0,   3,
+		  6,   6,   9,  13,  13,  17,  21,  21,  25,  29,
+		 29,  32,  36,  36,  40,  44,  44,  49,  54,  54,
+		 58,  63,  63,  68,  72,  72,  76,  79,  79,  83,
+		 87,  87,  90,  93,  93,  97, 100, 100, 103, 107
+	],
+	
+	"expRequired": {
+		"1": [null,
+			      0,       7,      22,      48,      88,     147,     234,     362,     546,     810,
+			   1180,    1692,    2383,    3303,    4503,    6043,    7989,   10412,   13387,   16996,
+			  21320,   26447,   32459,   39444,   47480,   56645,   67009,   78638,   91599,  105958,
+			 121784,  139146,  158115,  178765,  201169,  225401,  251537,  279655,  309835,  342154,
+			 376695,  413539,  452770,  494474,  538736,  585643,  635284,  687748,  743129,  801516
+		]
+	}
+
+}

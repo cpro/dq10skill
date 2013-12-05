@@ -6,7 +6,7 @@ var Simulator = (function($) {
 	var SKILL_PTS_MIN = 0;
 	var SKILL_PTS_MAX = 100;
 	var LEVEL_MIN = 1;
-	var LEVEL_MAX = 75;
+	var LEVEL_MAX = 80;
 	var TRAINING_SKILL_PTS_MIN = 0;
 	var TRAINING_SKILL_PTS_MAX = 5;
 	var LEVEL_FOR_TRAINING_MODE = 50;
@@ -595,7 +595,7 @@ var SimulatorUI = (function($) {
 				for(var skillIndex = 0; skillIndex < sim.skillCategories[skillCategory].skills.length; skillIndex++) {
 					var skill = sim.skillCategories[skillCategory].skills[skillIndex];
 					var hintText = skill.desc;
-					if(skill.mp !== null)
+					if((skill.mp !== null) && (skill.mp !== undefined))
 						hintText += '\n（消費MP: ' + skill.mp.toString() + '）';
 					if(skill.gold)
 						hintText += '\n（' + skill.gold.toString() + 'G）';
@@ -832,7 +832,8 @@ var Base64Param = (function($) {
 		'armamentalist', //魔法戦士
 		'luminary',      //スーパースター
 		'gladiator',     //バトルマスター
-		'sage'           //賢者
+		'sage',          //賢者
+		'monstermaster'  //まもの使い
 	];
 	
 	var EN_CHAR = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
