@@ -7,12 +7,12 @@
     <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
     <title>DQ10 スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=3.9' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=4.0alpha2' rel='stylesheet' type='text/css'>
     <link href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css' rel='stylesheet' type='text/css'>
     <script src='http://code.jquery.com/jquery-1.10.2.min.js' type='text/javascript'></script>
     <script src='http://code.jquery.com/ui/1.10.3/jquery-ui.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=3.9' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=4.0alpha2' type='text/javascript'></script>
     <script>
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-5127088-4']);
@@ -51,6 +51,7 @@
             <li class='button-each ui-corner-all'><a id='fold-ranger'>レン</a></li>
             <li class='button-each ui-corner-all'><a id='fold-sage'>賢者</a></li>
             <li class='button-each ui-corner-all'><a id='fold-luminary'>スパ</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-monstermaster'>まも</a></li>
           </ul>
         </div>
         <table class='ui-corner-all' id='total'>
@@ -1565,6 +1566,129 @@
           <tr class='jenesaisquoi_8'><td class='skill_pt'>82</td><td class='skill_name'>ベストスマイル（専）</td></tr>
           <tr class='jenesaisquoi_9'><td class='skill_pt'>100</td><td class='skill_name'>ゴールドシャワー（専）</td></tr>
         </table></div>
+      <div class='class_group' id='monstermaster'>
+        <div class='class_info'>
+          <h2>まもの使い Lv<span class='lv_h2'>1</span></h2>
+          <dl>
+            <dt class='label_lv'><label for='lv-monstermaster'>レベル</label></dt>
+            <dd class='lv_select'>
+              <select id='lv-monstermaster' size='1'></select>
+            </dd>
+            <dt>獲得経験値:</dt>
+            <dd class='exp'>0</dd>
+            <dt>残りスキルポイント:</dt>
+            <dd class='pts'>0 / 0</dd>
+            <dd><label for='training-monstermaster'>特訓</label><input class='training_pt' id='training-monstermaster'></dd>
+            <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
+            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
+            </dd>
+          </dl>
+        </div><table class='whip skill_table'>
+          <caption>
+            ムチ:
+            <span class='skill_total'>0</span>
+          </caption>
+          <tr>
+            <th class='console' colspan='2'>
+              <input class='ptspinner'>
+              <button class='reset'>リセット</button>
+            </th>
+          </tr>
+          <tr class='whip_0'><td class='skill_pt'>3</td><td class='skill_name'>らせん打ち</td></tr>
+          <tr class='whip_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='whip_2'><td class='skill_pt'>13</td><td class='skill_name'>愛のムチ</td></tr>
+          <tr class='whip_3'><td class='skill_pt'>22</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='whip_4'><td class='skill_pt'>35</td><td class='skill_name'>スパークショット</td></tr>
+          <tr class='whip_5'><td class='skill_pt'>42</td><td class='skill_name'>しばり打ち</td></tr>
+          <tr class='whip_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='whip_7'><td class='skill_pt'>76</td><td class='skill_name'>地ばしり打ち</td></tr>
+          <tr class='whip_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時効果範囲+2m</td></tr>
+          <tr class='whip_9'><td class='skill_pt'>100</td><td class='skill_name'>双竜打ち</td></tr>
+        </table><table class='claw skill_table'>
+          <caption>
+            ツメ:
+            <span class='skill_total'>0</span>
+          </caption>
+          <tr>
+            <th class='console' colspan='2'>
+              <input class='ptspinner'>
+              <button class='reset'>リセット</button>
+            </th>
+          </tr>
+          <tr class='claw_0'><td class='skill_pt'>3</td><td class='skill_name'>ウィングブロウ</td></tr>
+          <tr class='claw_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='claw_2'><td class='skill_pt'>13</td><td class='skill_name'>裂鋼拳</td></tr>
+          <tr class='claw_3'><td class='skill_pt'>22</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='claw_4'><td class='skill_pt'>35</td><td class='skill_name'>必中拳</td></tr>
+          <tr class='claw_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='claw_6'><td class='skill_pt'>58</td><td class='skill_name'>タイガークロー</td></tr>
+          <tr class='claw_7'><td class='skill_pt'>76</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='claw_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='claw_9'><td class='skill_pt'>100</td><td class='skill_name'>ゴールドフィンガー</td></tr>
+        </table><table class='twohandedsword skill_table'>
+          <caption>
+            両手剣:
+            <span class='skill_total'>0</span>
+          </caption>
+          <tr>
+            <th class='console' colspan='2'>
+              <input class='ptspinner'>
+              <button class='reset'>リセット</button>
+            </th>
+          </tr>
+          <tr class='twohandedsword_0'><td class='skill_pt'>3</td><td class='skill_name'>ブレードガード</td></tr>
+          <tr class='twohandedsword_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='twohandedsword_2'><td class='skill_pt'>13</td><td class='skill_name'>ドラゴンスラッシュ</td></tr>
+          <tr class='twohandedsword_3'><td class='skill_pt'>22</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='twohandedsword_4'><td class='skill_pt'>35</td><td class='skill_name'>ぶんまわし</td></tr>
+          <tr class='twohandedsword_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+          <tr class='twohandedsword_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='twohandedsword_7'><td class='skill_pt'>76</td><td class='skill_name'>フリーズブレード</td></tr>
+          <tr class='twohandedsword_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
+          <tr class='twohandedsword_9'><td class='skill_pt'>100</td><td class='skill_name'>渾身斬り</td></tr>
+        </table><table class='axe skill_table'>
+          <caption>
+            オノ:
+            <span class='skill_total'>0</span>
+          </caption>
+          <tr>
+            <th class='console' colspan='2'>
+              <input class='ptspinner'>
+              <button class='reset'>リセット</button>
+            </th>
+          </tr>
+          <tr class='axe_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+          <tr class='axe_1'><td class='skill_pt'>7</td><td class='skill_name'>たいぼく斬</td></tr>
+          <tr class='axe_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          <tr class='axe_3'><td class='skill_pt'>22</td><td class='skill_name'>蒼天魔斬</td></tr>
+          <tr class='axe_4'><td class='skill_pt'>35</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+          <tr class='axe_5'><td class='skill_pt'>42</td><td class='skill_name'>かぶと割り</td></tr>
+          <tr class='axe_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+          <tr class='axe_7'><td class='skill_pt'>76</td><td class='skill_name'>まじん斬り</td></tr>
+          <tr class='axe_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
+          <tr class='axe_9'><td class='skill_pt'>100</td><td class='skill_name'>オノむそう</td></tr>
+        </table><table class='monstermaster skill_table'>
+          <caption>
+            まものマスター:
+            <span class='skill_total'>0</span>
+          </caption>
+          <tr>
+            <th class='console' colspan='2'>
+              <input class='ptspinner'>
+              <button class='reset'>リセット</button>
+            </th>
+          </tr>
+          <tr class='monstermaster_0'><td class='skill_pt'>2</td><td class='skill_name'>スカウト成功率アップ</td></tr>
+          <tr class='monstermaster_1'><td class='skill_pt'>12</td><td class='skill_name'>かわいがる（専）</td></tr>
+          <tr class='monstermaster_2'><td class='skill_pt'>26</td><td class='skill_name'>常時みのまもり+5</td></tr>
+          <tr class='monstermaster_3'><td class='skill_pt'>40</td><td class='skill_name'>ブレスクラッシュ（専）</td></tr>
+          <tr class='monstermaster_4'><td class='skill_pt'>48</td><td class='skill_name'>常時ちから+5</td></tr>
+          <tr class='monstermaster_5'><td class='skill_pt'>56</td><td class='skill_name'>HPリンク（専）</td></tr>
+          <tr class='monstermaster_6'><td class='skill_pt'>70</td><td class='skill_name'>常時さいだいHP+10</td></tr>
+          <tr class='monstermaster_7'><td class='skill_pt'>80</td><td class='skill_name'>MPリンク（専）</td></tr>
+          <tr class='monstermaster_8'><td class='skill_pt'>90</td><td class='skill_name'>常時さいだいMP+10</td></tr>
+          <tr class='monstermaster_9'><td class='skill_pt'>100</td><td class='skill_name'>エモノ呼び（専）</td></tr>
+        </table></div>
       <div id='footconsole'>
         <p id='setalllevel'>
           レベル一括設定
@@ -1587,6 +1711,7 @@
         <ul>
           <li>スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』のスキルポイント割り振りを検討するためのシミュレータです。</li>
           <li>要JavaScript。Google Chrome, IE10で動作確認。Firefoxでも動くはずです。IE8, 9はたぶん動くと思いますが推奨しません。</li>
+          <li>レベル76から80のスキルポイントは仮の数値として2ポイントずつの増加としてあります。</li>
           <li>
             使い方:
             <ul>

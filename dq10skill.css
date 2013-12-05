@@ -69,9 +69,11 @@ a {
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-all {
           width: 99px; }
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-vocation {
-          width: 198px; }
+          width: 231px; }
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-skillCategory {
           width: 264px; }
+        #header #consoleblock #foldbuttons ul.button-container#appendbuttons {
+          width: 435px; }
         #header #consoleblock #foldbuttons ul.button-container li {
           float: left;
           height: 16px;
@@ -94,6 +96,11 @@ a {
             #header #consoleblock #foldbuttons ul.button-container li.button-each a {
               width: 24px;
               text-align: center; }
+          #header #consoleblock #foldbuttons ul.button-container li.button-monster-append {
+            width: 84px; }
+            #header #consoleblock #foldbuttons ul.button-container li.button-monster-append a {
+              width: 78px;
+              text-align: left; }
           #header #consoleblock #foldbuttons ul.button-container li a {
             display: block;
             padding: 0 3px;
@@ -108,7 +115,7 @@ a {
       background-color: #fcfcfd;
       position: absolute;
       top: 0;
-      left: 314px;
+      left: 347px;
       z-index: 102; }
       #header #consoleblock table#total td, #header #consoleblock table#total th {
         margin: 0;
@@ -135,17 +142,52 @@ a {
       z-index: 101;
       font-size: 12px; }
 
-/* 職業ボックス */
-.class_group {
+/* エントリボックス */
+.class_group, .monster_ent {
   border: 2px solid #9999aa;
   border-radius: 5px;
   clear: both;
-  width: 65.5em;
   margin: 3px 0;
   padding: 2px;
   overflow: hidden; }
-  .class_group:nth-child(even) {
+  .class_group:nth-child(even), .monster_ent:nth-child(even) {
     background-color: #f6f6f7; }
+  .class_group:nth-child(odd), .monster_ent:nth-child(odd) {
+    background-color: #fcfcfd; }
+
+.class_group {
+  width: 65.5em; }
+
+.monster_ent {
+  width: 65.5em; }
+
+/* モンスター用 各エントリタイトル */
+.ent_title {
+  width: 98%;
+  margin: 0 auto 3px auto;
+  padding: 3px 0;
+  position: relative;
+  border-bottom: 1px solid #9999aa; }
+  .ent_title h2 {
+    font-size: 100%;
+    margin: 0;
+    padding: 0; }
+  .ent_title .ent_title_console {
+    position: absolute;
+    top: 0;
+    right: 0; }
+    .ent_title .ent_title_console button {
+      width: 20px;
+      height: 20px; }
+    .ent_title .ent_title_console .indiv_name {
+      margin-right: 3px; }
+      .ent_title .ent_title_console .indiv_name label {
+        font-size: 80%;
+        display: inline-block;
+        vertical-align: middle; }
+      .ent_title .ent_title_console .indiv_name input {
+        display: inline-block;
+        vertical-align: middle; }
 
 /* 職業情報欄 */
 .class_info {
@@ -176,6 +218,9 @@ a {
   .class_info .training_pt {
     width: 2em;
     text-align: right; }
+
+.monster_ent .class_info {
+  height: 16em; }
 
 /* 折りたたみ/展開ボタン */
 p.fold, p.unfold {
@@ -275,6 +320,9 @@ span.fold, span.unfold {
     #footconsole p .ui-button-text {
       padding: 0.2em 0.5em; }
 
+#body-for-monster #footconsole {
+  width: 65.5em; }
+
 /* フッタ */
 #footer {
   font-size: 80%;
@@ -304,6 +352,9 @@ span.fold, span.unfold {
     font-size: 70%;
     line-height: 100%;
     text-align: center; }
+
+#body-for-monster #ad_sidebar {
+  left: 67em; }
 
 /* ヘッダ部 SNSボタン各種 */
 #snsbuttons {
