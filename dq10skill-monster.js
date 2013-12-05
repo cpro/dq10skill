@@ -4,6 +4,10 @@ var Simulator = (function() {
 	var LEVEL_MIN = 1;
 	var LEVEL_MAX = 50;
 	var MONSTER_MAX = 8;
+	
+	var RESTART_MIN = 0;
+	var RESTART_MAX = 10;
+	var SKILL_PTS_PER_RESTART = 10;
 
 	var DATA_JSON_URI = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'dq10skill-monster-data.json';
 
@@ -39,6 +43,7 @@ var Simulator = (function() {
 		this.level = LEVEL_MIN;
 		this.skillPts = {};
 		this.indivName = this.data.defaultName;
+		this.restartCount = 0;
 
 		this.id = monsterType + '_' + (lastId += 1).toString();
 
@@ -95,7 +100,8 @@ var Simulator = (function() {
 	
 	//スキルポイント合計に対する必要レベル取得
 	Monster.prototype.requiredLevel = function() {
-		var total = this.totalSkillPts();
+		var restartSkillPt = this.getRestartSkillPt();
+		var total = this.totalSkillPts() - restartSkillPt;
 		
 		for(var l = LEVEL_MIN; l <= LEVEL_MAX; l++) {
 			if(skillPtsGiven[l] >= total)
@@ -106,7 +112,8 @@ var Simulator = (function() {
 	
 	//モンスター・レベルによる必要経験値
 	Monster.prototype.requiredExp = function(level) {
-		return expRequired[this.data.expTable][level];
+		return expRequired[this.data.expTable][level] +
+			expRequired[this.data.expTable][LEVEL_MAX] * this.getRestartCount();
 	};
 	
 	//不足経験値
@@ -126,6 +133,24 @@ var Simulator = (function() {
 		this.indivName = newName;
 	};
 
+	//転生回数の取得
+	Monster.prototype.getRestartCount = function() {
+		return this.restartCount;
+	};
+	//転生回数の更新
+	Monster.prototype.updateRestartCount = function(newValue) {
+		var oldValue = this.restartCount;
+		if(newValue < RESTART_MIN || newValue > RESTART_MAX) {
+			return oldValue;
+		}
+		
+		this.restartCount = newValue;
+		return newValue;
+	};
+	//転生による特訓ポイントの取得
+	Monster.prototype.getRestartSkillPt = function() {
+		return this.restartCount * SKILL_PTS_PER_RESTART;
+	};
 	/* メソッド */
 
 	//モンスター追加
