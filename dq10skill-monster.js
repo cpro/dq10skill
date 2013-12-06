@@ -112,8 +112,10 @@ var Simulator = (function() {
 	
 	//モンスター・レベルによる必要経験値
 	Monster.prototype.requiredExp = function(level) {
-		return expRequired[this.data.expTable][level] +
-			expRequired[this.data.expTable][LEVEL_MAX] * this.getRestartCount();
+		var expMax = expRequired[this.data.expTable][LEVEL_MAX];
+		if(isNaN(expMax)) expMax = 0;
+
+		return expRequired[this.data.expTable][level] + expMax;
 	};
 	
 	//不足経験値
