@@ -259,9 +259,9 @@ var SimulatorUI = (function($) {
 			$table = drawSkillTable(skillCategory);
 
 			if(skillCategory == 'additional1' && (monster.restartCount < 1 || monster.additional1 === null))
-				$table.css('display', 'none');
+				$table.hide();
 			if(skillCategory == 'additional2' && (monster.restartCount < 2 || monster.additional2 === null))
-				$table.css('display', 'none');
+				$table.hide();
 			
 			$ent.append($table);
 		}
@@ -271,9 +271,9 @@ var SimulatorUI = (function($) {
 	}
 	function drawSkillTable(skillCategory) {
 		var $table = $('<table />').addClass(skillCategory).addClass('skill_table');
-		$table.append('<caption>' +
+		$table.append('<caption><span class="skill_category_name">' +
 			sim.skillCategories[skillCategory].name +
-			': <span class="skill_total">0</span></caption>')
+			'</span>: <span class="skill_total">0</span></caption>')
 			.append('<tr><th class="console" colspan="2"><input class="ptspinner" /> <button class="reset">リセット</button></th></tr>');
 
 		for (var s = 0; s < sim.skillCategories[skillCategory].skills.length; s++) {
@@ -377,6 +377,48 @@ var SimulatorUI = (function($) {
 		$('#tw-saveurl').attr('href', 'https://twitter.com/intent/tweet?' + $.param(params)); */
 	}
 
+	function refreshAdditionalSkill(monsterId) {
+		var monster = sim.getMonster(monsterId);
+		var $table;
+
+		$table = $('#' + monsterId + ' .additional1');
+		if(monster.restartCount < 1 || monster.additional1 === null) {
+			$table.hide();
+		} else {
+			refreshAdditionalSkillTable($table, monster.additional1);
+			$table.show();
+		}
+
+		$table = $('#' + monsterId + ' .additional2');
+		if(monster.restartCount < 2 || monster.additional2 === null) {
+			$table.hide();
+		} else {
+			refreshAdditionalSkillTable($table, monster.additional2);
+			$table.show();
+		}
+
+		function refreshAdditionalSkillTable($table, newSkillCategory) {
+			var data = sim.skillCategories[newSkillCategory];
+
+			$table.find('caption .skill_category_name').text(data.name);
+
+			var $tr;
+			for(var s = 0; s < data.skills.length; s++) {
+				$tr = $table.find('tr[class$=_' + s.toString() + ']');
+
+				var hintText = data.skills[s].desc;
+				if((data.skills[s].mp !== null) && (data.skills[s].mp !== undefined))
+					hintText += '\n（消費MP: ' + data.skills[s].mp.toString() + '）';
+				if(data.skills[s].gold)
+					hintText += '\n（' + data.skills[s].gold.toString() + 'G）';
+				$tr.attr('title', hintText);
+
+				$tr.children('.skill_pt').text(data.skills[s].pt);
+				$tr.children('.skill_name').text(data.skills[s].name);
+			}
+		}
+	}
+
 	function getCurrentMonsterId(currentNode) {
 		return $(currentNode).parents('.monster_ent').attr('id');
 	}
@@ -411,6 +453,7 @@ var SimulatorUI = (function($) {
 				var monster = sim.getMonster(monsterId);
 
 				if(monster.updateRestartCount(parseInt(ui.value))) {
+					refreshAdditionalSkill(monsterId);
 					refreshMonsterInfo(monsterId);
 				} else {
 					return false;
@@ -425,6 +468,7 @@ var SimulatorUI = (function($) {
 					return false;
 				}
 				if(monster.updateRestartCount(parseInt($(this).val()))) {
+					refreshAdditionalSkill(monsterId);
 					refreshMonsterInfo(monsterId);
 					refreshSaveUrl();
 				} else {
