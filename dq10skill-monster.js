@@ -671,6 +671,17 @@ var SimulatorUI = (function($) {
 
 			monster.updateIndividualName($(this).val());
 		});
+
+		//転生追加スキルセレクトボックス
+		for(skillCategory in sim.skillCategories) {
+			var skillData = sim.skillCategories[skillCategory];
+			if(skillData.additional >= 1) {
+				$ent.find('select[id^=select-additional]').append($('<option />').val(skillCategory).text(skillData.name));
+			}
+		}
+		$ent.find('select[id^=select-additional]').select(function(e) {
+
+		});
 	}
 
 	function setupConsole() {
