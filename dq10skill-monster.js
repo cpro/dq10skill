@@ -50,6 +50,11 @@ var Simulator = (function() {
 		for(var s = 0; s < this.data.skills.length; s++) {
 			this.skillPts[this.data.skills[s]] = 0;
 		}
+		//転生追加スキル
+		this.additional1 = null;
+		this.additional2 = null;
+		this.skillPts['additional1'] = 0;
+		this.skillPts['additional2'] = 0;
 	}
 
 	//スキルポイント取得
@@ -90,6 +95,11 @@ var Simulator = (function() {
 		for(var skillCategory in this.skillPts)
 			total += this.skillPts[skillCategory];
 		
+		if(this.restartCount >= 1 || this.additional1 !== null)
+			total += this.skillPts.additional1;
+		if(this.restartCount >= 2 || this.additional2 !== null)
+			total += this.skillPts.additional2;
+
 		return total;
 	};
 	
@@ -148,7 +158,7 @@ var Simulator = (function() {
 		this.restartCount = newValue;
 		return true;
 	};
-	//転生による特訓ポイントの取得
+	//転生による追加スキルポイントの取得
 	Monster.prototype.getRestartSkillPt = function() {
 		return this.restartCount * SKILL_PTS_PER_RESTART;
 	};
