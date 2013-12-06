@@ -53,8 +53,6 @@ var Simulator = (function() {
 		//転生追加スキル
 		this.additional1 = null;
 		this.additional2 = null;
-		this.skillPts['additional1'] = 0;
-		this.skillPts['additional2'] = 0;
 	}
 
 	//スキルポイント取得
@@ -92,13 +90,14 @@ var Simulator = (function() {
 	//スキルポイント合計
 	Monster.prototype.totalSkillPts = function() {
 		var total = 0;
-		for(var skillCategory in this.skillPts)
+		for(var skillCategory in this.skillPts) {
+			if(skillCategory == 'additional1' && (this.restartCount < 1 || this.additional1 === null))
+				continue;
+			if(skillCategory == 'additional2' && (this.restartCount < 2 || this.additional2 === null))
+				continue;
+
 			total += this.skillPts[skillCategory];
-		
-		if(this.restartCount >= 1 || this.additional1 !== null)
-			total += this.skillPts.additional1;
-		if(this.restartCount >= 2 || this.additional2 !== null)
-			total += this.skillPts.additional2;
+		}
 
 		return total;
 	};
@@ -257,26 +256,36 @@ var SimulatorUI = (function($) {
 
 		for(var c = 0; c < monster.data.skills.length; c++) {
 			var skillCategory = monster.data.skills[c];
+			$table = drawSkillTable(skillCategory);
 
-			var $table = $('<table />').addClass(skillCategory).addClass('skill_table');
-			$table.append('<caption>' +
-				sim.skillCategories[skillCategory].name +
-				': <span class="skill_total">0</span></caption>')
-				.append('<tr><th class="console" colspan="2"><input class="ptspinner" /><button class="reset">リセット</button></th></tr>');
-
-			for (var s = 0; s < sim.skillCategories[skillCategory].skills.length; s++) {
-				var skill = sim.skillCategories[skillCategory].skills[s];
-
-				var $trSkill = $('<tr />').addClass([skillCategory, s].join('_'))
-					.append('<td class="skill_pt">' + skill.pt + '</td>')
-					.append('<td class="skill_name">' + skill.name + '</td>')
-					.appendTo($table);
-			}
-
+			if(skillCategory == 'additional1' && (monster.restartCount < 1 || monster.additional1 === null))
+				$table.css('display', 'none');
+			if(skillCategory == 'additional2' && (monster.restartCount < 2 || monster.additional2 === null))
+				$table.css('display', 'none');
+			
 			$ent.append($table);
 		}
 
+
 		return $ent;
+	}
+	function drawSkillTable(skillCategory) {
+		var $table = $('<table />').addClass(skillCategory).addClass('skill_table');
+		$table.append('<caption>' +
+			sim.skillCategories[skillCategory].name +
+			': <span class="skill_total">0</span></caption>')
+			.append('<tr><th class="console" colspan="2"><input class="ptspinner" /> <button class="reset">リセット</button></th></tr>');
+
+		for (var s = 0; s < sim.skillCategories[skillCategory].skills.length; s++) {
+			var skill = sim.skillCategories[skillCategory].skills[s];
+
+			$('<tr />').addClass([skillCategory, s].join('_'))
+				.append('<td class="skill_pt">' + skill.pt + '</td>')
+				.append('<td class="skill_name">' + skill.name + '</td>')
+				.appendTo($table);
+		}
+
+		return $table;
 	}
 
 	function refreshEntry(monsterId) {
