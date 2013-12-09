@@ -15,7 +15,6 @@
 
 		"claw": {
 			"name": "ツメ",
-			"abbr": "ツメ",
 			"skills": [
 				{"pt":  3, "name": "装備時こうげき力+10", "desc": "ツメ装備時の\nこうげき力が\n１０増える", "mp": null},
 				{"pt":  7, "name": "裂鋼拳", "desc": "マシン系の敵に\n威力を発揮する\n鋼鉄を切り裂く拳", "mp": 1},
@@ -29,7 +28,6 @@
 
 		"slappler": {
 			"name": "スラップラー",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "スラ・ストライク", "desc": "ジャンプして\nプルプルボディで\nたいあたり", "mp": 3},
 				{"pt":   7, "name": "常時かいしん率+10%", "desc": "会心のいちげきが\n出やすくなる", "mp": null},
@@ -43,7 +41,6 @@
 
 		"slafource": {
 			"name": "スラフォース",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "ピオリム", "desc": "周囲の仲間の\n行動間隔を\n少し短くする", "mp": 4},
 				{"pt":   7, "name": "常時すばやさ+40", "desc": "常時\nすばやさが\n４０増える", "mp": null, "spd": 40},
@@ -57,7 +54,6 @@
 
 		"boomerang": {
 			"name": "ブーメラン",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "装備時こうげき力+10", "desc": "ブーメラン装備時\nこうげき力が\n１０増える", "mp": null},
 				{"pt":   7, "name": "スライムブロウ", "desc": "スライム系の敵に\n威力を発揮する\nブーメランの妙技", "mp": 1},
@@ -71,7 +67,6 @@
 
 		"rexsense": {
 			"name": "レックスセンス",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "テールアタック"},
 				{"pt":   7, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n３０増える", "mp": null, "maxhp": 30},
@@ -85,7 +80,6 @@
 
 		"firebreath": {
 			"name": "火炎ブレスの心得",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "かえんのいき"},
 				{"pt":   7, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
@@ -99,7 +93,6 @@
 
 		"axe": {
 			"name": "オノ",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "装備時こうげき力+10", "desc": "オノ装備時の\nこうげき力が\n１０増える", "mp": null},
 				{"pt":   7, "name": "たいぼく斬", "desc": "植物系の敵に\n威力を発揮する\n頼もしいひと振り", "mp": 1},
@@ -113,7 +106,6 @@
 
 		"lightmormon": {
 			"name": "ひかりモーモン",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "フワフワダンス", "desc": "ふわふわ踊って\n周りの仲間の\nＨＰを４８～回復", "mp": 5},
 				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
@@ -127,7 +119,6 @@
 
 		"darkmormon": {
 			"name": "やみモーモン",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "ドルマ", "desc": "闇のチカラで\n敵１体を攻撃", "mp": 4},
 				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
@@ -141,7 +132,6 @@
 
 		"stick": {
 			"name": "スティック",
-			"abbr": "ステ",
 			"skills": [
 				{"pt":   3, "name": "装備時MP吸収率+5%", "desc": "スティック攻撃時\n吸収できる\nＭＰが増える", "mp": null},
 				{"pt":   7, "name": "デビルンチャーム", "desc": "悪魔系の敵に\n威力を発揮し\nたまに魅了もする", "mp": 1},
@@ -155,7 +145,6 @@
 
 		"unknown1": {
 			"name": "不明",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "（不明）"},
 				{"pt":   7, "name": "（不明）"},
@@ -169,7 +158,6 @@
 
 		"unknown2": {
 			"name": "不明",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "（不明）"},
 				{"pt":   7, "name": "（不明）"},
@@ -183,7 +171,6 @@
 
 		"unknown3": {
 			"name": "不明",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "（不明）"},
 				{"pt":   7, "name": "（不明）"},
@@ -197,7 +184,6 @@
 
 		"raisehp": {
 			"name": "ＨＰアップ",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "常時さいだいＨＰ+10", "desc": "常時\nさいだいＨＰが\n１０増える", "mp": null, "maxhp": 10},
 				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
@@ -211,7 +197,6 @@
 
 		"raisemp": {
 			"name": "ＭＰアップ",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "常時さいだいＭＰ+15", "desc": "常時\nさいだいＭＰが\n１５増える", "mp": null, "maxmp": 15},
 				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
@@ -225,7 +210,6 @@
 
 		"raisepow": {
 			"name": "ちからアップ",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "常時ちから+5", "desc": "常時\nちからが\n５増える", "mp": null, "pow": 5},
 				{"pt":   7, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
@@ -239,7 +223,6 @@
 
 		"raisedef": {
 			"name": "みのまもりアップ",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "常時みのまもり+15", "desc": "常時\nみのまもりが\n１５増える", "mp": null, "def": 15},
 				{"pt":   7, "name": "常時みのまもり+30", "desc": "常時\nみのまもりが\n３０増える", "mp": null, "def": 30},
@@ -253,7 +236,6 @@
 
 		"raisespd": {
 			"name": "すばやさアップ",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "常時すばやさ+20", "desc": "常時\nすばやさが\n２０増える", "mp": null, "spd": 20},
 				{"pt":   7, "name": "常時すばやさ+40", "desc": "常時\nすばやさが\n４０増える", "mp": null, "spd": 40},
@@ -267,7 +249,6 @@
 
 		"raisemagic": {
 			"name": "まりょくアップ",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "常時かいふく魔力+20", "desc": "常時\nかいふく魔力が\n２０増える", "mp": null, "heal": 20},
 				{"pt":   7, "name": "常時こうげき魔力+40", "desc": "常時\nこうげき魔力が\n４０増える", "mp": null, "magic": 40},
@@ -281,7 +262,6 @@
 
 		"heal": {
 			"name": "かいふく",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "ホイミ"},
 				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
@@ -295,7 +275,6 @@
 
 		"weaken": {
 			"name": "じゃくたい",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "ボミオス"},
 				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
@@ -309,7 +288,6 @@
 
 		"cure": {
 			"name": "ちりょう",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "キアリー"},
 				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
@@ -323,7 +301,6 @@
 
 		"enhance": {
 			"name": "きょうか",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "ピオリム"},
 				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
@@ -337,7 +314,6 @@
 
 		"mera": {
 			"name": "メラの心得",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "メラ"},
 				{"pt":   7, "name": "常時こうげき魔力+40", "desc": "常時\nこうげき魔力が\n４０増える", "mp": null, "magic": 40},
@@ -364,7 +340,6 @@
 
 		"bagi": {
 			"name": "バギの心得",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "バギ"},
 				{"pt":   7, "name": "常時こうげき魔力+40", "desc": "常時\nこうげき魔力が\n４０増える", "mp": null, "magic": 40},
@@ -378,7 +353,6 @@
 
 		"io": {
 			"name": "イオの心得",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "イオ"},
 				{"pt":   7, "name": "常時こうげき魔力+40", "desc": "常時\nこうげき魔力が\n４０増える", "mp": null, "magic": 40},
@@ -392,7 +366,6 @@
 
 		"additional0": {
 			"name": "追加スキル0ダミー",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "（不明）"},
 				{"pt":   7, "name": "（不明）"},
@@ -406,7 +379,6 @@
 
 		"additional1": {
 			"name": "追加スキル1ダミー",
-			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "（不明）"},
 				{"pt":   7, "name": "（不明）"},
@@ -422,80 +394,70 @@
 	"monsters": {
 		"slime": {
 			"name": "スライム",
-			"abbr": "スラ",
-			"defaultName": "スラリン",
+			"defaultName": "スライム",
 			"skills": ["slappler", "slafource", "boomerang", "additional0", "additional1"],
 			"expTable": 1
 		},
 		
 		"mormon": {
 			"name": "モーモン",
-			"abbr": "スラ",
-			"defaultName": "ももち",
+			"defaultName": "モーモン",
 			"skills": ["lightmormon", "darkmormon", "stick", "additional0", "additional1"],
 			"expTable": 1
 		},
 
 		"prisonyan": {
 			"name": "プリズニャン",
-			"abbr": "プリ",
-			"defaultName": "プリズン",
+			"defaultName": "プリズニャン",
 			"skills": ["martialnyarts", "hyad", "claw", "additional0", "additional1"],
 			"expTable": 1
 		},
 
 		"hoimislime": {
 			"name": "ホイミスライム",
-			"abbr": "スラ",
-			"defaultName": "ホイミン",
+			"defaultName": "ホイミスライ",
 			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
 			"expTable": 1
 		},
 		
 		"slimeknight": {
 			"name": "スライムナイト",
-			"abbr": "スラ",
-			"defaultName": "ピエール",
+			"defaultName": "スライムナイ",
 			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
 			"expTable": 1
 		},
 		
 		"chimera": {
 			"name": "キメラ",
-			"abbr": "スラ",
-			"defaultName": "メッキー",
+			"defaultName": "キメラ",
 			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
 			"expTable": 1
 		},
 		
 		"catmage": {
 			"name": "ねこまどう",
-			"abbr": "スラ",
-			"defaultName": "モミャー",
+			"defaultName": "ねこまどう",
 			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
 			"expTable": 1
 		},
 		
 		"lizardman": {
 			"name": "リザードマン",
-			"abbr": "スラ",
-			"defaultName": "リンガー",
+			"defaultName": "リザードマン",
 			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
 			"expTable": 1
 		},
 		
 		"battlerex": {
 			"name": "バトルレックス",
-			"abbr": "スラ",
-			"defaultName": "ドランゴ",
+			"defaultName": "バトルレック",
 			"skills": ["rexsense", "firebreath", "axe", "additional0", "additional1"],
 			"expTable": 1
 		},
 		
 		"itazuramogura": {
 			"name": "いたずらもぐら",
-			"abbr": "スラ",
-			"defaultName": "モグモグ",
+			"defaultName": "いたずらもぐ",
 			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
 			"expTable": 1
 		}
