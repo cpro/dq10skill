@@ -339,6 +339,9 @@ var SimulatorUI = (function($) {
 		
 		//見出し中のレベル数値
 		$('#' + monsterId + ' .lv_h2').text(currentLevel);
+		if(monster.getRestartCount() > 0)
+			$('#' + monsterId + ' .lv_h2').append('<small> + ' + monster.getRestartCount() + '</small>');
+
 		var $levelH2 = $('#' + monsterId + ' h2');
 		
 		//必要経験値
@@ -664,7 +667,15 @@ var SimulatorUI = (function($) {
 			var monsterId = getCurrentMonsterId(this);
 			var monster = sim.getMonster(monsterId);
 
-			if(!window.confirm(monster.data.name + ' Lv' + monster.getLevel().toString() + ' を削除します。よろしいですか？')) return;
+			var additionalLevel = '';
+			if(monster.getRestartCount() > 0)
+				additionalLevel = '(+' + monster.getRestartCount() + ')';
+
+			var message = monster.data.name +
+				' Lv' + monster.getLevel().toString() + additionalLevel +
+				'「' + monster.getIndividualName() +
+				'」を削除します。よろしいですか？';
+			if(!window.confirm(message)) return;
 
 			sim.deleteMonster(monsterId);
 			$('#' + monsterId).remove();
