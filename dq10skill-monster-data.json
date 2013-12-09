@@ -395,70 +395,70 @@
 		"slime": {
 			"name": "スライム",
 			"defaultName": "スライム",
-			"skills": ["slappler", "slafource", "boomerang", "additional0", "additional1"],
+			"skills": ["slappler", "slafource", "boomerang"],
 			"expTable": 1
 		},
 		
 		"mormon": {
 			"name": "モーモン",
 			"defaultName": "モーモン",
-			"skills": ["lightmormon", "darkmormon", "stick", "additional0", "additional1"],
+			"skills": ["lightmormon", "darkmormon", "stick"],
 			"expTable": 1
 		},
 
 		"prisonyan": {
 			"name": "プリズニャン",
 			"defaultName": "プリズニャン",
-			"skills": ["martialnyarts", "hyad", "claw", "additional0", "additional1"],
+			"skills": ["martialnyarts", "hyad", "claw"],
 			"expTable": 1
 		},
 
 		"hoimislime": {
 			"name": "ホイミスライム",
 			"defaultName": "ホイミスライ",
-			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
+			"skills": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
 		
 		"slimeknight": {
 			"name": "スライムナイト",
 			"defaultName": "スライムナイ",
-			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
+			"skills": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
 		
 		"chimera": {
 			"name": "キメラ",
 			"defaultName": "キメラ",
-			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
+			"skills": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
 		
 		"catmage": {
 			"name": "ねこまどう",
 			"defaultName": "ねこまどう",
-			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
+			"skills": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
 		
 		"lizardman": {
 			"name": "リザードマン",
 			"defaultName": "リザードマン",
-			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
+			"skills": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
 		
 		"battlerex": {
 			"name": "バトルレックス",
 			"defaultName": "バトルレック",
-			"skills": ["rexsense", "firebreath", "axe", "additional0", "additional1"],
+			"skills": ["rexsense", "firebreath", "axe"],
 			"expTable": 1
 		},
 		
 		"itazuramogura": {
 			"name": "いたずらもぐら",
 			"defaultName": "いたずらもぐ",
-			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
+			"skills": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		}
 		

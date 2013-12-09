@@ -57,6 +57,7 @@ var Simulator = (function() {
 		this.additionalSkills = [];
 		for(s = 0; s < ADDITIONAL_SKILL_MAX; s++) {
 			this.additionalSkills[s] = null;
+			this.skillPts['additional' + s.toString()] = 0;
 		}
 	}
 
@@ -284,18 +285,23 @@ var SimulatorUI = (function($) {
 		});
 		$ent.find('.indiv_name input').val(monster.indivName);
 
-		for(var c = 0; c < monster.data.skills.length; c++) {
-			var skillCategory = monster.data.skills[c];
-			$table = drawSkillTable(skillCategory);
+		var skillCategory, $table;
 
-			var m = skillCategory.match(/^additional(\d+)$/);
-			if(m && (monster.restartCount < 1 || monster.getAdditionalSkill(m[1]) === null)) {
-				$table.hide();
-			}
+		for(var c = 0; c < monster.data.skills.length; c++) {
+			skillCategory = monster.data.skills[c];
+			$table = drawSkillTable(skillCategory);
 			
 			$ent.append($table);
 		}
+		for(var s = 0; s < sim.ADDITIONAL_SKILL_MAX; s++) {
+			skillCategory = 'additional' + s.toString();
+			$table = drawSkillTable(skillCategory);
 
+			if(monster.restartCount < s + 1 || monster.getAdditionalSkill(s) === null)
+				$table.hide();
+
+			$ent.append($table);
+		}
 
 		return $ent;
 	}
@@ -391,8 +397,7 @@ var SimulatorUI = (function($) {
 		$('#' + monsterId + ' .lv_select>select').val(monster.getLevel());
 		$('#' + monsterId + ' .restart_count').val(monster.getRestartCount());
 		
-		for(var s = 0; s < monster.data.skills.length; s++) {
-			var skillCategory = monster.data.skills[s];
+		for(var skillCategory in monster.skillPts) {
 			$('#' + monsterId + ' .' + skillCategory + ' .ptspinner').spinner('value', monster.getSkillPt(skillCategory));
 		}
 	}
