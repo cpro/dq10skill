@@ -6,8 +6,9 @@ var Simulator = (function() {
 	var MONSTER_MAX = 8;
 	
 	var RESTART_MIN = 0;
-	var RESTART_MAX = 10;
+	var RESTART_MAX = 5;
 	var SKILL_PTS_PER_RESTART = 10;
+	var RESTART_EXP_RATIO = 0.03; //仮数値
 
 	var DATA_JSON_URI = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'dq10skill-monster-data.json';
 
@@ -123,8 +124,12 @@ var Simulator = (function() {
 	Monster.prototype.requiredExp = function(level) {
 		var expMax = expRequired[this.data.expTable][LEVEL_MAX];
 		if(isNaN(expMax)) expMax = 0;
+		var additionalExp = 0;
+		for(var r = 1; r <= this.restartCount; r++) {
+			additionalExp += expMax * (1 + r * RESTART_EXP_RATIO);
+		}
 
-		return expRequired[this.data.expTable][level] + expMax;
+		return expRequired[this.data.expTable][level] + additionalExp;
 	};
 	
 	//不足経験値
