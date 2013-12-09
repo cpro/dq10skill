@@ -179,13 +179,13 @@ a {
     .ent_title .ent_title_console button {
       width: 20px;
       height: 20px; }
-    .ent_title .ent_title_console .indiv_name {
+    .ent_title .ent_title_console .indiv_name, .ent_title .ent_title_console .additional_skill_selector {
       margin-right: 3px; }
-      .ent_title .ent_title_console .indiv_name label {
+      .ent_title .ent_title_console .indiv_name label, .ent_title .ent_title_console .additional_skill_selector label {
         font-size: 80%;
         display: inline-block;
         vertical-align: middle; }
-      .ent_title .ent_title_console .indiv_name input {
+      .ent_title .ent_title_console .indiv_name input, .ent_title .ent_title_console .indiv_name select, .ent_title .ent_title_console .additional_skill_selector input, .ent_title .ent_title_console .additional_skill_selector select {
         display: inline-block;
         vertical-align: middle; }
 
