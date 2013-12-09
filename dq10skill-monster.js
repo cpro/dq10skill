@@ -294,6 +294,7 @@ var SimulatorUI = (function($) {
 	}
 
 	function refreshEntry(monsterId) {
+		refreshAdditionalSkillSelector(monsterId);
 		refreshMonsterInfo(monsterId);
 		for(var skillCategory in sim.skillCategories) {
 			refreshSkillList(monsterId, skillCategory);
@@ -382,6 +383,26 @@ var SimulatorUI = (function($) {
 		$('#tw-saveurl').attr('href', 'https://twitter.com/intent/tweet?' + $.param(params)); */
 	}
 
+	function refreshAdditionalSkillSelector(monsterId) {
+		var monster = sim.getMonster(monsterId);
+		$('#' + monsterId + ' .additional_skill_selector-1').toggle(monster.restartCount >= 1);
+		$('#' + monsterId + ' .additional_skill_selector-2').toggle(monster.restartCount >= 2);
+
+		$('#' + monsterId + ' .additional_skill_selector select').empty();
+
+		if(monster.restartCount >= 1) {
+			for(var skillCategory in sim.skillCategories) {
+				var skillData = sim.skillCategories[skillCategory];
+				if(monster.restartCount >= skillData.additional) {
+					$('#' + monsterId + ' .additional_skill_selector select').append($('<option />').val(skillCategory).text(skillData.name));
+				}
+			}
+		}
+
+		$('#' + monsterId + ' .additional_skill_selector-1 select').val(monster.additional1);
+		$('#' + monsterId + ' .additional_skill_selector-2 select').val(monster.additional2);
+	}
+
 	function refreshAdditionalSkill(monsterId) {
 		var monster = sim.getMonster(monsterId);
 		var $table;
@@ -449,7 +470,7 @@ var SimulatorUI = (function($) {
 		});
 
 		//レベル転生回数スピンボタン設定
-		var $spinner = $('.restart_count');
+		var $spinner = $ent.find('.restart_count');
 		$spinner.spinner({
 			min: sim.RESTART_MIN,
 			max: sim.RESTART_MAX,
@@ -458,6 +479,7 @@ var SimulatorUI = (function($) {
 				var monster = sim.getMonster(monsterId);
 
 				if(monster.updateRestartCount(parseInt(ui.value))) {
+					refreshAdditionalSkillSelector(monsterId);
 					refreshAdditionalSkill(monsterId);
 					refreshMonsterInfo(monsterId);
 				} else {
@@ -473,6 +495,7 @@ var SimulatorUI = (function($) {
 					return false;
 				}
 				if(monster.updateRestartCount(parseInt($(this).val()))) {
+					refreshAdditionalSkillSelector(monsterId);
 					refreshAdditionalSkill(monsterId);
 					refreshMonsterInfo(monsterId);
 					refreshSaveUrl();
@@ -678,13 +701,7 @@ var SimulatorUI = (function($) {
 		});
 
 		//転生追加スキルセレクトボックス
-		for(skillCategory in sim.skillCategories) {
-			var skillData = sim.skillCategories[skillCategory];
-			if(skillData.additional >= 1) {
-				$ent.find('select[id^=select-additional]').append($('<option />').val(skillCategory).text(skillData.name));
-			}
-		}
-		$ent.find('select[id^=select-additional]').select(function(e) {
+		$ent.find('.additional_skill_selector').select(function(e) {
 
 		});
 	}
