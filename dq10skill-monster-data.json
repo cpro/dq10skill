@@ -197,7 +197,6 @@
 
 		"raisehp": {
 			"name": "ＨＰアップ",
-			"additional": 1,
 			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "常時さいだいＨＰ+10", "desc": "常時\nさいだいＨＰが\n１０増える", "mp": null, "maxhp": 10},
@@ -212,7 +211,6 @@
 
 		"raisemp": {
 			"name": "ＭＰアップ",
-			"additional": 1,
 			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "常時さいだいＭＰ+15", "desc": "常時\nさいだいＭＰが\n１５増える", "mp": null, "maxmp": 15},
@@ -227,7 +225,6 @@
 
 		"raisepow": {
 			"name": "ちからアップ",
-			"additional": 1,
 			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "常時ちから+5", "desc": "常時\nちからが\n５増える", "mp": null, "pow": 5},
@@ -242,7 +239,6 @@
 
 		"raisedef": {
 			"name": "みのまもりアップ",
-			"additional": 1,
 			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "常時みのまもり+15", "desc": "常時\nみのまもりが\n１５増える", "mp": null, "def": 15},
@@ -257,7 +253,6 @@
 
 		"raisespd": {
 			"name": "すばやさアップ",
-			"additional": 1,
 			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "常時すばやさ+20", "desc": "常時\nすばやさが\n２０増える", "mp": null, "spd": 20},
@@ -272,7 +267,6 @@
 
 		"raisemagic": {
 			"name": "まりょくアップ",
-			"additional": 1,
 			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "常時かいふく魔力+20", "desc": "常時\nかいふく魔力が\n２０増える", "mp": null, "heal": 20},
@@ -287,7 +281,6 @@
 
 		"heal": {
 			"name": "かいふく",
-			"additional": 2,
 			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "ホイミ"},
@@ -302,7 +295,6 @@
 
 		"weaken": {
 			"name": "じゃくたい",
-			"additional": 3,
 			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "ボミオス"},
@@ -317,7 +309,6 @@
 
 		"cure": {
 			"name": "ちりょう",
-			"additional": 4,
 			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "キアリー"},
@@ -332,7 +323,6 @@
 
 		"enhance": {
 			"name": "きょうか",
-			"additional": 5,
 			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "ピオリム"},
@@ -347,7 +337,6 @@
 
 		"mera": {
 			"name": "メラの心得",
-			"additional": 2,
 			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "メラ"},
@@ -362,7 +351,6 @@
 
 		"hyad": {
 			"name": "ヒャドの心得",
-			"additional": 3,
 			"skills": [
 				{"pt":  3, "name": "ヒャド"},
 				{"pt":  7, "name": "常時こうげき魔力+40", "desc": "常時\nこうげき魔力が\n４０増える", "mp": null, "magic": 40},
@@ -376,7 +364,6 @@
 
 		"bagi": {
 			"name": "バギの心得",
-			"additional": 4,
 			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "バギ"},
@@ -391,7 +378,6 @@
 
 		"io": {
 			"name": "イオの心得",
-			"additional": 5,
 			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "イオ"},
@@ -515,6 +501,23 @@
 		}
 		
 	},
+
+	"additionalSkillCategories": [
+		{"name": "raisehp",    "restartCount": 1},
+		{"name": "raisemp",    "restartCount": 1},
+		{"name": "raisepow",   "restartCount": 1},
+		{"name": "raisedef",   "restartCount": 1},
+		{"name": "raisespd",   "restartCount": 1},
+		{"name": "raisemagic", "restartCount": 1},
+		{"name": "heal",       "restartCount": 2},
+		{"name": "weaken",     "restartCount": 3},
+		{"name": "cure",       "restartCount": 4},
+		{"name": "enhance",    "restartCount": 5},
+		{"name": "mera",       "restartCount": 2},
+		{"name": "hyad",       "restartCount": 3},
+		{"name": "bagi",       "restartCount": 4},
+		{"name": "io",         "restartCount": 5}
+	],
 
 	"skillPtsGiven": [null,
 		  0,   1,   2,   3,   6,   7,   8,   9,  10,  13,

@@ -27,7 +27,8 @@ var Simulator = (function() {
 	var monsterList = allData.monsters;
 	var skillPtsGiven = allData.skillPtsGiven;
 	var expRequired = allData.expRequired;
-	
+	var additionalSkillCategories = allData.additionalSkillCategories;
+
 	//パラメータ格納用
 	var skillPts = {};
 	var levels = {};
@@ -248,7 +249,8 @@ var Simulator = (function() {
 		skillPtsGiven: skillPtsGiven,
 		expRequired: expRequired,
 		monsters: monsters,
-		
+		additionalSkillCategories: additionalSkillCategories,
+
 		//定数
 		SKILL_PTS_MIN: SKILL_PTS_MIN,
 		SKILL_PTS_MAX: SKILL_PTS_MAX,
@@ -418,10 +420,13 @@ var SimulatorUI = (function($) {
 		$('#' + monsterId + ' .additional_skill_selector select').empty();
 
 		if(monster.restartCount >= 1) {
-			for(var skillCategory in sim.skillCategories) {
-				var skillData = sim.skillCategories[skillCategory];
-				if(monster.restartCount >= skillData.additional) {
-					$('#' + monsterId + ' .additional_skill_selector select').append($('<option />').val(skillCategory).text(skillData.name));
+			for(s = 0; s < sim.additionalSkillCategories.length; s++) {
+				var additionalSkillData = sim.additionalSkillCategories[s];
+				var skillData = sim.skillCategories[additionalSkillData.name];
+				if(monster.restartCount >= additionalSkillData.restartCount) {
+					$('#' + monsterId + ' .additional_skill_selector select').append(
+						$('<option />').val(additionalSkillData.name).text(skillData.name)
+					);
 				}
 			}
 		}
