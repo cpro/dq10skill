@@ -404,8 +404,8 @@
 			]
 		},
 
-		"additional1": {
-			"name": "追加スキル1ダミー",
+		"additional0": {
+			"name": "追加スキル0ダミー",
 			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "（不明）"},
@@ -418,8 +418,8 @@
 			]
 		},
 
-		"additional2": {
-			"name": "追加スキル2ダミー",
+		"additional1": {
+			"name": "追加スキル1ダミー",
 			"abbr": "",
 			"skills": [
 				{"pt":   3, "name": "（不明）"},
@@ -438,7 +438,7 @@
 			"name": "スライム",
 			"abbr": "スラ",
 			"defaultName": "スラリン",
-			"skills": ["slappler", "slafource", "boomerang", "additional1", "additional2"],
+			"skills": ["slappler", "slafource", "boomerang", "additional0", "additional1"],
 			"expTable": 1
 		},
 		
@@ -446,7 +446,7 @@
 			"name": "モーモン",
 			"abbr": "スラ",
 			"defaultName": "ももち",
-			"skills": ["lightmormon", "darkmormon", "stick", "additional1", "additional2"],
+			"skills": ["lightmormon", "darkmormon", "stick", "additional0", "additional1"],
 			"expTable": 1
 		},
 
@@ -454,7 +454,7 @@
 			"name": "プリズニャン",
 			"abbr": "プリ",
 			"defaultName": "プリズン",
-			"skills": ["martialnyarts", "hyad", "claw", "additional1", "additional2"],
+			"skills": ["martialnyarts", "hyad", "claw", "additional0", "additional1"],
 			"expTable": 1
 		},
 
@@ -462,7 +462,7 @@
 			"name": "ホイミスライム",
 			"abbr": "スラ",
 			"defaultName": "ホイミン",
-			"skills": ["unknown1", "unknown2", "unknown3", "additional1", "additional2"],
+			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
 			"expTable": 1
 		},
 		
@@ -470,7 +470,7 @@
 			"name": "スライムナイト",
 			"abbr": "スラ",
 			"defaultName": "ピエール",
-			"skills": ["unknown1", "unknown2", "unknown3", "additional1", "additional2"],
+			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
 			"expTable": 1
 		},
 		
@@ -478,7 +478,7 @@
 			"name": "キメラ",
 			"abbr": "スラ",
 			"defaultName": "メッキー",
-			"skills": ["unknown1", "unknown2", "unknown3", "additional1", "additional2"],
+			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
 			"expTable": 1
 		},
 		
@@ -486,7 +486,7 @@
 			"name": "ねこまどう",
 			"abbr": "スラ",
 			"defaultName": "モミャー",
-			"skills": ["unknown1", "unknown2", "unknown3", "additional1", "additional2"],
+			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
 			"expTable": 1
 		},
 		
@@ -494,7 +494,7 @@
 			"name": "リザードマン",
 			"abbr": "スラ",
 			"defaultName": "リンガー",
-			"skills": ["unknown1", "unknown2", "unknown3", "additional1", "additional2"],
+			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
 			"expTable": 1
 		},
 		
@@ -502,7 +502,7 @@
 			"name": "バトルレックス",
 			"abbr": "スラ",
 			"defaultName": "ドランゴ",
-			"skills": ["rexsense", "firebreath", "axe", "additional1", "additional2"],
+			"skills": ["rexsense", "firebreath", "axe", "additional0", "additional1"],
 			"expTable": 1
 		},
 		
@@ -510,7 +510,7 @@
 			"name": "いたずらもぐら",
 			"abbr": "スラ",
 			"defaultName": "モグモグ",
-			"skills": ["unknown1", "unknown2", "unknown3", "additional1", "additional2"],
+			"skills": ["unknown1", "unknown2", "unknown3", "additional0", "additional1"],
 			"expTable": 1
 		}
 		

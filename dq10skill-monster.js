@@ -9,6 +9,7 @@ var Simulator = (function() {
 	var RESTART_MAX = 5;
 	var SKILL_PTS_PER_RESTART = 10;
 	var RESTART_EXP_RATIO = 0.03; //仮数値
+	var ADDITIONAL_SKILL_MAX = 2;
 
 	var DATA_JSON_URI = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'dq10skill-monster-data.json';
 
@@ -52,8 +53,10 @@ var Simulator = (function() {
 			this.skillPts[this.data.skills[s]] = 0;
 		}
 		//転生追加スキル
-		this.additional1 = null;
-		this.additional2 = null;
+		this.additionalSkills = [];
+		for(s = 0; s < ADDITIONAL_SKILL_MAX; s++) {
+			this.additionalSkills[s] = null;
+		}
 	}
 
 	//スキルポイント取得
@@ -92,9 +95,8 @@ var Simulator = (function() {
 	Monster.prototype.totalSkillPts = function() {
 		var total = 0;
 		for(var skillCategory in this.skillPts) {
-			if(skillCategory == 'additional1' && (this.restartCount < 1 || this.additional1 === null))
-				continue;
-			if(skillCategory == 'additional2' && (this.restartCount < 2 || this.additional2 === null))
+			var m = skillCategory.match(/^additional(\d+)/);
+			if(m && (this.restartCount < 1 || this.getAdditionalSkill(m[1]) === null))
 				continue;
 
 			total += this.skillPts[skillCategory];
@@ -166,6 +168,26 @@ var Simulator = (function() {
 	Monster.prototype.getRestartSkillPt = function() {
 		return this.restartCount * SKILL_PTS_PER_RESTART;
 	};
+
+	//転生追加スキルの取得
+	Monster.prototype.getAdditionalSkill = function(skillIndex) {
+		return this.additionalSkills[skillIndex];
+	};
+	//転生追加スキルの更新
+	Monster.prototype.updateAdditionalSkill = function(skillIndex, newValue) {
+		if(skillIndex > ADDITIONAL_SKILL_MAX) return false;
+
+		if(newValue !== null) {
+			for(var i = 0; i < this.additionalSkills.length; i++) {
+				if(i == skillIndex) continue;
+				if(newValue == this.additionalSkills[i]) return false;
+			}
+		}
+		
+		this.additionalSkills[skillIndex] = newValue;
+		return true;
+	};
+
 	/* メソッド */
 
 	//モンスター追加
@@ -233,7 +255,8 @@ var Simulator = (function() {
 		LEVEL_MIN: LEVEL_MIN,
 		LEVEL_MAX: LEVEL_MAX,
 		RESTART_MIN: RESTART_MIN,
-		RESTART_MAX: RESTART_MAX
+		RESTART_MAX: RESTART_MAX,
+		ADDITIONAL_SKILL_MAX: ADDITIONAL_SKILL_MAX
 	};
 })();
 
@@ -263,10 +286,10 @@ var SimulatorUI = (function($) {
 			var skillCategory = monster.data.skills[c];
 			$table = drawSkillTable(skillCategory);
 
-			if(skillCategory == 'additional1' && (monster.restartCount < 1 || monster.additional1 === null))
+			var m = skillCategory.match(/^additional(\d+)$/);
+			if(m && (monster.restartCount < 1 || monster.getAdditionalSkill(m[1]) === null)) {
 				$table.hide();
-			if(skillCategory == 'additional2' && (monster.restartCount < 2 || monster.additional2 === null))
-				$table.hide();
+			}
 			
 			$ent.append($table);
 		}
@@ -385,8 +408,9 @@ var SimulatorUI = (function($) {
 
 	function refreshAdditionalSkillSelector(monsterId) {
 		var monster = sim.getMonster(monsterId);
-		$('#' + monsterId + ' .additional_skill_selector-1').toggle(monster.restartCount >= 1);
-		$('#' + monsterId + ' .additional_skill_selector-2').toggle(monster.restartCount >= 2);
+		for(var s = 0; s < sim.ADDITIONAL_SKILL_MAX; s++) {
+			$('#' + monsterId + ' .additional_skill_selector-' + s.toString()).toggle(monster.restartCount > s);
+		}
 
 		$('#' + monsterId + ' .additional_skill_selector select').empty();
 
@@ -399,28 +423,23 @@ var SimulatorUI = (function($) {
 			}
 		}
 
-		$('#' + monsterId + ' .additional_skill_selector-1 select').val(monster.additional1);
-		$('#' + monsterId + ' .additional_skill_selector-2 select').val(monster.additional2);
+		for(s = 0; s < sim.ADDITIONAL_SKILL_MAX; s++) {
+			$('#' + monsterId + ' .additional_skill_selector-' + s.toString() + ' select').val(monster.getAdditionalSkill(s));
+		}
 	}
 
 	function refreshAdditionalSkill(monsterId) {
 		var monster = sim.getMonster(monsterId);
 		var $table;
 
-		$table = $('#' + monsterId + ' .additional1');
-		if(monster.restartCount < 1 || monster.additional1 === null) {
-			$table.hide();
-		} else {
-			refreshAdditionalSkillTable($table, monster.additional1);
-			$table.show();
-		}
-
-		$table = $('#' + monsterId + ' .additional2');
-		if(monster.restartCount < 2 || monster.additional2 === null) {
-			$table.hide();
-		} else {
-			refreshAdditionalSkillTable($table, monster.additional2);
-			$table.show();
+		for(var s = 0; s < sim.ADDITIONAL_SKILL_MAX; s++) {
+			$table = $('#' + monsterId + ' .additional' + s.toString());
+			if(monster.restartCount >= s + 1 && monster.getAdditionalSkill(s) !== null) {
+				refreshAdditionalSkillTable($table, monster.getAdditionalSkill(s));
+				$table.show();
+			} else {
+				$table.hide();
+			}
 		}
 
 		function refreshAdditionalSkillTable($table, newSkillCategory) {
@@ -705,10 +724,13 @@ var SimulatorUI = (function($) {
 			var monsterId = getCurrentMonsterId(this);
 			var monster = sim.getMonster(monsterId);
 
-			var selectorId = $(this).attr('id').match(/^select-(additional\d)-/)[1];
-			monster[selectorId] = $(this).val();
-
-			refreshAdditionalSkill(monsterId);
+			var selectorId = $(this).attr('id').match(/^select-additional(\d+)-/)[1];
+			if(monster.updateAdditionalSkill(selectorId, $(this).val())) {
+				refreshAdditionalSkill(monsterId);
+			} else {
+				$(this).val(monster.getAdditionalSkill(selectorId));
+				return false;
+			}
 		});
 	}
 
