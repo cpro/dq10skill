@@ -125,11 +125,11 @@ var Simulator = (function() {
 		var expMax = expRequired[this.data.expTable][LEVEL_MAX];
 		if(isNaN(expMax)) expMax = 0;
 		var additionalExp = 0;
-		for(var r = 1; r <= this.restartCount; r++) {
-			additionalExp += expMax * (1 + r * RESTART_EXP_RATIO);
+		for(var r = 0; r < this.restartCount; r++) {
+			additionalExp += expMax * Math.floor(1 + r * RESTART_EXP_RATIO);
 		}
 
-		return expRequired[this.data.expTable][level] + additionalExp;
+		return expRequired[this.data.expTable][level] * Math.floor(1 + this.restartCount * RESTART_EXP_RATIO) + additionalExp;
 	};
 	
 	//不足経験値
