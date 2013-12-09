@@ -701,8 +701,14 @@ var SimulatorUI = (function($) {
 		});
 
 		//転生追加スキルセレクトボックス
-		$ent.find('.additional_skill_selector').select(function(e) {
+		$ent.find('.additional_skill_selector select').change(function(e) {
+			var monsterId = getCurrentMonsterId(this);
+			var monster = sim.getMonster(monsterId);
 
+			var selectorId = $(this).attr('id').match(/^select-(additional\d)-/)[1];
+			monster[selectorId] = $(this).val();
+
+			refreshAdditionalSkill(monsterId);
 		});
 	}
 
