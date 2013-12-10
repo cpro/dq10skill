@@ -568,7 +568,14 @@ var SimulatorUI = (function($) {
 	}
 	
 	function refreshSaveUrl() {
-		var url = window.location.href.replace(window.location.search, "") + '?' + sim.generateQueryString();
+		var queryString = sim.generateQueryString();
+		if(queryString.length === 0) {
+			$('#url_text').val(url);
+			$('#tw-saveurl').attr('href', '');
+			return;
+		}
+
+		var url = window.location.href.replace(window.location.search, "") + '?' + queryString;
 		$('#url_text').val(url);
 		
 		var params = {
@@ -855,6 +862,8 @@ var SimulatorUI = (function($) {
 			sim.deleteMonster(monsterId);
 			$('#' + monsterId).remove();
 
+			refreshSaveUrl();
+
 			if(sim.monsters.length === 0)
 				$('#initial-instruction').show();
 		});
@@ -877,6 +886,7 @@ var SimulatorUI = (function($) {
 				$ent.insertAfter($ent.next());
 				$ent.css({position: 'relative', top: 0, left: 0, 'z-index': zIndex});
 				sim.movedownMonster(monsterId);
+				refreshSaveUrl();
 			});
 		});
 		//上へボタン
@@ -897,6 +907,7 @@ var SimulatorUI = (function($) {
 				$ent.insertBefore($ent.prev());
 				$ent.css({position: 'relative', top: 0, left: 0, 'z-index': zIndex});
 				sim.moveupMonster(monsterId);
+				refreshSaveUrl();
 			});
 		});
 
@@ -906,6 +917,7 @@ var SimulatorUI = (function($) {
 			var monster = sim.getMonster(monsterId);
 
 			monster.updateIndividualName($(this).val());
+			refreshSaveUrl();
 		});
 
 		//転生追加スキルセレクトボックス
@@ -933,6 +945,8 @@ var SimulatorUI = (function($) {
 
 		//保存用URLツイートボタン設定
 		$('#tw-saveurl').button().click(function(e) {
+			if($(this).attr('href') === '') return false;
+
 			var screenWidth = screen.width, screenHeight = screen.height;
 			var windowWidth = 550, windowHeight = 420;
 			var windowLeft = Math.round(screenWidth / 2 - windowWidth / 2);
