@@ -393,6 +393,7 @@
 
 	"monsters": {
 		"slime": {
+			"id": 1,
 			"name": "スライム",
 			"defaultName": "スライム",
 			"skills": ["slappler", "slafource", "boomerang"],
@@ -400,6 +401,7 @@
 		},
 		
 		"mormon": {
+			"id": 2,
 			"name": "モーモン",
 			"defaultName": "モーモン",
 			"skills": ["lightmormon", "darkmormon", "stick"],
@@ -407,6 +409,7 @@
 		},
 
 		"prisonyan": {
+			"id": 3,
 			"name": "プリズニャン",
 			"defaultName": "プリズニャン",
 			"skills": ["martialnyarts", "hyad", "claw"],
@@ -414,6 +417,7 @@
 		},
 
 		"hoimislime": {
+			"id": 4,
 			"name": "ホイミスライム",
 			"defaultName": "ホイミスライ",
 			"skills": ["unknown1", "unknown2", "unknown3"],
@@ -421,6 +425,7 @@
 		},
 		
 		"slimeknight": {
+			"id": 5,
 			"name": "スライムナイト",
 			"defaultName": "スライムナイ",
 			"skills": ["unknown1", "unknown2", "unknown3"],
@@ -428,6 +433,7 @@
 		},
 		
 		"chimera": {
+			"id": 6,
 			"name": "キメラ",
 			"defaultName": "キメラ",
 			"skills": ["unknown1", "unknown2", "unknown3"],
@@ -435,6 +441,7 @@
 		},
 		
 		"catmage": {
+			"id": 7,
 			"name": "ねこまどう",
 			"defaultName": "ねこまどう",
 			"skills": ["unknown1", "unknown2", "unknown3"],
@@ -442,6 +449,7 @@
 		},
 		
 		"lizardman": {
+			"id": 8,
 			"name": "リザードマン",
 			"defaultName": "リザードマン",
 			"skills": ["unknown1", "unknown2", "unknown3"],
@@ -449,6 +457,7 @@
 		},
 		
 		"battlerex": {
+			"id": 9,
 			"name": "バトルレックス",
 			"defaultName": "バトルレック",
 			"skills": ["rexsense", "firebreath", "axe"],
@@ -456,6 +465,7 @@
 		},
 		
 		"itazuramogura": {
+			"id": 10,
 			"name": "いたずらもぐら",
 			"defaultName": "いたずらもぐ",
 			"skills": ["unknown1", "unknown2", "unknown3"],
@@ -465,20 +475,20 @@
 	},
 
 	"additionalSkillCategories": [
-		{"name": "raisehp",    "restartCount": 1},
-		{"name": "raisemp",    "restartCount": 1},
-		{"name": "raisepow",   "restartCount": 1},
-		{"name": "raisedef",   "restartCount": 1},
-		{"name": "raisespd",   "restartCount": 1},
-		{"name": "raisemagic", "restartCount": 1},
-		{"name": "heal",       "restartCount": 2},
-		{"name": "weaken",     "restartCount": 3},
-		{"name": "cure",       "restartCount": 4},
-		{"name": "enhance",    "restartCount": 5},
-		{"name": "mera",       "restartCount": 2},
-		{"name": "hyad",       "restartCount": 3},
-		{"name": "bagi",       "restartCount": 4},
-		{"name": "io",         "restartCount": 5}
+		{"name": "raisehp",    "restartCount": 1, "id":  1},
+		{"name": "raisemp",    "restartCount": 1, "id":  2},
+		{"name": "raisepow",   "restartCount": 1, "id":  3},
+		{"name": "raisedef",   "restartCount": 1, "id":  4},
+		{"name": "raisespd",   "restartCount": 1, "id":  5},
+		{"name": "raisemagic", "restartCount": 1, "id":  6},
+		{"name": "heal",       "restartCount": 2, "id":  7},
+		{"name": "weaken",     "restartCount": 3, "id":  8},
+		{"name": "cure",       "restartCount": 4, "id":  9},
+		{"name": "enhance",    "restartCount": 5, "id": 10},
+		{"name": "mera",       "restartCount": 2, "id": 11},
+		{"name": "hyad",       "restartCount": 3, "id": 12},
+		{"name": "bagi",       "restartCount": 4, "id": 13},
+		{"name": "io",         "restartCount": 5, "id": 14}
 	],
 
 	"skillPtsGiven": [null,

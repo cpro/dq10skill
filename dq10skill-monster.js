@@ -183,6 +183,91 @@ var Simulator = (function() {
 		return true;
 	};
 
+	//ビット数定義
+	var BITS_MONSTER_TYPE = 6;
+	var BITS_LEVEL = 8;
+	var BITS_RESTART_COUNT = 4;
+	var BITS_SKILL = 6;
+	var BITS_ADDITIONAL_SKILL = 6;
+
+	var bitDataLength =
+		BITS_MONSTER_TYPE +
+		BITS_LEVEL +
+		BITS_RESTART_COUNT +
+		BITS_SKILL * (monsterList['slime'].skills.length + ADDITIONAL_SKILL_MAX) +
+		BITS_ADDITIONAL_SKILL * ADDITIONAL_SKILL_MAX;
+
+	//データをビット列にシリアル化
+	Monster.prototype.serialize = function() {
+		var numToBitArray = Base64forBit.numToBitArray;
+		var bitArray = [];
+
+		bitArray = bitArray.concat(numToBitArray(this.data.id, BITS_MONSTER_TYPE));
+		bitArray = bitArray.concat(numToBitArray(this.level, BITS_LEVEL));
+		bitArray = bitArray.concat(numToBitArray(this.restartCount, BITS_RESTART_COUNT));
+
+		//スキル
+		for(var skillCategory in this.skillPts)
+			bitArray = bitArray.concat(numToBitArray(this.skillPts[skillCategory], BITS_SKILL));
+
+		//転生追加スキル種類
+		for(var i = 0; i < ADDITIONAL_SKILL_MAX; i++) {
+			var additionalSkillId = 0;
+
+			for(var j = 0; j < additionalSkillCategories.length; j++) {
+				if(this.additionalSkills[i] == additionalSkillCategories[j].name) {
+					additionalSkillId = additionalSkillCategories[j].id;
+					break;
+				}
+			}
+			bitArray = bitArray.concat(numToBitArray(additionalSkillId, BITS_ADDITIONAL_SKILL));
+		}
+
+		return bitArray;
+	};
+
+	//ビット列からデータを復元
+	Monster.deserialize = function(bitArray) {
+		var bitArrayToNum = Base64forBit.bitArrayToNum;
+		var monster;
+
+		var monsterTypeId = bitArrayToNum(bitArray.splice(0, BITS_MONSTER_TYPE));
+		for(var monsterType in monsterList) {
+			if(monsterTypeId == monsterList[monsterType].id) {
+				monster = new Monster(monsterType);
+				break;
+			}
+		}
+
+		if(monster === undefined) return null;
+
+		monster.updateLevel(bitArrayToNum(bitArray.splice(0, BITS_LEVEL)));
+		monster.updateRestartCount(bitArrayToNum(bitArray.splice(0, BITS_RESTART_COUNT)));
+
+		//スキル
+		for(var skillCategory in monster.skillPts)
+			monster.updateSkillPt(skillCategory, bitArrayToNum(bitArray.splice(0, BITS_SKILL)));
+
+		//転生追加スキル種類
+		for(var i = 0; i < ADDITIONAL_SKILL_MAX; i++) {
+			var additionalSkillId = bitArrayToNum(bitArray.splice(0, BITS_ADDITIONAL_SKILL));
+
+			if(additionalSkillId === 0) {
+				monster.updateAdditionalSkill(i, null);
+				break;
+			}
+
+			for(var j = 0; j < additionalSkillCategories.length; j++) {
+				if(additionalSkillId == additionalSkillCategories[j].id) {
+					monster.updateAdditionalSkill(i, additionalSkillCategories[j].name);
+					break;
+				}
+			}
+		}
+
+		return monster;
+	};
+
 	/* メソッド */
 
 	//モンスター追加
@@ -229,6 +314,89 @@ var Simulator = (function() {
 		return null;
 	}
 
+	function generateQueryString() {
+		var query = [];
+		for(var i = 0; i < monsters.length; i++) {
+			query.push(Base64forBit.encode(monsters[i].serialize()));
+			query.push(Base64.encode(monsters[i].indivName, true));
+		}
+
+		return query.join(';');
+	}
+
+	function applyQueryString(queryString) {
+		var query = queryString.split(';');
+		while(query.length > 0) {
+			var newMonster = Monster.deserialize(Base64forBit.decode(query.shift()));
+			newMonster.updateIndividualName(Base64.decode(query.shift()));
+			monsters.push(newMonster);
+		}
+	}
+
+	function validateQueryString(queryString) {
+		if(!queryString.match(/^[A-Za-z0-9-_;]+$/))
+			return false;
+
+		var query = queryString.split(';');
+		if(query.length % 2 == 1)
+			return false;
+
+		for(var i = 0; i < query.length; i += 2) {
+			if(query[i].length * Base64forBit.BITS_ENCODE < bitDataLength) return false;
+		}
+
+		return true;
+	}
+
+	var Base64forBit = (function() {
+		var EN_CHAR = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+		var BITS_ENCODE = 6; //6ビットごとに区切ってエンコード
+
+		function encode(bitArray) {
+			for(var i = (bitArray.length - 1) % BITS_ENCODE + 1 ; i < BITS_ENCODE; i++) bitArray.push(0); //末尾0補完
+
+			var base64str = '';
+			while(bitArray.length > 0) {
+				base64str += EN_CHAR.charAt(bitArrayToNum(bitArray.splice(0, BITS_ENCODE)));
+			}
+
+			return base64str;
+		}
+
+		function decode(base64str) {
+			var bitArray = [];
+			for(var i = 0; i < base64str.length; i++) {
+				bitArray = bitArray.concat(numToBitArray(EN_CHAR.indexOf(base64str.charAt(i)), BITS_ENCODE));
+			}
+
+			return bitArray;
+		}
+
+		function bitArrayToNum(bitArray) {
+			var num = 0;
+			for(var i = 0; i < bitArray.length; i++) {
+				num = num << 1 | bitArray[i];
+			}
+			return num;
+		}
+		function numToBitArray(num, digits) {
+			var bitArray = [];
+			for(var i = digits - 1; i >= 0; i--) {
+				bitArray.push(num >> i & 1);
+			}
+			return bitArray;
+		}
+
+		//API
+		return {
+			encode: encode,
+			decode: decode,
+			bitArrayToNum: bitArrayToNum,
+			numToBitArray: numToBitArray,
+			BITS_ENCODE: BITS_ENCODE
+		};
+	})();
+
 	//API
 	return {
 		//メソッド
@@ -236,7 +404,10 @@ var Simulator = (function() {
 		getMonster: getMonster,
 		deleteMonster: deleteMonster,
 		movedownMonster: movedownMonster,
-		moveupMonster : moveupMonster,
+		moveupMonster: moveupMonster,
+		generateQueryString: generateQueryString,
+		applyQueryString: applyQueryString,
+		validateQueryString: validateQueryString,
 
 		//プロパティ
 		skillCategories: skillCategories,
@@ -840,9 +1011,14 @@ var SimulatorUI = (function($) {
 
 //ロード時
 jQuery(function($) {
+	var query = window.location.search.substring(1);
+	if(Simulator.validateQueryString(query)) {
+		Simulator.applyQueryString(query);
+	}
+
 	//テスト用コード
-	Simulator.addMonster('prisonyan');
-	Simulator.addMonster('slime');
+	//Simulator.addMonster('prisonyan');
+	//Simulator.addMonster('slime');
 	SimulatorUI.setupAll();
 	
 	$('#tw-share').socialbutton('twitter', {
