@@ -388,3 +388,9 @@ span.fold, span.unfold {
 /* ベータ版注意事項 */
 #beta_notice {
   font-size: 90%; }
+
+#initial-instruction p {
+  font-size: 100%;
+  color: green;
+  text-align: center;
+  padding: 2em; }

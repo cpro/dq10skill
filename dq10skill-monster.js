@@ -288,7 +288,7 @@ var Simulator = (function() {
 	//指定IDのモンスター削除
 	function deleteMonster(monsterId) {
 		var i = indexOf(monsterId);
-		if(i) monsters.splice(i, 1);
+		if(i !== null) monsters.splice(i, 1);
 	}
 
 	//指定IDのモンスターをひとつ下に並び替える
@@ -854,6 +854,9 @@ var SimulatorUI = (function($) {
 
 			sim.deleteMonster(monsterId);
 			$('#' + monsterId).remove();
+
+			if(sim.monsters.length === 0)
+				$('#initial-instruction').show();
 		});
 
 		//下へボタン
@@ -980,6 +983,8 @@ var SimulatorUI = (function($) {
 			var monster = sim.addMonster(monsterType);
 			if(monster === null) return;
 
+			$('#initial-instruction').hide();
+
 			$('#monsters').append(drawMonsterEntry(monster));
 			setupEntry(monster.id);
 			refreshEntry(monster.id);
@@ -992,6 +997,10 @@ var SimulatorUI = (function($) {
 		setupConsole();
 
 		$('#monsters').empty();
+
+		if(sim.monsters.length > 0)
+			$('#initial-instruction').hide();
+
 		for(var i = 0; i < sim.monsters.length; i++) {
 			$('#monsters').append(drawMonsterEntry(sim.monsters[i]));
 		}
@@ -1019,9 +1028,6 @@ jQuery(function($) {
 		Simulator.applyQueryString(query);
 	}
 
-	//テスト用コード
-	//Simulator.addMonster('prisonyan');
-	//Simulator.addMonster('slime');
 	SimulatorUI.setupAll();
 	
 	$('#tw-share').socialbutton('twitter', {
