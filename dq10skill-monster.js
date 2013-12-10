@@ -177,14 +177,7 @@ var Simulator = (function() {
 	};
 	//転生追加スキルの更新
 	Monster.prototype.updateAdditionalSkill = function(skillIndex, newValue) {
-		if(skillIndex > ADDITIONAL_SKILL_MAX) return false;
-
-		if(newValue !== null) {
-			for(var i = 0; i < this.additionalSkills.length; i++) {
-				if(i == skillIndex) continue;
-				if(newValue == this.additionalSkills[i]) return false;
-			}
-		}
+		if(skillIndex < 0 || skillIndex > ADDITIONAL_SKILL_MAX) return false;
 		
 		this.additionalSkills[skillIndex] = newValue;
 		return true;
