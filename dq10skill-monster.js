@@ -490,6 +490,7 @@ var SimulatorUI = (function($) {
 
 	function refreshEntry(monsterId) {
 		refreshAdditionalSkillSelector(monsterId);
+		refreshAdditionalSkill(monsterId);
 		refreshMonsterInfo(monsterId);
 		for(var skillCategory in sim.skillCategories) {
 			refreshSkillList(monsterId, skillCategory);
@@ -566,18 +567,18 @@ var SimulatorUI = (function($) {
 		}
 	}
 	
-	function refreshSaveUrl() { /*
-		var url = window.location.href.replace(window.location.search, "") + '?' + Base64Param.encode();
+	function refreshSaveUrl() {
+		var url = window.location.href.replace(window.location.search, "") + '?' + sim.generateQueryString();
 		$('#url_text').val(url);
 		
 		var params = {
-			text: 'DQ10 V2のスキル構成予定:',
+			text: 'DQ10 仲間モンスターのスキル構成:',
 			hashtags: 'DQ10, dq10_skillsim',
 			url: url,
 			original_referer: window.location.href,
 			tw_p: 'tweetbutton'
 		};
-		$('#tw-saveurl').attr('href', 'https://twitter.com/intent/tweet?' + $.param(params)); */
+		$('#tw-saveurl').attr('href', 'https://twitter.com/intent/tweet?' + $.param(params));
 	}
 
 	function refreshAdditionalSkillSelector(monsterId) {
@@ -912,6 +913,8 @@ var SimulatorUI = (function($) {
 			var selectorId = $(this).attr('id').match(/^select-additional(\d+)-/)[1];
 			if(monster.updateAdditionalSkill(selectorId, $(this).val())) {
 				refreshAdditionalSkill(monsterId);
+				refreshMonsterInfo(monsterId);
+				refreshSaveUrl();
 			} else {
 				$(this).val(monster.getAdditionalSkill(selectorId));
 				return false;
