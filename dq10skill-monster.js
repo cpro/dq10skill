@@ -638,12 +638,13 @@ var SimulatorUI = (function($) {
 
 		function refreshAdditionalSkillTable($table, newSkillCategory) {
 			var data = sim.skillCategories[newSkillCategory];
+			var tableClass = $table.attr('class').split(' ')[0];
 
 			$table.find('caption .skill_category_name').text(data.name);
 
 			var $tr;
 			for(var s = 0; s < data.skills.length; s++) {
-				$tr = $table.find('tr[class$=_' + s.toString() + ']');
+				$tr = $table.find('tr.' + tableClass + '_' + s.toString());
 
 				var hintText = data.skills[s].desc;
 				if((data.skills[s].mp !== null) && (data.skills[s].mp !== undefined))
