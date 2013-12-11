@@ -190,12 +190,29 @@ a {
 			}
 		}
 
-		#hirobaimport {
+		#navlink {
 			position: absolute;
 			bottom: 0;
-			right: 10px;
+			right: 6px;
 			z-index: 101;
 			font-size: 12px;
+
+			a {
+				width: 17.5em;
+				margin-top: 2px;
+			}
+			.ui-button {
+				text-align: left;
+			}
+			.ui-button-text-icon-primary {
+				padding-left: 16px;
+			}
+			.ui-widget {
+				font-size: 1em;
+			}
+			.ui-button-text {
+				padding: .2em .5em;
+			}
 		}
 	}
 }
@@ -247,7 +264,7 @@ a {
 			height: 20px;
 		}
 
-		.indiv_name {
+		.indiv_name, .additional_skill_selector {
 			margin-right: 3px;
 
 			label {
@@ -255,7 +272,7 @@ a {
 				display: inline-block;
 				vertical-align: middle;
 			}
-			input {
+			input, select {
 				display: inline-block;
 				vertical-align: middle;
 			}
@@ -297,7 +314,7 @@ a {
 	.exp {
 		font-size: 120%;
 	}
-	.training_pt {
+	.training_pt, .restart_count {
 		width: 2em;
 		text-align: right;
 	}
@@ -513,4 +530,11 @@ span.fold, span.unfold {
 /* ベータ版注意事項 */
 #beta_notice {
 	font-size: 90%;
+}
+
+#initial-instruction p {
+	font-size: 100%;
+	color: green;
+	text-align: center;
+	padding: 2em;
 }

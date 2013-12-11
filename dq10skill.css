@@ -135,12 +135,23 @@ a {
         border-right: 1px solid #aaaabb; }
         #header #consoleblock table#total td.total_pts#total_exp, #header #consoleblock table#total td.total_pts#total_exp_remain {
           width: 64px; }
-    #header #consoleblock #hirobaimport {
+    #header #consoleblock #navlink {
       position: absolute;
       bottom: 0;
-      right: 10px;
+      right: 6px;
       z-index: 101;
       font-size: 12px; }
+      #header #consoleblock #navlink a {
+        width: 17.5em;
+        margin-top: 2px; }
+      #header #consoleblock #navlink .ui-button {
+        text-align: left; }
+      #header #consoleblock #navlink .ui-button-text-icon-primary {
+        padding-left: 16px; }
+      #header #consoleblock #navlink .ui-widget {
+        font-size: 1em; }
+      #header #consoleblock #navlink .ui-button-text {
+        padding: 0.2em 0.5em; }
 
 /* エントリボックス */
 .class_group, .monster_ent {
@@ -179,13 +190,13 @@ a {
     .ent_title .ent_title_console button {
       width: 20px;
       height: 20px; }
-    .ent_title .ent_title_console .indiv_name {
+    .ent_title .ent_title_console .indiv_name, .ent_title .ent_title_console .additional_skill_selector {
       margin-right: 3px; }
-      .ent_title .ent_title_console .indiv_name label {
+      .ent_title .ent_title_console .indiv_name label, .ent_title .ent_title_console .additional_skill_selector label {
         font-size: 80%;
         display: inline-block;
         vertical-align: middle; }
-      .ent_title .ent_title_console .indiv_name input {
+      .ent_title .ent_title_console .indiv_name input, .ent_title .ent_title_console .indiv_name select, .ent_title .ent_title_console .additional_skill_selector input, .ent_title .ent_title_console .additional_skill_selector select {
         display: inline-block;
         vertical-align: middle; }
 
@@ -215,7 +226,7 @@ a {
     font-size: 140%; }
   .class_info .exp {
     font-size: 120%; }
-  .class_info .training_pt {
+  .class_info .training_pt, .class_info .restart_count {
     width: 2em;
     text-align: right; }
 
@@ -388,3 +399,9 @@ span.fold, span.unfold {
 /* ベータ版注意事項 */
 #beta_notice {
   font-size: 90%; }
+
+#initial-instruction p {
+  font-size: 100%;
+  color: green;
+  text-align: center;
+  padding: 2em; }

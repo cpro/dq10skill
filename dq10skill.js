@@ -743,8 +743,11 @@ var SimulatorUI = (function($) {
 		
 		//hiroba-import.htmlへのリンクボタン
 		function() {
-			$('#hirobaimport>a').button({
+			$('a#hirobaimport').button({
 				icons: { primary: 'ui-icon-arrowreturnthick-1-s'}
+			});
+			$('a#tomonster').button({
+				icons: { primary: 'ui-icon-arrowthick-1-e'}
 			});
 		},
 		

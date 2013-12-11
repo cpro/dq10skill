@@ -7,12 +7,12 @@
     <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
     <title>DQ10 スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=4.0' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=4.0.1' rel='stylesheet' type='text/css'>
     <link href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css' rel='stylesheet' type='text/css'>
     <script src='http://code.jquery.com/jquery-1.10.2.min.js' type='text/javascript'></script>
     <script src='http://code.jquery.com/ui/1.10.3/jquery-ui.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=4.0' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=4.0.1' type='text/javascript'></script>
     <script>
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-5127088-4']);
@@ -29,7 +29,7 @@
       <div id='titleblock'>
         <h1><a href='http://cpro.jp/dq10/skillsimulator/'>DQ10 スキルシミュレータ</a></h1>
         <div id='save_url'>
-          保存用URL:<input class='ui-widget-content ui-corner-all' id='url_text' size='45' type='text'><a id='tw-saveurl'>保存用URLをツイート</a>
+          <label for='url_text'>保存用URL:</label><input class='ui-widget-content ui-corner-all' id='url_text' size='45' type='text'><a id='tw-saveurl'>保存用URLをツイート</a>
         </div>
       </div>
       <div id='consoleblock'>
@@ -84,8 +84,10 @@
             <td class='total_pts ui-corner-br'></td>
           </tr>
         </table>
-        <div id='hirobaimport'>
-          <a href='hiroba-import.html' target='_blank'>冒険者の広場からデータを取り込む</a>
+        <div id='navlink'>
+          <a href='monster.html' id='tomonster'>仲間モンスター用シミュレータ</a>
+          <br>
+          <a href='hiroba-import.html' id='hirobaimport' target='_blank'>冒険者の広場からデータを取り込む</a>
         </div>
       </div>
     </div>
@@ -243,10 +245,10 @@
           </tr>
           <tr class='spear_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+10</td></tr>
           <tr class='spear_1'><td class='skill_pt'>7</td><td class='skill_name'>けもの突き</td></tr>
-          <tr class='spear_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時武器ガード率+3%</td></tr>
+          <tr class='spear_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
           <tr class='spear_3'><td class='skill_pt'>22</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
           <tr class='spear_4'><td class='skill_pt'>35</td><td class='skill_name'>雷鳴突き</td></tr>
-          <tr class='spear_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時武器ガード率+3%</td></tr>
+          <tr class='spear_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時武器ガード率+5%</td></tr>
           <tr class='spear_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時こうげき力+15</td></tr>
           <tr class='spear_7'><td class='skill_pt'>76</td><td class='skill_name'>一閃突き</td></tr>
           <tr class='spear_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
@@ -262,13 +264,13 @@
               <button class='reset'>リセット</button>
             </th>
           </tr>
-          <tr class='stick_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時MP吸収率+2%</td></tr>
+          <tr class='stick_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時ＭＰ吸収率+2%</td></tr>
           <tr class='stick_1'><td class='skill_pt'>7</td><td class='skill_name'>マジステッキ</td></tr>
-          <tr class='stick_2'><td class='skill_pt'>13</td><td class='skill_name'>戦闘勝利時MP小回復</td></tr>
+          <tr class='stick_2'><td class='skill_pt'>13</td><td class='skill_name'>戦闘勝利時ＭＰ小回復</td></tr>
           <tr class='stick_3'><td class='skill_pt'>21</td><td class='skill_name'>装備時かいふく魔力+30</td></tr>
           <tr class='stick_4'><td class='skill_pt'>31</td><td class='skill_name'>デビルンチャーム</td></tr>
           <tr class='stick_5'><td class='skill_pt'>44</td><td class='skill_name'>装備時さいだいＭＰ+30</td></tr>
-          <tr class='stick_6'><td class='skill_pt'>57</td><td class='skill_name'>装備時MP吸収率+2%</td></tr>
+          <tr class='stick_6'><td class='skill_pt'>57</td><td class='skill_name'>装備時ＭＰ吸収率+2%</td></tr>
           <tr class='stick_7'><td class='skill_pt'>70</td><td class='skill_name'>パニパニハニー</td></tr>
           <tr class='stick_8'><td class='skill_pt'>84</td><td class='skill_name'>装備時かいふく魔力+30</td></tr>
           <tr class='stick_9'><td class='skill_pt'>100</td><td class='skill_name'>キラキラポーン</td></tr>
@@ -364,16 +366,16 @@
               <button class='reset'>リセット</button>
             </th>
           </tr>
-          <tr class='wand_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時MP吸収率+2%</td></tr>
+          <tr class='wand_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時ＭＰ吸収率+2%</td></tr>
           <tr class='wand_1'><td class='skill_pt'>7</td><td class='skill_name'>悪魔ばらい</td></tr>
-          <tr class='wand_2'><td class='skill_pt'>13</td><td class='skill_name'>戦闘勝利時MP小回復</td></tr>
+          <tr class='wand_2'><td class='skill_pt'>13</td><td class='skill_name'>戦闘勝利時ＭＰ小回復</td></tr>
           <tr class='wand_3'><td class='skill_pt'>21</td><td class='skill_name'>早詠みの杖</td></tr>
           <tr class='wand_4'><td class='skill_pt'>31</td><td class='skill_name'>装備時こうげき魔力+30</td></tr>
           <tr class='wand_5'><td class='skill_pt'>44</td><td class='skill_name'>しゅくふくの杖</td></tr>
           <tr class='wand_6'><td class='skill_pt'>57</td><td class='skill_name'>装備時こうげき魔力+30</td></tr>
           <tr class='wand_7'><td class='skill_pt'>70</td><td class='skill_name'>暴走魔法陣</td></tr>
           <tr class='wand_8'><td class='skill_pt'>84</td><td class='skill_name'>装備時さいだいＭＰ+100</td></tr>
-          <tr class='wand_9'><td class='skill_pt'>100</td><td class='skill_name'>戦闘勝利時MP中回復</td></tr>
+          <tr class='wand_9'><td class='skill_pt'>100</td><td class='skill_name'>戦闘勝利時ＭＰ中回復</td></tr>
         </table><table class='knife skill_table'>
           <caption>
             短剣:
@@ -388,7 +390,7 @@
           <tr class='knife_0'><td class='skill_pt'>3</td><td class='skill_name'>キラーブーン</td></tr>
           <tr class='knife_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
           <tr class='knife_2'><td class='skill_pt'>13</td><td class='skill_name'>スリープダガー</td></tr>
-          <tr class='knife_3'><td class='skill_pt'>22</td><td class='skill_name'>攻撃時たまにMP回復</td></tr>
+          <tr class='knife_3'><td class='skill_pt'>22</td><td class='skill_name'>攻撃時たまにＭＰ回復</td></tr>
           <tr class='knife_4'><td class='skill_pt'>35</td><td class='skill_name'>ヒュプノスハント</td></tr>
           <tr class='knife_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時こうげき力+10</td></tr>
           <tr class='knife_6'><td class='skill_pt'>58</td><td class='skill_name'>ヴァイパーファング</td></tr>
@@ -613,7 +615,7 @@
           <tr class='knife_0'><td class='skill_pt'>3</td><td class='skill_name'>キラーブーン</td></tr>
           <tr class='knife_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
           <tr class='knife_2'><td class='skill_pt'>13</td><td class='skill_name'>スリープダガー</td></tr>
-          <tr class='knife_3'><td class='skill_pt'>22</td><td class='skill_name'>攻撃時たまにMP回復</td></tr>
+          <tr class='knife_3'><td class='skill_pt'>22</td><td class='skill_name'>攻撃時たまにＭＰ回復</td></tr>
           <tr class='knife_4'><td class='skill_pt'>35</td><td class='skill_name'>ヒュプノスハント</td></tr>
           <tr class='knife_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時こうげき力+10</td></tr>
           <tr class='knife_6'><td class='skill_pt'>58</td><td class='skill_name'>ヴァイパーファング</td></tr>
@@ -778,7 +780,7 @@
           <tr class='knife_0'><td class='skill_pt'>3</td><td class='skill_name'>キラーブーン</td></tr>
           <tr class='knife_1'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
           <tr class='knife_2'><td class='skill_pt'>13</td><td class='skill_name'>スリープダガー</td></tr>
-          <tr class='knife_3'><td class='skill_pt'>22</td><td class='skill_name'>攻撃時たまにMP回復</td></tr>
+          <tr class='knife_3'><td class='skill_pt'>22</td><td class='skill_name'>攻撃時たまにＭＰ回復</td></tr>
           <tr class='knife_4'><td class='skill_pt'>35</td><td class='skill_name'>ヒュプノスハント</td></tr>
           <tr class='knife_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時こうげき力+10</td></tr>
           <tr class='knife_6'><td class='skill_pt'>58</td><td class='skill_name'>ヴァイパーファング</td></tr>
@@ -903,7 +905,7 @@
           <tr class='hammer_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時こうげき力+5</td></tr>
           <tr class='hammer_3'><td class='skill_pt'>22</td><td class='skill_name'>シールドブレイク</td></tr>
           <tr class='hammer_4'><td class='skill_pt'>35</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
-          <tr class='hammer_5'><td class='skill_pt'>42</td><td class='skill_name'>MPブレイク</td></tr>
+          <tr class='hammer_5'><td class='skill_pt'>42</td><td class='skill_name'>ＭＰブレイク</td></tr>
           <tr class='hammer_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時こうげき力+10</td></tr>
           <tr class='hammer_7'><td class='skill_pt'>76</td><td class='skill_name'>キャンセルショット</td></tr>
           <tr class='hammer_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
@@ -984,7 +986,7 @@
           <tr class='hammer_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時こうげき力+5</td></tr>
           <tr class='hammer_3'><td class='skill_pt'>22</td><td class='skill_name'>シールドブレイク</td></tr>
           <tr class='hammer_4'><td class='skill_pt'>35</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
-          <tr class='hammer_5'><td class='skill_pt'>42</td><td class='skill_name'>MPブレイク</td></tr>
+          <tr class='hammer_5'><td class='skill_pt'>42</td><td class='skill_name'>ＭＰブレイク</td></tr>
           <tr class='hammer_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時こうげき力+10</td></tr>
           <tr class='hammer_7'><td class='skill_pt'>76</td><td class='skill_name'>キャンセルショット</td></tr>
           <tr class='hammer_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
@@ -1002,10 +1004,10 @@
           </tr>
           <tr class='spear_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+10</td></tr>
           <tr class='spear_1'><td class='skill_pt'>7</td><td class='skill_name'>けもの突き</td></tr>
-          <tr class='spear_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時武器ガード率+3%</td></tr>
+          <tr class='spear_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
           <tr class='spear_3'><td class='skill_pt'>22</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
           <tr class='spear_4'><td class='skill_pt'>35</td><td class='skill_name'>雷鳴突き</td></tr>
-          <tr class='spear_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時武器ガード率+3%</td></tr>
+          <tr class='spear_5'><td class='skill_pt'>42</td><td class='skill_name'>装備時武器ガード率+5%</td></tr>
           <tr class='spear_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時こうげき力+15</td></tr>
           <tr class='spear_7'><td class='skill_pt'>76</td><td class='skill_name'>一閃突き</td></tr>
           <tr class='spear_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
@@ -1021,13 +1023,13 @@
               <button class='reset'>リセット</button>
             </th>
           </tr>
-          <tr class='stick_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時MP吸収率+2%</td></tr>
+          <tr class='stick_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時ＭＰ吸収率+2%</td></tr>
           <tr class='stick_1'><td class='skill_pt'>7</td><td class='skill_name'>マジステッキ</td></tr>
-          <tr class='stick_2'><td class='skill_pt'>13</td><td class='skill_name'>戦闘勝利時MP小回復</td></tr>
+          <tr class='stick_2'><td class='skill_pt'>13</td><td class='skill_name'>戦闘勝利時ＭＰ小回復</td></tr>
           <tr class='stick_3'><td class='skill_pt'>21</td><td class='skill_name'>装備時かいふく魔力+30</td></tr>
           <tr class='stick_4'><td class='skill_pt'>31</td><td class='skill_name'>デビルンチャーム</td></tr>
           <tr class='stick_5'><td class='skill_pt'>44</td><td class='skill_name'>装備時さいだいＭＰ+30</td></tr>
-          <tr class='stick_6'><td class='skill_pt'>57</td><td class='skill_name'>装備時MP吸収率+2%</td></tr>
+          <tr class='stick_6'><td class='skill_pt'>57</td><td class='skill_name'>装備時ＭＰ吸収率+2%</td></tr>
           <tr class='stick_7'><td class='skill_pt'>70</td><td class='skill_name'>パニパニハニー</td></tr>
           <tr class='stick_8'><td class='skill_pt'>84</td><td class='skill_name'>装備時かいふく魔力+30</td></tr>
           <tr class='stick_9'><td class='skill_pt'>100</td><td class='skill_name'>キラキラポーン</td></tr>
@@ -1123,16 +1125,16 @@
               <button class='reset'>リセット</button>
             </th>
           </tr>
-          <tr class='wand_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時MP吸収率+2%</td></tr>
+          <tr class='wand_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時ＭＰ吸収率+2%</td></tr>
           <tr class='wand_1'><td class='skill_pt'>7</td><td class='skill_name'>悪魔ばらい</td></tr>
-          <tr class='wand_2'><td class='skill_pt'>13</td><td class='skill_name'>戦闘勝利時MP小回復</td></tr>
+          <tr class='wand_2'><td class='skill_pt'>13</td><td class='skill_name'>戦闘勝利時ＭＰ小回復</td></tr>
           <tr class='wand_3'><td class='skill_pt'>21</td><td class='skill_name'>早詠みの杖</td></tr>
           <tr class='wand_4'><td class='skill_pt'>31</td><td class='skill_name'>装備時こうげき魔力+30</td></tr>
           <tr class='wand_5'><td class='skill_pt'>44</td><td class='skill_name'>しゅくふくの杖</td></tr>
           <tr class='wand_6'><td class='skill_pt'>57</td><td class='skill_name'>装備時こうげき魔力+30</td></tr>
           <tr class='wand_7'><td class='skill_pt'>70</td><td class='skill_name'>暴走魔法陣</td></tr>
           <tr class='wand_8'><td class='skill_pt'>84</td><td class='skill_name'>装備時さいだいＭＰ+100</td></tr>
-          <tr class='wand_9'><td class='skill_pt'>100</td><td class='skill_name'>戦闘勝利時MP中回復</td></tr>
+          <tr class='wand_9'><td class='skill_pt'>100</td><td class='skill_name'>戦闘勝利時ＭＰ中回復</td></tr>
         </table><table class='bow skill_table'>
           <caption>
             弓:
@@ -1146,11 +1148,11 @@
           </tr>
           <tr class='bow_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+5</td></tr>
           <tr class='bow_1'><td class='skill_pt'>7</td><td class='skill_name'>マジックアロー</td></tr>
-          <tr class='bow_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時射程距離+2m</td></tr>
+          <tr class='bow_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時射程距離+3m</td></tr>
           <tr class='bow_3'><td class='skill_pt'>22</td><td class='skill_name'>バードシュート</td></tr>
           <tr class='bow_4'><td class='skill_pt'>35</td><td class='skill_name'>装備時こうげき力+10</td></tr>
           <tr class='bow_5'><td class='skill_pt'>42</td><td class='skill_name'>サンダーボルト</td></tr>
-          <tr class='bow_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時射程距離+2m</td></tr>
+          <tr class='bow_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時射程距離+4m</td></tr>
           <tr class='bow_7'><td class='skill_pt'>76</td><td class='skill_name'>さみだれうち</td></tr>
           <tr class='bow_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
           <tr class='bow_9'><td class='skill_pt'>100</td><td class='skill_name'>天使の矢</td></tr>
@@ -1193,7 +1195,7 @@
           <tr class='fource_4'><td class='skill_pt'>32</td><td class='skill_name'>ストームフォース（専）</td></tr>
           <tr class='fource_5'><td class='skill_pt'>42</td><td class='skill_name'>常時みのまもり+5</td></tr>
           <tr class='fource_6'><td class='skill_pt'>55</td><td class='skill_name'>ダークフォース（専）</td></tr>
-          <tr class='fource_7'><td class='skill_pt'>68</td><td class='skill_name'>MPパサー（専）</td></tr>
+          <tr class='fource_7'><td class='skill_pt'>68</td><td class='skill_name'>ＭＰパサー（専）</td></tr>
           <tr class='fource_8'><td class='skill_pt'>82</td><td class='skill_name'>常時さいだいＨＰ+20</td></tr>
           <tr class='fource_9'><td class='skill_pt'>100</td><td class='skill_name'>ライトフォース（専）</td></tr>
         </table></div>
@@ -1227,11 +1229,11 @@
           </tr>
           <tr class='bow_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+5</td></tr>
           <tr class='bow_1'><td class='skill_pt'>7</td><td class='skill_name'>マジックアロー</td></tr>
-          <tr class='bow_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時射程距離+2m</td></tr>
+          <tr class='bow_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時射程距離+3m</td></tr>
           <tr class='bow_3'><td class='skill_pt'>22</td><td class='skill_name'>バードシュート</td></tr>
           <tr class='bow_4'><td class='skill_pt'>35</td><td class='skill_name'>装備時こうげき力+10</td></tr>
           <tr class='bow_5'><td class='skill_pt'>42</td><td class='skill_name'>サンダーボルト</td></tr>
-          <tr class='bow_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時射程距離+2m</td></tr>
+          <tr class='bow_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時射程距離+4m</td></tr>
           <tr class='bow_7'><td class='skill_pt'>76</td><td class='skill_name'>さみだれうち</td></tr>
           <tr class='bow_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
           <tr class='bow_9'><td class='skill_pt'>100</td><td class='skill_name'>天使の矢</td></tr>
@@ -1369,16 +1371,16 @@
               <button class='reset'>リセット</button>
             </th>
           </tr>
-          <tr class='wand_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時MP吸収率+2%</td></tr>
+          <tr class='wand_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時ＭＰ吸収率+2%</td></tr>
           <tr class='wand_1'><td class='skill_pt'>7</td><td class='skill_name'>悪魔ばらい</td></tr>
-          <tr class='wand_2'><td class='skill_pt'>13</td><td class='skill_name'>戦闘勝利時MP小回復</td></tr>
+          <tr class='wand_2'><td class='skill_pt'>13</td><td class='skill_name'>戦闘勝利時ＭＰ小回復</td></tr>
           <tr class='wand_3'><td class='skill_pt'>21</td><td class='skill_name'>早詠みの杖</td></tr>
           <tr class='wand_4'><td class='skill_pt'>31</td><td class='skill_name'>装備時こうげき魔力+30</td></tr>
           <tr class='wand_5'><td class='skill_pt'>44</td><td class='skill_name'>しゅくふくの杖</td></tr>
           <tr class='wand_6'><td class='skill_pt'>57</td><td class='skill_name'>装備時こうげき魔力+30</td></tr>
           <tr class='wand_7'><td class='skill_pt'>70</td><td class='skill_name'>暴走魔法陣</td></tr>
           <tr class='wand_8'><td class='skill_pt'>84</td><td class='skill_name'>装備時さいだいＭＰ+100</td></tr>
-          <tr class='wand_9'><td class='skill_pt'>100</td><td class='skill_name'>戦闘勝利時MP中回復</td></tr>
+          <tr class='wand_9'><td class='skill_pt'>100</td><td class='skill_name'>戦闘勝利時ＭＰ中回復</td></tr>
         </table><table class='bow skill_table'>
           <caption>
             弓:
@@ -1392,11 +1394,11 @@
           </tr>
           <tr class='bow_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+5</td></tr>
           <tr class='bow_1'><td class='skill_pt'>7</td><td class='skill_name'>マジックアロー</td></tr>
-          <tr class='bow_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時射程距離+2m</td></tr>
+          <tr class='bow_2'><td class='skill_pt'>13</td><td class='skill_name'>装備時射程距離+3m</td></tr>
           <tr class='bow_3'><td class='skill_pt'>22</td><td class='skill_name'>バードシュート</td></tr>
           <tr class='bow_4'><td class='skill_pt'>35</td><td class='skill_name'>装備時こうげき力+10</td></tr>
           <tr class='bow_5'><td class='skill_pt'>42</td><td class='skill_name'>サンダーボルト</td></tr>
-          <tr class='bow_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時射程距離+2m</td></tr>
+          <tr class='bow_6'><td class='skill_pt'>58</td><td class='skill_name'>装備時射程距離+4m</td></tr>
           <tr class='bow_7'><td class='skill_pt'>76</td><td class='skill_name'>さみだれうち</td></tr>
           <tr class='bow_8'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
           <tr class='bow_9'><td class='skill_pt'>100</td><td class='skill_name'>天使の矢</td></tr>
@@ -1513,13 +1515,13 @@
               <button class='reset'>リセット</button>
             </th>
           </tr>
-          <tr class='stick_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時MP吸収率+2%</td></tr>
+          <tr class='stick_0'><td class='skill_pt'>3</td><td class='skill_name'>装備時ＭＰ吸収率+2%</td></tr>
           <tr class='stick_1'><td class='skill_pt'>7</td><td class='skill_name'>マジステッキ</td></tr>
-          <tr class='stick_2'><td class='skill_pt'>13</td><td class='skill_name'>戦闘勝利時MP小回復</td></tr>
+          <tr class='stick_2'><td class='skill_pt'>13</td><td class='skill_name'>戦闘勝利時ＭＰ小回復</td></tr>
           <tr class='stick_3'><td class='skill_pt'>21</td><td class='skill_name'>装備時かいふく魔力+30</td></tr>
           <tr class='stick_4'><td class='skill_pt'>31</td><td class='skill_name'>デビルンチャーム</td></tr>
           <tr class='stick_5'><td class='skill_pt'>44</td><td class='skill_name'>装備時さいだいＭＰ+30</td></tr>
-          <tr class='stick_6'><td class='skill_pt'>57</td><td class='skill_name'>装備時MP吸収率+2%</td></tr>
+          <tr class='stick_6'><td class='skill_pt'>57</td><td class='skill_name'>装備時ＭＰ吸収率+2%</td></tr>
           <tr class='stick_7'><td class='skill_pt'>70</td><td class='skill_name'>パニパニハニー</td></tr>
           <tr class='stick_8'><td class='skill_pt'>84</td><td class='skill_name'>装備時かいふく魔力+30</td></tr>
           <tr class='stick_9'><td class='skill_pt'>100</td><td class='skill_name'>キラキラポーン</td></tr>
@@ -1711,7 +1713,7 @@
         <ul>
           <li>スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』のスキルポイント割り振りを検討するためのシミュレータです。</li>
           <li>要JavaScript。Google Chrome, IE10で動作確認。Firefoxでも動くはずです。IE8, 9はたぶん動くと思いますが推奨しません。</li>
-          <li>レベル76から80のスキルポイントは仮の数値として2ポイントずつの増加としてあります。</li>
+          <li>Lv76-80の獲得スキルポイントは、<a href="http://twitter.com/NeiaDQX/status/408516819847090176" target="_blank">ツイッターでの報告</a>をもとにした未検証のものです。</li>
           <li>
             使い方:
             <ul>
@@ -1737,6 +1739,7 @@
           <li>
             履歴:
             <ul>
+              <li>2013/12/11 <a href="./monster.html">仲間モンスター用スキルシミュレータ</a>を公開。</li>
               <li>2013/12/5 v4.0 Version2の新職業・まもの使いを追加、レベル上限を75→80に。</li>
               <li>
                 2013/11/26 v3.9
@@ -1754,7 +1757,6 @@
             ToDo:
             <ul>
               <li>Lv76-80の必要経験値入力</li>
-              <li>Lv76-80の獲得スキルポイント調査</li>
               <li>仲間モンスター用シミュレータの公開</li>
             </ul>
           </li>
