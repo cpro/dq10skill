@@ -135,7 +135,7 @@ a {
         border-right: 1px solid #aaaabb; }
         #header #consoleblock table#total td.total_pts#total_exp, #header #consoleblock table#total td.total_pts#total_exp_remain {
           width: 64px; }
-    #header #consoleblock #hirobaimport {
+    #header #consoleblock #hirobaimport, #header #consoleblock #backlink {
       position: absolute;
       bottom: 0;
       right: 10px;
