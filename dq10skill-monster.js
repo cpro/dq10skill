@@ -98,7 +98,7 @@ var Simulator = (function() {
 		var total = 0;
 		for(var skillCategory in this.skillPts) {
 			var m = skillCategory.match(/^additional(\d+)/);
-			if(m && (this.restartCount < 1 || this.getAdditionalSkill(m[1]) === null))
+			if(m && (this.restartCount < parseInt(m[1]) + 1 || this.getAdditionalSkill(m[1]) === null))
 				continue;
 
 			total += this.skillPts[skillCategory];
