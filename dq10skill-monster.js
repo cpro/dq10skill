@@ -126,16 +126,22 @@ var Simulator = (function() {
 	
 	//モンスター・レベルによる必要経験値
 	Monster.prototype.requiredExp = function(level) {
-		var expMax = expRequired[this.data.expTable][LEVEL_MAX];
-		if(isNaN(expMax)) expMax = 0;
-		var additionalExp = 0;
-		for(var r = 0; r < this.restartCount; r++) {
-			additionalExp += expMax * Math.floor(1 + r * RESTART_EXP_RATIO);
-		}
-
-		return expRequired[this.data.expTable][level] * Math.floor(1 + this.restartCount * RESTART_EXP_RATIO) + additionalExp;
+		return Math.floor(expRequired[this.data.expTable][level] * (1 + this.restartCount * RESTART_EXP_RATIO));
 	};
 	
+	//転生時の必要経験値 Lv50経験値×転生補正値の累計
+	Monster.prototype.additionalExp = function() {
+		var expMax = expRequired[this.data.expTable][LEVEL_MAX];
+		if(isNaN(expMax)) return 0;
+
+		var additionalExp = 0;
+		for(var r = 0; r < this.restartCount; r++) {
+			additionalExp += Math.floor(expMax * (1 + r * RESTART_EXP_RATIO));
+		}
+
+		return additionalExp;
+	};
+
 	//不足経験値
 	Monster.prototype.requiredExpRemain = function() {
 		var required = this.requiredLevel();
@@ -519,7 +525,10 @@ var SimulatorUI = (function($) {
 		
 		//必要経験値
 		$('#' + monsterId + ' .exp').text(numToFormedStr(monster.requiredExp(currentLevel)));
-		
+		var additionalExp = monster.additionalExp();
+		if(additionalExp > 0)
+			$('#' + monsterId + ' .exp').append('<small> + ' + numToFormedStr(additionalExp) + '</small>');
+
 		//スキルポイント 残り / 最大値
 		var maxSkillPts = monster.maxSkillPts();
 		var additionalSkillPts = monster.getRestartSkillPt();
