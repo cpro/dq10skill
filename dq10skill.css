@@ -135,12 +135,23 @@ a {
         border-right: 1px solid #aaaabb; }
         #header #consoleblock table#total td.total_pts#total_exp, #header #consoleblock table#total td.total_pts#total_exp_remain {
           width: 64px; }
-    #header #consoleblock #hirobaimport, #header #consoleblock #backlink {
+    #header #consoleblock #navlink {
       position: absolute;
       bottom: 0;
-      right: 10px;
+      right: 6px;
       z-index: 101;
       font-size: 12px; }
+      #header #consoleblock #navlink a {
+        width: 17.5em;
+        margin-top: 2px; }
+      #header #consoleblock #navlink .ui-button {
+        text-align: left; }
+      #header #consoleblock #navlink .ui-button-text-icon-primary {
+        padding-left: 16px; }
+      #header #consoleblock #navlink .ui-widget {
+        font-size: 1em; }
+      #header #consoleblock #navlink .ui-button-text {
+        padding: 0.2em 0.5em; }
 
 /* エントリボックス */
 .class_group, .monster_ent {

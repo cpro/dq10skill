@@ -29,7 +29,7 @@
       <div id='titleblock'>
         <h1><a href='http://cpro.jp/dq10/skillsimulator/'>DQ10 スキルシミュレータ</a></h1>
         <div id='save_url'>
-          保存用URL:<input class='ui-widget-content ui-corner-all' id='url_text' size='45' type='text'><a id='tw-saveurl'>保存用URLをツイート</a>
+          <label for='url_text'>保存用URL:</label><input class='ui-widget-content ui-corner-all' id='url_text' size='45' type='text'><a id='tw-saveurl'>保存用URLをツイート</a>
         </div>
       </div>
       <div id='consoleblock'>
@@ -84,8 +84,10 @@
             <td class='total_pts ui-corner-br'></td>
           </tr>
         </table>
-        <div id='hirobaimport'>
-          <a href='hiroba-import.html' target='_blank'>冒険者の広場からデータを取り込む</a>
+        <div id='navlink'>
+          <a href='monster.html' id='tomonster'>仲間モンスター用シミュレータ</a>
+          <br>
+          <a href='hiroba-import.html' id='hirobaimport' target='_blank'>冒険者の広場からデータを取り込む</a>
         </div>
       </div>
     </div>
@@ -1737,6 +1739,7 @@
           <li>
             履歴:
             <ul>
+              <li>2013/12/11 <a href="./monster.html">仲間モンスター用スキルシミュレータ</a>を公開。</li>
               <li>2013/12/5 v4.0 Version2の新職業・まもの使いを追加、レベル上限を75→80に。</li>
               <li>
                 2013/11/26 v3.9

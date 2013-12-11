@@ -34,7 +34,7 @@
 				%h1<
 					%a{href: @home_uri}= @title
 				#save_url
-					保存用URL:
+					%label{for: 'url_text'} 保存用URL:
 					%input#url_text.ui-widget-content.ui-corner-all{type: 'text', size: 45}>/
 					%a#tw-saveurl 保存用URLをツイート
 			#consoleblock
@@ -75,8 +75,10 @@
 						%td.total_pts#total_heal 0
 						%th
 						%td.total_pts.ui-corner-br
-				#hirobaimport
-					%a{href: 'hiroba-import.html', target: '_blank'} 冒険者の広場からデータを取り込む
+				#navlink
+					%a#tomonster{href: 'monster.html'} 仲間モンスター用シミュレータ
+					%br
+					%a#hirobaimport{href: 'hiroba-import.html', target: '_blank'} 冒険者の広場からデータを取り込む
 		#body_content
 			- data['vocationOrder'].each do |vocation|
 				%div.class_group{id: vocation}
@@ -158,6 +160,7 @@
 					%li
 						履歴:
 						%ul
+							%li 2013/12/11 <a href="./monster.html">仲間モンスター用スキルシミュレータ</a>を公開。
 							%li 2013/12/5 v4.0 Version2の新職業・まもの使いを追加、レベル上限を75→80に。
 							%li
 								2013/11/26 v3.9
