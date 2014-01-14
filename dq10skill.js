@@ -245,6 +245,67 @@ var Simulator = (function($) {
 		}
 	}
 
+	var VOCATIONS_DATA_ORDER = [
+		'warrior',       //戦士
+		'priest',        //僧侶
+		'mage',          //魔法使い
+		'martialartist', //武闘家
+		'thief',         //盗賊
+		'minstrel',      //旅芸人
+		'ranger',        //レンジャー
+		'paladin',       //パラディン
+		'armamentalist', //魔法戦士
+		'luminary',      //スーパースター
+		'gladiator',     //バトルマスター
+		'sage',          //賢者
+		'monstermaster'  //まもの使い
+	];
+
+	function serialize() {
+		var serialArray = [];
+
+		for(var i = 0; i < VOCATIONS_DATA_ORDER.length; i++) {
+			var vocation = VOCATIONS_DATA_ORDER[i];
+			serialArray.push(String.fromCharCode(getLevel(vocation)));
+			serialArray.push(String.fromCharCode(getTrainingSkillPt(vocation)));
+
+			for(var s = 0; s < vocations[vocation].skills.length; s++) {
+				var skillCategory = vocations[vocation].skills[s];
+				serialArray.push(String.fromCharCode(getSkillPt(vocation, skillCategory)));
+			}
+		}
+
+		return unescape(encodeURIComponent(serialArray.join('')));
+	}
+	function deserialize(serial) {
+		var dataArray = [];
+		var u_serial = decodeURIComponent(escape(serial));
+
+		for(var i = 0; i < u_serial.length; i++)
+			dataArray.push(u_serial.charCodeAt(i));
+		
+		//要素が足りなければ0で埋める
+		var expectedLength = (1 + 1 + vocations[VOCATIONS_DATA_ORDER[0]].skills.length) * VOCATIONS_DATA_ORDER.length;
+		for(i = i; i < expectedLength; i++)
+			dataArray.push(0);
+
+		var cur = 0;
+		for(i = 0; i < VOCATIONS_DATA_ORDER.length; i++) {
+			var vocation = VOCATIONS_DATA_ORDER[i];
+
+			updateLevel(vocation, dataArray[cur]);
+			cur++;
+			updateTrainingSkillPt(vocation, dataArray[cur]);
+			cur++;
+
+			for(var s = 0; s < vocations[vocation].skills.length; s++) {
+				var skillCategory = vocations[vocation].skills[s];
+				updateSkillPt(vocation, skillCategory, dataArray[cur]);
+				cur++;
+			}
+		}
+	}
+
 	//API
 	return {
 		//メソッド
@@ -267,6 +328,8 @@ var Simulator = (function($) {
 		totalStatus: totalStatus,
 		presetStatus: presetStatus,
 		bringUpLevelToRequired: bringUpLevelToRequired,
+		serialize: serialize,
+		deserialize: deserialize,
 
 		//プロパティ
 		skillCategories: skillCategories,
