@@ -266,29 +266,22 @@ var Simulator = (function($) {
 
 		for(var i = 0; i < VOCATIONS_DATA_ORDER.length; i++) {
 			var vocation = VOCATIONS_DATA_ORDER[i];
-			serialArray.push(fromCharCodeBtoASafe(getLevel(vocation)));
-			serialArray.push(fromCharCodeBtoASafe(getTrainingSkillPt(vocation)));
+			serialArray.push(String.fromCharCode(getLevel(vocation)));
+			serialArray.push(String.fromCharCode(getTrainingSkillPt(vocation)));
 
 			for(var s = 0; s < vocations[vocation].skills.length; s++) {
 				var skillCategory = vocations[vocation].skills[s];
-				serialArray.push(fromCharCodeBtoASafe(getSkillPt(vocation, skillCategory)));
+				serialArray.push(String.fromCharCode(getSkillPt(vocation, skillCategory)));
 			}
 		}
 
 		return serialArray.join('');
-
-		//btoa unsafeな文字のみUTF-8化する
-		function fromCharCodeBtoASafe(charCode) {
-			var c = String.fromCharCode(charCode);
-			return charCode <= 0xFF ? c : unescape(encodeURIComponent(c));
-		}
 	}
 	function deserialize(serial) {
 		var dataArray = [];
-		var u_serial = decodeURIComponent(escape(serial));
 
-		for(var i = 0; i < u_serial.length; i++)
-			dataArray.push(u_serial.charCodeAt(i));
+		for(var i = 0; i < serial.length; i++)
+			dataArray.push(serial.charCodeAt(i));
 		
 		//要素が足りなければ0で埋める
 		var expectedLength = (1 + 1 + vocations[VOCATIONS_DATA_ORDER[0]].skills.length) * VOCATIONS_DATA_ORDER.length;
@@ -533,9 +526,7 @@ var SimulatorUI = (function($) {
 	
 	function refreshSaveUrl() {
 		var url = window.location.href.replace(window.location.search, "") + '?' +
-			Base64.btoa(RawDeflate.deflate(sim.serialize()))
-				.replace(/[+\/]/g, function(m0) {return m0 == '+' ? '-' : '_';})
-				.replace(/=/g, '');
+			Base64.btoa(RawDeflate.deflate(sim.serialize()));
 
 		$('#url_text').val(url);
 		
@@ -1105,12 +1096,36 @@ var Base64Param = (function($) {
 	};
 })(jQuery);
 
+//Base64 URI safe
+//[^\x00-\xFF]な文字しか来ない前提
+var Base64 = (function(global) {
+	var EN_CHAR = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+
+	var btoa = global.btoa ? function(b) {
+		return global.btoa(b)
+			.replace(/[+\/]/g, function(m0) {return m0 == '+' ? '-' : '_';})
+			.replace(/=/g, '');
+	} : function(b) {
+
+	};
+
+	var atob = global.atob ? function(a) {
+		a = a.replace(/[-_]/g, function(m0) {return m0 == '-' ? '+' : '/';});
+		return global.atob(a);
+	} : function(a) {
+
+	};
+
+	//API
+	return {
+		btoa: btoa,
+		atob: atob
+	};
+})(window);
 
 //ロード時
 jQuery(function($) {
-	var query = window.location.search.substring(1)
-		.replace(/[-_]/g, function(m0) {return m0 == '-' ? '+' : '/';})
-		.replace(/=/g, '');
+	var query = window.location.search.substring(1);
 
 	try {
 		var serial = RawDeflate.inflate(Base64.atob(query));
