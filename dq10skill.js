@@ -266,16 +266,22 @@ var Simulator = (function($) {
 
 		for(var i = 0; i < VOCATIONS_DATA_ORDER.length; i++) {
 			var vocation = VOCATIONS_DATA_ORDER[i];
-			serialArray.push(String.fromCharCode(getLevel(vocation)));
-			serialArray.push(String.fromCharCode(getTrainingSkillPt(vocation)));
+			serialArray.push(fromCharCodeBtoASafe(getLevel(vocation)));
+			serialArray.push(fromCharCodeBtoASafe(getTrainingSkillPt(vocation)));
 
 			for(var s = 0; s < vocations[vocation].skills.length; s++) {
 				var skillCategory = vocations[vocation].skills[s];
-				serialArray.push(String.fromCharCode(getSkillPt(vocation, skillCategory)));
+				serialArray.push(fromCharCodeBtoASafe(getSkillPt(vocation, skillCategory)));
 			}
 		}
 
-		return unescape(encodeURIComponent(serialArray.join('')));
+		return serialArray.join('');
+
+		//btoa unsafeな文字のみUTF-8化する
+		function fromCharCodeBtoASafe(charCode) {
+			var c = String.fromCharCode(charCode);
+			return charCode <= 0xFF ? c : unescape(encodeURIComponent(c));
+		}
 	}
 	function deserialize(serial) {
 		var dataArray = [];
@@ -305,6 +311,82 @@ var Simulator = (function($) {
 			}
 		}
 	}
+
+	var BITS_LEVEL = 8; //レベルは8ビット確保
+	var BITS_SKILL = 7; //スキルは7ビット
+	var BITS_TRAINING = 7; //特訓スキルポイント7ビット
+
+	function serializeBit() {
+		var numToBitArray = Base64forBit.numToBitArray;
+
+		var bitArray = [];
+		for(var i = 0; i < VOCATIONS_DATA_ORDER.length; i++) {
+			var vocation = VOCATIONS_DATA_ORDER[i];
+			bitArray = bitArray.concat(numToBitArray(getLevel(vocation), BITS_LEVEL));
+			bitArray = bitArray.concat(numToBitArray(sim.getTrainingSkillPt(vocation), BITS_TRAINING));
+			
+			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
+				var skillCategory = sim.vocations[vocation].skills[s];
+				bitArray = bitArray.concat(numToBitArray(sim.getSkillPt(vocation, skillCategory), BITS_SKILL));
+			}
+		}
+		
+		for(i = (bitArray.length - 1) % BITS_ENCODE + 1 ; i < BITS_ENCODE; i++) bitArray.push(0); //末尾0補完
+
+	}
+	function deserializeBit(serialBitArray) {
+		var bitArrayToNum = Base64forBit.bitArrayToNum;
+
+	}
+
+	var Base64forBit = (function() {
+		var EN_CHAR = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+		var BITS_ENCODE = 6; //6ビットごとに区切ってエンコード
+
+		function encode(bitArray) {
+			for(var i = (bitArray.length - 1) % BITS_ENCODE + 1 ; i < BITS_ENCODE; i++) bitArray.push(0); //末尾0補完
+
+			var base64str = '';
+			while(bitArray.length > 0) {
+				base64str += EN_CHAR.charAt(bitArrayToNum(bitArray.splice(0, BITS_ENCODE)));
+			}
+
+			return base64str;
+		}
+
+		function decode(base64str) {
+			var bitArray = [];
+			for(var i = 0; i < base64str.length; i++) {
+				bitArray = bitArray.concat(numToBitArray(EN_CHAR.indexOf(base64str.charAt(i)), BITS_ENCODE));
+			}
+
+			return bitArray;
+		}
+
+		function bitArrayToNum(bitArray) {
+			var num = 0;
+			for(var i = 0; i < bitArray.length; i++) {
+				num = num << 1 | bitArray[i];
+			}
+			return num;
+		}
+		function numToBitArray(num, digits) {
+			var bitArray = [];
+			for(var i = digits - 1; i >= 0; i--) {
+				bitArray.push(num >> i & 1);
+			}
+			return bitArray;
+		}
+
+		//API
+		return {
+			encode: encode,
+			decode: decode,
+			bitArrayToNum: bitArrayToNum,
+			numToBitArray: numToBitArray,
+			BITS_ENCODE: BITS_ENCODE
+		};
+	})();
 
 	//API
 	return {
@@ -451,7 +533,9 @@ var SimulatorUI = (function($) {
 	
 	function refreshSaveUrl() {
 		var url = window.location.href.replace(window.location.search, "") + '?' +
-			Base64.encodeURI(RawDeflate.deflate(sim.serialize()));
+			Base64.btoa(RawDeflate.deflate(sim.serialize()))
+				.replace(/[+\/]/g, function(m0) {return m0 == '+' ? '-' : '_';})
+				.replace(/=/g, '');
 
 		$('#url_text').val(url);
 		
@@ -1021,12 +1105,15 @@ var Base64Param = (function($) {
 	};
 })(jQuery);
 
+
 //ロード時
 jQuery(function($) {
-	var query = window.location.search.substring(1);
+	var query = window.location.search.substring(1)
+		.replace(/[-_]/g, function(m0) {return m0 == '-' ? '+' : '/';})
+		.replace(/=/g, '');
 
 	try {
-		var serial = RawDeflate.inflate(Base64.decode(query));
+		var serial = RawDeflate.inflate(Base64.atob(query));
 		Simulator.deserialize(serial);
 	} catch(e) {
 		if(Base64Param.validate(query)) {
