@@ -450,7 +450,9 @@ var SimulatorUI = (function($) {
 	}
 	
 	function refreshSaveUrl() {
-		var url = window.location.href.replace(window.location.search, "") + '?' + Base64Param.encode();
+		var url = window.location.href.replace(window.location.search, "") + '?' +
+			Base64.encodeURI(RawDeflate.deflate(sim.serialize()));
+
 		$('#url_text').val(url);
 		
 		var params = {
@@ -1022,10 +1024,16 @@ var Base64Param = (function($) {
 //ロード時
 jQuery(function($) {
 	var query = window.location.search.substring(1);
-	if(Base64Param.validate(query)) {
-		var decodedArray = Base64Param.decode(query);
-		if(decodedArray) {
-			Base64Param.applyDecodedArray(decodedArray);
+
+	try {
+		var serial = RawDeflate.inflate(Base64.decode(query));
+		Simulator.deserialize(serial);
+	} catch(e) {
+		if(Base64Param.validate(query)) {
+			var decodedArray = Base64Param.decode(query);
+			if(decodedArray) {
+				Base64Param.applyDecodedArray(decodedArray);
+			}
 		}
 	}
 	
