@@ -904,7 +904,7 @@ var SimulatorUI = (function($) {
 			$('#bringUpLevel>button').button({
 				icons: { primary: 'ui-icon-arrowthickstop-1-n' },
 			}).click(function(e) {
-				if(!window.confirm('全職業のレベルを現在の取得スキルに必要なところまで持ち上げます。'))
+				if(!window.confirm('全職業のレベルを現在の取得スキルに必要なところまで引き上げます。'))
 					return;
 				
 				sim.bringUpLevelToRequired();
