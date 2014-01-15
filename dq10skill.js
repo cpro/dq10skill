@@ -1000,8 +1000,14 @@ jQuery(function($) {
 	var query = window.location.search.substring(1);
 
 	if(Base64.validate(query)) {
-		var serial = RawDeflate.inflate(Base64.atob(query));
-		if(serial === '') {
+		var serial = '';
+
+		try {
+			serial = RawDeflate.inflate(Base64.atob(query));
+		} catch(e) {
+		}
+		
+		if(serial.length < 33) { //バイト数が小さすぎる場合inflate失敗とみなす。(8+7*5)*6/8=32.25
 			serial = Base64.atob(query);
 			Simulator.deserializeBit(serial);
 		} else {
