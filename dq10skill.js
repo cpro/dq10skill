@@ -799,8 +799,9 @@ var SimulatorUI = (function($) {
 			$('#foldbuttons-skillCategory a').click(function(e) {
 				var skillCategory = $(this).attr('id').replace('fold-', '');
 				var vocationsHaveSkill = [];
+				var vocation;
 				for(var i = 0; i < sim.vocationOrder.length; i++) {
-					var vocation = sim.vocationOrder[i];
+					vocation = sim.vocationOrder[i];
 					
 					if($.inArray(skillCategory, sim.vocations[vocation]['skills']) >= 0)
 						vocationsHaveSkill.push(vocation);
@@ -808,8 +809,8 @@ var SimulatorUI = (function($) {
 				
 				var $folded = $('.class_info .fold');
 				var $unfolded = $('');
-				for(var i = 0; i < vocationsHaveSkill.length; i++) {
-					var vocation = vocationsHaveSkill[i];
+				for(i = 0; i < vocationsHaveSkill.length; i++) {
+					vocation = vocationsHaveSkill[i];
 					
 					$folded = $folded.not('#' + vocation + ' .fold');
 					$unfolded = $unfolded.add('#' + vocation + ' .unfold');
