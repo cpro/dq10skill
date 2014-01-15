@@ -316,20 +316,46 @@ var Simulator = (function($) {
 		for(var i = 0; i < VOCATIONS_DATA_ORDER.length; i++) {
 			var vocation = VOCATIONS_DATA_ORDER[i];
 			bitArray = bitArray.concat(numToBitArray(getLevel(vocation), BITS_LEVEL));
-			bitArray = bitArray.concat(numToBitArray(sim.getTrainingSkillPt(vocation), BITS_TRAINING));
+			bitArray = bitArray.concat(numToBitArray(getTrainingSkillPt(vocation), BITS_TRAINING));
 			
-			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
-				var skillCategory = sim.vocations[vocation].skills[s];
-				bitArray = bitArray.concat(numToBitArray(sim.getSkillPt(vocation, skillCategory), BITS_SKILL));
+			for(var s = 0; s < vocations[vocation].skills.length; s++) {
+				var skillCategory = vocations[vocation].skills[s];
+				bitArray = bitArray.concat(numToBitArray(getSkillPt(vocation, skillCategory), BITS_SKILL));
 			}
 		}
-		
-		for(i = (bitArray.length - 1) % BITS_ENCODE + 1 ; i < BITS_ENCODE; i++) bitArray.push(0); //末尾0補完
+		var byteArray = [];
+		for(i = 0; i < bitArray.length; i += 8) {
+			var b = 0;
+			for(var j = 0; j < 8; j++) {
+				if(i + j >= bitArray.length) break;
+				b = b | (bitArray[i + j] << (7 - j));
+			}
+			byteArray.push(String.fromCharCode(b));
+		}
+
+		return byteArray.join('');
 
 	}
-	function deserializeBit(serialBitArray) {
+	function deserializeBit(serial) {
+		var numToBitArray = Base64forBit.numToBitArray;
 		var bitArrayToNum = Base64forBit.bitArrayToNum;
 
+		var bitArray = [];
+		for(var i = 0; i < serial.length; i++)
+			bitArray = bitArray.concat(numToBitArray(serial.charCodeAt(i), 8));
+		
+		var cur = 0;
+		for(i = 0; i < VOCATIONS_DATA_ORDER.length; i++) {
+			var vocation = VOCATIONS_DATA_ORDER[i];
+
+			updateLevel(vocation, bitArrayToNum(bitArray.slice(cur, cur += BITS_LEVEL)));
+			updateTrainingSkillPt(vocation, bitArrayToNum(bitArray.slice(cur, cur += BITS_TRAINING)));
+
+			for(var s = 0; s < vocations[vocation].skills.length; s++) {
+				var skillCategory = vocations[vocation].skills[s];
+				updateSkillPt(vocation, skillCategory, bitArrayToNum(bitArray.slice(cur, cur += BITS_SKILL)));
+			}
+		}
 	}
 
 	var Base64forBit = (function() {
@@ -405,6 +431,8 @@ var Simulator = (function($) {
 		bringUpLevelToRequired: bringUpLevelToRequired,
 		serialize: serialize,
 		deserialize: deserialize,
+		serializeBit: serializeBit,
+		deserializeBit: deserializeBit,
 
 		//プロパティ
 		skillCategories: skillCategories,
@@ -961,140 +989,6 @@ var SimulatorUI = (function($) {
 
 })(jQuery);
 
-var Base64Param = (function($) {
-	//職業の内部データ順
-	var VOCATIONS_DATA_ORDER = [
-		'warrior',       //戦士
-		'priest',        //僧侶
-		'mage',          //魔法使い
-		'martialartist', //武闘家
-		'thief',         //盗賊
-		'minstrel',      //旅芸人
-		'ranger',        //レンジャー
-		'paladin',       //パラディン
-		'armamentalist', //魔法戦士
-		'luminary',      //スーパースター
-		'gladiator',     //バトルマスター
-		'sage',          //賢者
-		'monstermaster'  //まもの使い
-	];
-	
-	var EN_CHAR = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
-	var BITS_ENCODE = 6; //6ビットごとに区切ってエンコード
-	var BITS_LEVEL = 8; //レベルは8ビット確保
-	var BITS_SKILL = 7; //スキルは7ビット
-	var BITS_TRAINING = 7; //特訓スキルポイント7ビット
-	
-	var sim = Simulator;
-	var isIncludingTrainingPts = false; //直前にデコードした文字列が特訓ポイントを含んでいるかどうか
-	
-	function encode() {
-		//2進にして結合する
-		var bitArray = [];
-		for(var vocation in sim.vocations) {
-			bitArray = bitArray.concat(numToBitArray(sim.getLevel(vocation), BITS_LEVEL));
-			bitArray = bitArray.concat(numToBitArray(sim.getTrainingSkillPt(vocation), BITS_TRAINING));
-			
-			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
-				var skillCategory = sim.vocations[vocation].skills[s];
-				bitArray = bitArray.concat(numToBitArray(sim.getSkillPt(vocation, skillCategory), BITS_SKILL));
-			}
-		}
-		
-		for(var i = (bitArray.length - 1) % BITS_ENCODE + 1 ; i < BITS_ENCODE; i++) bitArray.push(0); //末尾0補完
-		
-		var enStr = '';
-		for(var i = 0; i < bitArray.length; i += BITS_ENCODE) {
-			enStr += EN_CHAR.charAt(bitArrayToNum(bitArray.slice(i, i + BITS_ENCODE)));
-		}
-		
-		return enStr;
-	}
-	
-	function decode(str) {
-		var bitArray = [];
-		for(var i = 0; i < str.length; i++) {
-			bitArray = bitArray.concat(numToBitArray(EN_CHAR.indexOf(str.charAt(i)), BITS_ENCODE));
-		}
-		
-		//特訓ポイントを含むかどうか: ビット列の長さで判断
-		isIncludingTrainingPts = bitArray.length >= (
-			BITS_LEVEL +
-			BITS_TRAINING +
-			BITS_SKILL * sim.vocations[VOCATIONS_DATA_ORDER[0]].skills.length
-		) * 10; //1.2VU（特訓モード実装）時点の職業数
-		
-		var paramArray = [];
-		var i = 0;
-		for(var vocation in sim.vocations) {
-			paramArray.push(bitArrayToNum(bitArray.slice(i, i += BITS_LEVEL)) || 1);
-			if(isIncludingTrainingPts)
-				paramArray.push(bitArrayToNum(bitArray.slice(i, i += BITS_TRAINING)));
-			else
-				paramArray.push(0);
-			
-			for(var s in sim.vocations[vocation].skills) {
-				paramArray.push(bitArrayToNum(bitArray.slice(i, i += BITS_SKILL)));
-			}
-		}
-		
-		return paramArray;
-	}
-	
-	function applyDecodedArray(decodedArray) {
-		//要素数カウント
-		var count = 0;
-		for(var vocation in sim.vocations) {
-			count += 1; //レベル
-			count += 1; //特訓ポイント
-			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
-				count += 1; //各スキルポイント
-			}
-		}
-		if(decodedArray.length != count)
-			return;
-		
-		var i = 0;
-		for(var vocation in sim.vocations) {
-			sim.updateLevel(vocation, decodedArray[i]);
-			i += 1;
-			sim.updateTrainingSkillPt(vocation, decodedArray[i]);
-			i += 1;
-			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
-				var skillCategory = sim.vocations[vocation].skills[s];
-				sim.updateSkillPt(vocation, skillCategory, decodedArray[i]);
-				i += 1;
-			}
-		}
-	}
-	
-	function validate(str) {
-		return str.match(/^[A-Za-z0-9-_]+$/);
-	}
-	
-	function numToBitArray(num, digits) {
-		var bitArray = [];
-		for(var i = digits - 1; i >= 0; i--) {
-			bitArray.push(num >> i & 1);
-		}
-		return bitArray;
-	}
-	function bitArrayToNum(bitArray) {
-		var num = 0;
-		for(var i = 0; i < bitArray.length; i++) {
-			num = num << 1 | bitArray[i];
-		}
-		return num;
-	}
-	
-	//API
-	return {
-		encode: encode,
-		decode: decode,
-		validate: validate,
-		applyDecodedArray: applyDecodedArray
-	};
-})(jQuery);
 
 //Base64 URI safe
 //[^\x00-\xFF]な文字しか来ない前提
@@ -1138,13 +1032,20 @@ var Base64 = (function(global) {
 
 	var atob = global.atob ? function(a) {
 		a = a.replace(/[-_]/g, function(m0) {return m0 == '-' ? '+' : '/';});
+		if(a.length % 4 == 1) a += 'A';
+
 		return global.atob(a);
 	} : _atob_impl;
+
+	function validate(str) {
+		return str.match(/^[A-Za-z0-9-_]+$/);
+	}
 
 	//API
 	return {
 		btoa: btoa,
-		atob: atob
+		atob: atob,
+		validate: validate
 	};
 })(window);
 
@@ -1152,15 +1053,13 @@ var Base64 = (function(global) {
 jQuery(function($) {
 	var query = window.location.search.substring(1);
 
-	try {
+	if(Base64.validate(query)) {
 		var serial = RawDeflate.inflate(Base64.atob(query));
-		Simulator.deserialize(serial);
-	} catch(e) {
-		if(Base64Param.validate(query)) {
-			var decodedArray = Base64Param.decode(query);
-			if(decodedArray) {
-				Base64Param.applyDecodedArray(decodedArray);
-			}
+		if(serial === '') {
+			serial = Base64.atob(query);
+			Simulator.deserializeBit(serial);
+		} else {
+			Simulator.deserialize(serial);
 		}
 	}
 	
