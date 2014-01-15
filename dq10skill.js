@@ -936,7 +936,6 @@ var SimulatorUI = (function($) {
 
 })(jQuery);
 
-
 //Base64 URI safe
 //[^\x00-\xFF]な文字しか来ない前提
 var Base64 = (function(global) {
@@ -944,10 +943,10 @@ var Base64 = (function(global) {
 
 	var _btoa_impl = function(b) {
 		return b.replace(/.{1,3}/g, function(m) {
-			var bits =
-				(m.charCodeAt(0) << 16) |
-				(m.length > 1 ? m.charCodeAt(1) << 8 : 0) |
-				(m.length > 2 ? m.charCodeAt(2) : 0);
+			var bits = 0;
+			for(var i = 0; i < m.length; i++)
+				bits = bits | (m.charCodeAt(i) << ((2 - i) * 8));
+
 			return [
 				EN_CHAR.charAt(bits >>> 18),
 				EN_CHAR.charAt((bits >>> 12) & 63),
@@ -960,9 +959,9 @@ var Base64 = (function(global) {
 	var _atob_impl = function(a) {
 		return a.replace(/.{1,4}/g, function(m) {
 			var bits = 0;
-			for(var i = 0; i < m.length; i++) {
+			for(var i = 0; i < m.length; i++)
 				bits = bits | (EN_CHAR.indexOf(m.charAt(i)) << ((3 - i) * 6));
-			}
+
 			return [
 				String.fromCharCode(bits >>> 16),
 				m.length > 1 ? String.fromCharCode((bits >>> 8) & 0xFF) : '',
@@ -984,15 +983,15 @@ var Base64 = (function(global) {
 		return global.atob(a);
 	} : _atob_impl;
 
-	function validate(str) {
-		return str.match(/^[A-Za-z0-9-_]+$/);
+	function isValid(a) {
+		return (/^[A-Za-z0-9-_]+$/).test(a);
 	}
 
 	//API
 	return {
 		btoa: btoa,
 		atob: atob,
-		validate: validate
+		isValid: isValid
 	};
 })(window);
 
@@ -1000,7 +999,7 @@ var Base64 = (function(global) {
 jQuery(function($) {
 	var query = window.location.search.substring(1);
 
-	if(Base64.validate(query)) {
+	if(Base64.isValid(query)) {
 		var serial = '';
 
 		try {
