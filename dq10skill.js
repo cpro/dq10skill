@@ -546,7 +546,6 @@ var SimulatorUI = (function($) {
 				refreshVocationInfo(vocation);
 				refreshTotalRequiredExp();
 				refreshTotalExpRemain();
-				refreshSaveUrl();
 			});
 		},
 		
@@ -578,14 +577,12 @@ var SimulatorUI = (function($) {
 						refreshVocationInfo(vocation);
 						refreshTotalRequiredExp();
 						refreshTotalExpRemain();
-						refreshSaveUrl();
 					} else {
 						$(this).val(sim.getTraningSkillPt(vocation));
 						return false;
 					}
 				},
 				stop: function (e, ui) {
-					refreshSaveUrl();
 				}
 			});
 		},
@@ -623,14 +620,12 @@ var SimulatorUI = (function($) {
 						refreshAllVocationInfo();
 						refreshTotalExpRemain();
 						refreshTotalPassive();
-						refreshSaveUrl();
 					} else {
 						$(this).val(sim.getSkillPt(vocation, skillCategory));
 						return false;
 					}
 				},
 				stop: function (e, ui) {
-					refreshSaveUrl();
 				}
 			});
 			//テキストボックスクリック時数値を選択状態に
@@ -661,7 +656,6 @@ var SimulatorUI = (function($) {
 				refreshAllVocationInfo();
 				refreshTotalExpRemain();
 				refreshTotalPassive();
-				refreshSaveUrl();
 			}).dblclick(function (e) {
 				//ダブルクリック時に各職業の該当スキルをすべて振り直し
 				var skillCategory = getCurrentSkillCategory(this);
@@ -676,7 +670,6 @@ var SimulatorUI = (function($) {
 				refreshAllVocationInfo();
 				refreshTotalExpRemain();
 				refreshTotalPassive();
-				refreshSaveUrl();
 			});
 		},
 		
@@ -699,7 +692,6 @@ var SimulatorUI = (function($) {
 				refreshAllVocationInfo();
 				refreshTotalExpRemain();
 				refreshTotalPassive();
-				refreshSaveUrl();
 			});
 		},
 		
@@ -721,6 +713,7 @@ var SimulatorUI = (function($) {
 		//URLテキストボックスクリック時
 		function() {
 			$('#url_text').click(function() {
+				refreshSaveUrl();
 				$(this).select();
 			});
 		},
@@ -728,6 +721,8 @@ var SimulatorUI = (function($) {
 		//保存用URLツイートボタン設定
 		function() {
 			$('#tw-saveurl').button().click(function(e) {
+				refreshSaveUrl();
+
 				var screenWidth = screen.width, screenHeight = screen.height;
 				var windowWidth = 550, windowHeight = 420;
 				var windowLeft = Math.round(screenWidth / 2 - windowWidth / 2);
@@ -839,7 +834,6 @@ var SimulatorUI = (function($) {
 				refreshTotalRequiredExp();
 				refreshTotalExpRemain();
 				refreshControls();
-				refreshSaveUrl();
 			});
 		},
 		
@@ -918,7 +912,6 @@ var SimulatorUI = (function($) {
 				refreshTotalRequiredExp();
 				refreshTotalExpRemain();
 				refreshControls();
-				refreshSaveUrl();
 			});
 		}
 	];
