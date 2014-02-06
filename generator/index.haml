@@ -110,16 +110,17 @@
 						%table{class: [skillCategory, 'skill_table']}>
 							%caption
 								= cat['name'] + ': '
+								%span.skill_current 0
+								&nbsp;/&nbsp;
 								%span.skill_total 0
-							%tr
-								%th.console{colspan: 2}
-									%input.ptspinner
-									%button.reset リセット
 							- cat['skills'].each_with_index do |skill, i|
 								%tr{class: [skillCategory, i].join('_')}<
 									%td.skill_pt>= skill['pt']
 									-# - hint = skill['desc'] + (skill['mp'] ? "\n（消費MP: #{skill['mp']}）" : '')
 									%td.skill_name= skill['name']
+			#pt_console{style: 'display: none'}
+				%input
+				%button リセット
 			#footconsole
 				%p#setalllevel
 					レベル一括設定
