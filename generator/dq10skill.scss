@@ -243,15 +243,32 @@ a {
 /* モンスター用 各エントリタイトル */
 .ent_title {
 	width: 98%;
-	margin: 0 auto 3px auto;
-	padding: 3px 0;
+	margin: 0 auto 2px auto;
+	padding: 2px 0;
 	position: relative;
+	height: 22px;
 	border-bottom: 1px solid #99a;
 
+	h2, dl, dt, dd {
+		display: inline-block;
+	}
 	h2 {
-		font-size: 100%;
+		font-size: 16px;
 		margin: 0;
 		padding: 0;
+	}
+	dl {
+		margin: 0 0 0 30px;
+	}
+	dt, dd {
+		margin: 0;
+	}
+	dt {
+		font-size: 12px;
+	}
+	.pts {
+		font-weight: bold;
+		font-size: 16px;
 	}
 
 	.ent_title_console {
@@ -285,7 +302,7 @@ a {
 	font-size: 70%;
 	float: left;
 	width: 12em;
-	height: 20em;
+	height: 200px;
 	position: relative;
 	text-align: center;
 	border-right: 1px solid #99a;
@@ -301,7 +318,7 @@ a {
 	dt.label_lv, dd.lv_select {
 		display: inline;
 	}
-	dt, dd {
+	dl, dt, dd {
 		margin: 0;
 	}
 	.lv_select select {

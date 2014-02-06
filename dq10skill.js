@@ -780,7 +780,7 @@ var SimulatorUI = (function($) {
 		
 		//おりたたむ・ひろげるボタン追加
 		function() {
-			var HEIGHT_FOLDED = '2.5em';
+			var HEIGHT_FOLDED = '48px';
 			var HEIGHT_UNFOLDED = $('.class_group').height() + 'px';
 			
 			var $foldButton = $('<p>▲おりたたむ</p>').addClass('fold').hide().click(function() {

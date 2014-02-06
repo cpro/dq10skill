@@ -82,10 +82,14 @@
 		#body_content
 			- data['vocationOrder'].each do |vocation|
 				%div.class_group{id: vocation}
-					.class_info
+					.ent_title
 						%h2<
 							= data['vocations'][vocation]['name'] + ' Lv '
 							%span.lv_h2> 1
+						%dl
+							%dt 残りSP:
+							%dd.pts 0 / 0
+					.class_info
 						%dl
 							%dt.label_lv<
 								%label{for: "lv-#{vocation}"} レベル
@@ -93,8 +97,6 @@
 								%select{size: 1, id: "lv-#{vocation}"}
 							%dt 獲得経験値:
 							%dd.exp 0
-							%dt 残りスキルポイント:
-							%dd.pts 0 / 0
 							%dd<
 								%label{for: "training-#{vocation}"}> 特訓
 								%input.training_pt{id: "training-#{vocation}"}>
