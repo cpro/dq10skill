@@ -113,7 +113,7 @@
 							%caption
 								= cat['name'] + ': '
 								%span.skill_current 0
-								&nbsp;/&nbsp;
+								\/
 								%span.skill_total 0
 							- cat['skills'].each_with_index do |skill, i|
 								%tr{class: [skillCategory, i].join('_')}<

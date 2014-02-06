@@ -283,8 +283,6 @@ span.fold, span.unfold {
     .skill_table caption #pt_console {
       position: absolute;
       top: -2px;
-      left: 0;
-      width: 80px;
       white-space: nowrap; }
       .skill_table caption #pt_console input {
         /* spinner */

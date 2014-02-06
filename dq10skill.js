@@ -662,7 +662,9 @@ var SimulatorUI = (function($) {
 
 				$ptConsole.find('input').val(sim.getSkillPt(vocation, skillCategory));
 
-				var consoleLeft = $(this).find('.skill_current').position().left;
+				var $baseSpan = $(this).find('.skill_current');
+				var consoleLeft = $baseSpan.position().left + $baseSpan.width() - 50;
+				$ptConsole.find('button').css({'margin-left': $(this).find('.skill_total').width() + 10});
 
 				$ptConsole
 					.appendTo($(this))
