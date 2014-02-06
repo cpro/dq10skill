@@ -785,23 +785,37 @@ var SimulatorUI = (function($) {
 			var HEIGHT_FOLDED = '48px';
 			var HEIGHT_UNFOLDED = $('.class_group').height() + 'px';
 			
-			var $foldButton = $('<p>▲おりたたむ</p>').addClass('fold').hide().click(function() {
-				$(this).parents('.class_group').animate({height: HEIGHT_FOLDED}, 0).addClass('folded').removeClass('unfolded');
+			var $foldButton = $('<button>▲おりたたむ</button>').button({
+				icons: { primary: 'ui-icon-triangle-1-n' },
+				text: false
+			}).click(function() {
+				$(this).parents('.class_group')
+					.animate({height: HEIGHT_FOLDED})
+					.addClass('folded')
+					.removeClass('unfolded');
 				$(this).hide();
-			});
-			var $unfoldButton = $('<p>▼ひろげる</p>').addClass('unfold').hide().click(function() {
-				$(this).parents('.class_group').animate({height: HEIGHT_UNFOLDED}).addClass('unfolded').removeClass('folded');
+			}).addClass('fold').hide();
+
+			var $unfoldButton = $('<button>▼ひろげる</button>').button({
+				icons: { primary: 'ui-icon-triangle-1-s' },
+				text: false
+			}).click(function() {
+				$(this).parents('.class_group')
+					.animate({height: HEIGHT_UNFOLDED})
+					.addClass('unfolded')
+					.removeClass('folded');
 				$(this).hide();
-			});
-			$('.class_info').append($foldButton).append($unfoldButton);
+			}).addClass('unfold').hide();
+
+			$('.class_group').append($foldButton).append($unfoldButton);
 			$('.class_group').addClass('unfolded');
 			
-			//職業情報欄ポイント時のみ表示する
-			$('.class_info').hover(function() {
-				if($(this).parents('.class_group').hasClass('folded')) {
+			//職業欄ポイント時のみ表示する
+			$('.class_group').hover(function() {
+				if($(this).hasClass('folded')) {
 					$(this).children('.unfold').show();
 				}
-				if($(this).parents('.class_group').hasClass('unfolded')) {
+				if($(this).hasClass('unfolded')) {
 					$(this).children('.fold').show();
 				}
 			}, function() {
@@ -810,11 +824,11 @@ var SimulatorUI = (function($) {
 			
 			//すべておりたたむ・すべてひろげるボタン追加
 			$('#fold-all').click(function(e) {
-				$('.class_info .fold').click();
+				$('.fold').click();
 				$('body, html').animate({scrollTop: 0});
 			});
 			$('#unfold-all').click(function(e) {
-				$('.class_info .unfold').click();
+				$('.unfold').click();
 				$('body, html').animate({scrollTop: 0});
 			});
 			

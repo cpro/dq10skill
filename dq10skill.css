@@ -160,14 +160,22 @@ a {
   clear: both;
   margin: 3px 0;
   padding: 2px;
-  overflow: hidden; }
+  overflow: hidden;
+  position: relative; }
   .class_group:nth-child(even), .monster_ent:nth-child(even) {
     background-color: #f6f6f7; }
   .class_group:nth-child(odd), .monster_ent:nth-child(odd) {
     background-color: #fcfcfd; }
 
 .class_group {
-  width: 65.5em; }
+  width: 65.5em;
+  /* 折りたたみ/展開ボタン */ }
+  .class_group .fold, .class_group .unfold {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 1px;
+    bottom: 1px; }
 
 .monster_ent {
   width: 65.5em; }
@@ -244,30 +252,6 @@ a {
 
 .monster_ent .class_info {
   height: 16em; }
-
-/* 折りたたみ/展開ボタン */
-p.fold, p.unfold {
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  left: 1em; }
-
-p.fold {
-  bottom: 2px; }
-
-p.unfold {
-  top: 2px; }
-
-.fold:hover, .unfold:hover {
-  cursor: pointer;
-  color: #d66; }
-
-span.fold, span.unfold {
-  margin: 0 0.5em; }
-
-#toggle_buttons {
-  font-size: 75%;
-  display: inline; }
 
 /* スキル一覧 */
 .skill_table {

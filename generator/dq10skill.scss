@@ -225,6 +225,7 @@ a {
 	margin: 3px 0;
 	padding: 2px;
 	overflow: hidden;
+	position: relative;
 
 	&:nth-child(even) {
 		background-color: #f6f6f7;
@@ -235,6 +236,15 @@ a {
 }
 .class_group {
 	width: $body-content-width;
+
+	/* 折りたたみ/展開ボタン */
+	.fold, .unfold {
+		width: 20px;
+		height: 20px;
+		position: absolute;
+		left: 1px;
+		bottom: 1px;
+	}
 }
 .monster_ent {
 	width: $body-content-width-monster;
@@ -338,31 +348,6 @@ a {
 }
 .monster_ent .class_info {
 	height: 16em;
-}
-
-/* 折りたたみ/展開ボタン */
-p.fold, p.unfold {
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	left: 1em;
-}
-p.fold {
-	bottom: 2px;
-}
-p.unfold {
-	top: 2px;
-}
-.fold:hover, .unfold:hover {
-	cursor: pointer;
-	color: #d66;
-}
-span.fold, span.unfold {
-	margin: 0 0.5em;
-}
-#toggle_buttons {
-	font-size: 75%;
-	display: inline;
 }
 
 /* スキル一覧 */
