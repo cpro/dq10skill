@@ -86,16 +86,18 @@
 						%h2<
 							= data['vocations'][vocation]['name'] + ' Lv '
 							%span.lv_h2 1
-						%dl
+						%dl.skill_pt
 							%dt 残りSP:
 							%dd.pts 0 / 0
+						%dl.training_pt
+							%dt
+								%label{for: "training-#{vocation}"} + 特訓
+							%dd{id: "training-#{vocation}"}
+								0
 					.class_info
 						%dl
 							%dt 獲得経験値:
 							%dd.exp 0
-							%dd<
-								%label{for: "training-#{vocation}"}> 特訓
-								%input.training_pt{id: "training-#{vocation}"}>
 							%dt.error{style: 'display:none'}<
 								必要レベル:
 								%span.req_lv>< 1
@@ -121,6 +123,8 @@
 				%button#pt_reset リセット
 			#lv_console{style: 'display: none'}
 				%select#lv-select.ui-widget-content.ui-corner-all{size: 1}
+			#training_pt_console{style: 'display: none'}
+				%input#training_pt_spinner
 			#footconsole
 				%p#setalllevel
 					レベル一括設定

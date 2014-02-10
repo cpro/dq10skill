@@ -202,15 +202,30 @@ a {
       .ent_title h2 #lv_console #lv-select {
         margin: 0;
         padding: 0; }
-  .ent_title dl {
+  .ent_title dl.skill_pt {
     margin: 0 0 0 30px; }
   .ent_title dt, .ent_title dd {
     margin: 0; }
   .ent_title dt {
     font-size: 12px; }
-  .ent_title .pts {
+  .ent_title dd.pts {
     font-weight: bold;
     font-size: 16px; }
+  .ent_title dl.training_pt {
+    margin: 0; }
+    .ent_title dl.training_pt dd {
+      font-weight: bold;
+      font-size: 14px;
+      position: relative; }
+    .ent_title dl.training_pt #training_pt_console {
+      position: absolute;
+      top: 0;
+      left: 0; }
+      .ent_title dl.training_pt #training_pt_console input {
+        /* spinner */
+        width: 24px;
+        text-align: right;
+        font-size: 12px; }
   .ent_title .ent_title_console {
     position: absolute;
     top: 0;
