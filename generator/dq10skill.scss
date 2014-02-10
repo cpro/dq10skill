@@ -403,8 +403,12 @@ a {
 /* スキル一覧 */
 .skill_table {
 	font-size: 70%;
-	width: $skill-table-width;
-	border-collapse: collapse;
+	width: $skill-table-width - 4px;
+	border-collapse: separate;
+	border-spacing: 0;
+	border: 2px solid rgba(255, 0, 0, 0);
+	border-radius: 4px;
+
 	display: inline-block;
 
 	caption {
@@ -471,25 +475,10 @@ a {
 	tr.enabled:hover td {
 		color: #211;
 	}
-	
-	&.selected {
-		tr:hover {
-			background-color: #ccd;
-			td {
-				color: #667;
-			}
-		}
-		tr.enabled:hover td {
-			color: #112;
-		}
-	}
 }
 
 .class_group .skill_table.selected {
-	background-color: #efeff4;
-}
-.class_group:nth-child(even) .skill_table.selected {
-	background-color: darken(#efeff4, 2%);
+	border-color: rgba(255, 0, 0, 0.4);
 }
 
 /* フッタコンソール */
@@ -542,7 +531,7 @@ a {
 /* サイドバー広告 */
 #ad_sidebar {
 	position: absolute;
-	left: $body-content-width + $body-margin + 5px;
+	left: $body-content-width + $body-margin + 10px;
 	top: $header-height + 5px;
 	z-index: 1;
 	
