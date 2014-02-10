@@ -660,17 +660,17 @@ var SimulatorUI = (function($) {
 				var vocation = getCurrentVocation(this);
 				var skillCategory = getCurrentSkillCategory(this);
 
-				$ptConsole.find('input').val(sim.getSkillPt(vocation, skillCategory));
-
+				//位置決め
 				var $baseSpan = $(this).find('.skill_current');
 				var consoleLeft = $baseSpan.position().left + $baseSpan.width() - 50;
-				$ptConsole.find('button').css({'margin-left': $(this).find('.skill_total').width() + 10});
+				$('#pt_reset').css({'margin-left': $(this).find('.skill_total').width() + 10});
 
-				$ptConsole
-					.appendTo($(this))
-					.css({left: consoleLeft})
-					.show();
+				$ptConsole.appendTo($(this)).css({left: consoleLeft});
+				$('#pt_spinner').val(sim.getSkillPt(vocation, skillCategory));
+
+				$ptConsole.show();
 			}, function(e) {
+				if($(':focus').attr('id') == 'pt_spinner') return false;
 				$ptConsole.hide();
 			});
 		},
