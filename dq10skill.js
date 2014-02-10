@@ -537,15 +537,12 @@ var SimulatorUI = (function($) {
 	var setupFunctions = [
 		//レベル選択セレクトボックス項目設定
 		function() {
-			var $select = $('.lv_select>select');
+			var $select = $('#lv-select');
 			for(var i = sim.LEVEL_MIN; i <= sim.LEVEL_MAX; i++) {
 				$select.append($("<option />").val(i).text(i.toString() + ' (' + sim.skillPtsGiven[i].toString() + ')'));
 			}
-		},
-		
-		//レベル選択セレクトボックス変更時
-		function() {
-			$('.lv_select>select').change(function() {
+
+			$select.change(function() {
 				var vocation = getCurrentVocation(this);
 				sim.updateLevel(vocation, $(this).val());
 				refreshVocationInfo(vocation);
@@ -555,6 +552,22 @@ var SimulatorUI = (function($) {
 			});
 		},
 		
+		//レベル欄ポイント時にUI表示
+		function() {
+			$('.ent_title h2').hover(function(e) {
+				var vocation = getCurrentVocation(this);
+				var consoleLeft = $(this).find('.lv_h2').position().left - 3;
+
+				$('#lv_console').appendTo($(this)).css({left: consoleLeft});
+				$('#lv-select').val(sim.getLevel(vocation));
+
+				$('#lv_console').show();
+			}, function(e) {
+				if($(':focus').attr('id') == 'lv-select') return false;
+				$('#lv_console').hide();
+			});
+		},
+
 		//特訓ポイント選択スピンボタン設定
 		function() {
 			var $spinner = $('.training_pt');

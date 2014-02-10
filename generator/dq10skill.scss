@@ -266,6 +266,18 @@ a {
 		font-size: 16px;
 		margin: 0;
 		padding: 0;
+		position: relative;
+
+		#lv_console {
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			#lv-select {
+				margin: 0;
+				padding: 0;
+			}
+		}
 	}
 	dl {
 		margin: 0 0 0 30px;
@@ -318,10 +330,6 @@ a {
 	border-right: 1px solid #99a;
 	vertical-align: top;
 	
-	h2 {
-		font-size: 140%;
-		margin: 0.8em 0;
-	}
 	dt {
 		font-weight: normal;
 	}

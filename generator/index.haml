@@ -85,16 +85,12 @@
 					.ent_title
 						%h2<
 							= data['vocations'][vocation]['name'] + ' Lv '
-							%span.lv_h2> 1
+							%span.lv_h2 1
 						%dl
 							%dt 残りSP:
 							%dd.pts 0 / 0
 					.class_info
 						%dl
-							%dt.label_lv<
-								%label{for: "lv-#{vocation}"} レベル
-							%dd.lv_select
-								%select{size: 1, id: "lv-#{vocation}"}
 							%dt 獲得経験値:
 							%dd.exp 0
 							%dd<
@@ -123,6 +119,8 @@
 			#pt_console{style: 'display: none'}
 				%input#pt_spinner
 				%button#pt_reset リセット
+			#lv_console{style: 'display: none'}
+				%select#lv-select.ui-widget-content.ui-corner-all{size: 1}
 			#footconsole
 				%p#setalllevel
 					レベル一括設定

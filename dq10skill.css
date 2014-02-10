@@ -193,7 +193,15 @@ a {
   .ent_title h2 {
     font-size: 16px;
     margin: 0;
-    padding: 0; }
+    padding: 0;
+    position: relative; }
+    .ent_title h2 #lv_console {
+      position: absolute;
+      top: 0;
+      left: 0; }
+      .ent_title h2 #lv_console #lv-select {
+        margin: 0;
+        padding: 0; }
   .ent_title dl {
     margin: 0 0 0 30px; }
   .ent_title dt, .ent_title dd {
@@ -230,9 +238,6 @@ a {
   text-align: center;
   border-right: 1px solid #9999aa;
   vertical-align: top; }
-  .class_info h2 {
-    font-size: 140%;
-    margin: 0.8em 0; }
   .class_info dt {
     font-weight: normal; }
   .class_info dt.label_lv, .class_info dd.lv_select {
