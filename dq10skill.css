@@ -163,12 +163,12 @@ a {
   overflow: hidden;
   position: relative; }
   .class_group:nth-child(even), .monster_ent:nth-child(even) {
-    background-color: #f6f6f7; }
+    background-color: #f6f6f9; }
   .class_group:nth-child(odd), .monster_ent:nth-child(odd) {
     background-color: #fcfcfd; }
 
 .class_group {
-  width: 900px;
+  width: 920px;
   /* 折りたたみ/展開ボタン */ }
   .class_group .fold, .class_group .unfold {
     width: 20px;
@@ -213,7 +213,7 @@ a {
       font-size: 16px; }
   .ent_title dl.training_pt dd {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 15px;
     position: relative; }
   .ent_title dl.training_pt #training_pt_console {
     position: absolute;
@@ -273,10 +273,13 @@ a {
 .monster_ent .class_info {
   height: 16em; }
 
+.skill_tables {
+  padding: 0 10px; }
+
 /* スキル一覧 */
 .skill_table {
   font-size: 70%;
-  width: 16em;
+  width: 180px;
   border-collapse: collapse;
   display: inline-block; }
   .skill_table caption {
@@ -321,30 +324,30 @@ a {
   .skill_table tr.enabled > td {
     color: black;
     font-weight: bold; }
-  .skill_table tr + tr:hover {
+  .skill_table tr:hover {
     background-color: #edd; }
-    .skill_table tr + tr:hover td {
+    .skill_table tr:hover td {
       color: #877; }
-  .skill_table tr + tr.enabled:hover td {
+  .skill_table tr.enabled:hover td {
     color: #211; }
-  .skill_table.selected tr + tr:hover {
+  .skill_table.selected tr:hover {
     background-color: #ccd; }
-    .skill_table.selected tr + tr:hover td {
+    .skill_table.selected tr:hover td {
       color: #667; }
-  .skill_table.selected tr + tr.enabled:hover td {
+  .skill_table.selected tr.enabled:hover td {
     color: #112; }
 
 .class_group .skill_table.selected {
   background-color: #efeff4; }
 
 .class_group:nth-child(even) .skill_table.selected {
-  background-color: #e4e4f0; }
+  background-color: #e9e9f0; }
 
 /* フッタコンソール */
 #footconsole {
   border: 2px solid #9999aa;
   border-radius: 5px;
-  width: 900px;
+  width: 920px;
   overflow: auto;
   margin: 3px 0;
   padding: 2px; }
@@ -369,6 +372,9 @@ a {
 /* フッタ */
 #footer {
   font-size: 80%;
+  width: 928px; }
+
+#body-for-monster #footer {
   width: 80.5em; }
 
 #contact {
@@ -377,7 +383,7 @@ a {
 /* サイドバー広告 */
 #ad_sidebar {
   position: absolute;
-  left: 925px;
+  left: 941px;
   top: 95px;
   z-index: 1; }
   #ad_sidebar ul {

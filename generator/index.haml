@@ -104,19 +104,20 @@
 								= '（あと '
 								%span.exp_remain> 0
 								= ' exp）'
-					- data['vocations'][vocation]['skills'].each do |skillCategory|
-						- cat = data['skillCategories'][skillCategory]
-						%table{class: [skillCategory, 'skill_table']}>
-							%caption
-								= cat['name'] + ': '
-								%span.skill_current 0
-								\/
-								%span.skill_total 0
-							- cat['skills'].each_with_index do |skill, i|
-								%tr{class: [skillCategory, i].join('_')}<
-									%td.skill_pt>= skill['pt']
-									-# - hint = skill['desc'] + (skill['mp'] ? "\n（消費MP: #{skill['mp']}）" : '')
-									%td.skill_name= skill['name']
+					.skill_tables
+						- data['vocations'][vocation]['skills'].each do |skillCategory|
+							- cat = data['skillCategories'][skillCategory]
+							%table{class: [skillCategory, 'skill_table']}>
+								%caption
+									= cat['name'] + ': '
+									%span.skill_current 0
+									\/
+									%span.skill_total 0
+								- cat['skills'].each_with_index do |skill, i|
+									%tr{class: [skillCategory, i].join('_')}<
+										%td.skill_pt>= skill['pt']
+										-# - hint = skill['desc'] + (skill['mp'] ? "\n（消費MP: #{skill['mp']}）" : '')
+										%td.skill_name= skill['name']
 			#pt_console{style: 'display: none'}
 				%input#pt_spinner
 				%button#pt_reset リセット
