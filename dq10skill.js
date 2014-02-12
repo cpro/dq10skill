@@ -811,51 +811,38 @@ var SimulatorUI = (function($) {
 		function() {
 			var HEIGHT_FOLDED = '48px';
 			var HEIGHT_UNFOLDED = $('.class_group').height() + 'px';
-			
-			var $foldButton = $('<button>▲おりたたむ</button>').button({
-				icons: { primary: 'ui-icon-triangle-1-n' },
-				text: false
-			}).click(function() {
-				$(this).parents('.class_group')
-					.animate({height: HEIGHT_FOLDED})
-					.addClass('folded')
-					.removeClass('unfolded');
-				$(this).hide();
-			}).addClass('fold').hide();
+			var CLASSNAME_FOLDED = 'folded';
 
-			var $unfoldButton = $('<button>▼ひろげる</button>').button({
-				icons: { primary: 'ui-icon-triangle-1-s' },
-				text: false
+			var $foldToggleButton = $('.toggle_ent').button({
+				icons: { primary: 'ui-icon-arrowthickstop-1-n' },
+				text: false,
+				label: 'おりたたむ'
 			}).click(function() {
-				$(this).parents('.class_group')
-					.animate({height: HEIGHT_UNFOLDED})
-					.addClass('unfolded')
-					.removeClass('folded');
-				$(this).hide();
-			}).addClass('unfold').hide();
+				var $entry = $(this).parents('.class_group');
+				$entry.toggleClass(CLASSNAME_FOLDED);
 
-			$('.class_group').append($foldButton).append($unfoldButton);
-			$('.class_group').addClass('unfolded');
-			
-			//職業欄ポイント時のみ表示する
-			$('.class_group').hover(function() {
-				if($(this).hasClass('folded')) {
-					$(this).children('.unfold').show();
+				if($entry.hasClass(CLASSNAME_FOLDED)) {
+					$entry.animate({height: HEIGHT_FOLDED});
+					$(this).button({
+						icons: {primary: 'ui-icon-arrowthickstop-1-s'},
+						label: 'ひろげる'
+					});
+				} else {
+					$entry.animate({height: HEIGHT_UNFOLDED});
+					$(this).button({
+						icons: {primary: 'ui-icon-arrowthickstop-1-n'},
+						label: 'おりたたむ'
+					});
 				}
-				if($(this).hasClass('unfolded')) {
-					$(this).children('.fold').show();
-				}
-			}, function() {
-				$(this).children('.fold, .unfold').hide();
 			});
 			
 			//すべておりたたむ・すべてひろげるボタン追加
 			$('#fold-all').click(function(e) {
-				$('.fold').click();
+				$('.class_group:not([class*="' + CLASSNAME_FOLDED + '"]) .toggle_ent').click();
 				$('body, html').animate({scrollTop: 0});
 			});
 			$('#unfold-all').click(function(e) {
-				$('.unfold').click();
+				$('.' + CLASSNAME_FOLDED + ' .toggle_ent').click();
 				$('body, html').animate({scrollTop: 0});
 			});
 			
@@ -865,7 +852,8 @@ var SimulatorUI = (function($) {
 			$('#foldbuttons-vocation a').click(function(e) {
 				var vocation = $(this).attr('id').replace('fold-', '');
 				$('body, html').animate({scrollTop: $('#' + vocation).offset().top - bodyTop});
-				$('#' + vocation + ' .unfold').click();
+				if($('#' + vocation).hasClass(CLASSNAME_FOLDED))
+					$('#' + vocation + ' .toggle_ent').click();
 			});
 			//特定スキルを持つ職業のみひろげるボタン追加
 			$('#foldbuttons-skillCategory a').click(function(e) {

@@ -104,6 +104,8 @@
 								= '（あと '
 								%span.exp_remain> 0
 								= ' exp）'
+						.ent_title_console
+							%button.toggle_ent たたむ/ひろげる
 					.skill_tables
 						- data['vocations'][vocation]['skills'].each do |skillCategory|
 							- cat = data['skillCategories'][skillCategory]
