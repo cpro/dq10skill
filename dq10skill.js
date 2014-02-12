@@ -668,19 +668,22 @@ var SimulatorUI = (function($) {
 					refreshSaveUrl();
 				}
 			});
-			//テキストボックスクリック時数値を選択状態に
-			$spinner.click(function(e) {
+		},
+		
+		//スピンコントロール共通
+		function() {
+			$('input.ui-spinner-input').click(function(e) {
+				//テキストボックスクリック時数値を選択状態に
 				$(this).select();
-			});
-			//テキストボックスでEnter押下時更新して選択状態に
-			$spinner.keypress(function(e) {
+			}).keypress(function(e) {
+				//テキストボックスでEnter押下時更新して選択状態に
 				if(e.which == 13) {
 					$('#url_text').focus();
 					$(this).focus().select();
 				}
 			});
 		},
-		
+
 		//スキルライン名ポイント時にUI表示
 		function() {
 			$('.skill_table caption').hover(function(e) {
