@@ -2,8 +2,17 @@
 
 $header-height: 90px;
 $main-background-color: #fcfcfd;
-$body-content-width: 65.5em;
 $body-content-width-monster: 65.5em;
+
+$body-margin: 8px;
+
+$skill-table-width: 180px;
+$skill-table-padding: 10px;
+$entry-border-width: 2px;
+$entry-padding: 2px;
+
+$entry-width: $skill-table-width * 5 + $skill-table-padding * 2;
+$body-content-width: $entry-width + ($entry-padding + $entry-border-width) * 2;
 
 body {
 	background-color: $main-background-color;
@@ -219,22 +228,32 @@ a {
 
 /* エントリボックス */
 .class_group, .monster_ent {
-	border: 2px solid #99a;
+	border: $entry-border-width solid #99a;
 	border-radius: 5px;
 	clear: both;
 	margin: 3px 0;
-	padding: 2px;
+	padding: $entry-padding;
 	overflow: hidden;
+	position: relative;
 
 	&:nth-child(even) {
-		background-color: #f6f6f7;
+		background-color: darken($main-background-color, 2%);
 	}
 	&:nth-child(odd) {
 		background-color: $main-background-color;
 	}
 }
 .class_group {
-	width: $body-content-width;
+	width: $entry-width;
+
+	/* 折りたたみ/展開ボタン */
+	.fold, .unfold {
+		width: 20px;
+		height: 20px;
+		position: absolute;
+		left: 1px;
+		bottom: 1px;
+	}
 }
 .monster_ent {
 	width: $body-content-width-monster;
@@ -243,15 +262,73 @@ a {
 /* モンスター用 各エントリタイトル */
 .ent_title {
 	width: 98%;
-	margin: 0 auto 3px auto;
-	padding: 3px 0;
+	margin: 0 auto 2px auto;
+	padding: 2px 0;
 	position: relative;
+	height: 22px;
 	border-bottom: 1px solid #99a;
 
+	h2, dl, dt, dd {
+		display: inline-block;
+	}
 	h2 {
-		font-size: 100%;
+		font-size: 16px;
 		margin: 0;
 		padding: 0;
+		position: relative;
+
+		#lv_console {
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			#lv-select {
+				margin: 0;
+				padding: 0;
+			}
+		}
+	}
+
+	dl, dt, dd {
+		margin: 0;
+	}
+	dt, dd {
+		font-size: 12px;
+	}
+
+	dl.skill_pt {
+		margin-left: 30px;
+
+		dd.pts {
+			font-weight: bold;
+			font-size: 16px;
+		}
+	}
+
+	dl.training_pt {
+		dd {
+			font-weight: bold;
+			font-size: 15px;
+			position: relative;
+		}
+
+		#training_pt_console {
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			input { /* spinner */
+				width: 24px;
+				text-align: right;
+				font-size: 12px;
+			}
+		}
+	}
+
+	dl.expinfo {
+		dt {
+			margin-left: 10px;
+		}
 	}
 
 	.ent_title_console {
@@ -285,23 +362,19 @@ a {
 	font-size: 70%;
 	float: left;
 	width: 12em;
-	height: 20em;
+	height: 200px;
 	position: relative;
 	text-align: center;
 	border-right: 1px solid #99a;
 	vertical-align: top;
 	
-	h2 {
-		font-size: 140%;
-		margin: 0.8em 0;
-	}
 	dt {
 		font-weight: normal;
 	}
 	dt.label_lv, dd.lv_select {
 		display: inline;
 	}
-	dt, dd {
+	dl, dt, dd {
 		margin: 0;
 	}
 	.lv_select select {
@@ -323,41 +396,44 @@ a {
 	height: 16em;
 }
 
-/* 折りたたみ/展開ボタン */
-p.fold, p.unfold {
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	left: 1em;
-}
-p.fold {
-	bottom: 2px;
-}
-p.unfold {
-	top: 2px;
-}
-.fold:hover, .unfold:hover {
-	cursor: pointer;
-	color: #d66;
-}
-span.fold, span.unfold {
-	margin: 0 0.5em;
-}
-#toggle_buttons {
-	font-size: 75%;
-	display: inline;
+.skill_tables {
+	padding: 0 $skill-table-padding;
 }
 
 /* スキル一覧 */
 .skill_table {
 	font-size: 70%;
-	width: 16em;
-	border-collapse: collapse;
+	width: $skill-table-width;
+	margin: -2px;
+	border-collapse: separate;
+	border-spacing: 0;
+	border: 2px solid rgba(255, 0, 0, 0);
+	border-radius: 4px;
+
 	display: inline-block;
-	
+
 	caption {
+		position: relative;
+		overflow: visible;
 		font-weight: bold;
 		font-size: 120%;
+
+		#pt_console {
+			position: absolute;
+			top: -2px;
+			white-space: nowrap;
+
+			input { /* spinner */
+				width: 24px;
+				text-align: right;
+				font-size: 12px;
+			}
+			button { /* reset */
+				width: 20px;
+				height: 20px;
+				vertical-align: bottom;
+			}
+		}
 	}
 	.skill_pt {
 		width: 2em;
@@ -391,44 +467,29 @@ span.fold, span.unfold {
 		color: black;
 		font-weight: bold;
 	}
-	tr+tr:hover {
+	tr:hover {
 		background-color: #edd;
 		td {
 			color: #877;
 		}
 	}
-	tr+tr.enabled:hover td {
+	tr.enabled:hover td {
 		color: #211;
-	}
-	
-	&.selected {
-		tr+tr:hover {
-			background-color: #ccd;
-			td {
-				color: #667;
-			}
-		}
-		tr+tr.enabled:hover td {
-			color: #112;
-		}
 	}
 }
 
 .class_group .skill_table.selected {
-	background-color: #efeff4;
-}
-.class_group:nth-child(even) .skill_table.selected {
-	background-color: #e4e4f0;
+	border-color: rgba(255, 0, 0, 0.4);
 }
 
 /* フッタコンソール */
 #footconsole {
-	border: 2px solid #99a;
+	border: $entry-border-width solid #99a;
 	border-radius: 5px;
-	width: $body-content-width;
+	width: $entry-width;
 	overflow: auto;
 	margin: 3px 0;
-	padding: 2px;
+	padding: $entry-padding;
 	
 	p {
 		float: left;
@@ -459,6 +520,9 @@ span.fold, span.unfold {
 /* フッタ */
 #footer {
 	font-size: 80%;
+	width: $body-content-width;
+}
+#body-for-monster #footer {
 	width: 80.5em;
 }
 #contact {
@@ -468,7 +532,7 @@ span.fold, span.unfold {
 /* サイドバー広告 */
 #ad_sidebar {
 	position: absolute;
-	left: $body-content-width + 1.5em;
+	left: $body-content-width + $body-margin + 10px;
 	top: $header-height + 5px;
 	z-index: 1;
 	

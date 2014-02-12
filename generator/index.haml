@@ -82,22 +82,22 @@
 		#body_content
 			- data['vocationOrder'].each do |vocation|
 				%div.class_group{id: vocation}
-					.class_info
+					.ent_title
 						%h2<
-							= data['vocations'][vocation]['name'] + ' Lv '
-							%span.lv_h2> 1
-						%dl
-							%dt.label_lv<
-								%label{for: "lv-#{vocation}"} レベル
-							%dd.lv_select
-								%select{size: 1, id: "lv-#{vocation}"}
+							%label{for: 'lv-select'}
+								= data['vocations'][vocation]['name'] + ' Lv '
+								%span.lv_h2 1
+						%dl.skill_pt
+							%dt 残りSP:
+							%dd.pts 0 / 0
+						%dl.training_pt
+							%dt
+								%label{for: 'training_pt_spinner'} + 特訓
+							%dd{id: "training-#{vocation}"}
+								0
+						%dl.expinfo
 							%dt 獲得経験値:
 							%dd.exp 0
-							%dt 残りスキルポイント:
-							%dd.pts 0 / 0
-							%dd<
-								%label{for: "training-#{vocation}"}> 特訓
-								%input.training_pt{id: "training-#{vocation}"}>
 							%dt.error{style: 'display:none'}<
 								必要レベル:
 								%span.req_lv>< 1
@@ -105,21 +105,30 @@
 								= '（あと '
 								%span.exp_remain> 0
 								= ' exp）'
-					- data['vocations'][vocation]['skills'].each do |skillCategory|
-						- cat = data['skillCategories'][skillCategory]
-						%table{class: [skillCategory, 'skill_table']}>
-							%caption
-								= cat['name'] + ': '
-								%span.skill_total 0
-							%tr
-								%th.console{colspan: 2}
-									%input.ptspinner
-									%button.reset リセット
-							- cat['skills'].each_with_index do |skill, i|
-								%tr{class: [skillCategory, i].join('_')}<
-									%td.skill_pt>= skill['pt']
-									-# - hint = skill['desc'] + (skill['mp'] ? "\n（消費MP: #{skill['mp']}）" : '')
-									%td.skill_name= skill['name']
+						.ent_title_console
+							%button.toggle_ent たたむ/ひろげる
+					.skill_tables
+						- data['vocations'][vocation]['skills'].each do |skillCategory|
+							- cat = data['skillCategories'][skillCategory]
+							%table{class: [skillCategory, 'skill_table']}>
+								%caption
+									%label{for: 'pt_spinner'}
+										= cat['name'] + ': '
+										%span.skill_current 0
+										\/
+										%span.skill_total 0
+								- cat['skills'].each_with_index do |skill, i|
+									%tr{class: [skillCategory, i].join('_')}<
+										%td.skill_pt>= skill['pt']
+										-# - hint = skill['desc'] + (skill['mp'] ? "\n（消費MP: #{skill['mp']}）" : '')
+										%td.skill_name= skill['name']
+			#pt_console{style: 'display: none'}
+				%input#pt_spinner
+				%button#pt_reset リセット
+			#lv_console{style: 'display: none'}
+				%select#lv-select.ui-widget-content.ui-corner-all{size: 1}
+			#training_pt_console{style: 'display: none'}
+				%input#training_pt_spinner
 			#footconsole
 				%p#setalllevel
 					レベル一括設定

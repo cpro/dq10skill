@@ -404,6 +404,8 @@ var SimulatorUI = (function($) {
 	var CLASSNAME_ERROR = 'error';
 	
 	var sim = Simulator;
+
+	var $ptConsole;
 	
 	function refreshAll() {
 		refreshAllVocationInfo();
@@ -434,8 +436,7 @@ var SimulatorUI = (function($) {
 		var remainingSkillPts = maxSkillPts + additionalSkillPts - sim.totalSkillPts(vocation);
 		var $skillPtsText = $('#' + vocation + ' .pts');
 		$skillPtsText.text(remainingSkillPts + ' / ' + maxSkillPts);
-		if(additionalSkillPts > 0)
-			$skillPtsText.append('<small> + ' + additionalSkillPts + '</small>');
+		$('#training-' + vocation).text(additionalSkillPts);
 		
 		//Lv不足の処理
 		var isLevelError = (isNaN(requiredLevel) || currentLevel < requiredLevel);
@@ -487,17 +488,17 @@ var SimulatorUI = (function($) {
 	
 	function refreshControls() {
 		for(var vocation in sim.vocations) {
-			$('#' + vocation + ' .lv_select>select').val(sim.getLevel(vocation));
-			$('#' + vocation + ' .training_pt').val(sim.getTrainingSkillPt(vocation));
-			
 			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
 				var skillCategory = sim.vocations[vocation].skills[s];
-				//$('#' + vocation + ' .' + skill + ' :text').val(sim.getSkillPt(vocation, skill));
-				$('#' + vocation + ' .' + skillCategory + ' .ptspinner').spinner('value', sim.getSkillPt(vocation, skillCategory));
+				refreshCurrentSkillPt(vocation, skillCategory);
 			}
 		}
 	}
 	
+	function refreshCurrentSkillPt(vocation, skillCategory) {
+		$('#' + vocation + ' .' + skillCategory + ' .skill_current').text(sim.getSkillPt(vocation, skillCategory));
+	}
+
 	function refreshSaveUrl() {
 		var url = window.location.href.replace(window.location.search, "") + '?' +
 			Base64.btoa(RawDeflate.deflate(sim.serialize()));
@@ -532,15 +533,12 @@ var SimulatorUI = (function($) {
 	var setupFunctions = [
 		//レベル選択セレクトボックス項目設定
 		function() {
-			var $select = $('.lv_select>select');
+			var $select = $('#lv-select');
 			for(var i = sim.LEVEL_MIN; i <= sim.LEVEL_MAX; i++) {
 				$select.append($("<option />").val(i).text(i.toString() + ' (' + sim.skillPtsGiven[i].toString() + ')'));
 			}
-		},
-		
-		//レベル選択セレクトボックス変更時
-		function() {
-			$('.lv_select>select').change(function() {
+
+			$select.change(function() {
 				var vocation = getCurrentVocation(this);
 				sim.updateLevel(vocation, $(this).val());
 				refreshVocationInfo(vocation);
@@ -550,9 +548,25 @@ var SimulatorUI = (function($) {
 			});
 		},
 		
+		//レベル欄ポイント時にUI表示
+		function() {
+			$('.ent_title h2').hover(function(e) {
+				var vocation = getCurrentVocation(this);
+				var consoleLeft = $(this).find('.lv_h2').position().left - 3;
+
+				$('#lv_console').appendTo($(this)).css({left: consoleLeft});
+				$('#lv-select').val(sim.getLevel(vocation));
+
+				$('#lv_console').show();
+			}, function(e) {
+				if($(':focus').attr('id') == 'lv-select') return false;
+				$('#lv_console').hide();
+			});
+		},
+
 		//特訓ポイント選択スピンボタン設定
 		function() {
-			var $spinner = $('.training_pt');
+			var $spinner = $('#training_pt_spinner');
 			$spinner.spinner({
 				min: sim.TRAINING_SKILL_PTS_MIN,
 				max: sim.TRAINING_SKILL_PTS_MAX,
@@ -563,24 +577,26 @@ var SimulatorUI = (function($) {
 						refreshVocationInfo(vocation);
 						refreshTotalRequiredExp();
 						refreshTotalExpRemain();
+						//e.stopPropagation();
 					} else {
 						return false;
 					}
 				},
 				change: function (e, ui) {
-					var vocation = $(this).parents('.class_group').attr('id');
-					
-					if(isNaN($(this).val())) {
-						$(this).val(sim.getTraningSkillPt(vocation));
+					var vocation = getCurrentVocation(this);
+					var newValue = $(this).val(), oldValue = sim.getTrainingSkillPt(vocation);
+
+					if(isNaN(newValue)) {
+						$(this).val(oldValue);
 						return false;
 					}
-					if(sim.updateTrainingSkillPt(vocation, parseInt($(this).val()))) {
+					if(sim.updateTrainingSkillPt(vocation, parseInt(newValue))) {
 						refreshVocationInfo(vocation);
 						refreshTotalRequiredExp();
 						refreshTotalExpRemain();
 						refreshSaveUrl();
 					} else {
-						$(this).val(sim.getTraningSkillPt(vocation));
+						$(this).val(oldValue);
 						return false;
 					}
 				},
@@ -590,9 +606,26 @@ var SimulatorUI = (function($) {
 			});
 		},
 		
+		//特訓表示欄ポイント時にUI表示
+		function() {
+			$('.ent_title .training_pt').hover(function(e) {
+				var vocation = getCurrentVocation(this);
+				var consoleLeft = $('#training-' + vocation).position().left - 3;
+
+				$('#training_pt_console').appendTo($(this)).css({left: consoleLeft});
+				$('#training_pt_spinner').val(sim.getTrainingSkillPt(vocation));
+
+				$('#training_pt_console').show();
+			}, function(e) {
+				if($(':focus').attr('id') == 'training_pt_spinner') return false;
+				$('#training_pt_console').hide();
+			});
+		},
+		
 		//スピンボタン設定
 		function() {
-			$spinner = $('.ptspinner');
+			$ptConsole = $('#pt_console');
+			var $spinner = $('#pt_spinner');
 			$spinner.spinner({
 				min: sim.SKILL_PTS_MIN,
 				max: sim.SKILL_PTS_MAX,
@@ -601,6 +634,7 @@ var SimulatorUI = (function($) {
 					var skillCategory = getCurrentSkillCategory(this);
 					
 					if(sim.updateSkillPt(vocation, skillCategory, parseInt(ui.value))) {
+						refreshCurrentSkillPt(vocation, skillCategory);
 						refreshSkillList(skillCategory);
 						refreshAllVocationInfo();
 						refreshTotalExpRemain();
@@ -619,6 +653,7 @@ var SimulatorUI = (function($) {
 						return false;
 					}
 					if(sim.updateSkillPt(vocation, skillCategory, parseInt($(this).val()))) {
+						refreshCurrentSkillPt(vocation, skillCategory);
 						refreshSkillList(skillCategory);
 						refreshAllVocationInfo();
 						refreshTotalExpRemain();
@@ -633,22 +668,46 @@ var SimulatorUI = (function($) {
 					refreshSaveUrl();
 				}
 			});
-			//テキストボックスクリック時数値を選択状態に
-			$spinner.click(function(e) {
+		},
+		
+		//スピンコントロール共通
+		function() {
+			$('input.ui-spinner-input').click(function(e) {
+				//テキストボックスクリック時数値を選択状態に
 				$(this).select();
-			});
-			//テキストボックスでEnter押下時更新して選択状態に
-			$spinner.keypress(function(e) {
+			}).keypress(function(e) {
+				//テキストボックスでEnter押下時更新して選択状態に
 				if(e.which == 13) {
 					$('#url_text').focus();
 					$(this).focus().select();
 				}
 			});
 		},
-		
+
+		//スキルライン名ポイント時にUI表示
+		function() {
+			$('.skill_table caption').hover(function(e) {
+				var vocation = getCurrentVocation(this);
+				var skillCategory = getCurrentSkillCategory(this);
+
+				//位置決め
+				var $baseSpan = $(this).find('.skill_current');
+				var consoleLeft = $baseSpan.position().left + $baseSpan.width() - 50;
+				$('#pt_reset').css({'margin-left': $(this).find('.skill_total').width() + 10});
+
+				$ptConsole.appendTo($(this)).css({left: consoleLeft});
+				$('#pt_spinner').val(sim.getSkillPt(vocation, skillCategory));
+
+				$ptConsole.show();
+			}, function(e) {
+				if($(':focus').attr('id') == 'pt_spinner') return false;
+				$ptConsole.hide();
+			});
+		},
+
 		//リセットボタン設定
 		function() {
-			$reset = $('.reset').button({
+			$reset = $('#pt_reset').button({
 				icons: { primary: 'ui-icon-refresh' },
 				text: false
 			}).click(function (e) {
@@ -656,7 +715,8 @@ var SimulatorUI = (function($) {
 				var skillCategory = getCurrentSkillCategory(this);
 				
 				sim.updateSkillPt(vocation, skillCategory, 0);
-				$('#' + vocation + ' .' + skillCategory + ' .ptspinner').spinner('value', sim.getSkillPt(vocation, skillCategory));
+				$('#pt_spinner').val(0);
+				refreshCurrentSkillPt(vocation, skillCategory);
 				refreshSkillList(skillCategory);
 				refreshAllVocationInfo();
 				refreshTotalExpRemain();
@@ -671,7 +731,8 @@ var SimulatorUI = (function($) {
 					return;
 				
 				sim.clearPtsOfSameSkills(skillCategory);
-				$('.' + skillCategory + ' .ptspinner').spinner('value', 0);
+				$('#pt_spinner').val(0);
+				$('.' + skillCategory + ' .skill_current').text('0');
 				refreshSkillList(skillCategory);
 				refreshAllVocationInfo();
 				refreshTotalExpRemain();
@@ -693,8 +754,8 @@ var SimulatorUI = (function($) {
 				if(requiredPt < totalPtsOfOthers) return;
 				
 				sim.updateSkillPt(vocation, skillCategory, requiredPt - totalPtsOfOthers);
-				$('#' + vocation + ' .' + skillCategory + ' .ptspinner').spinner('value', sim.getSkillPt(vocation, skillCategory));
 				
+				refreshCurrentSkillPt(vocation, skillCategory);
 				refreshSkillList(skillCategory);
 				refreshAllVocationInfo();
 				refreshTotalExpRemain();
@@ -751,39 +812,40 @@ var SimulatorUI = (function($) {
 		
 		//おりたたむ・ひろげるボタン追加
 		function() {
-			var HEIGHT_FOLDED = '2.5em';
+			var HEIGHT_FOLDED = '48px';
 			var HEIGHT_UNFOLDED = $('.class_group').height() + 'px';
-			
-			var $foldButton = $('<p>▲おりたたむ</p>').addClass('fold').hide().click(function() {
-				$(this).parents('.class_group').animate({height: HEIGHT_FOLDED}, 0).addClass('folded').removeClass('unfolded');
-				$(this).hide();
-			});
-			var $unfoldButton = $('<p>▼ひろげる</p>').addClass('unfold').hide().click(function() {
-				$(this).parents('.class_group').animate({height: HEIGHT_UNFOLDED}).addClass('unfolded').removeClass('folded');
-				$(this).hide();
-			});
-			$('.class_info').append($foldButton).append($unfoldButton);
-			$('.class_group').addClass('unfolded');
-			
-			//職業情報欄ポイント時のみ表示する
-			$('.class_info').hover(function() {
-				if($(this).parents('.class_group').hasClass('folded')) {
-					$(this).children('.unfold').show();
+			var CLASSNAME_FOLDED = 'folded';
+
+			var $foldToggleButton = $('.toggle_ent').button({
+				icons: { primary: 'ui-icon-arrowthickstop-1-n' },
+				text: false,
+				label: 'おりたたむ'
+			}).click(function() {
+				var $entry = $(this).parents('.class_group');
+				$entry.toggleClass(CLASSNAME_FOLDED);
+
+				if($entry.hasClass(CLASSNAME_FOLDED)) {
+					$entry.animate({height: HEIGHT_FOLDED});
+					$(this).button({
+						icons: {primary: 'ui-icon-arrowthickstop-1-s'},
+						label: 'ひろげる'
+					});
+				} else {
+					$entry.animate({height: HEIGHT_UNFOLDED});
+					$(this).button({
+						icons: {primary: 'ui-icon-arrowthickstop-1-n'},
+						label: 'おりたたむ'
+					});
 				}
-				if($(this).parents('.class_group').hasClass('unfolded')) {
-					$(this).children('.fold').show();
-				}
-			}, function() {
-				$(this).children('.fold, .unfold').hide();
 			});
 			
 			//すべておりたたむ・すべてひろげるボタン追加
 			$('#fold-all').click(function(e) {
-				$('.class_info .fold').click();
+				$('.class_group:not([class*="' + CLASSNAME_FOLDED + '"]) .toggle_ent').click();
 				$('body, html').animate({scrollTop: 0});
 			});
 			$('#unfold-all').click(function(e) {
-				$('.class_info .unfold').click();
+				$('.' + CLASSNAME_FOLDED + ' .toggle_ent').click();
 				$('body, html').animate({scrollTop: 0});
 			});
 			
@@ -793,7 +855,8 @@ var SimulatorUI = (function($) {
 			$('#foldbuttons-vocation a').click(function(e) {
 				var vocation = $(this).attr('id').replace('fold-', '');
 				$('body, html').animate({scrollTop: $('#' + vocation).offset().top - bodyTop});
-				$('#' + vocation + ' .unfold').click();
+				if($('#' + vocation).hasClass(CLASSNAME_FOLDED))
+					$('#' + vocation + ' .toggle_ent').click();
 			});
 			//特定スキルを持つ職業のみひろげるボタン追加
 			$('#foldbuttons-skillCategory a').click(function(e) {
