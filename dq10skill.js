@@ -4,7 +4,7 @@
 var Simulator = (function($) {
 	//定数
 	var SKILL_PTS_MIN = 0;
-	var SKILL_PTS_MAX = 100;
+	var SKILL_PTS_MAX = 130;
 	var LEVEL_MIN = 1;
 	var LEVEL_MAX = 80;
 	var TRAINING_SKILL_PTS_MIN = 0;
@@ -258,7 +258,8 @@ var Simulator = (function($) {
 		'luminary',      //スーパースター
 		'gladiator',     //バトルマスター
 		'sage',          //賢者
-		'monstermaster'  //まもの使い
+		'monstermaster', //まもの使い
+		'itemmaster'     //どうぐ使い
 	];
 
 	function serialize() {
