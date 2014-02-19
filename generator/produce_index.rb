@@ -77,7 +77,7 @@ else
 end
 
 # スキル等データロード
-data = JSON.parse(File.read("#{dir}/../dq10skill-data.json"))
+data = JSON.parse(File.read("#{dir}/dq10skill-data-full.json"))
 # HAMLからHTML生成
 File.open(index_html_path, 'w') do |file|
   file.puts Haml::Engine.new(File.read("#{dir}/index.haml")).render(Object.new, {:data => data, :item_list => item_list})
