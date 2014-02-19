@@ -214,3 +214,23 @@
 						%img{src: item[:img_url], width: item[:img_width], height: item[:img_height], alt: item[:item_title], title: item[:item_title]}>/
 						%br>/
 						=item[:item_title]
+		:javascript
+			jQuery(function($) {
+				var sharedUrl = "#{@home_uri}";
+				$('#tw-share').socialbutton('twitter', {
+					button: 'horizontal',
+					url: sharedUrl,
+					lang: 'ja',
+					hashtags: 'DQ10, dq10_skillsim'
+				});
+				$('#fb-like').socialbutton('facebook_like', {
+					button: 'button_count',
+					url: sharedUrl,
+					locale: 'ja_JP'
+				});
+				$('#g-plusone').socialbutton('google_plusone', {
+					lang: 'ja',
+					size: 'medium',
+					url: sharedUrl
+				});
+			});
