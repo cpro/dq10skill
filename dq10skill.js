@@ -764,21 +764,6 @@ var SimulatorUI = (function($) {
 			});
 		},
 		
-		//ヒントテキスト設定
-		function() {
-			for(var skillCategory in sim.skillCategories) {
-				for(var skillIndex = 0; skillIndex < sim.skillCategories[skillCategory].skills.length; skillIndex++) {
-					var skill = sim.skillCategories[skillCategory].skills[skillIndex];
-					var hintText = skill.desc;
-					if((skill.mp !== null) && (skill.mp !== undefined))
-						hintText += '\n（消費MP: ' + skill.mp.toString() + '）';
-					if(skill.gold)
-						hintText += '\n（' + skill.gold.toString() + 'G）';
-					$('.' + skillCategory + '_' + skillIndex.toString()).attr('title', hintText);
-				}
-			}
-		},
-		
 		//URLテキストボックスクリック時
 		function() {
 			$('#url_text').click(function() {

@@ -118,9 +118,11 @@
 										\/
 										%span.skill_total 0
 								- cat['skills'].each_with_index do |skill, i|
-									%tr{class: [skillCategory, i].join('_')}<
+									- hint = skill['desc']
+									- hint += "\n（消費MP: #{skill['mp']}）" if skill['mp']
+									- hint += "\n（#{skill['gold']}G）" if skill['gold']
+									%tr{class: [skillCategory, i].join('_'), title: hint}<
 										%td.skill_pt>= skill['pt']
-										-# - hint = skill['desc'] + (skill['mp'] ? "\n（消費MP: #{skill['mp']}）" : '')
 										%td.skill_name= skill['name']
 			#pt_console{style: 'display: none'}
 				%input#pt_spinner
