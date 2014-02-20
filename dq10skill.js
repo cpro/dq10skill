@@ -262,59 +262,56 @@ var Simulator = (function($) {
 	];
 
 	function serialize() {
-		var serialArray = [];
+		var serial = '';
+		var toByte = String.fromCharCode;
 
 		var vocationCount = VOCATIONS_DATA_ORDER.length;
 		//先頭に職業の数を含める
-		serialArray.push(String.fromCharCode(vocationCount));
+		serial += toByte(vocationCount);
 
 		for(var i = 0; i < vocationCount; i++) {
 			var vocation = VOCATIONS_DATA_ORDER[i];
-			serialArray.push(String.fromCharCode(getLevel(vocation)));
-			serialArray.push(String.fromCharCode(getTrainingSkillPt(vocation)));
+			serial += toByte(getLevel(vocation));
+			serial += toByte(getTrainingSkillPt(vocation));
 
 			for(var s = 0; s < vocations[vocation].skills.length; s++) {
 				var skillCategory = vocations[vocation].skills[s];
-				serialArray.push(String.fromCharCode(getSkillPt(vocation, skillCategory)));
+				serial += toByte(getSkillPt(vocation, skillCategory));
 			}
 		}
 
-		return serialArray.join('');
+		return serial;
 	}
 	function deserialize(serial) {
-		var dataArray = [];
-
-		for(var i = 0; i < serial.length; i++)
-			dataArray.push(serial.charCodeAt(i));
+		var cur = 0;
+		var getData = function() {
+			return serial.charCodeAt(cur++);
+		};
 		
 		//先頭に格納されている職業の数を取得
-		var vocationCount = dataArray.shift();
+		var vocationCount = getData();
 
-		var cur = 0;
 		for(i = 0; i < vocationCount; i++) {
 			var vocation = VOCATIONS_DATA_ORDER[i];
-			
-			if(dataArray.length - cur < 1 + 1 + vocations[vocation].skills.length)
+			var skills = vocations[vocation].skills;
+
+			if(serial.length - cur < 1 + 1 + skills.length)
 				break;
 
-			updateLevel(vocation, dataArray[cur]);
-			cur++;
-			updateTrainingSkillPt(vocation, dataArray[cur]);
-			cur++;
+			updateLevel(vocation, getData());
+			updateTrainingSkillPt(vocation, getData());
 
-			for(var s = 0; s < vocations[vocation].skills.length; s++) {
-				var skillCategory = vocations[vocation].skills[s];
-				updateSkillPt(vocation, skillCategory, dataArray[cur]);
-				cur++;
+			for(var s = 0; s < skills.length; s++) {
+				updateSkillPt(vocation, skills[s], getData());
 			}
 		}
 	}
 
-	var BITS_LEVEL = 8; //レベルは8ビット確保
-	var BITS_SKILL = 7; //スキルは7ビット
-	var BITS_TRAINING = 7; //特訓スキルポイント7ビット
-
 	function deserializeBit(serial) {
+		var BITS_LEVEL = 8; //レベルは8ビット確保
+		var BITS_SKILL = 7; //スキルは7ビット
+		var BITS_TRAINING = 7; //特訓スキルポイント7ビット
+		
 		var bitArray = [];
 		for(var i = 0; i < serial.length; i++)
 			bitArray = bitArray.concat(numToBitArray(serial.charCodeAt(i), 8));
