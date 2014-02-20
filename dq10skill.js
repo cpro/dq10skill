@@ -264,7 +264,11 @@ var Simulator = (function($) {
 	function serialize() {
 		var serialArray = [];
 
-		for(var i = 0; i < VOCATIONS_DATA_ORDER.length; i++) {
+		var vocationCount = VOCATIONS_DATA_ORDER.length;
+		//先頭に職業の数を含める
+		serialArray.push(String.fromCharCode(vocationCount));
+
+		for(var i = 0; i < vocationCount; i++) {
 			var vocation = VOCATIONS_DATA_ORDER[i];
 			serialArray.push(String.fromCharCode(getLevel(vocation)));
 			serialArray.push(String.fromCharCode(getTrainingSkillPt(vocation)));
@@ -283,14 +287,15 @@ var Simulator = (function($) {
 		for(var i = 0; i < serial.length; i++)
 			dataArray.push(serial.charCodeAt(i));
 		
-		//要素が足りなければ0で埋める
-		var expectedLength = (1 + 1 + vocations[VOCATIONS_DATA_ORDER[0]].skills.length) * VOCATIONS_DATA_ORDER.length;
-		for(i = i; i < expectedLength; i++)
-			dataArray.push(0);
+		//先頭に格納されている職業の数を取得
+		var vocationCount = dataArray.shift();
 
 		var cur = 0;
-		for(i = 0; i < VOCATIONS_DATA_ORDER.length; i++) {
+		for(i = 0; i < vocationCount; i++) {
 			var vocation = VOCATIONS_DATA_ORDER[i];
+			
+			if(dataArray.length - cur < 1 + 1 + vocations[vocation].skills.length)
+				break;
 
 			updateLevel(vocation, dataArray[cur]);
 			cur++;
