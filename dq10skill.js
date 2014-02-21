@@ -846,30 +846,6 @@ var SimulatorUI = (function($) {
 				if($('#' + vocation).hasClass(CLASSNAME_FOLDED))
 					$('#' + vocation + ' .toggle_ent').click();
 			});
-			//特定スキルを持つ職業のみひろげるボタン追加
-			$('#foldbuttons-skillLine a').click(function(e) {
-				var skillLine = $(this).attr('id').replace('fold-', '');
-				var vocationsHaveSkill = [];
-				for(var i = 0; i < sim.vocationOrder.length; i++) {
-					var vocation = sim.vocationOrder[i];
-					
-					if($.inArray(skillLine, sim.vocations[vocation]['skillLines']) >= 0)
-						vocationsHaveSkill.push(vocation);
-				}
-				
-				var $folded = $('.class_info .fold');
-				var $unfolded = $('');
-				for(var i = 0; i < vocationsHaveSkill.length; i++) {
-					var vocation = vocationsHaveSkill[i];
-					
-					$folded = $folded.not('#' + vocation + ' .fold');
-					$unfolded = $unfolded.add('#' + vocation + ' .unfold');
-				}
-				
-				$folded.click();
-				$('body, html').animate({scrollTop: $('#' + vocationsHaveSkill[0]).offset().top - bodyTop});
-				$unfolded.click();
-			});
 		},
 		
 		//レベル一括設定
