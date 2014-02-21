@@ -1,5 +1,5 @@
 {
-	"skillCategories": {
+	"skillLines": {
 		"sword": {
 			"name": "片手剣",
 			"abbr": "片剣",
@@ -584,7 +584,7 @@
 			]
 		}
 	},
-	"skillCategoryOrder": [
+	"skillLineOrder": [
 		"sword", "twohandedsword", "axe", "spear", "stick", "staff", "wand",
 		"knife", "whip", "claw", "fan", "hammer", "bow", "boomerang",
 		"fisticuffs", "shield"

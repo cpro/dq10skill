@@ -1,5 +1,5 @@
 {
-	"skillCategories": {
+	"skillLines": {
 		"martialnyarts": {
 			"name": "マーシャルニャーツ",
 			"skills": [
@@ -720,7 +720,7 @@
 		
 	},
 
-	"additionalSkillCategories": [
+	"additionalSkillLines": [
 		{"name": "raisehp",    "restartCount": 1, "id":  1},
 		{"name": "raisemp",    "restartCount": 1, "id":  2},
 		{"name": "raisepow",   "restartCount": 1, "id":  3},

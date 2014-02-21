@@ -11,11 +11,11 @@ require 'json'
 
 data = JSON.parse(File.read(source_json_path))
 
-data['skillCategories'].each_value do |cat|
-	cat['skills'].each do |skill|
+data['skillLines'].each_value do |skill_line|
+	skill_line['skills'].each do |skill|
 		%w(name desc mp).each {|key| skill.delete(key)} 
 	end
-	%w(abbr).each {|key| cat.delete(key)}
+	%w(abbr).each {|key| skill_line.delete(key)}
 end
 
 data['vocations'].each_value do |voc|
