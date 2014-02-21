@@ -642,19 +642,20 @@ var SimulatorUI = (function($) {
 
 			$table.find('caption .skill_line_name').text(data.name);
 
-			var $tr;
-			for(var s = 0; s < data.skills.length; s++) {
-				$tr = $table.find('tr.' + tableClass + '_' + s.toString());
+			var $tr, i, skill;
+			for(i = 0; i < data.skills.length; i++) {
+				$tr = $table.find('tr.' + tableClass + '_' + i.toString());
+				skill = data.skills[i];
 
-				var hintText = data.skills[s].desc;
-				if((data.skills[s].mp !== null) && (data.skills[s].mp !== undefined))
-					hintText += '\n（消費MP: ' + data.skills[s].mp.toString() + '）';
-				if(data.skills[s].gold)
-					hintText += '\n（' + data.skills[s].gold.toString() + 'G）';
+				var hintText = skill.desc;
+				if((skill.mp !== null) && (skill.mp !== undefined))
+					hintText += '\n（消費MP: ' + skill.mp.toString() + '）';
+				if(skill.gold)
+					hintText += '\n（' + skill.gold.toString() + 'G）';
 				$tr.attr('title', hintText);
 
-				$tr.children('.skill_pt').text(data.skills[s].pt);
-				$tr.children('.skill_name').text(data.skills[s].name);
+				$tr.children('.skill_pt').text(skill.pt);
+				$tr.children('.skill_name').text(skill.name);
 			}
 		}
 	}
