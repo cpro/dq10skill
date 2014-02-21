@@ -50,8 +50,8 @@ var Simulator = (function() {
 
 		this.id = monsterType + '_' + (lastId += 1).toString();
 
-		for(var s = 0; s < this.data.skills.length; s++) {
-			this.skillPts[this.data.skills[s]] = 0;
+		for(var s = 0; s < this.data.skillLines.length; s++) {
+			this.skillPts[this.data.skillLines[s]] = 0;
 		}
 		//転生追加スキル
 		this.additionalSkills = [];
@@ -200,7 +200,7 @@ var Simulator = (function() {
 		BITS_MONSTER_TYPE +
 		BITS_LEVEL +
 		BITS_RESTART_COUNT +
-		BITS_SKILL * (monsterList['slime'].skills.length + ADDITIONAL_SKILL_MAX) +
+		BITS_SKILL * (monsterList['slime'].skillLines.length + ADDITIONAL_SKILL_MAX) +
 		BITS_ADDITIONAL_SKILL * ADDITIONAL_SKILL_MAX;
 
 	//データをビット列にシリアル化
@@ -457,8 +457,8 @@ var SimulatorUI = (function($) {
 
 		var skillLine, $table;
 
-		for(var c = 0; c < monster.data.skills.length; c++) {
-			skillLine = monster.data.skills[c];
+		for(var c = 0; c < monster.data.skillLines.length; c++) {
+			skillLine = monster.data.skillLines[c];
 			$table = drawSkillTable(skillLine);
 			
 			$ent.append($table);

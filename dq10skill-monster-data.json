@@ -578,7 +578,7 @@
 			"id": 1,
 			"name": "スライム",
 			"defaultName": "スライム",
-			"skills": ["slappler", "slafource", "boomerang"],
+			"skillLines": ["slappler", "slafource", "boomerang"],
 			"expTable": 1
 		},
 		
@@ -586,7 +586,7 @@
 			"id": 2,
 			"name": "モーモン",
 			"defaultName": "モーモン",
-			"skills": ["lightmormon", "darkmormon", "stick"],
+			"skillLines": ["lightmormon", "darkmormon", "stick"],
 			"expTable": 1
 		},
 
@@ -594,7 +594,7 @@
 			"id": 3,
 			"name": "プリズニャン",
 			"defaultName": "プリズニャン",
-			"skills": ["martialnyarts", "hyad", "claw"],
+			"skillLines": ["martialnyarts", "hyad", "claw"],
 			"expTable": 1
 		},
 
@@ -602,7 +602,7 @@
 			"id": 4,
 			"name": "ホイミスライム",
 			"defaultName": "ホイミスライ",
-			"skills": ["hoimingrapple", "hoiminheal", "stick"],
+			"skillLines": ["hoimingrapple", "hoiminheal", "stick"],
 			"expTable": 1
 		},
 		
@@ -610,7 +610,7 @@
 			"id": 5,
 			"name": "スライムナイト",
 			"defaultName": "スライムナイ",
-			"skills": ["swordrider", "magicrider", "sword"],
+			"skillLines": ["swordrider", "magicrider", "sword"],
 			"expTable": 1
 		},
 		
@@ -618,7 +618,7 @@
 			"id": 6,
 			"name": "キメラ",
 			"defaultName": "キメラ",
-			"skills": ["chimerawing", "chimeraheal", "stick"],
+			"skillLines": ["chimerawing", "chimeraheal", "stick"],
 			"expTable": 1
 		},
 		
@@ -626,7 +626,7 @@
 			"id": 7,
 			"name": "ねこまどう",
 			"defaultName": "ねこまどう",
-			"skills": ["catmagic", "mera", "wand"],
+			"skillLines": ["catmagic", "mera", "wand"],
 			"expTable": 1
 		},
 		
@@ -634,7 +634,7 @@
 			"id": 8,
 			"name": "リザードマン",
 			"defaultName": "リザードマン",
-			"skills": ["gekkousword", "gekkoumove", "sword"],
+			"skillLines": ["gekkousword", "gekkoumove", "sword"],
 			"expTable": 1
 		},
 		
@@ -642,7 +642,7 @@
 			"id": 9,
 			"name": "バトルレックス",
 			"defaultName": "バトルレック",
-			"skills": ["rexsense", "firebreath", "axe"],
+			"skillLines": ["rexsense", "firebreath", "axe"],
 			"expTable": 1
 		},
 		
@@ -650,7 +650,7 @@
 			"id": 10,
 			"name": "いたずらもぐら",
 			"defaultName": "いたずらもぐ",
-			"skills": ["trick", "molefocus", "staff"],
+			"skillLines": ["trick", "molefocus", "staff"],
 			"expTable": 1
 		},
 		
@@ -658,7 +658,7 @@
 			"id": 101,
 			"name": "ゴーレム",
 			"defaultName": "ゴーレム",
-			"skills": ["unknown1", "unknown2", "unknown3"],
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
 		
@@ -666,7 +666,7 @@
 			"id": 102,
 			"name": "メタッピー",
 			"defaultName": "メタッピー",
-			"skills": ["unknown1", "unknown2", "unknown3"],
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
 		
@@ -674,7 +674,7 @@
 			"id": 103,
 			"name": "たけやりへい",
 			"defaultName": "たけやりへい",
-			"skills": ["unknown1", "unknown2", "unknown3"],
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
 		
@@ -682,7 +682,7 @@
 			"id": 104,
 			"name": "ニードルマン",
 			"defaultName": "ニードルマン",
-			"skills": ["unknown1", "unknown2", "unknown3"],
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
 		
@@ -690,7 +690,7 @@
 			"id": 105,
 			"name": "フォンデュ",
 			"defaultName": "フォンデュ",
-			"skills": ["unknown1", "unknown2", "unknown3"],
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
 		
@@ -698,7 +698,7 @@
 			"id": 106,
 			"name": "さまようよろい",
 			"defaultName": "さまようよろ",
-			"skills": ["unknown1", "unknown2", "unknown3"],
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
 		
@@ -706,7 +706,7 @@
 			"id": 107,
 			"name": "エンタシスマン",
 			"defaultName": "エンタシスマ",
-			"skills": ["unknown1", "unknown2", "unknown3"],
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		},
 		
@@ -714,7 +714,7 @@
 			"id": 108,
 			"name": "マジカルハット",
 			"defaultName": "マジカルハッ",
-			"skills": ["unknown1", "unknown2", "unknown3"],
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		}
 		

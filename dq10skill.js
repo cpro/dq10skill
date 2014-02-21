@@ -37,8 +37,8 @@ var Simulator = (function($) {
 	//パラメータ初期化
 	for(var vocation in vocations) {
 		skillPts[vocation] = {};
-		for(var s = 0; s < vocations[vocation].skills.length; s++) {
-			var skillLine = vocations[vocation].skills[s];
+		for(var s = 0; s < vocations[vocation].skillLines.length; s++) {
+			var skillLine = vocations[vocation].skillLines[s];
 			skillPts[vocation][skillLine] = 0;
 		}
 		levels[vocation] = LEVEL_MIN;
@@ -218,8 +218,8 @@ var Simulator = (function($) {
 		var returnValue = false;
 
 		for(var vocation in vocations) {
-			for(var s = 0; s < vocations[vocation].skills.length; s++) {
-				var skillLine = vocations[vocation].skills[s];
+			for(var s = 0; s < vocations[vocation].skillLines.length; s++) {
+				var skillLine = vocations[vocation].skillLines[s];
 
 				if(!skillLines[skillLine].unique) continue;
 
@@ -275,8 +275,8 @@ var Simulator = (function($) {
 			serial += toByte(getLevel(vocation));
 			serial += toByte(getTrainingSkillPt(vocation));
 
-			for(var s = 0; s < vocations[vocation].skills.length; s++) {
-				var skillLine = vocations[vocation].skills[s];
+			for(var s = 0; s < vocations[vocation].skillLines.length; s++) {
+				var skillLine = vocations[vocation].skillLines[s];
 				serial += toByte(getSkillPt(vocation, skillLine));
 			}
 		}
@@ -294,16 +294,16 @@ var Simulator = (function($) {
 
 		for(i = 0; i < vocationCount; i++) {
 			var vocation = VOCATIONS_DATA_ORDER[i];
-			var skills = vocations[vocation].skills;
+			var skillLines = vocations[vocation].skillLines;
 
-			if(serial.length - cur < 1 + 1 + skills.length)
+			if(serial.length - cur < 1 + 1 + skillLines.length)
 				break;
 
 			updateLevel(vocation, getData());
 			updateTrainingSkillPt(vocation, getData());
 
-			for(var s = 0; s < skills.length; s++) {
-				updateSkillPt(vocation, skills[s], getData());
+			for(var s = 0; s < skillLines.length; s++) {
+				updateSkillPt(vocation, skillLines[s], getData());
 			}
 		}
 	}
@@ -321,7 +321,7 @@ var Simulator = (function($) {
 		var isIncludingTrainingPts = bitArray.length >= (
 			BITS_LEVEL +
 			BITS_TRAINING +
-			BITS_SKILL * vocations[VOCATIONS_DATA_ORDER[0]].skills.length
+			BITS_SKILL * vocations[VOCATIONS_DATA_ORDER[0]].skillLines.length
 		) * 10; //1.2VU（特訓モード実装）時点の職業数
 		
 		var cur = 0;
@@ -335,8 +335,8 @@ var Simulator = (function($) {
 			else
 				updateTrainingSkillPt(vocation, 0);
 
-			for(var s = 0; s < vocations[vocation].skills.length; s++) {
-				var skillLine = vocations[vocation].skills[s];
+			for(var s = 0; s < vocations[vocation].skillLines.length; s++) {
+				var skillLine = vocations[vocation].skillLines[s];
 				updateSkillPt(vocation, skillLine, bitArrayToNum(bitArray.slice(cur, cur += BITS_SKILL)));
 			}
 		}
@@ -491,8 +491,8 @@ var SimulatorUI = (function($) {
 	
 	function refreshControls() {
 		for(var vocation in sim.vocations) {
-			for(var s = 0; s < sim.vocations[vocation].skills.length; s++) {
-				var skillLine = sim.vocations[vocation].skills[s];
+			for(var s = 0; s < sim.vocations[vocation].skillLines.length; s++) {
+				var skillLine = sim.vocations[vocation].skillLines[s];
 				refreshCurrentSkillPt(vocation, skillLine);
 			}
 		}
@@ -853,7 +853,7 @@ var SimulatorUI = (function($) {
 				for(var i = 0; i < sim.vocationOrder.length; i++) {
 					var vocation = sim.vocationOrder[i];
 					
-					if($.inArray(skillLine, sim.vocations[vocation]['skills']) >= 0)
+					if($.inArray(skillLine, sim.vocations[vocation]['skillLines']) >= 0)
 						vocationsHaveSkill.push(vocation);
 				}
 				

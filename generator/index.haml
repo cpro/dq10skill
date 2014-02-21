@@ -108,16 +108,16 @@
 						.ent_title_console
 							%button.toggle_ent たたむ/ひろげる
 					.skill_tables
-						- data['vocations'][vocation]['skills'].each do |skillLine|
-							- cat = data['skillLines'][skillLine]
+						- data['vocations'][vocation]['skillLines'].each do |skillLine|
+							- skill_line = data['skillLines'][skillLine]
 							%table{class: [skillLine, 'skill_table']}>
 								%caption
 									%label{for: 'pt_spinner'}
-										= cat['name'] + ': '
+										= skill_line['name'] + ': '
 										%span.skill_current 0
 										\/
 										%span.skill_total 0
-								- cat['skills'].each_with_index do |skill, i|
+								- skill_line['skills'].each_with_index do |skill, i|
 									- hint = skill['desc']
 									- hint += "\n（消費MP: #{skill['mp']}）" if skill['mp']
 									- hint += "\n（#{skill['gold']}G）" if skill['gold']
