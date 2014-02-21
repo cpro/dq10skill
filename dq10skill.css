@@ -5,6 +5,8 @@ body {
   font-family: "メイリオ", sans-serif;
   font-size: 100%;
   padding: 95px 0 0 0; }
+  body#body-for-monster {
+    padding: 138px 0 0 0; }
 
 a {
   text-decoration: none; }
@@ -71,8 +73,6 @@ a {
           width: 99px; }
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-vocation {
           width: 231px; }
-        #header #consoleblock #foldbuttons ul.button-container#foldbuttons-skillCategory {
-          width: 264px; }
         #header #consoleblock #foldbuttons ul.button-container#appendbuttons {
           width: 435px; }
         #header #consoleblock #foldbuttons ul.button-container li {
@@ -153,6 +153,11 @@ a {
         font-size: 1em; }
       #header #consoleblock #navlink .ui-button-text {
         padding: 0.2em 0.5em; }
+
+#body-for-monster #header {
+  height: 133px; }
+  #body-for-monster #header #consoleblock {
+    height: 82px; }
 
 /* エントリボックス */
 .class_group, .monster_ent {

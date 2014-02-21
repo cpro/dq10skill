@@ -1,5 +1,5 @@
 {
-	"skillCategories": {
+	"skillLines": {
 		"sword": {
 			"name": "片手剣",
 			"abbr": "片剣",
@@ -584,7 +584,7 @@
 			]
 		}
 	},
-	"skillCategoryOrder": [
+	"skillLineOrder": [
 		"sword", "twohandedsword", "axe", "spear", "stick", "staff", "wand",
 		"knife", "whip", "claw", "fan", "hammer", "bow", "boomerang",
 		"fisticuffs", "shield"
@@ -594,85 +594,85 @@
 		"warrior": {
 			"name": "戦士",
 			"abbr": "戦士",
-			"skills": ["sword", "twohandedsword", "axe", "shield", "courage"],
+			"skillLines": ["sword", "twohandedsword", "axe", "shield", "courage"],
 			"expTable": 1
 		},
 		"priest": {
 			"name": "僧侶",
 			"abbr": "僧侶",
-			"skills": ["spear", "stick", "staff", "shield", "faith"],
+			"skillLines": ["spear", "stick", "staff", "shield", "faith"],
 			"expTable": 1
 		},
 		"mage": {
 			"name": "魔法使い",
 			"abbr": "魔使",
-			"skills": ["wand", "knife", "whip", "shield", "spellcraft"],
+			"skillLines": ["wand", "knife", "whip", "shield", "spellcraft"],
 			"expTable": 1
 		},
 		"martialartist": {
 			"name": "武闘家",
 			"abbr": "武闘",
-			"skills": ["claw", "staff", "fan", "fisticuffs", "focus"],
+			"skillLines": ["claw", "staff", "fan", "fisticuffs", "focus"],
 			"expTable": 1
 		},
 		"thief": {
 			"name": "盗賊",
 			"abbr": "盗賊",
-			"skills": ["knife", "whip", "claw", "fisticuffs", "acquisitiveness"],
+			"skillLines": ["knife", "whip", "claw", "fisticuffs", "acquisitiveness"],
 			"expTable": 1
 		},
 		"minstrel": {
 			"name": "旅芸人",
 			"abbr": "旅芸",
-			"skills": ["fan", "staff", "knife", "shield", "litheness"],
+			"skillLines": ["fan", "staff", "knife", "shield", "litheness"],
 			"expTable": 1
 		},
 		"ranger": {
 			"name": "レンジャー",
 			"abbr": "レン",
-			"skills": ["bow", "boomerang", "axe", "fisticuffs", "ruggedness"],
+			"skillLines": ["bow", "boomerang", "axe", "fisticuffs", "ruggedness"],
 			"expTable": 2
 		},
 		"paladin": {
 			"name": "パラディン",
 			"abbr": "パラ",
-			"skills": ["hammer", "spear", "stick", "shield", "virtue"],
+			"skillLines": ["hammer", "spear", "stick", "shield", "virtue"],
 			"expTable": 2
 		},
 		"armamentalist": {
 			"name": "魔法戦士",
 			"abbr": "魔戦",
-			"skills": ["sword", "wand", "bow", "shield", "fource"],
+			"skillLines": ["sword", "wand", "bow", "shield", "fource"],
 			"expTable": 2
 		},
 		"luminary": {
 			"name": "スーパースター",
 			"abbr": "スパ",
-			"skills": ["whip", "fan", "stick", "fisticuffs", "jenesaisquoi"],
+			"skillLines": ["whip", "fan", "stick", "fisticuffs", "jenesaisquoi"],
 			"expTable": 2
 		},
 		"gladiator": {
 			"name": "バトルマスター",
 			"abbr": "バト",
-			"skills": ["twohandedsword", "sword", "hammer", "fisticuffs", "guts"],
+			"skillLines": ["twohandedsword", "sword", "hammer", "fisticuffs", "guts"],
 			"expTable": 2
 		},
 		"sage": {
 			"name": "賢者",
 			"abbr": "賢者",
-			"skills": ["boomerang", "wand", "bow", "shield", "enlightenment"],
+			"skillLines": ["boomerang", "wand", "bow", "shield", "enlightenment"],
 			"expTable": 2
 		},
 		"monstermaster": {
 			"name": "まもの使い",
 			"abbr": "まも",
-			"skills": ["whip", "claw", "twohandedsword", "axe", "monstermaster"],
+			"skillLines": ["whip", "claw", "twohandedsword", "axe", "monstermaster"],
 			"expTable": 2
  		},
  		"itemmaster": {
  			"name": "どうぐ使い",
  			"abbr": "道具",
- 			"skills": ["bow", "spear", "hammer", "boomerang", "unknown"],
+ 			"skillLines": ["bow", "spear", "hammer", "boomerang", "unknown"],
  			"expTable": 2
 		}
 	},

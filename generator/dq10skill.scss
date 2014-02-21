@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 $header-height: 90px;
+$header-height-monster: 133px;
 $main-background-color: #fcfcfd;
 $body-content-width-monster: 65.5em;
 
@@ -20,6 +21,10 @@ body {
 	font-family: "メイリオ", sans-serif;
 	font-size: 100%;
 	padding: $header-height + 5px 0 0 0;
+
+	&#body-for-monster {
+		padding: $header-height-monster + 5px 0 0 0;
+	}
 }
 a {
 	text-decoration: none;
@@ -109,9 +114,6 @@ a {
 				}
 				&#foldbuttons-vocation {
 					width: ($width-each + 2px + 1px) * 7;
-				}
-				&#foldbuttons-skillCategory {
-					width: ($width-each + 2px + 1px) * 8;
 				}
 				&#appendbuttons {
 					width: ($width-monster-append + 2px + 1px) * 5;
@@ -224,6 +226,12 @@ a {
 				padding: .2em .5em;
 			}
 		}
+	}
+}
+#body-for-monster #header {
+	height: $header-height-monster;
+	#consoleblock {
+		height: 39px + ($header-height-monster - $header-height);
 	}
 }
 

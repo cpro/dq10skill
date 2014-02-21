@@ -23,11 +23,11 @@ var Simulator = (function() {
 	
 	if(!allData) return null;
 
-	var skillCategories = allData.skillCategories;
+	var skillLines = allData.skillLines;
 	var monsterList = allData.monsters;
 	var skillPtsGiven = allData.skillPtsGiven;
 	var expRequired = allData.expRequired;
-	var additionalSkillCategories = allData.additionalSkillCategories;
+	var additionalSkillLines = allData.additionalSkillLines;
 
 	//パラメータ格納用
 	var skillPts = {};
@@ -50,8 +50,8 @@ var Simulator = (function() {
 
 		this.id = monsterType + '_' + (lastId += 1).toString();
 
-		for(var s = 0; s < this.data.skills.length; s++) {
-			this.skillPts[this.data.skills[s]] = 0;
+		for(var s = 0; s < this.data.skillLines.length; s++) {
+			this.skillPts[this.data.skillLines[s]] = 0;
 		}
 		//転生追加スキル
 		this.additionalSkills = [];
@@ -62,18 +62,18 @@ var Simulator = (function() {
 	}
 
 	//スキルポイント取得
-	Monster.prototype.getSkillPt = function(skillCategory) {
-		return this.skillPts[skillCategory];
+	Monster.prototype.getSkillPt = function(skillLine) {
+		return this.skillPts[skillLine];
 	};
 	
 	//スキルポイント更新：不正値の場合falseを返す
-	Monster.prototype.updateSkillPt = function(skillCategory, newValue) {
-		var oldValue = this.skillPts[skillCategory];
+	Monster.prototype.updateSkillPt = function(skillLine, newValue) {
+		var oldValue = this.skillPts[skillLine];
 		if(newValue < SKILL_PTS_MIN || newValue > SKILL_PTS_MAX) {
 			return false;
 		}
 		
-		this.skillPts[skillCategory] = newValue;
+		this.skillPts[skillLine] = newValue;
 		return true;
 	};
 	
@@ -96,12 +96,12 @@ var Simulator = (function() {
 	//スキルポイント合計
 	Monster.prototype.totalSkillPts = function() {
 		var total = 0;
-		for(var skillCategory in this.skillPts) {
-			var m = skillCategory.match(/^additional(\d+)/);
+		for(var skillLine in this.skillPts) {
+			var m = skillLine.match(/^additional(\d+)/);
 			if(m && (this.restartCount < parseInt(m[1]) + 1 || this.getAdditionalSkill(m[1]) === null))
 				continue;
 
-			total += this.skillPts[skillCategory];
+			total += this.skillPts[skillLine];
 		}
 
 		return total;
@@ -200,7 +200,7 @@ var Simulator = (function() {
 		BITS_MONSTER_TYPE +
 		BITS_LEVEL +
 		BITS_RESTART_COUNT +
-		BITS_SKILL * (monsterList['slime'].skills.length + ADDITIONAL_SKILL_MAX) +
+		BITS_SKILL * (monsterList['slime'].skillLines.length + ADDITIONAL_SKILL_MAX) +
 		BITS_ADDITIONAL_SKILL * ADDITIONAL_SKILL_MAX;
 
 	//データをビット列にシリアル化
@@ -213,16 +213,16 @@ var Simulator = (function() {
 		bitArray = bitArray.concat(numToBitArray(this.restartCount, BITS_RESTART_COUNT));
 
 		//スキル
-		for(var skillCategory in this.skillPts)
-			bitArray = bitArray.concat(numToBitArray(this.skillPts[skillCategory], BITS_SKILL));
+		for(var skillLine in this.skillPts)
+			bitArray = bitArray.concat(numToBitArray(this.skillPts[skillLine], BITS_SKILL));
 
 		//転生追加スキル種類
 		for(var i = 0; i < ADDITIONAL_SKILL_MAX; i++) {
 			var additionalSkillId = 0;
 
-			for(var j = 0; j < additionalSkillCategories.length; j++) {
-				if(this.additionalSkills[i] == additionalSkillCategories[j].name) {
-					additionalSkillId = additionalSkillCategories[j].id;
+			for(var j = 0; j < additionalSkillLines.length; j++) {
+				if(this.additionalSkills[i] == additionalSkillLines[j].name) {
+					additionalSkillId = additionalSkillLines[j].id;
 					break;
 				}
 			}
@@ -251,8 +251,8 @@ var Simulator = (function() {
 		monster.updateRestartCount(bitArrayToNum(bitArray.splice(0, BITS_RESTART_COUNT)));
 
 		//スキル
-		for(var skillCategory in monster.skillPts)
-			monster.updateSkillPt(skillCategory, bitArrayToNum(bitArray.splice(0, BITS_SKILL)));
+		for(var skillLine in monster.skillPts)
+			monster.updateSkillPt(skillLine, bitArrayToNum(bitArray.splice(0, BITS_SKILL)));
 
 		//転生追加スキル種類
 		for(var i = 0; i < ADDITIONAL_SKILL_MAX; i++) {
@@ -263,9 +263,9 @@ var Simulator = (function() {
 				break;
 			}
 
-			for(var j = 0; j < additionalSkillCategories.length; j++) {
-				if(additionalSkillId == additionalSkillCategories[j].id) {
-					monster.updateAdditionalSkill(i, additionalSkillCategories[j].name);
+			for(var j = 0; j < additionalSkillLines.length; j++) {
+				if(additionalSkillId == additionalSkillLines[j].id) {
+					monster.updateAdditionalSkill(i, additionalSkillLines[j].name);
 					break;
 				}
 			}
@@ -416,11 +416,11 @@ var Simulator = (function() {
 		validateQueryString: validateQueryString,
 
 		//プロパティ
-		skillCategories: skillCategories,
+		skillLines: skillLines,
 		skillPtsGiven: skillPtsGiven,
 		expRequired: expRequired,
 		monsters: monsters,
-		additionalSkillCategories: additionalSkillCategories,
+		additionalSkillLines: additionalSkillLines,
 
 		//定数
 		SKILL_PTS_MIN: SKILL_PTS_MIN,
@@ -455,17 +455,17 @@ var SimulatorUI = (function($) {
 		});
 		$ent.find('.indiv_name input').val(monster.indivName);
 
-		var skillCategory, $table;
+		var skillLine, $table;
 
-		for(var c = 0; c < monster.data.skills.length; c++) {
-			skillCategory = monster.data.skills[c];
-			$table = drawSkillTable(skillCategory);
+		for(var c = 0; c < monster.data.skillLines.length; c++) {
+			skillLine = monster.data.skillLines[c];
+			$table = drawSkillTable(skillLine);
 			
 			$ent.append($table);
 		}
 		for(var s = 0; s < sim.ADDITIONAL_SKILL_MAX; s++) {
-			skillCategory = 'additional' + s.toString();
-			$table = drawSkillTable(skillCategory);
+			skillLine = 'additional' + s.toString();
+			$table = drawSkillTable(skillLine);
 
 			if(monster.restartCount < s + 1 || monster.getAdditionalSkill(s) === null)
 				$table.hide();
@@ -475,17 +475,17 @@ var SimulatorUI = (function($) {
 
 		return $ent;
 	}
-	function drawSkillTable(skillCategory) {
-		var $table = $('<table />').addClass(skillCategory).addClass('skill_table');
-		$table.append('<caption><span class="skill_category_name">' +
-			sim.skillCategories[skillCategory].name +
+	function drawSkillTable(skillLine) {
+		var $table = $('<table />').addClass(skillLine).addClass('skill_table');
+		$table.append('<caption><span class="skill_line_name">' +
+			sim.skillLines[skillLine].name +
 			'</span>: <span class="skill_total">0</span></caption>')
 			.append('<tr><th class="console" colspan="2"><input class="ptspinner" /> <button class="reset">リセット</button></th></tr>');
 
-		for (var s = 0; s < sim.skillCategories[skillCategory].skills.length; s++) {
-			var skill = sim.skillCategories[skillCategory].skills[s];
+		for (var s = 0; s < sim.skillLines[skillLine].skills.length; s++) {
+			var skill = sim.skillLines[skillLine].skills[s];
 
-			$('<tr />').addClass([skillCategory, s].join('_'))
+			$('<tr />').addClass([skillLine, s].join('_'))
 				.append('<td class="skill_pt">' + skill.pt + '</td>')
 				.append('<td class="skill_name">' + skill.name + '</td>')
 				.appendTo($table);
@@ -498,8 +498,8 @@ var SimulatorUI = (function($) {
 		refreshAdditionalSkillSelector(monsterId);
 		refreshAdditionalSkill(monsterId);
 		refreshMonsterInfo(monsterId);
-		for(var skillCategory in sim.skillCategories) {
-			refreshSkillList(monsterId, skillCategory);
+		for(var skillLine in sim.skillLines) {
+			refreshSkillList(monsterId, skillLine);
 		}
 		refreshControls(monsterId);
 		refreshSaveUrl();
@@ -550,19 +550,19 @@ var SimulatorUI = (function($) {
 		}
 	}
 	
-	function refreshSkillList(monsterId, skillCategory) {
-		$('#' + monsterId + ' tr[class^=' + skillCategory + '_]').removeClass(CLASSNAME_SKILL_ENABLED); //クリア
+	function refreshSkillList(monsterId, skillLine) {
+		$('#' + monsterId + ' tr[class^=' + skillLine + '_]').removeClass(CLASSNAME_SKILL_ENABLED); //クリア
 		var monster = sim.getMonster(monsterId);
 
-		var skillPt = monster.getSkillPt(skillCategory);
-		var skills = sim.skillCategories[skillCategory].skills;
+		var skillPt = monster.getSkillPt(skillLine);
+		var skills = sim.skillLines[skillLine].skills;
 		for(var s = 0; s < skills.length; s++) {
 			if(skillPt < skills[s].pt)
 				break;
 			
-			$('#' + monsterId + ' .' + skillCategory + '_' + s.toString()).addClass(CLASSNAME_SKILL_ENABLED);
+			$('#' + monsterId + ' .' + skillLine + '_' + s.toString()).addClass(CLASSNAME_SKILL_ENABLED);
 		}
-		$('#' + monsterId + ' .' + skillCategory + ' .skill_total').text(skillPt);
+		$('#' + monsterId + ' .' + skillLine + ' .skill_total').text(skillPt);
 	}
 	
 	function refreshControls(monsterId) {
@@ -571,8 +571,8 @@ var SimulatorUI = (function($) {
 		$('#' + monsterId + ' .lv_select>select').val(monster.getLevel());
 		$('#' + monsterId + ' .restart_count').val(monster.getRestartCount());
 		
-		for(var skillCategory in monster.skillPts) {
-			$('#' + monsterId + ' .' + skillCategory + ' .ptspinner').spinner('value', monster.getSkillPt(skillCategory));
+		for(var skillLine in monster.skillPts) {
+			$('#' + monsterId + ' .' + skillLine + ' .ptspinner').spinner('value', monster.getSkillPt(skillLine));
 		}
 	}
 	
@@ -606,9 +606,9 @@ var SimulatorUI = (function($) {
 		$('#' + monsterId + ' .additional_skill_selector select').empty();
 
 		if(monster.restartCount >= 1) {
-			for(s = 0; s < sim.additionalSkillCategories.length; s++) {
-				var additionalSkillData = sim.additionalSkillCategories[s];
-				var skillData = sim.skillCategories[additionalSkillData.name];
+			for(s = 0; s < sim.additionalSkillLines.length; s++) {
+				var additionalSkillData = sim.additionalSkillLines[s];
+				var skillData = sim.skillLines[additionalSkillData.name];
 				if(monster.restartCount >= additionalSkillData.restartCount) {
 					$('#' + monsterId + ' .additional_skill_selector select').append(
 						$('<option />').val(additionalSkillData.name).text(skillData.name)
@@ -636,25 +636,26 @@ var SimulatorUI = (function($) {
 			}
 		}
 
-		function refreshAdditionalSkillTable($table, newSkillCategory) {
-			var data = sim.skillCategories[newSkillCategory];
+		function refreshAdditionalSkillTable($table, newSkillLine) {
+			var data = sim.skillLines[newSkillLine];
 			var tableClass = $table.attr('class').split(' ')[0];
 
-			$table.find('caption .skill_category_name').text(data.name);
+			$table.find('caption .skill_line_name').text(data.name);
 
-			var $tr;
-			for(var s = 0; s < data.skills.length; s++) {
-				$tr = $table.find('tr.' + tableClass + '_' + s.toString());
+			var $tr, i, skill;
+			for(i = 0; i < data.skills.length; i++) {
+				$tr = $table.find('tr.' + tableClass + '_' + i.toString());
+				skill = data.skills[i];
 
-				var hintText = data.skills[s].desc;
-				if((data.skills[s].mp !== null) && (data.skills[s].mp !== undefined))
-					hintText += '\n（消費MP: ' + data.skills[s].mp.toString() + '）';
-				if(data.skills[s].gold)
-					hintText += '\n（' + data.skills[s].gold.toString() + 'G）';
+				var hintText = skill.desc;
+				if((skill.mp !== null) && (skill.mp !== undefined))
+					hintText += '\n（消費MP: ' + skill.mp.toString() + '）';
+				if(skill.gold)
+					hintText += '\n（' + skill.gold.toString() + 'G）';
 				$tr.attr('title', hintText);
 
-				$tr.children('.skill_pt').text(data.skills[s].pt);
-				$tr.children('.skill_name').text(data.skills[s].name);
+				$tr.children('.skill_pt').text(skill.pt);
+				$tr.children('.skill_name').text(skill.name);
 			}
 		}
 	}
@@ -663,7 +664,7 @@ var SimulatorUI = (function($) {
 		return $(currentNode).parents('.monster_ent').attr('id');
 	}
 
-	function getCurrentSkillCategory(currentNode) {
+	function getCurrentSkillLine(currentNode) {
 		return $(currentNode).parents('.skill_table').attr('class').split(' ')[0];
 	}
 
@@ -730,10 +731,10 @@ var SimulatorUI = (function($) {
 			max: sim.SKILL_PTS_MAX,
 			spin: function (e, ui) {
 				var monsterId = getCurrentMonsterId(this);
-				var skillCategory = getCurrentSkillCategory(this);
+				var skillLine = getCurrentSkillLine(this);
 				
-				if(sim.getMonster(monsterId).updateSkillPt(skillCategory, parseInt(ui.value))) {
-					refreshSkillList(monsterId, skillCategory);
+				if(sim.getMonster(monsterId).updateSkillPt(skillLine, parseInt(ui.value))) {
+					refreshSkillList(monsterId, skillLine);
 					refreshMonsterInfo(monsterId);
 					e.stopPropagation();
 				} else {
@@ -742,19 +743,19 @@ var SimulatorUI = (function($) {
 			},
 			change: function (e, ui) {
 				var monsterId = getCurrentMonsterId(this);
-				var skillCategory = getCurrentSkillCategory(this);
+				var skillLine = getCurrentSkillLine(this);
 				var monster = sim.getMonster(monsterId);
 
 				if(isNaN($(this).val())) {
-					$(this).val(monster.getSkillPt(skillCategory));
+					$(this).val(monster.getSkillPt(skillLine));
 					return false;
 				}
-				if(monster.updateSkillPt(skillCategory, parseInt($(this).val()))) {
-					refreshSkillList(monsterId, skillCategory);
+				if(monster.updateSkillPt(skillLine, parseInt($(this).val()))) {
+					refreshSkillList(monsterId, skillLine);
 					refreshMonsterInfo(monsterId);
 					refreshSaveUrl();
 				} else {
-					$(this).val(monster.getSkillPt(skillCategory));
+					$(this).val(monster.getSkillPt(skillLine));
 					return false;
 				}
 			},
@@ -780,12 +781,12 @@ var SimulatorUI = (function($) {
 			text: false
 		}).click(function (e) {
 			var monsterId = getCurrentMonsterId(this);
-			var skillCategory = getCurrentSkillCategory(this);
+			var skillLine = getCurrentSkillLine(this);
 			var monster = sim.getMonster(monsterId);
 			
-			monster.updateSkillPt(skillCategory, 0);
-			$('#' + monsterId + ' .' + skillCategory + ' .ptspinner').spinner('value', monster.getSkillPt(skillCategory));
-			refreshSkillList(monsterId, skillCategory);
+			monster.updateSkillPt(skillLine, 0);
+			$('#' + monsterId + ' .' + skillLine + ' .ptspinner').spinner('value', monster.getSkillPt(skillLine));
+			refreshSkillList(monsterId, skillLine);
 			refreshMonsterInfo(monsterId);
 			refreshSaveUrl();
 		});
@@ -793,63 +794,61 @@ var SimulatorUI = (function($) {
 		//スキルテーブル項目クリック時
 		$ent.find('.skill_table tr[class]').click(function() {
 			var monsterId = getCurrentMonsterId(this);
-			var skillCategory = getCurrentSkillCategory(this);
-			var skillIndex = parseInt($(this).attr('class').replace(skillCategory + '_', ''));
+			var skillLine = getCurrentSkillLine(this);
+			var skillIndex = parseInt($(this).attr('class').replace(skillLine + '_', ''));
 			var monster = sim.getMonster(monsterId);
 
-			var skillPt = monster.getSkillPt(skillCategory);
-			var requiredPt = sim.skillCategories[skillCategory].skills[skillIndex].pt;
+			var skillPt = monster.getSkillPt(skillLine);
+			var requiredPt = sim.skillLines[skillLine].skills[skillIndex].pt;
 			
-			monster.updateSkillPt(skillCategory, requiredPt);
-			$('#' + monsterId + ' .' + skillCategory + ' .ptspinner').spinner('value', monster.getSkillPt(skillCategory));
+			monster.updateSkillPt(skillLine, requiredPt);
+			$('#' + monsterId + ' .' + skillLine + ' .ptspinner').spinner('value', monster.getSkillPt(skillLine));
 			
-			refreshSkillList(monsterId, skillCategory);
+			refreshSkillList(monsterId, skillLine);
 			refreshMonsterInfo(monsterId);
 			refreshSaveUrl();
 		});
 
-		//おりたたむ・ひろげるボタン追加
+		//おりたたむ・ひろげるボタン設定
 		var HEIGHT_FOLDED = '4.8em';
-		var HEIGHT_UNFOLDED = $ent.find('.monster_ent').height() + 'px';
-		if($ent.hasClass('monster_ent'))
-			HEIGHT_UNFOLDED = $ent.height() + 'px';
+		var HEIGHT_UNFOLDED = $ent.height() + 'px';
+		var CLASSNAME_FOLDED = 'folded';
 
-		var $foldButton = $('<p>▲おりたたむ</p>').addClass('fold').hide().click(function() {
-			$(this).parents('.monster_ent').animate({height: HEIGHT_FOLDED}).addClass('folded').removeClass('unfolded');
-			$(this).hide();
+		var $foldToggleButton = $ent.find('.toggle_ent').button({
+			icons: { primary: 'ui-icon-arrowthickstop-1-n' },
+			text: false,
+			label: 'おりたたむ'
+		}).click(function() {
+			var $entry = $(this).parents('.monster_ent');
+			$entry.toggleClass(CLASSNAME_FOLDED);
+
+			if($entry.hasClass(CLASSNAME_FOLDED)) {
+				$entry.animate({height: HEIGHT_FOLDED});
+				$(this).button('option', {
+					icons: {primary: 'ui-icon-arrowthickstop-1-s'},
+					label: 'ひろげる'
+				});
+			} else {
+				$entry.animate({height: HEIGHT_UNFOLDED});
+				$(this).button('option', {
+					icons: {primary: 'ui-icon-arrowthickstop-1-n'},
+					label: 'おりたたむ'
+				});
+			}
 		});
-		var $unfoldButton = $('<p>▼ひろげる</p>').addClass('unfold').hide().click(function() {
-			$(this).parents('.monster_ent').animate({height: HEIGHT_UNFOLDED}).addClass('unfolded').removeClass('folded');
-			$(this).hide();
-		});
-		$ent.find('.class_info').append($foldButton).append($unfoldButton);
-		$ent.find('.monster_ent').addClass('unfolded');
-		if($ent.hasClass('monster_ent')) $ent.addClass('unfolded');
 
 		//ヒントテキスト設定
-		for(var skillCategory in sim.skillCategories) {
-			for(var skillIndex = 0; skillIndex < sim.skillCategories[skillCategory].skills.length; skillIndex++) {
-				var skill = sim.skillCategories[skillCategory].skills[skillIndex];
+		for(var skillLine in sim.skillLines) {
+			for(var skillIndex = 0; skillIndex < sim.skillLines[skillLine].skills.length; skillIndex++) {
+				var skill = sim.skillLines[skillLine].skills[skillIndex];
 				var hintText = skill.desc;
 				if((skill.mp !== null) && (skill.mp !== undefined))
 					hintText += '\n（消費MP: ' + skill.mp.toString() + '）';
 				if(skill.gold)
 					hintText += '\n（' + skill.gold.toString() + 'G）';
-				$('.' + skillCategory + '_' + skillIndex.toString()).attr('title', hintText);
+				$('.' + skillLine + '_' + skillIndex.toString()).attr('title', hintText);
 			}
 		}
-		
-		//職業情報欄ポイント時のみ表示する
-		$ent.find('.class_info').hover(function() {
-			if($(this).parents('.monster_ent').hasClass('folded')) {
-				$(this).children('.unfold').show();
-			}
-			if($(this).parents('.monster_ent').hasClass('unfolded')) {
-				$(this).children('.fold').show();
-			}
-		}, function() {
-			$(this).children('.fold, .unfold').hide();
-		});
 
 		//削除ボタン
 		$ent.find('.delete_entry').button({
@@ -977,13 +976,14 @@ var SimulatorUI = (function($) {
 			return false;
 		});
 
-		//すべておりたたむ・すべてひろげるボタン追加
+		//すべておりたたむ・すべてひろげるボタン
+		var CLASSNAME_FOLDED = 'folded';
 		$('#fold-all').click(function(e) {
-			$('.class_info .fold').click();
+			$('.monster_ent:not([class*="' + CLASSNAME_FOLDED + '"]) .toggle_ent').click();
 			$('body, html').animate({scrollTop: 0});
 		});
 		$('#unfold-all').click(function(e) {
-			$('.class_info .unfold').click();
+			$('.' + CLASSNAME_FOLDED + ' .toggle_ent').click();
 			$('body, html').animate({scrollTop: 0});
 		});
 
