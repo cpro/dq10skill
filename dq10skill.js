@@ -798,7 +798,7 @@ var SimulatorUI = (function($) {
 			});
 		},
 		
-		//おりたたむ・ひろげるボタン追加
+		//おりたたむ・ひろげるボタン設定
 		function() {
 			var HEIGHT_FOLDED = '48px';
 			var HEIGHT_UNFOLDED = $('.class_group').height() + 'px';
@@ -814,20 +814,20 @@ var SimulatorUI = (function($) {
 
 				if($entry.hasClass(CLASSNAME_FOLDED)) {
 					$entry.animate({height: HEIGHT_FOLDED});
-					$(this).button({
+					$(this).button('option', {
 						icons: {primary: 'ui-icon-arrowthickstop-1-s'},
 						label: 'ひろげる'
 					});
 				} else {
 					$entry.animate({height: HEIGHT_UNFOLDED});
-					$(this).button({
+					$(this).button('option', {
 						icons: {primary: 'ui-icon-arrowthickstop-1-n'},
 						label: 'おりたたむ'
 					});
 				}
 			});
 			
-			//すべておりたたむ・すべてひろげるボタン追加
+			//すべておりたたむ・すべてひろげる
 			$('#fold-all').click(function(e) {
 				$('.class_group:not([class*="' + CLASSNAME_FOLDED + '"]) .toggle_ent').click();
 				$('body, html').animate({scrollTop: 0});
@@ -839,7 +839,7 @@ var SimulatorUI = (function($) {
 			
 			var bodyTop = $('#body_content').offset().top;
 			
-			//特定職業のみひろげるボタン追加
+			//特定職業のみひろげる
 			$('#foldbuttons-vocation a').click(function(e) {
 				var vocation = $(this).attr('id').replace('fold-', '');
 				$('body, html').animate({scrollTop: $('#' + vocation).offset().top - bodyTop});

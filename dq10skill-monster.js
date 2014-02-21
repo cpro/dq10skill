@@ -809,23 +809,33 @@ var SimulatorUI = (function($) {
 			refreshSaveUrl();
 		});
 
-		//おりたたむ・ひろげるボタン追加
+		//おりたたむ・ひろげるボタン設定
 		var HEIGHT_FOLDED = '4.8em';
-		var HEIGHT_UNFOLDED = $ent.find('.monster_ent').height() + 'px';
-		if($ent.hasClass('monster_ent'))
-			HEIGHT_UNFOLDED = $ent.height() + 'px';
+		var HEIGHT_UNFOLDED = $ent.height() + 'px';
+		var CLASSNAME_FOLDED = 'folded';
 
-		var $foldButton = $('<p>▲おりたたむ</p>').addClass('fold').hide().click(function() {
-			$(this).parents('.monster_ent').animate({height: HEIGHT_FOLDED}).addClass('folded').removeClass('unfolded');
-			$(this).hide();
+		var $foldToggleButton = $ent.find('.toggle_ent').button({
+			icons: { primary: 'ui-icon-arrowthickstop-1-n' },
+			text: false,
+			label: 'おりたたむ'
+		}).click(function() {
+			var $entry = $(this).parents('.monster_ent');
+			$entry.toggleClass(CLASSNAME_FOLDED);
+
+			if($entry.hasClass(CLASSNAME_FOLDED)) {
+				$entry.animate({height: HEIGHT_FOLDED});
+				$(this).button('option', {
+					icons: {primary: 'ui-icon-arrowthickstop-1-s'},
+					label: 'ひろげる'
+				});
+			} else {
+				$entry.animate({height: HEIGHT_UNFOLDED});
+				$(this).button('option', {
+					icons: {primary: 'ui-icon-arrowthickstop-1-n'},
+					label: 'おりたたむ'
+				});
+			}
 		});
-		var $unfoldButton = $('<p>▼ひろげる</p>').addClass('unfold').hide().click(function() {
-			$(this).parents('.monster_ent').animate({height: HEIGHT_UNFOLDED}).addClass('unfolded').removeClass('folded');
-			$(this).hide();
-		});
-		$ent.find('.class_info').append($foldButton).append($unfoldButton);
-		$ent.find('.monster_ent').addClass('unfolded');
-		if($ent.hasClass('monster_ent')) $ent.addClass('unfolded');
 
 		//ヒントテキスト設定
 		for(var skillLine in sim.skillLines) {
@@ -839,18 +849,6 @@ var SimulatorUI = (function($) {
 				$('.' + skillLine + '_' + skillIndex.toString()).attr('title', hintText);
 			}
 		}
-		
-		//職業情報欄ポイント時のみ表示する
-		$ent.find('.class_info').hover(function() {
-			if($(this).parents('.monster_ent').hasClass('folded')) {
-				$(this).children('.unfold').show();
-			}
-			if($(this).parents('.monster_ent').hasClass('unfolded')) {
-				$(this).children('.fold').show();
-			}
-		}, function() {
-			$(this).children('.fold, .unfold').hide();
-		});
 
 		//削除ボタン
 		$ent.find('.delete_entry').button({
@@ -978,13 +976,14 @@ var SimulatorUI = (function($) {
 			return false;
 		});
 
-		//すべておりたたむ・すべてひろげるボタン追加
+		//すべておりたたむ・すべてひろげるボタン
+		var CLASSNAME_FOLDED = 'folded';
 		$('#fold-all').click(function(e) {
-			$('.class_info .fold').click();
+			$('.monster_ent:not([class*="' + CLASSNAME_FOLDED + '"]) .toggle_ent').click();
 			$('body, html').animate({scrollTop: 0});
 		});
 		$('#unfold-all').click(function(e) {
-			$('.class_info .unfold').click();
+			$('.' + CLASSNAME_FOLDED + ' .toggle_ent').click();
 			$('body, html').animate({scrollTop: 0});
 		});
 
