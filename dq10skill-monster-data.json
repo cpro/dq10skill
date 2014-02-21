@@ -100,7 +100,7 @@
 				{"pt":  18, "name": "蒼天魔斬", "desc": "敵１体を\nたまにマヒさせる\n気合いの大技", "mp": 3},
 				{"pt":  25, "name": "装備時かいしん率+5%", "desc": "オノでの攻撃時\n会心のいちげきが\n出やすくなる", "mp": null},
 				{"pt":  32, "name": "装備時こうげき力+25", "desc": "オノ装備時の\nこうげき力が\n２５増える", "mp": null},
-				{"pt":  40, "name": "オノむそう", "desc": "周囲の敵を\n粉砕する\nこんしんの大技", "mp": 8}
+				{"pt":  40, "name": "オノまつり", "desc": "周囲の敵を\n粉砕する\nこんしんの大技", "mp": 8}
 			]
 		},
 
@@ -651,6 +651,70 @@
 			"name": "いたずらもぐら",
 			"defaultName": "いたずらもぐ",
 			"skills": ["trick", "molefocus", "staff"],
+			"expTable": 1
+		},
+		
+		"golem": {
+			"id": 101,
+			"name": "ゴーレム",
+			"defaultName": "ゴーレム",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"metappy": {
+			"id": 102,
+			"name": "メタッピー",
+			"defaultName": "メタッピー",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"takeyarihei": {
+			"id": 103,
+			"name": "たけやりへい",
+			"defaultName": "たけやりへい",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"needleman": {
+			"id": 104,
+			"name": "ニードルマン",
+			"defaultName": "ニードルマン",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"fondue": {
+			"id": 105,
+			"name": "フォンデュ",
+			"defaultName": "フォンデュ",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"samayouyoroi": {
+			"id": 106,
+			"name": "さまようよろい",
+			"defaultName": "さまようよろ",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"entasisman": {
+			"id": 107,
+			"name": "エンタシスマン",
+			"defaultName": "エンタシスマ",
+			"skills": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"magicalhat": {
+			"id": 108,
+			"name": "マジカルハット",
+			"defaultName": "マジカルハッ",
+			"skills": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		}
 		

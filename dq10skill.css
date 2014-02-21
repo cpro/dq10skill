@@ -63,6 +63,7 @@ a {
       z-index: 102; }
       #header #consoleblock #foldbuttons ul.button-container {
         display: inline-block;
+        vertical-align: top;
         list-style-type: none;
         margin: 0;
         padding: 0; }
