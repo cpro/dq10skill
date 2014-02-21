@@ -5,6 +5,8 @@ body {
   font-family: "メイリオ", sans-serif;
   font-size: 100%;
   padding: 95px 0 0 0; }
+  body#body-for-monster {
+    padding: 138px 0 0 0; }
 
 a {
   text-decoration: none; }
@@ -151,6 +153,11 @@ a {
         font-size: 1em; }
       #header #consoleblock #navlink .ui-button-text {
         padding: 0.2em 0.5em; }
+
+#body-for-monster #header {
+  height: 133px; }
+  #body-for-monster #header #consoleblock {
+    height: 82px; }
 
 /* エントリボックス */
 .class_group, .monster_ent {
