@@ -759,10 +759,11 @@ var SimulatorUI = (function($) {
 			});
 		},
 		
-		//URLテキストボックスクリック時
+		//URLテキストボックスクリック・フォーカス時
 		function() {
-			$('#url_text').click(function() {
+			$('#url_text').focus(function() {
 				refreshSaveUrl();
+			}).click(function() {
 				$(this).select();
 			});
 		},
