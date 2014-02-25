@@ -671,7 +671,7 @@
  		},
  		"itemmaster": {
  			"name": "どうぐ使い",
- 			"abbr": "道具",
+ 			"abbr": "どう",
  			"skillLines": ["bow", "spear", "hammer", "boomerang", "unknown"],
  			"expTable": 2
 		}
