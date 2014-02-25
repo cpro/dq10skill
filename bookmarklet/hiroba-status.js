@@ -100,70 +100,77 @@ var HirobaStatus = (function($) {
 		loadLvExp();
 		loadSkillPt();
 	}
+
+	function serialize() {
+		var serial = '';
+		var toByte = String.fromCharCode;
+
+		var vocationCount = VOCATIONS.length;
+		//先頭に職業の数を含める
+		serial += toByte(vocationCount);
+
+		for(var i = 0; i < vocationCount; i++) {
+			var vocation = VOCATIONS[i];
+			var stat = status[vocation];
+			serial += toByte(stat.level);
+			serial += toByte(stat.trainingSkillPt);
+
+			for(var s = 0; s < SKILLS[vocation].length; s++) {
+				var skillLine = SKILLS[vocation][s];
+				serial += toByte(stat.skill[skillLine]);
+			}
+		}
+
+		return serial;
+	}
 	
 	//API
 	return {
-		status: status,
+		serialize: serialize,
 		load: load
 	};
 })(jQuery);
 
-var Base64Param = (function() {
+//Base64 URI safe
+//btoaのみ
+var Base64 = (function(global) {
 	var EN_CHAR = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
-	var BITS_ENCODE = 6; //6ビットごとに区切ってエンコード
-	var BITS_LEVEL = 8; //レベルは8ビット確保
-	var BITS_SKILL = 7; //スキルは7ビット
-	var BITS_TRAINING = 7; //特訓スキルポイント7ビット
-	
-	function encode(status) {
-		//2進にして結合する
-		var bitArray = [];
-		for(var i = 0; i < VOCATIONS.length; i++) {
-			var vocation = VOCATIONS[i];
-			
-			bitArray = bitArray.concat(numToBitArray(status[vocation].level, BITS_LEVEL));
-			bitArray = bitArray.concat(numToBitArray(status[vocation].trainingSkillPt, BITS_TRAINING));
-			
-			for(var s = 0; s < SKILLS[vocation].length; s++) {
-				var skillName = SKILLS[vocation][s];
-				bitArray = bitArray.concat(numToBitArray(status[vocation].skill[skillName], BITS_SKILL));
-			}
-		}
-		
-		for(var i = (bitArray.length - 1) % BITS_ENCODE + 1 ; i < BITS_ENCODE; i++) bitArray.push(0); //末尾0補完
-		
-		var enStr = '';
-		for(var i = 0; i < bitArray.length; i += BITS_ENCODE) {
-			enStr += EN_CHAR.charAt(bitArrayToNum(bitArray.slice(i, i + BITS_ENCODE)));
-		}
-		
-		return enStr;
-	}
-	
-	function numToBitArray(num, digits) {
-		var bitArray = [];
-		for(var i = digits - 1; i >= 0; i--) {
-			bitArray.push(num >> i & 1);
-		}
-		return bitArray;
-	}
-	function bitArrayToNum(bitArray) {
-		var num = 0;
-		for(var i = 0; i < bitArray.length; i++) {
-			num = num << 1 | bitArray[i]
-		}
-		return num;
-	}
-	
+
+	var _btoa_impl = function(b) {
+		return b.replace(/.{1,3}/g, function(m) {
+			var bits = 0;
+			for(var i = 0; i < m.length; i++)
+				bits = bits | (m.charCodeAt(i) << ((2 - i) * 8));
+
+			return [
+				EN_CHAR.charAt(bits >>> 18),
+				EN_CHAR.charAt((bits >>> 12) & 63),
+				m.length > 1 ? EN_CHAR.charAt((bits >>> 6) & 63) : '',
+				m.length > 2 ? EN_CHAR.charAt(bits & 63) : ''
+			].join('');
+		});
+	};
+
+	var btoa = global.btoa ? function(b) {
+		return global.btoa(b)
+			.replace(/[+\/]/g, function(m0) {return m0 == '+' ? '-' : '_';})
+			.replace(/=/g, '');
+	} : _btoa_impl;
+
 	//API
 	return {
-		encode: encode,
+		btoa: btoa
 	};
-})();
+})(window);
+
+$.ajaxSetup({async: false});
+$.getScript(SIMULATOR_URL + 'js/rawdeflate.min.js');
+$.ajaxSetup({async: true});
 
 HirobaStatus.load();
-var query = Base64Param.encode(HirobaStatus.status);
+var url = SIMULATOR_URL + '?' +
+	Base64.btoa(RawDeflate.deflate(HirobaStatus.serialize()));
 
-window.open(SIMULATOR_URL + '?' + query, '_blank');
+window.open(url, '_blank');
 
 })();
