@@ -60,7 +60,7 @@ table#main {
       z-index: 2; }
     table#main td.remain, table#main td.bow {
       padding-right: 10px; }
-  table#main tr#warrior td, table#main tr#warrior th, table#main tr#footer td {
+  table#main tr#warrior td, table#main tr#warrior th, table#main tr#footer td, table#main tr#footer th {
     padding-top: 10px; }
   table#main tr#footer td.skill:after {
     height: 10px; }
@@ -77,13 +77,9 @@ table#main {
       -moz-transform: rotate(-90deg) scaleX(-1);
       -ms-transform: rotate(-90deg) scaleX(-1);
       -o-transform: rotate(-90deg) scaleX(-1); }
-  table#main tr.vocation th {
+  table#main tr.vocation th, table#main tr#footer th {
     text-align: right; }
 
-#test {
-  direction: ltr;
-  writing-mode: tb-rl;
-  -webkit-writing-mode: vertical-rl;
-  -moz-writing-mode: vertical-rl;
-  -ms-writing-mode: tb-rl;
-  -o-writing-mode: vertical-rl; }
+#description {
+  margin-top: 50px;
+  font-size: 12px; }

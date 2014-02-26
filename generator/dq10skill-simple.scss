@@ -90,7 +90,7 @@ table#main {
 			padding-right: 10px;
 		}
 	}
-	tr#warrior td, tr#warrior th, tr#footer td{
+	tr#warrior td, tr#warrior th, tr#footer td, tr#footer th{
 		padding-top: 10px;
 	}
 	tr#footer td.skill {
@@ -120,17 +120,12 @@ table#main {
 			-o-transform: rotate(-90deg) scaleX(-1);
 		}
 	}
-	tr.vocation th {
+	tr.vocation th, tr#footer th {
 		text-align: right;
-
 	}
 }
 
-#test {
-	direction: ltr;
-	writing-mode: tb-rl;
-	-webkit-writing-mode: vertical-rl;
-	-moz-writing-mode: vertical-rl;
-	-ms-writing-mode: tb-rl;
-	-o-writing-mode: vertical-rl;
+#description {
+	margin-top: 50px;
+	font-size: 12px;
 }
