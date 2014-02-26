@@ -163,14 +163,12 @@ var Base64 = (function(global) {
 	};
 })(window);
 
-$.ajaxSetup({async: false});
-$.getScript(SIMULATOR_URL + 'js/rawdeflate.min.js');
-$.ajaxSetup({async: true});
+$.getScript(SIMULATOR_URL + 'js/rawdeflate.min.js', function() {
+	HirobaStatus.load();
+	var url = SIMULATOR_URL + '?' +
+		Base64.btoa(RawDeflate.deflate(HirobaStatus.serialize()));
 
-HirobaStatus.load();
-var url = SIMULATOR_URL + '?' +
-	Base64.btoa(RawDeflate.deflate(HirobaStatus.serialize()));
-
-window.open(url, '_blank');
+	window.open(url, '_blank');
+});
 
 })();
