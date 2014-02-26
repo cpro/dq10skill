@@ -585,9 +585,9 @@
 		}
 	},
 	"skillLineOrder": [
-		"sword", "twohandedsword", "axe", "spear", "stick", "staff", "wand",
-		"knife", "whip", "claw", "fan", "hammer", "bow", "boomerang",
-		"fisticuffs", "shield"
+		"fisticuffs", "shield",
+		"sword", "twohandedsword", "knife", "stick", "wand", "spear", "axe",
+		"hammer", "staff", "claw", "fan", "whip", "boomerang", "bow"
 	],
 	
 	"vocations": {
