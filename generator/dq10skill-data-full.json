@@ -663,12 +663,14 @@
 			"name": "魔法戦士",
 			"abbr": "魔戦",
 			"skillLines": ["sword", "wand", "bow", "shield", "fource"],
+			"skillLineOrder": ["sword", "bow", "wand", "shield", "fource"],
 			"expTable": 2
 		},
 		"luminary": {
 			"name": "スーパースター",
 			"abbr": "スパ",
 			"skillLines": ["whip", "fan", "stick", "fisticuffs", "jenesaisquoi"],
+			"skillLineOrder": ["whip", "stick", "fan", "fisticuffs", "jenesaisquoi"],
 			"expTable": 2
 		},
 		"gladiator": {
