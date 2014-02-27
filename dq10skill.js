@@ -708,6 +708,10 @@ var SimulatorUI = (function($) {
 			}, function(e) {
 				if($(':focus').attr('id') == 'pt_spinner') return false;
 				$ptConsole.hide();
+			}).click(function(e) {
+				$ptConsole.hide();
+				$(this).mouseenter();
+				e.stopPropagation();
 			});
 		},
 
