@@ -58,14 +58,14 @@ table#main {
       left: 17px;
       background-color: #b0d06c;
       z-index: 2; }
-    table#main td.remain, table#main td.bow {
-      padding-right: 10px; }
   table#main tr#warrior td, table#main tr#warrior th, table#main tr#footer td, table#main tr#footer th {
     padding-top: 10px; }
   table#main tr#footer td.skill:after {
     height: 10px; }
   table#main tr#footer td.skill:before {
     content: none; }
+  table#main td.remain, table#main td.bow, table#main th.remain, table#main th.bow {
+    padding-right: 10px; }
   table#main tr.vocation {
     position: relative; }
   table#main #header th {

@@ -85,10 +85,6 @@ table#main {
 			background-color: rgb(176, 208, 108);
 			z-index: 2;
 		}
-
-		&.remain, &.bow {
-			padding-right: 10px;
-		}
 	}
 	tr#warrior td, tr#warrior th, tr#footer td, tr#footer th{
 		padding-top: 10px;
@@ -101,7 +97,12 @@ table#main {
 			content: none;
 		}
 	}
-
+	td, th {
+		&.remain, &.bow {
+			padding-right: 10px;
+		}
+	}
+	
 	tr.vocation {
 		position: relative;
 		
