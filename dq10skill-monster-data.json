@@ -718,8 +718,16 @@
 			"expTable": 1
 		},
 		
-		"odoruhouseki": {
+		"devilarmor": {
 			"id": 109,
+			"name": "デビルアーマー",
+			"defaultName": "デビルアーマ",
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"odoruhouseki": {
+			"id": 110,
 			"name": "おどるほうせき",
 			"defaultName": "おどるほうせ",
 			"skillLines": ["unknown1", "unknown2", "unknown3"],
