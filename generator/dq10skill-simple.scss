@@ -1,0 +1,200 @@
+$skill-cont-width: 30px;
+$skill-cont-height: $skill-cont-width;
+$skill-cont-border-width: 2px;
+$skill-cell-width: $skill-cont-width + $skill-cont-border-width * 4;
+
+body {
+	font-family: "メイリオ", sans-serif;
+	background-color: rgb(248, 248, 248);
+	color: rgb(32, 32, 32);
+}
+a {
+	text-decoration: none;
+	&:hover {
+		text-decoration: underline;
+	}
+	img {
+		border-style: none;
+	}
+}
+
+#header {
+	position: relative;
+	padding: 0 10px;
+	height: 50px;
+	margin-bottom: 5px;
+
+	h1 {
+		font-size: 18px;
+		margin: 0 10px 0 0;
+		height: 25px;
+		float: left;
+	}
+
+	#save_url {
+		padding: 2px 0;
+		height: 21px;
+		text-align: right;
+		white-space: nowrap;
+		font-size: 12px;
+		
+		#tw-saveurl {
+			font-size: 11px;
+			height: 18px;
+			overflow: hidden;
+			
+			.ui-button-text {
+				padding: .2em .5em;
+			}
+		}
+	}
+
+	#navlink {
+		position: absolute;
+		bottom: 0;
+		right: 6px;
+		z-index: 101;
+		font-size: 12px;
+
+		a {
+			/* width: 17.5em; */
+			margin-top: 2px;
+		}
+		.ui-button {
+			text-align: left;
+		}
+		.ui-button-text-icon-primary {
+			padding-left: 16px;
+		}
+		.ui-widget {
+			font-size: 1em;
+		}
+		.ui-button-text {
+			padding: .2em .5em;
+		}
+	}
+}
+
+table#main {
+	font-size: 12px;
+
+	border-collapse: separate;
+	border-spacing: 0;
+
+	th {
+		font-size: 14px;
+		font-weight: thick;
+	}
+	td {
+		padding: $skill-cont-border-width;
+		position: relative;
+
+		.container {
+			position: relative;
+			width: $skill-cont-width;
+			height: $skill-cont-height;
+			padding: auto;
+
+			background-color: white;
+			border: solid rgba(0, 0, 0, 0);
+			border-width: $skill-cont-border-width;
+			border-radius: 2px;
+			z-index: 99;
+
+			text-align: center;
+			font-size: 14px;
+
+			display: table-cell;
+			vertical-align: middle;
+		}
+		&.unique, &.remain, &.total {
+			.container {
+				border-color: rgb(192, 176, 176);
+			}
+		}
+		&.skill {
+			.container {
+				border-color: rgb(176, 208, 108);
+			}
+		}
+		.container.error {
+			color: rgb(240, 64, 64);
+			background-color: rgb(255, 250, 250);
+		}
+
+		&.skill, &.unique, &.remain, &.total {
+			&:before {
+				content: " ";
+				display: inline-block;
+				position: absolute;
+				width: $skill-cell-width * 1.5;
+				height: 10px;
+				bottom: ($skill-cell-width - 10px) / 2;
+				left: 0;
+				background-color: rgb(224, 220, 218);
+				z-index: 1;
+			}
+		}
+		&.unique:before {
+			left: 10px;
+		}
+		&.total:before {
+			width: 10px;
+		}
+
+		&.skill:after {
+			content: " ";
+			display: inline-block;
+			position: absolute;
+			width: 4px;
+			height: $skill-cell-width * 1.5;
+			top: 0;
+			left: ($skill-cell-width - 4px) / 2;
+			background-color: rgb(176, 208, 108);
+			z-index: 2;
+		}
+	}
+	tr#warrior td, tr#warrior th, tr#footer td, tr#footer th{
+		padding-top: 10px;
+	}
+	tr#footer td.skill {
+		&:after {
+			height: 10px;
+		}
+		&:before {
+			content: none;
+		}
+	}
+	td, th {
+		&.remain, &.bow {
+			padding-right: 10px;
+		}
+	}
+
+	tr.vocation {
+		position: relative;
+		
+		&.vocation:before {
+		}
+	}
+	#header th {
+		vertical-align: bottom;
+		line-height: 1.1em;
+
+		.chou {
+			display: inline-block;
+			-webkit-transform: rotate(-90deg) scaleX(-1);
+			-moz-transform: rotate(-90deg) scaleX(-1);
+			-ms-transform: rotate(-90deg) scaleX(-1);
+			-o-transform: rotate(-90deg) scaleX(-1);
+		}
+	}
+	tr.vocation th, tr#footer th {
+		text-align: right;
+	}
+}
+
+#description {
+	margin-top: 50px;
+	font-size: 12px;
+}

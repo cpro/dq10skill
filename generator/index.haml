@@ -78,6 +78,8 @@
 						%th
 						%td.total_pts.ui-corner-br
 				#navlink
+					%a#simpleui{href: 'simple.html'} 簡易表示版に切り替え
+					%br
 					%a#hirobaimport{href: 'hiroba-import.html', target: '_blank'} 冒険者の広場からデータを取り込む
 		#body_content
 			- data['vocationOrder'].each do |vocation|
@@ -178,6 +180,7 @@
 									%li おりたたむ・ひろげるボタンを職業欄右上に固定表示。
 									%li データ量増加に対応するため保存用URLの仕様変更。従来のものも読み込めます。
 									%li ページ読み込みを高速化。
+									%li <a href="simple.html" target="_blank">簡易表示版</a>を作成。デザインは<a href="https://twitter.com/mikonoMai" target="_blank">みこのん (@mikonoMai) さん</a>によるものです。ありがとうございます。
 							%li 2013/12/5 v4.0 Version2の新職業・まもの使いを追加、レベル上限を75→80に。
 							%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
 					%li

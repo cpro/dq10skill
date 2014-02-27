@@ -1,0 +1,132 @@
+!!! 5
+%html
+	%head
+		%meta{charset: 'UTF-8'}/
+		%meta{'http-equiv' => 'Content-Style-Type', content: 'text/css'}/
+		%meta{'http-equiv' => 'Content-Script-Type', content: 'text/javascript'}/
+		- @home_uri = 'http://cpro.jp/dq10/skillsimulator/simple.html'
+		%meta{name: 'description', content: 'ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキルシミュレータ簡易表示。'}/
+		
+		- @title = 'DQ10 スキルシミュレータ（簡易表示版）'
+		%title= @title
+		
+		%link{rel: 'stylesheet', type: 'text/css', href: "./dq10skill-simple.css?ver=#{VERSION}"}/
+		%link{rel: 'stylesheet', type: 'text/css', href: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css'}/
+		
+		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'}
+		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'}
+		%script{type: 'text/javascript', src: 'js/rawdeflate.min.js'}
+		%script{type: 'text/javascript', src: 'js/rawinflate.min.js'}
+		%script{type: 'text/javascript', src: 'js/jquery.socialbutton-1.9.1.min.js'}
+		%script{type: 'text/javascript', src: "./dq10skill.js?ver=#{VERSION}"}
+		:javascript
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-5127088-4']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+	%body
+		#body_content
+			#header
+				%h1<
+					%a{href: @home_uri}= @title
+				#save_url
+					%label{for: 'url_text'} 保存用URL:
+					%input#url_text.ui-widget-content.ui-corner-all{type: 'text', size: 45}>/
+					%a#tw-saveurl 保存用URLをツイート
+				#navlink
+					%a#mainui{href: '/'} 詳細表示版に切り替え
+			%table#main
+				%tr#header
+					%th
+					%th.unique 固<br>有<br>ス<br>キ<br>ル
+					%th.remain の<br>こ<br>り
+					- data['skillLineOrder'].each do |skill_line|
+						%th{class: "#{skill_line}"}= data['skillLines'][skill_line]['name'].split('').join('<br>').gsub('ー', '<span class="chou">ー</span>')
+					%th.total 合<br>計
+					%th
+				- data['vocationOrder'].each do |vocation|
+					%tr.vocation{id: "#{vocation}"}
+						%th= data['vocations'][vocation]['name']
+						%td.unique
+							.container
+						%td.remain
+							.container
+						- data['skillLineOrder'].each do |skill_line|
+							- if data['vocations'][vocation]['skillLines'].include?(skill_line)
+								%td.skill{class: "#{skill_line}"}
+									.container
+							- else
+								%td.skill.empty
+						%td.total
+							.container
+						%td.level
+				%tr#footer
+					%th{colspan: 3} 合計
+					- data['skillLineOrder'].each do |skill_line|
+						%td.skill{class: "#{skill_line}"}
+							.container
+					%td.empty{colspan: 2}
+			#description
+				%ul
+					%li <a href="./">DQ10 スキルシミュレータ</a>の簡易・一覧表示版です。今のところ表示機能のみです。
+					%li
+						使い方:
+						%ul
+							%li スキルシミュレータ本体から「簡易表示」ボタン経由でこのページに来るか、保存用URLの「?」以降をコピーしてこのページのURL末尾にペーストして読み込んでください。
+							%li 将来的にこのページでの編集機能も作成予定です。
+					%li 謝辞: デザインは、<a href="https://twitter.com/mikonoMai/status/431740179997405184" target="_blank">みこのん @mikonoMai さんによるSP管理表</a>をほぼそのまま、勝手にWebで再現したものです。デザイン利用・公開にご快諾くださり感謝いたします。
+					%li ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。
+				%address<
+					%p.contact 連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a>
+
+		-# #ad_sidebar
+			%h2 サイト内リンク
+			%ul
+				%li<
+					%a{href: 'monster.html'} 仲間モンスター用シミュレータ
+				%li<
+					%a{href: 'http://cpro.jp/dq10/roulette/'} ルーレットシミュレータ
+			%h2 DQ10ツールリンク
+			%ul
+				%li<
+					%a{href: 'http://www.d-quest-10.com/', target: '_blank'} ドラクエ10・モンスター完全図鑑
+				%li<
+					%a{href: 'http://dq100buster.wiki.fc2.com/', target: '_blank'} DQ10 モンスター100匹討伐隊攻略wiki
+				%li<
+					%a{href: 'http://yujuko.sakura.ne.jp/dq/ParaWt.html', target: '_blank'} DQX - 重さチェッカー
+				%li<
+					%a{href: 'http://rizria.com/dqx/search', target: '_blank'} DQ10 モーモンバザー サーチ
+			#snsbuttons
+				.snsbutton#tw-share
+				.snsbutton#fb-like
+				.snsbutton#g-plusone
+			- item_list.each do |item|
+				.amazonitem
+					%a{href: item[:item_url], target: '_blank'}<
+						%img{src: item[:img_url], width: item[:img_width], height: item[:img_height], alt: item[:item_title], title: item[:item_title]}>/
+						%br>/
+						=item[:item_title]
+		-# :javascript
+			jQuery(function($) {
+				var sharedUrl = "#{@home_uri}";
+				$('#tw-share').socialbutton('twitter', {
+					button: 'horizontal',
+					url: sharedUrl,
+					lang: 'ja',
+					hashtags: 'DQ10, dq10_skillsim'
+				});
+				$('#fb-like').socialbutton('facebook_like', {
+					button: 'button_count',
+					url: sharedUrl,
+					locale: 'ja_JP'
+				});
+				$('#g-plusone').socialbutton('google_plusone', {
+					lang: 'ja',
+					size: 'medium',
+					url: sharedUrl
+				});
+			});
