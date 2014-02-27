@@ -65,7 +65,7 @@ var HirobaStatus = (function($) {
 	function loadLvExp() {
 		var vocation = '';
 		$('#jobLvExp tr td[class^=col]').each(function() {
-			switch($(this).attr('class')) {
+			switch($(this).attr('class').split(/\s+/)[0]) {
 				case 'col1': //職業名
 					vocation = $(this).text().trim();
 					break;
