@@ -7,7 +7,7 @@
 		- @home_uri = 'http://cpro.jp/dq10/skillsimulator/simple.html'
 		%meta{name: 'description', content: 'ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキルシミュレータ簡易表示。'}/
 		
-		- @title = 'DQ10 スキルシミュレータ 簡易表示'
+		- @title = 'DQ10 スキルシミュレータ（簡易表示版）'
 		%title= @title
 		
 		%link{rel: 'stylesheet', type: 'text/css', href: "./dq10skill-simple.css?ver=#{VERSION}"}/
@@ -30,6 +30,15 @@
 			})();
 	%body
 		#body_content
+			#header
+				%h1<
+					%a{href: @home_uri}= @title
+				#save_url
+					%label{for: 'url_text'} 保存用URL:
+					%input#url_text.ui-widget-content.ui-corner-all{type: 'text', size: 45}>/
+					%a#tw-saveurl 保存用URLをツイート
+				#navlink
+					%a#mainui{href: '/'} 詳細表示版に切り替え
 			%table#main
 				%tr#header
 					%th

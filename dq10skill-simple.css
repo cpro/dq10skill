@@ -1,7 +1,55 @@
 @charset "UTF-8";
 body {
   font-family: "メイリオ", sans-serif;
-  background-color: #f8f8f8; }
+  background-color: #f8f8f8;
+  color: #202020; }
+
+a {
+  text-decoration: none; }
+  a:hover {
+    text-decoration: underline; }
+  a img {
+    border-style: none; }
+
+#header {
+  position: relative;
+  padding: 0 10px;
+  height: 50px;
+  margin-bottom: 5px; }
+  #header h1 {
+    font-size: 18px;
+    margin: 0 10px 0 0;
+    height: 25px;
+    float: left; }
+  #header #save_url {
+    padding: 2px 0;
+    height: 21px;
+    text-align: right;
+    white-space: nowrap;
+    font-size: 12px; }
+    #header #save_url #tw-saveurl {
+      font-size: 11px;
+      height: 18px;
+      overflow: hidden; }
+      #header #save_url #tw-saveurl .ui-button-text {
+        padding: 0.2em 0.5em; }
+  #header #navlink {
+    position: absolute;
+    bottom: 0;
+    right: 6px;
+    z-index: 101;
+    font-size: 12px; }
+    #header #navlink a {
+      /* width: 17.5em; */
+      margin-top: 2px; }
+    #header #navlink .ui-button {
+      text-align: left; }
+    #header #navlink .ui-button-text-icon-primary {
+      padding-left: 16px; }
+    #header #navlink .ui-widget {
+      font-size: 1em; }
+    #header #navlink .ui-button-text {
+      padding: 0.2em 0.5em; }
 
 table#main {
   font-size: 12px;

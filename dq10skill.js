@@ -901,14 +901,18 @@ var SimulatorUI = (function($) {
 			});
 		},
 		
-		//hiroba-import.htmlへのリンクボタン
+		//ナビゲーションボタン
 		function() {
 			$('a#hirobaimport').button({
 				icons: { primary: 'ui-icon-arrowreturnthick-1-s'}
 			});
-			$('a#tomonster').button({
-				icons: { primary: 'ui-icon-arrowthick-1-e'}
+			$('a#simpleui').button({
+				icons: { primary: 'ui-icon-transfer-e-w'}
+			}).click(function(e) {
+				this.href = this.href.replace(/\?.+$/, '') + '?' +
+					Base64.btoa(RawDeflate.deflate(sim.serialize()));
 			});
+
 		},
 		
 		//スキル選択時に同スキルを強調
@@ -997,7 +1001,7 @@ var SimpleUI = (function($) {
 		//refreshTotalExpRemain();
 		// refreshTotalPassive();
 		refreshControls();
-		// refreshSaveUrl();
+		refreshSaveUrl();
 	}
 	
 	function refreshVocationInfo(vocation) {
@@ -1096,6 +1100,52 @@ var SimpleUI = (function($) {
 	}
 	
 	var setupFunctions = [
+		
+		//URLテキストボックスクリック・フォーカス時
+		function() {
+			$('#url_text').focus(function() {
+				refreshSaveUrl();
+			}).click(function() {
+				$(this).select();
+			});
+		},
+		
+		//保存用URLツイートボタン設定
+		function() {
+			$('#tw-saveurl').button().click(function(e) {
+				refreshSaveUrl();
+
+				var screenWidth = screen.width, screenHeight = screen.height;
+				var windowWidth = 550, windowHeight = 420;
+				var windowLeft = Math.round(screenWidth / 2 - windowWidth / 2);
+				var windowTop = windowHeight >= screenHeight ? 0 : Math.round(screenHeight / 2 - windowHeight / 2);
+				var windowParams = {
+					scrollbars: 'yes',
+					resizable: 'yes',
+					toolbar: 'no',
+					location: 'yes',
+					width: windowWidth,
+					height: windowHeight,
+					left: windowLeft,
+					top: windowTop
+				};
+				var windowParam = $.map(windowParams, function(val, key) { return key + '=' + val; }).join(',');
+				window.open(this.href, null, windowParam);
+				
+				return false;
+			});
+		},
+		
+		//ナビゲーションボタン
+		function() {
+			$('a#mainui').button({
+				icons: { primary: 'ui-icon-transfer-e-w'}
+			}).click(function(e) {
+				this.href = this.href.replace(/\?.+$/, '') + '?' +
+					Base64.btoa(RawDeflate.deflate(sim.serialize()));
+			});
+
+		}
 	];
 	
 	//数値を3桁区切りに整形

@@ -5,7 +5,7 @@
     <meta content='text/css' http-equiv='Content-Style-Type'>
     <meta content='text/javascript' http-equiv='Content-Script-Type'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキルシミュレータ簡易表示。' name='description'>
-    <title>DQ10 スキルシミュレータ 簡易表示</title>
+    <title>DQ10 スキルシミュレータ（簡易表示版）</title>
     <link href='./dq10skill-simple.css?ver=4.0.0' rel='stylesheet' type='text/css'>
     <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' type='text/javascript'></script>
@@ -27,6 +27,15 @@
   </head>
   <body>
     <div id='body_content'>
+      <div id='header'>
+        <h1><a href='http://cpro.jp/dq10/skillsimulator/simple.html'>DQ10 スキルシミュレータ（簡易表示版）</a></h1>
+        <div id='save_url'>
+          <label for='url_text'>保存用URL:</label><input class='ui-widget-content ui-corner-all' id='url_text' size='45' type='text'><a id='tw-saveurl'>保存用URLをツイート</a>
+        </div>
+        <div id='navlink'>
+          <a href='/' id='mainui'>詳細表示版に切り替え</a>
+        </div>
+      </div>
       <table id='main'>
         <tr id='header'>
           <th></th>
