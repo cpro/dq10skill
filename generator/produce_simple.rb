@@ -12,7 +12,7 @@ opts.on('-a') {|v| refresh_item_cache = true}
 opts.parse!(ARGV)
 
 if ARGV.size < 1
-  index_html_path = "#{dir}/../index.html"
+  index_html_path = "#{dir}/../simple.html"
 else
   index_html_path = ARGV[0].to_s
 end
@@ -80,5 +80,5 @@ end
 data = JSON.parse(File.read("#{dir}/dq10skill-data-full.json"))
 # HAMLからHTML生成
 File.open(index_html_path, 'w') do |file|
-  file.puts Haml::Engine.new(File.read("#{dir}/index.haml")).render(Object.new, {:data => data, :item_list => item_list})
+  file.puts Haml::Engine.new(File.read("#{dir}/simple.haml")).render(Object.new, {:data => data, :item_list => item_list})
 end

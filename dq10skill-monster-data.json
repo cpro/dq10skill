@@ -1,5 +1,5 @@
 {
-	"skillCategories": {
+	"skillLines": {
 		"martialnyarts": {
 			"name": "マーシャルニャーツ",
 			"skills": [
@@ -69,10 +69,10 @@
 			"name": "レックスセンス",
 			"skills": [
 				{"pt":   3, "name": "テールアタック"},
-				{"pt":   7, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n３０増える", "mp": null, "maxhp": 30},
+				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
 				{"pt":  12, "name": "ドラゴンビート"},
 				{"pt":  18, "name": "常時かいしん率+5%", "desc": "会心のいちげきが\n出やすくなる", "mp": null},
-				{"pt":  25, "name": "はやぶさ斬り", "desc": "はやぶさのごとき\n高速の２回攻撃", "mp": 4},
+				{"pt":  25, "name": "はやぶさ斬り", "desc": "はやぶさのごとき\n高速の２回攻撃", "mp": 2},
 				{"pt":  32, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
 				{"pt":  40, "name": "竜のおたけび"}
 			]
@@ -85,7 +85,7 @@
 				{"pt":   7, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
 				{"pt":  12, "name": "はげしいほのお"},
 				{"pt":  18, "name": "常時すばやさ+60", "desc": "常時\nすばやさが\n６０増える", "mp": null, "spd": 60},
-				{"pt":  25, "name": "常時さいだいＭＰ+60", "desc": "常時\nさいだいＭＰが\n６０増える", "mp": null, "maxmp": 60},
+				{"pt":  25, "name": "常時さいだいＭＰ+80", "desc": "常時\nさいだいＭＰが\n８０増える", "mp": null, "maxmp": 80},
 				{"pt":  32, "name": "しゃくねつのほのお"},
 				{"pt":  40, "name": "ブレス効果+20%"}
 			]
@@ -97,10 +97,10 @@
 				{"pt":   3, "name": "装備時こうげき力+10", "desc": "オノ装備時の\nこうげき力が\n１０増える", "mp": null},
 				{"pt":   7, "name": "たいぼく斬", "desc": "植物系の敵に\n威力を発揮する\n頼もしいひと振り", "mp": 1},
 				{"pt":  12, "name": "装備時こうげき力+15", "desc": "オノ装備時の\nこうげき力が\n１５増える", "mp": null},
-				{"pt":  18, "name": "蒼天魔斬", "desc": "敵１体を\nたまにマヒさせる\n気合いの大技", "mp": 3},
+				{"pt":  18, "name": "晴天魔斬", "desc": "敵１体を\nたまにマヒさせる\n気合いの大技", "mp": 3},
 				{"pt":  25, "name": "装備時かいしん率+5%", "desc": "オノでの攻撃時\n会心のいちげきが\n出やすくなる", "mp": null},
 				{"pt":  32, "name": "装備時こうげき力+25", "desc": "オノ装備時の\nこうげき力が\n２５増える", "mp": null},
-				{"pt":  40, "name": "オノむそう", "desc": "周囲の敵を\n粉砕する\nこんしんの大技", "mp": 8}
+				{"pt":  40, "name": "オノまつり", "desc": "周囲の敵を\n粉砕する\nこんしんの大技", "mp": 8}
 			]
 		},
 
@@ -204,7 +204,7 @@
 				{"pt":  18, "name": "ミラクルソード", "desc": "敵を斬りつけ\n自らのキズも\nいやす　秘剣", "mp": 3},
 				{"pt":  25, "name": "装備時武器ガード率+5%", "desc": "片手剣装備時に\n武器ガードが\nできるようになる", "mp": null},
 				{"pt":  32, "name": "装備時こうげき力+25", "desc": "片手剣装備時の\nこうげき力が\n２５増える", "mp": null},
-				{"pt":  40, "name": "はやぶさ斬り", "desc": "はやぶさのごとき\n高速の２回攻撃", "mp": 4}
+				{"pt":  40, "name": "はやぶさ斬り", "desc": "はやぶさのごとき\n高速の２回攻撃", "mp": 2}
 			]
 		},
 
@@ -229,7 +229,7 @@
 				{"pt":  12, "name": "ザオラル", "desc": "", "mp": 8},
 				{"pt":  18, "name": "ベホイム", "desc": "仲間ひとりの\nＨＰを\n１６４～回復する", "mp": 10},
 				{"pt":  25, "name": "常時かいふく魔力+100", "desc": "常時\nかいふく魔力が\n１００増える", "mp": null, "heal": 100},
-				{"pt":  32, "name": "ベホマラー", "desc": "", "mp": 16},
+				{"pt":  32, "name": "ベホマラー", "desc": "範囲内にいる\n仲間のＨＰを\n８０～回復する", "mp": 16},
 				{"pt":  40, "name": "天使の守り", "desc": "死んでしまっても\n確実に生き返る", "mp": 10}
 			]
 		},
@@ -434,10 +434,10 @@
 			"skills": [
 				{"pt":   3, "name": "常時かいふく魔力+20", "desc": "常時\nかいふく魔力が\n２０増える", "mp": null, "heal": 20},
 				{"pt":   7, "name": "常時こうげき魔力+40", "desc": "常時\nこうげき魔力が\n４０増える", "mp": null, "magic": 40},
-				{"pt":  12, "name": "開戦時10%魔力アップ"},
+				{"pt":  12, "name": "開戦時10%魔力アップ", "desc": "戦闘開始時たまに\n攻撃と回復両方の\n呪文効果がアップ", "mp": null},
 				{"pt":  18, "name": "呪文ぼうそう率アップ", "desc": "呪文を唱えた時\n魔力が\n暴走しやすくなる", "mp": null},
 				{"pt":  25, "name": "常時かいふく魔力+60", "desc": "常時\nかいふく魔力が\n６０増える", "mp": null, "heal": 60},
-				{"pt":  32, "name": "たまにＭＰせつやく"},
+				{"pt":  32, "name": "たまにＭＰせつやく", "desc": "ＭＰを消費する時\nたまにＭＰを\n消費しない", "mp": null},
 				{"pt":  40, "name": "常時こうげき魔力+80", "desc": "常時\nこうげき魔力が\n８０増える", "mp": null, "magic": 80}
 			]
 		},
@@ -447,11 +447,11 @@
 			"skills": [
 				{"pt":   3, "name": "ホイミ", "desc": "仲間ひとりの\nＨＰを\n２５～回復する", "mp": 2},
 				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
-				{"pt":  25, "name": "べホイミ", "desc": "仲間ひとりの\nＨＰを\n８０～回復する", "mp": 4},
+				{"pt":  12, "name": "べホイミ", "desc": "仲間ひとりの\nＨＰを\n８０～回復する", "mp": 4},
 				{"pt":  18, "name": "常時かいふく魔力+60", "desc": "常時\nかいふく魔力が\n６０増える", "mp": null, "heal": 60},
-				{"pt":  25, "name": "ベホイム", "desc": "", "mp": 10},
+				{"pt":  25, "name": "ベホイム", "desc": "仲間ひとりの\nＨＰを\n１６４～回復する", "mp": 10},
 				{"pt":  32, "name": "常時さいだいＭＰ+60", "desc": "常時\nさいだいＭＰが\n６０増える", "mp": null, "maxmp": 60},
-				{"pt":  40, "name": "ベホマラー", "desc": "", "mp": 16}
+				{"pt":  40, "name": "ベホマラー", "desc": "範囲内にいる\n仲間のＨＰを\n８０～回復する", "mp": 16}
 			]
 		},
 
@@ -578,7 +578,7 @@
 			"id": 1,
 			"name": "スライム",
 			"defaultName": "スライム",
-			"skills": ["slappler", "slafource", "boomerang"],
+			"skillLines": ["slappler", "slafource", "boomerang"],
 			"expTable": 1
 		},
 		
@@ -586,7 +586,7 @@
 			"id": 2,
 			"name": "モーモン",
 			"defaultName": "モーモン",
-			"skills": ["lightmormon", "darkmormon", "stick"],
+			"skillLines": ["lightmormon", "darkmormon", "stick"],
 			"expTable": 1
 		},
 
@@ -594,7 +594,7 @@
 			"id": 3,
 			"name": "プリズニャン",
 			"defaultName": "プリズニャン",
-			"skills": ["martialnyarts", "hyad", "claw"],
+			"skillLines": ["martialnyarts", "hyad", "claw"],
 			"expTable": 1
 		},
 
@@ -602,7 +602,7 @@
 			"id": 4,
 			"name": "ホイミスライム",
 			"defaultName": "ホイミスライ",
-			"skills": ["hoimingrapple", "hoiminheal", "stick"],
+			"skillLines": ["hoimingrapple", "hoiminheal", "stick"],
 			"expTable": 1
 		},
 		
@@ -610,7 +610,7 @@
 			"id": 5,
 			"name": "スライムナイト",
 			"defaultName": "スライムナイ",
-			"skills": ["swordrider", "magicrider", "sword"],
+			"skillLines": ["swordrider", "magicrider", "sword"],
 			"expTable": 1
 		},
 		
@@ -618,7 +618,7 @@
 			"id": 6,
 			"name": "キメラ",
 			"defaultName": "キメラ",
-			"skills": ["chimerawing", "chimeraheal", "stick"],
+			"skillLines": ["chimerawing", "chimeraheal", "stick"],
 			"expTable": 1
 		},
 		
@@ -626,7 +626,7 @@
 			"id": 7,
 			"name": "ねこまどう",
 			"defaultName": "ねこまどう",
-			"skills": ["catmagic", "mera", "wand"],
+			"skillLines": ["catmagic", "mera", "wand"],
 			"expTable": 1
 		},
 		
@@ -634,7 +634,7 @@
 			"id": 8,
 			"name": "リザードマン",
 			"defaultName": "リザードマン",
-			"skills": ["gekkousword", "gekkoumove", "sword"],
+			"skillLines": ["gekkousword", "gekkoumove", "sword"],
 			"expTable": 1
 		},
 		
@@ -642,7 +642,7 @@
 			"id": 9,
 			"name": "バトルレックス",
 			"defaultName": "バトルレック",
-			"skills": ["rexsense", "firebreath", "axe"],
+			"skillLines": ["rexsense", "firebreath", "axe"],
 			"expTable": 1
 		},
 		
@@ -650,13 +650,93 @@
 			"id": 10,
 			"name": "いたずらもぐら",
 			"defaultName": "いたずらもぐ",
-			"skills": ["trick", "molefocus", "staff"],
+			"skillLines": ["trick", "molefocus", "staff"],
+			"expTable": 1
+		},
+		
+		"golem": {
+			"id": 101,
+			"name": "ゴーレム",
+			"defaultName": "ゴーレム",
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"metappy": {
+			"id": 102,
+			"name": "メタッピー",
+			"defaultName": "メタッピー",
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"takeyarihei": {
+			"id": 103,
+			"name": "たけやりへい",
+			"defaultName": "たけやりへい",
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"needleman": {
+			"id": 104,
+			"name": "ニードルマン",
+			"defaultName": "ニードルマン",
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"fondue": {
+			"id": 105,
+			"name": "フォンデュ",
+			"defaultName": "フォンデュ",
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"samayouyoroi": {
+			"id": 106,
+			"name": "さまようよろい",
+			"defaultName": "さまようよろ",
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"entasisman": {
+			"id": 107,
+			"name": "エンタシスマン",
+			"defaultName": "エンタシスマ",
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"magicalhat": {
+			"id": 108,
+			"name": "マジカルハット",
+			"defaultName": "マジカルハッ",
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"devilarmor": {
+			"id": 109,
+			"name": "デビルアーマー",
+			"defaultName": "デビルアーマ",
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"odoruhouseki": {
+			"id": 110,
+			"name": "おどるほうせき",
+			"defaultName": "おどるほうせ",
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
 			"expTable": 1
 		}
 		
 	},
 
-	"additionalSkillCategories": [
+	"additionalSkillLines": [
 		{"name": "raisehp",    "restartCount": 1, "id":  1},
 		{"name": "raisemp",    "restartCount": 1, "id":  2},
 		{"name": "raisepow",   "restartCount": 1, "id":  3},
@@ -685,8 +765,8 @@
 			      0,       5,      14,      29,      53,      89,     141,     218,     328,     486,
 			    708,    1016,    1430,    1982,    2702,    3626,    4794,    6248,    8033,   10198,
 			  12792,   15869,   19476,   23667,   28488,   33987,   "NaN",   47183,   54960,   63575,
-			  73071,   83488,   94869,  107259,  120702,  135241,  150923,  167793,   "NaN",   "NaN",
-			  "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",  480910
+			  73071,   83488,   94869,  107259,  120702,  135241,  150923,  167793,  185901,  205293,
+			 226017,   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",  480910
 		]
 	}
 }

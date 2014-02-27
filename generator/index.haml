@@ -1,4 +1,4 @@
-- VERSION = '4.0.1'
+- VERSION = '5.0'
 !!! 5
 %html
 	%head
@@ -13,10 +13,12 @@
 		%title= @title
 		
 		%link{rel: 'stylesheet', type: 'text/css', href: "./dq10skill.css?ver=#{VERSION}"}/
-		%link{rel: 'stylesheet', type: 'text/css', href: 'http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css'}/
+		%link{rel: 'stylesheet', type: 'text/css', href: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css'}/
 		
-		%script{type: 'text/javascript', src: 'http://code.jquery.com/jquery-1.10.2.min.js'}
-		%script{type: 'text/javascript', src: 'http://code.jquery.com/ui/1.10.3/jquery-ui.min.js'}
+		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'}
+		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'}
+		%script{type: 'text/javascript', src: 'js/rawdeflate.min.js'}
+		%script{type: 'text/javascript', src: 'js/rawinflate.min.js'}
 		%script{type: 'text/javascript', src: 'js/jquery.socialbutton-1.9.1.min.js'}
 		%script{type: 'text/javascript', src: "./dq10skill.js?ver=#{VERSION}"}
 		:javascript
@@ -76,28 +78,28 @@
 						%th
 						%td.total_pts.ui-corner-br
 				#navlink
-					%a#tomonster{href: 'monster.html'} 仲間モンスター用シミュレータ
+					%a#simpleui{href: 'simple.html'} 簡易表示版に切り替え
 					%br
 					%a#hirobaimport{href: 'hiroba-import.html', target: '_blank'} 冒険者の広場からデータを取り込む
 		#body_content
 			- data['vocationOrder'].each do |vocation|
 				%div.class_group{id: vocation}
-					.class_info
+					.ent_title
 						%h2<
-							= data['vocations'][vocation]['name'] + ' Lv '
-							%span.lv_h2> 1
-						%dl
-							%dt.label_lv<
-								%label{for: "lv-#{vocation}"} レベル
-							%dd.lv_select
-								%select{size: 1, id: "lv-#{vocation}"}
+							%label{for: 'lv-select'}
+								= data['vocations'][vocation]['name'] + ' Lv '
+								%span.lv_h2 1
+						%dl.skill_pt
+							%dt 残りSP:
+							%dd.pts 0 / 0
+						%dl.training_pt
+							%dt
+								%label{for: 'training_pt_spinner'} + 特訓
+							%dd{id: "training-#{vocation}"}
+								0
+						%dl.expinfo
 							%dt 獲得経験値:
 							%dd.exp 0
-							%dt 残りスキルポイント:
-							%dd.pts 0 / 0
-							%dd<
-								%label{for: "training-#{vocation}"}> 特訓
-								%input.training_pt{id: "training-#{vocation}"}>
 							%dt.error{style: 'display:none'}<
 								必要レベル:
 								%span.req_lv>< 1
@@ -105,21 +107,32 @@
 								= '（あと '
 								%span.exp_remain> 0
 								= ' exp）'
-					- data['vocations'][vocation]['skills'].each do |skillCategory|
-						- cat = data['skillCategories'][skillCategory]
-						%table{class: [skillCategory, 'skill_table']}>
-							%caption
-								= cat['name'] + ': '
-								%span.skill_total 0
-							%tr
-								%th.console{colspan: 2}
-									%input.ptspinner
-									%button.reset リセット
-							- cat['skills'].each_with_index do |skill, i|
-								%tr{class: [skillCategory, i].join('_')}<
-									%td.skill_pt>= skill['pt']
-									-# - hint = skill['desc'] + (skill['mp'] ? "\n（消費MP: #{skill['mp']}）" : '')
-									%td.skill_name= skill['name']
+						.ent_title_console
+							%button.toggle_ent たたむ/ひろげる
+					.skill_tables
+						- data['vocations'][vocation]['skillLines'].each do |skillLine|
+							- skill_line = data['skillLines'][skillLine]
+							%table{class: [skillLine, 'skill_table']}>
+								%caption
+									%label{for: 'pt_spinner'}
+										= skill_line['name'] + ': '
+										%span.skill_current 0
+										\/
+										%span.skill_total 0
+								- skill_line['skills'].each_with_index do |skill, i|
+									- hint = skill['desc']
+									- hint += "\n（消費MP: #{skill['mp']}）" if skill['mp']
+									- hint += "\n（#{skill['gold']}G）" if skill['gold']
+									%tr{class: [skillLine, i].join('_'), title: hint}<
+										%td.skill_pt>= skill['pt']
+										%td.skill_name= skill['name']
+			#pt_console{style: 'display: none'}
+				%input#pt_spinner
+				%button#pt_reset リセット
+			#lv_console{style: 'display: none'}
+				%select#lv-select.ui-widget-content.ui-corner-all{size: 1}
+			#training_pt_console{style: 'display: none'}
+				%input#training_pt_spinner
 			#footconsole
 				%p#setalllevel
 					レベル一括設定
@@ -137,12 +150,11 @@
 				%ul
 					%li スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』のスキルポイント割り振りを検討するためのシミュレータです。
 					%li 要JavaScript。Google Chrome, IE10で動作確認。Firefoxでも動くはずです。IE8, 9はたぶん動くと思いますが推奨しません。
-					%li Lv76-80の獲得スキルポイントは、<a href="http://twitter.com/NeiaDQX/status/408516819847090176" target="_blank">ツイッターでの報告</a>をもとにした未検証のものです。
-					-# %li 追加職の必要経験値は、初期職の実測値から算出した推測値を含みます（係数：1.333）。1-2程度の誤差を見込んでください。また、Lv70以降についてはこの法則を外れ、各レベルでの増分が固定値（前レベルに +199,346）であるとの情報に基づき設定しています。
+					%li スキルポイント115・130の項目は、ver2.1後期で実装されるまでの仮のものです。
 					%li
 						使い方:
 						%ul
-							%li プルダウンで職業レベルを選択。括弧内はそのレベルの累計スキルポイント。
+							%li レベル、特訓ポイント、スキルポイントの近くにマウスカーソルを持っていくと入力欄が表示されます。
 							%li スキルポイントはスキル一覧の項目をクリックすると必要なポイントが自動入力されます。上下ボタン・キーボードの上下キーで1ずつ調整、PageUp/PageDownキーで10ずつ上下します。数値の直接入力も可能。
 							%li
 								スキルポイント欄右のリセットボタンをクリックするとポイントを0にします。
@@ -150,45 +162,51 @@
 									%li ダブルクリックすると複数の職で振ったそのスキルのポイントをすべて0にします。
 									%li 職業欄下部の「全スキルをリセット」で、全職業で振ったスキルのポイントをすべて0にします。レベルと特訓は変化しません。
 							%li 「保存用URL」欄に表示されるURLは、アクセスすることで現在の状態を再現できます。メモ用・掲示板に貼る用などにどうぞ。
-							%li レベル欄あたりにカーソルを持っていくと「おりたたむ」ボタンが出てきて、クリックすると簡易表示になります。そのまま操作も可能。「すべてたたむ」でレベル・スキルを一覧するのがおすすめです。
+							%li 各職業欄の右上にある「おりたたむ」ボタンをクリックすると簡易表示になります。そのまま操作も可能。「すべてたたむ」でレベル・スキルを一覧するのがおすすめです。
 							%li タイトル下の職業ごとのボタンをクリックすると、その職業の位置にスクロールします。折りたたまれていた場合は展開されます。
 							%li 特訓モードのスキルポイントを1以上にした場合、最低でもレベル50必要なものとして計算します。
 							%li 「レベル一括設定」でレベルを選択し設定ボタンをクリックすると、全職業のレベルを一度に変更できます。
-							%li 「必要レベルまで上げる」ボタンをクリックすると、現在のレベルを取得済みのスキルに応じた必要レベルまで持ち上げます。
+							%li 「必要レベルまで上げる」ボタンをクリックすると、現在のレベルを取得済みのスキルに応じた必要レベルまで引き上げます。
 							%li 「パッシブ全取得」でステータスの種類を選択し設定ボタンをクリックすると、「常時さいだいHP+30」などのいわゆるパッシブスキルをすべて取得した状態に設定します。ゼロからのスキル設計時、「とりあえずHPMPパッシブ」のような使い方が可能です。
 							%li ブックマークレットを利用して、冒険者の広場のスキルポイント詳細ページからデータを取り込めます。詳細は<a href="hiroba-import.html" target="_blank">解説ページを参照</a>してください。
 					%li
 						履歴:
 						%ul
-							%li 2013/12/11 <a href="./monster.html">仲間モンスター用スキルシミュレータ</a>を公開。
-							%li 2013/12/5 v4.0 Version2の新職業・まもの使いを追加、レベル上限を75→80に。
 							%li
-								2013/11/26 v3.9
+								2014/2/27 v5.0
 								%ul
-									%li 「必要レベルまで上げる」機能追加。
-									%li 「パッシブ全取得」機能追加。
-									%li レイアウト変更。ツイートボタン2種の位置が近く間違いやすかったのを改善、広場取込ボタンを目立つ位置に。
-							%li 2013/11/22 v3.8.1 スクリプトの整理、ライブラリを<a href="http://code.jquery.com/" target="_blank">jQuery CDN</a>からロードするよう変更。
+									%li ver2.1の新職業・どうぐ使いを追加。後期実装予定の130スキルを暫定で選択可能に。
+									%li レイアウト大幅刷新。たたんだときに全情報が見えるように。入力部分はマウスポイント時のみ表示。
+									%li おりたたむ・ひろげるボタンを職業欄右上に固定表示。
+									%li データ量増加に対応するため保存用URLの仕様変更。従来のものも読み込めます。
+									%li ページ読み込みを高速化。
+									%li <a href="simple.html" target="_blank">簡易表示版</a>を作成。デザインは<a href="https://twitter.com/mikonoMai" target="_blank">みこのん (@mikonoMai) さん</a>によるものです。ありがとうございます。
+							%li 2013/12/5 v4.0 Version2の新職業・まもの使いを追加、レベル上限を75→80に。
 							%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
 					%li
 						ToDo:
 						%ul
-							%li Lv76-80の必要経験値入力
-							%li 仲間モンスター用シミュレータの公開
+							%li 簡易表示版の編集機能
 					%li ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。
 				%address<
 					%p.contact 連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a>
 		#ad_sidebar
-			%h2 DQ10ツールリンク
+			%h2 サイト内リンク
 			%ul
 				%li<
-					%a{href: 'http://grooowl.com/r/dqx/', target: '_blank'} DQX相場情報
+					%a{href: 'monster.html'} 仲間モンスター用シミュレータ
+				%li<
+					%a{href: 'http://cpro.jp/dq10/roulette/'} ルーレットシミュレータ
+			%h2 DQ10ツールリンク
+			%ul
 				%li<
 					%a{href: 'http://www.d-quest-10.com/', target: '_blank'} ドラクエ10・モンスター完全図鑑
 				%li<
 					%a{href: 'http://dq100buster.wiki.fc2.com/', target: '_blank'} DQ10 モンスター100匹討伐隊攻略wiki
 				%li<
 					%a{href: 'http://yujuko.sakura.ne.jp/dq/ParaWt.html', target: '_blank'} DQX - 重さチェッカー
+				%li<
+					%a{href: 'http://rizria.com/dqx/search', target: '_blank'} DQ10 モーモンバザー サーチ
 			#snsbuttons
 				.snsbutton#tw-share
 				.snsbutton#fb-like
@@ -199,3 +217,23 @@
 						%img{src: item[:img_url], width: item[:img_width], height: item[:img_height], alt: item[:item_title], title: item[:item_title]}>/
 						%br>/
 						=item[:item_title]
+		:javascript
+			jQuery(function($) {
+				var sharedUrl = "#{@home_uri}";
+				$('#tw-share').socialbutton('twitter', {
+					button: 'horizontal',
+					url: sharedUrl,
+					lang: 'ja',
+					hashtags: 'DQ10, dq10_skillsim'
+				});
+				$('#fb-like').socialbutton('facebook_like', {
+					button: 'button_count',
+					url: sharedUrl,
+					locale: 'ja_JP'
+				});
+				$('#g-plusone').socialbutton('google_plusone', {
+					lang: 'ja',
+					size: 'medium',
+					url: sharedUrl
+				});
+			});

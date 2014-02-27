@@ -7,13 +7,23 @@
     <link href='http://cpro.jp/dq10/skillsimulator/monster.html' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。まもの使いで仲間にしたモンスター用。' name='description'>
     <title>DQ10 仲間モンスター用スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=m0.1' rel='stylesheet' type='text/css'>
-    <link href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css' rel='stylesheet' type='text/css'>
-    <script src='http://code.jquery.com/jquery-1.10.2.min.js' type='text/javascript'></script>
-    <script src='http://code.jquery.com/ui/1.10.3/jquery-ui.min.js' type='text/javascript'></script>
+    <link href='./dq10skill.css?ver=m0.1c' rel='stylesheet' type='text/css'>
+    <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' type='text/javascript'></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
     <script src='js/base64.js' type='text/javascript'></script>
-    <script src='./dq10skill-monster.js?ver=m0.1' type='text/javascript'></script>
+    <script src='./dq10skill-monster.js?ver=m0.1c' type='text/javascript'></script>
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-5127088-4']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
   </head>
   <body id='body-for-monster'>
     <div id='header'>
@@ -40,6 +50,16 @@
             <li class='button-monster-append ui-corner-all'><a id='append-lizardman'>リザードマン</a></li>
             <li class='button-monster-append ui-corner-all'><a id='append-battlerex'>バトルレックス</a></li>
             <li class='button-monster-append ui-corner-all'><a id='append-itazuramogura'>いたずらもぐら</a></li>
+            <li class='button-monster-append ui-corner-all'><a id='append-golem'>ゴーレム</a></li>
+            <li class='button-monster-append ui-corner-all'><a id='append-metappy'>メタッピー</a></li>
+            <li class='button-monster-append ui-corner-all'><a id='append-takeyarihei'>たけやりへい</a></li>
+            <li class='button-monster-append ui-corner-all'><a id='append-needleman'>ニードルマン</a></li>
+            <li class='button-monster-append ui-corner-all'><a id='append-fondue'>フォンデュ</a></li>
+            <li class='button-monster-append ui-corner-all'><a id='append-samayouyoroi'>さまようよろい</a></li>
+            <li class='button-monster-append ui-corner-all'><a id='append-entasisman'>エンタシスマン</a></li>
+            <li class='button-monster-append ui-corner-all'><a id='append-magicalhat'>マジカルハット</a></li>
+            <li class='button-monster-append ui-corner-all'><a id='append-devilarmor'>デビルアーマー</a></li>
+            <li class='button-monster-append ui-corner-all'><a id='append-odoruhouseki'>おどるほうせき</a></li>
           </ul>
         </div>
         <div id='navlink'>
@@ -66,6 +86,7 @@
             </span>
             <span class='indiv_name'>
               <label for='indiv_name-dummy'>名前:</label><input class='ui-widget-content ui-corner-all' id='indiv_name-dummy' size='20' type='text'></span>
+            <button class='toggle_ent'>たたむ/ひろげる</button>
             <button class='movedown'>下へ</button>
             <button class='moveup'>上へ</button>
             &nbsp;
@@ -111,13 +132,19 @@
               <li>レベル転生に対応。転生回数を1以上にすると、追加スキルを選択可能になります。</li>
               <li>名前欄には、ゲーム本編と違い文字制限はありません。「回復特化」といったメモ用途など自由に入力してください。</li>
               <li>「保存用URL」欄に表示されるURLは、アクセスすることで現在の状態を再現できます。メモ用・掲示板に貼る用などにどうぞ。</li>
-              <li>レベル欄あたりにカーソルを持っていくと「おりたたむ」ボタンが出てきて、クリックすると簡易表示になります。そのまま操作も可能。「すべてたたむ」でレベル・スキルを一覧するのがおすすめです。</li>
+              <li>各欄の右上にある「おりたたむ」ボタンをクリックすると簡易表示になります。そのまま操作も可能。「すべてたたむ」でレベル・スキルを一覧するのがおすすめです。</li>
               <li>「レベル一括設定」でレベルを選択し設定ボタンをクリックすると、全モンスターのレベルを一度に変更できます。</li>
             </ul>
             <li>
               履歴:
               <ul>
-                <li>2013/12/11 v0.1 正式版リリース</li>
+                <li>2014/2/28 v0.2 ver2.1のどうぐ使いの仲間モンスターを追加。</li>
+                <li>
+                  2013/12/11 v0.1 正式版リリース
+                  <ul>
+                    <li>2013/12/12 v0.1c バトルレックスのスキルデータ誤りを訂正</li>
+                  </ul>
+                </li>
                 <li>過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。</li>
               </ul>
             </li>
@@ -136,12 +163,17 @@
       </div>
     </div>
     <div id='ad_sidebar'>
+      <h2>サイト内リンク</h2>
+      <ul>
+        <li><a href='./'>スキルシミュレータ</a></li>
+        <li><a href='http://cpro.jp/dq10/roulette/'>ルーレットシミュレータ</a></li>
+      </ul>
       <h2>DQ10ツールリンク</h2>
       <ul>
-        <li><a href='http://grooowl.com/r/dqx/' target='_blank'>DQX相場情報</a></li>
         <li><a href='http://www.d-quest-10.com/' target='_blank'>ドラクエ10・モンスター完全図鑑</a></li>
         <li><a href='http://dq100buster.wiki.fc2.com/' target='_blank'>DQ10 モンスター100匹討伐隊攻略wiki</a></li>
         <li><a href='http://yujuko.sakura.ne.jp/dq/ParaWt.html' target='_blank'>DQX - 重さチェッカー</a></li>
+        <li><a href='http://rizria.com/dqx/search' target='_blank'>DQ10 モーモンバザー サーチ</a></li>
       </ul>
       <div id='snsbuttons'>
         <div class='snsbutton' id='tw-share'></div>

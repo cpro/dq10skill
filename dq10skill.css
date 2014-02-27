@@ -5,6 +5,8 @@ body {
   font-family: "メイリオ", sans-serif;
   font-size: 100%;
   padding: 95px 0 0 0; }
+  body#body-for-monster {
+    padding: 138px 0 0 0; }
 
 a {
   text-decoration: none; }
@@ -63,6 +65,7 @@ a {
       z-index: 102; }
       #header #consoleblock #foldbuttons ul.button-container {
         display: inline-block;
+        vertical-align: top;
         list-style-type: none;
         margin: 0;
         padding: 0; }
@@ -70,8 +73,6 @@ a {
           width: 99px; }
         #header #consoleblock #foldbuttons ul.button-container#foldbuttons-vocation {
           width: 231px; }
-        #header #consoleblock #foldbuttons ul.button-container#foldbuttons-skillCategory {
-          width: 264px; }
         #header #consoleblock #foldbuttons ul.button-container#appendbuttons {
           width: 435px; }
         #header #consoleblock #foldbuttons ul.button-container li {
@@ -153,6 +154,11 @@ a {
       #header #consoleblock #navlink .ui-button-text {
         padding: 0.2em 0.5em; }
 
+#body-for-monster #header {
+  height: 133px; }
+  #body-for-monster #header #consoleblock {
+    height: 82px; }
+
 /* エントリボックス */
 .class_group, .monster_ent {
   border: 2px solid #9999aa;
@@ -160,14 +166,22 @@ a {
   clear: both;
   margin: 3px 0;
   padding: 2px;
-  overflow: hidden; }
+  overflow: hidden;
+  position: relative; }
   .class_group:nth-child(even), .monster_ent:nth-child(even) {
-    background-color: #f6f6f7; }
+    background-color: #f6f6f9; }
   .class_group:nth-child(odd), .monster_ent:nth-child(odd) {
     background-color: #fcfcfd; }
 
 .class_group {
-  width: 65.5em; }
+  width: 920px;
+  /* 折りたたみ/展開ボタン */ }
+  .class_group .fold, .class_group .unfold {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 1px;
+    bottom: 1px; }
 
 .monster_ent {
   width: 65.5em; }
@@ -175,14 +189,49 @@ a {
 /* モンスター用 各エントリタイトル */
 .ent_title {
   width: 98%;
-  margin: 0 auto 3px auto;
-  padding: 3px 0;
+  margin: 0 auto 2px auto;
+  padding: 2px 0;
   position: relative;
+  height: 22px;
   border-bottom: 1px solid #9999aa; }
+  .ent_title h2, .ent_title dl, .ent_title dt, .ent_title dd {
+    display: inline-block; }
   .ent_title h2 {
-    font-size: 100%;
+    font-size: 16px;
     margin: 0;
-    padding: 0; }
+    padding: 0;
+    position: relative; }
+    .ent_title h2 #lv_console {
+      position: absolute;
+      top: 0;
+      left: 0; }
+      .ent_title h2 #lv_console #lv-select {
+        margin: 0;
+        padding: 0; }
+  .ent_title dl, .ent_title dt, .ent_title dd {
+    margin: 0; }
+  .ent_title dt, .ent_title dd {
+    font-size: 12px; }
+  .ent_title dl.skill_pt {
+    margin-left: 30px; }
+    .ent_title dl.skill_pt dd.pts {
+      font-weight: bold;
+      font-size: 16px; }
+  .ent_title dl.training_pt dd {
+    font-weight: bold;
+    font-size: 15px;
+    position: relative; }
+  .ent_title dl.training_pt #training_pt_console {
+    position: absolute;
+    top: 0;
+    left: 0; }
+    .ent_title dl.training_pt #training_pt_console input {
+      /* spinner */
+      width: 24px;
+      text-align: right;
+      font-size: 12px; }
+  .ent_title dl.expinfo dt {
+    margin-left: 10px; }
   .ent_title .ent_title_console {
     position: absolute;
     top: 0;
@@ -205,19 +254,16 @@ a {
   font-size: 70%;
   float: left;
   width: 12em;
-  height: 20em;
+  height: 200px;
   position: relative;
   text-align: center;
   border-right: 1px solid #9999aa;
   vertical-align: top; }
-  .class_info h2 {
-    font-size: 140%;
-    margin: 0.8em 0; }
   .class_info dt {
     font-weight: normal; }
   .class_info dt.label_lv, .class_info dd.lv_select {
     display: inline; }
-  .class_info dt, .class_info dd {
+  .class_info dl, .class_info dt, .class_info dd {
     margin: 0; }
   .class_info .lv_select select {
     text-align: right; }
@@ -233,39 +279,38 @@ a {
 .monster_ent .class_info {
   height: 16em; }
 
-/* 折りたたみ/展開ボタン */
-p.fold, p.unfold {
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  left: 1em; }
-
-p.fold {
-  bottom: 2px; }
-
-p.unfold {
-  top: 2px; }
-
-.fold:hover, .unfold:hover {
-  cursor: pointer;
-  color: #d66; }
-
-span.fold, span.unfold {
-  margin: 0 0.5em; }
-
-#toggle_buttons {
-  font-size: 75%;
-  display: inline; }
+.skill_tables {
+  padding: 0 10px; }
 
 /* スキル一覧 */
 .skill_table {
   font-size: 70%;
-  width: 16em;
-  border-collapse: collapse;
+  width: 180px;
+  margin: -2px;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 2px solid rgba(255, 0, 0, 0);
+  border-radius: 4px;
   display: inline-block; }
   .skill_table caption {
+    position: relative;
+    overflow: visible;
     font-weight: bold;
     font-size: 120%; }
+    .skill_table caption #pt_console {
+      position: absolute;
+      top: -2px;
+      white-space: nowrap; }
+      .skill_table caption #pt_console input {
+        /* spinner */
+        width: 24px;
+        text-align: right;
+        font-size: 12px; }
+      .skill_table caption #pt_console button {
+        /* reset */
+        width: 20px;
+        height: 20px;
+        vertical-align: bottom; }
   .skill_table .skill_pt {
     width: 2em;
     text-align: right; }
@@ -289,30 +334,22 @@ span.fold, span.unfold {
   .skill_table tr.enabled > td {
     color: black;
     font-weight: bold; }
-  .skill_table tr + tr:hover {
+  .skill_table tr:hover {
     background-color: #edd; }
-    .skill_table tr + tr:hover td {
+    .skill_table tr:hover td {
       color: #877; }
-  .skill_table tr + tr.enabled:hover td {
+  .skill_table tr.enabled:hover td {
     color: #211; }
-  .skill_table.selected tr + tr:hover {
-    background-color: #ccd; }
-    .skill_table.selected tr + tr:hover td {
-      color: #667; }
-  .skill_table.selected tr + tr.enabled:hover td {
-    color: #112; }
 
 .class_group .skill_table.selected {
-  background-color: #efeff4; }
-
-.class_group:nth-child(even) .skill_table.selected {
-  background-color: #e4e4f0; }
+  border-color: rgba(0, 208, 0, 0.6);
+  background-color: rgba(0, 208, 0, 0.02); }
 
 /* フッタコンソール */
 #footconsole {
   border: 2px solid #9999aa;
   border-radius: 5px;
-  width: 65.5em;
+  width: 920px;
   overflow: auto;
   margin: 3px 0;
   padding: 2px; }
@@ -337,6 +374,9 @@ span.fold, span.unfold {
 /* フッタ */
 #footer {
   font-size: 80%;
+  width: 928px; }
+
+#body-for-monster #footer {
   width: 80.5em; }
 
 #contact {
@@ -345,7 +385,7 @@ span.fold, span.unfold {
 /* サイドバー広告 */
 #ad_sidebar {
   position: absolute;
-  left: 67em;
+  left: 946px;
   top: 95px;
   z-index: 1; }
   #ad_sidebar ul {
