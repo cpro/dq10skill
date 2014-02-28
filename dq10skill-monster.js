@@ -1002,7 +1002,7 @@ var SimulatorUI = (function($) {
 			refreshAll();
 		});
 
-		$('#appendbuttons a').click(function(e) {
+		$('.appendbuttons a').click(function(e) {
 			var monsterType = $(this).attr('id').replace('append-', '');
 			var monster = sim.addMonster(monsterType);
 			if(monster === null) return;
