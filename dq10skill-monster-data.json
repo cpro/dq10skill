@@ -330,37 +330,297 @@
 			"skills": [
 				{"pt":   3, "name": "バードカッター", "desc": "", "mp": 2},
 				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
-				{"pt":  12, "name": "常時かいしん率+5%", "desc": "会心のいちげきが\n出やすくなる", "mp": null},
-				{"pt":  18, "name": "魔導砲", "desc": "", "mp": null},
-				{"pt":  25, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
-				{"pt":  32, "name": "クイックチャージ", "desc": "", "mp": 0},
-				{"pt":  40, "name": "バードスラッシュ", "desc": "", "mp": 4}
+				{"pt":  12, "name": "バードスラッシュ", "desc": "", "mp": 4}
+				{"pt":  18, "name": "常時かいしん率+5%", "desc": "会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  25, "name": "魔導砲", "desc": "", "mp": 15},
+				{"pt":  32, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
+				{"pt":  40, "name": "クイックチャージ", "desc": "", "mp": 0},
 			]
 		},
 
 		"suppoppy": {
 			"name": "サポッピー",
 			"skills": [
-				{"pt":   3, "name": "", "desc": "", "mp": null},
-				{"pt":   7, "name": "", "desc": "", "mp": null},
-				{"pt":  12, "name": "", "desc": "", "mp": null},
-				{"pt":  18, "name": "", "desc": "", "mp": null},
-				{"pt":  25, "name": "", "desc": "", "mp": null},
-				{"pt":  32, "name": "", "desc": "", "mp": null},
-				{"pt":  40, "name": "", "desc": "", "mp": null}
+				{"pt":   3, "name": "ピオリム", "desc": "周囲の仲間の\n行動間隔を\n少し短くする", "mp": 4},
+				{"pt":   7, "name": "常時すばやさ+40", "desc": "常時\nすばやさが\n４０増える", "mp": null, "spd": 40},
+				{"pt":  12, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
+				{"pt":  18, "name": "おいかぜ", "desc": "", "mp": null},
+				{"pt":  25, "name": "常時みかわし率+5%", "desc": "敵の攻撃を\nかわしやすくなる", "mp": null},
+				{"pt":  32, "name": "常時みのまもり+80", "desc": "常時\nみのまもりが\n８０増える", "mp": null, "def": 80},
+				{"pt":  40, "name": "バイキルト", "desc": "仲間ひとりの\n攻撃力を\nかなり上げる", "mp": 4}
 			]
 		},
 
-		"": {
-			"name": "",
+		"takeyarihyouhou": {
+			"name": "たけやり兵法",
 			"skills": [
-				{"pt":   3, "name": "", "desc": "", "mp": null},
-				{"pt":   7, "name": "", "desc": "", "mp": null},
-				{"pt":  12, "name": "", "desc": "", "mp": null},
-				{"pt":  18, "name": "", "desc": "", "mp": null},
-				{"pt":  25, "name": "", "desc": "", "mp": null},
-				{"pt":  32, "name": "", "desc": "", "mp": null},
-				{"pt":  40, "name": "", "desc": "", "mp": null}
+				{"pt":   3, "name": "おうえん", "desc": "", "mp": 0},
+				{"pt":   7, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
+				{"pt":  12, "name": "常時みのまもり+50", "desc": "常時\nみのまもりが\n５０増える", "mp": null, "def": 50},
+				{"pt":  18, "name": "さみだれ突き", "desc": "", "mp": 6},
+				{"pt":  25, "name": "常時かいしん率+5%", "desc": "会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  32, "name": "常時さいだいＨＰ+50", "desc": "常時\nさいだいＨＰが\n５０増える", "mp": null, "maxhp": 50},
+				{"pt":  40, "name": "破竹の一撃", "desc": "", "mp": 8}
+			]
+		},
+
+		"takeyarikaihou": {
+			"name": "たけやり介抱",
+			"skills": [
+				{"pt":   3, "name": "スクルト", "desc": "", "mp": null},
+				{"pt":   7, "name": "常時みのまもり+30", "desc": "常時\nみのまもりが\n３０増える", "mp": null, "def": 30},
+				{"pt":  12, "name": "ベホイミ", "desc": "仲間ひとりの\nＨＰを\n８０～回復する", "mp": 4},
+				{"pt":  18, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
+				{"pt":  25, "name": "ザオラル", "desc": "仲間ひとりを\n生き返らせるが\n失敗する時もある", "mp": 8},
+				{"pt":  32, "name": "常時かいふく魔力+100", "desc": "常時\nかいふく魔力が\n１００増える", "mp": null, "heal": 100},
+				{"pt":  40, "name": "オートメンテナンス", "desc": "", "mp": null}
+			]
+		},
+
+		"spear": {
+			"name": "ヤリ",
+			"skills": [
+				{"pt":   3, "name": "装備時こうげき力+10", "desc": "ヤリ装備時の\nこうげき力が\n１０増える", "mp": null},
+				{"pt":   7, "name": "けもの突き", "desc": "獣系の敵に\n威力を発揮する\n荒々しい突き", "mp": 1},
+				{"pt":  12, "name": "装備時こうげき力+15", "desc": "ヤリ装備時の\nこうげき力が\n１５増える", "mp": null},
+				{"pt":  18, "name": "雷鳴突き", "desc": "雷のチカラを\nヤリに宿して\n敵を突く", "mp": 2},
+				{"pt":  25, "name": "装備時武器ガード率+5%", "desc": "ヤリ装備時\n武器ガードを\nしやすくなる", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+25", "desc": "ヤリ装備時の\nこうげき力が\n２５増える", "mp": null},
+				{"pt":  40, "name": "狼牙突き", "desc": "攻撃する相手と\nその間にいる敵を\n刺しつらぬく大技", "mp": 6}
+			]
+		},
+
+		"dirtyharry": {
+			"name": "ダーティーハリー",
+			"skills": [
+				{"pt":   3, "name": "ためる", "desc": "チカラをためて\nテンションアップ", "mp": 0},
+				{"pt":   7, "name": "常時かいしん率+5%", "desc": "会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  12, "name": "かげぬい", "desc": "", "mp": null},
+				{"pt":  18, "name": "常時すばやさ+60", "desc": "常時\nすばやさが\n６０増える", "mp": null, "spd": 60},
+				{"pt":  25, "name": "ニードルレイン", "desc": "", "mp": null},
+				{"pt":  32, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
+				{"pt":  40, "name": "アサシンアタック", "desc": "", "mp": null}
+			]
+		},
+
+		"cutyharry": {
+			"name": "キューティーハリー",
+			"skills": [
+				{"pt":   3, "name": "ピオリム", "desc": "周囲の仲間の\n行動間隔を\n少し短くする", "mp": 4},
+				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
+				{"pt":  12, "name": "常時みのまもり+50", "desc": "常時\nみのまもりが\n５０増える", "mp": null, "def": 50},
+				{"pt":  18, "name": "アップリケ", "desc": "", "mp": null},
+				{"pt":  25, "name": "常時みかわし率+5%", "desc": "敵の攻撃を\nかわしやすくなる", "mp": null},
+				{"pt":  32, "name": "常時さいだいＭＰ+80", "desc": "常時\nさいだいＭＰが\n８０増える", "mp": null, "maxmp": 80},
+				{"pt":  40, "name": "みがわりドール", "desc": "", "mp": null}
+			]
+		},
+
+		"knife": {
+			"name": "短剣",
+			"skills": [
+				{"pt":   3, "name": "装備時こうげき力+10", "desc": "短剣装備時の\nこうげき力が\n１０増える", "mp": null},
+				{"pt":   7, "name": "キラーブーン", "desc": "虫系の敵に\n威力を発揮する\nすばやい剣技", "mp": 1},
+				{"pt":  12, "name": "装備時こうげき力+15", "desc": "短剣装備時の\nこうげき力が\n１５増える", "mp": null},
+				{"pt":  18, "name": "ヴァイパーファング", "desc": "敵１体を\n斬りつけて\nたまに猛毒にする", "mp": 1},
+				{"pt":  25, "name": "攻撃時たまにＭＰ回復", "desc": "短剣での攻撃時\nたまにＭＰを\n回復する", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+25", "desc": "短剣装備時の\nこうげき力が\n２５増える", "mp": null},
+				{"pt":  40, "name": "タナトスハント", "desc": "毒やマヒの敵に\n威力を発揮する\n追い打ちの技", "mp": 3}
+			]
+		},
+
+		"gourmage": {
+			"name": "グルメイジ",
+			"skills": [
+				{"pt":   3, "name": "なめまわし", "desc": "", "mp": null},
+				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
+				{"pt":  12, "name": "常時こうげき魔力+60", "desc": "常時\nこうげき魔力が\n６０増える", "mp": null, "magic": 60},
+				{"pt":  18, "name": "チーズキャノン", "desc": "", "mp": 2},
+				{"pt":  25, "name": "常時みかわし率+5%", "desc": "敵の攻撃を\nかわしやすくなる", "mp": null},
+				{"pt":  32, "name": "常時さいだいＭＰ+80", "desc": "常時\nさいだいＭＰが\n８０増える", "mp": null, "maxmp": 80},
+				{"pt":  40, "name": "もぐもぐタイム", "desc": "", "mp": 12}
+			]
+		},
+
+		"entanohanamichi": {
+			"name": "エンタの花道",
+			"skills": [
+				{"pt":   3, "name": "ツッコミ", "desc": "ツッコんで\n仲間ひとりを\nわれに返す", "mp": 4},
+				{"pt":   7, "name": "常時すばやさ+40", "desc": "常時\nすばやさが\n４０増える", "mp": null, "spd": 40},
+				{"pt":  12, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
+				{"pt":  18, "name": "火ふき芸", "desc": "", "mp": null},
+				{"pt":  25, "name": "常時かいしん率+5%", "desc": "会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  32, "name": "常時みのまもり+80", "desc": "常時\nみのまもりが\n８０増える", "mp": null, "def": 80},
+				{"pt":  40, "name": "いてつく一発芸", "desc": "", "mp": null}
+			]
+		},
+
+		"entasistep": {
+			"name": "エンタシステップ",
+			"skills": [
+				{"pt":   3, "name": "マホトラ踊り", "desc": "", "mp": null},
+				{"pt":   7, "name": "常時みのまもり+30", "desc": "常時\nみのまもりが\n３０増える", "mp": null, "def": 30},
+				{"pt":  12, "name": "ダンサーステップ", "desc": "", "mp": null},
+				{"pt":  18, "name": "常時みかわし率+5%", "desc": "敵の攻撃を\nかわしやすくなる", "mp": null},
+				{"pt":  25, "name": "スピニングピラー", "desc": "", "mp": null},
+				{"pt":  32, "name": "常時さいだいＨＰ+50", "desc": "常時\nさいだいＨＰが\n５０増える", "mp": null, "maxhp": 50},
+				{"pt":  40, "name": "ハッスルダンス", "desc": "周囲の仲間の\nＨＰを７０～回復", "mp": 8}
+			]
+		},
+
+		"fan": {
+			"name": "扇",
+			"skills": [
+				{"pt":   3, "name": "装備時こうげき力+10", "desc": "扇装備時の\nこうげき力が\n１０増える", "mp": null},
+				{"pt":   7, "name": "波紋演舞", "desc": "水系の敵に\n威力を発揮する\n軽やかな扇の技", "mp": 1},
+				{"pt":  12, "name": "装備時こうげき力+15", "desc": "扇装備時の\nこうげき力が\n１５増える", "mp": null},
+				{"pt":  18, "name": "花ふぶき", "desc": "花びらを散らし\n周囲の敵を\n幻惑にかける", "mp": 2},
+				{"pt":  25, "name": "装備時みとれる+5%", "desc": "扇装備時　敵が\nみとれやすくなる", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+25", "desc": "扇装備時の\nこうげき力が\n２５増える", "mp": null},
+				{"pt":  40, "name": "おうぎのまい", "desc": "優雅な踊りで\n周囲の敵に\n４回攻撃", "mp": 4}
+			]
+		},
+
+		"demonssword": {
+			"name": "デモンズソード",
+			"skills": [
+				{"pt":   3, "name": "マホトラ斬り", "desc": "", "mp": null},
+				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
+				{"pt":  12, "name": "かぶと割り", "desc": "頭上から\n敵１体を斬りつけ\n守備力も下げる", "mp": 4},
+				{"pt":  18, "name": "常時かいしん率+5%", "desc": "会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  25, "name": "ロストアタック", "desc": "敵１体に\nダメージを与え\nテンションダウン", "mp": 4},
+				{"pt":  32, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
+				{"pt":  40, "name": "マジックブレイク", "desc": "", "mp": 8}
+			]
+		},
+
+		"demonsshield": {
+			"name": "デモンズシールド",
+			"skills": [
+				{"pt":   3, "name": "スクルト", "desc": "", "mp": null},
+				{"pt":   7, "name": "常時みのまもり+30", "desc": "常時\nみのまもりが\n３０増える", "mp": null, "def": 30},
+				{"pt":  12, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n３０増える", "mp": null, "maxhp": 30},
+				{"pt":  18, "name": "ズッシールド", "desc": "", "mp": 4},
+				{"pt":  25, "name": "常時みかわし率+5%", "desc": "敵の攻撃を\nかわしやすくなる", "mp": null},
+				{"pt":  32, "name": "常時みのまもり+80", "desc": "常時\nみのまもりが\n８０増える", "mp": null, "def": 80},
+				{"pt":  40, "name": "シールドカウンター", "desc": "反撃のスキを狙い\n攻撃をはじいて\nカウンターする", "mp": 6}
+			]
+		},
+
+		"straysword": {
+			"name": "ストレイソード",
+			"skills": [
+				{"pt":   3, "name": "マジックソード", "desc": "", "mp": 2},
+				{"pt":   7, "name": "常時かいしん率+5%", "desc": "会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  12, "name": "いかずち", "desc": "", "mp": 6},
+				{"pt":  18, "name": "常時ちから+15", "desc": "常時\nちからが\n１５増える", "mp": null, "pow": 15},
+				{"pt":  25, "name": "やいばくだき", "desc": "敵を攻撃しつつ\n攻撃力も下げる", "mp": 4},
+				{"pt":  32, "name": "常時さいだいＨＰ+50", "desc": "常時\nさいだいＨＰが\n５０増える", "mp": null, "maxhp": 50},
+				{"pt":  40, "name": "キングダムソード", "desc": "", "mp": 8}
+			]
+		},
+
+		"wanderarmor": {
+			"name": "ワンダーアーマー",
+			"skills": [
+				{"pt":   3, "name": "ホイミ", "desc": "仲間ひとりの\nＨＰを\n２５～回復する", "mp": 2},
+				{"pt":   7, "name": "常時すばやさ+40", "desc": "常時\nすばやさが\n４０増える", "mp": null, "spd": 40},
+				{"pt":  12, "name": "ベホイミ", "desc": "仲間ひとりの\nＨＰを\n８０～回復する", "mp": 4},
+				{"pt":  18, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
+				{"pt":  25, "name": "スーパーアーマー", "desc": "", "mp": 5},
+				{"pt":  32, "name": "常時みのまもり+80", "desc": "常時\nみのまもりが\n８０増える", "mp": null, "def": 80},
+				{"pt":  40, "name": "シールドカウンター", "desc": "反撃のスキを狙い\n攻撃をはじいて\nカウンターする", "mp": 6}
+			]
+		},
+
+		"tatakauchikara": {
+			"name": "たたかうチカラ",
+			"skills": [
+				{"pt":   3, "name": "ためる", "desc": "チカラをためて\nテンションアップ", "mp": 0},
+				{"pt":   7, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
+				{"pt":  12, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n３０増える", "mp": null, "maxhp": 30},
+				{"pt":  18, "name": "メガトンパンチ", "desc": "", "mp": null},
+				{"pt":  25, "name": "常時かいしん率+5%", "desc": "会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  32, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
+				{"pt":  40, "name": "ファイナルブロー", "desc": "", "mp": null}
+			]
+		},
+
+		"mamoruchikara": {
+			"name": "まもるチカラ",
+			"skills": [
+				{"pt":   3, "name": "ズッシード", "desc": "", "mp": null},
+				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
+				{"pt":  12, "name": "めいそう", "desc": "めいそうして\nＨＰを８０～回復", "mp": 5},
+				{"pt":  18, "name": "常時みのまもり+50", "desc": "常時\nみのまもりが\n５０増える", "mp": null, "def": 50},
+				{"pt":  25, "name": "おやすみチャージ", "desc": "", "mp": null},
+				{"pt":  32, "name": "常時さいだいＨＰ+50", "desc": "常時\nさいだいＨＰが\n５０増える", "mp": null, "maxhp": 50},
+				{"pt":  40, "name": "メルキドの秘法", "desc": "", "mp": null}
+			]
+		},
+
+		"twohandedsword": {
+			"name": "両手剣",
+			"skills": [
+				{"pt":   3, "name": "装備時こうげき力+10", "desc": "両手剣装備時の\nこうげき力が\n１０増える", "mp": null},
+				{"pt":   7, "name": "ドラゴンスラッシュ", "desc": "ドラゴン系の敵に\n威力を発揮する\n竜殺しのひと振り", "mp": 1},
+				{"pt":  12, "name": "装備時こうげき力+15", "desc": "両手剣装備時の\nこうげき力が\n１５増える", "mp": null},
+				{"pt":  18, "name": "ぶんまわし", "desc": "振りまわした剣で\n周囲の敵を\nなぎはらう", "mp": 4},
+				{"pt":  25, "name": "装備時武器ガード率+5%", "desc": "両手剣装備時に\n武器ガードが\nできるようになる", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+25", "desc": "両手剣装備時の\nこうげき力が\n２５増える", "mp": null},
+				{"pt":  40, "name": "渾身斬り", "desc": "頭上から\n敵１体を斬りつけ\n大ダメージ", "mp": 3}
+			]
+		},
+
+		"happyruby": {
+			"name": "しあわせのルビー",
+			"skills": [
+				{"pt":   3, "name": "マホトラ踊り", "desc": "", "mp": null},
+				{"pt":   7, "name": "常時すばやさ+40", "desc": "常時\nすばやさが\n４０増える", "mp": null, "spd": 40},
+				{"pt":  12, "name": "ぬすむ", "desc": "", "mp": null},
+				{"pt":  18, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n３０増える", "mp": null, "maxhp": 30},
+				{"pt":  25, "name": "宝石ジャグリング", "desc": "", "mp": null},
+				{"pt":  32, "name": "常時みのまもり+80", "desc": "常時\nみのまもりが\n８０増える", "mp": null, "def": 80},
+				{"pt":  40, "name": "ラッキーダンス", "desc": "幸運を呼ぶ踊りで\n獲得経験値と\nゴールドがアップ", "mp": 7}
+			]
+		},
+
+		"disasterdiamond": {
+			"name": "わざわいのダイヤ",
+			"skills": [
+				{"pt":   3, "name": "ルカナン", "desc": "", "mp": null},
+				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
+				{"pt":  12, "name": "ヘナトス", "desc": "", "mp": null},
+				{"pt":  18, "name": "常時みかわし率+5%", "desc": "敵の攻撃を\nかわしやすくなる", "mp": null},
+				{"pt":  25, "name": "くちふうじ踊り", "desc": "範囲内の敵の\nブレスと呪文を\n封じる", "mp": 5},
+				{"pt":  32, "name": "常時こうげき魔力+100", "desc": "常時\nこうげき魔力が\n１００増える", "mp": null, "magic": 100},
+				{"pt":  40, "name": "ディバインスペル", "desc": "", "mp": null}
+			]
+		},
+
+		"hatmagic": {
+			"name": "ハットマジック",
+			"skills": [
+				{"pt":   3, "name": "イオラ", "desc": "", "mp": null},
+				{"pt":   7, "name": "ドルクマ", "desc": "巨大な\n闇のチカラが\n敵１体をおそう", "mp": 7},
+				{"pt":  12, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
+				{"pt":  18, "name": "マホトラハット", "desc": "", "mp": null},
+				{"pt":  25, "name": "ドルモーア", "desc": "", "mp": null},
+				{"pt":  32, "name": "常時こうげき魔力+100", "desc": "常時\nこうげき魔力が\n１００増える", "mp": null, "magic": 100},
+				{"pt":  40, "name": "ハットイルージョン", "desc": "", "mp": 10}
+			]
+		},
+
+		"buhibuheal": {
+			"name": "ブヒブヒール",
+			"skills": [
+				{"pt":   3, "name": "ザオ", "desc": "仲間ひとりを\nたまにＨＰ１で\n生き返らせる", "mp": 5},
+				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
+				{"pt":  12, "name": "やすらぎハット", "desc": "", "mp": null},
+				{"pt":  18, "name": "常時みのまもり+50", "desc": "常時\nみのまもりが\n５０増える", "mp": null, "def": 50},
+				{"pt":  25, "name": "ベホイム", "desc": "仲間ひとりの\nＨＰを\n１６４～回復する", "mp": 8},
+				{"pt":  32, "name": "常時かいふく魔力+100", "desc": "常時\nかいふく魔力が\n１００増える", "mp": null, "heal": 100},
+				{"pt":  40, "name": "ザオリク", "desc": "", "mp": null}
 			]
 		},
 
@@ -693,16 +953,8 @@
 			"expTable": 1
 		},
 		
-		"golem": {
-			"id": 101,
-			"name": "ゴーレム",
-			"defaultName": "ゴーレム",
-			"skillLines": ["unknown1", "unknown2", "unknown3"],
-			"expTable": 1
-		},
-		
 		"metappy": {
-			"id": 102,
+			"id": 101,
 			"name": "メタッピー",
 			"defaultName": "メタッピー",
 			"skillLines": ["battoppy", "suppoppy", "claw"],
@@ -710,26 +962,34 @@
 		},
 		
 		"takeyarihei": {
-			"id": 103,
+			"id": 102,
 			"name": "たけやりへい",
 			"defaultName": "たけやりへい",
-			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"skillLines": ["takeyarihyouhou", "takeyarikaihou", "spear"],
 			"expTable": 1
 		},
 		
 		"needleman": {
-			"id": 104,
+			"id": 103,
 			"name": "ニードルマン",
 			"defaultName": "ニードルマン",
-			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"skillLines": ["dirtyharry", "cutyharry", "knife"],
 			"expTable": 1
 		},
 		
 		"fondue": {
-			"id": 105,
+			"id": 104,
 			"name": "フォンデュ",
 			"defaultName": "フォンデュ",
-			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"skillLines": ["gourmage", "io", "wand"],
+			"expTable": 1
+		},
+		
+		"entasisman": {
+			"id": 105,
+			"name": "エンタシスマン",
+			"defaultName": "エンタシスマ",
+			"skillLines": ["entanohanamichi", "entasistep", "fan"],
 			"expTable": 1
 		},
 		
@@ -737,43 +997,52 @@
 			"id": 106,
 			"name": "さまようよろい",
 			"defaultName": "さまようよろ",
-			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"skillLines": ["straysword", "wanderarmor", "sword"],
 			"expTable": 1
 		},
 		
-		"entasisman": {
+		"golem": {
 			"id": 107,
-			"name": "エンタシスマン",
-			"defaultName": "エンタシスマ",
-			"skillLines": ["unknown1", "unknown2", "unknown3"],
-			"expTable": 1
-		},
-		
-		"magicalhat": {
-			"id": 108,
-			"name": "マジカルハット",
-			"defaultName": "マジカルハッ",
-			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"name": "ゴーレム",
+			"defaultName": "ゴーレム",
+			"skillLines": ["tatakauchikara", "mamoruchikara", "twohandedsword"],
 			"expTable": 1
 		},
 		
 		"devilarmor": {
-			"id": 109,
+			"id": 108,
 			"name": "デビルアーマー",
 			"defaultName": "デビルアーマ",
-			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"skillLines": ["demonssword", "demonsshield", "sword"],
 			"expTable": 1
 		},
 		
 		"odoruhouseki": {
-			"id": 110,
+			"id": 109,
 			"name": "おどるほうせき",
 			"defaultName": "おどるほうせ",
-			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"skillLines": ["happyruby", "disasterdiamond", "fan"],
+			"expTable": 1
+		},
+		
+		"magicalhat": {
+			"id": 110,
+			"name": "マジカルハット",
+			"defaultName": "マジカルハッ",
+			"skillLines": ["hatmagic", "buhibuheal", "wand"],
 			"expTable": 1
 		}
 		
 	},
+
+	"monstermaster": [
+		"slime", "mormon", "prisonyan", "hoimislime", "slimeknight",
+		"chimera", "catmage", "lizardman", "battlerex", "itazuramogura"
+	],
+	"itemmaster": [
+		"metappy", "takeyarihei", "needleman", "fondue", "entasisman",
+		"samayouyoroi", "golem", "devilarmor", "odoruhouseki", "magicalhat"
+	],
 
 	"additionalSkillLines": [
 		{"name": "raisehp",    "restartCount": 1, "id":  1},
