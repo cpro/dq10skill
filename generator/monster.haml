@@ -45,12 +45,13 @@
 							%a#fold-all ▲すべてたたむ
 						%li.button-for-all.ui-corner-all<
 							%a#unfold-all ▼すべてひろげる
-					%ul.button-container#appendbuttons
-						- data['monsters'].each_pair do |monster, m_data|
-							%li.button-monster-append.ui-corner-all<
-								%a{id: "append-#{monster}"} #{m_data['name']}
+					- %w(monstermaster itemmaster).each do |master_type|
+						%ul.button-container.appendbuttons{id: "#{master_type}"}
+							- data[master_type].each do |monster|
+								%li.button-monster-append.ui-corner-all<
+									%a{id: "append-#{monster}"} #{data['monsters'][monster]['name']}
 				-# %table#total.ui-corner-all
-				#navlink
+				-# #navlink
 					%a{href: './'} プレイヤーキャラクター用シミュレータはこちら
 		#body_content
 			.monster_ent#initial-instruction
