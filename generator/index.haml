@@ -1,4 +1,4 @@
-- VERSION = '5.0'
+- VERSION = '5.0.2'
 !!! 5
 %html
 	%head
@@ -110,9 +110,10 @@
 						.ent_title_console
 							%button.toggle_ent たたむ/ひろげる
 					.skill_tables
-						- data['vocations'][vocation]['skillLines'].each do |skillLine|
-							- skill_line = data['skillLines'][skillLine]
-							%table{class: [skillLine, 'skill_table']}>
+						- skill_lines = data['vocations'][vocation]['skillLineOrder'] || data['vocations'][vocation]['skillLines']
+						- skill_lines.each do |skill_line_name|
+							- skill_line = data['skillLines'][skill_line_name]
+							%table{class: [skill_line_name, 'skill_table']}>
 								%caption
 									%label{for: 'pt_spinner'}
 										= skill_line['name'] + ': '
@@ -123,7 +124,7 @@
 									- hint = skill['desc']
 									- hint += "\n（消費MP: #{skill['mp']}）" if skill['mp']
 									- hint += "\n（#{skill['gold']}G）" if skill['gold']
-									%tr{class: [skillLine, i].join('_'), title: hint}<
+									%tr{class: [skill_line_name, i].join('_'), title: hint}<
 										%td.skill_pt>= skill['pt']
 										%td.skill_name= skill['name']
 			#pt_console{style: 'display: none'}
@@ -181,6 +182,7 @@
 									%li データ量増加に対応するため保存用URLの仕様変更。従来のものも読み込めます。
 									%li ページ読み込みを高速化。
 									%li <a href="simple.html" target="_blank">簡易表示版</a>を作成。デザインは<a href="https://twitter.com/mikonoMai" target="_blank">みこのん (@mikonoMai) さん</a>によるものです。ありがとうございます。
+									%li v5.0.2 魔戦・スパのスキルライン表示順がゲームと異なっていたのを修正。
 							%li 2013/12/5 v4.0 Version2の新職業・まもの使いを追加、レベル上限を75→80に。
 							%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
 					%li

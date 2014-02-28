@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 $header-height: 90px;
-$header-height-monster: 133px;
+$header-height-monster: 90px;
 $main-background-color: #fcfcfd;
 $body-content-width-monster: 65.5em;
 
@@ -115,7 +115,7 @@ a {
 				&#foldbuttons-vocation {
 					width: ($width-each + 2px + 1px) * 7;
 				}
-				&#appendbuttons {
+				&.appendbuttons {
 					width: ($width-monster-append + 2px + 1px) * 5;
 				}
 
@@ -159,6 +159,15 @@ a {
 						padding: 0 $side-padding-a;
 						height: $height-button;
 					}
+				}
+
+				&#monstermaster li {
+					border-color: #aab;
+					background-color: #f0f0f7;
+				}
+				&#itemmaster li {
+					border-color: #ba9;
+					background-color: #f7f4f0;
 				}
 			}
 		}
