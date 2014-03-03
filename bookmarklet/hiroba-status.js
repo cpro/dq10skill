@@ -37,7 +37,15 @@ var SKILLS = {
 	'賢者': ['ブーメラン', '両手杖', '弓', '盾', 'さとり'],
 	'スーパースター': ['ムチ', '扇', 'スティック', '格闘', 'オーラ'],
 	'まもの使い': ['ムチ', 'ツメ', '両手剣', 'オノ', 'まものマスター'],
-	'どうぐ使い': ['ブーメラン', 'ハンマー', 'ヤリ', '弓', 'アイテムマスター']
+	'どうぐ使い': ['ブーメラン', 'ハンマー', 'ヤリ', '弓', 'アイテムマスター'],
+	'マスタースキル': [
+		'ゆうかん', 'しんこう心', 'まほう', 'きあい', 'おたから', 'きょくげい',
+		'とうこん', 'フォース', 'サバイバル', 'はくあい', 'さとり', 'オーラ',
+		'まものマスター', 'アイテムマスター',
+		'格闘', '盾', '片手剣', '両手剣', '短剣', 'スティック',
+		'両手杖', 'ヤリ', 'オノ', 'ハンマー', '棍', 'ツメ',
+		'扇', 'ムチ', 'ブーメラン', '弓'
+	]
 };
 var TRAINING_TABLE = [
 	{stamp:    0, skillPt: 0},
@@ -92,7 +100,8 @@ var HirobaStatus = (function($) {
 		for(var skillName in skillMap) {
 			for(var j = 0; j < skillMap[skillName].jobSkillPoints.length; j++) {
 				var jobObj = skillMap[skillName].jobSkillPoints[j];
-				status[jobObj.job].skill[skillName] = jobObj.value;
+				if($.inArray(jobObj.job, VOCATIONS) >= 0)
+					status[jobObj.job].skill[skillName] = jobObj.value;
 			}
 		}
 	}
