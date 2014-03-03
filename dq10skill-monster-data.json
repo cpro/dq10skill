@@ -954,7 +954,7 @@
 		},
 		
 		"metappy": {
-			"id": 101,
+			"id": 11,
 			"name": "メタッピー",
 			"defaultName": "メタッピー",
 			"skillLines": ["battoppy", "suppoppy", "claw"],
@@ -962,7 +962,7 @@
 		},
 		
 		"takeyarihei": {
-			"id": 102,
+			"id": 12,
 			"name": "たけやりへい",
 			"defaultName": "たけやりへい",
 			"skillLines": ["takeyarihyouhou", "takeyarikaihou", "spear"],
@@ -970,7 +970,7 @@
 		},
 		
 		"needleman": {
-			"id": 103,
+			"id": 13,
 			"name": "ニードルマン",
 			"defaultName": "ニードルマン",
 			"skillLines": ["dirtyharry", "cutyharry", "knife"],
@@ -978,7 +978,7 @@
 		},
 		
 		"fondue": {
-			"id": 104,
+			"id": 14,
 			"name": "フォンデュ",
 			"defaultName": "フォンデュ",
 			"skillLines": ["gourmage", "io", "wand"],
@@ -986,7 +986,7 @@
 		},
 		
 		"entasisman": {
-			"id": 105,
+			"id": 15,
 			"name": "エンタシスマン",
 			"defaultName": "エンタシスマ",
 			"skillLines": ["entanohanamichi", "entasistep", "fan"],
@@ -994,7 +994,7 @@
 		},
 		
 		"samayouyoroi": {
-			"id": 106,
+			"id": 16,
 			"name": "さまようよろい",
 			"defaultName": "さまようよろ",
 			"skillLines": ["straysword", "wanderarmor", "sword"],
@@ -1002,7 +1002,7 @@
 		},
 		
 		"golem": {
-			"id": 107,
+			"id": 17,
 			"name": "ゴーレム",
 			"defaultName": "ゴーレム",
 			"skillLines": ["tatakauchikara", "mamoruchikara", "twohandedsword"],
@@ -1010,7 +1010,7 @@
 		},
 		
 		"devilarmor": {
-			"id": 108,
+			"id": 18,
 			"name": "デビルアーマー",
 			"defaultName": "デビルアーマ",
 			"skillLines": ["demonssword", "demonsshield", "sword"],
@@ -1018,7 +1018,7 @@
 		},
 		
 		"odoruhouseki": {
-			"id": 109,
+			"id": 19,
 			"name": "おどるほうせき",
 			"defaultName": "おどるほうせ",
 			"skillLines": ["happyruby", "disasterdiamond", "fan"],
@@ -1026,7 +1026,7 @@
 		},
 		
 		"magicalhat": {
-			"id": 110,
+			"id": 20,
 			"name": "マジカルハット",
 			"defaultName": "マジカルハッ",
 			"skillLines": ["hatmagic", "buhibuheal", "wand"],
