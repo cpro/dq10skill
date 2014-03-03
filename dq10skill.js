@@ -701,7 +701,7 @@ var SimulatorUI = (function($) {
 				var consoleLeft = $baseSpan.position().left + $baseSpan.width() - 50;
 				$('#pt_reset').css({'margin-left': $(this).find('.skill_total').width() + 10});
 
-				$ptConsole.appendTo($(this)).css({left: consoleLeft});
+				$ptConsole.appendTo($(this).find('.console_wrapper')).css({left: consoleLeft});
 				$('#pt_spinner').val(sim.getSkillPt(vocation, skillLine));
 
 				$ptConsole.show();

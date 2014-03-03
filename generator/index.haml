@@ -115,11 +115,12 @@
 							- skill_line = data['skillLines'][skill_line_name]
 							%table{class: [skill_line_name, 'skill_table']}>
 								%caption
-									%label{for: 'pt_spinner'}
-										= skill_line['name'] + ': '
-										%span.skill_current 0
-										\/
-										%span.skill_total 0
+									.console_wrapper
+										%label{for: 'pt_spinner'}
+											= skill_line['name'] + ': '
+											%span.skill_current 0
+											\/
+											%span.skill_total 0
 								- skill_line['skills'].each_with_index do |skill, i|
 									- hint = skill['desc']
 									- hint += "\n（消費MP: #{skill['mp']}）" if skill['mp']
