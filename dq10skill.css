@@ -299,24 +299,25 @@ a {
   border-radius: 4px;
   display: inline-block; }
   .skill_table caption {
-    position: relative;
     overflow: visible;
     font-weight: bold;
     font-size: 120%; }
-    .skill_table caption #pt_console {
-      position: absolute;
-      top: -2px;
-      white-space: nowrap; }
-      .skill_table caption #pt_console input {
-        /* spinner */
-        width: 24px;
-        text-align: right;
-        font-size: 12px; }
-      .skill_table caption #pt_console button {
-        /* reset */
-        width: 20px;
-        height: 20px;
-        vertical-align: bottom; }
+    .skill_table caption .console_wrapper {
+      position: relative; }
+      .skill_table caption .console_wrapper #pt_console {
+        position: absolute;
+        top: -2px;
+        white-space: nowrap; }
+        .skill_table caption .console_wrapper #pt_console input {
+          /* spinner */
+          width: 24px;
+          text-align: right;
+          font-size: 12px; }
+        .skill_table caption .console_wrapper #pt_console button {
+          /* reset */
+          width: 20px;
+          height: 20px;
+          vertical-align: bottom; }
   .skill_table .skill_pt {
     width: 2em;
     text-align: right; }

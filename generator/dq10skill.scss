@@ -431,25 +431,28 @@ a {
 	display: inline-block;
 
 	caption {
-		position: relative;
 		overflow: visible;
 		font-weight: bold;
 		font-size: 120%;
 
-		#pt_console {
-			position: absolute;
-			top: -2px;
-			white-space: nowrap;
+		.console_wrapper {
+			position: relative;
+			
+			#pt_console {
+				position: absolute;
+				top: -2px;
+				white-space: nowrap;
 
-			input { /* spinner */
-				width: 24px;
-				text-align: right;
-				font-size: 12px;
-			}
-			button { /* reset */
-				width: 20px;
-				height: 20px;
-				vertical-align: bottom;
+				input { /* spinner */
+					width: 24px;
+					text-align: right;
+					font-size: 12px;
+				}
+				button { /* reset */
+					width: 20px;
+					height: 20px;
+					vertical-align: bottom;
+				}
 			}
 		}
 	}
