@@ -50,6 +50,12 @@ a {
         overflow: hidden; }
         #header #titleblock #save_url #tw-saveurl .ui-button-text {
           padding: 0.2em 0.5em; }
+      #header #titleblock #save_url #msp_selector {
+        display: inline-block;
+        font-size: 11px;
+        margin-right: 10px; }
+        #header #titleblock #save_url #msp_selector label[for="msp_msp"] {
+          color: #5588ee; }
   #header #consoleblock {
     width: auto;
     height: 39px;
@@ -142,7 +148,7 @@ a {
         #header #consoleblock table#total td.total_pts#total_exp, #header #consoleblock table#total td.total_pts#total_exp_remain {
           width: 64px; }
       #header #consoleblock table#total td#msp_remain {
-        color: #79e;
+        color: #5588ee;
         font-weight: bold; }
     #header #consoleblock #navlink {
       position: absolute;
@@ -330,9 +336,9 @@ a {
           display: block;
           position: absolute;
           right: -14px;
-          top: -10px;
+          top: -9px;
           font-size: 80%;
-          color: #79e; }
+          color: #5588ee; }
   .skill_table .skill_pt {
     width: 2em;
     text-align: right; }
@@ -392,6 +398,14 @@ a {
 
 #body-for-monster #footconsole {
   width: 65.5em; }
+
+/* MSPモード時 */
+body.msp #pt_console .ui-widget-content {
+  background: #e0e9fc;
+  color: #1450c9; }
+body.msp .class_group .skill_table.selected {
+  border-color: rgba(85, 136, 238, 0.7);
+  background-color: rgba(85, 136, 238, 0.03); }
 
 /* フッタ */
 #footer {
