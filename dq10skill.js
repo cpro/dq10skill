@@ -10,7 +10,9 @@ var Simulator = (function($) {
 	var TRAINING_SKILL_PTS_MIN = 0;
 	var TRAINING_SKILL_PTS_MAX = 5;
 	var LEVEL_FOR_TRAINING_MODE = 50;
-	
+	var MSP_MIN = 0;
+	var MSP_MAX = 10;
+
 	var DATA_JSON_URI = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'dq10skill-data.json';
 	
 	//データロード
@@ -33,7 +35,8 @@ var Simulator = (function($) {
 	var skillPts = {};
 	var levels = {};
 	var trainingSkillPts = {};
-	
+	var msp = {}; //マスタースキルポイント
+
 	//パラメータ初期化
 	for(var vocation in vocations) {
 		skillPts[vocation] = {};
@@ -94,7 +97,33 @@ var Simulator = (function($) {
 		trainingSkillPts[vocation] = newValue;
 		return true;
 	}
-	
+
+	//マスタースキルポイント取得
+	function getMSP(skillLine) {
+		return msp[skillLine] || 0;
+	}
+
+	//マスタースキルポイント更新
+	function updateMSP(skillLine, newValue) {
+		var oldValue = msp[skillLine] || 0;
+		if(newValue < MSP_MIN || newValue > MSP_MAX)
+			return false;
+		if(totalMSP() - oldValue + newValue > MSP_MAX)
+			return false;
+
+		msp[skillLine] = newValue;
+		return true;
+	}
+
+	//使用中のマスタースキルポイント合計
+	function totalMSP() {
+		var total = 0;
+		for(var s in msp)
+			total += msp[s];
+
+		return total;
+	}
+
 	//職業のスキルポイント合計
 	function totalSkillPts(vocation) {
 		var total = 0;
@@ -111,6 +140,8 @@ var Simulator = (function($) {
 			if(skillPts[vocation][skillLine])
 				total += skillPts[vocation][skillLine];
 		}
+		total += msp[skillLine] || 0;
+
 		return total;
 	}
 	
@@ -120,6 +151,7 @@ var Simulator = (function($) {
 			if(skillPts[vocation][skillLine])
 				updateSkillPt(vocation, skillLine, 0);
 		}
+		msp[skillLine] = 0;
 	}
 	
 	//すべてのスキルを振り直し（0にセット）
@@ -129,6 +161,7 @@ var Simulator = (function($) {
 				skillPts[vocation][skillLine] = 0;
 			}
 		}
+		msp = {};
 	}
 	
 	//職業レベルに対するスキルポイント最大値
@@ -270,17 +303,24 @@ var Simulator = (function($) {
 		//先頭に職業の数を含める
 		serial += toByte(vocationCount);
 
+		var skillLine;
+
 		for(var i = 0; i < vocationCount; i++) {
 			var vocation = VOCATIONS_DATA_ORDER[i];
 			serial += toByte(getLevel(vocation));
 			serial += toByte(getTrainingSkillPt(vocation));
 
 			for(var s = 0; s < vocations[vocation].skillLines.length; s++) {
-				var skillLine = vocations[vocation].skillLines[s];
+				skillLine = vocations[vocation].skillLines[s];
 				serial += toByte(getSkillPt(vocation, skillLine));
 			}
 		}
-
+		//末尾にMSPのスキルラインIDとポイントをペアで格納
+		for(sl in msp) {
+			if(msp[sl] > 0) {
+				serial += toByte(skillLines[sl].id) + toByte(msp[sl]);
+			}
+		}
 		return serial;
 	}
 	function deserialize(serial) {
@@ -294,16 +334,25 @@ var Simulator = (function($) {
 
 		for(i = 0; i < vocationCount; i++) {
 			var vocation = VOCATIONS_DATA_ORDER[i];
-			var skillLines = vocations[vocation].skillLines;
+			var vSkillLines = vocations[vocation].skillLines;
 
-			if(serial.length - cur < 1 + 1 + skillLines.length)
+			if(serial.length - cur < 1 + 1 + vSkillLines.length)
 				break;
 
 			updateLevel(vocation, getData());
 			updateTrainingSkillPt(vocation, getData());
 
-			for(var s = 0; s < skillLines.length; s++) {
-				updateSkillPt(vocation, skillLines[s], getData());
+			for(var s = 0; s < vSkillLines.length; s++) {
+				updateSkillPt(vocation, vSkillLines[s], getData());
+			}
+		}
+		//末尾にデータがあればMSPとして取得
+		while(serial.length - cur >= 2) {
+			var skillLineId = getData();
+			var skillPt = getData();
+			for(var sl in skillLines) {
+				if(skillLines[sl].id == skillLineId)
+					updateMSP(sl, skillPt);
 			}
 		}
 	}
@@ -366,6 +415,9 @@ var Simulator = (function($) {
 		updateLevel: updateLevel,
 		getTrainingSkillPt : getTrainingSkillPt,
 		updateTrainingSkillPt : updateTrainingSkillPt,
+		getMSP: getMSP,
+		updateMSP: updateMSP,
+		totalMSP: totalMSP,
 		totalSkillPts: totalSkillPts,
 		totalOfSameSkills: totalOfSameSkills,
 		clearPtsOfSameSkills: clearPtsOfSameSkills,
@@ -398,7 +450,9 @@ var Simulator = (function($) {
 		LEVEL_MAX: LEVEL_MAX,
 		TRAINING_SKILL_PTS_MIN: TRAINING_SKILL_PTS_MIN,
 		TRAINING_SKILL_PTS_MAX: TRAINING_SKILL_PTS_MAX,
-		LEVEL_FOR_TRAINING_MODE: LEVEL_FOR_TRAINING_MODE
+		LEVEL_FOR_TRAINING_MODE: LEVEL_FOR_TRAINING_MODE,
+		MSP_MIN: MSP_MIN,
+		MSP_MAX: MSP_MAX
 	};
 })(jQuery);
 
