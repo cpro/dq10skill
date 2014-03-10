@@ -541,6 +541,12 @@ var SimulatorUI = (function($) {
 			$('.' + skillLine + '_' + s.toString()).addClass(CLASSNAME_SKILL_ENABLED);
 		}
 		$('.' + skillLine + ' .skill_total').text(totalOfSkill);
+
+		var msp = sim.getMSP(skillLine);
+		if(msp > 0)
+			$('<span>(' + msp.toString() + ')</span>')
+				.addClass('msp')
+				.appendTo('.' + skillLine + ' .skill_total');
 	}
 	
 	function refreshControls() {

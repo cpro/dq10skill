@@ -195,10 +195,10 @@ a {
 /* モンスター用 各エントリタイトル */
 .ent_title {
   width: 98%;
-  margin: 0 auto 2px auto;
-  padding: 2px 0;
+  margin: 0 auto 7px auto;
+  padding: 1px 0 2px 0;
   position: relative;
-  height: 22px;
+  height: 18px;
   border-bottom: 1px solid #9999aa; }
   .ent_title h2, .ent_title dl, .ent_title dt, .ent_title dd {
     display: inline-block; }
@@ -241,10 +241,11 @@ a {
   .ent_title .ent_title_console {
     position: absolute;
     top: 0;
-    right: 0; }
+    right: 0;
+    line-height: 18px; }
     .ent_title .ent_title_console button {
-      width: 20px;
-      height: 20px; }
+      width: 18px;
+      height: 18px; }
     .ent_title .ent_title_console .indiv_name, .ent_title .ent_title_console .additional_skill_selector {
       margin-right: 3px; }
       .ent_title .ent_title_console .indiv_name label, .ent_title .ent_title_console .additional_skill_selector label {
@@ -292,7 +293,8 @@ a {
 .skill_table {
   font-size: 70%;
   width: 180px;
-  margin: -2px;
+  margin: -6px -2px -2px -2px;
+  padding-top: 4px;
   border-collapse: separate;
   border-spacing: 0;
   border: 2px solid rgba(255, 0, 0, 0);
@@ -300,6 +302,7 @@ a {
   display: inline-block; }
   .skill_table caption {
     overflow: visible;
+    white-space: nowrap;
     font-weight: bold;
     font-size: 120%; }
     .skill_table caption .console_wrapper {
@@ -318,6 +321,16 @@ a {
           width: 20px;
           height: 20px;
           vertical-align: bottom; }
+      .skill_table caption .console_wrapper .skill_total {
+        display: inline-block;
+        position: relative; }
+        .skill_table caption .console_wrapper .skill_total .msp {
+          display: block;
+          position: absolute;
+          right: -14px;
+          top: -10px;
+          font-size: 80%;
+          color: #79E; }
   .skill_table .skill_pt {
     width: 2em;
     text-align: right; }

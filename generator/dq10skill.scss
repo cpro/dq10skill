@@ -280,10 +280,10 @@ a {
 /* モンスター用 各エントリタイトル */
 .ent_title {
 	width: 98%;
-	margin: 0 auto 2px auto;
-	padding: 2px 0;
+	margin: 0 auto 7px auto;
+	padding: 1px 0 2px 0;
 	position: relative;
-	height: 22px;
+	height: 18px;
 	border-bottom: 1px solid #99a;
 
 	h2, dl, dt, dd {
@@ -353,10 +353,10 @@ a {
 		position: absolute;
 		top: 0;
 		right: 0;
-
+		line-height: 18px;
 		button {
-			width: 20px;
-			height: 20px;
+			width: 18px;
+			height: 18px;
 		}
 
 		.indiv_name, .additional_skill_selector {
@@ -422,7 +422,8 @@ a {
 .skill_table {
 	font-size: 70%;
 	width: $skill-table-width;
-	margin: -2px;
+	margin: -6px -2px -2px -2px;
+	padding-top: 4px;
 	border-collapse: separate;
 	border-spacing: 0;
 	border: 2px solid rgba(255, 0, 0, 0);
@@ -432,6 +433,7 @@ a {
 
 	caption {
 		overflow: visible;
+		white-space: nowrap;
 		font-weight: bold;
 		font-size: 120%;
 
@@ -452,6 +454,19 @@ a {
 					width: 20px;
 					height: 20px;
 					vertical-align: bottom;
+				}
+			}
+
+			.skill_total {
+				display: inline-block;
+				position: relative;
+				.msp {
+					display: block;
+					position: absolute;
+					right: -14px;
+					top: -10px;
+					font-size: 80%;
+					color: #79E;
 				}
 			}
 		}
