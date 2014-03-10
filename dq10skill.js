@@ -528,6 +528,7 @@ var SimulatorUI = (function($) {
 		for(var i = 0; i < status.length; i++) {
 			$('#total_' + status[i]).text(sim.totalStatus(status[i]));
 		}
+		$('#msp_remain').text((sim.MSP_MAX - sim.totalMSP()).toString() + 'P');
 	}
 	
 	function refreshSkillList(skillLine) {
