@@ -155,6 +155,11 @@ var Simulator = (function($) {
 		}
 		msp[skillLine] = 0;
 	}
+
+	//MSPを初期化
+	function clearMSP() {
+		msp = {};
+	}
 	
 	//すべてのスキルを振り直し（0にセット）
 	function clearAllSkills() {
@@ -163,7 +168,7 @@ var Simulator = (function($) {
 				skillPts[vocation][skillLine] = 0;
 			}
 		}
-		msp = {};
+		clearMSP();
 	}
 	
 	//職業レベルに対するスキルポイント最大値
@@ -423,6 +428,7 @@ var Simulator = (function($) {
 		totalSkillPts: totalSkillPts,
 		totalOfSameSkills: totalOfSameSkills,
 		clearPtsOfSameSkills: clearPtsOfSameSkills,
+		clearMSP: clearMSP,
 		clearAllSkills: clearAllSkills,
 		maxSkillPts: maxSkillPts,
 		requiredLevel: requiredLevel,
@@ -845,18 +851,27 @@ var SimulatorUI = (function($) {
 				refreshTotalPassive();
 			}).dblclick(function (e) {
 				//ダブルクリック時に各職業の該当スキルをすべて振り直し
-				if(mspMode) return;
+				if(mspMode) {
+					if(!window.confirm('マスタースキルポイントをすべて振りなおします。'))
+						return;
 
-				var skillLine = getCurrentSkillLine(this);
-				var skillName = sim.skillLines[skillLine].name;
-				
-				if(!window.confirm('スキル「' + skillName + '」をすべて振りなおします。'))
-					return;
-				
-				sim.clearPtsOfSameSkills(skillLine);
+					sim.clearMSP();
+					for(var skillLine in sim.skillLines) {
+						refreshSkillList(skillLine);
+					}
+				} else {
+					var skillLine = getCurrentSkillLine(this);
+					var skillName = sim.skillLines[skillLine].name;
+					
+					if(!window.confirm('スキル「' + skillName + '」をすべて振りなおします。'))
+						return;
+					
+					sim.clearPtsOfSameSkills(skillLine);
+					$('.' + skillLine + ' .skill_current').text('0');
+					refreshSkillList(skillLine);
+				}
+
 				$('#pt_spinner').val(0);
-				$('.' + skillLine + ' .skill_current').text('0');
-				refreshSkillList(skillLine);
 				refreshAllVocationInfo();
 				refreshTotalExpRemain();
 				refreshTotalPassive();
