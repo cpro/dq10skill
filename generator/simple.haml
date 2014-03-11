@@ -43,6 +43,7 @@
 				%tr#header
 					%th
 					%th.unique 固<br>有<br>ス<br>キ<br>ル
+					%th.msp M<br>S<br>P
 					%th.remain の<br>こ<br>り
 					- data['skillLineOrder'].each do |skill_line|
 						%th{class: "#{skill_line}"}= data['skillLines'][skill_line]['name'].split('').join('<br>').gsub('ー', '<span class="chou">ー</span>')
@@ -52,6 +53,8 @@
 					%tr.vocation{id: "#{vocation}"}
 						%th= data['vocations'][vocation]['name']
 						%td.unique
+							.container
+						%td.msp
 							.container
 						%td.remain
 							.container
@@ -64,8 +67,19 @@
 						%td.total
 							.container
 						%td.level
+				%tr#msp
+					%th{colspan: 2} MSP
+					%td.msp
+					%td.remain
+						.container
+					- data['skillLineOrder'].each do |skill_line|
+						%td.skill{class: "#{skill_line}"}
+							.container
+					%td.total
+						.container
+					%td.empty
 				%tr#footer
-					%th{colspan: 3} 合計
+					%th{colspan: 4} 合計
 					- data['skillLineOrder'].each do |skill_line|
 						%td.skill{class: "#{skill_line}"}
 							.container

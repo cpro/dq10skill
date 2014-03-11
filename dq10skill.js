@@ -10,7 +10,9 @@ var Simulator = (function($) {
 	var TRAINING_SKILL_PTS_MIN = 0;
 	var TRAINING_SKILL_PTS_MAX = 5;
 	var LEVEL_FOR_TRAINING_MODE = 50;
-	
+	var MSP_MIN = 0;
+	var MSP_MAX = 10;
+
 	var DATA_JSON_URI = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'dq10skill-data.json';
 	
 	//データロード
@@ -33,7 +35,8 @@ var Simulator = (function($) {
 	var skillPts = {};
 	var levels = {};
 	var trainingSkillPts = {};
-	
+	var msp = {}; //マスタースキルポイント
+
 	//パラメータ初期化
 	for(var vocation in vocations) {
 		skillPts[vocation] = {};
@@ -94,7 +97,35 @@ var Simulator = (function($) {
 		trainingSkillPts[vocation] = newValue;
 		return true;
 	}
-	
+
+	//マスタースキルポイント取得
+	function getMSP(skillLine) {
+		return msp[skillLine] || 0;
+	}
+
+	//マスタースキルポイント更新
+	function updateMSP(skillLine, newValue) {
+		var oldValue = msp[skillLine] || 0;
+		if(newValue < MSP_MIN || newValue > MSP_MAX)
+			return false;
+		if(totalMSP() - oldValue + newValue > MSP_MAX)
+			return false;
+		if(totalOfSameSkills(skillLine) - oldValue + newValue > SKILL_PTS_MAX)
+			return false;
+
+		msp[skillLine] = newValue;
+		return true;
+	}
+
+	//使用中のマスタースキルポイント合計
+	function totalMSP() {
+		var total = 0;
+		for(var s in msp)
+			total += msp[s];
+
+		return total;
+	}
+
 	//職業のスキルポイント合計
 	function totalSkillPts(vocation) {
 		var total = 0;
@@ -111,6 +142,8 @@ var Simulator = (function($) {
 			if(skillPts[vocation][skillLine])
 				total += skillPts[vocation][skillLine];
 		}
+		total += msp[skillLine] || 0;
+
 		return total;
 	}
 	
@@ -120,6 +153,12 @@ var Simulator = (function($) {
 			if(skillPts[vocation][skillLine])
 				updateSkillPt(vocation, skillLine, 0);
 		}
+		msp[skillLine] = 0;
+	}
+
+	//MSPを初期化
+	function clearMSP() {
+		msp = {};
 	}
 	
 	//すべてのスキルを振り直し（0にセット）
@@ -129,6 +168,7 @@ var Simulator = (function($) {
 				skillPts[vocation][skillLine] = 0;
 			}
 		}
+		clearMSP();
 	}
 	
 	//職業レベルに対するスキルポイント最大値
@@ -270,17 +310,24 @@ var Simulator = (function($) {
 		//先頭に職業の数を含める
 		serial += toByte(vocationCount);
 
+		var skillLine;
+
 		for(var i = 0; i < vocationCount; i++) {
 			var vocation = VOCATIONS_DATA_ORDER[i];
 			serial += toByte(getLevel(vocation));
 			serial += toByte(getTrainingSkillPt(vocation));
 
 			for(var s = 0; s < vocations[vocation].skillLines.length; s++) {
-				var skillLine = vocations[vocation].skillLines[s];
+				skillLine = vocations[vocation].skillLines[s];
 				serial += toByte(getSkillPt(vocation, skillLine));
 			}
 		}
-
+		//末尾にMSPのスキルラインIDとポイントをペアで格納
+		for(sl in msp) {
+			if(msp[sl] > 0) {
+				serial += toByte(skillLines[sl].id) + toByte(msp[sl]);
+			}
+		}
 		return serial;
 	}
 	function deserialize(serial) {
@@ -294,16 +341,25 @@ var Simulator = (function($) {
 
 		for(i = 0; i < vocationCount; i++) {
 			var vocation = VOCATIONS_DATA_ORDER[i];
-			var skillLines = vocations[vocation].skillLines;
+			var vSkillLines = vocations[vocation].skillLines;
 
-			if(serial.length - cur < 1 + 1 + skillLines.length)
+			if(serial.length - cur < 1 + 1 + vSkillLines.length)
 				break;
 
 			updateLevel(vocation, getData());
 			updateTrainingSkillPt(vocation, getData());
 
-			for(var s = 0; s < skillLines.length; s++) {
-				updateSkillPt(vocation, skillLines[s], getData());
+			for(var s = 0; s < vSkillLines.length; s++) {
+				updateSkillPt(vocation, vSkillLines[s], getData());
+			}
+		}
+		//末尾にデータがあればMSPとして取得
+		while(serial.length - cur >= 2) {
+			var skillLineId = getData();
+			var skillPt = getData();
+			for(var sl in skillLines) {
+				if(skillLines[sl].id == skillLineId)
+					updateMSP(sl, skillPt);
 			}
 		}
 	}
@@ -366,9 +422,13 @@ var Simulator = (function($) {
 		updateLevel: updateLevel,
 		getTrainingSkillPt : getTrainingSkillPt,
 		updateTrainingSkillPt : updateTrainingSkillPt,
+		getMSP: getMSP,
+		updateMSP: updateMSP,
+		totalMSP: totalMSP,
 		totalSkillPts: totalSkillPts,
 		totalOfSameSkills: totalOfSameSkills,
 		clearPtsOfSameSkills: clearPtsOfSameSkills,
+		clearMSP: clearMSP,
 		clearAllSkills: clearAllSkills,
 		maxSkillPts: maxSkillPts,
 		requiredLevel: requiredLevel,
@@ -398,7 +458,9 @@ var Simulator = (function($) {
 		LEVEL_MAX: LEVEL_MAX,
 		TRAINING_SKILL_PTS_MIN: TRAINING_SKILL_PTS_MIN,
 		TRAINING_SKILL_PTS_MAX: TRAINING_SKILL_PTS_MAX,
-		LEVEL_FOR_TRAINING_MODE: LEVEL_FOR_TRAINING_MODE
+		LEVEL_FOR_TRAINING_MODE: LEVEL_FOR_TRAINING_MODE,
+		MSP_MIN: MSP_MIN,
+		MSP_MAX: MSP_MAX
 	};
 })(jQuery);
 
@@ -410,6 +472,8 @@ var SimulatorUI = (function($) {
 
 	var $ptConsole, $lvConsole, $trainingPtConsole;
 	
+	var mspMode = false; //MSP編集モードフラグ
+
 	function refreshAll() {
 		refreshAllVocationInfo();
 		for(var skillLine in sim.skillLines) {
@@ -474,6 +538,7 @@ var SimulatorUI = (function($) {
 		for(var i = 0; i < status.length; i++) {
 			$('#total_' + status[i]).text(sim.totalStatus(status[i]));
 		}
+		$('#msp_remain').text((sim.MSP_MAX - sim.totalMSP()).toString() + 'P');
 	}
 	
 	function refreshSkillList(skillLine) {
@@ -487,6 +552,12 @@ var SimulatorUI = (function($) {
 			$('.' + skillLine + '_' + s.toString()).addClass(CLASSNAME_SKILL_ENABLED);
 		}
 		$('.' + skillLine + ' .skill_total').text(totalOfSkill);
+
+		var msp = sim.getMSP(skillLine);
+		if(msp > 0)
+			$('<span>(' + msp.toString() + ')</span>')
+				.addClass('msp')
+				.appendTo('.' + skillLine + ' .skill_total');
 	}
 	
 	function refreshControls() {
@@ -518,6 +589,16 @@ var SimulatorUI = (function($) {
 		$('#tw-saveurl').attr('href', 'https://twitter.com/intent/tweet?' + $.param(params));
 	}
 	
+	function selectSkillLine(skillLine) {
+		$('.skill_table').removeClass('selected');
+		$('.' + skillLine).addClass('selected');
+	}
+
+	function toggleMspMode(mode) {
+		mspMode = mode;
+		$('body').toggleClass('msp', mode);
+	}
+
 	function getCurrentVocation(currentNode) {
 		return $(currentNode).parents('.class_group').attr('id');
 	}
@@ -638,8 +719,12 @@ var SimulatorUI = (function($) {
 				spin: function (e, ui) {
 					var vocation = getCurrentVocation(this);
 					var skillLine = getCurrentSkillLine(this);
-					
-					if(sim.updateSkillPt(vocation, skillLine, parseInt(ui.value))) {
+
+					var succeeded = mspMode ?
+						sim.updateMSP(skillLine, parseInt(ui.value)) :
+						sim.updateSkillPt(vocation, skillLine, parseInt(ui.value));
+
+					if(succeeded) {
 						refreshCurrentSkillPt(vocation, skillLine);
 						refreshSkillList(skillLine);
 						refreshAllVocationInfo();
@@ -653,23 +738,32 @@ var SimulatorUI = (function($) {
 				change: function (e, ui) {
 					var vocation = getCurrentVocation(this);
 					var skillLine = getCurrentSkillLine(this);
-					
+					var oldValue = mspMode ?
+						sim.getMSP(skillLine) :
+						sim.getSkillPt(vocation, skillLine);
+
 					if(isNaN($(this).val())) {
-						$(this).val(sim.getSkillPt(vocation, skillLine));
+						$(this).val(oldValue);
 						return false;
 					}
-					if(sim.updateSkillPt(vocation, skillLine, parseInt($(this).val()))) {
+					var succeeded = mspMode ?
+						sim.updateMSP(skillLine, parseInt($(this).val())) :
+						sim.updateSkillPt(vocation, skillLine, parseInt($(this).val()));
+
+					if(succeeded) {
 						refreshCurrentSkillPt(vocation, skillLine);
 						refreshSkillList(skillLine);
 						refreshAllVocationInfo();
 						refreshTotalExpRemain();
 						refreshTotalPassive();
 					} else {
-						$(this).val(sim.getSkillPt(vocation, skillLine));
+						$(this).val(oldValue);
 						return false;
 					}
 				},
 				stop: function (e, ui) {
+					var skillLine = getCurrentSkillLine(this);
+					selectSkillLine(skillLine);
 				}
 			});
 		},
@@ -679,6 +773,9 @@ var SimulatorUI = (function($) {
 			$('input.ui-spinner-input').click(function(e) {
 				//テキストボックスクリック時数値を選択状態に
 				$(this).select();
+
+				var skillLine = getCurrentSkillLine(this);
+				selectSkillLine(skillLine);
 			}).keypress(function(e) {
 				//テキストボックスでEnter押下時更新して選択状態に
 				if(e.which == 13) {
@@ -702,7 +799,7 @@ var SimulatorUI = (function($) {
 				$('#pt_reset').css({'margin-left': $(this).find('.skill_total').width() + 10});
 
 				$ptConsole.appendTo($(this).find('.console_wrapper')).css({left: consoleLeft});
-				$('#pt_spinner').val(sim.getSkillPt(vocation, skillLine));
+				$('#pt_spinner').val(mspMode ? sim.getMSP(skillLine) : sim.getSkillPt(vocation, skillLine));
 
 				$ptConsole.show();
 			}, function(e) {
@@ -740,7 +837,12 @@ var SimulatorUI = (function($) {
 				var vocation = getCurrentVocation(this);
 				var skillLine = getCurrentSkillLine(this);
 				
-				sim.updateSkillPt(vocation, skillLine, 0);
+				selectSkillLine(skillLine);
+
+				if(mspMode)
+					sim.updateMSP(skillLine, 0);
+				else
+					sim.updateSkillPt(vocation, skillLine, 0);
 				$('#pt_spinner').val(0);
 				refreshCurrentSkillPt(vocation, skillLine);
 				refreshSkillList(skillLine);
@@ -749,16 +851,27 @@ var SimulatorUI = (function($) {
 				refreshTotalPassive();
 			}).dblclick(function (e) {
 				//ダブルクリック時に各職業の該当スキルをすべて振り直し
-				var skillLine = getCurrentSkillLine(this);
-				var skillName = sim.skillLines[skillLine].name;
-				
-				if(!window.confirm('スキル「' + skillName + '」をすべて振りなおします。'))
-					return;
-				
-				sim.clearPtsOfSameSkills(skillLine);
+				if(mspMode) {
+					if(!window.confirm('マスタースキルポイントをすべて振りなおします。'))
+						return;
+
+					sim.clearMSP();
+					for(var skillLine in sim.skillLines) {
+						refreshSkillList(skillLine);
+					}
+				} else {
+					var skillLine = getCurrentSkillLine(this);
+					var skillName = sim.skillLines[skillLine].name;
+					
+					if(!window.confirm('スキル「' + skillName + '」をすべて振りなおします。'))
+						return;
+					
+					sim.clearPtsOfSameSkills(skillLine);
+					$('.' + skillLine + ' .skill_current').text('0');
+					refreshSkillList(skillLine);
+				}
+
 				$('#pt_spinner').val(0);
-				$('.' + skillLine + ' .skill_current').text('0');
-				refreshSkillList(skillLine);
 				refreshAllVocationInfo();
 				refreshTotalExpRemain();
 				refreshTotalPassive();
@@ -771,13 +884,22 @@ var SimulatorUI = (function($) {
 				var vocation = getCurrentVocation(this);
 				var skillLine = getCurrentSkillLine(this);
 				var skillIndex = parseInt($(this).attr('class').replace(skillLine + '_', ''));
+				
+				selectSkillLine(skillLine);
 
-				var totalPtsOfOthers = sim.totalOfSameSkills(skillLine) - sim.getSkillPt(vocation, skillLine);
-				
 				var requiredPt = sim.skillLines[skillLine].skills[skillIndex].pt;
-				if(requiredPt < totalPtsOfOthers) return;
-				
-				sim.updateSkillPt(vocation, skillLine, requiredPt - totalPtsOfOthers);
+				var totalPtsOfOthers;
+				if(mspMode) {
+					totalPtsOfOthers = sim.totalOfSameSkills(skillLine) - sim.getMSP(skillLine);
+					if(requiredPt < totalPtsOfOthers) return;
+
+					if(!sim.updateMSP(skillLine, requiredPt - totalPtsOfOthers)) return;
+				} else {
+					totalPtsOfOthers = sim.totalOfSameSkills(skillLine) - sim.getSkillPt(vocation, skillLine);
+					if(requiredPt < totalPtsOfOthers) return;
+
+					sim.updateSkillPt(vocation, skillLine, requiredPt - totalPtsOfOthers);
+				}
 				
 				refreshCurrentSkillPt(vocation, skillLine);
 				refreshSkillList(skillLine);
@@ -787,6 +909,13 @@ var SimulatorUI = (function($) {
 			});
 		},
 		
+		//MSPモード切替ラジオボタン
+		function() {
+			$('#msp_selector input').change(function(e) {
+				toggleMspMode($(this).val() == 'msp');
+			});
+		},
+
 		//URLテキストボックスクリック・フォーカス時
 		function() {
 			$('#url_text').focus(function() {
@@ -1030,6 +1159,8 @@ var SimpleUI = (function($) {
 		for(var vocation in sim.vocations) {
 			refreshVocationInfo(vocation);
 		}
+		$('#msp .remain .container').text(sim.MSP_MAX - sim.totalMSP());
+		$('#msp .total .container').text(sim.MSP_MAX);
 	}
 	
 	function refreshTotalRequiredExp() {
@@ -1052,6 +1183,19 @@ var SimpleUI = (function($) {
 	function refreshSkillList(skillLine) {
 		var totalOfSkill = sim.totalOfSameSkills(skillLine);
 		$('#footer .' + skillLine + ' .container').text(totalOfSkill);
+
+		var containerName = '#msp .' + skillLine;
+		if(sim.skillLines[skillLine].unique) {
+			for(var vocation in sim.vocations) {
+				if($.inArray(skillLine, sim.vocations[vocation].skillLines) >= 0) {
+					containerName = '#' + vocation + ' .msp';
+					break;
+				}
+			}
+		}
+
+		var msp = sim.getMSP(skillLine);
+		$(containerName + ' .container').text(msp > 0 ? msp : '');
 	}
 	
 	function refreshControls() {

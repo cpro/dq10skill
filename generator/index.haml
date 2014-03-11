@@ -1,4 +1,4 @@
-- VERSION = '5.0.2'
+- VERSION = '5.1'
 !!! 5
 %html
 	%head
@@ -36,6 +36,11 @@
 				%h1<
 					%a{href: @home_uri}= @title
 				#save_url
+					#msp_selector
+						%input#msp_normal{type: 'radio', name: 'mspMode', value: 'nomal', checked: 'checked'}
+						%label{for: 'msp_normal'} 通常
+						%input#msp_msp{type: 'radio', name: 'mspMode', value: 'msp'}
+						%label{for: 'msp_msp'} マスタースキル
 					%label{for: 'url_text'} 保存用URL:
 					%input#url_text.ui-widget-content.ui-corner-all{type: 'text', size: 45}>/
 					%a#tw-saveurl 保存用URLをツイート
@@ -75,8 +80,8 @@
 						%td.total_pts#total_spd 0
 						%th 回魔:
 						%td.total_pts#total_heal 0
-						%th
-						%td.total_pts.ui-corner-br
+						%th 残MSP:
+						%td.total_pts#msp_remain.ui-corner-br
 				#navlink
 					%a#simpleui{href: 'simple.html'} 簡易表示版に切り替え
 					%br
@@ -163,6 +168,7 @@
 								%ul
 									%li ダブルクリックすると複数の職で振ったそのスキルのポイントをすべて0にします。
 									%li 職業欄下部の「全スキルをリセット」で、全職業で振ったスキルのポイントをすべて0にします。レベルと特訓は変化しません。
+							%li ページ上部の「マスタースキル」をチェックすると、マスタースキルポイントを編集するモードに切り替わります。
 							%li 「保存用URL」欄に表示されるURLは、アクセスすることで現在の状態を再現できます。メモ用・掲示板に貼る用などにどうぞ。
 							%li 各職業欄の右上にある「おりたたむ」ボタンをクリックすると簡易表示になります。そのまま操作も可能。「すべてたたむ」でレベル・スキルを一覧するのがおすすめです。
 							%li タイトル下の職業ごとのボタンをクリックすると、その職業の位置にスクロールします。折りたたまれていた場合は展開されます。
@@ -174,6 +180,7 @@
 					%li
 						履歴:
 						%ul
+							%li 2014/3/11 v5.1 マスタースキルポイントに対応。ページ上部のラジオボタンでMSPモードに切り替え可能。
 							%li
 								2014/2/27 v5.0
 								%ul
@@ -184,7 +191,6 @@
 									%li ページ読み込みを高速化。
 									%li <a href="simple.html" target="_blank">簡易表示版</a>を作成。デザインは<a href="https://twitter.com/mikonoMai" target="_blank">みこのん (@mikonoMai) さん</a>によるものです。ありがとうございます。
 									%li v5.0.2 魔戦・スパのスキルライン表示順がゲームと異なっていたのを修正。
-							%li 2013/12/5 v4.0 Version2の新職業・まもの使いを追加、レベル上限を75→80に。
 							%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
 					%li
 						ToDo:
