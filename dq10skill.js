@@ -1144,6 +1144,8 @@ var SimpleUI = (function($) {
 		for(var vocation in sim.vocations) {
 			refreshVocationInfo(vocation);
 		}
+		$('#msp .remain .container').text(sim.MSP_MAX - sim.totalMSP());
+		$('#msp .total .container').text(sim.MSP_MAX);
 	}
 	
 	function refreshTotalRequiredExp() {
@@ -1166,6 +1168,19 @@ var SimpleUI = (function($) {
 	function refreshSkillList(skillLine) {
 		var totalOfSkill = sim.totalOfSameSkills(skillLine);
 		$('#footer .' + skillLine + ' .container').text(totalOfSkill);
+
+		var containerName = '#msp .' + skillLine;
+		if(sim.skillLines[skillLine].unique) {
+			for(var vocation in sim.vocations) {
+				if($.inArray(skillLine, sim.vocations[vocation].skillLines) >= 0) {
+					containerName = '#' + vocation + ' .msp';
+					break;
+				}
+			}
+		}
+
+		var msp = sim.getMSP(skillLine);
+		$(containerName + ' .container').text(msp > 0 ? msp : '');
 	}
 	
 	function refreshControls() {
