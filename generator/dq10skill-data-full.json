@@ -1,6 +1,7 @@
 {
 	"skillLines": {
 		"sword": {
+			"id": 1,
 			"name": "片手剣",
 			"abbr": "片剣",
 			"skills": [
@@ -20,6 +21,7 @@
 		},
 
 		"twohandedsword": {
+			"id": 2,
 			"name": "両手剣",
 			"abbr": "両剣",
 			"skills": [
@@ -39,6 +41,7 @@
 		},
 
 		"axe": {
+			"id": 3,
 			"name": "オノ",
 			"abbr": "オノ",
 			"skills": [
@@ -58,6 +61,7 @@
 		},
 
 		"shield": {
+			"id": 4,
 			"name": "盾",
 			"abbr": "盾",
 			"skills": [
@@ -77,6 +81,7 @@
 		},
 
 		"courage": {
+			"id": 5,
 			"unique": true,
 			"name": "ゆうかん",
 			"abbr": "",
@@ -97,6 +102,7 @@
 		},
 
 		"spear": {
+			"id": 6,
 			"name": "ヤリ",
 			"abbr": "ヤリ",
 			"skills": [
@@ -116,6 +122,7 @@
 		},
 
 		"stick": {
+			"id": 7,
 			"name": "スティック",
 			"abbr": "ステ",
 			"skills": [
@@ -135,6 +142,7 @@
 		},
 
 		"staff": {
+			"id": 8,
 			"name": "棍",
 			"abbr": "棍",
 			"skills": [
@@ -154,6 +162,7 @@
 		},
 
 		"faith": {
+			"id": 9,
 			"name": "しんこう心",
 			"unique": true,
 			"abbr": "",
@@ -174,6 +183,7 @@
 		},
 
 		"wand": {
+			"id": 10,
 			"name": "両手杖",
 			"abbr": "両杖",
 			"skills": [
@@ -193,6 +203,7 @@
 		},
 
 		"knife": {
+			"id": 11,
 			"name": "短剣",
 			"abbr": "短剣",
 			"skills": [
@@ -212,6 +223,7 @@
 		},
 
 		"whip": {
+			"id": 12,
 			"name": "ムチ",
 			"abbr": "ムチ",
 			"skills": [
@@ -231,6 +243,7 @@
 		},
 
 		"spellcraft": {
+			"id": 13,
 			"unique": true,
 			"name": "まほう",
 			"abbr": "",
@@ -251,6 +264,7 @@
 		},
 
 		"claw": {
+			"id": 14,
 			"name": "ツメ",
 			"abbr": "ツメ",
 			"skills": [
@@ -270,6 +284,7 @@
 		},
 
 		"fan": {
+			"id": 15,
 			"name": "扇",
 			"abbr": "扇",
 			"skills": [
@@ -289,6 +304,7 @@
 		},
 
 		"fisticuffs": {
+			"id": 16,
 			"name": "格闘",
 			"abbr": "格闘",
 			"skills": [
@@ -308,6 +324,7 @@
 		},
 
 		"focus": {
+			"id": 17,
 			"unique": true,
 			"name": "きあい",
 			"abbr": "",
@@ -328,6 +345,7 @@
 		},
 
 		"acquisitiveness": {
+			"id": 18,
 			"unique": true,
 			"name": "おたから",
 			"abbr": "",
@@ -348,6 +366,7 @@
 		},
 
 		"litheness": {
+			"id": 19,
 			"unique": true,
 			"name": "きょくげい",
 			"abbr": "",
@@ -368,6 +387,7 @@
 		},
 
 		"hammer": {
+			"id": 20,
 			"name": "ハンマー",
 			"abbr": "ハン",
 			"skills": [
@@ -387,6 +407,7 @@
 		},
 
 		"virtue": {
+			"id": 21,
 			"unique": true,
 			"name": "はくあい",
 			"abbr": "",
@@ -407,6 +428,7 @@
 		},
 
 		"bow": {
+			"id": 22,
 			"name": "弓",
 			"abbr": "弓",
 			"skills": [
@@ -426,6 +448,7 @@
 		},
 
 		"boomerang": {
+			"id": 23,
 			"name": "ブーメラン",
 			"abbr": "ブメ",
 			"skills": [
@@ -445,6 +468,7 @@
 		},
 
 		"ruggedness": {
+			"id": 24,
 			"unique": true,
 			"name": "サバイバル",
 			"abbr": "",
@@ -465,6 +489,7 @@
 		},
 		
 		"fource": {
+			"id": 25,
 			"unique": true,
 			"name": "フォース",
 			"abbr": "",
@@ -485,6 +510,7 @@
 		},
 		
 		"jenesaisquoi": {
+			"id": 26,
 			"unique": true,
 			"name": "オーラ",
 			"abbr": "",
@@ -505,6 +531,7 @@
 		},
 		
 		"guts": {
+			"id": 27,
 			"unique": true,
 			"name": "とうこん",
 			"abbr": "",
@@ -525,6 +552,7 @@
 		},
 		
 		"enlightenment": {
+			"id": 28,
 			"unique": true,
 			"name": "さとり",
 			"abbr": "",
@@ -545,6 +573,7 @@
 		},
 		
 		"monstermaster": {
+			"id": 29,
 			"unique": true,
 			"name": "まものマスター",
 			"abbr": "",
@@ -565,13 +594,14 @@
 		},
  
  		"itemmaster": {
- 			"unique": true,
+ 			"id": 30,
+			"unique": true,
  			"name": "アイテムマスター",
  			"abbr": "",
  			"skills": [
  				{"pt":   8, "name": "スカウト率アップ（専）", "desc": "どうぐ使いでの\nスカウトアタック\n成功率アップ", "mp": null},
  				{"pt":  16, "name": "チューンナップ（専）", "desc": "仲間モンスターを\n一時的に強化する\nどうぐ使い専用", "mp": 2},
- 				{"pt":  28, "name": "常時さいだいＭＰ+10", "desc": "常時\nさいだいＭＰが\n１０増える", "mp": null, "mapmp": 10},
+ 				{"pt":  28, "name": "常時さいだいＭＰ+10", "desc": "常時\nさいだいＭＰが\n１０増える", "mp": null, "maxmp": 10},
  				{"pt":  40, "name": "トラップジャマー（専）", "desc": "敵の魔法陣や\n爆弾を横取りする\nどうぐ使い専用", "mp": 1},
  				{"pt":  48, "name": "常時すばやさ+10", "desc": "常時\nすばやさが\n１０増える", "mp": null, "spd": 10},
  				{"pt":  56, "name": "どうぐ倍化術（専）", "desc": "消費アイテムの\n効果をアップする\nどうぐ使い専用", "mp": 6},
@@ -585,7 +615,8 @@
 		},
  
  		"unknown": {
- 			"unique": true,
+ 			"id": 999,
+			"unique": true,
  			"name": "（不明）",
  			"abbr": "",
  			"skills": [

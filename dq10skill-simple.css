@@ -58,6 +58,8 @@ table#main {
   table#main th {
     font-size: 14px;
     font-weight: thick; }
+    table#main th.msp {
+      color: #5588ee; }
   table#main td {
     padding: 2px;
     position: relative; }
@@ -82,7 +84,7 @@ table#main {
     table#main td .container.error {
       color: #f04040;
       background-color: snow; }
-    table#main td.skill:before, table#main td.unique:before, table#main td.remain:before, table#main td.total:before {
+    table#main td.skill:before, table#main td.unique:before, table#main td.msp:before, table#main td.remain:before, table#main td.total:before {
       content: " ";
       display: inline-block;
       position: absolute;
@@ -125,8 +127,32 @@ table#main {
       -moz-transform: rotate(-90deg) scaleX(-1);
       -ms-transform: rotate(-90deg) scaleX(-1);
       -o-transform: rotate(-90deg) scaleX(-1); }
-  table#main tr.vocation th, table#main tr#footer th {
+  table#main tr.vocation th, table#main tr#footer th, table#main tr#msp th {
     text-align: right; }
+  table#main #msp td, table#main #msp th, table#main td.msp, table#main th.msp {
+    color: #5588ee; }
+  table#main #msp td .container, table#main td.msp .container {
+    border-color: #b2c9f7; }
+  table#main td.msp:after {
+    content: " ";
+    display: inline-block;
+    position: absolute;
+    width: 4px;
+    height: 57px;
+    top: 0;
+    left: 17px;
+    background-color: #b2c9f7;
+    z-index: 2; }
+  table#main #msp td:before {
+    background-color: #b2c9f7;
+    height: 4px;
+    bottom: 17px; }
+  table#main #msp td.msp:after {
+    height: 21px; }
+  table#main #msp td.msp:before {
+    width: 21px;
+    left: auto;
+    right: 0; }
 
 #description {
   margin-top: 50px;
