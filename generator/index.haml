@@ -128,6 +128,7 @@
 											%span.skill_total 0
 								- skill_line['skills'].each_with_index do |skill, i|
 									- hint = skill['desc']
+									- hint += "\n（チャージ: #{skill['charge']}秒）" if skill['charge']
 									- hint += "\n（消費MP: #{skill['mp']}）" if skill['mp']
 									- hint += "\n（#{skill['gold']}G）" if skill['gold']
 									%tr{class: [skill_line_name, i].join('_'), title: hint}<
