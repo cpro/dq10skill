@@ -1,4 +1,4 @@
-- VERSION = '5.1'
+- VERSION = '5.2'
 !!! 5
 %html
 	%head
@@ -129,6 +129,7 @@
 								- skill_line['skills'].each_with_index do |skill, i|
 									- hint = skill['desc']
 									- hint += "\n（消費MP: #{skill['mp']}）" if skill['mp']
+									- hint += "\n（チャージ: #{skill['charge']}秒）" if skill['charge']
 									- hint += "\n（#{skill['gold']}G）" if skill['gold']
 									%tr{class: [skill_line_name, i].join('_'), title: hint}<
 										%td.skill_pt>= skill['pt']
@@ -157,7 +158,6 @@
 				%ul
 					%li スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』のスキルポイント割り振りを検討するためのシミュレータです。
 					%li 要JavaScript。Google Chrome, IE10で動作確認。Firefoxでも動くはずです。IE8, 9はたぶん動くと思いますが推奨しません。
-					%li スキルポイント115・130の項目は、ver2.1後期で実装されるまでの仮のものです。
 					%li
 						使い方:
 						%ul
@@ -180,6 +180,7 @@
 					%li
 						履歴:
 						%ul
+							%li 2014/4/17 v5.2 ver2.1後期の110・120スキルに対応。
 							%li 2014/3/11 v5.1 マスタースキルポイントに対応。ページ上部のラジオボタンでMSPモードに切り替え可能。
 							%li
 								2014/2/27 v5.0
