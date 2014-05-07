@@ -607,6 +607,12 @@ var SimulatorUI = (function($) {
 		return $(currentNode).parents('.skill_table').attr('class').split(' ')[0];
 	}
 
+	function hideConsoles() {
+		$ptConsole.hide();
+		$lvConsole.hide();
+		$trainingPtConsole.hide();
+	}
+
 	function setup() {
 		for(var i = 0; i < setupFunctions.length; i++) {
 			setupFunctions[i]();
@@ -632,10 +638,10 @@ var SimulatorUI = (function($) {
 			});
 		},
 		
-		//レベル欄ポイント時にUI表示
+		//レベル欄クリック時にUI表示
 		function() {
-			$('.ent_title h2').hover(function(e) {
-				if($(':focus').attr('id') == 'lv-select') return false;
+			$('.ent_title h2').click(function(e) {
+				hideConsoles();
 
 				var vocation = getCurrentVocation(this);
 				var consoleLeft = $(this).find('.lv_h2').position().left - 3;
@@ -644,9 +650,7 @@ var SimulatorUI = (function($) {
 				$('#lv-select').val(sim.getLevel(vocation));
 
 				$lvConsole.show();
-			}, function(e) {
-				if($(':focus').attr('id') == 'lv-select') return false;
-				$lvConsole.hide();
+				e.stopPropagation();
 			});
 		},
 
@@ -691,11 +695,11 @@ var SimulatorUI = (function($) {
 			});
 		},
 		
-		//特訓表示欄ポイント時にUI表示
+		//特訓表示欄クリック時にUI表示
 		function() {
-			$('.ent_title .training_pt').hover(function(e) {
-				if($(':focus').attr('id') == 'training_pt_spinner') return false;
-
+			$('.ent_title .training_pt').click(function(e) {
+				hideConsoles();
+				
 				var vocation = getCurrentVocation(this);
 				var consoleLeft = $('#training-' + vocation).position().left - 3;
 
@@ -703,9 +707,7 @@ var SimulatorUI = (function($) {
 				$('#training_pt_spinner').val(sim.getTrainingSkillPt(vocation));
 
 				$trainingPtConsole.show();
-			}, function(e) {
-				if($(':focus').attr('id') == 'training_pt_spinner') return false;
-				$trainingPtConsole.hide();
+				e.stopPropagation();
 			});
 		},
 		
@@ -774,8 +776,10 @@ var SimulatorUI = (function($) {
 				//テキストボックスクリック時数値を選択状態に
 				$(this).select();
 
-				var skillLine = getCurrentSkillLine(this);
-				selectSkillLine(skillLine);
+				if($(this).attr('id') == 'pt_spinner') {
+					var skillLine = getCurrentSkillLine(this);
+					selectSkillLine(skillLine);
+				}
 			}).keypress(function(e) {
 				//テキストボックスでEnter押下時更新して選択状態に
 				if(e.which == 13) {
@@ -785,11 +789,11 @@ var SimulatorUI = (function($) {
 			});
 		},
 
-		//スキルライン名ポイント時にUI表示
+		//スキルライン名クリック時にUI表示
 		function() {
-			$('.skill_table caption').hover(function(e) {
-				if($(':focus').attr('id') == 'pt_spinner') return false;
-
+			$('.skill_table caption').click(function(e) {
+				hideConsoles();
+				
 				var vocation = getCurrentVocation(this);
 				var skillLine = getCurrentSkillLine(this);
 
@@ -802,12 +806,6 @@ var SimulatorUI = (function($) {
 				$('#pt_spinner').val(mspMode ? sim.getMSP(skillLine) : sim.getSkillPt(vocation, skillLine));
 
 				$ptConsole.show();
-			}, function(e) {
-				if($(':focus').attr('id') == 'pt_spinner') return false;
-				$ptConsole.hide();
-			}).click(function(e) {
-				$ptConsole.hide();
-				$(this).mouseenter();
 				e.stopPropagation();
 			});
 		},
@@ -818,11 +816,6 @@ var SimulatorUI = (function($) {
 			$lvConsole.click(function(e) {e.stopPropagation();});
 			$trainingPtConsole.click(function(e) {e.stopPropagation();});
 
-			var hideConsoles = function() {
-				$ptConsole.hide();
-				$lvConsole.hide();
-				$trainingPtConsole.hide();
-			};
 			$('body').click(hideConsoles).keydown(function(e) {
 				if(e.which == 27) hideConsoles();
 			});
