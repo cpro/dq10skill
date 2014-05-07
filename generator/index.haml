@@ -89,16 +89,17 @@
 			- data['vocationOrder'].each do |vocation|
 				%div.class_group{id: vocation}
 					.ent_title
-						%h2<
+						%h2.ui-handler<
 							%label{for: 'lv-select'}
 								= data['vocations'][vocation]['name'] + ' Lv '
 								%span.lv_h2 1
 						%dl.skill_pt
 							%dt 残りSP:
 							%dd.pts 0 / 0
-						%dl.training_pt
+							%dt &nbsp;+&nbsp;
+						%dl.training_pt.ui-handler
 							%dt
-								%label{for: 'training_pt_spinner'} + 特訓
+								%label{for: 'training_pt_spinner'} 特訓
 							%dd{id: "training-#{vocation}"}
 								0
 						%dl.expinfo
@@ -118,7 +119,7 @@
 						- skill_lines.each do |skill_line_name|
 							- skill_line = data['skillLines'][skill_line_name]
 							%table{class: [skill_line_name, 'skill_table']}>
-								%caption
+								%caption.ui-handler
 									.console_wrapper
 										%label{for: 'pt_spinner'}
 											= skill_line['name'] + ': '
