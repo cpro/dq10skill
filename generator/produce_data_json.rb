@@ -13,7 +13,7 @@ data = JSON.parse(File.read(source_json_path))
 
 data['skillLines'].each_value do |skill_line|
 	skill_line['skills'].each do |skill|
-		%w(name desc mp).each {|key| skill.delete(key)} 
+		%w(name desc mp charge).each {|key| skill.delete(key)} 
 	end
 	%w(abbr).each {|key| skill_line.delete(key)}
 end
