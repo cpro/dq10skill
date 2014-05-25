@@ -15,6 +15,8 @@ $entry-padding: 2px;
 $entry-width: $skill-table-width * 5 + $skill-table-padding * 2;
 $body-content-width: $entry-width + ($entry-padding + $entry-border-width) * 2;
 
+$msp-color: #58e;
+
 body {
 	background-color: $main-background-color;
 	color: #404044;
@@ -77,6 +79,16 @@ a {
 				
 				.ui-button-text {
 					padding: .2em .5em;
+				}
+			}
+
+			#msp_selector {
+				display: inline-block;
+				font-size: 11px;
+				margin-right: 10px;
+
+				label[for="msp_msp"] {
+					color: $msp-color;
 				}
 			}
 		}
@@ -175,7 +187,6 @@ a {
 		/* 合計表示欄 */
 		table#total {
 			margin: 0;
-			border-collapse: collapse;
 			border-collapse: separate;
 			border-spacing: 0;
 			border-left: 1px solid #aab;
@@ -208,6 +219,10 @@ a {
 				&#total_exp, &#total_exp_remain {
 					width: 64px;
 				}
+			}
+			td#msp_remain {
+				color: $msp-color;
+				font-weight: bold;
 			}
 		}
 
@@ -280,10 +295,10 @@ a {
 /* モンスター用 各エントリタイトル */
 .ent_title {
 	width: 98%;
-	margin: 0 auto 2px auto;
-	padding: 2px 0;
+	margin: 0 auto 7px auto;
+	padding: 1px 0 2px 0;
 	position: relative;
-	height: 22px;
+	height: 18px;
 	border-bottom: 1px solid #99a;
 
 	h2, dl, dt, dd {
@@ -353,10 +368,10 @@ a {
 		position: absolute;
 		top: 0;
 		right: 0;
-
+		line-height: 18px;
 		button {
-			width: 20px;
-			height: 20px;
+			width: 18px;
+			height: 18px;
 		}
 
 		.indiv_name, .additional_skill_selector {
@@ -422,7 +437,8 @@ a {
 .skill_table {
 	font-size: 70%;
 	width: $skill-table-width;
-	margin: -2px;
+	margin: -6px -2px -2px -2px;
+	padding-top: 4px;
 	border-collapse: separate;
 	border-spacing: 0;
 	border: 2px solid rgba(255, 0, 0, 0);
@@ -432,6 +448,7 @@ a {
 
 	caption {
 		overflow: visible;
+		white-space: nowrap;
 		font-weight: bold;
 		font-size: 120%;
 
@@ -454,6 +471,19 @@ a {
 					vertical-align: bottom;
 				}
 			}
+
+			.skill_total {
+				display: inline-block;
+				position: relative;
+				.msp {
+					display: block;
+					position: absolute;
+					right: -14px;
+					top: -9px;
+					font-size: 80%;
+					color: $msp-color;
+				}
+			}
 		}
 	}
 	.skill_pt {
@@ -462,6 +492,7 @@ a {
 	}
 	.skill_name {
 		width: 14em;
+		white-space: nowrap;
 	}
 	td {
 		padding: 1px 3px 0 3px;
@@ -537,6 +568,19 @@ a {
 }
 #body-for-monster #footconsole {
 	width: $body-content-width-monster;
+}
+
+/* MSPモード時 */
+body.msp {
+	#pt_console .ui-widget-content {
+		background: lighten($msp-color, 30%);
+		color: darken($msp-color, 20%);
+	}
+
+	.class_group .skill_table.selected {
+		border-color: rgba(85, 136, 238, 0.7);
+		background-color: rgba(85, 136, 238, 0.03)
+	}
 }
 
 /* フッタ */

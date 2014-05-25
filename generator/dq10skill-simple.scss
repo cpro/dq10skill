@@ -3,6 +3,8 @@ $skill-cont-height: $skill-cont-width;
 $skill-cont-border-width: 2px;
 $skill-cell-width: $skill-cont-width + $skill-cont-border-width * 4;
 
+$msp-color: #58e;
+
 body {
 	font-family: "メイリオ", sans-serif;
 	background-color: rgb(248, 248, 248);
@@ -84,6 +86,10 @@ table#main {
 	th {
 		font-size: 14px;
 		font-weight: thick;
+
+		&.msp {
+			color: $msp-color;
+		}
 	}
 	td {
 		padding: $skill-cont-border-width;
@@ -122,7 +128,7 @@ table#main {
 			background-color: rgb(255, 250, 250);
 		}
 
-		&.skill, &.unique, &.remain, &.total {
+		&.skill, &.unique, &.msp, &.remain, &.total {
 			&:before {
 				content: " ";
 				display: inline-block;
@@ -189,8 +195,43 @@ table#main {
 			-o-transform: rotate(-90deg) scaleX(-1);
 		}
 	}
-	tr.vocation th, tr#footer th {
+	tr.vocation th, tr#footer th, tr#msp th {
 		text-align: right;
+	}
+
+	#msp td, #msp th, td.msp, th.msp {
+		color: $msp-color;
+	}
+	#msp td, td.msp {
+		.container {
+			border-color: lighten($msp-color, 20%);
+		}
+	}
+	td.msp:after {
+		content: " ";
+		display: inline-block;
+		position: absolute;
+		width: 4px;
+		height: $skill-cell-width * 1.5;
+		top: 0;
+		left: ($skill-cell-width - 4px) / 2;
+		background-color: lighten($msp-color, 20%);
+		z-index: 2;
+	}
+	#msp td {
+		&:before {
+			background-color: lighten($msp-color, 20%);
+			height: 4px;
+			bottom: ($skill-cell-width - 4px) / 2;
+		}
+		&.msp:after {
+			height: $skill-cell-width / 2 + 2px;
+		}
+		&.msp:before {
+			width: $skill-cell-width / 2 + 2px;
+			left: auto;
+			right: 0;
+		}
 	}
 }
 

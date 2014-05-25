@@ -39,18 +39,30 @@ var SKILLS = {
 	'まもの使い': ['ムチ', 'ツメ', '両手剣', 'オノ', 'まものマスター'],
 	'どうぐ使い': ['ブーメラン', 'ハンマー', 'ヤリ', '弓', 'アイテムマスター']
 };
+var MSP_SKILLLINE_ORDER = [
+	'片手剣', '両手剣', 'オノ', '盾', 'ゆうかん', 'ヤリ',
+	'スティック', '棍', 'しんこう心', '両手杖', '短剣', 'ムチ',
+	'まほう', 'ツメ', '扇', '格闘', 'きあい', 'おたから',
+	'きょくげい', 'ハンマー', 'はくあい', '弓', 'ブーメラン', 'サバイバル',
+	'フォース', 'オーラ', 'とうこん', 'さとり', 'まものマスター', 'アイテムマスター'
+];
+
 var TRAINING_TABLE = [
 	{stamp:    0, skillPt: 0},
 	{stamp:  100, skillPt: 1},
 	{stamp:  300, skillPt: 2},
 	{stamp:  600, skillPt: 3},
 	{stamp: 1000, skillPt: 4},
-	{stamp: 1500, skillPt: 5}
+	{stamp: 1500, skillPt: 5},
+	{stamp: 2000, skillPt: 6},
+	{stamp: 2500, skillPt: 7},
+	{stamp: 3000, skillPt: 8}
 ];
 
 var HirobaStatus = (function($) {
 	var status = {};
-	
+	var msp = {};
+
 	function initStatus() {
 		for(var i = 0; i < VOCATIONS.length; i++) {
 			var vocation = VOCATIONS[i];
@@ -92,7 +104,10 @@ var HirobaStatus = (function($) {
 		for(var skillName in skillMap) {
 			for(var j = 0; j < skillMap[skillName].jobSkillPoints.length; j++) {
 				var jobObj = skillMap[skillName].jobSkillPoints[j];
-				status[jobObj.job].skill[skillName] = jobObj.value;
+				if($.inArray(jobObj.job, VOCATIONS) >= 0)
+					status[jobObj.job].skill[skillName] = jobObj.value;
+				else if(jobObj.job == 'マスタースキル')
+					msp[skillName] = jobObj.value;
 			}
 		}
 	}
@@ -111,6 +126,7 @@ var HirobaStatus = (function($) {
 		//先頭に職業の数を含める
 		serial += toByte(vocationCount);
 
+		var skillLine;
 		for(var i = 0; i < vocationCount; i++) {
 			var vocation = VOCATIONS[i];
 			var stat = status[vocation];
@@ -118,11 +134,15 @@ var HirobaStatus = (function($) {
 			serial += toByte(stat.trainingSkillPt);
 
 			for(var s = 0; s < SKILLS[vocation].length; s++) {
-				var skillLine = SKILLS[vocation][s];
+				skillLine = SKILLS[vocation][s];
 				serial += toByte(stat.skill[skillLine]);
 			}
 		}
-
+		for(i = 0; i < MSP_SKILLLINE_ORDER.length; i++) {
+			skillLine = MSP_SKILLLINE_ORDER[i];
+			if((msp[skillLine] || 0) > 0)
+				serial += toByte(i + 1) + toByte(msp[skillLine]);
+		}
 		return serial;
 	}
 	
