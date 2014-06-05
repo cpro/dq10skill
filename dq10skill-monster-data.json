@@ -624,6 +624,32 @@
 			]
 		},
 
+		"fencerform": {
+			"name": "フェンサーフォーム",
+			"skills": [
+				{"pt":   3, "name": "ボミオスラッシュ", "mp": null},
+				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
+				{"pt":  12, "name": "コードゼロ", "mp": null},
+				{"pt":  18, "name": "常時すばやさ+60", "desc": "常時\nすばやさが\n６０増える", "mp": null, "spd": 60},
+				{"pt":  25, "name": "ロックオン", "mp": null},
+				{"pt":  32, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
+				{"pt":  40, "name": "真マヒャド斬り", "mp": null}
+			]
+		},
+
+		"armsgadget": {
+			"name": "アームズガジェット",
+			"skills": [
+				{"pt":   3, "name": "スタンアロー", "mp": null},
+				{"pt":   7, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
+				{"pt":  12, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
+				{"pt":  18, "name": "ブラストビーム", "mp": null},
+				{"pt":  25, "name": "常時かいしん率+5%", "desc": "会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  32, "name": "常時みのまもり+80", "desc": "常時\nみのまもりが\n８０増える", "mp": null, "def": 80},
+				{"pt":  40, "name": "たまに２回行動", "mp": null}
+			]
+		},
+
 		"unknown1": {
 			"name": "不明",
 			"skills": [
@@ -1031,17 +1057,51 @@
 			"defaultName": "マジカルハッ",
 			"skillLines": ["hatmagic", "buhibuheal", "wand"],
 			"expTable": 1
+		},
+		
+		"babysatan": {
+			"id": 21,
+			"name": "ベビーサタン",
+			"defaultName": "ベビーサタン",
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"dragonkids": {
+			"id": 22,
+			"name": "ドラゴンキッズ",
+			"defaultName": "ドラゴンキッ",
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"puppetman": {
+			"id": 23,
+			"name": "パペットマン",
+			"defaultName": "パペットマン",
+			"skillLines": ["unknown1", "unknown2", "unknown3"],
+			"expTable": 1
+		},
+		
+		"killermachine": {
+			"id": 24,
+			"name": "キラーマシン",
+			"defaultName": "キラーマシン",
+			"skillLines": ["fencerform", "armsgadget", "twohandedsword"],
+			"expTable": 1
 		}
 		
 	},
 
 	"monstermaster": [
 		"slime", "mormon", "prisonyan", "hoimislime", "slimeknight",
-		"chimera", "catmage", "lizardman", "battlerex", "itazuramogura"
+		"chimera", "catmage", "lizardman", "battlerex", "itazuramogura",
+		"babysatan", "dragonkids"
 	],
 	"itemmaster": [
 		"metappy", "takeyarihei", "needleman", "fondue", "entasisman",
-		"samayouyoroi", "golem", "devilarmor", "odoruhouseki", "magicalhat"
+		"samayouyoroi", "golem", "devilarmor", "odoruhouseki", "magicalhat",
+		"puppetman", "killermachine"
 	],
 
 	"additionalSkillLines": [
