@@ -6,7 +6,7 @@ body {
   font-size: 100%;
   padding: 95px 0 0 0; }
   body#body-for-monster {
-    padding: 95px 0 0 0; }
+    padding: 115px 0 0 0; }
 
 a {
   text-decoration: none; }
@@ -169,9 +169,9 @@ a {
         padding: 0.2em 0.5em; }
 
 #body-for-monster #header {
-  height: 90px; }
+  height: 110px; }
   #body-for-monster #header #consoleblock {
-    height: 39px; }
+    height: 59px; }
 
 /* エントリボックス */
 .class_group, .monster_ent {
@@ -442,7 +442,8 @@ body.msp .class_group .skill_table.selected {
     text-align: center; }
 
 #body-for-monster #ad_sidebar {
-  left: 67em; }
+  left: 67em;
+  top: 115px; }
 
 /* ヘッダ部 SNSボタン各種 */
 #snsbuttons {

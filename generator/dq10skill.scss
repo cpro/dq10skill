@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 $header-height: 90px;
-$header-height-monster: 90px;
+$header-height-monster: 110px;
 $main-background-color: #fcfcfd;
 $body-content-width-monster: 65.5em;
 
@@ -623,6 +623,7 @@ body.msp {
 }
 #body-for-monster #ad_sidebar {
 	left: $body-content-width-monster + 1.5em;
+	top: $header-height-monster + 5px;
 }
 
 /* ヘッダ部 SNSボタン各種 */
