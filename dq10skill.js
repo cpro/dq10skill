@@ -574,9 +574,8 @@ var SimulatorUI = (function($) {
 	}
 
 	function refreshSaveUrl() {
-		var url = window.location.href.replace(window.location.search, "") + '?' +
-			Base64.btoa(RawDeflate.deflate(sim.serialize()));
-
+		var url = makeCurrentUrl();
+		
 		$('#url_text').val(url);
 		
 		var params = {
@@ -589,6 +588,19 @@ var SimulatorUI = (function($) {
 		$('#tw-saveurl').attr('href', 'https://twitter.com/intent/tweet?' + $.param(params));
 	}
 	
+	function refreshUrlBar() {
+		if(window.history && window.history.pushState) {
+			var url = makeCurrentUrl();
+			history.pushState(url, null, url);
+		}
+	}
+
+	function makeCurrentUrl() {
+		return window.location.href.replace(window.location.search, "") + '?' +
+			Base64.btoa(RawDeflate.deflate(sim.serialize()));
+
+	}
+
 	function selectSkillLine(skillLine) {
 		$('.skill_table').removeClass('selected');
 		$('.' + skillLine).addClass('selected');
@@ -629,6 +641,7 @@ var SimulatorUI = (function($) {
 				refreshVocationInfo(vocation);
 				refreshTotalRequiredExp();
 				refreshTotalExpRemain();
+				refreshUrlBar();
 			});
 		},
 		
@@ -664,6 +677,7 @@ var SimulatorUI = (function($) {
 						refreshVocationInfo(vocation);
 						refreshTotalRequiredExp();
 						refreshTotalExpRemain();
+						refreshUrlBar();
 						//e.stopPropagation();
 					} else {
 						return false;
@@ -681,6 +695,7 @@ var SimulatorUI = (function($) {
 						refreshVocationInfo(vocation);
 						refreshTotalRequiredExp();
 						refreshTotalExpRemain();
+						refreshUrlBar();
 					} else {
 						$(this).val(oldValue);
 						return false;
@@ -730,6 +745,7 @@ var SimulatorUI = (function($) {
 						refreshAllVocationInfo();
 						refreshTotalExpRemain();
 						refreshTotalPassive();
+						refreshUrlBar();
 						e.stopPropagation();
 					} else {
 						return false;
@@ -756,6 +772,7 @@ var SimulatorUI = (function($) {
 						refreshAllVocationInfo();
 						refreshTotalExpRemain();
 						refreshTotalPassive();
+						refreshUrlBar();
 					} else {
 						$(this).val(oldValue);
 						return false;
@@ -776,6 +793,7 @@ var SimulatorUI = (function($) {
 
 				var skillLine = getCurrentSkillLine(this);
 				selectSkillLine(skillLine);
+				refreshUrlBar();
 			}).keypress(function(e) {
 				//テキストボックスでEnter押下時更新して選択状態に
 				if(e.which == 13) {
@@ -849,6 +867,7 @@ var SimulatorUI = (function($) {
 				refreshAllVocationInfo();
 				refreshTotalExpRemain();
 				refreshTotalPassive();
+				refreshUrlBar();
 			}).dblclick(function (e) {
 				//ダブルクリック時に各職業の該当スキルをすべて振り直し
 				if(mspMode) {
@@ -875,6 +894,7 @@ var SimulatorUI = (function($) {
 				refreshAllVocationInfo();
 				refreshTotalExpRemain();
 				refreshTotalPassive();
+				refreshUrlBar();
 			});
 		},
 		
@@ -906,6 +926,7 @@ var SimulatorUI = (function($) {
 				refreshAllVocationInfo();
 				refreshTotalExpRemain();
 				refreshTotalPassive();
+				refreshUrlBar();
 			});
 		},
 		
@@ -1018,6 +1039,7 @@ var SimulatorUI = (function($) {
 				refreshTotalRequiredExp();
 				refreshTotalExpRemain();
 				refreshControls();
+				refreshUrlBar();
 			});
 		},
 		
@@ -1031,6 +1053,7 @@ var SimulatorUI = (function($) {
 				
 				sim.clearAllSkills();
 				refreshAll();
+				refreshUrlBar();
 			});
 		},
 		
@@ -1084,6 +1107,7 @@ var SimulatorUI = (function($) {
 					sim.presetStatus($select.val().split(';')[v]);
 				}
 				refreshAll();
+				refreshUrlBar();
 			});
 		},
 
@@ -1100,6 +1124,7 @@ var SimulatorUI = (function($) {
 				refreshTotalRequiredExp();
 				refreshTotalExpRemain();
 				refreshControls();
+				refreshUrlBar();
 			});
 		}
 	];
@@ -1112,7 +1137,8 @@ var SimulatorUI = (function($) {
 	
 	//API
 	return {
-		setup: setup
+		setup: setup,
+		refreshAll: refreshAll
 	};
 
 })(jQuery);
@@ -1217,8 +1243,7 @@ var SimpleUI = (function($) {
 	}
 
 	function refreshSaveUrl() {
-		var url = window.location.href.replace(window.location.search, "") + '?' +
-			Base64.btoa(RawDeflate.deflate(sim.serialize()));
+		var url = makeCurrentUrl();
 
 		$('#url_text').val(url);
 		
@@ -1232,6 +1257,19 @@ var SimpleUI = (function($) {
 		$('#tw-saveurl').attr('href', 'https://twitter.com/intent/tweet?' + $.param(params));
 	}
 	
+	function refreshUrlBar() {
+		if(window.history && window.history.pushState) {
+			var url = makeCurrentUrl();
+			window.history.pushState(url, null, url);
+		}
+	}
+
+	function makeCurrentUrl() {
+		return window.location.href.replace(window.location.search, "") + '?' +
+			Base64.btoa(RawDeflate.deflate(sim.serialize()));
+
+	}
+
 	function getCurrentVocation(currentNode) {
 		return $(currentNode).parents('.class_group').attr('id');
 	}
@@ -1304,7 +1342,8 @@ var SimpleUI = (function($) {
 	
 	//API
 	return {
-		setup: setup
+		setup: setup,
+		refreshAll: refreshAll
 	};
 
 })(jQuery);
@@ -1370,24 +1409,36 @@ var Base64 = (function(global) {
 
 //ロード時
 jQuery(function($) {
-	var query = window.location.search.substring(1);
-	var ui = window.location.pathname.indexOf('/simple.html') > 0 ? SimpleUI : SimulatorUI;
-	
-	if(Base64.isValid(query)) {
-		var serial = '';
+	function deserialize() {
+		var query = window.location.search.substring(1);
+		if(Base64.isValid(query)) {
+			var serial = '';
 
-		try {
-			serial = RawDeflate.inflate(Base64.atob(query));
-		} catch(e) {
-		}
-		
-		if(serial.length < 33) { //バイト数が小さすぎる場合inflate失敗とみなす。(8+7*5)*6/8=32.25
-			serial = Base64.atob(query);
-			Simulator.deserializeBit(serial);
-		} else {
-			Simulator.deserialize(serial);
+			try {
+				serial = RawDeflate.inflate(Base64.atob(query));
+			} catch(e) {
+			}
+			
+			if(serial.length < 33) { //バイト数が小さすぎる場合inflate失敗とみなす。(8+7*5)*6/8=32.25
+				serial = Base64.atob(query);
+				Simulator.deserializeBit(serial);
+			} else {
+				Simulator.deserialize(serial);
+			}
 		}
 	}
 	
+	var ui = window.location.pathname.indexOf('/simple.html') > 0 ? SimpleUI : SimulatorUI;
+
+	deserialize();
 	ui.setup();
+	
+	$(window).on('popstate', function(e) {
+		// 最初に開いた状態まで戻ったとき、クエリー文字列がなかったらリロードする
+		if(!e.originalEvent.state && window.location.search.length === 0)
+			window.location.reload();
+		
+		deserialize();
+		ui.refreshAll();
+	});
 });
