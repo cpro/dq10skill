@@ -188,6 +188,51 @@ var Simulator = (function() {
 		this.additionalSkills[skillIndex] = newValue;
 		return true;
 	};
+	//Lv50時の各種ステータス合計値取得
+	//ちから      : pow
+	//みのまもり  : def
+	//きようさ    : dex
+	//すばやさ    : spd
+	//こうげき魔力: magic
+	//かいふく魔力: heal
+	//さいだいHP  : maxhp
+	//さいだいMP  : maxmp
+	//みりょく    : charm
+	//おもさ      : weight
+	Monster.prototype.getTotalStatus = function(status) {
+		var total = this.getTotalPassive(status);
+
+		//Lv50時ステータス
+		total += this.data.status[status];
+		//転生時のステータス増分
+		total += this.data.increment[status] * this.restartCount;
+
+		return total;
+	};
+	//パッシブスキルのステータス加算合計値取得
+	Monster.prototype.getTotalPassive = function(status) {
+		var total = 0;
+		var skills;
+		for(var skillLine in this.skillPts) {
+			var m = skillLine.match(/^additional(\d+)/);
+			if(m) {
+				if(this.restartCount < parseInt(m[1]) + 1 || this.getAdditionalSkill(m[1]) === null)
+					continue;
+				else
+					skills = skillLines[this.getAdditionalSkill(m[1])].skills;
+			} else {
+				skills = skillLines[skillLine].skills;
+			}
+			for(var i = 0; i < skills.length; i++) {
+				if(this.skillPts[skillLine] < skills[i].pt)
+					break;
+				
+				if(skills[i][status])
+					total += skills[i][status];
+			}
+		}
+		return total;
+	};
 
 	//ビット数定義
 	var BITS_MONSTER_TYPE = 6;
@@ -455,13 +500,13 @@ var SimulatorUI = (function($) {
 		});
 		$ent.find('.indiv_name input').val(monster.indivName);
 
-		var skillLine, $table;
+		var skillLine, $table, $skillContainer = $ent.find('.skill_tables');
 
 		for(var c = 0; c < monster.data.skillLines.length; c++) {
 			skillLine = monster.data.skillLines[c];
 			$table = drawSkillTable(skillLine);
 			
-			$ent.append($table);
+			$skillContainer.append($table);
 		}
 		for(var s = 0; s < sim.ADDITIONAL_SKILL_MAX; s++) {
 			skillLine = 'additional' + s.toString();
@@ -470,7 +515,7 @@ var SimulatorUI = (function($) {
 			if(monster.restartCount < s + 1 || monster.getAdditionalSkill(s) === null)
 				$table.hide();
 
-			$ent.append($table);
+			$skillContainer.append($table);
 		}
 
 		return $ent;
@@ -501,6 +546,7 @@ var SimulatorUI = (function($) {
 		for(var skillLine in sim.skillLines) {
 			refreshSkillList(monsterId, skillLine);
 		}
+		refreshTotalStatus(monsterId)
 		refreshControls(monsterId);
 		refreshSaveUrl();
 	}
@@ -660,6 +706,19 @@ var SimulatorUI = (function($) {
 		}
 	}
 
+	function refreshTotalStatus(monsterId) {
+		var monster = sim.getMonster(monsterId);
+		var statusArray = 'maxhp,maxmp,pow,def,magic,heal,spd,dex,charm,weight'.split(',');
+
+		var $cont = $('#' + monsterId + ' .status_info dl');
+		var status;
+
+		for(var i = 0; i < statusArray.length; i++) {
+			status = statusArray[i];
+			$cont.find('.' + status).text(monster.getTotalStatus(status));
+		}
+	}
+
 	function getCurrentMonsterId(currentNode) {
 		return $(currentNode).parents('.monster_ent').attr('id');
 	}
@@ -697,6 +756,7 @@ var SimulatorUI = (function($) {
 					refreshAdditionalSkillSelector(monsterId);
 					refreshAdditionalSkill(monsterId);
 					refreshMonsterInfo(monsterId);
+					refreshTotalStatus(monsterId);
 				} else {
 					return false;
 				}
@@ -713,6 +773,7 @@ var SimulatorUI = (function($) {
 					refreshAdditionalSkillSelector(monsterId);
 					refreshAdditionalSkill(monsterId);
 					refreshMonsterInfo(monsterId);
+					refreshTotalStatus(monsterId);
 					refreshSaveUrl();
 				} else {
 					$(this).val(monster.getRestartCount());
@@ -736,6 +797,7 @@ var SimulatorUI = (function($) {
 				if(sim.getMonster(monsterId).updateSkillPt(skillLine, parseInt(ui.value))) {
 					refreshSkillList(monsterId, skillLine);
 					refreshMonsterInfo(monsterId);
+					refreshTotalStatus(monsterId);
 					e.stopPropagation();
 				} else {
 					return false;
@@ -753,6 +815,7 @@ var SimulatorUI = (function($) {
 				if(monster.updateSkillPt(skillLine, parseInt($(this).val()))) {
 					refreshSkillList(monsterId, skillLine);
 					refreshMonsterInfo(monsterId);
+					refreshTotalStatus(monsterId);
 					refreshSaveUrl();
 				} else {
 					$(this).val(monster.getSkillPt(skillLine));
@@ -788,6 +851,7 @@ var SimulatorUI = (function($) {
 			$('#' + monsterId + ' .' + skillLine + ' .ptspinner').spinner('value', monster.getSkillPt(skillLine));
 			refreshSkillList(monsterId, skillLine);
 			refreshMonsterInfo(monsterId);
+			refreshTotalStatus(monsterId);
 			refreshSaveUrl();
 		});
 		
@@ -806,6 +870,7 @@ var SimulatorUI = (function($) {
 			
 			refreshSkillList(monsterId, skillLine);
 			refreshMonsterInfo(monsterId);
+			refreshTotalStatus(monsterId);
 			refreshSaveUrl();
 		});
 
@@ -938,6 +1003,7 @@ var SimulatorUI = (function($) {
 			if(monster.updateAdditionalSkill(selectorId, $(this).val())) {
 				refreshAdditionalSkill(monsterId);
 				refreshMonsterInfo(monsterId);
+				refreshTotalStatus(monsterId);
 				refreshSaveUrl();
 			} else {
 				$(this).val(monster.getAdditionalSkill(selectorId));
@@ -1053,21 +1119,4 @@ jQuery(function($) {
 	}
 
 	SimulatorUI.setupAll();
-	
-	$('#tw-share').socialbutton('twitter', {
-		button: 'horizontal',
-		url: 'http://cpro.jp/dq10/skillsimulator/monster.html',
-		lang: 'ja',
-		hashtags: 'DQ10, dq10_skillsim'
-	});
-	$('#fb-like').socialbutton('facebook_like', {
-		button: 'button_count',
-		url: 'http://cpro.jp/dq10/skillsimulator/monster.html',
-		locale: 'ja_JP'
-	});
-	$('#g-plusone').socialbutton('google_plusone', {
-		lang: 'ja',
-		size: 'medium',
-		url: 'http://cpro.jp/dq10/skillsimulator/monster.html'
-	});
 });
