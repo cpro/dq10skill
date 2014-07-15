@@ -455,13 +455,13 @@ var SimulatorUI = (function($) {
 		});
 		$ent.find('.indiv_name input').val(monster.indivName);
 
-		var skillLine, $table;
+		var skillLine, $table, $skillContainer = $ent.find('.skill_tables');
 
 		for(var c = 0; c < monster.data.skillLines.length; c++) {
 			skillLine = monster.data.skillLines[c];
 			$table = drawSkillTable(skillLine);
 			
-			$ent.append($table);
+			$skillContainer.append($table);
 		}
 		for(var s = 0; s < sim.ADDITIONAL_SKILL_MAX; s++) {
 			skillLine = 'additional' + s.toString();
@@ -470,7 +470,7 @@ var SimulatorUI = (function($) {
 			if(monster.restartCount < s + 1 || monster.getAdditionalSkill(s) === null)
 				$table.hide();
 
-			$ent.append($table);
+			$skillContainer.append($table);
 		}
 
 		return $ent;
