@@ -264,6 +264,9 @@ a {
         display: inline-block;
         vertical-align: middle; }
 
+.monster_ent .ent_title {
+  height: 22px; }
+
 /* 職業情報欄 */
 .class_info {
   font-size: 70%;
@@ -373,6 +376,38 @@ a {
 .class_group .skill_table.selected {
   border-color: rgba(0, 208, 0, 0.6);
   background-color: rgba(0, 208, 0, 0.02); }
+
+/* 仲間モンスター用 ステータス表示欄 */
+.status_info {
+  clear: both;
+  width: 98%;
+  margin: 7px auto 0 auto;
+  padding: 2px 0 1px 0;
+  position: relative;
+  border-top: 1px solid #9999aa;
+  height: 22px; }
+  .status_info h3 {
+    margin: 0;
+    padding: 0;
+    display: inline;
+    font-size: 80%;
+    font-weight: bold; }
+  .status_info dl {
+    margin: 0;
+    padding: 0;
+    display: inline-block; }
+  .status_info dt {
+    margin: 0 5px 0 5px;
+    padding: 0;
+    display: inline;
+    font-size: 80%; }
+    .status_info dt:after {
+      content: ": "; }
+  .status_info dd {
+    margin: 0;
+    padding: 0;
+    display: inline;
+    font-size: 85%; }
 
 /* フッタコンソール */
 #footconsole {
