@@ -188,6 +188,51 @@ var Simulator = (function() {
 		this.additionalSkills[skillIndex] = newValue;
 		return true;
 	};
+	//Lv50時の各種ステータス合計値取得
+	//ちから      : pow
+	//みのまもり  : def
+	//きようさ    : dex
+	//すばやさ    : spd
+	//こうげき魔力: magic
+	//かいふく魔力: heal
+	//さいだいHP  : maxhp
+	//さいだいMP  : maxmp
+	//みりょく    : charm
+	//おもさ      : weight
+	Monster.prototype.getTotalStatus = function(status) {
+		var total = this.getTotalPassive(status);
+
+		//Lv50時ステータス
+		total += this.data.status[status];
+		//転生時のステータス増分
+		total += this.data.increment[status] * this.restartCount;
+
+		return total;
+	};
+	//パッシブスキルのステータス加算合計値取得
+	Monster.prototype.getTotalPassive = function(status) {
+		var total = 0;
+		var skills;
+		for(var skillLine in this.skillPts) {
+			var m = skillLine.match(/^additional(\d+)/);
+			if(m) {
+				if(this.restartCount < parseInt(m[1]) + 1 || this.getAdditionalSkill(m[1]) === null)
+					continue;
+				else
+					skills = skillLines[this.getAdditionalSkill(m[1])].skills;
+			} else {
+				skills = skillLines[skillLine].skills;
+			}
+			for(var i = 0; i < skills.length; i++) {
+				if(this.skillPts[skillLine] < skills[i].pt)
+					break;
+				
+				if(skills[i][status])
+					total += skills[i][status];
+			}
+		}
+		return total;
+	};
 
 	//ビット数定義
 	var BITS_MONSTER_TYPE = 6;
