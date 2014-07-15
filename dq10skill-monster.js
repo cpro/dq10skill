@@ -546,6 +546,7 @@ var SimulatorUI = (function($) {
 		for(var skillLine in sim.skillLines) {
 			refreshSkillList(monsterId, skillLine);
 		}
+		refreshTotalStatus(monsterId)
 		refreshControls(monsterId);
 		refreshSaveUrl();
 	}
@@ -705,6 +706,19 @@ var SimulatorUI = (function($) {
 		}
 	}
 
+	function refreshTotalStatus(monsterId) {
+		var monster = sim.getMonster(monsterId);
+		var statusArray = 'maxhp,maxmp,pow,def,magic,heal,spd,dex,charm,weight'.split(',');
+
+		var $cont = $('#' + monsterId + ' .status_info dl');
+		var status;
+
+		for(var i = 0; i < statusArray.length; i++) {
+			status = statusArray[i];
+			$cont.find('.' + status).text(monster.getTotalStatus(status));
+		}
+	}
+
 	function getCurrentMonsterId(currentNode) {
 		return $(currentNode).parents('.monster_ent').attr('id');
 	}
@@ -742,6 +756,7 @@ var SimulatorUI = (function($) {
 					refreshAdditionalSkillSelector(monsterId);
 					refreshAdditionalSkill(monsterId);
 					refreshMonsterInfo(monsterId);
+					refreshTotalStatus(monsterId);
 				} else {
 					return false;
 				}
@@ -758,6 +773,7 @@ var SimulatorUI = (function($) {
 					refreshAdditionalSkillSelector(monsterId);
 					refreshAdditionalSkill(monsterId);
 					refreshMonsterInfo(monsterId);
+					refreshTotalStatus(monsterId);
 					refreshSaveUrl();
 				} else {
 					$(this).val(monster.getRestartCount());
@@ -781,6 +797,7 @@ var SimulatorUI = (function($) {
 				if(sim.getMonster(monsterId).updateSkillPt(skillLine, parseInt(ui.value))) {
 					refreshSkillList(monsterId, skillLine);
 					refreshMonsterInfo(monsterId);
+					refreshTotalStatus(monsterId);
 					e.stopPropagation();
 				} else {
 					return false;
@@ -798,6 +815,7 @@ var SimulatorUI = (function($) {
 				if(monster.updateSkillPt(skillLine, parseInt($(this).val()))) {
 					refreshSkillList(monsterId, skillLine);
 					refreshMonsterInfo(monsterId);
+					refreshTotalStatus(monsterId);
 					refreshSaveUrl();
 				} else {
 					$(this).val(monster.getSkillPt(skillLine));
@@ -833,6 +851,7 @@ var SimulatorUI = (function($) {
 			$('#' + monsterId + ' .' + skillLine + ' .ptspinner').spinner('value', monster.getSkillPt(skillLine));
 			refreshSkillList(monsterId, skillLine);
 			refreshMonsterInfo(monsterId);
+			refreshTotalStatus(monsterId);
 			refreshSaveUrl();
 		});
 		
@@ -851,6 +870,7 @@ var SimulatorUI = (function($) {
 			
 			refreshSkillList(monsterId, skillLine);
 			refreshMonsterInfo(monsterId);
+			refreshTotalStatus(monsterId);
 			refreshSaveUrl();
 		});
 
@@ -983,6 +1003,7 @@ var SimulatorUI = (function($) {
 			if(monster.updateAdditionalSkill(selectorId, $(this).val())) {
 				refreshAdditionalSkill(monsterId);
 				refreshMonsterInfo(monsterId);
+				refreshTotalStatus(monsterId);
 				refreshSaveUrl();
 			} else {
 				$(this).val(monster.getAdditionalSkill(selectorId));
