@@ -475,6 +475,7 @@ var SimulatorUI = (function($) {
 	var mspMode = false; //MSP編集モードフラグ
 
 	function refreshAll() {
+		hideConsoles();
 		refreshAllVocationInfo();
 		for(var skillLine in sim.skillLines) {
 			refreshSkillList(skillLine);
@@ -619,6 +620,12 @@ var SimulatorUI = (function($) {
 		return $(currentNode).parents('.skill_table').attr('class').split(' ')[0];
 	}
 
+	function hideConsoles() {
+		$ptConsole.hide();
+		$lvConsole.hide();
+		$trainingPtConsole.hide();
+	}
+
 	function setup() {
 		for(var i = 0; i < setupFunctions.length; i++) {
 			setupFunctions[i]();
@@ -677,7 +684,6 @@ var SimulatorUI = (function($) {
 						refreshVocationInfo(vocation);
 						refreshTotalRequiredExp();
 						refreshTotalExpRemain();
-						refreshUrlBar();
 						//e.stopPropagation();
 					} else {
 						return false;
@@ -702,6 +708,7 @@ var SimulatorUI = (function($) {
 					}
 				},
 				stop: function (e, ui) {
+					refreshUrlBar();
 				}
 			});
 		},
@@ -745,7 +752,6 @@ var SimulatorUI = (function($) {
 						refreshAllVocationInfo();
 						refreshTotalExpRemain();
 						refreshTotalPassive();
-						refreshUrlBar();
 						e.stopPropagation();
 					} else {
 						return false;
@@ -781,6 +787,7 @@ var SimulatorUI = (function($) {
 				stop: function (e, ui) {
 					var skillLine = getCurrentSkillLine(this);
 					selectSkillLine(skillLine);
+					refreshUrlBar();
 				}
 			});
 		},
@@ -793,7 +800,6 @@ var SimulatorUI = (function($) {
 
 				var skillLine = getCurrentSkillLine(this);
 				selectSkillLine(skillLine);
-				refreshUrlBar();
 			}).keypress(function(e) {
 				//テキストボックスでEnter押下時更新して選択状態に
 				if(e.which == 13) {
@@ -836,11 +842,6 @@ var SimulatorUI = (function($) {
 			$lvConsole.click(function(e) {e.stopPropagation();});
 			$trainingPtConsole.click(function(e) {e.stopPropagation();});
 
-			var hideConsoles = function() {
-				$ptConsole.hide();
-				$lvConsole.hide();
-				$trainingPtConsole.hide();
-			};
 			$('body').click(hideConsoles).keydown(function(e) {
 				if(e.which == 27) hideConsoles();
 			});
