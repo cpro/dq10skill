@@ -48,16 +48,17 @@ var MSP_SKILLLINE_ORDER = [
 ];
 
 var TRAINING_TABLE = [
-	{stamp:    0, skillPt: 0},
-	{stamp:  100, skillPt: 1},
-	{stamp:  300, skillPt: 2},
-	{stamp:  600, skillPt: 3},
-	{stamp: 1000, skillPt: 4},
-	{stamp: 1500, skillPt: 5},
-	{stamp: 2000, skillPt: 6},
-	{stamp: 2500, skillPt: 7},
-	{stamp: 3000, skillPt: 8},
-	{stamp: 3500, skillPt: 9}
+	{stamp:    0, skillPt:  0},
+	{stamp:  100, skillPt:  1},
+	{stamp:  300, skillPt:  2},
+	{stamp:  600, skillPt:  3},
+	{stamp: 1000, skillPt:  4},
+	{stamp: 1500, skillPt:  5},
+	{stamp: 2000, skillPt:  6},
+	{stamp: 2500, skillPt:  7},
+	{stamp: 3000, skillPt:  8},
+	{stamp: 3500, skillPt:  9},
+	{stamp: 4000, skillPt: 10}
 ];
 
 var HirobaStatus = (function($) {
