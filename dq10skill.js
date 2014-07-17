@@ -8,10 +8,10 @@ var Simulator = (function($) {
 	var LEVEL_MIN = 1;
 	var LEVEL_MAX = 80;
 	var TRAINING_SKILL_PTS_MIN = 0;
-	var TRAINING_SKILL_PTS_MAX = 9;
+	var TRAINING_SKILL_PTS_MAX = 10;
 	var LEVEL_FOR_TRAINING_MODE = 50;
 	var MSP_MIN = 0;
-	var MSP_MAX = 10;
+	var MSP_MAX = 15;
 
 	var DATA_JSON_URI = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'dq10skill-data.json';
 	
@@ -475,6 +475,7 @@ var SimulatorUI = (function($) {
 	var mspMode = false; //MSP編集モードフラグ
 
 	function refreshAll() {
+		hideConsoles();
 		refreshAllVocationInfo();
 		for(var skillLine in sim.skillLines) {
 			refreshSkillList(skillLine);
@@ -619,6 +620,12 @@ var SimulatorUI = (function($) {
 		return $(currentNode).parents('.skill_table').attr('class').split(' ')[0];
 	}
 
+	function hideConsoles() {
+		$ptConsole.hide();
+		$lvConsole.hide();
+		$trainingPtConsole.hide();
+	}
+
 	function setup() {
 		for(var i = 0; i < setupFunctions.length; i++) {
 			setupFunctions[i]();
@@ -645,10 +652,10 @@ var SimulatorUI = (function($) {
 			});
 		},
 		
-		//レベル欄ポイント時にUI表示
+		//レベル欄クリック時にUI表示
 		function() {
-			$('.ent_title h2').hover(function(e) {
-				if($(':focus').attr('id') == 'lv-select') return false;
+			$('.ent_title h2').click(function(e) {
+				hideConsoles();
 
 				var vocation = getCurrentVocation(this);
 				var consoleLeft = $(this).find('.lv_h2').position().left - 3;
@@ -657,9 +664,7 @@ var SimulatorUI = (function($) {
 				$('#lv-select').val(sim.getLevel(vocation));
 
 				$lvConsole.show();
-			}, function(e) {
-				if($(':focus').attr('id') == 'lv-select') return false;
-				$lvConsole.hide();
+				e.stopPropagation();
 			});
 		},
 
@@ -677,7 +682,6 @@ var SimulatorUI = (function($) {
 						refreshVocationInfo(vocation);
 						refreshTotalRequiredExp();
 						refreshTotalExpRemain();
-						refreshUrlBar();
 						//e.stopPropagation();
 					} else {
 						return false;
@@ -691,7 +695,12 @@ var SimulatorUI = (function($) {
 						$(this).val(oldValue);
 						return false;
 					}
-					if(sim.updateTrainingSkillPt(vocation, parseInt(newValue))) {
+					
+					newValue = parseInt(newValue, 10);
+					if(newValue == oldValue)
+						return false;
+
+					if(sim.updateTrainingSkillPt(vocation, newValue)) {
 						refreshVocationInfo(vocation);
 						refreshTotalRequiredExp();
 						refreshTotalExpRemain();
@@ -702,15 +711,16 @@ var SimulatorUI = (function($) {
 					}
 				},
 				stop: function (e, ui) {
+					refreshUrlBar();
 				}
 			});
 		},
 		
-		//特訓表示欄ポイント時にUI表示
+		//特訓表示欄クリック時にUI表示
 		function() {
-			$('.ent_title .training_pt').hover(function(e) {
-				if($(':focus').attr('id') == 'training_pt_spinner') return false;
-
+			$('.ent_title .training_pt').click(function(e) {
+				hideConsoles();
+				
 				var vocation = getCurrentVocation(this);
 				var consoleLeft = $('#training-' + vocation).position().left - 3;
 
@@ -718,9 +728,7 @@ var SimulatorUI = (function($) {
 				$('#training_pt_spinner').val(sim.getTrainingSkillPt(vocation));
 
 				$trainingPtConsole.show();
-			}, function(e) {
-				if($(':focus').attr('id') == 'training_pt_spinner') return false;
-				$trainingPtConsole.hide();
+				e.stopPropagation();
 			});
 		},
 		
@@ -745,7 +753,6 @@ var SimulatorUI = (function($) {
 						refreshAllVocationInfo();
 						refreshTotalExpRemain();
 						refreshTotalPassive();
-						refreshUrlBar();
 						e.stopPropagation();
 					} else {
 						return false;
@@ -754,17 +761,23 @@ var SimulatorUI = (function($) {
 				change: function (e, ui) {
 					var vocation = getCurrentVocation(this);
 					var skillLine = getCurrentSkillLine(this);
+					var newValue = $(this).val();
 					var oldValue = mspMode ?
 						sim.getMSP(skillLine) :
 						sim.getSkillPt(vocation, skillLine);
 
-					if(isNaN($(this).val())) {
+					if(isNaN(newValue)) {
 						$(this).val(oldValue);
 						return false;
 					}
+					
+					newValue = parseInt(newValue, 10);
+					if(newValue == oldValue)
+						return false;
+
 					var succeeded = mspMode ?
-						sim.updateMSP(skillLine, parseInt($(this).val())) :
-						sim.updateSkillPt(vocation, skillLine, parseInt($(this).val()));
+						sim.updateMSP(skillLine, newValue) :
+						sim.updateSkillPt(vocation, skillLine, newValue);
 
 					if(succeeded) {
 						refreshCurrentSkillPt(vocation, skillLine);
@@ -781,6 +794,7 @@ var SimulatorUI = (function($) {
 				stop: function (e, ui) {
 					var skillLine = getCurrentSkillLine(this);
 					selectSkillLine(skillLine);
+					refreshUrlBar();
 				}
 			});
 		},
@@ -790,10 +804,6 @@ var SimulatorUI = (function($) {
 			$('input.ui-spinner-input').click(function(e) {
 				//テキストボックスクリック時数値を選択状態に
 				$(this).select();
-
-				var skillLine = getCurrentSkillLine(this);
-				selectSkillLine(skillLine);
-				refreshUrlBar();
 			}).keypress(function(e) {
 				//テキストボックスでEnter押下時更新して選択状態に
 				if(e.which == 13) {
@@ -803,11 +813,11 @@ var SimulatorUI = (function($) {
 			});
 		},
 
-		//スキルライン名ポイント時にUI表示
+		//スキルライン名クリック時にUI表示
 		function() {
-			$('.skill_table caption').hover(function(e) {
-				if($(':focus').attr('id') == 'pt_spinner') return false;
-
+			$('.skill_table caption').click(function(e) {
+				hideConsoles();
+				
 				var vocation = getCurrentVocation(this);
 				var skillLine = getCurrentSkillLine(this);
 
@@ -819,13 +829,9 @@ var SimulatorUI = (function($) {
 				$ptConsole.appendTo($(this).find('.console_wrapper')).css({left: consoleLeft});
 				$('#pt_spinner').val(mspMode ? sim.getMSP(skillLine) : sim.getSkillPt(vocation, skillLine));
 
+				selectSkillLine(skillLine);
+
 				$ptConsole.show();
-			}, function(e) {
-				if($(':focus').attr('id') == 'pt_spinner') return false;
-				$ptConsole.hide();
-			}).click(function(e) {
-				$ptConsole.hide();
-				$(this).mouseenter();
 				e.stopPropagation();
 			});
 		},
@@ -836,11 +842,6 @@ var SimulatorUI = (function($) {
 			$lvConsole.click(function(e) {e.stopPropagation();});
 			$trainingPtConsole.click(function(e) {e.stopPropagation();});
 
-			var hideConsoles = function() {
-				$ptConsole.hide();
-				$lvConsole.hide();
-				$trainingPtConsole.hide();
-			};
 			$('body').click(hideConsoles).keydown(function(e) {
 				if(e.which == 27) hideConsoles();
 			});
