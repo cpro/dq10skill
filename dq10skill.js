@@ -775,11 +775,6 @@ var SimulatorUI = (function($) {
 			$('input.ui-spinner-input').click(function(e) {
 				//テキストボックスクリック時数値を選択状態に
 				$(this).select();
-
-				if($(this).attr('id') == 'pt_spinner') {
-					var skillLine = getCurrentSkillLine(this);
-					selectSkillLine(skillLine);
-				}
 			}).keypress(function(e) {
 				//テキストボックスでEnter押下時更新して選択状態に
 				if(e.which == 13) {
@@ -804,6 +799,8 @@ var SimulatorUI = (function($) {
 
 				$ptConsole.appendTo($(this).find('.console_wrapper')).css({left: consoleLeft});
 				$('#pt_spinner').val(mspMode ? sim.getMSP(skillLine) : sim.getSkillPt(vocation, skillLine));
+
+				selectSkillLine(skillLine);
 
 				$ptConsole.show();
 				e.stopPropagation();
