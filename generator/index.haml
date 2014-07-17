@@ -90,16 +90,14 @@
 				%div.class_group{id: vocation}
 					.ent_title
 						%h2.ui-handler<
-							%label{for: 'lv-select'}
-								= data['vocations'][vocation]['name'] + ' Lv '
-								%span.lv_h2 1
+							= data['vocations'][vocation]['name'] + ' Lv '
+							%span.lv_h2 1
 						%dl.skill_pt
 							%dt 残りSP:
 							%dd.pts 0 / 0
 							%dt &nbsp;+&nbsp;
 						%dl.training_pt.ui-handler
-							%dt
-								%label{for: 'training_pt_spinner'} 特訓
+							%dt 特訓
 							%dd{id: "training-#{vocation}"}
 								0
 						%dl.expinfo
@@ -121,11 +119,10 @@
 							%table{class: [skill_line_name, 'skill_table']}>
 								%caption.ui-handler
 									.console_wrapper
-										%label{for: 'pt_spinner'}
-											= skill_line['name'] + ': '
-											%span.skill_current 0
-											\/
-											%span.skill_total 0
+										= skill_line['name'] + ': '
+										%span.skill_current 0
+										\/
+										%span.skill_total 0
 								- skill_line['skills'].each_with_index do |skill, i|
 									- hint = skill['desc']
 									- hint += "\n（消費MP: #{skill['mp']}）" if skill['mp']
