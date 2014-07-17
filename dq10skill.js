@@ -697,7 +697,12 @@ var SimulatorUI = (function($) {
 						$(this).val(oldValue);
 						return false;
 					}
-					if(sim.updateTrainingSkillPt(vocation, parseInt(newValue))) {
+					
+					newValue = parseInt(newValue, 10);
+					if(newValue == oldValue)
+						return false;
+
+					if(sim.updateTrainingSkillPt(vocation, newValue)) {
 						refreshVocationInfo(vocation);
 						refreshTotalRequiredExp();
 						refreshTotalExpRemain();
@@ -760,17 +765,23 @@ var SimulatorUI = (function($) {
 				change: function (e, ui) {
 					var vocation = getCurrentVocation(this);
 					var skillLine = getCurrentSkillLine(this);
+					var newValue = $(this).val();
 					var oldValue = mspMode ?
 						sim.getMSP(skillLine) :
 						sim.getSkillPt(vocation, skillLine);
 
-					if(isNaN($(this).val())) {
+					if(isNaN(newValue)) {
 						$(this).val(oldValue);
 						return false;
 					}
+					
+					newValue = parseInt(newValue, 10);
+					if(newValue == oldValue)
+						return false;
+
 					var succeeded = mspMode ?
-						sim.updateMSP(skillLine, parseInt($(this).val())) :
-						sim.updateSkillPt(vocation, skillLine, parseInt($(this).val()));
+						sim.updateMSP(skillLine, newValue) :
+						sim.updateSkillPt(vocation, skillLine, newValue);
 
 					if(succeeded) {
 						refreshCurrentSkillPt(vocation, skillLine);
