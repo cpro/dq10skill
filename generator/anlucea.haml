@@ -1,4 +1,4 @@
-- VERSION = '0.1'
+- VERSION = '0.1.5'
 !!! 5
 %html
 	%head
@@ -79,6 +79,29 @@
 								%tr{class: [skill_line_name, i].join('_'), title: hint}<
 									%td.skill_pt>= skill['pt']
 									%td.skill_name= skill['name']
+				.status_info
+					%h3 ステータス:
+					%dl
+						%dt 最大HP
+						%dd.maxhp 0
+						%dt 最大MP
+						%dd.maxmp 0
+						%dt 力
+						%dd.pow 0
+						%dt 身守
+						%dd.def 0
+						%dt 攻魔
+						%dd.magic 0
+						%dt 回魔
+						%dd.heal 0
+						%dt 素早
+						%dd.spd 0
+						%dt 器用
+						%dd.dex 0
+						%dt 魅力
+						%dd.charm 0
+						%dt 重さ
+						%dd.weight 0
 			#footconsole
 				%p#bringUpLevel
 					%button 必要レベルまで上げる
@@ -99,13 +122,15 @@
 					%li
 						履歴:
 						%ul
-							%li 2014/7/29 v0.1 公開。
+							%li
+								2014/7/29 v0.1 公開。
+								%ul
+									%li v0.1.5 ステータス表示を追加。
 							%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
 					%li
 						ToDo:
 						%ul
-							%li 取得スキルポイント等のデータ埋め
-							%li ステータス表示
+							%li 取得スキルポイント、ステータス等のデータ埋め
 					%li ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。
 				%address<
 					%p.contact 連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a>
