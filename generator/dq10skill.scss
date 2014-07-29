@@ -2,6 +2,8 @@
 
 $header-height: 90px;
 $header-height-monster: 110px;
+$header-height-anlucea: 50px;
+
 $main-background-color: #fcfcfd;
 $body-content-width-monster: 65.5em;
 
@@ -26,6 +28,9 @@ body {
 
 	&#body-for-monster {
 		padding: $header-height-monster + 5px 0 0 0;
+	}
+	&#body-for-anlucea {
+		padding: $header-height-anlucea + 5px 0 0 0;
 	}
 }
 a {
@@ -258,6 +263,9 @@ a {
 		height: 39px + ($header-height-monster - $header-height);
 	}
 }
+#body-for-anlucea #header {
+	height: $header-height-anlucea;
+}
 
 /* エントリボックス */
 .class_group, .monster_ent {
@@ -390,6 +398,9 @@ a {
 	}
 }
 .monster_ent .ent_title {
+	height: 22px;
+}
+#anlucea-data .ent_title {
 	height: 22px;
 }
 
@@ -674,6 +685,9 @@ body.msp {
 #body-for-monster #ad_sidebar {
 	left: $body-content-width-monster + 1.5em;
 	top: $header-height-monster + 5px;
+}
+#body-for-anlucea #ad_sidebar {
+	top: $header-height-anlucea + 5px;
 }
 
 /* ヘッダ部 SNSボタン各種 */

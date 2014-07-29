@@ -7,6 +7,8 @@ body {
   padding: 95px 0 0 0; }
   body#body-for-monster {
     padding: 115px 0 0 0; }
+  body#body-for-anlucea {
+    padding: 55px 0 0 0; }
 
 a {
   text-decoration: none; }
@@ -173,6 +175,9 @@ a {
   #body-for-monster #header #consoleblock {
     height: 59px; }
 
+#body-for-anlucea #header {
+  height: 50px; }
+
 /* エントリボックス */
 .class_group, .monster_ent {
   border: 2px solid #9999aa;
@@ -265,6 +270,9 @@ a {
         vertical-align: middle; }
 
 .monster_ent .ent_title {
+  height: 22px; }
+
+#anlucea-data .ent_title {
   height: 22px; }
 
 /* 職業情報欄 */
@@ -485,6 +493,9 @@ body.msp .class_group .skill_table.selected {
 #body-for-monster #ad_sidebar {
   left: 67em;
   top: 115px; }
+
+#body-for-anlucea #ad_sidebar {
+  top: 55px; }
 
 /* ヘッダ部 SNSボタン各種 */
 #snsbuttons {
