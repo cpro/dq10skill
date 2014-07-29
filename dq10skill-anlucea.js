@@ -222,6 +222,8 @@
 			var currentLevel = sim.getLevel();
 			var requiredLevel = sim.requiredLevel();
 			
+			//見出し中のレベル数値
+			$('#anlucea-data .lv_h2').text(currentLevel);
 			var $levelH2 = $('#anlucea-data h2');
 
 			//必要経験値
@@ -267,7 +269,7 @@
 		}
 		
 		function refreshControls() {
-			$('#lv-select').val(sim.getLevel());
+			$('#anlucea-data .lv_select>select').val(sim.getLevel());
 			
 			for(var skillLine in sim.skillLines) {
 				$('#anlucea-data .' + skillLine + ' .ptspinner').spinner('value', sim.getSkillPt(skillLine));
@@ -316,9 +318,14 @@
 		var setupFunctions = [
 			//レベル選択セレクトボックス項目設定
 			function() {
-				var $select = $('#lv-select');
+				var $select = $('#anlucea-data .lv_select>select');
+				var skillPtsGiven;
+
 				for(var i = sim.LEVEL_MIN; i <= sim.LEVEL_MAX; i++) {
-					$select.append($("<option />").val(i).text(i.toString() + ' (' + sim.skillPtsGiven[i].toString() + ')'));
+					skillPtsGiven = sim.skillPtsGiven[i].toString();
+					if(skillPtsGiven == 'NaN')
+						skillPtsGiven = '-';
+					$select.append($("<option />").val(i).text(i.toString() + ' (' + skillPtsGiven + ')'));
 				}
 
 				$select.change(function() {

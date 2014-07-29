@@ -5,7 +5,7 @@
 		%meta{charset: 'UTF-8'}/
 		%meta{'http-equiv' => 'Content-Style-Type', content: 'text/css'}/
 		%meta{'http-equiv' => 'Content-Script-Type', content: 'text/javascript'}/
-		- @home_uri = 'http://cpro.jp/dq10/skillsimulator/'
+		- @home_uri = 'http://cpro.jp/dq10/skillsimulator/anlucea.html'
 		%link{rel: 'canonical', href: @home_uri}/
 		%meta{name: 'description', content: 'ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。勇者姫アンルシア用。'}/
 		
@@ -17,11 +17,9 @@
 		
 		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'}
 		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js'}
-		%script{type: 'text/javascript', src: 'js/rawdeflate.min.js'}
-		%script{type: 'text/javascript', src: 'js/rawinflate.min.js'}
 		%script{type: 'text/javascript', src: 'js/jquery.socialbutton-1.9.1.min.js'}
 		%script{type: 'text/javascript', src: "./dq10skill-anlucea.js?ver=#{VERSION}"}
-		-# :javascript
+		:javascript
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -38,15 +36,18 @@
 					%label{for: 'url_text'} 保存用URL:
 					%input#url_text.ui-widget-content.ui-corner-all{type: 'text', size: 45}>/
 					%a#tw-saveurl 保存用URLをツイート
-			#consoleblock
+			-# #consoleblock
 				#navlink
-					-# %a#hirobaimport{href: 'hiroba-import.html', target: '_blank'} 冒険者の広場からデータを取り込む
+					%a#hirobaimport{href: 'hiroba-import.html', target: '_blank'} 冒険者の広場からデータを取り込む
 		#body_content
 			%div#anlucea-data.class_group
 				.ent_title
 					%h2<
 						アンルシア Lv
-						%select{size: 1, id: "lv-select"}
+						%span.lv_h2 20
+					%dl
+						%dd.lv_select
+							%select{size: 1}
 					%dl.skill_pt
 						%dt 残りSP:
 						%dd.pts 0 / 0
@@ -90,22 +91,11 @@
 					%li
 						使い方:
 						%ul
-							%li レベル、特訓ポイント、スキルポイントの辺りをクリックすると入力欄が表示されます。
+							%li プルダウンでレベルを選択。括弧内はそのレベルの累計スキルポイント。
 							%li スキルポイントはスキル一覧の項目をクリックすると必要なポイントが自動入力されます。上下ボタン・キーボードの上下キーで1ずつ調整、PageUp/PageDownキーで10ずつ上下します。数値の直接入力も可能。
-							%li
-								スキルポイント欄右のリセットボタンをクリックするとポイントを0にします。
-								%ul
-									%li ダブルクリックすると複数の職で振ったそのスキルのポイントをすべて0にします。
-									%li 職業欄下部の「全スキルをリセット」で、全職業で振ったスキルのポイントをすべて0にします。レベルと特訓は変化しません。
-							%li ページ上部の「マスタースキル」をチェックすると、マスタースキルポイントを編集するモードに切り替わります。
+							%li スキルポイント欄右のリセットボタンをクリックするとポイントを0にします。
 							%li 「保存用URL」欄に表示されるURLは、アクセスすることで現在の状態を再現できます。メモ用・掲示板に貼る用などにどうぞ。
-							%li 各職業欄の右上にある「おりたたむ」ボタンをクリックすると簡易表示になります。そのまま操作も可能。「すべてたたむ」でレベル・スキルを一覧するのがおすすめです。
-							%li タイトル下の職業ごとのボタンをクリックすると、その職業の位置にスクロールします。折りたたまれていた場合は展開されます。
-							%li 特訓モードのスキルポイントを1以上にした場合、最低でもレベル50必要なものとして計算します。
-							%li 「レベル一括設定」でレベルを選択し設定ボタンをクリックすると、全職業のレベルを一度に変更できます。
 							%li 「必要レベルまで上げる」ボタンをクリックすると、現在のレベルを取得済みのスキルに応じた必要レベルまで引き上げます。
-							%li 「パッシブ全取得」でステータスの種類を選択し設定ボタンをクリックすると、「常時さいだいHP+30」などのいわゆるパッシブスキルをすべて取得した状態に設定します。ゼロからのスキル設計時、「とりあえずHPMPパッシブ」のような使い方が可能です。
-							%li ブックマークレットを利用して、冒険者の広場のスキルポイント詳細ページからデータを取り込めます。詳細は<a href="hiroba-import.html" target="_blank">解説ページを参照</a>してください。
 					%li
 						履歴:
 						%ul
@@ -114,7 +104,8 @@
 					%li
 						ToDo:
 						%ul
-							%li 取得スキルポイントのデータ埋め
+							%li 取得スキルポイント等のデータ埋め
+							%li ステータス表示
 					%li ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。
 				%address<
 					%p.contact 連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a>
@@ -147,7 +138,7 @@
 						%img{src: item[:img_url], width: item[:img_width], height: item[:img_height], alt: item[:item_title], title: item[:item_title]}>/
 						%br>/
 						=item[:item_title]
-		-#:javascript
+		:javascript
 			jQuery(function($) {
 				var sharedUrl = "#{@home_uri}";
 				$('#tw-share').socialbutton('twitter', {
