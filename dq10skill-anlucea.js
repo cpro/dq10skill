@@ -21,10 +21,12 @@
 		var skillLines = allData.skillLines;
 		var skillPtsGiven = allData.skillPtsGiven;
 		var expRequired = allData.expRequired;
-		
+		var statusData = allData.status;
+
 		//パラメータ格納用
 		var skillPts = {};
 		var level = LEVEL_MIN;
+		var baseStatus = statusData[level];
 
 		//パラメータ初期化
 		for(var skillLine in skillLines) {
@@ -61,6 +63,7 @@
 			}
 			
 			level = newValue;
+			baseStatus = statusData[level];
 			return newValue;
 		}
 
@@ -119,9 +122,13 @@
 		//さいだいHP  : maxhp
 		//さいだいMP  : maxmp
 		//みりょく    : charm
+		//おもさ      : weight
 		function totalStatus(status) {
 			//スキルラインデータの各スキルから上記プロパティを調べ合計する
-			var total = 0;
+			if(baseStatus === null)
+				return NaN;
+
+			var total = baseStatus[status];
 			var skills;
 			for(var skillLine in skillLines) {
 				skills = skillLines[skillLine].skills;
@@ -213,7 +220,7 @@
 			for(var skillLine in sim.skillLines) {
 				refreshSkillList(skillLine);
 			}
-			//refreshTotalPassive();
+			refreshTotalStatus();
 			refreshControls();
 			refreshSaveUrl();
 		}
@@ -246,13 +253,17 @@
 				$('#anlucea-data .exp_remain').text(numToFormedStr(sim.requiredExpRemain()));
 			}
 		}
-		
-		function refreshTotalPassive() {
-			var status = 'maxhp,maxmp,pow,def,dex,spd,magic,heal,charm'.split(',');
-			for(var i = 0; i < status.length; i++) {
-				$('#total_' + status[i]).text(sim.totalStatus(status[i]));
+
+		function refreshTotalStatus() {
+			var statusArray = 'maxhp,maxmp,pow,def,magic,heal,spd,dex,charm,weight'.split(',');
+
+			var $cont = $('#anlucea-data .status_info dl');
+			var status;
+
+			for(var i = 0; i < statusArray.length; i++) {
+				status = statusArray[i];
+				$cont.find('.' + status).text(sim.totalStatus(status));
 			}
-			$('#msp_remain').text((sim.MSP_MAX - sim.totalMSP()).toString() + 'P');
 		}
 		
 		function refreshSkillList(skillLine) {
@@ -331,6 +342,7 @@
 				$select.change(function() {
 					sim.updateLevel($(this).val());
 					refreshCharacterInfo();
+					refreshTotalStatus();
 					refreshUrlBar();
 				});
 			},
@@ -350,6 +362,7 @@
 						if(succeeded) {
 							refreshSkillList(skillLine);
 							refreshCharacterInfo();
+							refreshTotalStatus();
 							e.stopPropagation();
 						} else {
 							return false;
@@ -374,6 +387,7 @@
 						if(succeeded) {
 							refreshSkillList(skillLine);
 							refreshCharacterInfo();
+							refreshTotalStatus();
 							refreshUrlBar();
 						} else {
 							$(this).val(oldValue);
@@ -413,6 +427,7 @@
 					$('.ptspinner').val(0);
 					refreshSkillList(skillLine);
 					refreshCharacterInfo();
+					refreshTotalStatus();
 					refreshUrlBar();
 				});
 			},
@@ -429,7 +444,7 @@
 
 					refreshSkillList(skillLine);
 					refreshCharacterInfo();
-					//refreshTotalPassive();
+					refreshTotalStatus();
 					refreshUrlBar();
 				});
 			},
@@ -511,6 +526,7 @@
 					sim.bringUpLevelToRequired();
 					refreshCharacterInfo();
 					refreshControls();
+					refreshTotalStatus();
 					refreshUrlBar();
 				});
 			}
