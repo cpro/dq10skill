@@ -79,6 +79,29 @@
 								%tr{class: [skill_line_name, i].join('_'), title: hint}<
 									%td.skill_pt>= skill['pt']
 									%td.skill_name= skill['name']
+				.status_info
+					%h3 ステータス:
+					%dl
+						%dt 最大HP
+						%dd.maxhp 0
+						%dt 最大MP
+						%dd.maxmp 0
+						%dt 力
+						%dd.pow 0
+						%dt 身守
+						%dd.def 0
+						%dt 攻魔
+						%dd.magic 0
+						%dt 回魔
+						%dd.heal 0
+						%dt 素早
+						%dd.spd 0
+						%dt 器用
+						%dd.dex 0
+						%dt 魅力
+						%dd.charm 0
+						%dt 重さ
+						%dd.weight 0
 			#footconsole
 				%p#bringUpLevel
 					%button 必要レベルまで上げる
