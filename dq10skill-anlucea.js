@@ -21,10 +21,12 @@
 		var skillLines = allData.skillLines;
 		var skillPtsGiven = allData.skillPtsGiven;
 		var expRequired = allData.expRequired;
-		
+		var statusData = allData.status;
+
 		//パラメータ格納用
 		var skillPts = {};
 		var level = LEVEL_MIN;
+		var baseStatus = statusData[level];
 
 		//パラメータ初期化
 		for(var skillLine in skillLines) {
@@ -61,6 +63,7 @@
 			}
 			
 			level = newValue;
+			baseStatus = statusData[level];
 			return newValue;
 		}
 
@@ -119,9 +122,13 @@
 		//さいだいHP  : maxhp
 		//さいだいMP  : maxmp
 		//みりょく    : charm
+		//おもさ      : weight
 		function totalStatus(status) {
 			//スキルラインデータの各スキルから上記プロパティを調べ合計する
-			var total = 0;
+			if(baseStatus === null)
+				return NaN;
+
+			var total = baseStatus[status];
 			var skills;
 			for(var skillLine in skillLines) {
 				skills = skillLines[skillLine].skills;
