@@ -526,6 +526,7 @@
 					sim.bringUpLevelToRequired();
 					refreshCharacterInfo();
 					refreshControls();
+					refreshTotalStatus();
 					refreshUrlBar();
 				});
 			}
