@@ -298,7 +298,7 @@
 
 		function makeCurrentUrl() {
 			return window.location.href.replace(window.location.search, "") + '?' +
-				Base64.btoa(RawDeflate.deflate(sim.serialize()));
+				Base64.btoa(sim.serialize());
 
 		}
 
@@ -590,14 +590,11 @@
 				var serial = '';
 
 				try {
-					serial = RawDeflate.inflate(Base64.atob(query));
+					serial = Base64.atob(query);
 				} catch(e) {
 				}
 				
-				if(serial.length < 5) { //バイト数が小さすぎる場合inflate失敗とみなす。6*6/8=4.5
-					serial = Base64.atob(query);
-					Simulator.deserializeBit(serial);
-				} else {
+				if(serial.length >= 6) { //Lv 1 + skill 5
 					Simulator.deserialize(serial);
 				}
 			}
