@@ -75,15 +75,15 @@
 		 10,  10,  10,  10,  10,  10,  10,  10,  10,  10,
 		 10,  10,  10,  10,  10,  10,  10,  10,  10,  10,
 		 13,  16,  19,  22,  24,  27,  30,  33,  35,  38,
-		 40,  42,  44,  46,  49,  51,  53,  55, "NaN", "NaN",
+		 40,  42,  44,  46,  49,  51,  53,  55,  57,  60,
 		 "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN"
 	],
 	"expRequired": [null,
 		  "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",
 		  "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",
 		  "NaN",    8596,   10701,   13146,   16120,   19512,   23347,   27767,   32693,   38150, 
-		  44481,   51426,   59014,   67274,   76236,   87141,   98903,   "NaN",  125138,   "NaN",
-		  "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN"
+		  44481,   51426,   59014,   67274,   76236,   87141,   98903,   "NaN",  125138,  139682,
+		 156953,   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN"
 	],
 	"status": [null,
 		null, null, null, null, null, null, null, null, null, null,
@@ -107,7 +107,8 @@
 		{"maxhp": 506, "maxmp": 421, "pow": 373, "def": 426, "spd": 374, "dex": 338, "magic": 354, "heal": 496, "charm": 256, "weight": 120},
 		{"maxhp": 507, "maxmp": 423, "pow": 374, "def": 428, "spd": 376, "dex": 341, "magic": 359, "heal": 500, "charm": 260, "weight": 120},
 		{"maxhp": 509, "maxmp": 424, "pow": 374, "def": 430, "spd": 378, "dex": 343, "magic": 365, "heal": 504, "charm": 264, "weight": 120},
-		null, null,
+		{"maxhp": 510, "maxmp": 425, "pow": 375, "def": 433, "spd": 380, "dex": 345, "magic": 370, "heal": 508, "charm": 268, "weight": 120},
+		{"maxhp": 512, "maxmp": 426, "pow": 376, "def": 435, "spd": 382, "dex": 347, "magic": 376, "heal": 511, "charm": 271, "weight": 120},
 		null, null, null, null, null, null, null, null, null, null
 	]
 }
