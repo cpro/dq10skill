@@ -75,15 +75,15 @@
 		 10,  10,  10,  10,  10,  10,  10,  10,  10,  10,
 		 10,  10,  10,  10,  10,  10,  10,  10,  10,  10,
 		 13,  16,  19,  22,  24,  27,  30,  33,  35,  38,
-		 40,  42,  44,  46,  49,  51,  53,  55, "NaN", "NaN",
-		 "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN", "NaN"
+		 40,  42,  44,  46,  49,  51,  53,  55,  57,  60,
+		 62,  64,  66,  68,  70,  72,  74,  76,  78,  80
 	],
 	"expRequired": [null,
 		  "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",
 		  "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",
 		  "NaN",    8596,   10701,   13146,   16120,   19512,   23347,   27767,   32693,   38150, 
-		  44481,   51426,   59014,   67274,   76236,   87141,   98903,   "NaN",  125138,   "NaN",
-		  "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN"
+		  44481,   51426,   59014,   67274,   76236,   87141,   98903,   "NaN",  125138,  139682,
+		 156953,  175375,  194991,  215843,  237974,  261428,  286249,  312481,  340172,  369366  
 	],
 	"status": [null,
 		null, null, null, null, null, null, null, null, null, null,
@@ -107,7 +107,17 @@
 		{"maxhp": 506, "maxmp": 421, "pow": 373, "def": 426, "spd": 374, "dex": 338, "magic": 354, "heal": 496, "charm": 256, "weight": 120},
 		{"maxhp": 507, "maxmp": 423, "pow": 374, "def": 428, "spd": 376, "dex": 341, "magic": 359, "heal": 500, "charm": 260, "weight": 120},
 		{"maxhp": 509, "maxmp": 424, "pow": 374, "def": 430, "spd": 378, "dex": 343, "magic": 365, "heal": 504, "charm": 264, "weight": 120},
-		null, null,
-		null, null, null, null, null, null, null, null, null, null
+		{"maxhp": 510, "maxmp": 425, "pow": 375, "def": 433, "spd": 380, "dex": 345, "magic": 370, "heal": 508, "charm": 268, "weight": 120},
+		{"maxhp": 512, "maxmp": 426, "pow": 376, "def": 435, "spd": 382, "dex": 347, "magic": 376, "heal": 511, "charm": 271, "weight": 120},
+		{"maxhp": 513, "maxmp": 428, "pow": 377, "def": 437, "spd": 384, "dex": 350, "magic": 381, "heal": 515, "charm": 275, "weight": 120},
+		{"maxhp": 515, "maxmp": 429, "pow": 377, "def": 439, "spd": 386, "dex": 352, "magic": 387, "heal": 519, "charm": 279, "weight": 120},
+		{"maxhp": 516, "maxmp": 430, "pow": 378, "def": 441, "spd": 388, "dex": 354, "magic": 392, "heal": 523, "charm": 283, "weight": 120},
+		{"maxhp": 518, "maxmp": 431, "pow": 379, "def": 443, "spd": 390, "dex": 356, "magic": 398, "heal": 527, "charm": 287, "weight": 120},
+		{"maxhp": 519, "maxmp": 433, "pow": 380, "def": 445, "spd": 392, "dex": 359, "magic": 403, "heal": 531, "charm": 291, "weight": 120},
+		{"maxhp": 521, "maxmp": 434, "pow": 380, "def": 447, "spd": 394, "dex": 361, "magic": 409, "heal": 535, "charm": 295, "weight": 120},
+		{"maxhp": 522, "maxmp": 435, "pow": 381, "def": 450, "spd": 396, "dex": 363, "magic": 414, "heal": 539, "charm": 299, "weight": 120},
+		{"maxhp": 524, "maxmp": 436, "pow": 382, "def": 452, "spd": 398, "dex": 365, "magic": 420, "heal": 542, "charm": 302, "weight": 120},
+		{"maxhp": 525, "maxmp": 438, "pow": 383, "def": 454, "spd": 400, "dex": 368, "magic": 425, "heal": 546, "charm": 306, "weight": 120},
+		{"maxhp": 527, "maxmp": 439, "pow": 383, "def": 456, "spd": 402, "dex": 370, "magic": 431, "heal": 550, "charm": 310, "weight": 120}
 	]
 }
