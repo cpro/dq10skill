@@ -727,9 +727,20 @@ body.msp {
 	font-size: 90%;
 }
 
-#initial-instruction p {
-	font-size: 100%;
-	color: green;
-	text-align: center;
-	padding: 2em;
+#initial-instruction {
+	padding: {
+		top: 2em;
+		bottom: 2em;
+	}
+
+	p {
+		font-size: 100%;
+		color: green;
+		text-align: center;
+		margin: 0;
+		padding: 0;
+	}
+	p.whatsnew {
+		color: #f75050;
+	}
 }
