@@ -6,7 +6,7 @@ var Simulator = (function() {
 	var MONSTER_MAX = 8;
 	
 	var RESTART_MIN = 0;
-	var RESTART_MAX = 5;
+	var RESTART_MAX = 6;
 	var SKILL_PTS_PER_RESTART = 10;
 	var RESTART_EXP_RATIO = 0.03; //仮数値
 	var ADDITIONAL_SKILL_MAX = 2;
