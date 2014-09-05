@@ -38,6 +38,13 @@ if refresh_item_cache or !File.exist?(ITEM_CACHE_PATH)
 
   asin_list = File.readlines("#{dir}/asin_list.txt").map { |e| e.chomp }
   item_list = asin_list.map do |asin|
+    # ASINコードに続けてタブ文字と文字列が記述されている場合
+    # カスタムタイトルとして扱う
+    custom_title = nil
+    if asin.split("\t").size >= 2
+      asin, custom_title = asin.split("\t")
+    end
+
     il = ItemLookup.new('ASIN', {ItemId: asin})
     request = Search::Request.new
     
@@ -61,7 +68,7 @@ if refresh_item_cache or !File.exist?(ITEM_CACHE_PATH)
       img_height: item.medium_image && item.medium_image.height.to_s,
       img_width: item.medium_image && item.medium_image.width.to_s,
       item_url: item.detail_page_url.to_s,
-      item_title: item.item_attributes.title.to_s
+      item_title: custom_title || item.item_attributes.title.to_s
     }
   end
   
