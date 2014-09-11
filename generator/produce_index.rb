@@ -28,52 +28,12 @@ item_list = []
 # -aオプション時、またはキャッシュが存在しない場合
 # AWSから商品タイトル・画像URL等を取得する
 if refresh_item_cache or !File.exist?(ITEM_CACHE_PATH)
-  require 'amazon/aws'
-  require 'amazon/aws/search'
-  
-  # Ruby/AWS 設定
-  ENV['AMAZONRCDIR']  = dir
-  ENV['AMAZONRCFILE'] = '.amazonrc'
-  include Amazon::AWS
+  system("ruby #{dir}/refresh_amazon_cache.rb")
+end
 
-  asin_list = File.readlines("#{dir}/asin_list.txt").map { |e| e.chomp }
-  item_list = asin_list.map do |asin|
-    il = ItemLookup.new('ASIN', {ItemId: asin})
-    request = Search::Request.new
-    
-    retry_count = 0
-    begin
-      response = request.search il
-    rescue HTTPError => e
-      retry_count += 1
-      if retry_count < 5
-        STDOUT.puts "retrying #{asin} ..."
-        sleep 1
-        retry
-      else
-        raise e
-      end
-    end
-    
-    item = response.item_lookup_response.items.item
-    {
-      img_url: item.medium_image && item.medium_image.url.to_s,
-      img_height: item.medium_image && item.medium_image.height.to_s,
-      img_width: item.medium_image && item.medium_image.width.to_s,
-      item_url: item.detail_page_url.to_s,
-      item_title: item.item_attributes.title.to_s
-    }
-  end
-  
-  #キャッシュ
-  File.open(ITEM_CACHE_PATH, 'w') do |file|
-    file.puts JSON.generate(item_list)
-  end
-else
-  #キャッシュをロード
-  File.open(ITEM_CACHE_PATH, 'r') do |file|
-    item_list = JSON.parse(file.read, symbolize_names: true)
-  end
+#キャッシュをロード
+File.open(ITEM_CACHE_PATH, 'r') do |file|
+  item_list = JSON.parse(file.read, symbolize_names: true)
 end
 
 # スキル等データロード

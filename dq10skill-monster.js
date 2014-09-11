@@ -6,8 +6,9 @@ var Simulator = (function() {
 	var MONSTER_MAX = 8;
 	
 	var RESTART_MIN = 0;
-	var RESTART_MAX = 5;
+	var RESTART_MAX = 6;
 	var SKILL_PTS_PER_RESTART = 10;
+	var SKILL_PTS_PER_RESTART_OVER_5 = 5; //転生6回目以降の増分
 	var RESTART_EXP_RATIO = 0.03; //仮数値
 	var ADDITIONAL_SKILL_MAX = 2;
 
@@ -174,7 +175,14 @@ var Simulator = (function() {
 	};
 	//転生による追加スキルポイントの取得
 	Monster.prototype.getRestartSkillPt = function() {
-		return this.restartCount * SKILL_PTS_PER_RESTART;
+		var rcBase = this.restartCount;
+		var rcOver5 = 0;
+		if(rcBase > 5) {
+			rcOver5 = rcBase - 5;
+			rcBase = 5;
+		}
+		return rcBase * SKILL_PTS_PER_RESTART +
+			rcOver5 * SKILL_PTS_PER_RESTART_OVER_5;
 	};
 
 	//転生追加スキルの取得
