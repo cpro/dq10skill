@@ -11,7 +11,7 @@ var Simulator = (function($) {
 	var TRAINING_SKILL_PTS_MAX = 11;
 	var LEVEL_FOR_TRAINING_MODE = 50;
 	var MSP_MIN = 0;
-	var MSP_MAX = 15;
+	var MSP_MAX = 16;
 
 	var DATA_JSON_URI = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'dq10skill-data.json';
 	
