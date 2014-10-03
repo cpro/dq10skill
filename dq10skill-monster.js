@@ -44,10 +44,10 @@ var Simulator = (function() {
 	function Monster (monsterType) {
 		this.data = monsterList[monsterType];
 		this.monsterType = monsterType;
-		this.level = LEVEL_MIN;
+		this.level = LEVEL_MAX;
 		this.skillPts = {};
 		this.indivName = this.data.defaultName;
-		this.restartCount = 0;
+		this.restartCount = RESTART_MAX;
 
 		this.id = monsterType + '_' + (lastId += 1).toString();
 
@@ -192,6 +192,13 @@ var Simulator = (function() {
 	//転生追加スキルの更新
 	Monster.prototype.updateAdditionalSkill = function(skillIndex, newValue) {
 		if(skillIndex < 0 || skillIndex > ADDITIONAL_SKILL_MAX) return false;
+		
+		if(newValue !== null) {
+			for(var i = 0; i < this.additionalSkills.length; i++) {
+				if(i == skillIndex) continue;
+				if(newValue == this.additionalSkills[i]) return false;
+			}
+		}
 		
 		this.additionalSkills[skillIndex] = newValue;
 		return true;
