@@ -44,10 +44,10 @@ var Simulator = (function() {
 	function Monster (monsterType) {
 		this.data = monsterList[monsterType];
 		this.monsterType = monsterType;
-		this.level = LEVEL_MIN;
+		this.level = LEVEL_MAX;
 		this.skillPts = {};
 		this.indivName = this.data.defaultName;
-		this.restartCount = 0;
+		this.restartCount = RESTART_MAX;
 
 		this.id = monsterType + '_' + (lastId += 1).toString();
 
