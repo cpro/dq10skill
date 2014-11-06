@@ -1,4 +1,4 @@
-- VERSION = 'm0.4.4'
+- VERSION = 'm0.5'
 !!! 5
 %html
 	%head
@@ -55,7 +55,7 @@
 		#body_content
 			.monster_ent#initial-instruction
 				%p 上のモンスター名のボタンをクリックして仲間モンスターを追加してください。
-				%p.whatsnew （New: モンスター追加時の初期状態をLv50・6転生に変更しました）
+				%p.whatsnew （New: ver2.3後期のドラキーおよび新スキルラインを追加）
 			#monsters
 			.monster_ent#monster_dummy{style: 'display:none'}
 				.ent_title
@@ -152,6 +152,12 @@
 							履歴:
 							%ul
 								%li
+									2014/11/6 v0.5
+									%ul
+										%li ver2.3後期のドラキーを追加。
+										%li ver2.3後期の追加スキルライン（きようさアップ・ドルマの心得）に対応。暫定的に転生6回目で取得可能としている。
+										%li 2.1で消費MPが減らされた上位呪文（メラゾーマ25→12等）がそのままだったので修正。
+								%li
 									2014/10/3 v0.4.4
 									%ul
 										%li モンスター追加時の初期状態を最大Lv・最大転生数に変更。完成時を想定した使われ方が多いため。
@@ -161,10 +167,6 @@
 									2014/8/28 v0.4.2 ver2.3の転生回数解放に仮対応。
 									%ul
 										%li 2014/9/11 v0.4.3 ver2.3公開にともない、転生6回目の追加スキルポイントを5に修正。
-								%li
-									2014/7/15 v0.4 Lv50時ステータスの表示欄を追加。数値情報は<a href="http://www.logsoku.com/r/ff/1405308669/5" target="_blank">2ch仲間モンスタースレ</a>より。
-									%ul
-										%li 2014/7/17 v0.4.1 ステータス表示から武器の攻撃力パッシブを除外。バイキ計算等で性格が異なるため。
 								%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
 					%li
 						ToDo:
