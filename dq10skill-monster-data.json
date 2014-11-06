@@ -605,7 +605,7 @@
 				{"pt":   7, "name": "ドルクマ", "desc": "巨大な\n闇のチカラが\n敵１体をおそう", "mp": 7},
 				{"pt":  12, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
 				{"pt":  18, "name": "マホトラハット", "desc": "", "mp": null},
-				{"pt":  25, "name": "ドルモーア", "desc": "", "mp": null},
+				{"pt":  25, "name": "ドルモーア", "desc": "破滅的な\n闇のチカラが\n敵１体をおそう", "mp": 14},
 				{"pt":  32, "name": "常時こうげき魔力+100", "desc": "常時\nこうげき魔力が\n１００増える", "mp": null, "magic": 100},
 				{"pt":  40, "name": "ハットイルージョン", "desc": "", "mp": 10}
 			]
@@ -715,6 +715,19 @@
 			]
 		},
 
+		"mahodrakee": {
+			"name": "マホドラキー",
+			"skills": [
+				{"pt":   3, "name": "マホトラ", "desc": "敵１体から\nＭＰを吸いとる", "mp": null},
+				{"pt":   7, "name": "常時みかわし率+5%", "desc": "常時\n敵の攻撃を\nかわしやすくなる", "mp": null},
+				{"pt":  12, "name": "やすらぎバット", "desc": "敵が減ると安心し\nＭＰが少し回復\nするようになる", "mp": null},
+				{"pt":  18, "name": "常時こうげき魔力+60", "desc": "常時\nこうげき魔力が\n６０増える", "mp": null, "magic": 60},
+				{"pt":  25, "name": "りゅうせいよび", "desc": "周囲を巻き込む\nりゅうせいが\n敵に降りそそぐ", "mp": 10},
+				{"pt":  32, "name": "常時さいだいＭＰ+80", "desc": "常時\nさいだいＭＰが\n８０増える", "mp": null, "maxmp": 80},
+				{"pt":  40, "name": "まりょくのうた", "desc": "周囲の仲間の\n呪文のダメージを\n大幅に上げる", "mp": 12}
+			]
+		},
+
 		"unknown1": {
 			"name": "不明",
 			"skills": [
@@ -819,6 +832,19 @@
 			]
 		},
 
+		"raisedex": {
+			"name": "きようさアップ",
+			"skills": [
+				{"pt":   3, "name": "常時きようさ+60", "desc": "常時\nきようさが\n６０増える", "mp": null, "dex": 60},
+				{"pt":   7, "name": "弱体成功率アップ", "desc": "", "mp": null},
+				{"pt":  12, "name": "呪文ぼうそう率アップ", "desc": "呪文を唱えた時\n魔力が\n暴走しやすくなる", "mp": null},
+				{"pt":  18, "name": "常時きようさ+100", "desc": "常時\nきようさが\n１００増える", "mp": null, "dex": 100},
+				{"pt":  25, "name": "かいしん率+5%", "desc": "会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  32, "name": "弱体成功率アップ", "desc": "", "mp": null},
+				{"pt":  40, "name": "ロストアタック", "desc": "敵１体に\nダメージを与え\nテンションダウン", "mp": 4}
+			]
+		},
+
 		"raisemagic": {
 			"name": "まりょくアップ",
 			"skills": [
@@ -892,7 +918,7 @@
 				{"pt":  12, "name": "メラミ", "desc": "大きな火の玉で\n敵１体を攻撃", "mp": 6},
 				{"pt":  18, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
 				{"pt":  25, "name": "常時こうげき魔力+100", "desc": "常時\nこうげき魔力が\n１００増える", "mp": null, "magic": 100},
-				{"pt":  32, "name": "メラゾーマ", "desc": "巨大な火の玉で\n敵１体を攻撃", "mp": 25},
+				{"pt":  32, "name": "メラゾーマ", "desc": "巨大な火の玉で\n敵１体を攻撃", "mp": 12},
 				{"pt":  40, "name": "メラ系効果+20%", "desc": "メラ系の呪文の\n威力があがる", "mp": null}
 			]
 		},
@@ -900,13 +926,13 @@
 		"hyad": {
 			"name": "ヒャドの心得",
 			"skills": [
-				{"pt":  3, "name": "ヒャド", "desc": "氷のやいばで\n敵１体を攻撃", "mp": 3},
-				{"pt":  7, "name": "常時こうげき魔力+40", "desc": "常時\nこうげき魔力が\n４０増える", "mp": null, "magic": 40},
-				{"pt": 12, "name": "ヒャダルコ", "desc": "周囲を巻き込む\n氷のやいばが\n敵に突きささる", "mp": 8},
-				{"pt": 18, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
-				{"pt": 25, "name": "常時こうげき魔力+100", "desc": "常時\nこうげき魔力が\n１００増える", "mp": null, "magic": 100},
-				{"pt": 32, "name": "マヒャド", "desc": "周囲を巻き込む\n大きな氷の柱が\n敵に突きささる", "mp": 24},
-				{"pt": 40, "name": "ヒャド系効果+20%", "desc": "ヒャド系の呪文の\n威力があがる", "mp": null}
+				{"pt":   3, "name": "ヒャド", "desc": "氷のやいばで\n敵１体を攻撃", "mp": 3},
+				{"pt":   7, "name": "常時こうげき魔力+40", "desc": "常時\nこうげき魔力が\n４０増える", "mp": null, "magic": 40},
+				{"pt":  12, "name": "ヒャダルコ", "desc": "周囲を巻き込む\n氷のやいばが\n敵に突きささる", "mp": 8},
+				{"pt":  18, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
+				{"pt":  25, "name": "常時こうげき魔力+100", "desc": "常時\nこうげき魔力が\n１００増える", "mp": null, "magic": 100},
+				{"pt":  32, "name": "マヒャド", "desc": "周囲を巻き込む\n大きな氷の柱が\n敵に突きささる", "mp": 21},
+				{"pt":  40, "name": "ヒャド系効果+20%", "desc": "ヒャド系の呪文の\n威力があがる", "mp": null}
 			]
 		},
 
@@ -918,7 +944,7 @@
 				{"pt":  12, "name": "バギマ", "desc": "", "mp": 5},
 				{"pt":  18, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
 				{"pt":  25, "name": "常時こうげき魔力+100", "desc": "常時\nこうげき魔力が\n１００増える", "mp": null, "magic": 100},
-				{"pt":  32, "name": "バギクロス", "desc": "", "mp": 14},
+				{"pt":  32, "name": "バギクロス", "desc": "", "mp": 12},
 				{"pt":  40, "name": "バギ系効果+20%", "desc": "バギ系の呪文の\n威力があがる", "mp": null}
 			]
 		},
@@ -931,8 +957,21 @@
 				{"pt":  12, "name": "イオラ", "desc": "", "mp": 10},
 				{"pt":  18, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
 				{"pt":  25, "name": "常時こうげき魔力+100", "desc": "常時\nこうげき魔力が\n１００増える", "mp": null, "magic": 100},
-				{"pt":  32, "name": "イオナズン", "desc": "", "mp": 28},
+				{"pt":  32, "name": "イオナズン", "desc": "", "mp": 23},
 				{"pt":  40, "name": "イオ系効果+20%", "desc": "イオ系の呪文の\n威力があがる", "mp": null}
+			]
+		},
+
+		"doruma": {
+			"name": "ドルマの心得",
+			"skills": [
+				{"pt":   3, "name": "ドルマ", "desc": "闇のチカラで\n敵１体を攻撃", "mp": 4},
+				{"pt":   7, "name": "常時こうげき魔力+40", "desc": "常時\nこうげき魔力が\n４０増える", "mp": null, "magic": 40},
+				{"pt":  12, "name": "ドルクマ", "desc": "巨大な\n闇のチカラが\n敵１体をおそう", "mp": 7},
+				{"pt":  18, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
+				{"pt":  25, "name": "常時こうげき魔力+100", "desc": "常時\nこうげき魔力が\n１００増える", "mp": null, "magic": 100},
+				{"pt":  32, "name": "ドルモーア", "desc": "破滅的な\n闇のチカラが\n敵１体をおそう", "mp": 14},
+				{"pt":  40, "name": "ドルマ系効果+20%", "desc": "ドルマ系の呪文の\n威力があがる", "mp": null}
 			]
 		},
 
@@ -1202,6 +1241,16 @@
 			"status": {"maxhp": 345, "maxmp": 25, "pow": 170, "def": 190, "magic": 20, "heal": 20, "spd": 100, "dex": 80, "charm": 100, "weight": 150},
 			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
 			"expTable": 1
+		},
+		
+		"drakee": {
+			"id": 25,
+			"name": "ドラキー",
+			"defaultName": "ドラキー",
+			"skillLines": ["mahodrakee", "doruma", "wand"],
+			"status": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
+			"expTable": 1
 		}
 		
 	},
@@ -1209,7 +1258,7 @@
 	"monstermaster": [
 		"slime", "mormon", "prisonyan", "hoimislime", "slimeknight",
 		"chimera", "catmage", "lizardman", "battlerex", "itazuramogura",
-		"babysatan", "dragonkids"
+		"babysatan", "dragonkids", "drakee"
 	],
 	"itemmaster": [
 		"metappy", "takeyarihei", "needleman", "fondue", "entasisman",
@@ -1224,6 +1273,7 @@
 		{"name": "raisedef",   "restartCount": 1, "id":  4},
 		{"name": "raisespd",   "restartCount": 1, "id":  5},
 		{"name": "raisemagic", "restartCount": 1, "id":  6},
+		{"name": "raisedex",   "restartCount": 6, "id": 15},
 		{"name": "heal",       "restartCount": 2, "id":  7},
 		{"name": "weaken",     "restartCount": 3, "id":  8},
 		{"name": "cure",       "restartCount": 4, "id":  9},
@@ -1231,7 +1281,8 @@
 		{"name": "mera",       "restartCount": 2, "id": 11},
 		{"name": "hyad",       "restartCount": 3, "id": 12},
 		{"name": "bagi",       "restartCount": 4, "id": 13},
-		{"name": "io",         "restartCount": 5, "id": 14}
+		{"name": "io",         "restartCount": 5, "id": 14},
+		{"name": "doruma",     "restartCount": 6, "id": 16}
 	],
 
 	"skillPtsGiven": [null,
@@ -1249,5 +1300,11 @@
 			  73071,   83488,   94869,  107259,  120702,  135241,  150923,  167793,  185901,  205293,
 			 226017,   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",  480910
 		]
-	}
+	},
+
+	"badge": [
+		{"id":  1, "name": "スライム・銅", "maxhp": 30}
+	],
+	"specialbadge": [
+	]
 }
