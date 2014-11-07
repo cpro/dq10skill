@@ -1273,7 +1273,7 @@
 		{"name": "raisedef",   "restartCount": 1, "id":  4},
 		{"name": "raisespd",   "restartCount": 1, "id":  5},
 		{"name": "raisemagic", "restartCount": 1, "id":  6},
-		{"name": "raisedex",   "restartCount": 6, "id": 15},
+		{"name": "raisedex",   "restartCount": 1, "id": 15},
 		{"name": "heal",       "restartCount": 2, "id":  7},
 		{"name": "weaken",     "restartCount": 3, "id":  8},
 		{"name": "cure",       "restartCount": 4, "id":  9},
