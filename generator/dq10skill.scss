@@ -408,7 +408,7 @@ a {
 .class_info {
 	font-size: 70%;
 	float: left;
-	width: 12em;
+	width: 140px;
 	height: 200px;
 	position: relative;
 	text-align: center;
@@ -440,7 +440,57 @@ a {
 	}
 }
 .monster_ent .class_info {
-	height: 16em;
+	height: 210px;
+
+	ul.badge-button-container {
+		list-style-type: none;
+		margin: 0;
+		padding: 2px 3px 0 3px;
+
+		li {
+			margin: 1px 0 0 0;
+			height: 16px;
+			width: auto;
+			overflow: hidden;
+			white-space: nowrap;
+			border: 1px solid #aab;
+
+			&.blank {
+				background-color: transparent;
+				color: #889;
+			}
+			&.bronze {
+				background-color: #eda;
+				color: #752;
+			}
+			&.silver {
+				background-color: #f0f0f5;
+				color: #505053;
+			}
+			&.gold {
+				background-color: #fef487;
+				color: #551;
+			}
+			&.luminous {
+				background-color: white;
+				color: #444;
+			}
+
+			&:hover {
+				cursor: pointer;
+				border-color: #445;
+				color: black;
+			}
+
+			a {
+				display: block;
+				padding: 0 3px;
+				height: 16px;
+				width: auto;
+				text-align: center;
+			}
+		}
+	}
 }
 
 .skill_tables {
@@ -558,6 +608,7 @@ a {
 	position: relative;
 	border-top: 1px solid #99a;
 	height: 22px;
+	white-space: nowrap;
 
 	h3 {
 		margin: 0;
@@ -586,7 +637,13 @@ a {
 		padding: 0;
 		display: inline;
 		font-size: 85%;
+	}
 }
+
+.monster_ent .status_info {
+	clear: none;
+	margin-left: 146px;
+	width: 900px;
 }
 
 /* フッタコンソール */
