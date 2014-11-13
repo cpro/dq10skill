@@ -187,6 +187,31 @@
 					%li ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。
 				%address<
 					%p.contact 連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a>
+		#dark-screen
+		#badge-selector
+			#badge-selector-header
+			#badge-selector-body
+				%ul#badge-selector-list.badge-button-container
+					- 1.upto(100) do |i|
+						%li.ui-corner-all.bronze<
+							%a<
+								= sprintf("%03d", i) + ' ？？？？？・銅'
+					- 101.upto(200) do |i|
+						%li.ui-corner-all.silver<
+							%a<
+								= sprintf("%03d", i) + ' ？？？？？・銀'
+					- 201.upto(300) do |i|
+						%li.ui-corner-all.gold<
+							%a<
+								= sprintf("%03d", i) + ' ？？？？？・金'
+			#badge-selector-footer
+				%h2#badge-selector-badge-title<
+					%span#badge-selector-badge-id> 001
+					%span#badge-selector-badge-name> スライム・銅
+				%p#badge-selector-race スライム系
+				%ul#badge-selector-feature-list
+					%li さいだいHP+40
+					%li かいしん率+2.0%
 		#ad_sidebar
 			%h2 サイト内リンク
 			%ul

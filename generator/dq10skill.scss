@@ -16,6 +16,7 @@ $entry-padding: 2px;
 
 $entry-width: $skill-table-width * 5 + $skill-table-padding * 2;
 $body-content-width: $entry-width + ($entry-padding + $entry-border-width) * 2;
+$border-color-general: #99a;
 
 $msp-color: #58e;
 
@@ -269,7 +270,7 @@ a {
 
 /* エントリボックス */
 .class_group, .monster_ent {
-	border: $entry-border-width solid #99a;
+	border: $entry-border-width solid $border-color-general;
 	border-radius: 5px;
 	clear: both;
 	margin: 3px 0;
@@ -307,7 +308,7 @@ a {
 	padding: 1px 0 2px 0;
 	position: relative;
 	height: 18px;
-	border-bottom: 1px solid #99a;
+	border-bottom: 1px solid $border-color-general;
 
 	h2, dl, dt, dd {
 		display: inline-block;
@@ -412,7 +413,7 @@ a {
 	height: 200px;
 	position: relative;
 	text-align: center;
-	border-right: 1px solid #99a;
+	border-right: 1px solid $border-color-general;
 	vertical-align: top;
 	
 	dt {
@@ -441,56 +442,6 @@ a {
 }
 .monster_ent .class_info {
 	height: 210px;
-
-	ul.badge-button-container {
-		list-style-type: none;
-		margin: 0;
-		padding: 2px 3px 0 3px;
-
-		li {
-			margin: 1px 0 0 0;
-			height: 16px;
-			width: auto;
-			overflow: hidden;
-			white-space: nowrap;
-			border: 1px solid #aab;
-
-			&.blank {
-				background-color: transparent;
-				color: #889;
-			}
-			&.bronze {
-				background-color: #eda;
-				color: #752;
-			}
-			&.silver {
-				background-color: #f0f0f5;
-				color: #505053;
-			}
-			&.gold {
-				background-color: #fef487;
-				color: #551;
-			}
-			&.luminous {
-				background-color: white;
-				color: #444;
-			}
-
-			&:hover {
-				cursor: pointer;
-				border-color: #445;
-				color: black;
-			}
-
-			a {
-				display: block;
-				padding: 0 3px;
-				height: 16px;
-				width: auto;
-				text-align: center;
-			}
-		}
-	}
 }
 
 .skill_tables {
@@ -606,7 +557,7 @@ a {
 	margin: 7px auto 0 auto;
 	padding: 2px 0 1px 0;
 	position: relative;
-	border-top: 1px solid #99a;
+	border-top: 1px solid $border-color-general;
 	height: 22px;
 	white-space: nowrap;
 
@@ -648,7 +599,7 @@ a {
 
 /* フッタコンソール */
 #footconsole {
-	border: $entry-border-width solid #99a;
+	border: $entry-border-width solid $border-color-general;
 	border-radius: 5px;
 	width: $entry-width;
 	overflow: auto;
@@ -660,7 +611,7 @@ a {
 		font-size: 80%;
 		margin: 0;
 		padding: 0 10px;
-		border-right: 1px solid #99a;
+		border-right: 1px solid $border-color-general;
 		&:last-child {
 			border-right: none;
 		}
@@ -713,6 +664,179 @@ body.msp {
 	font-style: normal;
 }
 
+/* バッジ関連定義 */
+$badge-button-height: 16px;
+$badge-anchor-padding-x: 3px;
+$badge-button-width: 144px;
+$badge-button-border-width: 1px;
+$badge-button-margin-x: 1px;
+$badge-button-margin-y: 2px;
+$badge-button-count-per-row: 5; /* 1行あたりのボタン数 */
+$badge-button-container-width: (
+	$badge-button-width +
+	$badge-button-border-width * 2 +
+	$badge-button-margin-x * 2
+	) * $badge-button-count-per-row;
+
+/* バッジ選択ボタン */
+ul.badge-button-container {
+	list-style-type: none;
+
+	li {
+		overflow: hidden;
+		white-space: nowrap;
+		border: 1px solid #aab;
+		font-size: 11px;
+
+		&.blank {
+			background-color: transparent;
+			color: #889;
+		}
+		&.bronze {
+			background-color: #eda;
+			color: #752;
+		}
+		&.silver {
+			background-color: #f0f0f5;
+			color: #303032;
+		}
+		&.gold {
+			background-color: #fef487;
+			color: #551;
+		}
+		&.luminous {
+			background-color: white;
+			color: #444;
+		}
+
+		&:hover {
+			cursor: pointer;
+			border-color: #445;
+			color: black;
+		}
+
+		a {
+			display: block;
+			padding: 0 $badge-anchor-padding-x;
+			height: $badge-button-height;
+			width: auto;
+			text-align: center;
+		}
+	}
+}
+.monster_ent .class_info ul.badge-button-container {
+	padding: 2px 3px 0 3px;
+	margin: 0;
+
+	li {
+		margin: 1px 0 0 0;
+		width: auto;
+	}
+	a {
+		padding: 0 3px;
+	}
+}
+
+/* バッジ選択画面 */
+#badge-selector {
+	position: fixed;
+	left: 150px;
+	top: 200px;
+	z-index: 200;
+
+	margin: 0;
+	padding: 0;
+
+	$badge-selector-header-height: 60px;
+	$badge-selector-footer-height: 80px;
+	$badge-selector-body-height: 240px;
+	$badge-selector-body-padding: 15px;
+	$badge-selector-body-scrollbar-margin: 18px;
+	$badge-selector-inner-border-width: 1px;
+	$badge-selector-outer-border-width: 3px;
+
+	width:
+		$badge-button-container-width +
+		$badge-selector-body-padding * 2 +
+		$badge-selector-body-scrollbar-margin;
+	height:
+		$badge-selector-header-height +
+		$badge-selector-footer-height +
+		$badge-selector-body-height +
+		$badge-selector-inner-border-width * 2;
+
+	border: $badge-selector-outer-border-width solid $border-color-general;
+	border-radius: $badge-selector-outer-border-width * 2;
+	background-color: $main-background-color;
+
+	#badge-selector-header {
+		position: relative;
+		height: $badge-selector-header-height;
+		border-bottom: $badge-selector-inner-border-width solid $border-color-general;
+	}
+	#badge-selector-footer {
+		position: relative;
+		height: $badge-selector-footer-height;
+		border-top: $badge-selector-inner-border-width solid $border-color-general;
+	}
+	#badge-selector-body {
+		position: relative;
+		height: $badge-selector-body-height;
+		overflow-y: scroll;
+		overflow-x: hidden;
+
+		#badge-selector-list {
+			margin: {
+				top: 5px;
+				right: $badge-selector-body-padding + $badge-selector-body-scrollbar-margin;
+				bottom: 5px;
+				left: $badge-selector-body-padding;
+			}
+			padding: 0;
+			width: $badge-button-container-width;
+
+			li {
+				/* display: inline-block; */
+				float: left;
+				width: $badge-button-width;
+				margin: $badge-button-margin-y $badge-button-margin-x;
+			}
+		}
+	}
+	#badge-selector-badge-title {
+		font-size: 18px;
+		margin: 5px 0 3px $badge-selector-body-padding;
+		
+		#badge-selector-badge-id {
+			font-size: 85%;
+			margin-right: 3px;
+		}
+	}
+	#badge-selector-race {
+		font-size: 14px;
+		margin: 0 0 0 $badge-selector-body-padding;
+		padding: 0;
+	}
+	#badge-selector-feature-list {
+		font-size: 12px;
+		margin: 5px 0 0 0;
+		position: absolute;
+		height: $badge-selector-footer-height - 5px;
+		top: 0;
+		left: $badge-button-width * 2;
+	}
+}
+
+#dark-screen {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 199;
+	background-color: rgba(0, 0, 0, 0.5);
+
+}
 /* サイドバー広告 */
 #ad_sidebar {
 	position: absolute;
@@ -728,7 +852,7 @@ body.msp {
 	h2 {
 		font-size: 90%;
 		margin: 0;
-		border-bottom: 1px solid #99a;
+		border-bottom: 1px solid $border-color-general;
 	}
 	div.amazonitem {
 		position: relative;

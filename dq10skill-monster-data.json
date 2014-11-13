@@ -1307,7 +1307,7 @@
 		{"id":   2, "name": "バブルスライム・銅", "class": "bronze", "race": "slime", "poison": 15, "skills": ["キアリー"]},
 		{"id":  10, "name": "ドラキー・銅", "class": "bronze", "race": "bird", "spd": 50, "evasion": 4},
 		{"id":  18, "name": "ナスビナーラ・銅", "class": "bronze", "race": "plant", "maxmp": 35, "makeup": 20},
-		{"id":  50, "name": "キラーマシン・銅", "class": "bronze", "race": "machine", "atk": 25, "maxhp": 45},
+		{"id":  50, "name": "キラーマシン・銅", "class": "bronze", "race": "machine", "atk": 25, "maxhp": 45}
 	],
 	"specialbadge": [
 	]
