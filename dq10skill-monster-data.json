@@ -1274,8 +1274,8 @@
 			"name": "ドラキー",
 			"defaultName": "ドラキー",
 			"skillLines": ["mahodrakee", "doruma", "wand"],
-			"status": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
-			"increment": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
+			"status": {"maxhp": 325, "maxmp": 80, "pow": 120, "def": 125, "magic": 100, "heal": 100, "spd": 220, "dex": 90, "charm": 90, "weight": 70},
+			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1284,8 +1284,8 @@
 			"name": "やみしばり",
 			"defaultName": "やみしばり",
 			"skillLines": ["meifunojahou", "moujanojubaku", "axe"],
-			"status": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
-			"increment": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
+			"status": {"maxhp": 310, "maxmp": 100, "pow": 155, "def": 170, "magic": 130, "heal": 130, "spd": 85, "dex": 90, "charm": 90, "weight": 110},
+			"increment": {"maxhp": 6, "maxmp": 4, "pow": 6, "def": 4, "magic": 16, "heal": 8, "spd": 4, "dex": 0, "charm": 0, "weight": 0},
 			"expTable": 1
 		}
 		
