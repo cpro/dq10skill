@@ -728,6 +728,32 @@
 			]
 		},
 
+		"meifunojahou": {
+			"name": "冥府の邪法",
+			"skills": [
+				{"pt":   3, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
+				{"pt":   7, "name": "カウンター", "desc": "反撃のスキを狙い\n攻撃を避けて\nたまに反撃をする", "mp": null},
+				{"pt":  12, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n３０増える", "mp": null, "maxhp": 30},
+				{"pt":  18, "name": "ライフスティール", "desc": "攻撃を行った時\nＨＰを少しだけ\n回復する", "mp": null},
+				{"pt":  25, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
+				{"pt":  32, "name": "ソウルイーター", "desc": "攻撃を行った時\nＨＰをさらに\n回復する", "mp": null},
+				{"pt":  40, "name": "冥府のひかり", "desc": "敵に不浄の効果が\n多くついていると\n威力が上がる攻撃", "mp": 16}
+			]
+		},
+
+		"moujanojubaku": {
+			"name": "亡者の呪縛",
+			"skills": [
+				{"pt":   3, "name": "あやしいひかり", "desc": "あやしいひかりで\n敵１体を\n眠りにさそう", "mp": 5},
+				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
+				{"pt":  12, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  18, "name": "呪縛", "desc": "はいよる柵が\n周囲の敵を攻撃し\n同時にマヒさせる", "mp": 3},
+				{"pt":  25, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
+				{"pt":  32, "name": "常時さいだいＨＰ+50", "desc": "常時\nさいだいＨＰが\n５０増える", "mp": null, "maxhp": 50},
+				{"pt":  40, "name": "嘆きの霧", "desc": "あらゆる負の力で\n周囲の敵を攻撃し\n同時に弱らせる", "mp": 10}
+			]
+		},
+
 		"unknown1": {
 			"name": "不明",
 			"skills": [
@@ -836,11 +862,11 @@
 			"name": "きようさアップ",
 			"skills": [
 				{"pt":   3, "name": "常時きようさ+60", "desc": "常時\nきようさが\n６０増える", "mp": null, "dex": 60},
-				{"pt":   7, "name": "弱体成功率アップ", "desc": "", "mp": null},
+				{"pt":   7, "name": "弱体成功率アップ", "desc": "弱体効果の\nとくぎと呪文が\n成功しやすくなる", "mp": null},
 				{"pt":  12, "name": "呪文ぼうそう率アップ", "desc": "呪文を唱えた時\n魔力が\n暴走しやすくなる", "mp": null},
 				{"pt":  18, "name": "常時きようさ+100", "desc": "常時\nきようさが\n１００増える", "mp": null, "dex": 100},
 				{"pt":  25, "name": "かいしん率+5%", "desc": "会心のいちげきが\n出やすくなる", "mp": null},
-				{"pt":  32, "name": "弱体成功率アップ", "desc": "", "mp": null},
+				{"pt":  32, "name": "弱体成功率アップ", "desc": "弱体効果の\nとくぎと呪文が\n成功しやすくなる", "mp": null},
 				{"pt":  40, "name": "ロストアタック", "desc": "敵１体に\nダメージを与え\nテンションダウン", "mp": 4}
 			]
 		},
@@ -1251,6 +1277,16 @@
 			"status": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
 			"increment": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
 			"expTable": 1
+		},
+		
+		"yamishibari": {
+			"id": 26,
+			"name": "やみしばり",
+			"defaultName": "やみしばり",
+			"skillLines": ["meifunojahou", "moujanojubaku", "axe"],
+			"status": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
+			"expTable": 1
 		}
 		
 	},
@@ -1263,7 +1299,7 @@
 	"itemmaster": [
 		"metappy", "takeyarihei", "needleman", "fondue", "entasisman",
 		"samayouyoroi", "golem", "devilarmor", "odoruhouseki", "magicalhat",
-		"puppetman", "killermachine"
+		"puppetman", "killermachine", "yamishibari"
 	],
 
 	"additionalSkillLines": [
@@ -1273,7 +1309,7 @@
 		{"name": "raisedef",   "restartCount": 1, "id":  4},
 		{"name": "raisespd",   "restartCount": 1, "id":  5},
 		{"name": "raisemagic", "restartCount": 1, "id":  6},
-		{"name": "raisedex",   "restartCount": 6, "id": 15},
+		{"name": "raisedex",   "restartCount": 1, "id": 15},
 		{"name": "heal",       "restartCount": 2, "id":  7},
 		{"name": "weaken",     "restartCount": 3, "id":  8},
 		{"name": "cure",       "restartCount": 4, "id":  9},
