@@ -98,7 +98,7 @@
 							%span.exp_remain> 0
 							= ' exp）'
 						%dd
-							%ul.badge-button-container
+							%ul.badge-button-container.button-container
 								%li.blank.ui-corner-all<
 									%a{id: "append-badge0-dummy"} バッジ1
 								%li.blank.ui-corner-all<
@@ -190,8 +190,20 @@
 		#dark-screen
 		#badge-selector
 			#badge-selector-header
+				%ul#badge-search-buttons-race.badge-search-button-container.button-container
+					- data['badgerace'].each do |k, v|
+						%li.ui-corner-all<
+							%a{id: "badge-search-race-#{k}"} #{v['abbr']}
+				%ul#badge-search-buttons-class.badge-search-button-container.button-container
+					- data['badgeclass'].each do |k, v|
+						%li.ui-corner-all<
+							%a{id: "badge-search-class-#{k}"} #{v}
+				%ul#badge-search-buttons-feature.badge-search-button-container.button-container
+					- data['badgefeature'].each do |k, v|
+						%li.ui-corner-all<
+							%a{id: "badge-search-feature-#{k}"} #{v['abbr']}
 			#badge-selector-body
-				%ul#badge-selector-list.badge-button-container
+				%ul#badge-selector-list.badge-button-container.button-container
 					- 1.upto(100) do |i|
 						%li.ui-corner-all.bronze<
 							%a<
@@ -204,6 +216,10 @@
 						%li.ui-corner-all.gold<
 							%a<
 								= sprintf("%03d", i) + ' ？？？？？・金'
+					- 301.upto(312) do |i|
+						%li.ui-corner-all.luminous<
+							%a<
+								= sprintf("%03d", i) + ' ？？？？？・光'
 			#badge-selector-footer
 				%h2#badge-selector-badge-title<
 					%span#badge-selector-badge-id> 001

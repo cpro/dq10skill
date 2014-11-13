@@ -665,8 +665,9 @@ body.msp {
 }
 
 /* バッジ関連定義 */
-$badge-button-height: 16px;
-$badge-anchor-padding-x: 3px;
+$button-height: 16px;
+$badge-button-height: $button-height;
+$button-anchor-padding-x: 3px;
 $badge-button-width: 144px;
 $badge-button-border-width: 1px;
 $badge-button-margin-x: 1px;
@@ -678,16 +679,40 @@ $badge-button-container-width: (
 	$badge-button-margin-x * 2
 	) * $badge-button-count-per-row;
 
-/* バッジ選択ボタン */
-ul.badge-button-container {
+/* ボタンコンテナ一般 */
+ul.button-container {
 	list-style-type: none;
+	font-size: 11px;
+
+	margin: 0;
+	padding: 0;
 
 	li {
+		float: left;
+		height: $button-height;
 		overflow: hidden;
 		white-space: nowrap;
 		border: 1px solid #aab;
-		font-size: 11px;
+		background-color: #f0f0f7;
+		
+		&:hover {
+			cursor: pointer;
+			border-color: #445;
+			color: black;
+		}
+		a {
+			display: block;
+			/* padding: 0 $button-anchor-padding-x; */
+			height: $button-height;
+			width: auto;
+			text-align: center;
+		}
+	}
+}
 
+/* バッジ選択ボタン */
+ul.badge-button-container {
+	li {
 		&.blank {
 			background-color: transparent;
 			color: #889;
@@ -716,10 +741,6 @@ ul.badge-button-container {
 		}
 
 		a {
-			display: block;
-			padding: 0 $badge-anchor-padding-x;
-			height: $badge-button-height;
-			width: auto;
 			text-align: center;
 		}
 	}
@@ -729,6 +750,7 @@ ul.badge-button-container {
 	margin: 0;
 
 	li {
+		float: none;
 		margin: 1px 0 0 0;
 		width: auto;
 	}
@@ -747,7 +769,7 @@ ul.badge-button-container {
 	margin: 0;
 	padding: 0;
 
-	$badge-selector-header-height: 60px;
+	$badge-selector-header-height: 80px;
 	$badge-selector-footer-height: 80px;
 	$badge-selector-body-height: 240px;
 	$badge-selector-body-padding: 15px;
@@ -803,6 +825,39 @@ ul.badge-button-container {
 			}
 		}
 	}
+
+	/* バッジ検索ボタン */
+	$badge-search-button-width: 36px;
+
+	ul.badge-search-button-container {
+		float: left;
+		margin-top: 10px;
+		height: ($button-height + 4px) * 3;
+
+		li {
+			width: $badge-search-button-width;
+			margin: 1px;
+		}
+	}
+	ul#badge-search-buttons-race {
+		margin-left: $badge-selector-body-padding;
+		width: ($badge-search-button-width + 4px) * 5;
+	}
+	ul#badge-search-buttons-class {
+		margin-left: 4px;
+		border-left: 1px solid $border-color-general;
+		padding-left: 4px;
+		width: ($badge-search-button-width + 4px) * 2;
+
+	}
+	ul#badge-search-buttons-feature {
+		margin-left: 4px;
+		border-left: 1px solid $border-color-general;
+		padding-left: 4px;
+		margin-left: 5px;
+		width: ($badge-search-button-width + 4px) * 6;
+	}
+
 	#badge-selector-badge-title {
 		font-size: 18px;
 		margin: 5px 0 3px $badge-selector-body-padding;

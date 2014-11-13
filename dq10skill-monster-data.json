@@ -1304,11 +1304,49 @@
 
 	"badge": [
 		{"id":   1, "name": "スライム・銅", "class": "bronze", "race": "slime", "maxhp": 40, "critical": 2.0},
-		{"id":   2, "name": "バブルスライム・銅", "class": "bronze", "race": "slime", "poison": 15, "skills": ["キアリー"]},
+		{"id":   2, "name": "バブルスライム・銅", "class": "bronze", "race": "slime", "poison": 15, "skill": ["キアリー"]},
 		{"id":  10, "name": "ドラキー・銅", "class": "bronze", "race": "bird", "spd": 50, "evasion": 4},
 		{"id":  18, "name": "ナスビナーラ・銅", "class": "bronze", "race": "plant", "maxmp": 35, "makeup": 20},
 		{"id":  50, "name": "キラーマシン・銅", "class": "bronze", "race": "machine", "atk": 25, "maxhp": 45}
 	],
 	"specialbadge": [
-	]
+	],
+	"badgerace": {
+		"slime": {"name": "スライム", "abbr": "スラ"},
+		"beast": {"name": "けもの",  "abbr": "獣"},
+		"dragon": {"name": "ドラゴン",  "abbr": "竜"},
+		"insect": {"name": "虫",  "abbr": "虫"},
+		"bird": {"name": "鳥",  "abbr": "鳥"},
+		"plant": {"name": "植物",  "abbr": "植物"},
+		"material": {"name": "物質",  "abbr": "物質"},
+		"machine": {"name": "マシン",  "abbr": "機械"},
+		"zombie": {"name": "ゾンビ",  "abbr": "不死"},
+		"demon": {"name": "あくま",  "abbr": "悪魔"},
+		"element": {"name": "エレメント",  "abbr": "エレ"},
+		"mystery": {"name": "怪人",  "abbr": "怪人"},
+		"water": {"name": "水", "abbr": "水"}
+	},
+	"badgeclass": {
+		"bronze": "銅",
+		"silver": "銀",
+		"gold": "金",
+		"luminous": "光"
+	},
+	"badgefeature": {
+		"maxhp": {"name": "さいだいＨＰ", "abbr": "HP"},
+		"maxmp": {"name": "さいだいＭＰ", "abbr": "MP"},
+		"atk": {"name": "こうげき力", "abbr": "攻撃"},
+		"def": {"name": "しゅび力", "abbr": "守備"},
+		"magic": {"name": "こうげき魔力", "abbr": "攻魔"},
+		"heal": {"name": "かいふく魔力", "abbr": "回魔"},
+		"spd": {"name": "すばやさ", "abbr": "素早"},
+		"dex": {"name": "きようさ", "abbr": "器用"},
+		"stylish": {"name": "おしゃれさ", "abbr": "洒落"},
+		"weight": {"name": "おもさ", "abbr": "重さ"},
+		"shield": {"name": "盾ガード率", "abbr": "盾ガ"},
+		"mpdrain": {"name": "ＭＰ吸収率", "abbr": "MP吸"},
+		"skill": {"name": "呪文特技使用", "abbr": "特技"},
+		"special": {"name": "ひっさつ使用", "abbr": "必殺"}
+	}
+
 }
