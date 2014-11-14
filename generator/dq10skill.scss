@@ -759,8 +759,10 @@ ul.badge-button-container {
 	}
 }
 
-/* バッジ選択画面 */
+/* バッジ選択ダイアログ */
 #badge-selector {
+	display: none;
+
 	position: fixed;
 	left: 150px;
 	top: 200px;
@@ -855,7 +857,7 @@ ul.badge-button-container {
 		border-left: 1px solid $border-color-general;
 		padding-left: 4px;
 		margin-left: 5px;
-		width: ($badge-search-button-width + 4px) * 6;
+		width: ($badge-search-button-width + 4px) * 7;
 	}
 
 	#badge-selector-badge-title {
@@ -882,7 +884,10 @@ ul.badge-button-container {
 	}
 }
 
+/* ダイアログ表示時のマスク用スクリーン */
 #dark-screen {
+	display: none;
+
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -890,8 +895,8 @@ ul.badge-button-container {
 	height: 100vh;
 	z-index: 199;
 	background-color: rgba(0, 0, 0, 0.5);
-
 }
+
 /* サイドバー広告 */
 #ad_sidebar {
 	position: absolute;

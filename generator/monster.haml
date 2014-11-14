@@ -106,7 +106,7 @@
 								%li.blank.ui-corner-all<
 									%a{id: "append-badge2-dummy"} バッジ3
 								%li.blank.ui-corner-all<
-									%a{id: "append-spbadge-dummy"} スペシャルバッジ
+									%a{id: "append-badge3-dummy"} スペシャルバッジ
 				.skill_tables
 				.status_info
 					%h3 Lv50時ステータス:
@@ -204,6 +204,9 @@
 							%a{id: "badge-search-feature-#{k}"} #{v['abbr']}
 			#badge-selector-body
 				%ul#badge-selector-list.badge-button-container.button-container
+					%li.ui-corner-all.blank<
+						%a#badge-selector-remove バッジをはずす
+					%br{style: 'clear: left'}
 					- 1.upto(100) do |i|
 						%li.ui-corner-all.bronze<
 							%a<
@@ -222,12 +225,10 @@
 								= sprintf("%03d", i) + ' ？？？？？・光'
 			#badge-selector-footer
 				%h2#badge-selector-badge-title<
-					%span#badge-selector-badge-id> 001
-					%span#badge-selector-badge-name> スライム・銅
-				%p#badge-selector-race スライム系
+					%span#badge-selector-badge-id>
+					%span#badge-selector-badge-name>
+				%p#badge-selector-race
 				%ul#badge-selector-feature-list
-					%li さいだいHP+40
-					%li かいしん率+2.0%
 		#ad_sidebar
 			%h2 サイト内リンク
 			%ul

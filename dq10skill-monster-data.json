@@ -1302,14 +1302,14 @@
 		]
 	},
 
-	"badge": [
-		{"id":   1, "name": "スライム・銅", "class": "bronze", "race": "slime", "maxhp": 40, "critical": 2.0},
-		{"id":   2, "name": "バブルスライム・銅", "class": "bronze", "race": "slime", "poison": 15, "skill": ["キアリー"]},
-		{"id":  10, "name": "ドラキー・銅", "class": "bronze", "race": "bird", "spd": 50, "evasion": 4},
-		{"id":  18, "name": "ナスビナーラ・銅", "class": "bronze", "race": "plant", "maxmp": 35, "makeup": 20},
-		{"id":  50, "name": "キラーマシン・銅", "class": "bronze", "race": "machine", "atk": 25, "maxhp": 45}
-	],
-	"specialbadge": [
+	"badges": {
+		"001": {"id":   1, "name": "スライム・銅", "class": "bronze", "race": "slime", "maxhp": 40, "critical": "2.0%"},
+		"002": {"id":   2, "name": "バブルスライム・銅", "class": "bronze", "race": "slime", "debuff": ["15%で猛毒"], "skill": ["キアリー"]},
+		"010": {"id":  10, "name": "ドラキー・銅", "class": "bronze", "race": "bird", "spd": 50, "evd": "4%"},
+		"018": {"id":  18, "name": "ナスビナーラ・銅", "class": "bronze", "race": "plant", "maxmp": 35, "startup": ["20%でメイクアップ"]},
+		"050": {"id":  50, "name": "キラーマシン・銅", "class": "bronze", "race": "machine", "atk": 25, "maxhp": 45}
+	},
+	"specialbadges": [
 	],
 	"badgerace": {
 		"slime": {"name": "スライム", "abbr": "スラ"},
@@ -1324,7 +1324,8 @@
 		"demon": {"name": "あくま",  "abbr": "悪魔"},
 		"element": {"name": "エレメント",  "abbr": "エレ"},
 		"mystery": {"name": "怪人",  "abbr": "怪人"},
-		"water": {"name": "水", "abbr": "水"}
+		"water": {"name": "水", "abbr": "水"},
+		"special": {"name": "スペシャルバッジ", "abbr": "SP"}
 	},
 	"badgeclass": {
 		"bronze": "銅",
@@ -1344,7 +1345,12 @@
 		"stylish": {"name": "おしゃれさ", "abbr": "洒落"},
 		"weight": {"name": "おもさ", "abbr": "重さ"},
 		"shield": {"name": "盾ガード率", "abbr": "盾ガ"},
+		"parry": {"name": "武器ガード率", "abbr": "武ガ"},
 		"mpdrain": {"name": "ＭＰ吸収率", "abbr": "MP吸"},
+		"critical": {"name": "かいしん率", "abbr": "会心"},
+		"evd": {"name": "みかわし率", "abbr": "回避"},
+		"startup": {"name": "開戦時発動", "abbr": "開戦"},
+		"debuff": {"name": "攻撃時追加効果", "abbr": "追加"},
 		"skill": {"name": "呪文特技使用", "abbr": "特技"},
 		"special": {"name": "ひっさつ使用", "abbr": "必殺"}
 	}

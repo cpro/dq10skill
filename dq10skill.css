@@ -533,8 +533,9 @@ ul.badge-button-container li a {
   .monster_ent .class_info ul.badge-button-container a {
     padding: 0 3px; }
 
-/* バッジ選択画面 */
+/* バッジ選択ダイアログ */
 #badge-selector {
+  display: none;
   position: fixed;
   left: 150px;
   top: 200px;
@@ -592,7 +593,7 @@ ul.badge-button-container li a {
     border-left: 1px solid #9999aa;
     padding-left: 4px;
     margin-left: 5px;
-    width: 240px; }
+    width: 280px; }
   #badge-selector #badge-selector-badge-title {
     font-size: 18px;
     margin: 5px 0 3px 15px; }
@@ -611,7 +612,9 @@ ul.badge-button-container li a {
     top: 0;
     left: 288px; }
 
+/* ダイアログ表示時のマスク用スクリーン */
 #dark-screen {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;

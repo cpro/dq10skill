@@ -29,6 +29,7 @@ var Simulator = (function() {
 	var skillPtsGiven = allData.skillPtsGiven;
 	var expRequired = allData.expRequired;
 	var additionalSkillLines = allData.additionalSkillLines;
+	var badges = allData.badges;
 
 	//パラメータ格納用
 	var skillPts = {};
@@ -60,6 +61,9 @@ var Simulator = (function() {
 			this.additionalSkills[s] = null;
 			this.skillPts['additional' + s.toString()] = 0;
 		}
+
+		//バッジ
+		this.badgeEquip = [null, null, null, null];
 	}
 
 	//スキルポイント取得
@@ -214,6 +218,8 @@ var Simulator = (function() {
 	//さいだいMP  : maxmp
 	//みりょく    : charm
 	//おもさ      : weight
+	//こうげき力  : atk
+	//しゅび力    : def
 	Monster.prototype.getTotalStatus = function(status) {
 		var total = this.getTotalPassive(status);
 
@@ -221,6 +227,15 @@ var Simulator = (function() {
 		total += this.data.status[status];
 		//転生時のステータス増分
 		total += this.data.increment[status] * this.restartCount;
+
+		//バッジ
+		for(var i = 0; i < this.badgeEquip.length; i++) {
+			if(this.badgeEquip[i] === null) continue;
+
+			var badge = badges[this.badgeEquip[i]];
+			if(badge[status])
+				total += badge[status];
+		}
 
 		return total;
 	};
@@ -481,6 +496,10 @@ var Simulator = (function() {
 		expRequired: expRequired,
 		monsters: monsters,
 		additionalSkillLines: additionalSkillLines,
+		badges: badges,
+		badgeClass: allData.badgeclass,
+		badgeRace: allData.badgerace,
+		badgeFeature: allData.badgefeature,
 
 		//定数
 		SKILL_PTS_MIN: SKILL_PTS_MIN,
@@ -561,7 +580,7 @@ var SimulatorUI = (function($) {
 		for(var skillLine in sim.skillLines) {
 			refreshSkillList(monsterId, skillLine);
 		}
-		refreshTotalStatus(monsterId)
+		refreshTotalStatus(monsterId);
 		refreshControls(monsterId);
 		refreshSaveUrl();
 	}
@@ -731,6 +750,35 @@ var SimulatorUI = (function($) {
 		for(var i = 0; i < statusArray.length; i++) {
 			status = statusArray[i];
 			$cont.find('.' + status).text(monster.getTotalStatus(status));
+		}
+	}
+
+	function drawBadgeButton(monsterId, badgeIndex) {
+		var monster = sim.getMonster(monsterId);
+
+		var $badgeButton = $('#append-badge' + badgeIndex + '-' + monsterId);
+		var $badgeButtonCont = $badgeButton.closest('li');
+
+		var badgeId = monster.badgeEquip[badgeIndex];
+		var badge = badgeId ? sim.badges[badgeId] : null;
+
+		var buttonText = '';
+
+		if(badge) {
+			buttonText = badgeId + ' ' + badge.name;
+		} else {
+			if(badgeIndex == monster.badgeEquip.length - 1)
+				buttonText = 'スペシャルバッジ';
+			else
+				buttonText = 'バッジ' + (badgeIndex + 1).toString();
+		}
+		$badgeButton.text(buttonText);
+
+		var bc = badge === null ? 'blank' : badge['class'];
+
+		$badgeButtonCont.toggleClass('blank', bc == 'blank');
+		for(var c in sim.badgeClass) {
+			$badgeButtonCont.toggleClass(c, bc == c);
 		}
 	}
 
@@ -1025,6 +1073,18 @@ var SimulatorUI = (function($) {
 				return false;
 			}
 		});
+
+		//バッジ選択ボタン
+		$ent.find('.badge-button-container a').click(function(e) {
+			var monsterId = getCurrentMonsterId(this);
+			var badgeIndex = parseInt($(this).attr('id').match(/^append-badge(\d+)-/)[1], 10);
+
+			BadgeSelector.show(function(badgeId) {
+				sim.getMonster(monsterId).badgeEquip[badgeIndex] = badgeId;
+				drawBadgeButton(monsterId, badgeIndex);
+				refreshTotalStatus(monsterId);
+			});
+		});
 	}
 
 	function setupConsole() {
@@ -1100,6 +1160,7 @@ var SimulatorUI = (function($) {
 
 	function setupAll() {
 		setupConsole();
+		BadgeSelector.setup();
 
 		$('#monsters').empty();
 
@@ -1119,6 +1180,111 @@ var SimulatorUI = (function($) {
 		if(isNaN(num)) return 'N/A';
 		return num.toString().split(/(?=(?:\d{3})+$)/).join(',');
 	}
+
+	//バッジ選択ダイアログ
+	var BadgeSelector = (function($) {
+		var $dialog;
+		var $maskScreen;
+
+		var dialogResult = false;
+		var selectedBadgeId = null;
+		var closingCallback = function(){};
+
+		function setup() {
+			$dialog = $('#badge-selector');
+			$maskScreen = $('#dark-screen');
+
+			$maskScreen.click(function(e) {
+				cancel();
+			});
+
+			$('#badge-selector-list a').click(function(e) {
+				var badgeId = getBadgeId(this);
+				apply(badgeId);
+			}).hover(function(e) {
+				var badgeId = getBadgeId(this);
+				refreshBadgeInfo(badgeId);
+			});
+		}
+
+		function getBadgeId(elem) {
+			if($(elem).attr('id') == 'badge-selector-remove')
+				return null;
+			else
+				return $(elem).text().substring(0, 3);
+		}
+
+		function refreshBadgeInfo(badgeId) {
+			var badge = sim.badges[badgeId];
+			if(!badge) return;
+
+			$('#badge-selector-badge-id').text(badgeId);
+			$('#badge-selector-badge-name').text(badge.name);
+
+			var raceName;
+			if(badge.race == 'special')
+				raceName = 'スペシャルバッジ';
+			else
+				raceName = sim.badgeRace[badge.race].name + '系';
+			$('#badge-selector-race').text(raceName);
+
+			var features = [];
+			for(var feature in sim.badgeFeature) {
+				if(badge[feature]) {
+					switch(feature) {
+						case 'startup':
+							for(var i = 0; i < badge[feature].length; i++)
+								features.push('開戦時 ' + badge[feature][i]);
+							break;
+						case 'debuff':
+							for(var i = 0; i < badge[feature].length; i++)
+								features.push('攻撃時 ' + badge[feature][i]);
+							break;
+						case 'skill':
+							for(var i = 0; i < badge[feature].length; i++)
+								features.push(badge[feature][i] + 'を おぼえる');
+							break;
+						case 'special':
+							features.push('ひっさつ「' + badge[feature] + '」');
+							break;
+						default:
+							features.push(sim.badgeFeature[feature].name + ' +' + badge[feature].toString());
+							break;
+					}
+				}
+			}
+			var $featureList = $('#badge-selector-feature-list');
+			$featureList.empty();
+			for (var i = 0; i < features.length; i++) {
+				$('<li>').text(features[i]).appendTo($featureList);
+			}
+		}
+
+		function apply(badgeId) {
+			closingCallback(badgeId);
+			hide();
+		}
+		function cancel() {
+			hide();
+		}
+		function show(callback) {
+			$maskScreen.show();
+			$dialog.show();
+			selectedBadgeId = null;
+			closingCallback = callback;
+		}
+		function hide() {
+			$dialog.hide();
+			$maskScreen.hide();
+		}
+
+		//API
+		return {
+			//メソッド
+			setup: setup,
+			show: show
+		};
+	})($);
 
 	//API
 	return {
