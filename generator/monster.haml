@@ -196,7 +196,7 @@
 							%a{id: "badge-search-race-#{k}"} #{v['abbr']}
 				%ul#badge-search-buttons-class.badge-search-button-container.button-container
 					- data['badgeclass'].each do |k, v|
-						%li.ui-corner-all<
+						%li{'class' => ['ui-corner-all', k]}<
 							%a{id: "badge-search-class-#{k}"} #{v}
 				%ul#badge-search-buttons-feature.badge-search-button-container.button-container
 					- data['badgefeature'].each do |k, v|

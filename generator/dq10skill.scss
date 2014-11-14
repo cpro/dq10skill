@@ -711,7 +711,7 @@ ul.button-container {
 }
 
 /* バッジ選択ボタン */
-ul.badge-button-container {
+ul.badge-button-container, ul#badge-search-buttons-class {
 	li {
 		&.blank {
 			background-color: transparent;
