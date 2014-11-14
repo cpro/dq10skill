@@ -4,14 +4,14 @@
 var Simulator = (function($) {
 	//定数
 	var SKILL_PTS_MIN = 0;
-	var SKILL_PTS_MAX = 130;
+	var SKILL_PTS_MAX = 140;
 	var LEVEL_MIN = 1;
 	var LEVEL_MAX = 80;
 	var TRAINING_SKILL_PTS_MIN = 0;
 	var TRAINING_SKILL_PTS_MAX = 12;
 	var LEVEL_FOR_TRAINING_MODE = 50;
 	var MSP_MIN = 0;
-	var MSP_MAX = 18;
+	var MSP_MAX = 19;
 
 	var DATA_JSON_URI = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'dq10skill-data.json';
 	
