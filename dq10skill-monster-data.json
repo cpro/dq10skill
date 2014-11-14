@@ -949,7 +949,7 @@
 			]
 		},
 
-		"hyad": {
+		"hyado": {
 			"name": "ヒャドの心得",
 			"skills": [
 				{"pt":   3, "name": "ヒャド", "desc": "氷のやいばで\n敵１体を攻撃", "mp": 3},
@@ -1053,7 +1053,7 @@
 			"id": 3,
 			"name": "プリズニャン",
 			"defaultName": "プリズニャン",
-			"skillLines": ["martialnyarts", "hyad", "claw"],
+			"skillLines": ["martialnyarts", "hyado", "claw"],
 			"status": {"maxhp": 360, "maxmp": 85, "pow": 120, "def": 165, "magic": 100, "heal": 100, "spd": 130, "dex": 100, "charm": 90, "weight": 100},
 			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 0},
 			"expTable": 1
@@ -1315,7 +1315,7 @@
 		{"name": "cure",       "restartCount": 4, "id":  9},
 		{"name": "enhance",    "restartCount": 5, "id": 10},
 		{"name": "mera",       "restartCount": 2, "id": 11},
-		{"name": "hyad",       "restartCount": 3, "id": 12},
+		{"name": "hyado",      "restartCount": 3, "id": 12},
 		{"name": "bagi",       "restartCount": 4, "id": 13},
 		{"name": "io",         "restartCount": 5, "id": 14},
 		{"name": "doruma",     "restartCount": 6, "id": 16}
