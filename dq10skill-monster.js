@@ -1198,6 +1198,10 @@ var SimulatorUI = (function($) {
 		var classSearchCache = {};
 		var featureSearchCache = {};
 
+		//ソート順の昇降を保持
+		var sortByIdDesc = false;
+		var sortByKanaDesc = false;
+
 		function setup() {
 			$dialog = $('#badge-selector');
 			$maskScreen = $('#dark-screen');
@@ -1227,6 +1231,20 @@ var SimulatorUI = (function($) {
 				filterButtons(getFeatureSearchCache(feature));
 			});
 
+			$('#badge-sort-badgeid').click(function(e) {
+				sortBadgeById(sortByIdDesc);
+				sortByIdDesc = !sortByIdDesc;
+				sortByKanaDesc = false;
+			});
+			$('#badge-sort-kana').click(function(e) {
+				sortBadgeByKana(sortByKanaDesc);
+				sortByKanaDesc = !sortByKanaDesc;
+				sortByIdDesc = false;
+			});
+
+			$('#badge-search-clear').click(function(e) {
+				clearFilter();
+			});
 		}
 
 		function getBadgeId(elem) {
@@ -1331,11 +1349,11 @@ var SimulatorUI = (function($) {
 			var $allHiddenButtons = $('#badge-selector-list li:hidden');
 
 			$allVisibleButtons.filter(function() {
-					var badgeId = $(this).attr('id').match(/^badge-button-(\d+)$/)[1];
+					var badgeId = getBadgeId($(this).find('a'));
 					return $.inArray(badgeId, showIds) == -1;
 				}).hide();
 			$allHiddenButtons.filter(function() {
-					var badgeId = $(this).attr('id').match(/^badge-button-(\d+)$/)[1];
+					var badgeId = getBadgeId($(this).find('a'));
 					return $.inArray(badgeId, showIds) != -1;
 				}).show();
 		}
@@ -1367,6 +1385,40 @@ var SimulatorUI = (function($) {
 			return getSearchCache(featureSearchCache, feature, function(badge) {
 				return badge[feature] !== undefined;
 			});
+		}
+
+		function sortBadgeBy(func, desc) {
+			if(desc === undefined) desc = false;
+
+			$('#badge-selector-list').html(
+				$('#badge-selector-list li').sort(function(a, b) {
+					var key_a = func(a);
+					var key_b = func(b);
+					
+					if(key_a == key_b) {
+						key_a = getBadgeId($(a).find('a'));
+						key_b = getBadgeId($(b).find('a'));
+					}
+					var ascend = key_a < key_b;
+					if(desc) ascend = !ascend;
+
+					return ascend ? -1 : 1;
+				})
+			);
+		}
+		function sortBadgeById(desc) {
+			sortBadgeBy(function(li) {
+				return getBadgeId($(li).find('a'));
+			}, desc);
+		}
+		function sortBadgeByKana(desc) {
+			sortBadgeBy(function(li) {
+				return $(li).attr('data-kana-sort-key');
+			}, desc);
+		}
+
+		function clearFilter() {
+			$('#badge-selector-list li').show();
 		}
 
 		function apply(badgeId) {

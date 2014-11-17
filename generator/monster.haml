@@ -215,7 +215,7 @@
 						%a#badge-selector-remove バッジをはずす
 				%ul#badge-selector-list.badge-button-container.button-container
 					- data['badges'].each do |id, badge|
-						%li{id: "badge-button-#{id}", 'class' => ['ui-corner-all', badge['class']]}<
+						%li{id: "badge-button-#{id}", 'class' => ['ui-corner-all', badge['class']], 'data-kana-sort-key' => badge['sort']}<
 							%a<
 								= id + ' ' + badge['name']
 					-#
