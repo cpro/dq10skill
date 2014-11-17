@@ -208,7 +208,7 @@
 						%a#badge-selector-remove バッジをはずす
 					%br{style: 'clear: left'}
 					- data['badges'].each do |id, badge|
-						%li{'class' => ['ui-corner-all', badge['class']]}<
+						%li{id: "badge-button-#{id}", 'class' => ['ui-corner-all', badge['class']]}<
 							%a<
 								= id + ' ' + badge['name']
 					-#
