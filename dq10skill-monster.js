@@ -1216,15 +1216,15 @@ var SimulatorUI = (function($) {
 
 			$('#badge-search-buttons-race a').click(function(e) {
 				var race = $(this).attr('id').match(/^badge-search-race-(\w+)$/)[1];
-				searchByRace(race);
+				filterButtons(getRaceSearchCache(race));
 			});
 			$('#badge-search-buttons-class a').click(function(e) {
 				var badgeClass = $(this).attr('id').match(/^badge-search-class-(\w+)$/)[1];
-				searchByClass(badgeClass);
+				filterButtons(getClassSearchCache(badgeClass));
 			});
 			$('#badge-search-buttons-feature a').click(function(e) {
 				var feature = $(this).attr('id').match(/^badge-search-feature-(\w+)$/)[1];
-				searchByFeature(feature);
+				filterButtons(getFeatureSearchCache(feature));
 			});
 
 		}
@@ -1327,8 +1327,8 @@ var SimulatorUI = (function($) {
 		}
 
 		function filterButtons(showIds) {
-			var $allVisibleButtons = $('#badge-selector-list li[id^=badge-button-]:visible');
-			var $allHiddenButtons = $('#badge-selector-list li[id^=badge-button-]:hidden');
+			var $allVisibleButtons = $('#badge-selector-list li:visible');
+			var $allHiddenButtons = $('#badge-selector-list li:hidden');
 
 			$allVisibleButtons.filter(function() {
 					var badgeId = $(this).attr('id').match(/^badge-button-(\d+)$/)[1];
@@ -1339,54 +1339,34 @@ var SimulatorUI = (function($) {
 					return $.inArray(badgeId, showIds) != -1;
 				}).show();
 		}
-		function searchByRace(race) {
-			filterButtons(getRaceSearchCache(race));
-		}
-		function searchByClass(badgeClass) {
-			filterButtons(getClassSearchCache(badgeClass));
-		}
-		function searchByFeature(feature) {
-			filterButtons(getFeatureSearchCache(feature));
-		}
 
-		function getRaceSearchCache(race) {
-			if(raceSearchCache[race])
-				return raceSearchCache[race];
+		function getSearchCache(cacheArray, key, func) {
+			if(cacheArray[key])
+				return cacheArray[key];
 
 			var filteredArray = [];
 			for(var badgeId in sim.badges) {
-				if(sim.badges[badgeId]['race'] == race)
+				if(func(sim.badges[badgeId]))
 					filteredArray.push(badgeId);
 			}
 
-			raceSearchCache[race] = filteredArray;
-			return raceSearchCache[race];
+			cacheArray[key] = filteredArray;
+			return cacheArray[key];
+		}
+		function getRaceSearchCache(race) {
+			return getSearchCache(raceSearchCache, race, function(badge) {
+				return badge['race'] == race;
+			});
 		}
 		function getClassSearchCache(badgeClass) {
-			if(classSearchCache[badgeClass])
-				return classSearchCache[badgeClass];
-
-			var filteredArray = [];
-			for(var badgeId in sim.badges) {
-				if(sim.badges[badgeId]['class'] == badgeClass)
-					filteredArray.push(badgeId);
-			}
-
-			classSearchCache[badgeClass] = filteredArray;
-			return classSearchCache[badgeClass];
+			return getSearchCache(classSearchCache, badgeClass, function(badge) {
+				return badge['class'] == badgeClass;
+			});
 		}
 		function getFeatureSearchCache(feature) {
-			if(featureSearchCache[feature])
-				return featureSearchCache[feature];
-
-			var filteredArray = [];
-			for(var badgeId in sim.badges) {
-				if(sim.badges[badgeId][feature])
-					filteredArray.push(badgeId);
-			}
-
-			featureSearchCache[feature] = filteredArray;
-			return featureSearchCache[feature];
+			return getSearchCache(featureSearchCache, feature, function(badge) {
+				return badge[feature] !== undefined;
+			});
 		}
 
 		function apply(badgeId) {

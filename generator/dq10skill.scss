@@ -809,22 +809,29 @@ ul.badge-button-container, ul#badge-search-buttons-class {
 		overflow-y: scroll;
 		overflow-x: hidden;
 
-		#badge-selector-list {
+		ul {
 			margin: {
-				top: 5px;
+				top: 0;
 				right: $badge-selector-body-padding + $badge-selector-body-scrollbar-margin;
-				bottom: 5px;
 				left: $badge-selector-body-padding;
+				bottom: 0;
 			}
 			padding: 0;
 			width: $badge-button-container-width;
 
 			li {
-				/* display: inline-block; */
 				float: left;
 				width: $badge-button-width;
 				margin: $badge-button-margin-y $badge-button-margin-x;
 			}
+		}
+		ul#badge-selector-blank {
+			margin-top: 5px;
+			margin-bottom: 4px;
+		}
+		ul#badge-selector-list {
+			clear: left;
+			margin-bottom: 5px;
 		}
 	}
 
@@ -836,28 +843,41 @@ ul.badge-button-container, ul#badge-search-buttons-class {
 		margin-top: 10px;
 		height: ($button-height + 4px) * 3;
 
+		margin-right: 4px;
+		border-right: 1px solid $border-color-general;
+		padding-right: 4px;
+
+		&:first-child {
+			margin-left: $badge-selector-body-padding;
+		}
+		&:last-child {
+			margin-right: $badge-selector-body-padding;
+			border-right: none;
+			padding-right: 0;
+		}
+
 		li {
 			width: $badge-search-button-width;
 			margin: 1px;
 		}
 	}
 	ul#badge-search-buttons-race {
-		margin-left: $badge-selector-body-padding;
 		width: ($badge-search-button-width + 4px) * 5;
 	}
 	ul#badge-search-buttons-class {
-		margin-left: 4px;
-		border-left: 1px solid $border-color-general;
-		padding-left: 4px;
 		width: ($badge-search-button-width + 4px) * 2;
 
 	}
 	ul#badge-search-buttons-feature {
-		margin-left: 4px;
-		border-left: 1px solid $border-color-general;
-		padding-left: 4px;
-		margin-left: 5px;
-		width: ($badge-search-button-width + 4px) * 7;
+		width: ($badge-search-button-width + 4px) * 9;
+	}
+	ul#badge-search-buttons-sort {
+		float: right;
+		width: $badge-search-button-width * 2;
+
+		li {
+			width: $badge-search-button-width * 2;
+		}
 	}
 
 	#badge-selector-badge-title {

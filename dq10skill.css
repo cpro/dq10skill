@@ -561,39 +561,50 @@ ul.badge-button-container li a, ul#badge-search-buttons-class li a {
     height: 240px;
     overflow-y: scroll;
     overflow-x: hidden; }
-    #badge-selector #badge-selector-body #badge-selector-list {
-      margin-top: 5px;
+    #badge-selector #badge-selector-body ul {
+      margin-top: 0;
       margin-right: 33px;
-      margin-bottom: 5px;
       margin-left: 15px;
+      margin-bottom: 0;
       padding: 0;
       width: 740px; }
-      #badge-selector #badge-selector-body #badge-selector-list li {
-        /* display: inline-block; */
+      #badge-selector #badge-selector-body ul li {
         float: left;
         width: 144px;
         margin: 2px 1px; }
+    #badge-selector #badge-selector-body ul#badge-selector-blank {
+      margin-top: 5px;
+      margin-bottom: 4px; }
+    #badge-selector #badge-selector-body ul#badge-selector-list {
+      clear: left;
+      margin-bottom: 5px; }
   #badge-selector ul.badge-search-button-container {
     float: left;
     margin-top: 10px;
-    height: 60px; }
+    height: 60px;
+    margin-right: 4px;
+    border-right: 1px solid #9999aa;
+    padding-right: 4px; }
+    #badge-selector ul.badge-search-button-container:first-child {
+      margin-left: 15px; }
+    #badge-selector ul.badge-search-button-container:last-child {
+      margin-right: 15px;
+      border-right: none;
+      padding-right: 0; }
     #badge-selector ul.badge-search-button-container li {
       width: 36px;
       margin: 1px; }
   #badge-selector ul#badge-search-buttons-race {
-    margin-left: 15px;
     width: 200px; }
   #badge-selector ul#badge-search-buttons-class {
-    margin-left: 4px;
-    border-left: 1px solid #9999aa;
-    padding-left: 4px;
     width: 80px; }
   #badge-selector ul#badge-search-buttons-feature {
-    margin-left: 4px;
-    border-left: 1px solid #9999aa;
-    padding-left: 4px;
-    margin-left: 5px;
-    width: 280px; }
+    width: 360px; }
+  #badge-selector ul#badge-search-buttons-sort {
+    float: right;
+    width: 72px; }
+    #badge-selector ul#badge-search-buttons-sort li {
+      width: 72px; }
   #badge-selector #badge-selector-badge-title {
     font-size: 18px;
     margin: 5px 0 3px 15px; }

@@ -201,12 +201,19 @@
 				%ul#badge-search-buttons-feature.badge-search-button-container.button-container
 					- data['badgefeature'].each do |k, v|
 						%li.ui-corner-all<
-							%a{id: "badge-search-feature-#{k}"} #{v['abbr']}
+							%a{id: "badge-search-feature-#{k}", title: v['name']} #{v['abbr']}
+				%ul#badge-search-buttons-sort.badge-search-button-container.button-container
+					%li.ui-corner-all<
+						%a#badge-search-clear すべて表示
+					%li.ui-corner-all<
+						%a#badge-sort-badgeid バッジNo.順
+					%li.ui-corner-all<
+						%a#badge-sort-kana 五十音順
 			#badge-selector-body
-				%ul#badge-selector-list.badge-button-container.button-container
+				%ul#badge-selector-blank.badge-button-container.button-container
 					%li.ui-corner-all.blank<
 						%a#badge-selector-remove バッジをはずす
-					%br{style: 'clear: left'}
+				%ul#badge-selector-list.badge-button-container.button-container
 					- data['badges'].each do |id, badge|
 						%li{id: "badge-button-#{id}", 'class' => ['ui-corner-all', badge['class']]}<
 							%a<
