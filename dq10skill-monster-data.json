@@ -1303,11 +1303,34 @@
 	},
 
 	"badges": {
-		"001": {"id":   1, "name": "スライム・銅", "class": "bronze", "race": "slime", "maxhp": 40, "critical": "2.0%"},
-		"002": {"id":   2, "name": "バブルスライム・銅", "class": "bronze", "race": "slime", "debuff": ["15%で猛毒"], "skill": ["キアリー"]},
-		"010": {"id":  10, "name": "ドラキー・銅", "class": "bronze", "race": "bird", "spd": 50, "evd": "4%"},
-		"018": {"id":  18, "name": "ナスビナーラ・銅", "class": "bronze", "race": "plant", "maxmp": 35, "startup": ["20%でメイクアップ"]},
-		"050": {"id":  50, "name": "キラーマシン・銅", "class": "bronze", "race": "machine", "atk": 25, "maxhp": 45}
+		"001": {"name": "スライム・銅", "class": "bronze", "race": "slime", "maxhp": 40, "critical": "2.0%"},
+		"002": {"name": "バブルスライム・銅", "class": "bronze", "race": "slime", "debuff": {"猛毒": 15}, "skill": ["キアリー"]},
+		"003": {"name": "", "class": "bronze", "race": "slime", "maxmp": 45, "heal": 45},
+		"004": {"name": "", "class": "bronze", "race": "slime", "shield": "4.0%", "misc": ["攻撃ダメージの 5%回復"]},
+		"005": {"name": "", "class": "bronze", "race": "slime", "def": 40, "maxhp": 45},
+		"006": {"name": "ぬかどこスライム・銅", "class": "bronze", "race": "slime", "atk": 20, "skill": ["キノコ爆弾"]},
+		"007": {"name": "", "class": "bronze", "race": "slime", "def": 50, "damage": {"攻撃呪文": 15}},
+		"008": {"name": "", "class": "bronze", "race": "slime", "def": 50, "startup": {"天使の守り": 20}},
+		"009": {"name": "", "class": "bronze", "race": "slime", "def": 60, "win": ["ＭＰが30回復"]},
+		"010": {"name": "ドラキー・銅", "class": "bronze", "race": "bird", "spd": 50, "evd": "4%"},
+		"011": {"name": "", "class": "bronze", "race": "bird", "spd": 50, "debuff": {"ルカニ": 10}},
+		"012": {"name": "", "class": "bronze", "race": "bird", "heal": 35, "evd": "4%"},
+		"013": {"name": "デッドペッカー・銅", "class": "bronze", "race": "bird", "maxmp": 40, "resist": {"幻惑": 60}},
+		"014": {"name": "", "class": "bronze", "race": "bird", "maxhp": 45, "debuff": {"マホトーン": 10}},
+		"015": {"name": "アサシンエミュー・銅", "class": "bronze", "race": "bird", "atk": 18, "resist": {"即死": 60}},
+		"016": {"name": "", "class": "bronze", "race": "bird", "atk": 20, "attrib": "風"},
+		"017": {"name": "おむつっこり・銅", "class": "bronze", "race": "plant", "heal": 35, "resist": {"封印": 60}},
+		"018": {"name": "ナスビナーラ・銅", "class": "bronze", "race": "plant", "maxmp": 35, "startup": {"メイクアップ": 20}},
+		"021": {"name": "おばけトマト・銅", "class": "bronze", "race": "plant", "maxhp": 45, "debuff": {"ヘナトス": 10}},
+		"022": {"name": "マザーウッド・銅", "class": "bronze", "race": "plant", "heal": 38, "skill": ["ズッシード"]},
+		"023": {"name": "", "class": "bronze", "race": "plant", "magic": 45, "overload": "3.0%"},
+		"024": {"name": "", "class": "bronze", "race": "insect", "def": 35, "spd": 45},
+		"026": {"name": "マジックフライ・銅", "class": "bronze", "race": "insect", "magic": 40, "evd": "4%"},
+		"027": {"name": "キラービー・銅", "class": "bronze", "race": "insect", "atk": 20, "critical": "3%"},
+		"028": {"name": "げんじかぶと・銅", "class": "bronze", "race": "insect", "def": 45, "damage": {"攻撃呪文": 10}},
+		"029": {"name": "ブラウニー・銅", "class": "bronze", "race": "mystery", "atk": 18, "maxmp": 35},
+		"030": {"name": "", "class": "bronze", "race": "mystery", "def": 35, "shield": "4.0%"},
+		"050": {"name": "キラーマシン・銅", "class": "bronze", "race": "machine", "atk": 25, "maxhp": 45}
 	},
 	"specialbadges": [
 	],
@@ -1348,11 +1371,19 @@
 		"parry": {"name": "武器ガード率", "abbr": "武ガ"},
 		"mpdrain": {"name": "ＭＰ吸収率", "abbr": "MP吸"},
 		"critical": {"name": "かいしん率", "abbr": "会心"},
+		"overload": {"name": "呪文ぼうそう率", "abbr": "暴走"},
 		"evd": {"name": "みかわし率", "abbr": "回避"},
 		"startup": {"name": "開戦時発動", "abbr": "開戦"},
+		"win": {"name": "勝利時発動", "abbr": "勝利"},
 		"debuff": {"name": "攻撃時追加効果", "abbr": "追加"},
 		"skill": {"name": "呪文特技使用", "abbr": "特技"},
-		"special": {"name": "ひっさつ使用", "abbr": "必殺"}
+		"resist": {"name": "状態異常耐性", "abbr": "異耐"},
+		"raceup": {"name": "種族特効", "abbr": "種特"},
+		"attrup": {"name": "属性特技ダメージ増", "abbr": "属特"},
+		"attrib": {"name": "属性攻撃", "abbr": "属性"},
+		"damage": {"name": "ダメージ耐性", "abbr": "ダ耐"},
+		"special": {"name": "ひっさつ使用", "abbr": "必殺"},
+		"misc": {"name": "その他の効果", "abbr": "他"}
 	}
 
 }

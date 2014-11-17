@@ -1190,6 +1190,9 @@ var SimulatorUI = (function($) {
 		var selectedBadgeId = null;
 		var closingCallback = function(){};
 
+		//バッジ効果リストのキャッシュ
+		var featureCache = {};
+
 		function setup() {
 			$dialog = $('#badge-selector');
 			$maskScreen = $('#dark-screen');
@@ -1228,35 +1231,79 @@ var SimulatorUI = (function($) {
 				raceName = sim.badgeRace[badge.race].name + '系';
 			$('#badge-selector-race').text(raceName);
 
-			var features = [];
-			for(var feature in sim.badgeFeature) {
-				if(badge[feature]) {
-					switch(feature) {
-						case 'startup':
-							for(var i = 0; i < badge[feature].length; i++)
-								features.push('開戦時 ' + badge[feature][i]);
-							break;
-						case 'debuff':
-							for(var i = 0; i < badge[feature].length; i++)
-								features.push('攻撃時 ' + badge[feature][i]);
-							break;
-						case 'skill':
-							for(var i = 0; i < badge[feature].length; i++)
-								features.push(badge[feature][i] + 'を おぼえる');
-							break;
-						case 'special':
-							features.push('ひっさつ「' + badge[feature] + '」');
-							break;
-						default:
-							features.push(sim.badgeFeature[feature].name + ' +' + badge[feature].toString());
-							break;
-					}
-				}
-			}
+			var features = getFeatureCache(badgeId);
+			
 			var $featureList = $('#badge-selector-feature-list');
 			$featureList.empty();
 			for (var i = 0; i < features.length; i++) {
 				$('<li>').text(features[i]).appendTo($featureList);
+			}
+		}
+		function getFeatureCache(badgeId) {
+			if(featureCache[badgeId])
+				return featureCache[badgeId];
+
+			var badge = sim.badges[badgeId];
+
+			var features = [];
+			for(var feature in sim.badgeFeature) {
+				var val = badge[feature];
+				if(val) {
+					switch(feature) {
+						case 'startup':
+							features = features.concat(getFeatureArrayFromHash('開戦時 @v%で@k', val));
+							break;
+						case 'win':
+							features = features.concat(getFeatureArrayFromArray('戦闘勝利時に @v', val));
+							break;
+						case 'debuff':
+							features = features.concat(getFeatureArrayFromHash('攻撃時 @v%で@k', val));
+							break;
+						case 'damage':
+							features = features.concat(getFeatureArrayFromHash('@k耐性 +@v%', val));
+							break;
+						case 'resist':
+							features = features.concat(getFeatureArrayFromHash('@kガード +@v%', val));
+							break;
+						case 'skill':
+							features = features.concat(getFeatureArrayFromArray('@vを おぼえる', val));
+							break;
+						case 'special':
+							features.push('ひっさつ「' + val + '」');
+							break;
+						case 'misc':
+							features = features.concat(getFeatureArrayFromArray('@v', val));
+							break;
+						default:
+							features.push(sim.badgeFeature[feature].name + ' +' + val.toString());
+							break;
+					}
+				}
+			}
+
+			featureCache[badgeId] = features;
+			return featureCache[badgeId];
+
+			function getFeatureArrayFromArray(format, fromArray) {
+				var retArray = [];
+
+				for(var i = 0; i < fromArray.length; i++) {
+					var ret = format.replace('@v', fromArray[i]);
+					retArray.push(ret);
+				}
+
+				return retArray;
+			}
+			function getFeatureArrayFromHash(format, fromHash) {
+				var retArray = [];
+
+				for(var k in fromHash) {
+					var v = fromHash[k];
+					var ret = format.replace('@k', k).replace('@v', v);
+					retArray.push(ret);
+				}
+
+				return retArray;
 			}
 		}
 
