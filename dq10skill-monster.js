@@ -1219,15 +1219,15 @@ var SimulatorUI = (function($) {
 			});
 
 			$('#badge-search-buttons-race a').click(function(e) {
-				var race = $(this).attr('id').match(/^badge-search-race-(\w+)$/)[1];
+				var race = $(this).attr('data-search-key');
 				filterButtons(getRaceSearchCache(race));
 			});
 			$('#badge-search-buttons-class a').click(function(e) {
-				var badgeClass = $(this).attr('id').match(/^badge-search-class-(\w+)$/)[1];
+				var badgeClass = $(this).attr('data-search-key');
 				filterButtons(getClassSearchCache(badgeClass));
 			});
 			$('#badge-search-buttons-feature a').click(function(e) {
-				var feature = $(this).attr('id').match(/^badge-search-feature-(\w+)$/)[1];
+				var feature = $(this).attr('data-search-key');
 				filterButtons(getFeatureSearchCache(feature));
 			});
 
@@ -1248,10 +1248,13 @@ var SimulatorUI = (function($) {
 		}
 
 		function getBadgeId(elem) {
+			if(elem.tagName.toUpperCase() == 'LI')
+				elem = $(elem).find('a');
+
 			if($(elem).attr('id') == 'badge-selector-remove')
 				return null;
 			else
-				return $(elem).text().substring(0, 3);
+				return $(elem).attr('data-badge-id');
 		}
 
 		function refreshBadgeInfo(badgeId) {
@@ -1349,11 +1352,11 @@ var SimulatorUI = (function($) {
 			var $allHiddenButtons = $('#badge-selector-list li:hidden');
 
 			$allVisibleButtons.filter(function() {
-					var badgeId = getBadgeId($(this).find('a'));
+					var badgeId = getBadgeId(this);
 					return $.inArray(badgeId, showIds) == -1;
 				}).hide();
 			$allHiddenButtons.filter(function() {
-					var badgeId = getBadgeId($(this).find('a'));
+					var badgeId = getBadgeId(this);
 					return $.inArray(badgeId, showIds) != -1;
 				}).show();
 		}
@@ -1390,14 +1393,14 @@ var SimulatorUI = (function($) {
 		function sortBadgeBy(func, desc) {
 			if(desc === undefined) desc = false;
 
-			$('#badge-selector-list').html(
+			$('#badge-selector-list').append(
 				$('#badge-selector-list li').sort(function(a, b) {
 					var key_a = func(a);
 					var key_b = func(b);
 					
 					if(key_a == key_b) {
-						key_a = getBadgeId($(a).find('a'));
-						key_b = getBadgeId($(b).find('a'));
+						key_a = getBadgeId(a);
+						key_b = getBadgeId(b);
 					}
 					var ascend = key_a < key_b;
 					if(desc) ascend = !ascend;
@@ -1408,7 +1411,7 @@ var SimulatorUI = (function($) {
 		}
 		function sortBadgeById(desc) {
 			sortBadgeBy(function(li) {
-				return getBadgeId($(li).find('a'));
+				return getBadgeId(li);
 			}, desc);
 		}
 		function sortBadgeByKana(desc) {

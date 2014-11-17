@@ -193,15 +193,15 @@
 				%ul#badge-search-buttons-race.badge-search-button-container.button-container
 					- data['badgerace'].each do |k, v|
 						%li.ui-corner-all<
-							%a{id: "badge-search-race-#{k}"} #{v['abbr']}
+							%a{'data-search-key' => k} #{v['abbr']}
 				%ul#badge-search-buttons-class.badge-search-button-container.button-container
 					- data['badgeclass'].each do |k, v|
 						%li{'class' => ['ui-corner-all', k]}<
-							%a{id: "badge-search-class-#{k}"} #{v}
+							%a{'data-search-key' => k} #{v}
 				%ul#badge-search-buttons-feature.badge-search-button-container.button-container
 					- data['badgefeature'].each do |k, v|
 						%li.ui-corner-all<
-							%a{id: "badge-search-feature-#{k}", title: v['name']} #{v['abbr']}
+							%a{'data-search-key' => k, title: v['name']} #{v['abbr']}
 				%ul#badge-search-buttons-sort.badge-search-button-container.button-container
 					%li.ui-corner-all<
 						%a#badge-search-clear すべて表示
@@ -215,8 +215,8 @@
 						%a#badge-selector-remove バッジをはずす
 				%ul#badge-selector-list.badge-button-container.button-container
 					- data['badges'].each do |id, badge|
-						%li{id: "badge-button-#{id}", 'class' => ['ui-corner-all', badge['class']], 'data-kana-sort-key' => badge['sort']}<
-							%a<
+						%li{'class' => ['ui-corner-all', badge['class']], 'data-kana-sort-key' => badge['sort']}<
+							%a{'data-badge-id' => id}<
 								= id + ' ' + badge['name']
 					-#
 						- 1.upto(100) do |i|
