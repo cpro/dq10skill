@@ -1297,48 +1297,24 @@ var SimulatorUI = (function($) {
 			var badge = sim.badgeTable[badgeId];
 
 			var features = [];
-			for(var feature in sim.badgeFeature) {
-				var val = badge[feature];
+			for(var f in sim.badgeFeature) {
+				var feature = sim.badgeFeature[f];
+				var val = badge[f];
+
 				if(val) {
-					switch(feature) {
-						case 'startup':
-							features = features.concat(getFeatureArrayFromHash('開戦時 @v%で@k', val));
+					switch(feature['type']) {
+						case 'int':
+						case 'string':
+							if(feature.format)
+								features.push(feature.format.replace('@v', val));
+							else
+								features.push(feature.name + ' +' + val.toString());
 							break;
-						case 'win':
-							features = features.concat(getFeatureArrayFromArray('戦闘勝利時に @v', val));
+						case 'array':
+							features = features.concat(getFeatureArrayFromArray(feature.format, val));
 							break;
-						case 'debuff':
-							features = features.concat(getFeatureArrayFromHash('攻撃時 @v%で@k', val));
-							break;
-						case 'damage':
-							features = features.concat(getFeatureArrayFromHash('@k耐性 +@v%', val));
-							break;
-						case 'resist':
-							features = features.concat(getFeatureArrayFromHash('@kガード +@v%', val));
-							break;
-						case 'skill':
-							features = features.concat(getFeatureArrayFromArray('@vを おぼえる', val));
-							break;
-						case 'attrup':
-							features = features.concat(getFeatureArrayFromHash('@k特技の攻撃ダメージ +@v%', val));
-							break;
-						case 'raceup':
-							features = features.concat(getFeatureArrayFromHash('@k系ダメージ +@v%', val));
-							break;
-						case 'spellup':
-							features = features.concat(getFeatureArrayFromHash('@k系効果 +@v%', val));
-							break;
-						case 'attrib':
-							features.push(val + '属性攻撃');
-							break;
-						case 'special':
-							features.push('ひっさつ「' + val + '」');
-							break;
-						case 'misc':
-							features = features.concat(getFeatureArrayFromArray('@v', val));
-							break;
-						default:
-							features.push(sim.badgeFeature[feature].name + ' +' + val.toString());
+						case 'hash':
+							features = features.concat(getFeatureArrayFromHash(feature.format, val));
 							break;
 					}
 				}
