@@ -542,15 +542,15 @@ ul.badge-button-container li a, ul#badge-search-buttons-class li a {
   z-index: 200;
   margin: 0;
   padding: 0;
-  width: 788px;
-  height: 402px;
+  width: 878px;
+  height: 487px;
   border: 3px solid #9999aa;
   border-radius: 6px;
   background-color: #fcfcfd;
   /* バッジ検索ボタン */ }
   #badge-selector #badge-selector-header {
     position: relative;
-    height: 80px;
+    height: 105px;
     border-bottom: 1px solid #9999aa; }
   #badge-selector #badge-selector-footer {
     position: relative;
@@ -558,53 +558,55 @@ ul.badge-button-container li a, ul#badge-search-buttons-class li a {
     border-top: 1px solid #9999aa; }
   #badge-selector #badge-selector-body {
     position: relative;
-    height: 240px;
+    height: 300px;
     overflow-y: scroll;
     overflow-x: hidden; }
     #badge-selector #badge-selector-body ul {
+      font-size: 12px;
       margin-top: 0;
       margin-right: 33px;
       margin-left: 15px;
       margin-bottom: 0;
       padding: 0;
-      width: 740px; }
+      width: 830px; }
       #badge-selector #badge-selector-body ul li {
         float: left;
-        width: 144px;
-        margin: 2px 1px; }
+        width: 160px;
+        height: 17px;
+        margin: 3px 2px; }
     #badge-selector #badge-selector-body ul#badge-selector-blank {
       margin-top: 5px;
-      margin-bottom: 4px; }
+      margin-bottom: 6px; }
     #badge-selector #badge-selector-body ul#badge-selector-list {
       clear: left;
       margin-bottom: 5px; }
   #badge-selector ul.badge-search-button-container {
     float: left;
-    margin-top: 10px;
-    height: 60px;
-    margin-right: 4px;
+    margin-top: 15px;
+    height: 80px;
+    margin-right: 6px;
     border-right: 1px solid #9999aa;
-    padding-right: 4px; }
+    padding-right: 6px; }
     #badge-selector ul.badge-search-button-container:first-child {
       margin-left: 15px; }
     #badge-selector ul.badge-search-button-container:last-child {
-      margin-right: 15px;
+      margin-right: 33px;
       border-right: none;
       padding-right: 0; }
     #badge-selector ul.badge-search-button-container li {
       width: 36px;
       margin: 1px; }
   #badge-selector ul#badge-search-buttons-race {
-    width: 200px; }
+    width: 160px; }
   #badge-selector ul#badge-search-buttons-class {
-    width: 80px; }
+    width: 40px; }
   #badge-selector ul#badge-search-buttons-feature {
-    width: 360px; }
+    width: 320px; }
   #badge-selector ul#badge-search-buttons-sort {
     float: right;
-    width: 72px; }
+    width: 84px; }
     #badge-selector ul#badge-search-buttons-sort li {
-      width: 72px; }
+      width: 80px; }
   #badge-selector #badge-selector-badge-title {
     font-size: 18px;
     margin: 5px 0 3px 15px; }
@@ -621,7 +623,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-class li a {
     position: absolute;
     height: 75px;
     top: 0;
-    left: 288px; }
+    left: 320px; }
 
 /* ダイアログ表示時のマスク用スクリーン */
 #dark-screen {

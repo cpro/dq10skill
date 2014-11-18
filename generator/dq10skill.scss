@@ -666,12 +666,12 @@ body.msp {
 
 /* バッジ関連定義 */
 $button-height: 16px;
-$badge-button-height: $button-height;
+$badge-button-height: $button-height + 1px;
 $button-anchor-padding-x: 3px;
-$badge-button-width: 144px;
+$badge-button-width: 160px;
 $badge-button-border-width: 1px;
-$badge-button-margin-x: 1px;
-$badge-button-margin-y: 2px;
+$badge-button-margin-x: 2px;
+$badge-button-margin-y: 3px;
 $badge-button-count-per-row: 5; /* 1行あたりのボタン数 */
 $badge-button-container-width: (
 	$badge-button-width +
@@ -771,11 +771,14 @@ ul.badge-button-container, ul#badge-search-buttons-class {
 	margin: 0;
 	padding: 0;
 
-	$badge-selector-header-height: 80px;
-	$badge-selector-footer-height: 80px;
-	$badge-selector-body-height: 240px;
+	$badge-selector-body-height: 300px;
 	$badge-selector-body-padding: 15px;
 	$badge-selector-body-scrollbar-margin: 18px;
+	$badge-selector-header-height:
+		($button-height + 1px * 2 /* margin */ + 1px * 2 /* border */) * 4 +
+		$badge-selector-body-padding /* top */ +
+		10px /* bottom */;
+	$badge-selector-footer-height: 80px;
 	$badge-selector-inner-border-width: 1px;
 	$badge-selector-outer-border-width: 3px;
 
@@ -810,6 +813,7 @@ ul.badge-button-container, ul#badge-search-buttons-class {
 		overflow-x: hidden;
 
 		ul {
+			font-size: 12px;
 			margin: {
 				top: 0;
 				right: $badge-selector-body-padding + $badge-selector-body-scrollbar-margin;
@@ -822,12 +826,13 @@ ul.badge-button-container, ul#badge-search-buttons-class {
 			li {
 				float: left;
 				width: $badge-button-width;
+				height: $badge-button-height;
 				margin: $badge-button-margin-y $badge-button-margin-x;
 			}
 		}
 		ul#badge-selector-blank {
 			margin-top: 5px;
-			margin-bottom: 4px;
+			margin-bottom: 6px;
 		}
 		ul#badge-selector-list {
 			clear: left;
@@ -840,18 +845,18 @@ ul.badge-button-container, ul#badge-search-buttons-class {
 
 	ul.badge-search-button-container {
 		float: left;
-		margin-top: 10px;
-		height: ($button-height + 4px) * 3;
+		margin-top: $badge-selector-body-padding;
+		height: ($button-height + 4px) * 4;
 
-		margin-right: 4px;
+		margin-right: 6px;
 		border-right: 1px solid $border-color-general;
-		padding-right: 4px;
+		padding-right: 6px;
 
 		&:first-child {
 			margin-left: $badge-selector-body-padding;
 		}
 		&:last-child {
-			margin-right: $badge-selector-body-padding;
+			margin-right: $badge-selector-body-padding + $badge-selector-body-scrollbar-margin;
 			border-right: none;
 			padding-right: 0;
 		}
@@ -862,21 +867,23 @@ ul.badge-button-container, ul#badge-search-buttons-class {
 		}
 	}
 	ul#badge-search-buttons-race {
-		width: ($badge-search-button-width + 4px) * 5;
+		width: ($badge-search-button-width + 4px) * 4;
 	}
 	ul#badge-search-buttons-class {
-		width: ($badge-search-button-width + 4px) * 2;
+		width: ($badge-search-button-width + 4px) * 1;
 
 	}
 	ul#badge-search-buttons-feature {
-		width: ($badge-search-button-width + 4px) * 9;
+		width: ($badge-search-button-width + 4px) * 8;
 	}
 	ul#badge-search-buttons-sort {
+		$badge-sort-button-width: 80px;
+
 		float: right;
-		width: $badge-search-button-width * 2;
+		width: $badge-sort-button-width + 4px;
 
 		li {
-			width: $badge-search-button-width * 2;
+			width: $badge-sort-button-width;
 		}
 	}
 
