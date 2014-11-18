@@ -1308,6 +1308,18 @@ var SimulatorUI = (function($) {
 						case 'skill':
 							features = features.concat(getFeatureArrayFromArray('@vを おぼえる', val));
 							break;
+						case 'attrup':
+							features = features.concat(getFeatureArrayFromHash('@k特技の攻撃ダメージ +@v%', val));
+							break;
+						case 'raceup':
+							features = features.concat(getFeatureArrayFromHash('@k系ダメージ +@v%', val));
+							break;
+						case 'spellup':
+							features = features.concat(getFeatureArrayFromHash('@k系効果 +@v%', val));
+							break;
+						case 'attrib':
+							features.push(val + '属性攻撃');
+							break;
 						case 'special':
 							features.push('ひっさつ「' + val + '」');
 							break;
