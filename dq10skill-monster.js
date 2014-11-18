@@ -29,7 +29,7 @@ var Simulator = (function() {
 	var skillPtsGiven = allData.skillPtsGiven;
 	var expRequired = allData.expRequired;
 	var additionalSkillLines = allData.additionalSkillLines;
-	var badges = allData.badges;
+	var badgeTable = allData.badges;
 
 	//パラメータ格納用
 	var skillPts = {};
@@ -232,7 +232,7 @@ var Simulator = (function() {
 		for(var i = 0; i < this.badgeEquip.length; i++) {
 			if(this.badgeEquip[i] === null) continue;
 
-			var badge = badges[this.badgeEquip[i]];
+			var badge = badgeTable[this.badgeEquip[i]];
 			if(badge[status])
 				total += badge[status];
 		}
@@ -496,7 +496,7 @@ var Simulator = (function() {
 		expRequired: expRequired,
 		monsters: monsters,
 		additionalSkillLines: additionalSkillLines,
-		badges: badges,
+		badgeTable: badgeTable,
 		badgeClass: allData.badgeclass,
 		badgeRace: allData.badgerace,
 		badgeFeature: allData.badgefeature,
@@ -760,7 +760,7 @@ var SimulatorUI = (function($) {
 		var $badgeButtonCont = $badgeButton.closest('li');
 
 		var badgeId = monster.badgeEquip[badgeIndex];
-		var badge = badgeId ? sim.badges[badgeId] : null;
+		var badge = badgeId ? sim.badgeTable[badgeId] : null;
 
 		var buttonText = '';
 
@@ -1210,6 +1210,12 @@ var SimulatorUI = (function($) {
 				cancel();
 			});
 
+			//バッジをはずすボタン
+			$('#badge-selector-remove').click(function(e) {
+				apply(null);
+			});
+
+			//バッジ設定ボタン
 			$('#badge-selector-list a').click(function(e) {
 				var badgeId = getBadgeId(this);
 				apply(badgeId);
@@ -1218,6 +1224,7 @@ var SimulatorUI = (function($) {
 				refreshBadgeInfo(badgeId);
 			});
 
+			//バッジ検索ボタン
 			$('#badge-search-buttons-race a').click(function(e) {
 				var race = $(this).attr('data-search-key');
 				filterButtons(getRaceSearchCache(race));
@@ -1231,6 +1238,7 @@ var SimulatorUI = (function($) {
 				filterButtons(getFeatureSearchCache(feature));
 			});
 
+			//バッジソートボタン
 			$('#badge-sort-badgeid').click(function(e) {
 				sortBadgeById(sortByIdDesc);
 				sortByIdDesc = !sortByIdDesc;
@@ -1242,6 +1250,7 @@ var SimulatorUI = (function($) {
 				sortByIdDesc = false;
 			});
 
+			//検索クリアボタン
 			$('#badge-search-clear').click(function(e) {
 				clearFilter();
 			});
@@ -1258,7 +1267,7 @@ var SimulatorUI = (function($) {
 		}
 
 		function refreshBadgeInfo(badgeId) {
-			var badge = sim.badges[badgeId];
+			var badge = sim.badgeTable[badgeId];
 			if(!badge) return;
 
 			$('#badge-selector-badge-id').text(badgeId);
@@ -1285,7 +1294,7 @@ var SimulatorUI = (function($) {
 			if(featureCache[badgeId])
 				return featureCache[badgeId];
 
-			var badge = sim.badges[badgeId];
+			var badge = sim.badgeTable[badgeId];
 
 			var features = [];
 			for(var feature in sim.badgeFeature) {
@@ -1380,8 +1389,8 @@ var SimulatorUI = (function($) {
 				return cacheArray[key];
 
 			var filteredArray = [];
-			for(var badgeId in sim.badges) {
-				if(func(sim.badges[badgeId]))
+			for(var badgeId in sim.badgeTable) {
+				if(func(sim.badgeTable[badgeId]))
 					filteredArray.push(badgeId);
 			}
 
