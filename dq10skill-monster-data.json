@@ -1365,6 +1365,11 @@
 		"060": {"name": "ガニラス", "sort": "かにらす", "class": "bronze", "race": "water", "atk": 27, "critical": 3},
 		"101": {"name": "スライム", "sort": "すらいむ", "class": "silver", "race": "slime", "maxhp": 60, "critical": 3, "evd": 3}
 	},
+	"badgetrade": {
+		"007": {"001": 1, "010": 1, "049": 1},
+		"008": {"004": 1, "075": 1, "051": 1},
+		"101": {"001": 3}
+	},
 	"specialbadges": [
 	],
 	"badgerace": {

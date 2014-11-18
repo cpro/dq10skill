@@ -218,29 +218,14 @@
 						%li{'class' => ['ui-corner-all', badge['class']], 'data-kana-sort-key' => badge['sort']}<
 							%a{'data-badge-id' => id}<
 								= "#{id} #{badge['name']}・#{data['badgeclass'][badge['class']]}"
-					-#
-						- 1.upto(100) do |i|
-							%li.ui-corner-all.bronze<
-								%a<
-									= sprintf("%03d", i) + ' ？？？？？・銅'
-						- 101.upto(200) do |i|
-							%li.ui-corner-all.silver<
-								%a<
-									= sprintf("%03d", i) + ' ？？？？？・銀'
-						- 201.upto(300) do |i|
-							%li.ui-corner-all.gold<
-								%a<
-									= sprintf("%03d", i) + ' ？？？？？・金'
-						- 301.upto(312) do |i|
-							%li.ui-corner-all.luminous<
-								%a<
-									= sprintf("%03d", i) + ' ？？？？？・光'
 			#badge-selector-footer
-				%h2#badge-selector-badge-title<
-					%span#badge-selector-badge-id>
-					%span#badge-selector-badge-name>
-				%p#badge-selector-race
+				#badge-selector-baseinfo
+					%h2#badge-selector-badge-title<
+						%span#badge-selector-badge-id>
+						%span#badge-selector-badge-name>
+					%p#badge-selector-race
 				%ul#badge-selector-feature-list
+				%ul#badge-selector-trade-list
 		#ad_sidebar
 			%h2 サイト内リンク
 			%ul

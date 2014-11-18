@@ -667,7 +667,7 @@ body.msp {
 /* バッジ関連定義 */
 $button-height: 16px;
 $badge-button-height: $button-height + 1px;
-$button-anchor-padding-x: 3px;
+$button-anchor-padding-x: 5px;
 $badge-button-width: 160px;
 $badge-button-border-width: 1px;
 $badge-button-margin-x: 2px;
@@ -837,6 +837,11 @@ ul.badge-button-container, ul#badge-search-buttons-class {
 		ul#badge-selector-list {
 			clear: left;
 			margin-bottom: 5px;
+
+			li a {
+				text-align: left;
+				margin-left: $button-anchor-padding-x;
+			}
 		}
 	}
 
@@ -887,27 +892,41 @@ ul.badge-button-container, ul#badge-search-buttons-class {
 		}
 	}
 
-	#badge-selector-badge-title {
-		font-size: 18px;
-		margin: 5px 0 3px $badge-selector-body-padding;
-		
-		#badge-selector-badge-id {
-			font-size: 85%;
-			margin-right: 3px;
+	#badge-selector-footer {
+		&>div, &>ul {
+			float: left;
+			margin-top: 5px;
+			height: $badge-selector-footer-height - 5px;
 		}
 	}
-	#badge-selector-race {
-		font-size: 14px;
-		margin: 0 0 0 $badge-selector-body-padding;
-		padding: 0;
+	#badge-selector-baseinfo {
+		width: 220px;
+		margin-left: $badge-selector-body-padding;
+
+		#badge-selector-badge-title {
+			font-size: 18px;
+			margin: 0 0 3px 0;
+			white-space: nowrap;
+
+			#badge-selector-badge-id {
+				font-size: 85%;
+				margin-right: 3px;
+			}
+		}
+
+		#badge-selector-race {
+			font-size: 14px;
+			margin: 0;
+			padding: 0;
+		}
 	}
 	#badge-selector-feature-list {
+		width: 180px;
 		font-size: 12px;
-		margin: 5px 0 0 0;
-		position: absolute;
-		height: $badge-selector-footer-height - 5px;
-		top: 0;
-		left: $badge-button-width * 2;
+	}
+	#badge-selector-trade-list {
+		width: 180px;
+		font-size: 12px;
 	}
 }
 

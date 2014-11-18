@@ -580,6 +580,9 @@ ul.badge-button-container li a, ul#badge-search-buttons-class li a {
     #badge-selector #badge-selector-body ul#badge-selector-list {
       clear: left;
       margin-bottom: 5px; }
+      #badge-selector #badge-selector-body ul#badge-selector-list li a {
+        text-align: left;
+        margin-left: 5px; }
   #badge-selector ul.badge-search-button-container {
     float: left;
     margin-top: 15px;
@@ -607,23 +610,30 @@ ul.badge-button-container li a, ul#badge-search-buttons-class li a {
     width: 84px; }
     #badge-selector ul#badge-search-buttons-sort li {
       width: 80px; }
-  #badge-selector #badge-selector-badge-title {
-    font-size: 18px;
-    margin: 5px 0 3px 15px; }
-    #badge-selector #badge-selector-badge-title #badge-selector-badge-id {
-      font-size: 85%;
-      margin-right: 3px; }
-  #badge-selector #badge-selector-race {
-    font-size: 14px;
-    margin: 0 0 0 15px;
-    padding: 0; }
+  #badge-selector #badge-selector-footer > div, #badge-selector #badge-selector-footer > ul {
+    float: left;
+    margin-top: 5px;
+    height: 75px; }
+  #badge-selector #badge-selector-baseinfo {
+    width: 220px;
+    margin-left: 15px; }
+    #badge-selector #badge-selector-baseinfo #badge-selector-badge-title {
+      font-size: 18px;
+      margin: 0 0 3px 0;
+      white-space: nowrap; }
+      #badge-selector #badge-selector-baseinfo #badge-selector-badge-title #badge-selector-badge-id {
+        font-size: 85%;
+        margin-right: 3px; }
+    #badge-selector #badge-selector-baseinfo #badge-selector-race {
+      font-size: 14px;
+      margin: 0;
+      padding: 0; }
   #badge-selector #badge-selector-feature-list {
-    font-size: 12px;
-    margin: 5px 0 0 0;
-    position: absolute;
-    height: 75px;
-    top: 0;
-    left: 320px; }
+    width: 180px;
+    font-size: 12px; }
+  #badge-selector #badge-selector-trade-list {
+    width: 180px;
+    font-size: 12px; }
 
 /* ダイアログ表示時のマスク用スクリーン */
 #dark-screen {
