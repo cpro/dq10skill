@@ -765,7 +765,7 @@ var SimulatorUI = (function($) {
 		var buttonText = '';
 
 		if(badge) {
-			buttonText = badgeId + ' ' + badge.name;
+			buttonText = badgeId + ' ' + badge.name + '・' + sim.badgeClass[badge['class']];
 		} else {
 			if(badgeIndex == monster.badgeEquip.length - 1)
 				buttonText = 'スペシャルバッジ';
@@ -1262,7 +1262,9 @@ var SimulatorUI = (function($) {
 			if(!badge) return;
 
 			$('#badge-selector-badge-id').text(badgeId);
-			$('#badge-selector-badge-name').text(badge.name);
+
+			var badgeName = badge.name + '・' + sim.badgeClass[badge['class']];
+			$('#badge-selector-badge-name').text(badgeName);
 
 			var raceName;
 			if(badge.race == 'special')

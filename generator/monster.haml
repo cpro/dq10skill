@@ -217,7 +217,7 @@
 					- data['badges'].each do |id, badge|
 						%li{'class' => ['ui-corner-all', badge['class']], 'data-kana-sort-key' => badge['sort']}<
 							%a{'data-badge-id' => id}<
-								= id + ' ' + badge['name']
+								= "#{id} #{badge['name']}・#{data['badgeclass'][badge['class']]}"
 					-#
 						- 1.upto(100) do |i|
 							%li.ui-corner-all.bronze<
