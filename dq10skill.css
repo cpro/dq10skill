@@ -406,7 +406,7 @@ a {
     padding: 0;
     display: inline-block; }
   .status_info dt {
-    margin: 0 5px 0 5px;
+    margin: 0 2px 0 4px;
     padding: 0;
     display: inline;
     font-size: 80%; }
@@ -543,7 +543,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-class li a {
   margin: 0;
   padding: 0;
   width: 878px;
-  height: 487px;
+  height: 527px;
   border: 3px solid #9999aa;
   border-radius: 6px;
   background-color: #fcfcfd;
@@ -554,7 +554,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-class li a {
     border-bottom: 1px solid #9999aa; }
   #badge-selector #badge-selector-footer {
     position: relative;
-    height: 80px;
+    height: 120px;
     border-top: 1px solid #9999aa; }
   #badge-selector #badge-selector-body {
     position: relative;
@@ -610,11 +610,11 @@ ul.badge-button-container li a, ul#badge-search-buttons-class li a {
     width: 84px; }
     #badge-selector ul#badge-search-buttons-sort li {
       width: 80px; }
-  #badge-selector #badge-selector-footer > div, #badge-selector #badge-selector-footer > ul {
-    float: left;
+  #badge-selector #badge-selector-footer > div, #badge-selector #badge-selector-footer > ul, #badge-selector #badge-selector-footer > table {
     margin-top: 5px;
-    height: 75px; }
+    /* height: $badge-selector-footer-height - 5px; */ }
   #badge-selector #badge-selector-baseinfo {
+    float: left;
     width: 220px;
     margin-left: 15px; }
     #badge-selector #badge-selector-baseinfo #badge-selector-badge-title {
@@ -629,11 +629,44 @@ ul.badge-button-container li a, ul#badge-search-buttons-class li a {
       margin: 0;
       padding: 0; }
   #badge-selector #badge-selector-feature-list {
+    float: left;
     width: 180px;
     font-size: 12px; }
   #badge-selector #badge-selector-trade-list {
+    float: left;
     width: 180px;
     font-size: 12px; }
+  #badge-selector #badge-selector-status-table {
+    float: right;
+    margin-left: 0;
+    margin-right: 33px;
+    padding: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: none;
+    height: 100px; }
+    #badge-selector #badge-selector-status-table th, #badge-selector #badge-selector-status-table td {
+      vertical-align: middle;
+      margin: 0;
+      padding: 0 3px;
+      height: 20px;
+      overflow: hidden; }
+    #badge-selector #badge-selector-status-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: normal; }
+    #badge-selector #badge-selector-status-table td.badge-status-current, #badge-selector #badge-selector-status-table td.badge-status-after {
+      font-size: 12px;
+      text-align: right;
+      width: 28px; }
+    #badge-selector #badge-selector-status-table td.badge-status-arrow {
+      font-size: 9px; }
+    #badge-selector #badge-selector-status-table td.badge-status-after {
+      font-weight: bold; }
+      #badge-selector #badge-selector-status-table td.badge-status-after.badge-status-plus {
+        color: #46b; }
+      #badge-selector #badge-selector-status-table td.badge-status-after.badge-status-minus {
+        color: #b55; }
 
 /* ダイアログ表示時のマスク用スクリーン */
 #dark-screen {

@@ -224,9 +224,15 @@ var Simulator = (function() {
 		var total = this.getTotalPassive(status);
 
 		//Lv50時ステータス
-		total += this.data.status[status];
-		//転生時のステータス増分
-		total += this.data.increment[status] * this.restartCount;
+		if(status == 'atk') {
+			total += this.getTotalStatus('pow');
+		} else if(status == 'stylish') {
+			total += this.getTotalStatus('charm');
+		} else {
+			total += this.data.status[status];
+			//転生時のステータス増分
+			total += this.data.increment[status] * this.restartCount;
+		}
 
 		//バッジ
 		for(var i = 0; i < this.badgeEquip.length; i++) {
@@ -742,7 +748,7 @@ var SimulatorUI = (function($) {
 
 	function refreshTotalStatus(monsterId) {
 		var monster = sim.getMonster(monsterId);
-		var statusArray = 'maxhp,maxmp,pow,def,magic,heal,spd,dex,charm,weight'.split(',');
+		var statusArray = 'maxhp,maxmp,atk,pow,def,magic,heal,spd,dex,charm,weight'.split(',');
 
 		var $cont = $('#' + monsterId + ' .status_info dl');
 		var status;
@@ -1079,6 +1085,7 @@ var SimulatorUI = (function($) {
 			var monsterId = getCurrentMonsterId(this);
 			var badgeIndex = parseInt($(this).attr('id').match(/^append-badge(\d+)-/)[1], 10);
 
+			BadgeSelector.setCurrentMonster(sim.getMonster(monsterId), badgeIndex);
 			BadgeSelector.show(function(badgeId) {
 				sim.getMonster(monsterId).badgeEquip[badgeIndex] = badgeId;
 				drawBadgeButton(monsterId, badgeIndex);
@@ -1202,6 +1209,11 @@ var SimulatorUI = (function($) {
 		var sortByIdDesc = false;
 		var sortByKanaDesc = false;
 
+		//モンスターデータを一部保持
+		var status = {};
+		var currentBadgeId = null;
+		var badgeEquip = [];
+
 		function setup() {
 			$dialog = $('#badge-selector');
 			$maskScreen = $('#dark-screen');
@@ -1213,6 +1225,9 @@ var SimulatorUI = (function($) {
 			//バッジをはずすボタン
 			$('#badge-selector-remove').click(function(e) {
 				apply(null);
+			}).hover(function(e) {
+				clearBadgeInfo();
+				refreshStatusAfter(null);
 			});
 
 			//バッジ設定ボタン
@@ -1222,6 +1237,7 @@ var SimulatorUI = (function($) {
 			}).hover(function(e) {
 				var badgeId = getBadgeId(this);
 				refreshBadgeInfo(badgeId);
+				refreshStatusAfter(badgeId);
 			});
 
 			//バッジ検索ボタン
@@ -1264,6 +1280,13 @@ var SimulatorUI = (function($) {
 				return null;
 			else
 				return $(elem).attr('data-badge-id');
+		}
+
+		function clearBadgeInfo() {
+			$('#badge-selector-badge-id').text('');
+			$('#badge-selector-badge-name').text('');
+			$('#badge-selector-race').text('');
+			$('#badge-selector-feature-list').empty();
 		}
 
 		function refreshBadgeInfo(badgeId) {
@@ -1344,6 +1367,45 @@ var SimulatorUI = (function($) {
 
 				return retArray;
 			}
+		}
+
+		var STATUS_ARRAY = 'atk,def,maxhp,maxmp,magic,heal,spd,dex,stylish,weight'.split(',');
+
+		function setCurrentMonster(monster, badgeIndex) {
+			for(var i = 0; i < STATUS_ARRAY.length; i++) {
+				var s = STATUS_ARRAY[i];
+				status[s] = monster.getTotalStatus(s);
+
+				$('#badge-status-current-' + s).text(status[s]);
+			}
+			currentBadgeId = monster.badgeEquip[badgeIndex];
+
+			refreshStatusAfter(null);
+		}
+
+		function refreshStatusAfter(badgeId) {
+			var currentBadge = null;
+			if(currentBadgeId !== null)
+				currentBadge = sim.badgeTable[currentBadgeId];
+			var newBadge = null;
+			if(badgeId !== null)
+				newBadge = sim.badgeTable[badgeId];
+
+			for(var i = 0; i < STATUS_ARRAY.length; i++) {
+				var s = STATUS_ARRAY[i];
+				var before = status[s];
+
+				var after = before;
+				if(currentBadge !== null && currentBadge[s])
+					after -= currentBadge[s];
+				if(newBadge !== null && newBadge[s])
+					after += newBadge[s];
+
+				$('#badge-status-after-' + s).text(before == after ? '' : after)
+					.toggleClass('badge-status-plus', before < after)
+					.toggleClass('badge-status-minus', before > after);
+			}
+
 		}
 
 		function filterButtons(showIds) {
@@ -1431,6 +1493,7 @@ var SimulatorUI = (function($) {
 			hide();
 		}
 		function show(callback) {
+			clearBadgeInfo();
 			$maskScreen.show();
 			$dialog.show();
 			selectedBadgeId = null;
@@ -1445,6 +1508,7 @@ var SimulatorUI = (function($) {
 		return {
 			//メソッド
 			setup: setup,
+			setCurrentMonster: setCurrentMonster,
 			show: show
 		};
 	})($);

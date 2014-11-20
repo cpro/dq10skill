@@ -575,7 +575,7 @@ a {
 		display: inline-block;
 	}
 	dt {
-		margin: 0 5px 0 5px;
+		margin: 0 2px 0 4px;
 		padding: 0;
 		display: inline;
 		font-size: 80%;
@@ -778,7 +778,7 @@ ul.badge-button-container, ul#badge-search-buttons-class {
 		($button-height + 1px * 2 /* margin */ + 1px * 2 /* border */) * 4 +
 		$badge-selector-body-padding /* top */ +
 		10px /* bottom */;
-	$badge-selector-footer-height: 80px;
+	$badge-selector-footer-height: 120px;
 	$badge-selector-inner-border-width: 1px;
 	$badge-selector-outer-border-width: 3px;
 
@@ -893,13 +893,13 @@ ul.badge-button-container, ul#badge-search-buttons-class {
 	}
 
 	#badge-selector-footer {
-		&>div, &>ul {
-			float: left;
+		&>div, &>ul, &>table {
 			margin-top: 5px;
-			height: $badge-selector-footer-height - 5px;
+			/* height: $badge-selector-footer-height - 5px; */
 		}
 	}
 	#badge-selector-baseinfo {
+		float: left;
 		width: 220px;
 		margin-left: $badge-selector-body-padding;
 
@@ -921,12 +921,58 @@ ul.badge-button-container, ul#badge-search-buttons-class {
 		}
 	}
 	#badge-selector-feature-list {
+		float: left;
 		width: 180px;
 		font-size: 12px;
 	}
 	#badge-selector-trade-list {
+		float: left;
 		width: 180px;
 		font-size: 12px;
+	}
+
+	#badge-selector-status-table {
+		float: right;
+		margin-left: 0;
+		margin-right: $badge-selector-body-padding + $badge-selector-body-scrollbar-margin;
+		padding: 0;
+		border-collapse: separate;
+		border-spacing: 0;
+		border: none;
+
+		$status-cell-height: 20px;
+		height: $status-cell-height * 5;
+
+		th, td {
+			vertical-align: middle;
+			margin: 0;
+			padding: 0 3px;
+			height: $status-cell-height;
+			overflow: hidden;
+		}
+		th {
+			text-align: left;
+			font-size: 11px;
+			font-weight: normal;
+		}
+		td.badge-status-current, td.badge-status-after {
+			font-size: 12px;
+			text-align: right;
+			width: 28px;
+		}
+		td.badge-status-arrow {
+			font-size: 9px;
+		}
+		td.badge-status-after {
+			font-weight: bold;
+
+			&.badge-status-plus {
+				color: #46b;
+			}
+			&.badge-status-minus {
+				color: #b55;
+			}
+		}
 	}
 }
 

@@ -123,12 +123,14 @@
         </div>
         <div class='skill_tables'></div>
         <div class='status_info'>
-          <h3>Lv50時ステータス:</h3>
+          <h3>Lv50時つよさ:</h3>
           <dl>
-            <dt>最大HP</dt>
+            <dt>HP</dt>
             <dd class='maxhp'>0</dd>
-            <dt>最大MP</dt>
+            <dt>MP</dt>
             <dd class='maxmp'>0</dd>
+            <dt>攻撃</dt>
+            <dd class='atk'>0</dd>
             <dt>力</dt>
             <dd class='pow'>0</dd>
             <dt>身守</dt>
@@ -262,7 +264,7 @@
           <li class='ui-corner-all'><a data-search-key='evd' title='みかわし率'>回避</a></li>
           <li class='ui-corner-all'><a data-search-key='startup' title='開戦時発動'>開戦</a></li>
           <li class='ui-corner-all'><a data-search-key='win' title='勝利時発動'>勝利</a></li>
-          <li class='ui-corner-all'><a data-search-key='debuff' title='攻撃時追加効果'>追加</a></li>
+          <li class='ui-corner-all'><a data-search-key='debuff' title='攻撃時弱体効果'>弱体</a></li>
           <li class='ui-corner-all'><a data-search-key='skill' title='呪文特技使用'>特技</a></li>
           <li class='ui-corner-all'><a data-search-key='resist' title='状態異常耐性'>異耐</a></li>
           <li class='ui-corner-all'><a data-search-key='raceup' title='種族特効'>種UP</a></li>
@@ -375,7 +377,7 @@
           <li class='ui-corner-all bronze' data-kana-sort-key='きまいらろおと'><a data-badge-id='088'>088 キマイラロード・銅</a></li>
           <li class='ui-corner-all bronze' data-kana-sort-key='まりいん'><a data-badge-id='089'>089 マリーン・銅</a></li>
           <li class='ui-corner-all bronze' data-kana-sort-key='せらふい'><a data-badge-id='090'>090 セラフィ・銅</a></li>
-          <li class='ui-corner-all bronze' data-kana-sort-key=''><a data-badge-id='091'>091 マイユ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='まいゆ'><a data-badge-id='091'>091 マイユ・銅</a></li>
           <li class='ui-corner-all bronze' data-kana-sort-key='りせろつた'><a data-badge-id='092'>092 リゼロッタ・銅</a></li>
           <li class='ui-corner-all bronze' data-kana-sort-key='ふうら'><a data-badge-id='093'>093 フウラ・銅</a></li>
           <li class='ui-corner-all bronze' data-kana-sort-key='そおみや'><a data-badge-id='094'>094 ソーミャ・銅</a></li>
@@ -475,7 +477,7 @@
           <li class='ui-corner-all silver' data-kana-sort-key='きまいらろおと'><a data-badge-id='188'>188 キマイラロード・銀</a></li>
           <li class='ui-corner-all silver' data-kana-sort-key='まりいん'><a data-badge-id='189'>189 マリーン・銀</a></li>
           <li class='ui-corner-all silver' data-kana-sort-key='せらふい'><a data-badge-id='190'>190 セラフィ・銀</a></li>
-          <li class='ui-corner-all silver' data-kana-sort-key=''><a data-badge-id='191'>191 マイユ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='まいゆ'><a data-badge-id='191'>191 マイユ・銀</a></li>
           <li class='ui-corner-all silver' data-kana-sort-key='りせろつた'><a data-badge-id='192'>192 リゼロッタ・銀</a></li>
           <li class='ui-corner-all silver' data-kana-sort-key='ふうら'><a data-badge-id='193'>193 フウラ・銀</a></li>
           <li class='ui-corner-all silver' data-kana-sort-key='そおみや'><a data-badge-id='194'>194 ソーミャ・銀</a></li>
@@ -575,7 +577,7 @@
           <li class='ui-corner-all gold' data-kana-sort-key='きまいらろおと'><a data-badge-id='288'>288 キマイラロード・金</a></li>
           <li class='ui-corner-all gold' data-kana-sort-key='まりいん'><a data-badge-id='289'>289 マリーン・金</a></li>
           <li class='ui-corner-all gold' data-kana-sort-key='せらふい'><a data-badge-id='290'>290 セラフィ・金</a></li>
-          <li class='ui-corner-all gold' data-kana-sort-key=''><a data-badge-id='291'>291 マイユ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='まいゆ'><a data-badge-id='291'>291 マイユ・金</a></li>
           <li class='ui-corner-all gold' data-kana-sort-key='りせろつた'><a data-badge-id='292'>292 リゼロッタ・金</a></li>
           <li class='ui-corner-all gold' data-kana-sort-key='ふうら'><a data-badge-id='293'>293 フウラ・金</a></li>
           <li class='ui-corner-all gold' data-kana-sort-key='そおみや'><a data-badge-id='294'>294 ソーミャ・金</a></li>
@@ -587,7 +589,7 @@
           <li class='ui-corner-all gold' data-kana-sort-key='すうほお'><a data-badge-id='300'>300 ズーボー・金</a></li>
           <li class='ui-corner-all luminous' data-kana-sort-key='まりいん'><a data-badge-id='301'>301 マリーン・光</a></li>
           <li class='ui-corner-all luminous' data-kana-sort-key='せらふい'><a data-badge-id='302'>302 セラフィ・光</a></li>
-          <li class='ui-corner-all luminous' data-kana-sort-key=''><a data-badge-id='303'>303 マイユ・光</a></li>
+          <li class='ui-corner-all luminous' data-kana-sort-key='まいゆ'><a data-badge-id='303'>303 マイユ・光</a></li>
           <li class='ui-corner-all luminous' data-kana-sort-key='りせろつた'><a data-badge-id='304'>304 リゼロッタ・光</a></li>
           <li class='ui-corner-all luminous' data-kana-sort-key='ふうら'><a data-badge-id='305'>305 フウラ・光</a></li>
           <li class='ui-corner-all luminous' data-kana-sort-key='そおみや'><a data-badge-id='306'>306 ソーミャ・光</a></li>
@@ -605,7 +607,58 @@
           <p id='badge-selector-race'></p>
         </div>
         <ul id='badge-selector-feature-list'></ul>
-        <ul id='badge-selector-trade-list'></ul>
+        <table id='badge-selector-status-table'>
+          <tr>
+            <th>こうげき力</th>
+            <td class='badge-status-current' id='badge-status-current-atk'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-atk'></td>
+            <th>すばやさ</th>
+            <td class='badge-status-current' id='badge-status-current-spd'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-spd'></td>
+          </tr>
+          <tr>
+            <th>しゅび力</th>
+            <td class='badge-status-current' id='badge-status-current-def'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-def'></td>
+            <th>きようさ</th>
+            <td class='badge-status-current' id='badge-status-current-dex'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-dex'></td>
+          </tr>
+          <tr>
+            <th>さいだいＨＰ</th>
+            <td class='badge-status-current' id='badge-status-current-maxhp'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-maxhp'></td>
+            <th>こうげき魔力</th>
+            <td class='badge-status-current' id='badge-status-current-magic'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-magic'></td>
+          </tr>
+          <tr>
+            <th>さいだいＭＰ</th>
+            <td class='badge-status-current' id='badge-status-current-maxmp'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-maxmp'></td>
+            <th>かいふく魔力</th>
+            <td class='badge-status-current' id='badge-status-current-heal'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-heal'></td>
+          </tr>
+          <tr>
+            <th>おしゃれさ</th>
+            <td class='badge-status-current' id='badge-status-current-stylish'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-stylish'></td>
+            <th>おもさ</th>
+            <td class='badge-status-current' id='badge-status-current-weight'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-weight'></td>
+          </tr>
+        </table>
       </div>
     </div>
     <div id='ad_sidebar'>
