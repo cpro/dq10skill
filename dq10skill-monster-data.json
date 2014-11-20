@@ -448,7 +448,7 @@
 				{"pt":   3, "name": "ツッコミ", "desc": "ツッコんで\n仲間ひとりを\nわれに返す", "mp": 4},
 				{"pt":   7, "name": "常時すばやさ+40", "desc": "常時\nすばやさが\n４０増える", "mp": null, "spd": 40},
 				{"pt":  12, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
-				{"pt":  18, "name": "火ふき芸", "desc": "", "mp": null},
+				{"pt":  18, "name": "火ふき芸", "desc": "", "mp": 10},
 				{"pt":  25, "name": "常時かいしん率+5%", "desc": "会心のいちげきが\n出やすくなる", "mp": null},
 				{"pt":  32, "name": "常時みのまもり+80", "desc": "常時\nみのまもりが\n８０増える", "mp": null, "def": 80},
 				{"pt":  40, "name": "いてつく一発芸", "desc": "", "mp": null}
@@ -488,7 +488,7 @@
 				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
 				{"pt":  12, "name": "かぶと割り", "desc": "頭上から\n敵１体を斬りつけ\n守備力も下げる", "mp": 4},
 				{"pt":  18, "name": "常時かいしん率+5%", "desc": "会心のいちげきが\n出やすくなる", "mp": null},
-				{"pt":  25, "name": "ロストアタック", "desc": "敵１体に\nダメージを与え\nテンションダウン", "mp": 4},
+				{"pt":  25, "name": "ロストスラッシュ", "desc": "敵１体に\nダメージを与え\nテンションダウン", "mp": 4},
 				{"pt":  32, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
 				{"pt":  40, "name": "マジックブレイク", "desc": "", "mp": 8}
 			]
@@ -604,8 +604,8 @@
 				{"pt":   3, "name": "イオラ", "desc": "", "mp": null},
 				{"pt":   7, "name": "ドルクマ", "desc": "巨大な\n闇のチカラが\n敵１体をおそう", "mp": 7},
 				{"pt":  12, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
-				{"pt":  18, "name": "マホトラハット", "desc": "", "mp": null},
-				{"pt":  25, "name": "ドルモーア", "desc": "破滅的な\n闇のチカラが\n敵１体をおそう", "mp": 14},
+				{"pt":  18, "name": "ドルモーア", "desc": "破滅的な\n闇のチカラが\n敵１体をおそう", "mp": 14},
+				{"pt":  25, "name": "マホトラハット", "desc": "", "mp": null},
 				{"pt":  32, "name": "常時こうげき魔力+100", "desc": "常時\nこうげき魔力が\n１００増える", "mp": null, "magic": 100},
 				{"pt":  40, "name": "ハットイルージョン", "desc": "", "mp": 10}
 			]
@@ -949,7 +949,7 @@
 			]
 		},
 
-		"hyad": {
+		"hyado": {
 			"name": "ヒャドの心得",
 			"skills": [
 				{"pt":   3, "name": "ヒャド", "desc": "氷のやいばで\n敵１体を攻撃", "mp": 3},
@@ -1053,7 +1053,7 @@
 			"id": 3,
 			"name": "プリズニャン",
 			"defaultName": "プリズニャン",
-			"skillLines": ["martialnyarts", "hyad", "claw"],
+			"skillLines": ["martialnyarts", "hyado", "claw"],
 			"status": {"maxhp": 360, "maxmp": 85, "pow": 120, "def": 165, "magic": 100, "heal": 100, "spd": 130, "dex": 100, "charm": 90, "weight": 100},
 			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 0},
 			"expTable": 1
@@ -1274,8 +1274,8 @@
 			"name": "ドラキー",
 			"defaultName": "ドラキー",
 			"skillLines": ["mahodrakee", "doruma", "wand"],
-			"status": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
-			"increment": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
+			"status": {"maxhp": 325, "maxmp": 80, "pow": 120, "def": 125, "magic": 100, "heal": 100, "spd": 220, "dex": 90, "charm": 90, "weight": 70},
+			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1284,8 +1284,8 @@
 			"name": "やみしばり",
 			"defaultName": "やみしばり",
 			"skillLines": ["meifunojahou", "moujanojubaku", "axe"],
-			"status": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
-			"increment": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
+			"status": {"maxhp": 310, "maxmp": 100, "pow": 155, "def": 170, "magic": 130, "heal": 130, "spd": 85, "dex": 90, "charm": 90, "weight": 110},
+			"increment": {"maxhp": 6, "maxmp": 4, "pow": 6, "def": 4, "magic": 16, "heal": 8, "spd": 4, "dex": 0, "charm": 0, "weight": 0},
 			"expTable": 1
 		}
 		
@@ -1315,7 +1315,7 @@
 		{"name": "cure",       "restartCount": 4, "id":  9},
 		{"name": "enhance",    "restartCount": 5, "id": 10},
 		{"name": "mera",       "restartCount": 2, "id": 11},
-		{"name": "hyad",       "restartCount": 3, "id": 12},
+		{"name": "hyado",      "restartCount": 3, "id": 12},
 		{"name": "bagi",       "restartCount": 4, "id": 13},
 		{"name": "io",         "restartCount": 5, "id": 14},
 		{"name": "doruma",     "restartCount": 6, "id": 16}

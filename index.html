@@ -7,14 +7,14 @@
     <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
     <title>DQ10 スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=5.4.5' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=5.5' rel='stylesheet' type='text/css'>
     <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' type='text/javascript'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js' type='text/javascript'></script>
     <script src='js/rawdeflate.min.js' type='text/javascript'></script>
     <script src='js/rawinflate.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=5.4.5' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=5.5' type='text/javascript'></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -147,6 +147,7 @@
             <tr class='sword_10' title='片手剣での攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
             <tr class='sword_11' title='はやぶさをこえる&#x000A;神速の４回攻撃&#x000A;（消費MP: 2）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>120</td><td class='skill_name'>超はやぶさ斬り</td></tr>
             <tr class='sword_12' title='片手剣装備時&#x000A;さらに武器ガード&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時武器ガード率+2%</td></tr>
+            <tr class='sword_13' title='光の刃で周囲の&#x000A;敵を撃ち滅ぼす&#x000A;究極の剣技&#x000A;（消費MP: 12）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>140</td><td class='skill_name'>ギガブレイク</td></tr>
           </table><table class='twohandedsword skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -169,6 +170,7 @@
             <tr class='twohandedsword_10' title='両手剣装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
             <tr class='twohandedsword_11' title='周囲の敵を&#x000A;大爆発で&#x000A;焼きつくす&#x000A;（消費MP: 6）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ビッグバン</td></tr>
             <tr class='twohandedsword_12' title='両手剣装備時&#x000A;さらに武器ガード&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+            <tr class='twohandedsword_13' title='フルパワーで&#x000A;敵１体を斬りつけ&#x000A;大ダメージ&#x000A;（消費MP: 6）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>全身全霊斬り</td></tr>
           </table><table class='axe skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -191,6 +193,7 @@
             <tr class='axe_10' title='オノ装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
             <tr class='axe_11' title='敵１体を斬りつけ&#x000A;守備力を下げて&#x000A;行動間隔ものばす&#x000A;（消費MP: 5）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>120</td><td class='skill_name'>鉄甲斬</td></tr>
             <tr class='axe_12' title='オノでの攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+3%</td></tr>
+            <tr class='axe_13' title='周囲の敵を&#x000A;２回ずつ攻撃する&#x000A;真のオノむそう&#x000A;（消費MP: 15）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>真・オノむそう</td></tr>
           </table><table class='shield skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -213,6 +216,7 @@
             <tr class='shield_10' title='盾装備時の&#x000A;しゅび力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時しゅび力+10</td></tr>
             <tr class='shield_11' title='与えるダメージと&#x000A;ひきかえに受ける&#x000A;ダメージを減らす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ファランクス</td></tr>
             <tr class='shield_12' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+            <tr class='shield_13' title='自分自身に&#x000A;呪文をかき消す&#x000A;バリアを張る&#x000A;（消費MP: 5）&#x000A;（チャージ: 30秒）'><td class='skill_pt'>140</td><td class='skill_name'>スペルガード</td></tr>
           </table><table class='courage skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -235,6 +239,7 @@
             <tr class='courage_10' title='かばう中に&#x000A;うけるダメージを&#x000A;減らす'><td class='skill_pt'>110</td><td class='skill_name'>かばうの心得（専）</td></tr>
             <tr class='courage_11' title='戦士時&#x000A;ちからが&#x000A;１０増える'><td class='skill_pt'>120</td><td class='skill_name'>ちから+10（専）</td></tr>
             <tr class='courage_12' title='大ダメージを与え&#x000A;敵をふっとばす&#x000A;戦士専用特技&#x000A;（消費MP: 4）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>130</td><td class='skill_name'>チャージタックル（専）</td></tr>
+            <tr class='courage_13' title='戦士時&#x000A;たまに２回攻撃&#x000A;できる'><td class='skill_pt'>140</td><td class='skill_name'>たまに２回攻撃（専）</td></tr>
           </table></div>
       </div>
       <div class='class_group' id='priest'>
@@ -284,6 +289,7 @@
             <tr class='spear_10' title='ヤリでの攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+3%</td></tr>
             <tr class='spear_11' title='敵を選ばず&#x000A;突きまくる&#x000A;どとうの４回攻撃&#x000A;（消費MP: 4）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>120</td><td class='skill_name'>さみだれ突き</td></tr>
             <tr class='spear_12' title='ヤリ装備時&#x000A;さらに武器ガード&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時武器ガード率+3%</td></tr>
+            <tr class='spear_13' title='地獄のいかずちで&#x000A;ダメージを与え&#x000A;たまにマヒさせる&#x000A;（消費MP: 8）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>140</td><td class='skill_name'>ジゴスパーク</td></tr>
           </table><table class='stick skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -306,6 +312,7 @@
             <tr class='stick_10' title='スティック攻撃時&#x000A;吸収できるＭＰが&#x000A;さらに増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時MP吸収率+4%</td></tr>
             <tr class='stick_11' title='いつもより&#x000A;すばやく呪文を&#x000A;唱えられる&#x000A;（消費MP: 5）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>120</td><td class='skill_name'>ラピッドステッキ</td></tr>
             <tr class='stick_12' title='スティック装備で&#x000A;戦闘に勝つと&#x000A;ＭＰが中回復する'><td class='skill_pt'>130</td><td class='skill_name'>戦闘勝利時ＭＰ中回復</td></tr>
+            <tr class='stick_13' title='仲間ひとりの&#x000A;テンションを&#x000A;１段階アップする&#x000A;（消費MP: 2）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>ティンクルバトン</td></tr>
           </table><table class='staff skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -328,6 +335,7 @@
             <tr class='staff_10' title='棍で攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
             <tr class='staff_11' title='武器ガード率が&#x000A;大幅に上がる&#x000A;棍のかまえ&#x000A;（消費MP: 2）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>120</td><td class='skill_name'>水流のかまえ</td></tr>
             <tr class='staff_12' title='棍装備時&#x000A;さらに武器ガード&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+            <tr class='staff_13' title='敵１体に強烈な&#x000A;ダメージを与える&#x000A;棍の奥義&#x000A;（消費MP: 5）&#x000A;（チャージ: 70秒）'><td class='skill_pt'>140</td><td class='skill_name'>奥義・棍閃殺</td></tr>
           </table><table class='shield skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -350,6 +358,7 @@
             <tr class='shield_10' title='盾装備時の&#x000A;しゅび力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時しゅび力+10</td></tr>
             <tr class='shield_11' title='与えるダメージと&#x000A;ひきかえに受ける&#x000A;ダメージを減らす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ファランクス</td></tr>
             <tr class='shield_12' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+            <tr class='shield_13' title='自分自身に&#x000A;呪文をかき消す&#x000A;バリアを張る&#x000A;（消費MP: 5）&#x000A;（チャージ: 30秒）'><td class='skill_pt'>140</td><td class='skill_name'>スペルガード</td></tr>
           </table><table class='faith skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -372,6 +381,7 @@
             <tr class='faith_10' title='僧侶時&#x000A;かいふく魔力が&#x000A;２０増える'><td class='skill_pt'>110</td><td class='skill_name'>かいふく魔力+20（専）</td></tr>
             <tr class='faith_11' title='僧侶時&#x000A;さいだいMPが&#x000A;３０増える'><td class='skill_pt'>120</td><td class='skill_name'>さいだいMP+30（専）</td></tr>
             <tr class='faith_12' title='聖なる光で&#x000A;ダメージを与える&#x000A;僧侶専用特技&#x000A;（消費MP: 4）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>130</td><td class='skill_name'>ホーリーライト（専）</td></tr>
+            <tr class='faith_13' title='僧侶時&#x000A;ＨＰ１で生き残る&#x000A;確率が増える'><td class='skill_pt'>140</td><td class='skill_name'>たまにＨＰ１生き残り（専）</td></tr>
           </table></div>
       </div>
       <div class='class_group' id='mage'>
@@ -421,6 +431,7 @@
             <tr class='wand_10' title='両手杖での攻撃時&#x000A;吸収できるＭＰが&#x000A;さらに増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時MP吸収率+4%</td></tr>
             <tr class='wand_11' title='さらに呪文が&#x000A;暴走しやすくなる&#x000A;魔法陣を作る&#x000A;（消費MP: 4）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>超暴走魔法陣</td></tr>
             <tr class='wand_12' title='両手杖装備時の&#x000A;こうげき魔力が&#x000A;１０増える'><td class='skill_pt'>130</td><td class='skill_name'>装備時こうげき魔力+10</td></tr>
+            <tr class='wand_13' title='仲間ひとりを&#x000A;確実に&#x000A;生き返らせる&#x000A;（消費MP: 10）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>140</td><td class='skill_name'>復活の杖</td></tr>
           </table><table class='knife skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -443,6 +454,7 @@
             <tr class='knife_10' title='短剣での攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
             <tr class='knife_11' title='敵１体を斬りつけ&#x000A;混乱やマヒを&#x000A;起こさせる&#x000A;（消費MP: 1）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>カオスエッジ</td></tr>
             <tr class='knife_12' title='短剣装備時の&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>130</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='knife_13' title='敵１体を斬りつけ&#x000A;猛毒や眠りを&#x000A;起こさせる&#x000A;（消費MP: 1）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>140</td><td class='skill_name'>ナイトメアファング</td></tr>
           </table><table class='whip skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -465,6 +477,7 @@
             <tr class='whip_10' title='ムチ装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
             <tr class='whip_11' title='雷をまとった&#x000A;ムチの一閃が&#x000A;敵集団をなぎ払う&#x000A;（消費MP: 4）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>疾風迅雷</td></tr>
             <tr class='whip_12' title='ムチでの攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+4%</td></tr>
+            <tr class='whip_13' title='敵１体に３連撃の&#x000A;ダメージを与え&#x000A;よい効果も消す&#x000A;（消費MP: 8）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>極竜打ち</td></tr>
           </table><table class='shield skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -487,6 +500,7 @@
             <tr class='shield_10' title='盾装備時の&#x000A;しゅび力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時しゅび力+10</td></tr>
             <tr class='shield_11' title='与えるダメージと&#x000A;ひきかえに受ける&#x000A;ダメージを減らす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ファランクス</td></tr>
             <tr class='shield_12' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+            <tr class='shield_13' title='自分自身に&#x000A;呪文をかき消す&#x000A;バリアを張る&#x000A;（消費MP: 5）&#x000A;（チャージ: 30秒）'><td class='skill_pt'>140</td><td class='skill_name'>スペルガード</td></tr>
           </table><table class='spellcraft skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -509,6 +523,7 @@
             <tr class='spellcraft_10' title='魔法使い時&#x000A;さらに魔力が&#x000A;暴走しやすくなる'><td class='skill_pt'>110</td><td class='skill_name'>呪文ぼうそう率アップ（専）</td></tr>
             <tr class='spellcraft_11' title='魔法使い時&#x000A;こうげき魔力が&#x000A;２０増える'><td class='skill_pt'>120</td><td class='skill_name'>こうげき魔力+20（専）</td></tr>
             <tr class='spellcraft_12' title='周囲を巻き込む&#x000A;巨大な氷の柱が&#x000A;敵に突きささる&#x000A;（消費MP: 24）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>130</td><td class='skill_name'>マヒャデドス（専）</td></tr>
+            <tr class='spellcraft_13' title='魔法使い時&#x000A;たまにＭＰを&#x000A;消費しない'><td class='skill_pt'>140</td><td class='skill_name'>たまにＭＰ消費しない（専）</td></tr>
           </table></div>
       </div>
       <div class='class_group' id='martialartist'>
@@ -558,6 +573,7 @@
             <tr class='claw_10' title='ツメ装備時&#x000A;敵の攻撃を&#x000A;かわしやすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時身かわし率+2%</td></tr>
             <tr class='claw_11' title='旋風を巻き起こし&#x000A;敵１体を打ち抜く&#x000A;必殺のアッパー&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>サイクロンアッパー</td></tr>
             <tr class='claw_12' title='ツメでの攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='claw_13' title='獣神のごとく&#x000A;敵１体を&#x000A;５連続で斬り刻む&#x000A;（消費MP: 8）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>140</td><td class='skill_name'>ライガークラッシュ</td></tr>
           </table><table class='staff skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -580,6 +596,7 @@
             <tr class='staff_10' title='棍で攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
             <tr class='staff_11' title='武器ガード率が&#x000A;大幅に上がる&#x000A;棍のかまえ&#x000A;（消費MP: 2）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>120</td><td class='skill_name'>水流のかまえ</td></tr>
             <tr class='staff_12' title='棍装備時&#x000A;さらに武器ガード&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+            <tr class='staff_13' title='敵１体に強烈な&#x000A;ダメージを与える&#x000A;棍の奥義&#x000A;（消費MP: 5）&#x000A;（チャージ: 70秒）'><td class='skill_pt'>140</td><td class='skill_name'>奥義・棍閃殺</td></tr>
           </table><table class='fan skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -602,6 +619,7 @@
             <tr class='fan_10' title='扇での攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
             <tr class='fan_11' title='魅惑の旋風で&#x000A;周囲の敵を&#x000A;切りきざむ&#x000A;（消費MP: 3）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ピンクタイフーン</td></tr>
             <tr class='fan_12' title='扇装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>130</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='fan_13' title='周囲の敵を攻撃し&#x000A;幻惑や攻撃呪文に&#x000A;弱くする&#x000A;（消費MP: 6）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>百花繚乱</td></tr>
           </table><table class='fisticuffs skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -624,6 +642,7 @@
             <tr class='fisticuffs_10' title='格闘の時&#x000A;敵の攻撃をさらに&#x000A;かわしやすくなる'><td class='skill_pt'>110</td><td class='skill_name'>素手時身かわし率+2%</td></tr>
             <tr class='fisticuffs_11' title='呼吸をととのえ&#x000A;少しずつ&#x000A;ＨＰを回復&#x000A;（消費MP: 4）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>120</td><td class='skill_name'>達人の呼吸</td></tr>
             <tr class='fisticuffs_12' title='敵の頭上めがけて&#x000A;巨大な岩石を&#x000A;投げ落とす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>130</td><td class='skill_name'>岩石おとし</td></tr>
+            <tr class='fisticuffs_13' title='チカラをタメて&#x000A;敵１体に&#x000A;強烈な一撃&#x000A;（消費MP: 3）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>140</td><td class='skill_name'>せいけん爆撃</td></tr>
           </table><table class='focus skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -646,6 +665,7 @@
             <tr class='focus_10' title='武闘家時&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>110</td><td class='skill_name'>すばやさ+30（専）</td></tr>
             <tr class='focus_11' title='武闘家時&#x000A;ちからが&#x000A;１０増える'><td class='skill_pt'>120</td><td class='skill_name'>ちから+10（専）</td></tr>
             <tr class='focus_12' title='無我の境地で&#x000A;ＭＰをかなり回復&#x000A;武闘家専用特技&#x000A;（消費MP: 0）&#x000A;（チャージ: 180秒）'><td class='skill_pt'>130</td><td class='skill_name'>無念無想（専）</td></tr>
+            <tr class='focus_13' title='武闘家時&#x000A;カウンターでの&#x000A;ダメージが増える'><td class='skill_pt'>140</td><td class='skill_name'>カウンターブースト（専）</td></tr>
           </table></div>
       </div>
       <div class='class_group' id='thief'>
@@ -695,6 +715,7 @@
             <tr class='knife_10' title='短剣での攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
             <tr class='knife_11' title='敵１体を斬りつけ&#x000A;混乱やマヒを&#x000A;起こさせる&#x000A;（消費MP: 1）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>カオスエッジ</td></tr>
             <tr class='knife_12' title='短剣装備時の&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>130</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='knife_13' title='敵１体を斬りつけ&#x000A;猛毒や眠りを&#x000A;起こさせる&#x000A;（消費MP: 1）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>140</td><td class='skill_name'>ナイトメアファング</td></tr>
           </table><table class='whip skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -717,6 +738,7 @@
             <tr class='whip_10' title='ムチ装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
             <tr class='whip_11' title='雷をまとった&#x000A;ムチの一閃が&#x000A;敵集団をなぎ払う&#x000A;（消費MP: 4）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>疾風迅雷</td></tr>
             <tr class='whip_12' title='ムチでの攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+4%</td></tr>
+            <tr class='whip_13' title='敵１体に３連撃の&#x000A;ダメージを与え&#x000A;よい効果も消す&#x000A;（消費MP: 8）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>極竜打ち</td></tr>
           </table><table class='claw skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -739,6 +761,7 @@
             <tr class='claw_10' title='ツメ装備時&#x000A;敵の攻撃を&#x000A;かわしやすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時身かわし率+2%</td></tr>
             <tr class='claw_11' title='旋風を巻き起こし&#x000A;敵１体を打ち抜く&#x000A;必殺のアッパー&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>サイクロンアッパー</td></tr>
             <tr class='claw_12' title='ツメでの攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='claw_13' title='獣神のごとく&#x000A;敵１体を&#x000A;５連続で斬り刻む&#x000A;（消費MP: 8）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>140</td><td class='skill_name'>ライガークラッシュ</td></tr>
           </table><table class='fisticuffs skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -761,6 +784,7 @@
             <tr class='fisticuffs_10' title='格闘の時&#x000A;敵の攻撃をさらに&#x000A;かわしやすくなる'><td class='skill_pt'>110</td><td class='skill_name'>素手時身かわし率+2%</td></tr>
             <tr class='fisticuffs_11' title='呼吸をととのえ&#x000A;少しずつ&#x000A;ＨＰを回復&#x000A;（消費MP: 4）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>120</td><td class='skill_name'>達人の呼吸</td></tr>
             <tr class='fisticuffs_12' title='敵の頭上めがけて&#x000A;巨大な岩石を&#x000A;投げ落とす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>130</td><td class='skill_name'>岩石おとし</td></tr>
+            <tr class='fisticuffs_13' title='チカラをタメて&#x000A;敵１体に&#x000A;強烈な一撃&#x000A;（消費MP: 3）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>140</td><td class='skill_name'>せいけん爆撃</td></tr>
           </table><table class='acquisitiveness skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -783,6 +807,7 @@
             <tr class='acquisitiveness_10' title='盗賊時&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>110</td><td class='skill_name'>すばやさ+30（専）</td></tr>
             <tr class='acquisitiveness_11' title='盗賊時&#x000A;きようさが&#x000A;３０増える'><td class='skill_pt'>120</td><td class='skill_name'>きようさ+30（専）</td></tr>
             <tr class='acquisitiveness_12' title='威力がアップした&#x000A;バクダンをおく&#x000A;盗賊専用特技&#x000A;（消費MP: 6）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>130</td><td class='skill_name'>ギガボンバー（専）</td></tr>
+            <tr class='acquisitiveness_13' title='ぬすむで&#x000A;アイテムをぬすむ&#x000A;成功率が増える'><td class='skill_pt'>140</td><td class='skill_name'>ぬすむ成功率アップ（専）</td></tr>
           </table></div>
       </div>
       <div class='class_group' id='minstrel'>
@@ -832,6 +857,7 @@
             <tr class='fan_10' title='扇での攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
             <tr class='fan_11' title='魅惑の旋風で&#x000A;周囲の敵を&#x000A;切りきざむ&#x000A;（消費MP: 3）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ピンクタイフーン</td></tr>
             <tr class='fan_12' title='扇装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>130</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='fan_13' title='周囲の敵を攻撃し&#x000A;幻惑や攻撃呪文に&#x000A;弱くする&#x000A;（消費MP: 6）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>百花繚乱</td></tr>
           </table><table class='staff skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -854,6 +880,7 @@
             <tr class='staff_10' title='棍で攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
             <tr class='staff_11' title='武器ガード率が&#x000A;大幅に上がる&#x000A;棍のかまえ&#x000A;（消費MP: 2）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>120</td><td class='skill_name'>水流のかまえ</td></tr>
             <tr class='staff_12' title='棍装備時&#x000A;さらに武器ガード&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+            <tr class='staff_13' title='敵１体に強烈な&#x000A;ダメージを与える&#x000A;棍の奥義&#x000A;（消費MP: 5）&#x000A;（チャージ: 70秒）'><td class='skill_pt'>140</td><td class='skill_name'>奥義・棍閃殺</td></tr>
           </table><table class='knife skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -876,6 +903,7 @@
             <tr class='knife_10' title='短剣での攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
             <tr class='knife_11' title='敵１体を斬りつけ&#x000A;混乱やマヒを&#x000A;起こさせる&#x000A;（消費MP: 1）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>カオスエッジ</td></tr>
             <tr class='knife_12' title='短剣装備時の&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>130</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='knife_13' title='敵１体を斬りつけ&#x000A;猛毒や眠りを&#x000A;起こさせる&#x000A;（消費MP: 1）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>140</td><td class='skill_name'>ナイトメアファング</td></tr>
           </table><table class='shield skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -898,6 +926,7 @@
             <tr class='shield_10' title='盾装備時の&#x000A;しゅび力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時しゅび力+10</td></tr>
             <tr class='shield_11' title='与えるダメージと&#x000A;ひきかえに受ける&#x000A;ダメージを減らす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ファランクス</td></tr>
             <tr class='shield_12' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+            <tr class='shield_13' title='自分自身に&#x000A;呪文をかき消す&#x000A;バリアを張る&#x000A;（消費MP: 5）&#x000A;（チャージ: 30秒）'><td class='skill_pt'>140</td><td class='skill_name'>スペルガード</td></tr>
           </table><table class='litheness skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -920,6 +949,7 @@
             <tr class='litheness_10' title='旅芸人時&#x000A;きようさが&#x000A;３０増える'><td class='skill_pt'>110</td><td class='skill_name'>きようさ+30（専）</td></tr>
             <tr class='litheness_11' title='周囲の仲間を&#x000A;われに返す&#x000A;旅芸人専用特技&#x000A;（消費MP: 4）&#x000A;（チャージ: 15秒）'><td class='skill_pt'>120</td><td class='skill_name'>エンドオブシーン（専）</td></tr>
             <tr class='litheness_12' title='鬼神のごとく&#x000A;鉄球をなげつける&#x000A;旅芸人専用特技&#x000A;（消費MP: 8）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>130</td><td class='skill_name'>ゴッドジャグリング（専）</td></tr>
+            <tr class='litheness_13' title='旅芸人時&#x000A;カウンターが&#x000A;できるようになる'><td class='skill_pt'>140</td><td class='skill_name'>たまにカウンター（専）</td></tr>
           </table></div>
       </div>
       <div class='class_group' id='gladiator'>
@@ -969,6 +999,7 @@
             <tr class='twohandedsword_10' title='両手剣装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
             <tr class='twohandedsword_11' title='周囲の敵を&#x000A;大爆発で&#x000A;焼きつくす&#x000A;（消費MP: 6）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ビッグバン</td></tr>
             <tr class='twohandedsword_12' title='両手剣装備時&#x000A;さらに武器ガード&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+            <tr class='twohandedsword_13' title='フルパワーで&#x000A;敵１体を斬りつけ&#x000A;大ダメージ&#x000A;（消費MP: 6）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>全身全霊斬り</td></tr>
           </table><table class='sword skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -991,6 +1022,7 @@
             <tr class='sword_10' title='片手剣での攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
             <tr class='sword_11' title='はやぶさをこえる&#x000A;神速の４回攻撃&#x000A;（消費MP: 2）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>120</td><td class='skill_name'>超はやぶさ斬り</td></tr>
             <tr class='sword_12' title='片手剣装備時&#x000A;さらに武器ガード&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時武器ガード率+2%</td></tr>
+            <tr class='sword_13' title='光の刃で周囲の&#x000A;敵を撃ち滅ぼす&#x000A;究極の剣技&#x000A;（消費MP: 12）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>140</td><td class='skill_name'>ギガブレイク</td></tr>
           </table><table class='hammer skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1013,6 +1045,7 @@
             <tr class='hammer_10' title='ハンマー装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
             <tr class='hammer_11' title='なぐった相手を&#x000A;ひるませる&#x000A;強烈な一撃&#x000A;（消費MP: 5）&#x000A;（チャージ: 120秒）'><td class='skill_pt'>120</td><td class='skill_name'>スタンショット</td></tr>
             <tr class='hammer_12' title='ハンマーで攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='hammer_13' title='自分の周りの敵に&#x000A;ダメージを与え&#x000A;守備と重さダウン&#x000A;（消費MP: 8）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>プレートインパクト</td></tr>
           </table><table class='fisticuffs skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1035,6 +1068,7 @@
             <tr class='fisticuffs_10' title='格闘の時&#x000A;敵の攻撃をさらに&#x000A;かわしやすくなる'><td class='skill_pt'>110</td><td class='skill_name'>素手時身かわし率+2%</td></tr>
             <tr class='fisticuffs_11' title='呼吸をととのえ&#x000A;少しずつ&#x000A;ＨＰを回復&#x000A;（消費MP: 4）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>120</td><td class='skill_name'>達人の呼吸</td></tr>
             <tr class='fisticuffs_12' title='敵の頭上めがけて&#x000A;巨大な岩石を&#x000A;投げ落とす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>130</td><td class='skill_name'>岩石おとし</td></tr>
+            <tr class='fisticuffs_13' title='チカラをタメて&#x000A;敵１体に&#x000A;強烈な一撃&#x000A;（消費MP: 3）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>140</td><td class='skill_name'>せいけん爆撃</td></tr>
           </table><table class='guts skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1057,6 +1091,7 @@
             <tr class='guts_10' title='バトマス時&#x000A;ちからが&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>ちから+10（専）</td></tr>
             <tr class='guts_11' title='バトマス時&#x000A;きようさが&#x000A;３０増える'><td class='skill_pt'>120</td><td class='skill_name'>きようさ+30（専）</td></tr>
             <tr class='guts_12' title='なぐられると&#x000A;テンションアップ&#x000A;バトマス専用特技&#x000A;（消費MP: 8）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>130</td><td class='skill_name'>テンションバーン（専）</td></tr>
+            <tr class='guts_13' title='バトマス時たまに&#x000A;テンションを&#x000A;消費しない'><td class='skill_pt'>140</td><td class='skill_name'>テンション消費軽減（専）</td></tr>
           </table></div>
       </div>
       <div class='class_group' id='paladin'>
@@ -1106,6 +1141,7 @@
             <tr class='hammer_10' title='ハンマー装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
             <tr class='hammer_11' title='なぐった相手を&#x000A;ひるませる&#x000A;強烈な一撃&#x000A;（消費MP: 5）&#x000A;（チャージ: 120秒）'><td class='skill_pt'>120</td><td class='skill_name'>スタンショット</td></tr>
             <tr class='hammer_12' title='ハンマーで攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='hammer_13' title='自分の周りの敵に&#x000A;ダメージを与え&#x000A;守備と重さダウン&#x000A;（消費MP: 8）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>プレートインパクト</td></tr>
           </table><table class='spear skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1128,6 +1164,7 @@
             <tr class='spear_10' title='ヤリでの攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+3%</td></tr>
             <tr class='spear_11' title='敵を選ばず&#x000A;突きまくる&#x000A;どとうの４回攻撃&#x000A;（消費MP: 4）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>120</td><td class='skill_name'>さみだれ突き</td></tr>
             <tr class='spear_12' title='ヤリ装備時&#x000A;さらに武器ガード&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時武器ガード率+3%</td></tr>
+            <tr class='spear_13' title='地獄のいかずちで&#x000A;ダメージを与え&#x000A;たまにマヒさせる&#x000A;（消費MP: 8）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>140</td><td class='skill_name'>ジゴスパーク</td></tr>
           </table><table class='stick skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1150,6 +1187,7 @@
             <tr class='stick_10' title='スティック攻撃時&#x000A;吸収できるＭＰが&#x000A;さらに増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時MP吸収率+4%</td></tr>
             <tr class='stick_11' title='いつもより&#x000A;すばやく呪文を&#x000A;唱えられる&#x000A;（消費MP: 5）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>120</td><td class='skill_name'>ラピッドステッキ</td></tr>
             <tr class='stick_12' title='スティック装備で&#x000A;戦闘に勝つと&#x000A;ＭＰが中回復する'><td class='skill_pt'>130</td><td class='skill_name'>戦闘勝利時ＭＰ中回復</td></tr>
+            <tr class='stick_13' title='仲間ひとりの&#x000A;テンションを&#x000A;１段階アップする&#x000A;（消費MP: 2）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>ティンクルバトン</td></tr>
           </table><table class='shield skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1172,6 +1210,7 @@
             <tr class='shield_10' title='盾装備時の&#x000A;しゅび力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時しゅび力+10</td></tr>
             <tr class='shield_11' title='与えるダメージと&#x000A;ひきかえに受ける&#x000A;ダメージを減らす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ファランクス</td></tr>
             <tr class='shield_12' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+            <tr class='shield_13' title='自分自身に&#x000A;呪文をかき消す&#x000A;バリアを張る&#x000A;（消費MP: 5）&#x000A;（チャージ: 30秒）'><td class='skill_pt'>140</td><td class='skill_name'>スペルガード</td></tr>
           </table><table class='virtue skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1194,6 +1233,7 @@
             <tr class='virtue_10' title='におうだち中に&#x000A;うけるダメージを&#x000A;減らす'><td class='skill_pt'>110</td><td class='skill_name'>におうだちの心得（専）</td></tr>
             <tr class='virtue_11' title='パラディン時&#x000A;さいだいＨＰが&#x000A;２０増える'><td class='skill_pt'>120</td><td class='skill_name'>さいだいHP+20（専）</td></tr>
             <tr class='virtue_12' title='周囲の敵を滅する&#x000A;星雲のかがやき&#x000A;パラディン専用&#x000A;（消費MP: 6）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>130</td><td class='skill_name'>グランドネビュラ（専）</td></tr>
+            <tr class='virtue_13' title='パラディンで&#x000A;ガード時たまに&#x000A;敵がしびれる'><td class='skill_pt'>140</td><td class='skill_name'>ガード時しびれさせる（専）</td></tr>
           </table></div>
       </div>
       <div class='class_group' id='armamentalist'>
@@ -1243,6 +1283,7 @@
             <tr class='sword_10' title='片手剣での攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
             <tr class='sword_11' title='はやぶさをこえる&#x000A;神速の４回攻撃&#x000A;（消費MP: 2）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>120</td><td class='skill_name'>超はやぶさ斬り</td></tr>
             <tr class='sword_12' title='片手剣装備時&#x000A;さらに武器ガード&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時武器ガード率+2%</td></tr>
+            <tr class='sword_13' title='光の刃で周囲の&#x000A;敵を撃ち滅ぼす&#x000A;究極の剣技&#x000A;（消費MP: 12）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>140</td><td class='skill_name'>ギガブレイク</td></tr>
           </table><table class='bow skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1265,6 +1306,7 @@
             <tr class='bow_10' title='弓装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
             <tr class='bow_11' title='敵を選ばず&#x000A;するどい光の矢が&#x000A;ふりそそぐ&#x000A;（消費MP: 4）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>シャイニングボウ</td></tr>
             <tr class='bow_12' title='弓での攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+3%</td></tr>
+            <tr class='bow_13' title='範囲内の仲間を&#x000A;悪い効果から&#x000A;１度だけ守る&#x000A;（消費MP: 8）&#x000A;（チャージ: 30秒）'><td class='skill_pt'>140</td><td class='skill_name'>弓聖の守り星</td></tr>
           </table><table class='wand skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1287,6 +1329,7 @@
             <tr class='wand_10' title='両手杖での攻撃時&#x000A;吸収できるＭＰが&#x000A;さらに増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時MP吸収率+4%</td></tr>
             <tr class='wand_11' title='さらに呪文が&#x000A;暴走しやすくなる&#x000A;魔法陣を作る&#x000A;（消費MP: 4）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>超暴走魔法陣</td></tr>
             <tr class='wand_12' title='両手杖装備時の&#x000A;こうげき魔力が&#x000A;１０増える'><td class='skill_pt'>130</td><td class='skill_name'>装備時こうげき魔力+10</td></tr>
+            <tr class='wand_13' title='仲間ひとりを&#x000A;確実に&#x000A;生き返らせる&#x000A;（消費MP: 10）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>140</td><td class='skill_name'>復活の杖</td></tr>
           </table><table class='shield skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1309,6 +1352,7 @@
             <tr class='shield_10' title='盾装備時の&#x000A;しゅび力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時しゅび力+10</td></tr>
             <tr class='shield_11' title='与えるダメージと&#x000A;ひきかえに受ける&#x000A;ダメージを減らす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ファランクス</td></tr>
             <tr class='shield_12' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+            <tr class='shield_13' title='自分自身に&#x000A;呪文をかき消す&#x000A;バリアを張る&#x000A;（消費MP: 5）&#x000A;（チャージ: 30秒）'><td class='skill_pt'>140</td><td class='skill_name'>スペルガード</td></tr>
           </table><table class='fource skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1331,6 +1375,7 @@
             <tr class='fource_10' title='魔法戦士時&#x000A;フォースを範囲で&#x000A;かけられる'><td class='skill_pt'>110</td><td class='skill_name'>フォース範囲化（専）</td></tr>
             <tr class='fource_11' title='魔法戦士時&#x000A;さいだいＭＰが&#x000A;３０増える'><td class='skill_pt'>120</td><td class='skill_name'>さいだいMP+30（専）</td></tr>
             <tr class='fource_12' title='ダメージを与え&#x000A;全耐性ダウン&#x000A;魔法戦士専用特技&#x000A;（消費MP: 4）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>130</td><td class='skill_name'>フォースブレイク（専）</td></tr>
+            <tr class='fource_13' title='魔法戦士で攻撃時&#x000A;たまにＭＰを&#x000A;回復する'><td class='skill_pt'>140</td><td class='skill_name'>攻撃時たまにＭＰ回復（専）</td></tr>
           </table></div>
       </div>
       <div class='class_group' id='ranger'>
@@ -1380,6 +1425,7 @@
             <tr class='bow_10' title='弓装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
             <tr class='bow_11' title='敵を選ばず&#x000A;するどい光の矢が&#x000A;ふりそそぐ&#x000A;（消費MP: 4）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>シャイニングボウ</td></tr>
             <tr class='bow_12' title='弓での攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+3%</td></tr>
+            <tr class='bow_13' title='範囲内の仲間を&#x000A;悪い効果から&#x000A;１度だけ守る&#x000A;（消費MP: 8）&#x000A;（チャージ: 30秒）'><td class='skill_pt'>140</td><td class='skill_name'>弓聖の守り星</td></tr>
           </table><table class='boomerang skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1402,6 +1448,7 @@
             <tr class='boomerang_10' title='ブーメラン装備時&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+5</td></tr>
             <tr class='boomerang_11' title='氷の刃となった&#x000A;ブーメランが&#x000A;敵をメッタ切り&#x000A;（消費MP: 6）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>フローズンバード</td></tr>
             <tr class='boomerang_12' title='ブーメラン攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='boomerang_13' title='状態異常の耐性を&#x000A;下げる２回連続の&#x000A;ブーメラン攻撃&#x000A;（消費MP: 8）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>デュアルブレイカー</td></tr>
           </table><table class='axe skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1424,6 +1471,7 @@
             <tr class='axe_10' title='オノ装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
             <tr class='axe_11' title='敵１体を斬りつけ&#x000A;守備力を下げて&#x000A;行動間隔ものばす&#x000A;（消費MP: 5）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>120</td><td class='skill_name'>鉄甲斬</td></tr>
             <tr class='axe_12' title='オノでの攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+3%</td></tr>
+            <tr class='axe_13' title='周囲の敵を&#x000A;２回ずつ攻撃する&#x000A;真のオノむそう&#x000A;（消費MP: 15）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>真・オノむそう</td></tr>
           </table><table class='fisticuffs skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1446,6 +1494,7 @@
             <tr class='fisticuffs_10' title='格闘の時&#x000A;敵の攻撃をさらに&#x000A;かわしやすくなる'><td class='skill_pt'>110</td><td class='skill_name'>素手時身かわし率+2%</td></tr>
             <tr class='fisticuffs_11' title='呼吸をととのえ&#x000A;少しずつ&#x000A;ＨＰを回復&#x000A;（消費MP: 4）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>120</td><td class='skill_name'>達人の呼吸</td></tr>
             <tr class='fisticuffs_12' title='敵の頭上めがけて&#x000A;巨大な岩石を&#x000A;投げ落とす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>130</td><td class='skill_name'>岩石おとし</td></tr>
+            <tr class='fisticuffs_13' title='チカラをタメて&#x000A;敵１体に&#x000A;強烈な一撃&#x000A;（消費MP: 3）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>140</td><td class='skill_name'>せいけん爆撃</td></tr>
           </table><table class='ruggedness skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1468,6 +1517,7 @@
             <tr class='ruggedness_10' title='レンジャー時&#x000A;不意をつく確率が&#x000A;上がる'><td class='skill_pt'>110</td><td class='skill_name'>先制攻撃率アップ（専）</td></tr>
             <tr class='ruggedness_11' title='レンジャー時&#x000A;きようさが&#x000A;３０増える'><td class='skill_pt'>120</td><td class='skill_name'>きようさ+30（専）</td></tr>
             <tr class='ruggedness_12' title='暗黒のきりで&#x000A;相手を弱らせる&#x000A;レンジャー専用&#x000A;（消費MP: 4）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>130</td><td class='skill_name'>あんこくのきり（専）</td></tr>
+            <tr class='ruggedness_13' title='一定時間が経つと&#x000A;大地が超爆裂する&#x000A;結界を地面に描く&#x000A;（消費MP: 16）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>140</td><td class='skill_name'>ジバルンバ（専）</td></tr>
           </table></div>
       </div>
       <div class='class_group' id='sage'>
@@ -1517,6 +1567,7 @@
             <tr class='boomerang_10' title='ブーメラン装備時&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+5</td></tr>
             <tr class='boomerang_11' title='氷の刃となった&#x000A;ブーメランが&#x000A;敵をメッタ切り&#x000A;（消費MP: 6）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>フローズンバード</td></tr>
             <tr class='boomerang_12' title='ブーメラン攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='boomerang_13' title='状態異常の耐性を&#x000A;下げる２回連続の&#x000A;ブーメラン攻撃&#x000A;（消費MP: 8）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>デュアルブレイカー</td></tr>
           </table><table class='wand skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1539,6 +1590,7 @@
             <tr class='wand_10' title='両手杖での攻撃時&#x000A;吸収できるＭＰが&#x000A;さらに増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時MP吸収率+4%</td></tr>
             <tr class='wand_11' title='さらに呪文が&#x000A;暴走しやすくなる&#x000A;魔法陣を作る&#x000A;（消費MP: 4）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>超暴走魔法陣</td></tr>
             <tr class='wand_12' title='両手杖装備時の&#x000A;こうげき魔力が&#x000A;１０増える'><td class='skill_pt'>130</td><td class='skill_name'>装備時こうげき魔力+10</td></tr>
+            <tr class='wand_13' title='仲間ひとりを&#x000A;確実に&#x000A;生き返らせる&#x000A;（消費MP: 10）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>140</td><td class='skill_name'>復活の杖</td></tr>
           </table><table class='bow skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1561,6 +1613,7 @@
             <tr class='bow_10' title='弓装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
             <tr class='bow_11' title='敵を選ばず&#x000A;するどい光の矢が&#x000A;ふりそそぐ&#x000A;（消費MP: 4）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>シャイニングボウ</td></tr>
             <tr class='bow_12' title='弓での攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+3%</td></tr>
+            <tr class='bow_13' title='範囲内の仲間を&#x000A;悪い効果から&#x000A;１度だけ守る&#x000A;（消費MP: 8）&#x000A;（チャージ: 30秒）'><td class='skill_pt'>140</td><td class='skill_name'>弓聖の守り星</td></tr>
           </table><table class='shield skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1583,6 +1636,7 @@
             <tr class='shield_10' title='盾装備時の&#x000A;しゅび力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時しゅび力+10</td></tr>
             <tr class='shield_11' title='与えるダメージと&#x000A;ひきかえに受ける&#x000A;ダメージを減らす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ファランクス</td></tr>
             <tr class='shield_12' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
+            <tr class='shield_13' title='自分自身に&#x000A;呪文をかき消す&#x000A;バリアを張る&#x000A;（消費MP: 5）&#x000A;（チャージ: 30秒）'><td class='skill_pt'>140</td><td class='skill_name'>スペルガード</td></tr>
           </table><table class='enlightenment skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1605,6 +1659,7 @@
             <tr class='enlightenment_10' title='賢者時&#x000A;かいふく魔力が&#x000A;３０増える'><td class='skill_pt'>110</td><td class='skill_name'>かいふく魔力+30（専）</td></tr>
             <tr class='enlightenment_11' title='賢者時&#x000A;こうげき魔力が&#x000A;３０増える'><td class='skill_pt'>120</td><td class='skill_name'>こうげき魔力+30（専）</td></tr>
             <tr class='enlightenment_12' title='想像を絶する&#x000A;大爆発で自分の&#x000A;周りの敵を攻撃&#x000A;（消費MP: 25）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>130</td><td class='skill_name'>イオグランデ（専）</td></tr>
+            <tr class='enlightenment_13' title='攻撃と回復の呪文&#x000A;効果が２段アップ&#x000A;賢者専用特技&#x000A;（消費MP: 14）&#x000A;（チャージ: 150秒）'><td class='skill_pt'>140</td><td class='skill_name'>むげんのさとり（専）</td></tr>
           </table></div>
       </div>
       <div class='class_group' id='luminary'>
@@ -1654,6 +1709,7 @@
             <tr class='whip_10' title='ムチ装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
             <tr class='whip_11' title='雷をまとった&#x000A;ムチの一閃が&#x000A;敵集団をなぎ払う&#x000A;（消費MP: 4）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>疾風迅雷</td></tr>
             <tr class='whip_12' title='ムチでの攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+4%</td></tr>
+            <tr class='whip_13' title='敵１体に３連撃の&#x000A;ダメージを与え&#x000A;よい効果も消す&#x000A;（消費MP: 8）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>極竜打ち</td></tr>
           </table><table class='stick skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1676,6 +1732,7 @@
             <tr class='stick_10' title='スティック攻撃時&#x000A;吸収できるＭＰが&#x000A;さらに増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時MP吸収率+4%</td></tr>
             <tr class='stick_11' title='いつもより&#x000A;すばやく呪文を&#x000A;唱えられる&#x000A;（消費MP: 5）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>120</td><td class='skill_name'>ラピッドステッキ</td></tr>
             <tr class='stick_12' title='スティック装備で&#x000A;戦闘に勝つと&#x000A;ＭＰが中回復する'><td class='skill_pt'>130</td><td class='skill_name'>戦闘勝利時ＭＰ中回復</td></tr>
+            <tr class='stick_13' title='仲間ひとりの&#x000A;テンションを&#x000A;１段階アップする&#x000A;（消費MP: 2）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>ティンクルバトン</td></tr>
           </table><table class='fan skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1698,6 +1755,7 @@
             <tr class='fan_10' title='扇での攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
             <tr class='fan_11' title='魅惑の旋風で&#x000A;周囲の敵を&#x000A;切りきざむ&#x000A;（消費MP: 3）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ピンクタイフーン</td></tr>
             <tr class='fan_12' title='扇装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>130</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='fan_13' title='周囲の敵を攻撃し&#x000A;幻惑や攻撃呪文に&#x000A;弱くする&#x000A;（消費MP: 6）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>百花繚乱</td></tr>
           </table><table class='fisticuffs skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1720,6 +1778,7 @@
             <tr class='fisticuffs_10' title='格闘の時&#x000A;敵の攻撃をさらに&#x000A;かわしやすくなる'><td class='skill_pt'>110</td><td class='skill_name'>素手時身かわし率+2%</td></tr>
             <tr class='fisticuffs_11' title='呼吸をととのえ&#x000A;少しずつ&#x000A;ＨＰを回復&#x000A;（消費MP: 4）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>120</td><td class='skill_name'>達人の呼吸</td></tr>
             <tr class='fisticuffs_12' title='敵の頭上めがけて&#x000A;巨大な岩石を&#x000A;投げ落とす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>130</td><td class='skill_name'>岩石おとし</td></tr>
+            <tr class='fisticuffs_13' title='チカラをタメて&#x000A;敵１体に&#x000A;強烈な一撃&#x000A;（消費MP: 3）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>140</td><td class='skill_name'>せいけん爆撃</td></tr>
           </table><table class='jenesaisquoi skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1742,6 +1801,7 @@
             <tr class='jenesaisquoi_10' title='スパスタ時&#x000A;みりょくが&#x000A;３０増える'><td class='skill_pt'>110</td><td class='skill_name'>みりょく+30（専）</td></tr>
             <tr class='jenesaisquoi_11' title='スパスタ時に敵が&#x000A;みとれやすくなる'><td class='skill_pt'>120</td><td class='skill_name'>みとれる+2%（専）</td></tr>
             <tr class='jenesaisquoi_12' title='周囲を巻き込む&#x000A;巨大な竜巻が&#x000A;敵を切り刻む&#x000A;（消費MP: 16）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>130</td><td class='skill_name'>バギムーチョ（専）</td></tr>
+            <tr class='jenesaisquoi_13' title='スパスタ時&#x000A;ボディーガードが&#x000A;強化される'><td class='skill_pt'>140</td><td class='skill_name'>ボディーガード強化（専）</td></tr>
           </table></div>
       </div>
       <div class='class_group' id='monstermaster'>
@@ -1791,6 +1851,7 @@
             <tr class='whip_10' title='ムチ装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
             <tr class='whip_11' title='雷をまとった&#x000A;ムチの一閃が&#x000A;敵集団をなぎ払う&#x000A;（消費MP: 4）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>疾風迅雷</td></tr>
             <tr class='whip_12' title='ムチでの攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+4%</td></tr>
+            <tr class='whip_13' title='敵１体に３連撃の&#x000A;ダメージを与え&#x000A;よい効果も消す&#x000A;（消費MP: 8）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>極竜打ち</td></tr>
           </table><table class='claw skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1813,6 +1874,7 @@
             <tr class='claw_10' title='ツメ装備時&#x000A;敵の攻撃を&#x000A;かわしやすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時身かわし率+2%</td></tr>
             <tr class='claw_11' title='旋風を巻き起こし&#x000A;敵１体を打ち抜く&#x000A;必殺のアッパー&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>サイクロンアッパー</td></tr>
             <tr class='claw_12' title='ツメでの攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='claw_13' title='獣神のごとく&#x000A;敵１体を&#x000A;５連続で斬り刻む&#x000A;（消費MP: 8）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>140</td><td class='skill_name'>ライガークラッシュ</td></tr>
           </table><table class='twohandedsword skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1835,6 +1897,7 @@
             <tr class='twohandedsword_10' title='両手剣装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
             <tr class='twohandedsword_11' title='周囲の敵を&#x000A;大爆発で&#x000A;焼きつくす&#x000A;（消費MP: 6）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ビッグバン</td></tr>
             <tr class='twohandedsword_12' title='両手剣装備時&#x000A;さらに武器ガード&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+            <tr class='twohandedsword_13' title='フルパワーで&#x000A;敵１体を斬りつけ&#x000A;大ダメージ&#x000A;（消費MP: 6）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>全身全霊斬り</td></tr>
           </table><table class='axe skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1857,6 +1920,7 @@
             <tr class='axe_10' title='オノ装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
             <tr class='axe_11' title='敵１体を斬りつけ&#x000A;守備力を下げて&#x000A;行動間隔ものばす&#x000A;（消費MP: 5）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>120</td><td class='skill_name'>鉄甲斬</td></tr>
             <tr class='axe_12' title='オノでの攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+3%</td></tr>
+            <tr class='axe_13' title='周囲の敵を&#x000A;２回ずつ攻撃する&#x000A;真のオノむそう&#x000A;（消費MP: 15）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>真・オノむそう</td></tr>
           </table><table class='monstermaster skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1879,6 +1943,7 @@
             <tr class='monstermaster_10' title='まもの使い時&#x000A;仲間モンスターが&#x000A;なつきやすくなる'><td class='skill_pt'>110</td><td class='skill_name'>なつきやすくなる（専）</td></tr>
             <tr class='monstermaster_11' title='まもの使い時&#x000A;転生モンスターに&#x000A;あいやすくなる'><td class='skill_pt'>120</td><td class='skill_name'>転生遭遇率アップ（専）</td></tr>
             <tr class='monstermaster_12' title='敵1体を攻撃し&#x000A;特技を封じる&#x000A;まもの使い専用&#x000A;（消費MP: 3）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>130</td><td class='skill_name'>スキルクラッシュ（専）</td></tr>
+            <tr class='monstermaster_13' title='まもの使い時&#x000A;行動間隔が&#x000A;少し短くなる'><td class='skill_pt'>140</td><td class='skill_name'>行動間隔短縮（専）</td></tr>
           </table></div>
       </div>
       <div class='class_group' id='itemmaster'>
@@ -1928,6 +1993,7 @@
             <tr class='boomerang_10' title='ブーメラン装備時&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+5</td></tr>
             <tr class='boomerang_11' title='氷の刃となった&#x000A;ブーメランが&#x000A;敵をメッタ切り&#x000A;（消費MP: 6）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>フローズンバード</td></tr>
             <tr class='boomerang_12' title='ブーメラン攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='boomerang_13' title='状態異常の耐性を&#x000A;下げる２回連続の&#x000A;ブーメラン攻撃&#x000A;（消費MP: 8）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>デュアルブレイカー</td></tr>
           </table><table class='hammer skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1950,6 +2016,7 @@
             <tr class='hammer_10' title='ハンマー装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
             <tr class='hammer_11' title='なぐった相手を&#x000A;ひるませる&#x000A;強烈な一撃&#x000A;（消費MP: 5）&#x000A;（チャージ: 120秒）'><td class='skill_pt'>120</td><td class='skill_name'>スタンショット</td></tr>
             <tr class='hammer_12' title='ハンマーで攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='hammer_13' title='自分の周りの敵に&#x000A;ダメージを与え&#x000A;守備と重さダウン&#x000A;（消費MP: 8）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>プレートインパクト</td></tr>
           </table><table class='spear skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1972,6 +2039,7 @@
             <tr class='spear_10' title='ヤリでの攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+3%</td></tr>
             <tr class='spear_11' title='敵を選ばず&#x000A;突きまくる&#x000A;どとうの４回攻撃&#x000A;（消費MP: 4）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>120</td><td class='skill_name'>さみだれ突き</td></tr>
             <tr class='spear_12' title='ヤリ装備時&#x000A;さらに武器ガード&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時武器ガード率+3%</td></tr>
+            <tr class='spear_13' title='地獄のいかずちで&#x000A;ダメージを与え&#x000A;たまにマヒさせる&#x000A;（消費MP: 8）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>140</td><td class='skill_name'>ジゴスパーク</td></tr>
           </table><table class='bow skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -1994,6 +2062,7 @@
             <tr class='bow_10' title='弓装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
             <tr class='bow_11' title='敵を選ばず&#x000A;するどい光の矢が&#x000A;ふりそそぐ&#x000A;（消費MP: 4）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>シャイニングボウ</td></tr>
             <tr class='bow_12' title='弓での攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+3%</td></tr>
+            <tr class='bow_13' title='範囲内の仲間を&#x000A;悪い効果から&#x000A;１度だけ守る&#x000A;（消費MP: 8）&#x000A;（チャージ: 30秒）'><td class='skill_pt'>140</td><td class='skill_name'>弓聖の守り星</td></tr>
           </table><table class='itemmaster skill_table'>
             <caption class='ui-handler'>
               <div class='console_wrapper'>
@@ -2019,6 +2088,7 @@
 (専）
 </td></tr>
             <tr class='itemmaster_12' title='HP回復する&#x000A;魔法陣を作る&#x000A;どうぐ使い専用&#x000A;（消費MP: 2）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>130</td><td class='skill_name'>メディカルデバイス（専）</td></tr>
+            <tr class='itemmaster_13' title='どうぐ使い時&#x000A;どうぐ発動速度が&#x000A;短くなる'><td class='skill_pt'>140</td><td class='skill_name'>どうぐ発動速度短縮（専）</td></tr>
           </table></div>
       </div>
       <div id='pt_console' style='display: none'>
@@ -2079,6 +2149,14 @@
           <li>
             履歴:
             <ul>
+              <li>2014/11/20 v5.5 140スキルに対応。</li>
+              <li>
+                2014/11/14 v5.4.6
+                <ul>
+                  <li>MSP18→19 アラハギーロ配信クエストでの追加に対応。</li>
+                  <li>後期期間中予定の140スキルに暫定対応。</li>
+                </ul>
+              </li>
               <li>2014/11/6 v5.4.5 ver2.3後期対応。特訓上限11→12</li>
               <li>2014/10/9 v5.4.4 MSP17→18 セレド配信クエストでの追加に対応。</li>
               <li>2014/9/18 v5.4.3 MSP16→17 メルサンディ配信クエストでの追加に対応。</li>
