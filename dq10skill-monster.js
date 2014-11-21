@@ -1252,6 +1252,10 @@ var SimulatorUI = (function($) {
 			$('#badge-search-buttons-feature a').click(function(e) {
 				var feature = $(this).attr('data-search-key');
 				filterButtons(getFeatureSearchCache(feature));
+
+				if(sim.badgeFeature[feature]['type'] == 'int') {
+					sortBadgeByFeatureValue(feature, true);
+				}
 			});
 
 			//バッジソートボタン
@@ -1459,12 +1463,14 @@ var SimulatorUI = (function($) {
 					var key_a = func(a);
 					var key_b = func(b);
 					
+					var ascend = key_a < key_b;
+					if(desc) ascend = !ascend;
+					
 					if(key_a == key_b) {
 						key_a = getBadgeId(a);
 						key_b = getBadgeId(b);
+						ascend = key_a < key_b;
 					}
-					var ascend = key_a < key_b;
-					if(desc) ascend = !ascend;
 
 					return ascend ? -1 : 1;
 				})
@@ -1478,6 +1484,14 @@ var SimulatorUI = (function($) {
 		function sortBadgeByKana(desc) {
 			sortBadgeBy(function(li) {
 				return $(li).attr('data-kana-sort-key');
+			}, desc);
+		}
+		function sortBadgeByFeatureValue(feature, desc) {
+			sortBadgeBy(function(li) {
+				var badgeId = getBadgeId(li);
+				var ret = sim.badgeTable[badgeId][feature];
+
+				return ret !== undefined ? ret : 0;
 			}, desc);
 		}
 
