@@ -16,6 +16,7 @@ $entry-padding: 2px;
 
 $entry-width: $skill-table-width * 5 + $skill-table-padding * 2;
 $body-content-width: $entry-width + ($entry-padding + $entry-border-width) * 2;
+$border-color-general: #99a;
 
 $msp-color: #58e;
 
@@ -269,7 +270,7 @@ a {
 
 /* エントリボックス */
 .class_group, .monster_ent {
-	border: $entry-border-width solid #99a;
+	border: $entry-border-width solid $border-color-general;
 	border-radius: 5px;
 	clear: both;
 	margin: 3px 0;
@@ -307,7 +308,7 @@ a {
 	padding: 1px 0 2px 0;
 	position: relative;
 	height: 18px;
-	border-bottom: 1px solid #99a;
+	border-bottom: 1px solid $border-color-general;
 
 	h2, dl, dt, dd {
 		display: inline-block;
@@ -408,11 +409,11 @@ a {
 .class_info {
 	font-size: 70%;
 	float: left;
-	width: 12em;
+	width: 140px;
 	height: 200px;
 	position: relative;
 	text-align: center;
-	border-right: 1px solid #99a;
+	border-right: 1px solid $border-color-general;
 	vertical-align: top;
 	
 	dt {
@@ -440,7 +441,7 @@ a {
 	}
 }
 .monster_ent .class_info {
-	height: 16em;
+	height: 210px;
 }
 
 .skill_tables {
@@ -556,8 +557,9 @@ a {
 	margin: 7px auto 0 auto;
 	padding: 2px 0 1px 0;
 	position: relative;
-	border-top: 1px solid #99a;
+	border-top: 1px solid $border-color-general;
 	height: 22px;
+	white-space: nowrap;
 
 	h3 {
 		margin: 0;
@@ -573,7 +575,7 @@ a {
 		display: inline-block;
 	}
 	dt {
-		margin: 0 5px 0 5px;
+		margin: 0 2px 0 4px;
 		padding: 0;
 		display: inline;
 		font-size: 80%;
@@ -586,12 +588,18 @@ a {
 		padding: 0;
 		display: inline;
 		font-size: 85%;
+	}
 }
+
+.monster_ent .status_info {
+	clear: none;
+	margin-left: 146px;
+	width: 900px;
 }
 
 /* フッタコンソール */
 #footconsole {
-	border: $entry-border-width solid #99a;
+	border: $entry-border-width solid $border-color-general;
 	border-radius: 5px;
 	width: $entry-width;
 	overflow: auto;
@@ -603,7 +611,7 @@ a {
 		font-size: 80%;
 		margin: 0;
 		padding: 0 10px;
-		border-right: 1px solid #99a;
+		border-right: 1px solid $border-color-general;
 		&:last-child {
 			border-right: none;
 		}
@@ -656,6 +664,331 @@ body.msp {
 	font-style: normal;
 }
 
+/* バッジ関連定義 */
+$button-height: 16px;
+$badge-button-height: $button-height + 1px;
+$button-anchor-padding-x: 5px;
+$badge-button-width: 160px;
+$badge-button-border-width: 1px;
+$badge-button-margin-x: 2px;
+$badge-button-margin-y: 3px;
+$badge-button-count-per-row: 5; /* 1行あたりのボタン数 */
+$badge-button-container-width: (
+	$badge-button-width +
+	$badge-button-border-width * 2 +
+	$badge-button-margin-x * 2
+	) * $badge-button-count-per-row;
+
+/* ボタンコンテナ一般 */
+ul.button-container {
+	list-style-type: none;
+	font-size: 11px;
+
+	margin: 0;
+	padding: 0;
+
+	li {
+		float: left;
+		height: $button-height;
+		overflow: hidden;
+		white-space: nowrap;
+		border: 1px solid #aab;
+		background-color: #f0f0f7;
+		
+		&:hover {
+			cursor: pointer;
+			border-color: #445;
+			color: black;
+		}
+		a {
+			display: block;
+			/* padding: 0 $button-anchor-padding-x; */
+			height: $button-height;
+			width: auto;
+			text-align: center;
+		}
+	}
+}
+
+/* バッジ選択ボタン */
+ul.badge-button-container, ul#badge-search-buttons-class {
+	li {
+		&.blank {
+			background-color: transparent;
+			color: #889;
+		}
+		&.bronze {
+			background-color: #eda;
+			color: #531;
+		}
+		&.silver {
+			background-color: #f0f0f5;
+			color: #303032;
+		}
+		&.gold {
+			background-color: #fef487;
+			color: #551;
+		}
+		&.luminous {
+			background-color: white;
+			color: #444;
+		}
+
+		&:hover {
+			cursor: pointer;
+			border-color: #445;
+			color: black;
+		}
+
+		a {
+			text-align: center;
+		}
+	}
+}
+.monster_ent .class_info ul.badge-button-container {
+	padding: 2px 3px 0 3px;
+	margin: 0;
+
+	li {
+		float: none;
+		margin: 1px 0 0 0;
+		width: auto;
+	}
+	a {
+		padding: 0 3px;
+	}
+}
+
+/* バッジ選択ダイアログ */
+#badge-selector {
+	display: none;
+
+	position: fixed;
+	left: 150px;
+	top: 200px;
+	z-index: 200;
+
+	margin: 0;
+	padding: 0;
+
+	$badge-selector-body-height: 300px;
+	$badge-selector-body-padding: 15px;
+	$badge-selector-body-scrollbar-margin: 18px;
+	$badge-selector-header-height:
+		($button-height + 1px * 2 /* margin */ + 1px * 2 /* border */) * 4 +
+		$badge-selector-body-padding /* top */ +
+		10px /* bottom */;
+	$badge-selector-footer-height: 120px;
+	$badge-selector-inner-border-width: 1px;
+	$badge-selector-outer-border-width: 3px;
+
+	width:
+		$badge-button-container-width +
+		$badge-selector-body-padding * 2 +
+		$badge-selector-body-scrollbar-margin;
+	height:
+		$badge-selector-header-height +
+		$badge-selector-footer-height +
+		$badge-selector-body-height +
+		$badge-selector-inner-border-width * 2;
+
+	border: $badge-selector-outer-border-width solid $border-color-general;
+	border-radius: $badge-selector-outer-border-width * 2;
+	background-color: $main-background-color;
+
+	#badge-selector-header {
+		position: relative;
+		height: $badge-selector-header-height;
+		border-bottom: $badge-selector-inner-border-width solid $border-color-general;
+	}
+	#badge-selector-footer {
+		position: relative;
+		height: $badge-selector-footer-height;
+		border-top: $badge-selector-inner-border-width solid $border-color-general;
+	}
+	#badge-selector-body {
+		position: relative;
+		height: $badge-selector-body-height;
+		overflow-y: scroll;
+		overflow-x: hidden;
+
+		ul {
+			font-size: 12px;
+			margin: {
+				top: 0;
+				right: $badge-selector-body-padding + $badge-selector-body-scrollbar-margin;
+				left: $badge-selector-body-padding;
+				bottom: 0;
+			}
+			padding: 0;
+			width: $badge-button-container-width;
+
+			li {
+				float: left;
+				width: $badge-button-width;
+				height: $badge-button-height;
+				margin: $badge-button-margin-y $badge-button-margin-x;
+			}
+		}
+		ul#badge-selector-blank {
+			margin-top: 5px;
+			margin-bottom: 6px;
+		}
+		ul#badge-selector-list {
+			clear: left;
+			margin-bottom: 5px;
+
+			li a {
+				text-align: left;
+				margin-left: $button-anchor-padding-x;
+			}
+		}
+	}
+
+	/* バッジ検索ボタン */
+	$badge-search-button-width: 36px;
+
+	ul.badge-search-button-container {
+		float: left;
+		margin-top: $badge-selector-body-padding;
+		height: ($button-height + 4px) * 4;
+
+		margin-right: 6px;
+		border-right: 1px solid $border-color-general;
+		padding-right: 6px;
+
+		&:first-child {
+			margin-left: $badge-selector-body-padding;
+		}
+		&:last-child {
+			margin-right: $badge-selector-body-padding + $badge-selector-body-scrollbar-margin;
+			border-right: none;
+			padding-right: 0;
+		}
+
+		li {
+			width: $badge-search-button-width;
+			margin: 1px;
+		}
+	}
+	ul#badge-search-buttons-race {
+		width: ($badge-search-button-width + 4px) * 4;
+	}
+	ul#badge-search-buttons-class {
+		width: ($badge-search-button-width + 4px) * 1;
+
+	}
+	ul#badge-search-buttons-feature {
+		width: ($badge-search-button-width + 4px) * 8;
+	}
+	ul#badge-search-buttons-sort {
+		$badge-sort-button-width: 80px;
+
+		float: right;
+		width: $badge-sort-button-width + 4px;
+
+		li {
+			width: $badge-sort-button-width;
+		}
+	}
+
+	#badge-selector-footer {
+		&>div, &>ul, &>table {
+			margin-top: 5px;
+			/* height: $badge-selector-footer-height - 5px; */
+		}
+	}
+	#badge-selector-baseinfo {
+		float: left;
+		width: 220px;
+		margin-left: $badge-selector-body-padding;
+
+		#badge-selector-badge-title {
+			font-size: 18px;
+			margin: 0 0 3px 0;
+			white-space: nowrap;
+
+			#badge-selector-badge-id {
+				font-size: 85%;
+				margin-right: 3px;
+			}
+		}
+
+		#badge-selector-race {
+			font-size: 14px;
+			margin: 0;
+			padding: 0;
+		}
+	}
+	#badge-selector-feature-list {
+		float: left;
+		width: 180px;
+		font-size: 12px;
+	}
+	#badge-selector-trade-list {
+		float: left;
+		width: 180px;
+		font-size: 12px;
+	}
+
+	#badge-selector-status-table {
+		float: right;
+		margin-left: 0;
+		margin-right: $badge-selector-body-padding + $badge-selector-body-scrollbar-margin;
+		padding: 0;
+		border-collapse: separate;
+		border-spacing: 0;
+		border: none;
+
+		$status-cell-height: 20px;
+		height: $status-cell-height * 5;
+
+		th, td {
+			vertical-align: middle;
+			margin: 0;
+			padding: 0 3px;
+			height: $status-cell-height;
+			overflow: hidden;
+		}
+		th {
+			text-align: left;
+			font-size: 11px;
+			font-weight: normal;
+		}
+		td.badge-status-current, td.badge-status-after {
+			font-size: 12px;
+			text-align: right;
+			width: 28px;
+		}
+		td.badge-status-arrow {
+			font-size: 9px;
+		}
+		td.badge-status-after {
+			font-weight: bold;
+
+			&.badge-status-plus {
+				color: #46b;
+			}
+			&.badge-status-minus {
+				color: #b55;
+			}
+		}
+	}
+}
+
+/* ダイアログ表示時のマスク用スクリーン */
+#dark-screen {
+	display: none;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 199;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
 /* サイドバー広告 */
 #ad_sidebar {
 	position: absolute;
@@ -671,7 +1004,7 @@ body.msp {
 	h2 {
 		font-size: 90%;
 		margin: 0;
-		border-bottom: 1px solid #99a;
+		border-bottom: 1px solid $border-color-general;
 	}
 	div.amazonitem {
 		position: relative;

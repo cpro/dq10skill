@@ -11,6 +11,7 @@ var Simulator = (function() {
 	var SKILL_PTS_PER_RESTART_OVER_5 = 5; //転生6回目以降の増分
 	var RESTART_EXP_RATIO = 0.03; //仮数値
 	var ADDITIONAL_SKILL_MAX = 2;
+	var BADGE_COUNT = 4;
 
 	var DATA_JSON_URI = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'dq10skill-monster-data.json';
 
@@ -29,6 +30,7 @@ var Simulator = (function() {
 	var skillPtsGiven = allData.skillPtsGiven;
 	var expRequired = allData.expRequired;
 	var additionalSkillLines = allData.additionalSkillLines;
+	var badgeTable = allData.badges;
 
 	//パラメータ格納用
 	var skillPts = {};
@@ -60,6 +62,9 @@ var Simulator = (function() {
 			this.additionalSkills[s] = null;
 			this.skillPts['additional' + s.toString()] = 0;
 		}
+
+		//バッジ
+		this.badgeEquip = [null, null, null, null];
 	}
 
 	//スキルポイント取得
@@ -214,13 +219,30 @@ var Simulator = (function() {
 	//さいだいMP  : maxmp
 	//みりょく    : charm
 	//おもさ      : weight
+	//こうげき力  : atk
+	//しゅび力    : def
 	Monster.prototype.getTotalStatus = function(status) {
 		var total = this.getTotalPassive(status);
 
 		//Lv50時ステータス
-		total += this.data.status[status];
-		//転生時のステータス増分
-		total += this.data.increment[status] * this.restartCount;
+		if(status == 'atk') {
+			total += this.getTotalStatus('pow');
+		} else if(status == 'stylish') {
+			total += this.getTotalStatus('charm');
+		} else {
+			total += this.data.status[status];
+			//転生時のステータス増分
+			total += this.data.increment[status] * this.restartCount;
+		}
+
+		//バッジ
+		for(var i = 0; i < this.badgeEquip.length; i++) {
+			if(this.badgeEquip[i] === null) continue;
+
+			var badge = badgeTable[this.badgeEquip[i]];
+			if(badge[status])
+				total += badge[status];
+		}
 
 		return total;
 	};
@@ -255,13 +277,15 @@ var Simulator = (function() {
 	var BITS_RESTART_COUNT = 4;
 	var BITS_SKILL = 6;
 	var BITS_ADDITIONAL_SKILL = 6;
+	var BITS_BADGE = 10;
 
 	var bitDataLength =
 		BITS_MONSTER_TYPE +
 		BITS_LEVEL +
 		BITS_RESTART_COUNT +
 		BITS_SKILL * (monsterList['slime'].skillLines.length + ADDITIONAL_SKILL_MAX) +
-		BITS_ADDITIONAL_SKILL * ADDITIONAL_SKILL_MAX;
+		BITS_ADDITIONAL_SKILL * ADDITIONAL_SKILL_MAX; // +
+		//BITS_BADGE * BADGE_COUNT;
 
 	//データをビット列にシリアル化
 	Monster.prototype.serialize = function() {
@@ -287,6 +311,16 @@ var Simulator = (function() {
 				}
 			}
 			bitArray = bitArray.concat(numToBitArray(additionalSkillId, BITS_ADDITIONAL_SKILL));
+		}
+
+		//バッジ
+		for(i = 0; i < BADGE_COUNT; i++) {
+			var badgeId = this.badgeEquip[i];
+			if(badgeId === null)
+				badgeId = 0;
+			badgeId = parseInt(badgeId, 10);
+
+			bitArray = bitArray.concat(numToBitArray(badgeId, BITS_BADGE));
 		}
 
 		return bitArray;
@@ -320,7 +354,7 @@ var Simulator = (function() {
 
 			if(additionalSkillId === 0) {
 				monster.updateAdditionalSkill(i, null);
-				break;
+				continue;
 			}
 
 			for(var j = 0; j < additionalSkillLines.length; j++) {
@@ -328,6 +362,21 @@ var Simulator = (function() {
 					monster.updateAdditionalSkill(i, additionalSkillLines[j].name);
 					break;
 				}
+			}
+		}
+
+		//バッジ
+		if(bitArray.length >= BITS_BADGE * BADGE_COUNT) {
+			for(i = 0; i < BADGE_COUNT; i++) {
+				var badgeId = bitArrayToNum(bitArray.splice(0, BITS_BADGE));
+				if(badgeId === 0) {
+					badgeId = null;
+				} else {
+					//0補間
+					badgeId = '00' + badgeId.toString();
+					badgeId = badgeId.substring(badgeId.length - 3);
+				}
+				monster.badgeEquip[i] = badgeId;
 			}
 		}
 
@@ -481,6 +530,10 @@ var Simulator = (function() {
 		expRequired: expRequired,
 		monsters: monsters,
 		additionalSkillLines: additionalSkillLines,
+		badgeTable: badgeTable,
+		badgeClass: allData.badgeclass,
+		badgeRace: allData.badgerace,
+		badgeFeature: allData.badgefeature,
 
 		//定数
 		SKILL_PTS_MIN: SKILL_PTS_MIN,
@@ -489,7 +542,8 @@ var Simulator = (function() {
 		LEVEL_MAX: LEVEL_MAX,
 		RESTART_MIN: RESTART_MIN,
 		RESTART_MAX: RESTART_MAX,
-		ADDITIONAL_SKILL_MAX: ADDITIONAL_SKILL_MAX
+		ADDITIONAL_SKILL_MAX: ADDITIONAL_SKILL_MAX,
+		BADGE_COUNT: BADGE_COUNT
 	};
 })();
 
@@ -561,8 +615,9 @@ var SimulatorUI = (function($) {
 		for(var skillLine in sim.skillLines) {
 			refreshSkillList(monsterId, skillLine);
 		}
-		refreshTotalStatus(monsterId)
+		refreshTotalStatus(monsterId);
 		refreshControls(monsterId);
+		refreshBadgeButtons(monsterId);
 		refreshSaveUrl();
 	}
 
@@ -723,7 +778,7 @@ var SimulatorUI = (function($) {
 
 	function refreshTotalStatus(monsterId) {
 		var monster = sim.getMonster(monsterId);
-		var statusArray = 'maxhp,maxmp,pow,def,magic,heal,spd,dex,charm,weight'.split(',');
+		var statusArray = 'maxhp,maxmp,atk,pow,def,magic,heal,spd,dex,charm,weight'.split(',');
 
 		var $cont = $('#' + monsterId + ' .status_info dl');
 		var status;
@@ -732,6 +787,40 @@ var SimulatorUI = (function($) {
 			status = statusArray[i];
 			$cont.find('.' + status).text(monster.getTotalStatus(status));
 		}
+	}
+
+	function drawBadgeButton(monsterId, badgeIndex) {
+		var monster = sim.getMonster(monsterId);
+
+		var $badgeButton = $('#append-badge' + badgeIndex + '-' + monsterId);
+		var $badgeButtonCont = $badgeButton.closest('li');
+
+		var badgeId = monster.badgeEquip[badgeIndex];
+		var badge = badgeId ? sim.badgeTable[badgeId] : null;
+
+		var buttonText = '';
+
+		if(badge) {
+			buttonText = badgeId + ' ' + badge.name + '・' + sim.badgeClass[badge['class']];
+		} else {
+			if(badgeIndex == monster.badgeEquip.length - 1)
+				buttonText = 'スペシャルバッジ';
+			else
+				buttonText = 'バッジ' + (badgeIndex + 1).toString();
+		}
+		$badgeButton.text(buttonText);
+
+		var bc = badge === null ? 'blank' : badge['class'];
+
+		$badgeButtonCont.toggleClass('blank', bc == 'blank');
+		for(var c in sim.badgeClass) {
+			$badgeButtonCont.toggleClass(c, bc == c);
+		}
+	}
+
+	function refreshBadgeButtons(monsterId) {
+		for(var i = 0; i < sim.BADGE_COUNT; i++)
+			drawBadgeButton(monsterId, i);
 	}
 
 	function getCurrentMonsterId(currentNode) {
@@ -1025,6 +1114,20 @@ var SimulatorUI = (function($) {
 				return false;
 			}
 		});
+
+		//バッジ選択ボタン
+		$ent.find('.badge-button-container a').click(function(e) {
+			var monsterId = getCurrentMonsterId(this);
+			var badgeIndex = parseInt($(this).attr('id').match(/^append-badge(\d+)-/)[1], 10);
+
+			BadgeSelector.setCurrentMonster(sim.getMonster(monsterId), badgeIndex);
+			BadgeSelector.show(function(badgeId) {
+				sim.getMonster(monsterId).badgeEquip[badgeIndex] = badgeId;
+				drawBadgeButton(monsterId, badgeIndex);
+				refreshTotalStatus(monsterId);
+				refreshSaveUrl();
+			});
+		});
 	}
 
 	function setupConsole() {
@@ -1100,6 +1203,7 @@ var SimulatorUI = (function($) {
 
 	function setupAll() {
 		setupConsole();
+		BadgeSelector.setup();
 
 		$('#monsters').empty();
 
@@ -1119,6 +1223,345 @@ var SimulatorUI = (function($) {
 		if(isNaN(num)) return 'N/A';
 		return num.toString().split(/(?=(?:\d{3})+$)/).join(',');
 	}
+
+	//バッジ選択ダイアログ
+	var BadgeSelector = (function($) {
+		var $dialog;
+		var $maskScreen;
+
+		var dialogResult = false;
+		var selectedBadgeId = null;
+		var closingCallback = function(){};
+
+		//バッジ効果リストのキャッシュ
+		var featureCache = {};
+
+		//検索キャッシュ
+		var raceSearchCache = {};
+		var classSearchCache = {};
+		var featureSearchCache = {};
+
+		//ソート順の昇降を保持
+		var sortByIdDesc = false;
+		var sortByKanaDesc = false;
+
+		//モンスターデータを一部保持
+		var status = {};
+		var currentBadgeId = null;
+		var badgeEquip = [];
+
+		function setup() {
+			$dialog = $('#badge-selector');
+			$maskScreen = $('#dark-screen');
+
+			$maskScreen.click(function(e) {
+				cancel();
+			});
+
+			//バッジをはずすボタン
+			$('#badge-selector-remove').click(function(e) {
+				apply(null);
+			}).hover(function(e) {
+				clearBadgeInfo();
+				refreshStatusAfter(null);
+			});
+
+			//バッジ設定ボタン
+			$('#badge-selector-list a').click(function(e) {
+				var badgeId = getBadgeId(this);
+				apply(badgeId);
+			}).hover(function(e) {
+				var badgeId = getBadgeId(this);
+				refreshBadgeInfo(badgeId);
+				refreshStatusAfter(badgeId);
+			});
+
+			//バッジ検索ボタン
+			$('#badge-search-buttons-race a').click(function(e) {
+				var race = $(this).attr('data-search-key');
+				filterButtons(getRaceSearchCache(race));
+			});
+			$('#badge-search-buttons-class a').click(function(e) {
+				var badgeClass = $(this).attr('data-search-key');
+				filterButtons(getClassSearchCache(badgeClass));
+			});
+			$('#badge-search-buttons-feature a').click(function(e) {
+				var feature = $(this).attr('data-search-key');
+				filterButtons(getFeatureSearchCache(feature));
+
+				if(sim.badgeFeature[feature]['type'] == 'int') {
+					sortBadgeByFeatureValue(feature, true);
+				}
+			});
+
+			//バッジソートボタン
+			$('#badge-sort-badgeid').click(function(e) {
+				sortBadgeById(sortByIdDesc);
+				sortByIdDesc = !sortByIdDesc;
+				sortByKanaDesc = false;
+			});
+			$('#badge-sort-kana').click(function(e) {
+				sortBadgeByKana(sortByKanaDesc);
+				sortByKanaDesc = !sortByKanaDesc;
+				sortByIdDesc = false;
+			});
+
+			//検索クリアボタン
+			$('#badge-search-clear').click(function(e) {
+				clearFilter();
+			});
+		}
+
+		function getBadgeId(elem) {
+			if(elem.tagName.toUpperCase() == 'LI')
+				elem = $(elem).find('a');
+
+			if($(elem).attr('id') == 'badge-selector-remove')
+				return null;
+			else
+				return $(elem).attr('data-badge-id');
+		}
+
+		function clearBadgeInfo() {
+			$('#badge-selector-badge-id').text('');
+			$('#badge-selector-badge-name').text('');
+			$('#badge-selector-race').text('');
+			$('#badge-selector-feature-list').empty();
+		}
+
+		function refreshBadgeInfo(badgeId) {
+			var badge = sim.badgeTable[badgeId];
+			if(!badge) return;
+
+			$('#badge-selector-badge-id').text(badgeId);
+
+			var badgeName = badge.name + '・' + sim.badgeClass[badge['class']];
+			$('#badge-selector-badge-name').text(badgeName);
+
+			var raceName;
+			if(badge.race == 'special')
+				raceName = 'スペシャルバッジ';
+			else
+				raceName = sim.badgeRace[badge.race].name + '系';
+			$('#badge-selector-race').text(raceName);
+
+			var features = getFeatureCache(badgeId);
+
+			var $featureList = $('#badge-selector-feature-list');
+			$featureList.empty();
+			for (var i = 0; i < features.length; i++) {
+				$('<li>').text(features[i]).appendTo($featureList);
+			}
+		}
+		function getFeatureCache(badgeId) {
+			if(featureCache[badgeId])
+				return featureCache[badgeId];
+
+			var badge = sim.badgeTable[badgeId];
+
+			var features = [];
+			for(var f in sim.badgeFeature) {
+				var feature = sim.badgeFeature[f];
+				var val = badge[f];
+
+				if(val) {
+					switch(feature['type']) {
+						case 'int':
+						case 'string':
+							if(feature.format)
+								features.push(feature.format.replace('@v', val));
+							else
+								features.push(feature.name + ' +' + val.toString());
+							break;
+						case 'array':
+							features = features.concat(getFeatureArrayFromArray(feature.format, val));
+							break;
+						case 'hash':
+							features = features.concat(getFeatureArrayFromHash(feature.format, val));
+							break;
+					}
+				}
+			}
+
+			featureCache[badgeId] = features;
+			return featureCache[badgeId];
+
+			function getFeatureArrayFromArray(format, fromArray) {
+				var retArray = [];
+
+				for(var i = 0; i < fromArray.length; i++) {
+					var ret = format.replace('@v', fromArray[i]);
+					retArray.push(ret);
+				}
+
+				return retArray;
+			}
+			function getFeatureArrayFromHash(format, fromHash) {
+				var retArray = [];
+
+				for(var k in fromHash) {
+					var v = fromHash[k];
+					var ret = format.replace('@k', k).replace('@v', v);
+					retArray.push(ret);
+				}
+
+				return retArray;
+			}
+		}
+
+		var STATUS_ARRAY = 'atk,def,maxhp,maxmp,magic,heal,spd,dex,stylish,weight'.split(',');
+
+		function setCurrentMonster(monster, badgeIndex) {
+			for(var i = 0; i < STATUS_ARRAY.length; i++) {
+				var s = STATUS_ARRAY[i];
+				status[s] = monster.getTotalStatus(s);
+
+				$('#badge-status-current-' + s).text(status[s]);
+			}
+			currentBadgeId = monster.badgeEquip[badgeIndex];
+
+			refreshStatusAfter(null);
+		}
+
+		function refreshStatusAfter(badgeId) {
+			var currentBadge = null;
+			if(currentBadgeId !== null)
+				currentBadge = sim.badgeTable[currentBadgeId];
+			var newBadge = null;
+			if(badgeId !== null)
+				newBadge = sim.badgeTable[badgeId];
+
+			for(var i = 0; i < STATUS_ARRAY.length; i++) {
+				var s = STATUS_ARRAY[i];
+				var before = status[s];
+
+				var after = before;
+				if(currentBadge !== null && currentBadge[s])
+					after -= currentBadge[s];
+				if(newBadge !== null && newBadge[s])
+					after += newBadge[s];
+
+				$('#badge-status-after-' + s).text(before == after ? '' : after)
+					.toggleClass('badge-status-plus', before < after)
+					.toggleClass('badge-status-minus', before > after);
+			}
+
+		}
+
+		function filterButtons(showIds) {
+			var $allVisibleButtons = $('#badge-selector-list li:visible');
+			var $allHiddenButtons = $('#badge-selector-list li:hidden');
+
+			$allVisibleButtons.filter(function() {
+					var badgeId = getBadgeId(this);
+					return $.inArray(badgeId, showIds) == -1;
+				}).hide();
+			$allHiddenButtons.filter(function() {
+					var badgeId = getBadgeId(this);
+					return $.inArray(badgeId, showIds) != -1;
+				}).show();
+		}
+
+		function getSearchCache(cacheArray, key, func) {
+			if(cacheArray[key])
+				return cacheArray[key];
+
+			var filteredArray = [];
+			for(var badgeId in sim.badgeTable) {
+				if(func(sim.badgeTable[badgeId]))
+					filteredArray.push(badgeId);
+			}
+
+			cacheArray[key] = filteredArray;
+			return cacheArray[key];
+		}
+		function getRaceSearchCache(race) {
+			return getSearchCache(raceSearchCache, race, function(badge) {
+				return badge['race'] == race;
+			});
+		}
+		function getClassSearchCache(badgeClass) {
+			return getSearchCache(classSearchCache, badgeClass, function(badge) {
+				return badge['class'] == badgeClass;
+			});
+		}
+		function getFeatureSearchCache(feature) {
+			return getSearchCache(featureSearchCache, feature, function(badge) {
+				return badge[feature] !== undefined;
+			});
+		}
+
+		function sortBadgeBy(func, desc) {
+			if(desc === undefined) desc = false;
+
+			$('#badge-selector-list').append(
+				$('#badge-selector-list li').sort(function(a, b) {
+					var key_a = func(a);
+					var key_b = func(b);
+					
+					var ascend = key_a < key_b;
+					if(desc) ascend = !ascend;
+					
+					if(key_a == key_b) {
+						key_a = getBadgeId(a);
+						key_b = getBadgeId(b);
+						ascend = key_a < key_b;
+					}
+
+					return ascend ? -1 : 1;
+				})
+			);
+		}
+		function sortBadgeById(desc) {
+			sortBadgeBy(function(li) {
+				return getBadgeId(li);
+			}, desc);
+		}
+		function sortBadgeByKana(desc) {
+			sortBadgeBy(function(li) {
+				return $(li).attr('data-kana-sort-key');
+			}, desc);
+		}
+		function sortBadgeByFeatureValue(feature, desc) {
+			sortBadgeBy(function(li) {
+				var badgeId = getBadgeId(li);
+				var ret = sim.badgeTable[badgeId][feature];
+
+				return ret !== undefined ? ret : 0;
+			}, desc);
+		}
+
+		function clearFilter() {
+			$('#badge-selector-list li').show();
+		}
+
+		function apply(badgeId) {
+			closingCallback(badgeId);
+			hide();
+		}
+		function cancel() {
+			hide();
+		}
+		function show(callback) {
+			clearBadgeInfo();
+			$maskScreen.show();
+			$dialog.show();
+			selectedBadgeId = null;
+			closingCallback = callback;
+		}
+		function hide() {
+			$dialog.hide();
+			$maskScreen.hide();
+		}
+
+		//API
+		return {
+			//メソッド
+			setup: setup,
+			setCurrentMonster: setCurrentMonster,
+			show: show
+		};
+	})($);
 
 	//API
 	return {

@@ -7,13 +7,13 @@
     <link href='http://cpro.jp/dq10/skillsimulator/monster.html' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。まもの使いで仲間にしたモンスター用。' name='description'>
     <title>DQ10 仲間モンスター用スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=m0.5.2' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=m0.6' rel='stylesheet' type='text/css'>
     <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' type='text/javascript'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
     <script src='js/base64.js' type='text/javascript'></script>
-    <script src='./dq10skill-monster.js?ver=m0.5.2' type='text/javascript'></script>
+    <script src='./dq10skill-monster.js?ver=m0.6' type='text/javascript'></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -112,16 +112,26 @@
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
             <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
             </dd>
+            <dd>
+              <ul class='badge-button-container button-container'>
+                <li class='blank ui-corner-all'><a id='append-badge0-dummy'>バッジ1</a></li>
+                <li class='blank ui-corner-all'><a id='append-badge1-dummy'>バッジ2</a></li>
+                <li class='blank ui-corner-all'><a id='append-badge2-dummy'>バッジ3</a></li>
+                <li class='blank ui-corner-all'><a id='append-badge3-dummy'>スペシャルバッジ</a></li>
+              </ul>
+            </dd>
           </dl>
         </div>
         <div class='skill_tables'></div>
         <div class='status_info'>
-          <h3>Lv50時ステータス:</h3>
+          <h3>Lv50時つよさ:</h3>
           <dl>
-            <dt>最大HP</dt>
+            <dt>HP</dt>
             <dd class='maxhp'>0</dd>
-            <dt>最大MP</dt>
+            <dt>MP</dt>
             <dd class='maxmp'>0</dd>
+            <dt>攻撃</dt>
+            <dd class='atk'>0</dd>
             <dt>力</dt>
             <dd class='pow'>0</dd>
             <dt>身守</dt>
@@ -162,7 +172,8 @@
               <li>スキルポイント欄右のリセットボタンをクリックするとポイントを0にします。</li>
               <li>レベル転生に対応。転生回数を1以上にすると、追加スキルを選択可能になります。</li>
               <li>名前欄には、ゲーム本編と違い文字制限はありません。「回復特化」といったメモ用途など自由に入力してください。</li>
-              <li>各モンスターの「Lv50時ステータス」欄には、転生回数に応じたカンスト時ステータスと各種パッシブスキルの合計を表示しています。杖・スティックの魔力パッシブも加算しています。</li>
+              <li>各モンスターの「Lv50時つよさ」欄には、転生回数に応じたカンスト時ステータスと各種パッシブスキルの合計を表示しています。杖・スティックの魔力パッシブも加算しています。</li>
+              <li>「バッジ1」等のボタンをクリックすると、モンスターバッジ選択画面が開きます。選択したバッジのステータスも上記つよさ欄に加算されます。</li>
               <li>「保存用URL」欄に表示されるURLは、アクセスすることで現在の状態を再現できます。メモ用・掲示板に貼る用などにどうぞ。</li>
               <li>各欄の右上にある「おりたたむ」ボタンをクリックすると簡易表示になります。そのまま操作も可能。「すべてたたむ」でレベル・スキルを一覧するのがおすすめです。</li>
               <li>「レベル一括設定」でレベルを選択し設定ボタンをクリックすると、全モンスターのレベルを一度に変更できます。</li>
@@ -170,6 +181,12 @@
             <li>
               履歴:
               <ul>
+                <li>
+                  2014/11/26 v0.6 バトルロードのモンスターバッジ機能を追加。
+                  <ul>
+                    <li>同じバッジや4つめ以外でのSPバッジも選択できてしまいますが、これは修正予定です。</li>
+                  </ul>
+                </li>
                 <li>
                   2014/11/6 v0.5
                   <ul>
@@ -200,14 +217,457 @@
           <li>
             ToDo:
             <ul>
-              <li>必要経験値の調査</li>
-              <li>各種特技のテキスト調査</li>
-              <li>パッシブ合計表示</li>
+              <li>同バッジ・SPバッジ選択制限</li>
+              <li>バッジの複数条件選択</li>
             </ul>
           </li>
           <li>ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。</li>
         </ul>
         <address><p class='contact'>連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a></p></address>
+      </div>
+    </div>
+    <div id='dark-screen'></div>
+    <div id='badge-selector'>
+      <div id='badge-selector-header'>
+        <ul class='badge-search-button-container button-container' id='badge-search-buttons-race'>
+          <li class='ui-corner-all'><a data-search-key='slime'>スラ</a></li>
+          <li class='ui-corner-all'><a data-search-key='beast'>獣</a></li>
+          <li class='ui-corner-all'><a data-search-key='dragon'>竜</a></li>
+          <li class='ui-corner-all'><a data-search-key='insect'>虫</a></li>
+          <li class='ui-corner-all'><a data-search-key='bird'>鳥</a></li>
+          <li class='ui-corner-all'><a data-search-key='plant'>植物</a></li>
+          <li class='ui-corner-all'><a data-search-key='material'>物質</a></li>
+          <li class='ui-corner-all'><a data-search-key='machine'>機械</a></li>
+          <li class='ui-corner-all'><a data-search-key='zombie'>不死</a></li>
+          <li class='ui-corner-all'><a data-search-key='demon'>悪魔</a></li>
+          <li class='ui-corner-all'><a data-search-key='element'>エレ</a></li>
+          <li class='ui-corner-all'><a data-search-key='mystery'>怪人</a></li>
+          <li class='ui-corner-all'><a data-search-key='water'>水</a></li>
+          <li class='ui-corner-all'><a data-search-key='special'>SP</a></li>
+        </ul>
+        <ul class='badge-search-button-container button-container' id='badge-search-buttons-class'>
+          <li class='ui-corner-all bronze'><a data-search-key='bronze'>銅</a></li>
+          <li class='ui-corner-all silver'><a data-search-key='silver'>銀</a></li>
+          <li class='ui-corner-all gold'><a data-search-key='gold'>金</a></li>
+          <li class='ui-corner-all luminous'><a data-search-key='luminous'>光</a></li>
+        </ul>
+        <ul class='badge-search-button-container button-container' id='badge-search-buttons-feature'>
+          <li class='ui-corner-all'><a data-search-key='maxhp' title='さいだいＨＰ'>HP</a></li>
+          <li class='ui-corner-all'><a data-search-key='maxmp' title='さいだいＭＰ'>MP</a></li>
+          <li class='ui-corner-all'><a data-search-key='atk' title='こうげき力'>攻撃</a></li>
+          <li class='ui-corner-all'><a data-search-key='def' title='しゅび力'>守備</a></li>
+          <li class='ui-corner-all'><a data-search-key='magic' title='こうげき魔力'>攻魔</a></li>
+          <li class='ui-corner-all'><a data-search-key='heal' title='かいふく魔力'>回魔</a></li>
+          <li class='ui-corner-all'><a data-search-key='spd' title='すばやさ'>素早</a></li>
+          <li class='ui-corner-all'><a data-search-key='dex' title='きようさ'>器用</a></li>
+          <li class='ui-corner-all'><a data-search-key='stylish' title='おしゃれさ'>洒落</a></li>
+          <li class='ui-corner-all'><a data-search-key='weight' title='おもさ'>重さ</a></li>
+          <li class='ui-corner-all'><a data-search-key='shield' title='盾ガード率'>盾ガ</a></li>
+          <li class='ui-corner-all'><a data-search-key='parry' title='武器ガード率'>武ガ</a></li>
+          <li class='ui-corner-all'><a data-search-key='mpdrain' title='ＭＰ吸収率'>MP吸</a></li>
+          <li class='ui-corner-all'><a data-search-key='critical' title='かいしん率'>会心</a></li>
+          <li class='ui-corner-all'><a data-search-key='overload' title='呪文ぼうそう率'>暴走</a></li>
+          <li class='ui-corner-all'><a data-search-key='mpsave' title='ＭＰ消費しない率'>MP消</a></li>
+          <li class='ui-corner-all'><a data-search-key='quick' title='呪文発動速度'>速度</a></li>
+          <li class='ui-corner-all'><a data-search-key='evd' title='みかわし率'>回避</a></li>
+          <li class='ui-corner-all'><a data-search-key='startup' title='開戦時発動'>開戦</a></li>
+          <li class='ui-corner-all'><a data-search-key='win' title='勝利時発動'>勝利</a></li>
+          <li class='ui-corner-all'><a data-search-key='debuff' title='攻撃時弱体効果'>弱体</a></li>
+          <li class='ui-corner-all'><a data-search-key='skill' title='呪文特技使用'>特技</a></li>
+          <li class='ui-corner-all'><a data-search-key='resist' title='状態異常ガード'>異常G</a></li>
+          <li class='ui-corner-all'><a data-search-key='raceup' title='種族へのダメージ増'>種UP</a></li>
+          <li class='ui-corner-all'><a data-search-key='attrup' title='属性特技ダメージ増'>特UP</a></li>
+          <li class='ui-corner-all'><a data-search-key='spellup' title='攻撃系統効果増'>系UP</a></li>
+          <li class='ui-corner-all'><a data-search-key='attrib' title='属性攻撃'>属性</a></li>
+          <li class='ui-corner-all'><a data-search-key='reduce' title='ダメージ耐性'>ダ耐</a></li>
+          <li class='ui-corner-all'><a data-search-key='reflect' title='盾ガード時追加効果'>盾G時</a></li>
+          <li class='ui-corner-all'><a data-search-key='spcharge' title='必殺チャージ'>必C</a></li>
+          <li class='ui-corner-all'><a data-search-key='special' title='ひっさつ使用'>必殺</a></li>
+          <li class='ui-corner-all'><a data-search-key='misc' title='その他の効果'>他</a></li>
+        </ul>
+        <ul class='badge-search-button-container button-container' id='badge-search-buttons-sort'>
+          <li class='ui-corner-all'><a id='badge-search-clear'>すべて表示</a></li>
+          <li class='ui-corner-all'><a id='badge-sort-badgeid'>バッジNo.順</a></li>
+          <li class='ui-corner-all'><a id='badge-sort-kana'>五十音順</a></li>
+        </ul>
+      </div>
+      <div id='badge-selector-body'>
+        <ul class='badge-button-container button-container' id='badge-selector-blank'>
+          <li class='ui-corner-all blank'><a id='badge-selector-remove'>バッジをはずす</a></li>
+        </ul>
+        <ul class='badge-button-container button-container' id='badge-selector-list'>
+          <li class='ui-corner-all bronze' data-kana-sort-key='すらいむ'><a data-badge-id='001'>001 スライム・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='はふるすらいむ'><a data-badge-id='002'>002 バブルスライム・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='ほいみすらいむ'><a data-badge-id='003'>003 ホイミスライム・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='すらいむないと'><a data-badge-id='004'>004 スライムナイト・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='きんくすらいむ'><a data-badge-id='005'>005 キングスライム・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='ぬかとこすらいむ'><a data-badge-id='006'>006 ぬかどこスライム・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='めたるすらいむ'><a data-badge-id='007'>007 メタルスライム・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='めたるふらさあす'><a data-badge-id='008'>008 メタルブラザーズ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='はくれめたる'><a data-badge-id='009'>009 はぐれメタル・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='とらきい'><a data-badge-id='010'>010 ドラキー・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='くつくるう'><a data-badge-id='011'>011 クックルー・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='きめら'><a data-badge-id='012'>012 キメラ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='てつとへつかあ'><a data-badge-id='013'>013 デッドペッカー・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='さいれす'><a data-badge-id='014'>014 サイレス・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='あさしんえみゆう'><a data-badge-id='015'>015 アサシンエミュー・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='かあこいる'><a data-badge-id='016'>016 ガーゴイル・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='おむつつこり'><a data-badge-id='017'>017 おむつっこり・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='なすひなあら'><a data-badge-id='018'>018 ナスビナーラ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='しんめんしゆ'><a data-badge-id='019'>019 じんめんじゅ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='あろえおに'><a data-badge-id='020'>020 アロエおに・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='おはけとまと'><a data-badge-id='021'>021 おばけトマト・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='まさあうつと'><a data-badge-id='022'>022 マザーウッド・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='きりかふこそう'><a data-badge-id='023'>023 きりかぶこぞう・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='きやたひらあ'><a data-badge-id='024'>024 キャタピラー・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='めえたろおと'><a data-badge-id='025'>025 メーダロード・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='ましつくふらい'><a data-badge-id='026'>026 マジックフライ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='きらあひい'><a data-badge-id='027'>027 キラービー・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='けんしかふと'><a data-badge-id='028'>028 げんじかぶと・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='ふらうにい'><a data-badge-id='029'>029 ブラウニー・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='しいるとこそう'><a data-badge-id='030'>030 シールドこぞう・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='ゆめにゆうとう'><a data-badge-id='031'>031 ゆめにゅうどう・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='あろおいんふ'><a data-badge-id='032'>032 アローインプ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='へろへろ'><a data-badge-id='033'>033 ベロベロ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='はさらあな'><a data-badge-id='034'>034 バサラーナ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='あもてうす'><a data-badge-id='035'>035 アモデウス・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='おはけきやんとる'><a data-badge-id='036'>036 おばけキャンドル・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='おとるほうせき'><a data-badge-id='037'>037 おどるほうせき・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='ひとくいさあへる'><a data-badge-id='038'>038 ひとくいサーベル・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='ふおんてゆ'><a data-badge-id='039'>039 フォンデュ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='ひとくいはこ'><a data-badge-id='040'>040 ひとくいばこ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='こおれむ'><a data-badge-id='041'>041 ゴーレム・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='えんたしすまん'><a data-badge-id='042'>042 エンタシスマン・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='めたつひい'><a data-badge-id='043'>043 メタッピー・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='たけやりへい'><a data-badge-id='044'>044 たけやりへい・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='きらあましん'><a data-badge-id='045'>045 キラーマシン・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='るはんか'><a data-badge-id='046'>046 ルバンカ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='めかはあん'><a data-badge-id='047'>047 メカバーン・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='めらこおすと'><a data-badge-id='048'>048 メラゴースト・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='きすも'><a data-badge-id='049'>049 ギズモ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='ふれいむ'><a data-badge-id='050'>050 フレイム・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='れつとふりん'><a data-badge-id='051'>051 レッドプリン・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='りゆういいそお'><a data-badge-id='052'>052 リュウイーソー・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='あやしいかけ'><a data-badge-id='053'>053 あやしいかげ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='しひれくらけ'><a data-badge-id='054'>054 しびれくらげ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='たいおうきつす'><a data-badge-id='055'>055 だいおうキッズ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='たこめつと'><a data-badge-id='056'>056 タコメット・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='まりんすらいむ'><a data-badge-id='057'>057 マリンスライム・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='まあしすたあ'><a data-badge-id='058'>058 マージスター・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='あさしんくろお'><a data-badge-id='059'>059 アサシンクロー・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='かにらす'><a data-badge-id='060'>060 ガニラス・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='こおすと'><a data-badge-id='061'>061 ゴースト・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='ちやあむはつと'><a data-badge-id='062'>062 チャームバット・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='まとはんと'><a data-badge-id='063'>063 マドハンド・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='くさつたしたい'><a data-badge-id='064'>064 くさった死体・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='はいきんくそうる'><a data-badge-id='065'>065 バイキングソウル・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='しるはあまんと'><a data-badge-id='066'>066 シルバーマント・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='てすふりいすと'><a data-badge-id='067'>067 デスプリースト・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='もおもん'><a data-badge-id='068'>068 モーモン・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='くれむりん'><a data-badge-id='069'>069 グレムリン・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='あくましんかん'><a data-badge-id='070'>070 あくま神官・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='へひいまししやん'><a data-badge-id='071'>071 ベビーマジシャン・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='へひいさたん'><a data-badge-id='072'>072 ベビーサタン・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='しるはあてひる'><a data-badge-id='073'>073 シルバーデビル・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='きかんてす'><a data-badge-id='074'>074 ギガンテス・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='りさあとまん'><a data-badge-id='075'>075 リザードマン・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='たつしゆらん'><a data-badge-id='076'>076 ダッシュラン・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='とらこんきつす'><a data-badge-id='077'>077 ドラゴンキッズ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='はとるれつくす'><a data-badge-id='078'>078 バトルレックス・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='すかるこん'><a data-badge-id='079'>079 スカルゴン・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='ふあんきいとらこ'><a data-badge-id='080'>080 ファンキードラゴ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='きんくりさあと'><a data-badge-id='081'>081 キングリザード・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='ふああらつと'><a data-badge-id='082'>082 ファーラット・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='ねこまとう'><a data-badge-id='083'>083 ねこまどう・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='あるみらあし'><a data-badge-id='084'>084 アルミラージ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='とんふれろ'><a data-badge-id='085'>085 トンブレロ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='ふりすにやん'><a data-badge-id='086'>086 プリズニャン・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='いえてい'><a data-badge-id='087'>087 イエティ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='きまいらろおと'><a data-badge-id='088'>088 キマイラロード・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='まりいん'><a data-badge-id='089'>089 マリーン・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='せらふい'><a data-badge-id='090'>090 セラフィ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='まいゆ'><a data-badge-id='091'>091 マイユ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='りせろつた'><a data-badge-id='092'>092 リゼロッタ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='ふうら'><a data-badge-id='093'>093 フウラ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='そおみや'><a data-badge-id='094'>094 ソーミャ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='さんくろおね'><a data-badge-id='095'>095 ザンクローネ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='ひゆうさ'><a data-badge-id='096'>096 ヒューザ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='ふおすている'><a data-badge-id='097'>097 フォステイル・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='たすとん'><a data-badge-id='098'>098 ダストン・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='くろうす'><a data-badge-id='099'>099 クロウズ・銅</a></li>
+          <li class='ui-corner-all bronze' data-kana-sort-key='すうほお'><a data-badge-id='100'>100 ズーボー・銅</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='すらいむ'><a data-badge-id='101'>101 スライム・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='はふるすらいむ'><a data-badge-id='102'>102 バブルスライム・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='ほいみすらいむ'><a data-badge-id='103'>103 ホイミスライム・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='すらいむないと'><a data-badge-id='104'>104 スライムナイト・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='きんくすらいむ'><a data-badge-id='105'>105 キングスライム・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='ぬかとこすらいむ'><a data-badge-id='106'>106 ぬかどこスライム・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='めたるすらいむ'><a data-badge-id='107'>107 メタルスライム・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='めたるふらさあす'><a data-badge-id='108'>108 メタルブラザーズ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='はくれめたる'><a data-badge-id='109'>109 はぐれメタル・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='とらきい'><a data-badge-id='110'>110 ドラキー・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='くつくるう'><a data-badge-id='111'>111 クックルー・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='きめら'><a data-badge-id='112'>112 キメラ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='てつとへつかあ'><a data-badge-id='113'>113 デッドペッカー・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='さいれす'><a data-badge-id='114'>114 サイレス・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='あさしんえみゆう'><a data-badge-id='115'>115 アサシンエミュー・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='かあこいる'><a data-badge-id='116'>116 ガーゴイル・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='おむつつこり'><a data-badge-id='117'>117 おむつっこり・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='なすひなあら'><a data-badge-id='118'>118 ナスビナーラ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='しんめんしゆ'><a data-badge-id='119'>119 じんめんじゅ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='あろえおに'><a data-badge-id='120'>120 アロエおに・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='おはけとまと'><a data-badge-id='121'>121 おばけトマト・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='まさあうつと'><a data-badge-id='122'>122 マザーウッド・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='きりかふこそう'><a data-badge-id='123'>123 きりかぶこぞう・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='きやたひらあ'><a data-badge-id='124'>124 キャタピラー・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='めえたろおと'><a data-badge-id='125'>125 メーダロード・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='ましつくふらい'><a data-badge-id='126'>126 マジックフライ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='きらあひい'><a data-badge-id='127'>127 キラービー・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='けんしかふと'><a data-badge-id='128'>128 げんじかぶと・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='ふらうにい'><a data-badge-id='129'>129 ブラウニー・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='しいるとこそう'><a data-badge-id='130'>130 シールドこぞう・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='ゆめにゆうとう'><a data-badge-id='131'>131 ゆめにゅうどう・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='あろおいんふ'><a data-badge-id='132'>132 アローインプ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='へろへろ'><a data-badge-id='133'>133 ベロベロ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='はさらあな'><a data-badge-id='134'>134 バサラーナ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='あもてうす'><a data-badge-id='135'>135 アモデウス・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='おはけきやんとる'><a data-badge-id='136'>136 おばけキャンドル・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='おとるほうせき'><a data-badge-id='137'>137 おどるほうせき・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='ひとくいさあへる'><a data-badge-id='138'>138 ひとくいサーベル・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='ふおんてゆ'><a data-badge-id='139'>139 フォンデュ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='ひとくいはこ'><a data-badge-id='140'>140 ひとくいばこ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='こおれむ'><a data-badge-id='141'>141 ゴーレム・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='えんたしすまん'><a data-badge-id='142'>142 エンタシスマン・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='めたつひい'><a data-badge-id='143'>143 メタッピー・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='たけやりへい'><a data-badge-id='144'>144 たけやりへい・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='きらあましん'><a data-badge-id='145'>145 キラーマシン・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='るはんか'><a data-badge-id='146'>146 ルバンカ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='めかはあん'><a data-badge-id='147'>147 メカバーン・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='めらこおすと'><a data-badge-id='148'>148 メラゴースト・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='きすも'><a data-badge-id='149'>149 ギズモ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='ふれいむ'><a data-badge-id='150'>150 フレイム・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='れつとふりん'><a data-badge-id='151'>151 レッドプリン・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='りゆういいそお'><a data-badge-id='152'>152 リュウイーソー・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='あやしいかけ'><a data-badge-id='153'>153 あやしいかげ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='しひれくらけ'><a data-badge-id='154'>154 しびれくらげ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='たいおうきつす'><a data-badge-id='155'>155 だいおうキッズ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='たこめつと'><a data-badge-id='156'>156 タコメット・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='まりんすらいむ'><a data-badge-id='157'>157 マリンスライム・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='まあしすたあ'><a data-badge-id='158'>158 マージスター・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='あさしんくろお'><a data-badge-id='159'>159 アサシンクロー・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='かにらす'><a data-badge-id='160'>160 ガニラス・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='こおすと'><a data-badge-id='161'>161 ゴースト・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='ちやあむはつと'><a data-badge-id='162'>162 チャームバット・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='まとはんと'><a data-badge-id='163'>163 マドハンド・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='くさつたしたい'><a data-badge-id='164'>164 くさった死体・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='はいきんくそうる'><a data-badge-id='165'>165 バイキングソウル・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='しるはあまんと'><a data-badge-id='166'>166 シルバーマント・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='てすふりいすと'><a data-badge-id='167'>167 デスプリースト・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='もおもん'><a data-badge-id='168'>168 モーモン・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='くれむりん'><a data-badge-id='169'>169 グレムリン・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='あくましんかん'><a data-badge-id='170'>170 あくま神官・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='へひいまししやん'><a data-badge-id='171'>171 ベビーマジシャン・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='へひいさたん'><a data-badge-id='172'>172 ベビーサタン・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='しるはあてひる'><a data-badge-id='173'>173 シルバーデビル・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='きかんてす'><a data-badge-id='174'>174 ギガンテス・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='りさあとまん'><a data-badge-id='175'>175 リザードマン・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='たつしゆらん'><a data-badge-id='176'>176 ダッシュラン・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='とらこんきつす'><a data-badge-id='177'>177 ドラゴンキッズ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='はとるれつくす'><a data-badge-id='178'>178 バトルレックス・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='すかるこん'><a data-badge-id='179'>179 スカルゴン・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='ふあんきいとらこ'><a data-badge-id='180'>180 ファンキードラゴ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='きんくりさあと'><a data-badge-id='181'>181 キングリザード・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='ふああらつと'><a data-badge-id='182'>182 ファーラット・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='ねこまとう'><a data-badge-id='183'>183 ねこまどう・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='あるみらあし'><a data-badge-id='184'>184 アルミラージ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='とんふれろ'><a data-badge-id='185'>185 トンブレロ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='ふりすにやん'><a data-badge-id='186'>186 プリズニャン・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='いえてい'><a data-badge-id='187'>187 イエティ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='きまいらろおと'><a data-badge-id='188'>188 キマイラロード・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='まりいん'><a data-badge-id='189'>189 マリーン・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='せらふい'><a data-badge-id='190'>190 セラフィ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='まいゆ'><a data-badge-id='191'>191 マイユ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='りせろつた'><a data-badge-id='192'>192 リゼロッタ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='ふうら'><a data-badge-id='193'>193 フウラ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='そおみや'><a data-badge-id='194'>194 ソーミャ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='さんくろおね'><a data-badge-id='195'>195 ザンクローネ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='ひゆうさ'><a data-badge-id='196'>196 ヒューザ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='ふおすている'><a data-badge-id='197'>197 フォステイル・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='たすとん'><a data-badge-id='198'>198 ダストン・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='くろうす'><a data-badge-id='199'>199 クロウズ・銀</a></li>
+          <li class='ui-corner-all silver' data-kana-sort-key='すうほお'><a data-badge-id='200'>200 ズーボー・銀</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='すらいむ'><a data-badge-id='201'>201 スライム・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='はふるすらいむ'><a data-badge-id='202'>202 バブルスライム・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='ほいみすらいむ'><a data-badge-id='203'>203 ホイミスライム・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='すらいむないと'><a data-badge-id='204'>204 スライムナイト・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='きんくすらいむ'><a data-badge-id='205'>205 キングスライム・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='ぬかとこすらいむ'><a data-badge-id='206'>206 ぬかどこスライム・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='めたるすらいむ'><a data-badge-id='207'>207 メタルスライム・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='めたるふらさあす'><a data-badge-id='208'>208 メタルブラザーズ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='はくれめたる'><a data-badge-id='209'>209 はぐれメタル・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='とらきい'><a data-badge-id='210'>210 ドラキー・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='くつくるう'><a data-badge-id='211'>211 クックルー・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='きめら'><a data-badge-id='212'>212 キメラ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='てつとへつかあ'><a data-badge-id='213'>213 デッドペッカー・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='さいれす'><a data-badge-id='214'>214 サイレス・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='あさしんえみゆう'><a data-badge-id='215'>215 アサシンエミュー・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='かあこいる'><a data-badge-id='216'>216 ガーゴイル・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='おむつつこり'><a data-badge-id='217'>217 おむつっこり・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='なすひなあら'><a data-badge-id='218'>218 ナスビナーラ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='しんめんしゆ'><a data-badge-id='219'>219 じんめんじゅ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='あろえおに'><a data-badge-id='220'>220 アロエおに・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='おはけとまと'><a data-badge-id='221'>221 おばけトマト・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='まさあうつと'><a data-badge-id='222'>222 マザーウッド・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='きりかふこそう'><a data-badge-id='223'>223 きりかぶこぞう・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='きやたひらあ'><a data-badge-id='224'>224 キャタピラー・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='めえたろおと'><a data-badge-id='225'>225 メーダロード・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='ましつくふらい'><a data-badge-id='226'>226 マジックフライ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='きらあひい'><a data-badge-id='227'>227 キラービー・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='けんしかふと'><a data-badge-id='228'>228 げんじかぶと・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='ふらうにい'><a data-badge-id='229'>229 ブラウニー・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='しいるとこそう'><a data-badge-id='230'>230 シールドこぞう・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='ゆめにゆうとう'><a data-badge-id='231'>231 ゆめにゅうどう・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='あろおいんふ'><a data-badge-id='232'>232 アローインプ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='へろへろ'><a data-badge-id='233'>233 ベロベロ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='はさらあな'><a data-badge-id='234'>234 バサラーナ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='あもてうす'><a data-badge-id='235'>235 アモデウス・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='おはけきやんとる'><a data-badge-id='236'>236 おばけキャンドル・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='おとるほうせき'><a data-badge-id='237'>237 おどるほうせき・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='ひとくいさあへる'><a data-badge-id='238'>238 ひとくいサーベル・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='ふおんてゆ'><a data-badge-id='239'>239 フォンデュ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='ひとくいはこ'><a data-badge-id='240'>240 ひとくいばこ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='こおれむ'><a data-badge-id='241'>241 ゴーレム・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='えんたしすまん'><a data-badge-id='242'>242 エンタシスマン・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='めたつひい'><a data-badge-id='243'>243 メタッピー・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='たけやりへい'><a data-badge-id='244'>244 たけやりへい・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='きらあましん'><a data-badge-id='245'>245 キラーマシン・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='るはんか'><a data-badge-id='246'>246 ルバンカ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='めかはあん'><a data-badge-id='247'>247 メカバーン・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='めらこおすと'><a data-badge-id='248'>248 メラゴースト・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='きすも'><a data-badge-id='249'>249 ギズモ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='ふれいむ'><a data-badge-id='250'>250 フレイム・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='れつとふりん'><a data-badge-id='251'>251 レッドプリン・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='りゆういいそお'><a data-badge-id='252'>252 リュウイーソー・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='あやしいかけ'><a data-badge-id='253'>253 あやしいかげ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='しひれくらけ'><a data-badge-id='254'>254 しびれくらげ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='たいおうきつす'><a data-badge-id='255'>255 だいおうキッズ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='たこめつと'><a data-badge-id='256'>256 タコメット・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='まりんすらいむ'><a data-badge-id='257'>257 マリンスライム・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='まあしすたあ'><a data-badge-id='258'>258 マージスター・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='あさしんくろお'><a data-badge-id='259'>259 アサシンクロー・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='かにらす'><a data-badge-id='260'>260 ガニラス・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='こおすと'><a data-badge-id='261'>261 ゴースト・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='ちやあむはつと'><a data-badge-id='262'>262 チャームバット・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='まとはんと'><a data-badge-id='263'>263 マドハンド・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='くさつたしたい'><a data-badge-id='264'>264 くさった死体・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='はいきんくそうる'><a data-badge-id='265'>265 バイキングソウル・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='しるはあまんと'><a data-badge-id='266'>266 シルバーマント・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='てすふりいすと'><a data-badge-id='267'>267 デスプリースト・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='もおもん'><a data-badge-id='268'>268 モーモン・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='くれむりん'><a data-badge-id='269'>269 グレムリン・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='あくましんかん'><a data-badge-id='270'>270 あくま神官・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='へひいまししやん'><a data-badge-id='271'>271 ベビーマジシャン・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='へひいさたん'><a data-badge-id='272'>272 ベビーサタン・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='しるはあてひる'><a data-badge-id='273'>273 シルバーデビル・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='きかんてす'><a data-badge-id='274'>274 ギガンテス・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='りさあとまん'><a data-badge-id='275'>275 リザードマン・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='たつしゆらん'><a data-badge-id='276'>276 ダッシュラン・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='とらこんきつす'><a data-badge-id='277'>277 ドラゴンキッズ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='はとるれつくす'><a data-badge-id='278'>278 バトルレックス・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='すかるこん'><a data-badge-id='279'>279 スカルゴン・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='ふあんきいとらこ'><a data-badge-id='280'>280 ファンキードラゴ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='きんくりさあと'><a data-badge-id='281'>281 キングリザード・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='ふああらつと'><a data-badge-id='282'>282 ファーラット・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='ねこまとう'><a data-badge-id='283'>283 ねこまどう・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='あるみらあし'><a data-badge-id='284'>284 アルミラージ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='とんふれろ'><a data-badge-id='285'>285 トンブレロ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='ふりすにやん'><a data-badge-id='286'>286 プリズニャン・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='いえてい'><a data-badge-id='287'>287 イエティ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='きまいらろおと'><a data-badge-id='288'>288 キマイラロード・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='まりいん'><a data-badge-id='289'>289 マリーン・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='せらふい'><a data-badge-id='290'>290 セラフィ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='まいゆ'><a data-badge-id='291'>291 マイユ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='りせろつた'><a data-badge-id='292'>292 リゼロッタ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='ふうら'><a data-badge-id='293'>293 フウラ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='そおみや'><a data-badge-id='294'>294 ソーミャ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='さんくろおね'><a data-badge-id='295'>295 ザンクローネ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='ひゆうさ'><a data-badge-id='296'>296 ヒューザ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='ふおすている'><a data-badge-id='297'>297 フォステイル・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='たすとん'><a data-badge-id='298'>298 ダストン・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='くろうす'><a data-badge-id='299'>299 クロウズ・金</a></li>
+          <li class='ui-corner-all gold' data-kana-sort-key='すうほお'><a data-badge-id='300'>300 ズーボー・金</a></li>
+          <li class='ui-corner-all luminous' data-kana-sort-key='まりいん'><a data-badge-id='301'>301 マリーン・光</a></li>
+          <li class='ui-corner-all luminous' data-kana-sort-key='せらふい'><a data-badge-id='302'>302 セラフィ・光</a></li>
+          <li class='ui-corner-all luminous' data-kana-sort-key='まいゆ'><a data-badge-id='303'>303 マイユ・光</a></li>
+          <li class='ui-corner-all luminous' data-kana-sort-key='りせろつた'><a data-badge-id='304'>304 リゼロッタ・光</a></li>
+          <li class='ui-corner-all luminous' data-kana-sort-key='ふうら'><a data-badge-id='305'>305 フウラ・光</a></li>
+          <li class='ui-corner-all luminous' data-kana-sort-key='そおみや'><a data-badge-id='306'>306 ソーミャ・光</a></li>
+          <li class='ui-corner-all luminous' data-kana-sort-key='さんくろおね'><a data-badge-id='307'>307 ザンクローネ・光</a></li>
+          <li class='ui-corner-all luminous' data-kana-sort-key='ひゆうさ'><a data-badge-id='308'>308 ヒューザ・光</a></li>
+          <li class='ui-corner-all luminous' data-kana-sort-key='ふおすている'><a data-badge-id='309'>309 フォステイル・光</a></li>
+          <li class='ui-corner-all luminous' data-kana-sort-key='たすとん'><a data-badge-id='310'>310 ダストン・光</a></li>
+          <li class='ui-corner-all luminous' data-kana-sort-key='くろうす'><a data-badge-id='311'>311 クロウズ・光</a></li>
+          <li class='ui-corner-all luminous' data-kana-sort-key='すうほお'><a data-badge-id='312'>312 ズーボー・光</a></li>
+        </ul>
+      </div>
+      <div id='badge-selector-footer'>
+        <div id='badge-selector-baseinfo'>
+          <h2 id='badge-selector-badge-title'><span id='badge-selector-badge-id'></span><span id='badge-selector-badge-name'></span></h2>
+          <p id='badge-selector-race'></p>
+        </div>
+        <ul id='badge-selector-feature-list'></ul>
+        <table id='badge-selector-status-table'>
+          <tr>
+            <th>こうげき力</th>
+            <td class='badge-status-current' id='badge-status-current-atk'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-atk'></td>
+            <th>すばやさ</th>
+            <td class='badge-status-current' id='badge-status-current-spd'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-spd'></td>
+          </tr>
+          <tr>
+            <th>しゅび力</th>
+            <td class='badge-status-current' id='badge-status-current-def'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-def'></td>
+            <th>きようさ</th>
+            <td class='badge-status-current' id='badge-status-current-dex'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-dex'></td>
+          </tr>
+          <tr>
+            <th>さいだいＨＰ</th>
+            <td class='badge-status-current' id='badge-status-current-maxhp'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-maxhp'></td>
+            <th>こうげき魔力</th>
+            <td class='badge-status-current' id='badge-status-current-magic'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-magic'></td>
+          </tr>
+          <tr>
+            <th>さいだいＭＰ</th>
+            <td class='badge-status-current' id='badge-status-current-maxmp'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-maxmp'></td>
+            <th>かいふく魔力</th>
+            <td class='badge-status-current' id='badge-status-current-heal'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-heal'></td>
+          </tr>
+          <tr>
+            <th>おしゃれさ</th>
+            <td class='badge-status-current' id='badge-status-current-stylish'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-stylish'></td>
+            <th>おもさ</th>
+            <td class='badge-status-current' id='badge-status-current-weight'></td>
+            <td class='badge-status-arrow'>→</td>
+            <td class='badge-status-after' id='badge-status-after-weight'></td>
+          </tr>
+        </table>
       </div>
     </div>
     <div id='ad_sidebar'>
