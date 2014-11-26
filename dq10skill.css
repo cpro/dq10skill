@@ -306,7 +306,8 @@ a {
   height: 210px; }
 
 .skill_tables {
-  padding: 0 10px; }
+  padding: 0 10px;
+  white-space: nowrap; }
 
 /* スキル一覧 */
 .skill_table {
