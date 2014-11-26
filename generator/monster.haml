@@ -97,14 +97,26 @@
 							= '（あと '
 							%span.exp_remain> 0
 							= ' exp）'
+						%dd
+							%ul.badge-button-container.button-container
+								%li.blank.ui-corner-all<
+									%a{id: "append-badge0-dummy"} バッジ1
+								%li.blank.ui-corner-all<
+									%a{id: "append-badge1-dummy"} バッジ2
+								%li.blank.ui-corner-all<
+									%a{id: "append-badge2-dummy"} バッジ3
+								%li.blank.ui-corner-all<
+									%a{id: "append-badge3-dummy"} スペシャルバッジ
 				.skill_tables
 				.status_info
-					%h3 Lv50時ステータス:
+					%h3 Lv50時つよさ:
 					%dl
-						%dt 最大HP
+						%dt HP
 						%dd.maxhp 0
-						%dt 最大MP
+						%dt MP
 						%dd.maxmp 0
+						%dt 攻撃
+						%dd.atk 0
 						%dt 力
 						%dd.pow 0
 						%dt 身守
@@ -178,6 +190,91 @@
 					%li ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。
 				%address<
 					%p.contact 連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a>
+		#dark-screen
+		#badge-selector
+			#badge-selector-header
+				%ul#badge-search-buttons-race.badge-search-button-container.button-container
+					- data['badgerace'].each do |k, v|
+						%li.ui-corner-all<
+							%a{'data-search-key' => k} #{v['abbr']}
+				%ul#badge-search-buttons-class.badge-search-button-container.button-container
+					- data['badgeclass'].each do |k, v|
+						%li{'class' => ['ui-corner-all', k]}<
+							%a{'data-search-key' => k} #{v}
+				%ul#badge-search-buttons-feature.badge-search-button-container.button-container
+					- data['badgefeature'].each do |k, v|
+						%li.ui-corner-all<
+							%a{'data-search-key' => k, title: v['name']} #{v['abbr']}
+				%ul#badge-search-buttons-sort.badge-search-button-container.button-container
+					%li.ui-corner-all<
+						%a#badge-search-clear すべて表示
+					%li.ui-corner-all<
+						%a#badge-sort-badgeid バッジNo.順
+					%li.ui-corner-all<
+						%a#badge-sort-kana 五十音順
+			#badge-selector-body
+				%ul#badge-selector-blank.badge-button-container.button-container
+					%li.ui-corner-all.blank<
+						%a#badge-selector-remove バッジをはずす
+				%ul#badge-selector-list.badge-button-container.button-container
+					- data['badges'].each do |id, badge|
+						%li{'class' => ['ui-corner-all', badge['class']], 'data-kana-sort-key' => badge['sort']}<
+							%a{'data-badge-id' => id}<
+								= "#{id} #{badge['name']}・#{data['badgeclass'][badge['class']]}"
+			#badge-selector-footer
+				#badge-selector-baseinfo
+					%h2#badge-selector-badge-title<
+						%span#badge-selector-badge-id>
+						%span#badge-selector-badge-name>
+					%p#badge-selector-race
+				%ul#badge-selector-feature-list
+				-# %ul#badge-selector-trade-list
+				%table#badge-selector-status-table
+					%tr
+						%th こうげき力
+						%td#badge-status-current-atk.badge-status-current
+						%td.badge-status-arrow →
+						%td#badge-status-after-atk.badge-status-after
+						%th すばやさ
+						%td#badge-status-current-spd.badge-status-current
+						%td.badge-status-arrow →
+						%td#badge-status-after-spd.badge-status-after
+					%tr
+						%th しゅび力
+						%td#badge-status-current-def.badge-status-current
+						%td.badge-status-arrow →
+						%td#badge-status-after-def.badge-status-after
+						%th きようさ
+						%td#badge-status-current-dex.badge-status-current
+						%td.badge-status-arrow →
+						%td#badge-status-after-dex.badge-status-after
+					%tr
+						%th さいだいＨＰ
+						%td#badge-status-current-maxhp.badge-status-current
+						%td.badge-status-arrow →
+						%td#badge-status-after-maxhp.badge-status-after
+						%th こうげき魔力
+						%td#badge-status-current-magic.badge-status-current
+						%td.badge-status-arrow →
+						%td#badge-status-after-magic.badge-status-after
+					%tr
+						%th さいだいＭＰ
+						%td#badge-status-current-maxmp.badge-status-current
+						%td.badge-status-arrow →
+						%td#badge-status-after-maxmp.badge-status-after
+						%th かいふく魔力
+						%td#badge-status-current-heal.badge-status-current
+						%td.badge-status-arrow →
+						%td#badge-status-after-heal.badge-status-after
+					%tr
+						%th おしゃれさ
+						%td#badge-status-current-stylish.badge-status-current
+						%td.badge-status-arrow →
+						%td#badge-status-after-stylish.badge-status-after
+						%th おもさ
+						%td#badge-status-current-weight.badge-status-current
+						%td.badge-status-arrow →
+						%td#badge-status-after-weight.badge-status-after
 		#ad_sidebar
 			%h2 サイト内リンク
 			%ul

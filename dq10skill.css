@@ -279,7 +279,7 @@ a {
 .class_info {
   font-size: 70%;
   float: left;
-  width: 12em;
+  width: 140px;
   height: 200px;
   position: relative;
   text-align: center;
@@ -303,7 +303,7 @@ a {
     text-align: right; }
 
 .monster_ent .class_info {
-  height: 16em; }
+  height: 210px; }
 
 .skill_tables {
   padding: 0 10px; }
@@ -393,7 +393,8 @@ a {
   padding: 2px 0 1px 0;
   position: relative;
   border-top: 1px solid #9999aa;
-  height: 22px; }
+  height: 22px;
+  white-space: nowrap; }
   .status_info h3 {
     margin: 0;
     padding: 0;
@@ -405,7 +406,7 @@ a {
     padding: 0;
     display: inline-block; }
   .status_info dt {
-    margin: 0 5px 0 5px;
+    margin: 0 2px 0 4px;
     padding: 0;
     display: inline;
     font-size: 80%; }
@@ -416,6 +417,11 @@ a {
     padding: 0;
     display: inline;
     font-size: 85%; }
+
+.monster_ent .status_info {
+  clear: none;
+  margin-left: 146px;
+  width: 900px; }
 
 /* フッタコンソール */
 #footconsole {
@@ -467,6 +473,211 @@ body.msp .class_group .skill_table.selected {
 
 #contact {
   font-style: normal; }
+
+/* バッジ関連定義 */
+/* 1行あたりのボタン数 */
+/* ボタンコンテナ一般 */
+ul.button-container {
+  list-style-type: none;
+  font-size: 11px;
+  margin: 0;
+  padding: 0; }
+  ul.button-container li {
+    float: left;
+    height: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    border: 1px solid #aaaabb;
+    background-color: #f0f0f7; }
+    ul.button-container li:hover {
+      cursor: pointer;
+      border-color: #445;
+      color: black; }
+    ul.button-container li a {
+      display: block;
+      /* padding: 0 $button-anchor-padding-x; */
+      height: 16px;
+      width: auto;
+      text-align: center; }
+
+/* バッジ選択ボタン */
+ul.badge-button-container li.blank, ul#badge-search-buttons-class li.blank {
+  background-color: transparent;
+  color: #889; }
+ul.badge-button-container li.bronze, ul#badge-search-buttons-class li.bronze {
+  background-color: #eda;
+  color: #531; }
+ul.badge-button-container li.silver, ul#badge-search-buttons-class li.silver {
+  background-color: #f0f0f5;
+  color: #303032; }
+ul.badge-button-container li.gold, ul#badge-search-buttons-class li.gold {
+  background-color: #fef487;
+  color: #551; }
+ul.badge-button-container li.luminous, ul#badge-search-buttons-class li.luminous {
+  background-color: white;
+  color: #444; }
+ul.badge-button-container li:hover, ul#badge-search-buttons-class li:hover {
+  cursor: pointer;
+  border-color: #445;
+  color: black; }
+ul.badge-button-container li a, ul#badge-search-buttons-class li a {
+  text-align: center; }
+
+.monster_ent .class_info ul.badge-button-container {
+  padding: 2px 3px 0 3px;
+  margin: 0; }
+  .monster_ent .class_info ul.badge-button-container li {
+    float: none;
+    margin: 1px 0 0 0;
+    width: auto; }
+  .monster_ent .class_info ul.badge-button-container a {
+    padding: 0 3px; }
+
+/* バッジ選択ダイアログ */
+#badge-selector {
+  display: none;
+  position: fixed;
+  left: 150px;
+  top: 200px;
+  z-index: 200;
+  margin: 0;
+  padding: 0;
+  width: 878px;
+  height: 527px;
+  border: 3px solid #9999aa;
+  border-radius: 6px;
+  background-color: #fcfcfd;
+  /* バッジ検索ボタン */ }
+  #badge-selector #badge-selector-header {
+    position: relative;
+    height: 105px;
+    border-bottom: 1px solid #9999aa; }
+  #badge-selector #badge-selector-footer {
+    position: relative;
+    height: 120px;
+    border-top: 1px solid #9999aa; }
+  #badge-selector #badge-selector-body {
+    position: relative;
+    height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden; }
+    #badge-selector #badge-selector-body ul {
+      font-size: 12px;
+      margin-top: 0;
+      margin-right: 33px;
+      margin-left: 15px;
+      margin-bottom: 0;
+      padding: 0;
+      width: 830px; }
+      #badge-selector #badge-selector-body ul li {
+        float: left;
+        width: 160px;
+        height: 17px;
+        margin: 3px 2px; }
+    #badge-selector #badge-selector-body ul#badge-selector-blank {
+      margin-top: 5px;
+      margin-bottom: 6px; }
+    #badge-selector #badge-selector-body ul#badge-selector-list {
+      clear: left;
+      margin-bottom: 5px; }
+      #badge-selector #badge-selector-body ul#badge-selector-list li a {
+        text-align: left;
+        margin-left: 5px; }
+  #badge-selector ul.badge-search-button-container {
+    float: left;
+    margin-top: 15px;
+    height: 80px;
+    margin-right: 6px;
+    border-right: 1px solid #9999aa;
+    padding-right: 6px; }
+    #badge-selector ul.badge-search-button-container:first-child {
+      margin-left: 15px; }
+    #badge-selector ul.badge-search-button-container:last-child {
+      margin-right: 33px;
+      border-right: none;
+      padding-right: 0; }
+    #badge-selector ul.badge-search-button-container li {
+      width: 36px;
+      margin: 1px; }
+  #badge-selector ul#badge-search-buttons-race {
+    width: 160px; }
+  #badge-selector ul#badge-search-buttons-class {
+    width: 40px; }
+  #badge-selector ul#badge-search-buttons-feature {
+    width: 320px; }
+  #badge-selector ul#badge-search-buttons-sort {
+    float: right;
+    width: 84px; }
+    #badge-selector ul#badge-search-buttons-sort li {
+      width: 80px; }
+  #badge-selector #badge-selector-footer > div, #badge-selector #badge-selector-footer > ul, #badge-selector #badge-selector-footer > table {
+    margin-top: 5px;
+    /* height: $badge-selector-footer-height - 5px; */ }
+  #badge-selector #badge-selector-baseinfo {
+    float: left;
+    width: 220px;
+    margin-left: 15px; }
+    #badge-selector #badge-selector-baseinfo #badge-selector-badge-title {
+      font-size: 18px;
+      margin: 0 0 3px 0;
+      white-space: nowrap; }
+      #badge-selector #badge-selector-baseinfo #badge-selector-badge-title #badge-selector-badge-id {
+        font-size: 85%;
+        margin-right: 3px; }
+    #badge-selector #badge-selector-baseinfo #badge-selector-race {
+      font-size: 14px;
+      margin: 0;
+      padding: 0; }
+  #badge-selector #badge-selector-feature-list {
+    float: left;
+    width: 180px;
+    font-size: 12px; }
+  #badge-selector #badge-selector-trade-list {
+    float: left;
+    width: 180px;
+    font-size: 12px; }
+  #badge-selector #badge-selector-status-table {
+    float: right;
+    margin-left: 0;
+    margin-right: 33px;
+    padding: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: none;
+    height: 100px; }
+    #badge-selector #badge-selector-status-table th, #badge-selector #badge-selector-status-table td {
+      vertical-align: middle;
+      margin: 0;
+      padding: 0 3px;
+      height: 20px;
+      overflow: hidden; }
+    #badge-selector #badge-selector-status-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: normal; }
+    #badge-selector #badge-selector-status-table td.badge-status-current, #badge-selector #badge-selector-status-table td.badge-status-after {
+      font-size: 12px;
+      text-align: right;
+      width: 28px; }
+    #badge-selector #badge-selector-status-table td.badge-status-arrow {
+      font-size: 9px; }
+    #badge-selector #badge-selector-status-table td.badge-status-after {
+      font-weight: bold; }
+      #badge-selector #badge-selector-status-table td.badge-status-after.badge-status-plus {
+        color: #46b; }
+      #badge-selector #badge-selector-status-table td.badge-status-after.badge-status-minus {
+        color: #b55; }
+
+/* ダイアログ表示時のマスク用スクリーン */
+#dark-screen {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 199;
+  background-color: rgba(0, 0, 0, 0.5); }
 
 /* サイドバー広告 */
 #ad_sidebar {
