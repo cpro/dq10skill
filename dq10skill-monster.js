@@ -11,6 +11,7 @@ var Simulator = (function() {
 	var SKILL_PTS_PER_RESTART_OVER_5 = 5; //転生6回目以降の増分
 	var RESTART_EXP_RATIO = 0.03; //仮数値
 	var ADDITIONAL_SKILL_MAX = 2;
+	var BADGE_COUNT = 4;
 
 	var DATA_JSON_URI = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'dq10skill-monster-data.json';
 
@@ -276,13 +277,15 @@ var Simulator = (function() {
 	var BITS_RESTART_COUNT = 4;
 	var BITS_SKILL = 6;
 	var BITS_ADDITIONAL_SKILL = 6;
+	var BITS_BADGE = 10;
 
 	var bitDataLength =
 		BITS_MONSTER_TYPE +
 		BITS_LEVEL +
 		BITS_RESTART_COUNT +
 		BITS_SKILL * (monsterList['slime'].skillLines.length + ADDITIONAL_SKILL_MAX) +
-		BITS_ADDITIONAL_SKILL * ADDITIONAL_SKILL_MAX;
+		BITS_ADDITIONAL_SKILL * ADDITIONAL_SKILL_MAX; // +
+		//BITS_BADGE * BADGE_COUNT;
 
 	//データをビット列にシリアル化
 	Monster.prototype.serialize = function() {
@@ -308,6 +311,16 @@ var Simulator = (function() {
 				}
 			}
 			bitArray = bitArray.concat(numToBitArray(additionalSkillId, BITS_ADDITIONAL_SKILL));
+		}
+
+		//バッジ
+		for(i = 0; i < BADGE_COUNT; i++) {
+			var badgeId = this.badgeEquip[i];
+			if(badgeId === null)
+				badgeId = 0;
+			badgeId = parseInt(badgeId, 10);
+
+			bitArray = bitArray.concat(numToBitArray(badgeId, BITS_BADGE));
 		}
 
 		return bitArray;
@@ -341,7 +354,7 @@ var Simulator = (function() {
 
 			if(additionalSkillId === 0) {
 				monster.updateAdditionalSkill(i, null);
-				break;
+				continue;
 			}
 
 			for(var j = 0; j < additionalSkillLines.length; j++) {
@@ -349,6 +362,21 @@ var Simulator = (function() {
 					monster.updateAdditionalSkill(i, additionalSkillLines[j].name);
 					break;
 				}
+			}
+		}
+
+		//バッジ
+		if(bitArray.length >= BITS_BADGE * BADGE_COUNT) {
+			for(i = 0; i < BADGE_COUNT; i++) {
+				var badgeId = bitArrayToNum(bitArray.splice(0, BITS_BADGE));
+				if(badgeId === 0) {
+					badgeId = null;
+				} else {
+					//0補間
+					badgeId = '00' + badgeId.toString();
+					badgeId = badgeId.substring(badgeId.length - 3);
+				}
+				monster.badgeEquip[i] = badgeId;
 			}
 		}
 
@@ -514,7 +542,8 @@ var Simulator = (function() {
 		LEVEL_MAX: LEVEL_MAX,
 		RESTART_MIN: RESTART_MIN,
 		RESTART_MAX: RESTART_MAX,
-		ADDITIONAL_SKILL_MAX: ADDITIONAL_SKILL_MAX
+		ADDITIONAL_SKILL_MAX: ADDITIONAL_SKILL_MAX,
+		BADGE_COUNT: BADGE_COUNT
 	};
 })();
 
@@ -588,6 +617,7 @@ var SimulatorUI = (function($) {
 		}
 		refreshTotalStatus(monsterId);
 		refreshControls(monsterId);
+		refreshBadgeButtons(monsterId);
 		refreshSaveUrl();
 	}
 
@@ -786,6 +816,11 @@ var SimulatorUI = (function($) {
 		for(var c in sim.badgeClass) {
 			$badgeButtonCont.toggleClass(c, bc == c);
 		}
+	}
+
+	function refreshBadgeButtons(monsterId) {
+		for(var i = 0; i < sim.BADGE_COUNT; i++)
+			drawBadgeButton(monsterId, i);
 	}
 
 	function getCurrentMonsterId(currentNode) {
@@ -1090,6 +1125,7 @@ var SimulatorUI = (function($) {
 				sim.getMonster(monsterId).badgeEquip[badgeIndex] = badgeId;
 				drawBadgeButton(monsterId, badgeIndex);
 				refreshTotalStatus(monsterId);
+				refreshSaveUrl();
 			});
 		});
 	}
