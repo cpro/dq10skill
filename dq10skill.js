@@ -25,9 +25,8 @@
 		var msp = {}; //マスタースキルポイント
 
 		/* メソッド */
-		//初期化
+		//パラメータ初期化
 		function initialize() {
-			//パラメータ初期化
 			for(var vocation in DB.vocations) {
 				skillPts[vocation] = {};
 				for(var s = 0; s < DB.vocations[vocation].skillLines.length; s++) {
@@ -1431,6 +1430,3 @@
 		});
 	});
 })(jQuery);
-
-
-
