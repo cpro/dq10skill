@@ -1,4 +1,11 @@
 (function($) {
+	//データJSONを格納する変数
+	var DB;
+	var DATA_JSON_URI = window.location.href.replace(/\/[^\/]*$/, '/dq10skill-anlucea-data.json');
+	var $dbLoad = $.getJSON(DATA_JSON_URI, function(data) {
+		DB = data;
+	});
+
 	var Simulator = (function() {
 		//定数
 		var SKILL_PTS_MIN = 0;
@@ -6,34 +13,20 @@
 		var LEVEL_MIN = 20;
 		var LEVEL_MAX = 55;
 
-		var DATA_JSON_URI = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'dq10skill-anlucea-data.json';
-		
-		//データロード
-		var allData;
-		$.ajaxSetup({async: false});
-		$.getJSON(DATA_JSON_URI, function(data) {
-			allData = data;
-		});
-		$.ajaxSetup({async: true});
-		
-		if(!allData) return null;
-		
-		var skillLines = allData.skillLines;
-		var skillPtsGiven = allData.skillPtsGiven;
-		var expRequired = allData.expRequired;
-		var statusData = allData.status;
-
 		//パラメータ格納用
 		var skillPts = {};
 		var level = LEVEL_MIN;
-		var baseStatus = statusData[level];
+		var baseStatus;
 
+		/* メソッド */
 		//パラメータ初期化
-		for(var skillLine in skillLines) {
-			skillPts[skillLine] = 0;
+		function initialize() {
+			for(var skillLine in DB.skillLines) {
+				skillPts[skillLine] = 0;
+			}
+			baseStatus = DB.status[level];
 		}
 		
-		/* メソッド */
 		//スキルポイント取得
 		function getSkillPt(skillLine) {
 			return skillPts[skillLine];
@@ -63,14 +56,14 @@
 			}
 			
 			level = newValue;
-			baseStatus = statusData[level];
+			baseStatus = DB.status[level];
 			return newValue;
 		}
 
 		//使用済みスキルポイント合計
 		function totalSkillPts() {
 			var total = 0;
-			for(var skillLine in skillLines)
+			for(var skillLine in DB.skillLines)
 				total += skillPts[skillLine];
 			
 			return total;
@@ -78,14 +71,14 @@
 		
 		//すべてのスキルを振り直し（0にセット）
 		function clearAllSkills() {
-			for(var skillLine in skillLines) {
+			for(var skillLine in DB.skillLines) {
 				skillPts[skillLine] = 0;
 			}
 		}
 		
 		//レベルに対するスキルポイント最大値
 		function maxSkillPts() {
-			return skillPtsGiven[level];
+			return DB.skillPtsGiven[level];
 		}
 		
 		//スキルポイント合計に対する必要レベル取得
@@ -93,7 +86,7 @@
 			var total = totalSkillPts();
 			
 			for(var l = LEVEL_MIN; l <= LEVEL_MAX; l++) {
-				if(skillPtsGiven[l] >= total)
+				if(DB.skillPtsGiven[l] >= total)
 					return l;
 			}
 			return NaN;
@@ -101,7 +94,7 @@
 		
 		//レベルによる必要経験値
 		function requiredExp(level) {
-			return expRequired[level];
+			return DB.expRequired[level];
 		}
 		
 		//不足経験値
@@ -130,8 +123,8 @@
 
 			var total = baseStatus[status];
 			var skills;
-			for(var skillLine in skillLines) {
-				skills = skillLines[skillLine].skills;
+			for(var skillLine in DB.skillLines) {
+				skills = DB.skillLines[skillLine].skills;
 				for(var i = 0; i < skills.length; i++) {
 					if(skillPts[skillLine] < skills[i].pt)
 						break;
@@ -156,7 +149,7 @@
 
 			serial += toByte(getLevel());
 
-			for(var skillLine in skillLines) {
+			for(var skillLine in DB.skillLines) {
 				serial += toByte(getSkillPt(skillLine));
 			}
 
@@ -168,12 +161,12 @@
 				return serial.charCodeAt(cur++);
 			};
 
-			if(serial.length < 1 + skillLines.length)
+			if(serial.length < 1 + DB.skillLines.length)
 				return;
 
 			updateLevel(getData());
 
-			for(var skillLine in skillLines) {
+			for(var skillLine in DB.skillLines) {
 				updateSkillPt(skillLine, getData());
 			}
 		}
@@ -181,6 +174,7 @@
 		//API
 		return {
 			//メソッド
+			initialize: initialize,
 			getSkillPt: getSkillPt,
 			updateSkillPt: updateSkillPt,
 			getLevel: getLevel,
@@ -196,11 +190,6 @@
 			serialize: serialize,
 			deserialize: deserialize,
 
-			//プロパティ
-			skillLines: skillLines,
-			skillPtsGiven: skillPtsGiven,
-			expRequired: expRequired,
-			
 			//定数
 			SKILL_PTS_MIN: SKILL_PTS_MIN,
 			SKILL_PTS_MAX: SKILL_PTS_MAX,
@@ -217,7 +206,7 @@
 
 		function refreshAll() {
 			refreshCharacterInfo();
-			for(var skillLine in sim.skillLines) {
+			for(var skillLine in DB.skillLines) {
 				refreshSkillList(skillLine);
 			}
 			refreshTotalStatus();
@@ -269,7 +258,7 @@
 		function refreshSkillList(skillLine) {
 			$('tr[class^=' + skillLine + '_]').removeClass(CLASSNAME_SKILL_ENABLED); //クリア
 			var skillPt = sim.getSkillPt(skillLine);
-			var skills = sim.skillLines[skillLine].skills;
+			var skills = DB.skillLines[skillLine].skills;
 			for(var s = 0; s < skills.length; s++) {
 				if(skillPt < skills[s].pt)
 					break;
@@ -282,7 +271,7 @@
 		function refreshControls() {
 			$('#anlucea-data .lv_select>select').val(sim.getLevel());
 			
-			for(var skillLine in sim.skillLines) {
+			for(var skillLine in DB.skillLines) {
 				$('#anlucea-data .' + skillLine + ' .ptspinner').spinner('value', sim.getSkillPt(skillLine));
 			}
 		}
@@ -333,7 +322,7 @@
 				var skillPtsGiven;
 
 				for(var i = sim.LEVEL_MIN; i <= sim.LEVEL_MAX; i++) {
-					skillPtsGiven = sim.skillPtsGiven[i].toString();
+					skillPtsGiven = DB.skillPtsGiven[i].toString();
 					if(skillPtsGiven == 'NaN')
 						skillPtsGiven = '-';
 					$select.append($("<option />").val(i).text(i.toString() + ' (' + skillPtsGiven + ')'));
@@ -438,7 +427,7 @@
 					var skillLine = getCurrentSkillLine(this);
 					var skillIndex = parseInt($(this).attr('class').replace(skillLine + '_', ''), 10);
 
-					var requiredPt = sim.skillLines[skillLine].skills[skillIndex].pt;
+					var requiredPt = DB.skillLines[skillLine].skills[skillIndex].pt;
 					sim.updateSkillPt(skillLine, requiredPt);
 					$('.' + skillLine + ' .ptspinner').spinner('value', sim.getSkillPt(skillLine));
 
@@ -623,11 +612,6 @@
 			}
 		}
 		
-		var ui = window.location.pathname.indexOf('/simple.html') > 0 ? SimpleUI : SimulatorUI;
-
-		deserialize();
-		ui.setup();
-		
 		$(window).on('popstate', function(e) {
 			// 最初に開いた状態まで戻ったとき、クエリー文字列がなかったらリロードする
 			if(!e.originalEvent.state && window.location.search.length === 0)
@@ -635,6 +619,15 @@
 			
 			deserialize();
 			ui.refreshAll();
+		});
+		
+		$dbLoad.done(function(data) {
+			Simulator.initialize();
+			
+			var ui = SimulatorUI;
+
+			deserialize();
+			ui.setup();
 		});
 	});
 
