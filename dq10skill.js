@@ -312,9 +312,9 @@
 				}
 			}
 			//末尾にMSPのスキルラインIDとポイントをペアで格納
-			for(sl in msp) {
-				if(msp[sl] > 0) {
-					serial += toByte(DB.skillLines[sl].id) + toByte(msp[sl]);
+			for(skillLine in msp) {
+				if(msp[skillLine] > 0) {
+					serial += toByte(DB.skillLines[skillLine].id) + toByte(msp[skillLine]);
 				}
 			}
 			return serial;
@@ -660,7 +660,7 @@
 					spin: function (e, ui) {
 						var vocation = getCurrentVocation(this);
 						
-						if(sim.updateTrainingSkillPt(vocation, parseInt(ui.value))) {
+						if(sim.updateTrainingSkillPt(vocation, parseInt(ui.value, 10))) {
 							refreshVocationInfo(vocation);
 							refreshTotalRequiredExp();
 							refreshTotalExpRemain();
@@ -726,8 +726,8 @@
 						var skillLine = getCurrentSkillLine(this);
 
 						var succeeded = mspMode ?
-							sim.updateMSP(skillLine, parseInt(ui.value)) :
-							sim.updateSkillPt(vocation, skillLine, parseInt(ui.value));
+							sim.updateMSP(skillLine, parseInt(ui.value, 10)) :
+							sim.updateSkillPt(vocation, skillLine, parseInt(ui.value, 10));
 
 						if(succeeded) {
 							refreshCurrentSkillPt(vocation, skillLine);
@@ -852,17 +852,18 @@
 					refreshTotalPassive();
 					refreshUrlBar();
 				}).dblclick(function (e) {
+					var skillLine;
 					//ダブルクリック時に各職業の該当スキルをすべて振り直し
 					if(mspMode) {
 						if(!window.confirm('マスタースキルポイントをすべて振りなおします。'))
 							return;
 
 						sim.clearMSP();
-						for(var skillLine in DB.skillLines) {
+						for(skillLine in DB.skillLines) {
 							refreshSkillList(skillLine);
 						}
 					} else {
-						var skillLine = getCurrentSkillLine(this);
+						skillLine = getCurrentSkillLine(this);
 						var skillName = DB.skillLines[skillLine].name;
 						
 						if(!window.confirm('スキル「' + skillName + '」をすべて振りなおします。'))
@@ -886,7 +887,7 @@
 				$('.skill_table tr[class]').click(function() {
 					var vocation = getCurrentVocation(this);
 					var skillLine = getCurrentSkillLine(this);
-					var skillIndex = parseInt($(this).attr('class').replace(skillLine + '_', ''));
+					var skillIndex = parseInt($(this).attr('class').replace(skillLine + '_', ''), 10);
 					
 					selectSkillLine(skillLine);
 

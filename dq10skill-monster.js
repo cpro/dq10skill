@@ -94,7 +94,7 @@
 			var total = 0;
 			for(var skillLine in this.skillPts) {
 				var m = skillLine.match(/^additional(\d+)/);
-				if(m && (this.restartCount < parseInt(m[1]) + 1 || this.getAdditionalSkill(m[1]) === null))
+				if(m && (this.restartCount < parseInt(m[1], 10) + 1 || this.getAdditionalSkill(m[1]) === null))
 					continue;
 
 				total += this.skillPts[skillLine];
@@ -243,7 +243,7 @@
 			for(var skillLine in this.skillPts) {
 				var m = skillLine.match(/^additional(\d+)/);
 				if(m) {
-					if(this.restartCount < parseInt(m[1]) + 1 || this.getAdditionalSkill(m[1]) === null)
+					if(this.restartCount < parseInt(m[1], 10) + 1 || this.getAdditionalSkill(m[1]) === null)
 						continue;
 					else
 						skills = DB.skillLines[this.getAdditionalSkill(m[1])].skills;
@@ -838,7 +838,7 @@
 					var monsterId = getCurrentMonsterId(this);
 					var monster = sim.getMonster(monsterId);
 
-					if(monster.updateRestartCount(parseInt(ui.value))) {
+					if(monster.updateRestartCount(parseInt(ui.value, 10))) {
 						refreshAdditionalSkillSelector(monsterId);
 						refreshAdditionalSkill(monsterId);
 						refreshMonsterInfo(monsterId);
@@ -855,7 +855,7 @@
 						$(this).val(monster.getRestartCount());
 						return false;
 					}
-					if(monster.updateRestartCount(parseInt($(this).val()))) {
+					if(monster.updateRestartCount(parseInt($(this).val(), 10))) {
 						refreshAdditionalSkillSelector(monsterId);
 						refreshAdditionalSkill(monsterId);
 						refreshMonsterInfo(monsterId);
@@ -880,7 +880,7 @@
 					var monsterId = getCurrentMonsterId(this);
 					var skillLine = getCurrentSkillLine(this);
 					
-					if(sim.getMonster(monsterId).updateSkillPt(skillLine, parseInt(ui.value))) {
+					if(sim.getMonster(monsterId).updateSkillPt(skillLine, parseInt(ui.value, 10))) {
 						refreshSkillList(monsterId, skillLine);
 						refreshMonsterInfo(monsterId);
 						refreshTotalStatus(monsterId);
@@ -898,7 +898,7 @@
 						$(this).val(monster.getSkillPt(skillLine));
 						return false;
 					}
-					if(monster.updateSkillPt(skillLine, parseInt($(this).val()))) {
+					if(monster.updateSkillPt(skillLine, parseInt($(this).val(), 10))) {
 						refreshSkillList(monsterId, skillLine);
 						refreshMonsterInfo(monsterId);
 						refreshTotalStatus(monsterId);
@@ -945,7 +945,7 @@
 			$ent.find('.skill_table tr[class]').click(function() {
 				var monsterId = getCurrentMonsterId(this);
 				var skillLine = getCurrentSkillLine(this);
-				var skillIndex = parseInt($(this).attr('class').replace(skillLine + '_', ''));
+				var skillIndex = parseInt($(this).attr('class').replace(skillLine + '_', ''), 10);
 				var monster = sim.getMonster(monsterId);
 
 				var skillPt = monster.getSkillPt(skillLine);
