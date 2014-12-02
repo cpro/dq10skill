@@ -328,7 +328,7 @@
 			//先頭に格納されている職業の数を取得
 			var vocationCount = getData();
 
-			for(i = 0; i < vocationCount; i++) {
+			for(var i = 0; i < vocationCount; i++) {
 				var vocation = VOCATIONS_DATA_ORDER[i];
 				var vSkillLines = DB.vocations[vocation].skillLines;
 
@@ -831,7 +831,7 @@
 
 			//リセットボタン設定
 			function() {
-				$reset = $('#pt_reset').button({
+				$('#pt_reset').button({
 					icons: { primary: 'ui-icon-refresh' },
 					text: false
 				}).click(function (e) {
@@ -962,7 +962,7 @@
 				var HEIGHT_UNFOLDED = $('.class_group').height() + 'px';
 				var CLASSNAME_FOLDED = 'folded';
 
-				var $foldToggleButton = $('.toggle_ent').button({
+				$('.toggle_ent').button({
 					icons: { primary: 'ui-icon-arrowthickstop-1-n' },
 					text: false,
 					label: 'おりたたむ'
@@ -1412,6 +1412,8 @@
 			}
 		}
 		
+		var ui = window.location.pathname.indexOf('/simple.html') > 0 ? SimpleUI : SimulatorUI;
+		
 		$(window).on('popstate', function(e) {
 			// 最初に開いた状態まで戻ったとき、クエリー文字列がなかったらリロードする
 			if(!e.originalEvent.state && window.location.search.length === 0)
@@ -1423,8 +1425,6 @@
 
 		$dbLoad.done(function(data) {
 			Simulator.initialize();
-			
-			var ui = window.location.pathname.indexOf('/simple.html') > 0 ? SimpleUI : SimulatorUI;
 
 			deserialize();
 			ui.setup();

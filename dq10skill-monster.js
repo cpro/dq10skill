@@ -23,8 +23,6 @@
 		var BADGE_COUNT = 4;
 
 		//パラメータ格納用
-		var skillPts = {};
-		var levels = {};
 		var monsters = [];
 		
 		//モンスターID管理
@@ -64,7 +62,6 @@
 		
 		//スキルポイント更新：不正値の場合falseを返す
 		Monster.prototype.updateSkillPt = function(skillLine, newValue) {
-			var oldValue = this.skillPts[skillLine];
 			if(newValue < SKILL_PTS_MIN || newValue > SKILL_PTS_MAX) {
 				return false;
 			}
@@ -925,7 +922,7 @@
 			});
 
 			//リセットボタン設定
-			$reset = $ent.find('.reset').button({
+			$ent.find('.reset').button({
 				icons: { primary: 'ui-icon-refresh' },
 				text: false
 			}).click(function (e) {
@@ -948,7 +945,6 @@
 				var skillIndex = parseInt($(this).attr('class').replace(skillLine + '_', ''), 10);
 				var monster = sim.getMonster(monsterId);
 
-				var skillPt = monster.getSkillPt(skillLine);
 				var requiredPt = DB.skillLines[skillLine].skills[skillIndex].pt;
 				
 				monster.updateSkillPt(skillLine, requiredPt);
@@ -965,7 +961,7 @@
 			var HEIGHT_UNFOLDED = $ent.height() + 'px';
 			var CLASSNAME_FOLDED = 'folded';
 
-			var $foldToggleButton = $ent.find('.toggle_ent').button({
+			$ent.find('.toggle_ent').button({
 				icons: { primary: 'ui-icon-arrowthickstop-1-n' },
 				text: false,
 				label: 'おりたたむ'
@@ -1155,8 +1151,8 @@
 
 			//レベル一括設定
 			//セレクトボックス初期化
-			$select = $('#setalllevel>select');
-			for(i = sim.LEVEL_MIN; i <= sim.LEVEL_MAX; i++) {
+			var $select = $('#setalllevel>select');
+			for(var i = sim.LEVEL_MIN; i <= sim.LEVEL_MAX; i++) {
 				$select.append($("<option />").val(i).text(i.toString()));
 			}
 			$select.val(sim.LEVEL_MAX);

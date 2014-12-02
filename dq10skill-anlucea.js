@@ -34,7 +34,6 @@
 		
 		//スキルポイント更新：不正値の場合falseを返す
 		function updateSkillPt(skillLine, newValue) {
-			var oldValue = skillPts[skillLine];
 			if(newValue < SKILL_PTS_MIN || newValue > SKILL_PTS_MAX) {
 				return false;
 			}
@@ -384,7 +383,6 @@
 						}
 					},
 					stop: function (e, ui) {
-						var skillLine = getCurrentSkillLine(this);
 						refreshUrlBar();
 					}
 				});
@@ -406,7 +404,7 @@
 
 			//リセットボタン設定
 			function() {
-				$reset = $('.reset').button({
+				$('.reset').button({
 					icons: { primary: 'ui-icon-refresh' },
 					text: false
 				}).click(function (e) {
@@ -612,6 +610,8 @@
 			}
 		}
 		
+		var ui = SimulatorUI;
+		
 		$(window).on('popstate', function(e) {
 			// 最初に開いた状態まで戻ったとき、クエリー文字列がなかったらリロードする
 			if(!e.originalEvent.state && window.location.search.length === 0)
@@ -623,8 +623,6 @@
 		
 		$dbLoad.done(function(data) {
 			Simulator.initialize();
-			
-			var ui = SimulatorUI;
 
 			deserialize();
 			ui.setup();
