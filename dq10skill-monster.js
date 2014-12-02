@@ -1236,6 +1236,12 @@
 					cancel();
 				});
 
+				//ヘッダー部ドラッグで画面移動可能
+				$dialog.draggable({
+					handle: '#badge-selector-header',
+					cursor: 'move'
+				});
+
 				//バッジをはずすボタン
 				$('#badge-selector-remove').click(function(e) {
 					apply(null);
