@@ -765,11 +765,14 @@ ul.badge-button-container, ul#badge-search-buttons-class {
 	display: none;
 
 	position: fixed;
-	left: 150px;
-	top: 200px;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+
 	z-index: 200;
 
-	margin: 0;
+	margin: auto;
 	padding: 0;
 
 	$badge-selector-body-height: 300px;
