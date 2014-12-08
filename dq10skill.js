@@ -650,51 +650,27 @@
 				});
 			},
 
-			//特訓ポイント選択スピンボタン設定
+			//特訓ポイント選択セレクトボックス設定
 			function() {
 				$trainingPtConsole = $('#training_pt_console');
-				var $spinner = $('#training_pt_spinner');
-				$spinner.spinner({
-					min: sim.TRAINING_SKILL_PTS_MIN,
-					max: sim.TRAINING_SKILL_PTS_MAX,
-					spin: function (e, ui) {
-						var vocation = getCurrentVocation(this);
-						
-						if(sim.updateTrainingSkillPt(vocation, parseInt(ui.value, 10))) {
-							refreshVocationInfo(vocation);
-							refreshTotalRequiredExp();
-							refreshTotalExpRemain();
-							//e.stopPropagation();
-						} else {
-							return false;
-						}
-					},
-					change: function (e, ui) {
-						var vocation = getCurrentVocation(this);
-						var newValue = $(this).val(), oldValue = sim.getTrainingSkillPt(vocation);
+				var $select = $('#training_pt_select');
+				for(var i = 0; i <= sim.TRAINING_SKILL_PTS_MAX; i++) {
+					$select.append($('<option />').val(i).text(i.toString() +
+						' (' + numToFormedStr(DB.trainingPts[i].stamps) + ')'));
+				}
 
-						if(isNaN(newValue)) {
-							$(this).val(oldValue);
-							return false;
-						}
-						
-						newValue = parseInt(newValue, 10);
-						if(newValue == oldValue)
-							return false;
+				$select.change(function() {
+					var vocation = getCurrentVocation(this);
 
-						if(sim.updateTrainingSkillPt(vocation, newValue)) {
-							refreshVocationInfo(vocation);
-							refreshTotalRequiredExp();
-							refreshTotalExpRemain();
-							refreshUrlBar();
-						} else {
-							$(this).val(oldValue);
-							return false;
-						}
-					},
-					stop: function (e, ui) {
+					if(sim.updateTrainingSkillPt(vocation, parseInt($(this).val(), 10))) {
+						refreshVocationInfo(vocation);
+						refreshTotalRequiredExp();
+						refreshTotalExpRemain();
 						refreshUrlBar();
+					} else {
+						return false;
 					}
+
 				});
 			},
 			
@@ -707,7 +683,7 @@
 					var consoleLeft = $('#training-' + vocation).position().left - 3;
 
 					$trainingPtConsole.appendTo($(this)).css({left: consoleLeft});
-					$('#training_pt_spinner').val(sim.getTrainingSkillPt(vocation));
+					$('#training_pt_select').val(sim.getTrainingSkillPt(vocation));
 
 					$trainingPtConsole.show();
 					e.stopPropagation();
