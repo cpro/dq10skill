@@ -836,10 +836,18 @@
 	},
 	
 	"trainingPts": [
-		{ "stamps":    0, "pt": 0 },
-		{ "stamps":  100, "pt": 1 },
-		{ "stamps":  300, "pt": 2 },
-		{ "stamps":  600, "pt": 3 },
-		{ "stamps": 1000, "pt": 4 }
+		{ "stamps":    0, "pt":  0 },
+		{ "stamps":  100, "pt":  1 },
+		{ "stamps":  300, "pt":  2 },
+		{ "stamps":  600, "pt":  3 },
+		{ "stamps": 1000, "pt":  4 },
+		{ "stamps": 1500, "pt":  5 },
+		{ "stamps": 2000, "pt":  6 },
+		{ "stamps": 2500, "pt":  7 },
+		{ "stamps": 3000, "pt":  8 },
+		{ "stamps": 3500, "pt":  9 },
+		{ "stamps": 4000, "pt": 10 },
+		{ "stamps": 4500, "pt": 11 },
+		{ "stamps": 5000, "pt": 12 }
 	]
 }
