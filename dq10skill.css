@@ -536,10 +536,12 @@ ul.badge-button-container li a, ul#badge-search-buttons-class li a {
 #badge-selector {
   display: none;
   position: fixed;
-  left: 150px;
-  top: 200px;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
   z-index: 200;
-  margin: 0;
+  margin: auto;
   padding: 0;
   width: 878px;
   height: 527px;

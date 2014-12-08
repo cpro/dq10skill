@@ -778,16 +778,18 @@
 			var badge = badgeId ? DB.badges[badgeId] : null;
 
 			var buttonText = '';
+			var buttonHintText = '';
 
 			if(badge) {
 				buttonText = badgeId + ' ' + badge.name + '・' + DB.badgeclass[badge['class']];
+				buttonHintText = BadgeSelector.getFeatureCache(badgeId).join("\n");
 			} else {
 				if(badgeIndex == monster.badgeEquip.length - 1)
 					buttonText = 'スペシャルバッジ';
 				else
 					buttonText = 'バッジ' + (badgeIndex + 1).toString();
 			}
-			$badgeButton.text(buttonText);
+			$badgeButton.text(buttonText).attr('title', buttonHintText);
 
 			var bc = badge === null ? 'blank' : badge['class'];
 
@@ -1236,6 +1238,12 @@
 					cancel();
 				});
 
+				//ヘッダー部ドラッグで画面移動可能
+				$dialog.draggable({
+					handle: '#badge-selector-header',
+					cursor: 'move'
+				});
+
 				//バッジをはずすボタン
 				$('#badge-selector-remove').click(function(e) {
 					apply(null);
@@ -1537,7 +1545,8 @@
 				//メソッド
 				setup: setup,
 				setCurrentMonster: setCurrentMonster,
-				show: show
+				show: show,
+				getFeatureCache: getFeatureCache
 			};
 		})();
 
