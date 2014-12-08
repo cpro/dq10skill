@@ -359,10 +359,9 @@ a {
 			top: 0;
 			left: 0;
 
-			input { /* spinner */
-				width: 24px;
-				text-align: right;
-				font-size: 12px;
+			#training_pt-select {
+				margin: 0;
+				padding: 0;
 			}
 		}
 	}
