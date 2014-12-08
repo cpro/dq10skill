@@ -7,13 +7,13 @@
     <link href='http://cpro.jp/dq10/skillsimulator/monster.html' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。まもの使いで仲間にしたモンスター用。' name='description'>
     <title>DQ10 仲間モンスター用スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=m0.6' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=m0.7' rel='stylesheet' type='text/css'>
     <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' type='text/javascript'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
     <script src='js/base64.js' type='text/javascript'></script>
-    <script src='./dq10skill-monster.js?ver=m0.6' type='text/javascript'></script>
+    <script src='./dq10skill-monster.js?ver=m0.7' type='text/javascript'></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -74,7 +74,7 @@
     <div id='body_content'>
       <div class='monster_ent' id='initial-instruction'>
         <p>上のモンスター名のボタンをクリックして仲間モンスターを追加してください。</p>
-        <p class='whatsnew'>（New: ver2.3後期(2.3.5b/c)のやみしばりを追加）</p>
+        <p class='whatsnew'>（New: バトルロードのモンスターバッジ選択機能追加）</p>
       </div>
       <div id='monsters'></div>
       <div class='monster_ent' id='monster_dummy' style='display:none'>
@@ -182,6 +182,14 @@
               履歴:
               <ul>
                 <li>
+                  2014/12/8 v0.7
+                  <ul>
+                    <li>バッジ選択画面をブラウザのウィンドウサイズに対して中央に表示するよう修正。また、選択画面上部をドラッグ可能に。</li>
+                    <li>装備中のバッジのボタンをマウスでポイントしたとき、バッジ効果をヒント表示するようにした。</li>
+                    <li>データロードの最適化等微調整。</li>
+                  </ul>
+                </li>
+                <li>
                   2014/11/26 v0.6 バトルロードのモンスターバッジ機能を追加。
                   <ul>
                     <li>同じバッジや4つめ以外でのSPバッジも選択できてしまいますが、これは修正予定です。</li>
@@ -200,14 +208,6 @@
                     <li>2.1で消費MPが減らされた上位呪文（メラゾーマ25→12等）がそのままだったので修正。</li>
                     <li>2014/11/13 v0.5.1 ver2.3後期(2.3.5b/c)のやみしばりを追加。</li>
                     <li>2014/11/17 v0.5.2 ver2.3後期の特技変更に対応。デモンズソードのロストアタック→スラッシュ等</li>
-                  </ul>
-                </li>
-                <li>
-                  2014/10/3 v0.4.4
-                  <ul>
-                    <li>モンスター追加時の初期状態を最大Lv・最大転生数に変更。完成時を想定した使われ方が多いため。</li>
-                    <li>転生追加スキルを重複して指定できないよう修正。ねこまどうのメラ×2のように、既存スキルとの重複は引き続き可能。</li>
-                    <li>スティックスキル32のさいだいMP+100がステータスに反映されていなかったのを修正。</li>
                   </ul>
                 </li>
                 <li>過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。</li>

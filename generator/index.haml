@@ -1,4 +1,4 @@
-- VERSION = '5.5'
+- VERSION = '5.6'
 !!! 5
 %html
 	%head
@@ -137,7 +137,7 @@
 			#lv_console{style: 'display: none'}
 				%select#lv-select.ui-widget-content.ui-corner-all{size: 1}
 			#training_pt_console{style: 'display: none'}
-				%input#training_pt_spinner
+				%select#training_pt_select.ui-widget-content.ui-corner-all
 			#footconsole
 				%p#setalllevel
 					レベル一括設定
@@ -177,6 +177,7 @@
 					%li
 						履歴:
 						%ul
+							%li 2014/12/8 v5.6 特訓スキルポイントの入力をセレクトボックスに変更し、選択欄に特訓スタンプ数を併記。他、データロードの最適化等微調整。
 							%li 2014/11/20 v5.5 140スキルに対応。
 							%li
 								2014/11/14 v5.4.6
@@ -186,10 +187,6 @@
 							%li 2014/11/6 v5.4.5 ver2.3後期対応。特訓上限11→12
 							%li 2014/10/9 v5.4.4 MSP17→18 セレド配信クエストでの追加に対応。
 							%li 2014/9/18 v5.4.3 MSP16→17 メルサンディ配信クエストでの追加に対応。
-							%li
-								2014/9/11 v5.4.1 ver2.3前期対応。特訓上限10→11
-								%ul
-									%li 2014/9/12 v5.4.2 MSP15→16
 							%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
 					%li
 						ToDo:
