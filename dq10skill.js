@@ -432,7 +432,7 @@
 			serialize: serialize,
 			deserialize: deserialize,
 			deserializeBit: deserializeBit,
-			
+
 			//定数
 			SKILL_PTS_MIN: SKILL_PTS_MIN,
 			SKILL_PTS_MAX: SKILL_PTS_MAX,
@@ -446,11 +446,135 @@
 		};
 	})();
 
+	//Undo/Redo
+	var SimulatorCommandManager = (function(simulator) {
+		var sim = simulator;
+
+		var UNDO_MAX = 20;
+		var commandStack = [];
+		var cursor = 0;
+
+		function invoke(command) {
+			var ret = command.invoke();
+			//if(!ret) return false;
+
+			commandStack.splice(cursor);
+			commandStack.push(command);
+			cursor++;
+
+			if(commandStack.length > UNDO_MAX) {
+				commandStack.shift();
+				cursor--;
+			}
+
+			return ret;
+		}
+
+		function undo() {
+			if(!isUndoable()) return;
+
+			cursor--;
+			var command = commandStack[cursor];
+			command.undo();
+		}
+
+		function redo() {
+			if(!isRedoable()) return;
+
+			var command = commandStack[cursor];
+			command.redo();
+			cursor++;
+		}
+
+		function isUndoable() {
+			return (cursor > 0);
+		}
+
+		function isRedoable() {
+			return (cursor < commandStack.length);
+		}
+
+		var UpdateSkillPtCommand = function(vocation, skillLine, newValue) {
+			this.vocation = vocation;
+			this.skillLine = skillLine;
+			this.prevValue = 0;
+			this.newValue = newValue;
+		};
+		UpdateSkillPtCommand.prototype.invoke = function() {
+			this.prevValue = getSkillPt(this.vocation, this.skillLine);
+			skillPts[this.vocation][this.skillLine] = this.newValue;
+		};
+		UpdateSkillPtCommand.prototype.undo = function() {
+			skillPts[this.vocation][this.skillLine] = this.prevValue;
+		};
+		UpdateSkillPtCommand.prototype.redo = function() {
+			skillPts[this.vocation][this.skillLine] = this.newValue;
+		};
+
+		var UpdateLevelCommand = function(vocation, newValue) {
+			this.vocation = vocation;
+			this.prevValue = 0;
+			this.newValue = newValue;
+		};
+		UpdateLevelCommand.prototype.invoke = function() {
+			this.prevValue = sim.getLevel(this.vocation);
+			sim.updateLevel(this.vocation, this.newValue);
+		};
+		UpdateLevelCommand.prototype.undo = function() {
+			sim.updateLevel(this.vocation, this.prevValue);
+		};
+		UpdateLevelCommand.prototype.redo = function() {
+			sim.updateLevel(this.vocation, this.newValue);
+		};
+
+		var UpdateTrainingSkillPtCommand = function() {
+
+		};
+
+		//API
+		return {
+			//invoke: invoke,
+			undo: undo,
+			redo: redo,
+			isUndoable: isUndoable,
+			isRedoable: isRedoable,
+
+			updateSkillPt: function(vocation, skillLine, newValue) {
+				return invoke(new UpdateSkillPtCommand(vocation, skillLine, newValue));
+			},
+			updateLevel: function(vocation, newValue) {
+				return invoke(new UpdateLevelCommand(vocation, newValue));
+			},
+			updateTrainingSkillPt : function(vocation, newValue) {
+				return invoke(new UpdateTrainingSkillPtCommand(vocation, newValue));
+			},
+			updateMSP: function(skillLine, newvalue) {
+				return invoke(new UpdateMSPCommand(skillLine, newValue));
+			},
+			clearPtsOfSameSkills: function(skillLine) {
+				return invoke(new ClearPtsOfSameSkillsCommand(skillLine));
+			},
+			clearMSP: function() {
+				return invoke(new ClearMSPCommand());
+			},
+			clearAllSkills: function() {
+				return invoke(new ClearAllSkillsCommand());
+			},
+			presetStatus: function() {
+				return invoke(new PresetStatusCommand(status));
+			},
+			bringUpLevelToRequired: function() {
+				return invoke(new BringUpLevelToRequiredCommand());
+			}
+		};
+	})(Simulator);
+
 	var SimulatorUI = (function() {
 		var CLASSNAME_SKILL_ENABLED = 'enabled';
 		var CLASSNAME_ERROR = 'error';
 		
 		var sim = Simulator;
+		var com = SimulatorCommandManager;
 
 		var $ptConsole, $lvConsole, $trainingPtConsole;
 		
@@ -626,7 +750,7 @@
 
 				$select.change(function() {
 					var vocation = getCurrentVocation(this);
-					sim.updateLevel(vocation, $(this).val());
+					com.updateLevel(vocation, $(this).val());
 					refreshVocationInfo(vocation);
 					refreshTotalRequiredExp();
 					refreshTotalExpRemain();
@@ -1085,6 +1209,18 @@
 					refreshTotalExpRemain();
 					refreshControls();
 					refreshUrlBar();
+				});
+			},
+
+			//undo/redo
+			function() {
+				shortcut.add('Ctrl+Z', function() {
+					com.undo();
+					refreshAll();
+				});
+				shortcut.add('Ctrl+Y', function() {
+					com.redo();
+					refreshAll();
 				});
 			}
 		];
