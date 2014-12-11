@@ -66,7 +66,7 @@
 		function updateLevel(vocation, newValue) {
 			var oldValue = levels[vocation];
 			if(newValue < LEVEL_MIN || newValue > LEVEL_MAX) {
-				return oldValue;
+				return false;
 			}
 			
 			levels[vocation] = newValue;
@@ -455,8 +455,8 @@
 		var cursor = 0;
 
 		function invoke(command) {
-			var ret = command.invoke();
-			//if(!ret) return false;
+			var succeeded = command.invoke();
+			if(!succeeded) return false;
 
 			commandStack.splice(cursor);
 			commandStack.push(command);
@@ -467,7 +467,7 @@
 				cursor--;
 			}
 
-			return ret;
+			return true;
 		}
 
 		function undo() {
@@ -494,6 +494,7 @@
 			return (cursor < commandStack.length);
 		}
 
+		//スキルポイント更新
 		var UpdateSkillPtCommand = function(vocation, skillLine, newValue) {
 			this.vocation = vocation;
 			this.skillLine = skillLine;
@@ -501,16 +502,17 @@
 			this.newValue = newValue;
 		};
 		UpdateSkillPtCommand.prototype.invoke = function() {
-			this.prevValue = getSkillPt(this.vocation, this.skillLine);
-			skillPts[this.vocation][this.skillLine] = this.newValue;
+			this.prevValue = sim.getSkillPt(this.vocation, this.skillLine);
+			return sim.updateSkillPt(this.vocation, this.skillLine, this.newValue);
 		};
 		UpdateSkillPtCommand.prototype.undo = function() {
-			skillPts[this.vocation][this.skillLine] = this.prevValue;
+			sim.updateSkillPt(this.vocation, this.skillLine, this.prevValue);
 		};
 		UpdateSkillPtCommand.prototype.redo = function() {
-			skillPts[this.vocation][this.skillLine] = this.newValue;
+			sim.updateSkillPt(this.vocation, this.skillLine, this.newValue);
 		};
 
+		//レベル更新
 		var UpdateLevelCommand = function(vocation, newValue) {
 			this.vocation = vocation;
 			this.prevValue = 0;
@@ -518,7 +520,7 @@
 		};
 		UpdateLevelCommand.prototype.invoke = function() {
 			this.prevValue = sim.getLevel(this.vocation);
-			sim.updateLevel(this.vocation, this.newValue);
+			return sim.updateLevel(this.vocation, this.newValue);
 		};
 		UpdateLevelCommand.prototype.undo = function() {
 			sim.updateLevel(this.vocation, this.prevValue);
@@ -527,8 +529,61 @@
 			sim.updateLevel(this.vocation, this.newValue);
 		};
 
-		var UpdateTrainingSkillPtCommand = function() {
+		//全職業のレベルを一括指定
+		var SetAllLevelCommand = function(newValue) {
+			this.prevSerial = '';
+			this.newValue = newValue;
+		};
+		SetAllLevelCommand.prototype.invoke = function() {
+			this.prevSerial = sim.serialize();
+			for(var vocation in DB.vocations) {
+				var succeeded = sim.updateLevel(vocation, this.newValue);
+				if(!succeeded) {
+					sim.deserialize(this.prevSerial);
+					return false;
+				}
+			}
+			return true;
+		};
+		SetAllLevelCommand.prototype.undo = function() {
+			sim.deserialize(this.prevSerial);
+		};
+		SetAllLevelCommand.prototype.redo = function() {
+			for(var vocation in DB.vocations) {
+				sim.updateLevel(vocation, this.newValue);
+			}
+		};
 
+		var UpdateTrainingSkillPtCommand = function(vocation, newValue) {
+			this.vocation = vocation;
+			this.prevValue = 0;
+			this.newValue = newValue;
+		};
+		UpdateTrainingSkillPtCommand.prototype.invoke = function() {
+			this.prevValue = sim.getTrainingSkillPt(this.vocation);
+			return sim.updateTrainingSkillPt(this.vocation, this.newValue);
+		};
+		UpdateTrainingSkillPtCommand.prototype.undo = function() {
+			sim.updateTrainingSkillPt(this.vocation, this.prevValue);
+		};
+		UpdateTrainingSkillPtCommand.prototype.redo = function() {
+			sim.updateTrainingSkillPt(this.vocation, this.newValue);
+		};
+
+		var UpdateMSPCommand = function(skillLine, newValue) {
+			this.skillLine = skillLine;
+			this.prevValue = 0;
+			this.newValue = newValue;
+		};
+		UpdateMSPCommand.prototype.invoke = function() {
+			this.prevValue = sim.getMSP(this.skillLine);
+			return sim.updateMSP(this.skillLine, this.newValue);
+		};
+		UpdateMSPCommand.prototype.undo = function() {
+			sim.updateMSP(this.skillLine, this.prevValue);
+		};
+		UpdateMSPCommand.prototype.redo = function() {
+			sim.updateMSP(this.skillLine, this.newValue);
 		};
 
 		//API
@@ -545,10 +600,13 @@
 			updateLevel: function(vocation, newValue) {
 				return invoke(new UpdateLevelCommand(vocation, newValue));
 			},
+			setAllLevel: function(newValue) {
+				return invoke(new SetAllLevelCommand(newValue));
+			},
 			updateTrainingSkillPt : function(vocation, newValue) {
 				return invoke(new UpdateTrainingSkillPtCommand(vocation, newValue));
 			},
-			updateMSP: function(skillLine, newvalue) {
+			updateMSP: function(skillLine, newValue) {
 				return invoke(new UpdateMSPCommand(skillLine, newValue));
 			},
 			clearPtsOfSameSkills: function(skillLine) {
@@ -786,7 +844,7 @@
 				$select.change(function() {
 					var vocation = getCurrentVocation(this);
 
-					if(sim.updateTrainingSkillPt(vocation, parseInt($(this).val(), 10))) {
+					if(com.updateTrainingSkillPt(vocation, parseInt($(this).val(), 10))) {
 						refreshVocationInfo(vocation);
 						refreshTotalRequiredExp();
 						refreshTotalExpRemain();
@@ -826,8 +884,8 @@
 						var skillLine = getCurrentSkillLine(this);
 
 						var succeeded = mspMode ?
-							sim.updateMSP(skillLine, parseInt(ui.value, 10)) :
-							sim.updateSkillPt(vocation, skillLine, parseInt(ui.value, 10));
+							com.updateMSP(skillLine, parseInt(ui.value, 10)) :
+							com.updateSkillPt(vocation, skillLine, parseInt(ui.value, 10));
 
 						if(succeeded) {
 							refreshCurrentSkillPt(vocation, skillLine);
@@ -858,8 +916,8 @@
 							return false;
 
 						var succeeded = mspMode ?
-							sim.updateMSP(skillLine, newValue) :
-							sim.updateSkillPt(vocation, skillLine, newValue);
+							com.updateMSP(skillLine, newValue) :
+							com.updateSkillPt(vocation, skillLine, newValue);
 
 						if(succeeded) {
 							refreshCurrentSkillPt(vocation, skillLine);
@@ -941,9 +999,9 @@
 					selectSkillLine(skillLine);
 
 					if(mspMode)
-						sim.updateMSP(skillLine, 0);
+						com.updateMSP(skillLine, 0);
 					else
-						sim.updateSkillPt(vocation, skillLine, 0);
+						com.updateSkillPt(vocation, skillLine, 0);
 					$('#pt_spinner').val(0);
 					refreshCurrentSkillPt(vocation, skillLine);
 					refreshSkillList(skillLine);
@@ -997,12 +1055,12 @@
 						totalPtsOfOthers = sim.totalOfSameSkills(skillLine) - sim.getMSP(skillLine);
 						if(requiredPt < totalPtsOfOthers) return;
 
-						if(!sim.updateMSP(skillLine, requiredPt - totalPtsOfOthers)) return;
+						if(!com.updateMSP(skillLine, requiredPt - totalPtsOfOthers)) return;
 					} else {
 						totalPtsOfOthers = sim.totalOfSameSkills(skillLine) - sim.getSkillPt(vocation, skillLine);
 						if(requiredPt < totalPtsOfOthers) return;
 
-						sim.updateSkillPt(vocation, skillLine, requiredPt - totalPtsOfOthers);
+						com.updateSkillPt(vocation, skillLine, requiredPt - totalPtsOfOthers);
 					}
 					
 					refreshCurrentSkillPt(vocation, skillLine);
@@ -1116,9 +1174,8 @@
 				$select.val(sim.LEVEL_MAX);
 				
 				$('#setalllevel>button').button().click(function(e) {
-					for(var vocation in DB.vocations) {
-						sim.updateLevel(vocation, $select.val());
-					}
+					if(!com.setAllLevel($select.val())) return;
+
 					refreshAllVocationInfo();
 					refreshTotalRequiredExp();
 					refreshTotalExpRemain();
@@ -1215,10 +1272,12 @@
 			//undo/redo
 			function() {
 				shortcut.add('Ctrl+Z', function() {
+					hideConsoles();
 					com.undo();
 					refreshAll();
 				});
 				shortcut.add('Ctrl+Y', function() {
+					hideConsoles();
 					com.redo();
 					refreshAll();
 				});
