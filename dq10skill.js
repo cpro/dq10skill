@@ -458,9 +458,16 @@
 			var succeeded = command.execute();
 			if(!succeeded) return false;
 
+			//以降のスタックを切捨て
 			commandStack.splice(cursor);
-			commandStack.push(command);
-			cursor++;
+
+			if(cursor >= 1 && commandStack[cursor - 1].isAbsorbable(command)) {
+				//連続した同種の操作ならひとつの操作にまとめる
+				commandStack[cursor - 1].absorb(command);
+			} else {
+				commandStack.push(command);
+				cursor++;
+			}
 
 			if(commandStack.length > UNDO_MAX) {
 				commandStack.shift();
@@ -509,6 +516,15 @@
 		UpdateSkillPt.prototype.undo = function() {
 			sim.updateSkillPt(this.vocation, this.skillLine, this.prevValue);
 		};
+		UpdateSkillPt.prototype.name = 'UpdateSkillPt';
+		UpdateSkillPt.prototype.isAbsorbable = function(command) {
+			return this.name === command.name &&
+				this.vocation === command.vocation &&
+				this.skillLine === command.skillLine;
+		};
+		UpdateSkillPt.prototype.absorb = function(newCommand) {
+			this.newValue = newCommand.newValue;
+		};
 
 		//レベル更新
 		var UpdateLevel = function(vocation, newValue) {
@@ -523,6 +539,14 @@
 		};
 		UpdateLevel.prototype.undo = function() {
 			sim.updateLevel(this.vocation, this.prevValue);
+		};
+		UpdateLevel.prototype.name = 'UpdateLevel';
+		UpdateLevel.prototype.isAbsorbable = function(command) {
+			return this.name === command.name &&
+				this.vocation === command.vocation;
+		};
+		UpdateLevel.prototype.absorb = function(newCommand) {
+			this.newValue = newCommand.newValue;
 		};
 
 		//全職業のレベルを一括指定
@@ -545,10 +569,12 @@
 		SetAllLevel.prototype.undo = function() {
 			sim.deserialize(this.prevSerial);
 		};
+		SetAllLevel.prototype.isAbsorbable = function() { return false; };
 
+		//特訓スキルポイント更新
 		var UpdateTrainingSkillPt = function(vocation, newValue) {
 			this.vocation = vocation;
-			this.prevValue = 0;
+			this.prevValue = undefined;
 			this.newValue = newValue;
 		};
 		UpdateTrainingSkillPt.prototype.execute = function() {
@@ -559,10 +585,19 @@
 		UpdateTrainingSkillPt.prototype.undo = function() {
 			sim.updateTrainingSkillPt(this.vocation, this.prevValue);
 		};
+		UpdateTrainingSkillPt.prototype.name = 'UpdateTrainingSkillPt';
+		UpdateTrainingSkillPt.prototype.isAbsorbable = function(command) {
+			return this.name === command.name &&
+				this.vocation === command.vocation;
+		};
+		UpdateTrainingSkillPt.prototype.absorb = function(newCommand) {
+			this.newValue = newCommand.newValue;
+		};
 
+		//MSP更新
 		var UpdateMSP = function(skillLine, newValue) {
 			this.skillLine = skillLine;
-			this.prevValue = 0;
+			this.prevValue = undefined;
 			this.newValue = newValue;
 		};
 		UpdateMSP.prototype.execute = function() {
@@ -572,6 +607,14 @@
 		};
 		UpdateMSP.prototype.undo = function() {
 			sim.updateMSP(this.skillLine, this.prevValue);
+		};
+		UpdateMSP.prototype.name = 'UpdateMSP';
+		UpdateMSP.prototype.isAbsorbable = function(command) {
+			return this.name === command.name &&
+				this.skillLine === command.skillLine;
+		};
+		UpdateMSP.prototype.absorb = function(newCommand) {
+			this.newValue = newCommand.newValue;
 		};
 
 		//API
