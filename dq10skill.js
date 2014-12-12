@@ -455,7 +455,7 @@
 		var cursor = 0;
 
 		function invoke(command) {
-			var succeeded = command.invoke();
+			var succeeded = command.execute();
 			if(!succeeded) return false;
 
 			commandStack.splice(cursor);
@@ -482,7 +482,7 @@
 			if(!isRedoable()) return;
 
 			var command = commandStack[cursor];
-			command.redo();
+			command.execute();
 			cursor++;
 		}
 
@@ -495,47 +495,44 @@
 		}
 
 		//スキルポイント更新
-		var UpdateSkillPtCommand = function(vocation, skillLine, newValue) {
+		var UpdateSkillPt = function(vocation, skillLine, newValue) {
 			this.vocation = vocation;
 			this.skillLine = skillLine;
-			this.prevValue = 0;
+			this.prevValue = undefined;
 			this.newValue = newValue;
 		};
-		UpdateSkillPtCommand.prototype.invoke = function() {
-			this.prevValue = sim.getSkillPt(this.vocation, this.skillLine);
+		UpdateSkillPt.prototype.execute = function() {
+			if(this.prevValue === undefined)
+				this.prevValue = sim.getSkillPt(this.vocation, this.skillLine);
 			return sim.updateSkillPt(this.vocation, this.skillLine, this.newValue);
 		};
-		UpdateSkillPtCommand.prototype.undo = function() {
+		UpdateSkillPt.prototype.undo = function() {
 			sim.updateSkillPt(this.vocation, this.skillLine, this.prevValue);
-		};
-		UpdateSkillPtCommand.prototype.redo = function() {
-			sim.updateSkillPt(this.vocation, this.skillLine, this.newValue);
 		};
 
 		//レベル更新
-		var UpdateLevelCommand = function(vocation, newValue) {
+		var UpdateLevel = function(vocation, newValue) {
 			this.vocation = vocation;
-			this.prevValue = 0;
+			this.prevValue = undefined;
 			this.newValue = newValue;
 		};
-		UpdateLevelCommand.prototype.invoke = function() {
-			this.prevValue = sim.getLevel(this.vocation);
+		UpdateLevel.prototype.execute = function() {
+			if(this.prevValue === undefined)
+				this.prevValue = sim.getLevel(this.vocation);
 			return sim.updateLevel(this.vocation, this.newValue);
 		};
-		UpdateLevelCommand.prototype.undo = function() {
+		UpdateLevel.prototype.undo = function() {
 			sim.updateLevel(this.vocation, this.prevValue);
-		};
-		UpdateLevelCommand.prototype.redo = function() {
-			sim.updateLevel(this.vocation, this.newValue);
 		};
 
 		//全職業のレベルを一括指定
-		var SetAllLevelCommand = function(newValue) {
-			this.prevSerial = '';
+		var SetAllLevel = function(newValue) {
+			this.prevSerial = undefined;
 			this.newValue = newValue;
 		};
-		SetAllLevelCommand.prototype.invoke = function() {
-			this.prevSerial = sim.serialize();
+		SetAllLevel.prototype.execute = function() {
+			if(this.prevSerial === undefined)
+				this.prevSerial = sim.serialize();
 			for(var vocation in DB.vocations) {
 				var succeeded = sim.updateLevel(vocation, this.newValue);
 				if(!succeeded) {
@@ -545,45 +542,36 @@
 			}
 			return true;
 		};
-		SetAllLevelCommand.prototype.undo = function() {
+		SetAllLevel.prototype.undo = function() {
 			sim.deserialize(this.prevSerial);
 		};
-		SetAllLevelCommand.prototype.redo = function() {
-			for(var vocation in DB.vocations) {
-				sim.updateLevel(vocation, this.newValue);
-			}
-		};
 
-		var UpdateTrainingSkillPtCommand = function(vocation, newValue) {
+		var UpdateTrainingSkillPt = function(vocation, newValue) {
 			this.vocation = vocation;
 			this.prevValue = 0;
 			this.newValue = newValue;
 		};
-		UpdateTrainingSkillPtCommand.prototype.invoke = function() {
-			this.prevValue = sim.getTrainingSkillPt(this.vocation);
+		UpdateTrainingSkillPt.prototype.execute = function() {
+			if(this.prevValue === undefined)
+				this.prevValue = sim.getTrainingSkillPt(this.vocation);
 			return sim.updateTrainingSkillPt(this.vocation, this.newValue);
 		};
-		UpdateTrainingSkillPtCommand.prototype.undo = function() {
+		UpdateTrainingSkillPt.prototype.undo = function() {
 			sim.updateTrainingSkillPt(this.vocation, this.prevValue);
 		};
-		UpdateTrainingSkillPtCommand.prototype.redo = function() {
-			sim.updateTrainingSkillPt(this.vocation, this.newValue);
-		};
 
-		var UpdateMSPCommand = function(skillLine, newValue) {
+		var UpdateMSP = function(skillLine, newValue) {
 			this.skillLine = skillLine;
 			this.prevValue = 0;
 			this.newValue = newValue;
 		};
-		UpdateMSPCommand.prototype.invoke = function() {
-			this.prevValue = sim.getMSP(this.skillLine);
+		UpdateMSP.prototype.execute = function() {
+			if(this.prevValue === undefined)
+				this.prevValue = sim.getMSP(this.skillLine);
 			return sim.updateMSP(this.skillLine, this.newValue);
 		};
-		UpdateMSPCommand.prototype.undo = function() {
+		UpdateMSP.prototype.undo = function() {
 			sim.updateMSP(this.skillLine, this.prevValue);
-		};
-		UpdateMSPCommand.prototype.redo = function() {
-			sim.updateMSP(this.skillLine, this.newValue);
 		};
 
 		//API
@@ -595,34 +583,34 @@
 			isRedoable: isRedoable,
 
 			updateSkillPt: function(vocation, skillLine, newValue) {
-				return invoke(new UpdateSkillPtCommand(vocation, skillLine, newValue));
+				return invoke(new UpdateSkillPt(vocation, skillLine, newValue));
 			},
 			updateLevel: function(vocation, newValue) {
-				return invoke(new UpdateLevelCommand(vocation, newValue));
+				return invoke(new UpdateLevel(vocation, newValue));
 			},
 			setAllLevel: function(newValue) {
-				return invoke(new SetAllLevelCommand(newValue));
+				return invoke(new SetAllLevel(newValue));
 			},
 			updateTrainingSkillPt : function(vocation, newValue) {
-				return invoke(new UpdateTrainingSkillPtCommand(vocation, newValue));
+				return invoke(new UpdateTrainingSkillPt(vocation, newValue));
 			},
 			updateMSP: function(skillLine, newValue) {
-				return invoke(new UpdateMSPCommand(skillLine, newValue));
+				return invoke(new UpdateMSP(skillLine, newValue));
 			},
 			clearPtsOfSameSkills: function(skillLine) {
-				return invoke(new ClearPtsOfSameSkillsCommand(skillLine));
+				return invoke(new ClearPtsOfSameSkills(skillLine));
 			},
 			clearMSP: function() {
-				return invoke(new ClearMSPCommand());
+				return invoke(new ClearMSP());
 			},
 			clearAllSkills: function() {
-				return invoke(new ClearAllSkillsCommand());
+				return invoke(new ClearAllSkills());
 			},
 			presetStatus: function() {
-				return invoke(new PresetStatusCommand(status));
+				return invoke(new PresetStatus(status));
 			},
 			bringUpLevelToRequired: function() {
-				return invoke(new BringUpLevelToRequiredCommand());
+				return invoke(new BringUpLevelToRequired());
 			}
 		};
 	})(Simulator);
