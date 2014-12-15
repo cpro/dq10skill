@@ -549,28 +549,6 @@
 			this.newValue = newCommand.newValue;
 		};
 
-		//全職業のレベルを一括指定
-		var SetAllLevel = function(newValue) {
-			this.prevSerial = undefined;
-			this.newValue = newValue;
-		};
-		SetAllLevel.prototype.execute = function() {
-			if(this.prevSerial === undefined)
-				this.prevSerial = sim.serialize();
-			for(var vocation in DB.vocations) {
-				var succeeded = sim.updateLevel(vocation, this.newValue);
-				if(!succeeded) {
-					sim.deserialize(this.prevSerial);
-					return false;
-				}
-			}
-			return true;
-		};
-		SetAllLevel.prototype.undo = function() {
-			sim.deserialize(this.prevSerial);
-		};
-		SetAllLevel.prototype.isAbsorbable = function() { return false; };
-
 		//特訓スキルポイント更新
 		var UpdateTrainingSkillPt = function(vocation, newValue) {
 			this.vocation = vocation;
@@ -617,6 +595,90 @@
 			this.newValue = newCommand.newValue;
 		};
 
+		//一括操作系コマンドの基本抽象クラス
+		//継承先で _impl() を実装する
+		var PackageCommand = function() {};
+		PackageCommand.prototype.execute = function() {
+			if(this.prevSerial === undefined)
+				this.prevSerial = sim.serialize();
+			var succeeded = this._impl();
+			if(!succeeded) {
+				sim.deserialize(this.prevSerial);
+				return false;
+			}
+			return true;
+		};
+		PackageCommand.prototype.undo = function() {
+			sim.deserialize(this.prevSerial);
+		};
+		PackageCommand.prototype.isAbsorbable = function() { return false; };
+		PackageCommand.prototype._impl = function() {
+			throw 'NotImplemented';
+		};
+
+		//全職業のレベルを一括指定
+		var SetAllLevel = function(newValue) {
+			this.prevSerial = undefined;
+			this.newValue = newValue;
+		};
+		SetAllLevel.prototype = new PackageCommand();
+		SetAllLevel.prototype._impl = function() {
+			for(var vocation in DB.vocations) {
+				var succeeded = sim.updateLevel(vocation, this.newValue);
+				if(!succeeded) return false;
+			}
+			return true;
+		};
+
+		//特定スキルすべてを振り直し
+		var ClearPtsOfSameSkills = function(skillLine) {
+			this.skillLine = skillLine;
+		};
+		ClearPtsOfSameSkills.prototype = new PackageCommand();
+		ClearPtsOfSameSkills.prototype._impl = function() {
+			sim.clearPtsOfSameSkills(this.skillLine);
+			return true;
+		};
+
+		//MSPすべてを振り直し
+		var ClearMSP = function() {};
+		ClearMSP.prototype = new PackageCommand();
+		ClearMSP.prototype._impl = function() {
+			sim.clearMSP();
+			return true;
+		};
+
+		//全スキルを振り直し
+		var ClearAllSkills = function() {};
+		ClearAllSkills.prototype = new PackageCommand();
+		ClearAllSkills.prototype._impl = function() {
+			sim.clearAllSkills();
+			return true;
+		};
+
+		//ステータス上昇パッシブスキルを取得
+		//セミコロン区切りで複数指定可
+		var PresetStatus = function(status) {
+			this.status = status;
+		};
+		PresetStatus.prototype = new PackageCommand();
+		PresetStatus.prototype._impl = function() {
+			var sarray = this.status.split(';');
+			var succeeded = false;
+			for(var i = 0; i < sarray.length; i++) {
+				succeeded = sim.presetStatus(sarray[i]) || succeeded;
+			}
+			return succeeded;
+		};
+
+		//現在のレベルを取得スキルに対する必要レベルにそろえる
+		var BringUpLevelToRequired = function() {};
+		BringUpLevelToRequired.prototype = new PackageCommand();
+		BringUpLevelToRequired.prototype._impl = function() {
+			sim.bringUpLevelToRequired();
+			return true;
+		};
+
 		//API
 		return {
 			//invoke: invoke,
@@ -649,7 +711,7 @@
 			clearAllSkills: function() {
 				return invoke(new ClearAllSkills());
 			},
-			presetStatus: function() {
+			presetStatus: function(status) {
 				return invoke(new PresetStatus(status));
 			},
 			bringUpLevelToRequired: function() {
@@ -1047,7 +1109,7 @@
 						if(!window.confirm('マスタースキルポイントをすべて振りなおします。'))
 							return;
 
-						sim.clearMSP();
+						com.clearMSP();
 						for(skillLine in DB.skillLines) {
 							refreshSkillList(skillLine);
 						}
@@ -1058,7 +1120,7 @@
 						if(!window.confirm('スキル「' + skillName + '」をすべて振りなおします。'))
 							return;
 						
-						sim.clearPtsOfSameSkills(skillLine);
+						com.clearPtsOfSameSkills(skillLine);
 						$('.' + skillLine + ' .skill_current').text('0');
 						refreshSkillList(skillLine);
 					}
@@ -1223,7 +1285,7 @@
 					if(!window.confirm('全職業のすべてのスキルを振りなおします。\n（レベル・特訓のポイントは変わりません）'))
 						return;
 					
-					sim.clearAllSkills();
+					com.clearAllSkills();
 					refreshAll();
 					refreshUrlBar();
 				});
@@ -1275,9 +1337,7 @@
 				$select.val('maxhp;maxmp');
 
 				$('#preset>button').button().click(function(e) {
-					for (var v = 0; v < $select.val().split(';').length; v++) {
-						sim.presetStatus($select.val().split(';')[v]);
-					}
+					com.presetStatus($select.val());
 					refreshAll();
 					refreshUrlBar();
 				});
@@ -1291,7 +1351,7 @@
 					if(!window.confirm('全職業のレベルを現在の取得スキルに必要なところまで引き上げます。'))
 						return;
 					
-					sim.bringUpLevelToRequired();
+					com.bringUpLevelToRequired();
 					refreshAllVocationInfo();
 					refreshTotalRequiredExp();
 					refreshTotalExpRemain();
