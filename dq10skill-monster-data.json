@@ -1710,7 +1710,7 @@
 		"spellup": {"name": "攻撃系統効果増", "abbr": "系UP", "format": "@k系効果 +@v%", "type": "hash"},
 		"attrib": {"name": "属性攻撃", "abbr": "属性", "format": "@v属性攻撃", "type": "string"},
 		"reduce": {"name": "ダメージ耐性", "abbr": "ダ耐", "format": "@k耐性 +@v%", "type": "hash"},
-		"reflect": {"name": "盾ガード時追加効果", "abbr": "盾G時", "format": "盾ガード時 @v%で@k"},
+		"reflect": {"name": "盾ガード時追加効果", "abbr": "盾G時", "format": "盾ガード時 @v%で@k", "type": "hash"},
 		"spcharge": {"name": "必殺チャージ", "abbr": "必C", "format": "必殺チャージ率 @v%アップ", "type": "int"},
 		"special": {"name": "ひっさつ使用", "abbr": "必殺", "format": "ひっさつ「@v」", "type": "string"},
 		"misc": {"name": "その他の効果", "abbr": "他", "format": "@v", "type": "array"}

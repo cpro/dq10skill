@@ -78,7 +78,7 @@ a {
 			white-space: nowrap;
 			font-size: 12px;
 			
-			#tw-saveurl {
+			#tw-saveurl, #undo, #redo {
 				font-size: 11px;
 				height: 18px;
 				overflow: hidden;
@@ -86,6 +86,12 @@ a {
 				.ui-button-text {
 					padding: .2em .5em;
 				}
+			}
+			.ui-button-text-icon-primary {
+				padding-left: 16px;
+			}
+			.ui-button-text-icon-secondary {
+				padding-right: 16px;
 			}
 
 			#msp_selector {

@@ -66,7 +66,7 @@
 		function updateLevel(vocation, newValue) {
 			var oldValue = levels[vocation];
 			if(newValue < LEVEL_MIN || newValue > LEVEL_MAX) {
-				return oldValue;
+				return false;
 			}
 			
 			levels[vocation] = newValue;
@@ -432,7 +432,7 @@
 			serialize: serialize,
 			deserialize: deserialize,
 			deserializeBit: deserializeBit,
-			
+
 			//定数
 			SKILL_PTS_MIN: SKILL_PTS_MIN,
 			SKILL_PTS_MAX: SKILL_PTS_MAX,
@@ -446,11 +446,295 @@
 		};
 	})();
 
+	//Undo/Redo
+	var SimulatorCommandManager = (function(simulator) {
+		var sim = simulator;
+
+		var UNDO_MAX = 20;
+		var commandStack = [];
+		var cursor = 0;
+		var onCommandStackChanged = function() {};
+
+		function invoke(command) {
+			var succeeded = command.execute();
+			if(!succeeded) return false;
+
+			//以降のスタックを切捨て
+			commandStack.splice(cursor);
+
+			if(cursor >= 1 && commandStack[cursor - 1].isAbsorbable(command)) {
+				//連続した同種の操作ならひとつの操作にまとめる
+				commandStack[cursor - 1].absorb(command);
+			} else {
+				commandStack.push(command);
+				cursor++;
+			}
+
+			if(commandStack.length > UNDO_MAX) {
+				commandStack.shift();
+				cursor--;
+			}
+
+			onCommandStackChanged();
+			return true;
+		}
+
+		function undo() {
+			if(!isUndoable()) return;
+
+			cursor--;
+			var command = commandStack[cursor];
+			command.undo();
+			onCommandStackChanged();
+		}
+
+		function redo() {
+			if(!isRedoable()) return;
+
+			var command = commandStack[cursor];
+			command.execute();
+			cursor++;
+			onCommandStackChanged();
+		}
+
+		function isUndoable() {
+			return (cursor > 0);
+		}
+
+		function isRedoable() {
+			return (cursor < commandStack.length);
+		}
+
+		function addEvent(f) {
+			onCommandStackChanged = f;
+		}
+
+		//スキルポイント更新
+		var UpdateSkillPt = function(vocation, skillLine, newValue) {
+			this.vocation = vocation;
+			this.skillLine = skillLine;
+			this.prevValue = undefined;
+			this.newValue = newValue;
+		};
+		UpdateSkillPt.prototype.execute = function() {
+			if(this.prevValue === undefined)
+				this.prevValue = sim.getSkillPt(this.vocation, this.skillLine);
+			return sim.updateSkillPt(this.vocation, this.skillLine, this.newValue);
+		};
+		UpdateSkillPt.prototype.undo = function() {
+			sim.updateSkillPt(this.vocation, this.skillLine, this.prevValue);
+		};
+		UpdateSkillPt.prototype.name = 'UpdateSkillPt';
+		UpdateSkillPt.prototype.isAbsorbable = function(command) {
+			return this.name === command.name &&
+				this.vocation === command.vocation &&
+				this.skillLine === command.skillLine;
+		};
+		UpdateSkillPt.prototype.absorb = function(newCommand) {
+			this.newValue = newCommand.newValue;
+		};
+
+		//レベル更新
+		var UpdateLevel = function(vocation, newValue) {
+			this.vocation = vocation;
+			this.prevValue = undefined;
+			this.newValue = newValue;
+		};
+		UpdateLevel.prototype.execute = function() {
+			if(this.prevValue === undefined)
+				this.prevValue = sim.getLevel(this.vocation);
+			return sim.updateLevel(this.vocation, this.newValue);
+		};
+		UpdateLevel.prototype.undo = function() {
+			sim.updateLevel(this.vocation, this.prevValue);
+		};
+		UpdateLevel.prototype.name = 'UpdateLevel';
+		UpdateLevel.prototype.isAbsorbable = function(command) {
+			return this.name === command.name &&
+				this.vocation === command.vocation;
+		};
+		UpdateLevel.prototype.absorb = function(newCommand) {
+			this.newValue = newCommand.newValue;
+		};
+
+		//特訓スキルポイント更新
+		var UpdateTrainingSkillPt = function(vocation, newValue) {
+			this.vocation = vocation;
+			this.prevValue = undefined;
+			this.newValue = newValue;
+		};
+		UpdateTrainingSkillPt.prototype.execute = function() {
+			if(this.prevValue === undefined)
+				this.prevValue = sim.getTrainingSkillPt(this.vocation);
+			return sim.updateTrainingSkillPt(this.vocation, this.newValue);
+		};
+		UpdateTrainingSkillPt.prototype.undo = function() {
+			sim.updateTrainingSkillPt(this.vocation, this.prevValue);
+		};
+		UpdateTrainingSkillPt.prototype.name = 'UpdateTrainingSkillPt';
+		UpdateTrainingSkillPt.prototype.isAbsorbable = function(command) {
+			return this.name === command.name &&
+				this.vocation === command.vocation;
+		};
+		UpdateTrainingSkillPt.prototype.absorb = function(newCommand) {
+			this.newValue = newCommand.newValue;
+		};
+
+		//MSP更新
+		var UpdateMSP = function(skillLine, newValue) {
+			this.skillLine = skillLine;
+			this.prevValue = undefined;
+			this.newValue = newValue;
+		};
+		UpdateMSP.prototype.execute = function() {
+			if(this.prevValue === undefined)
+				this.prevValue = sim.getMSP(this.skillLine);
+			return sim.updateMSP(this.skillLine, this.newValue);
+		};
+		UpdateMSP.prototype.undo = function() {
+			sim.updateMSP(this.skillLine, this.prevValue);
+		};
+		UpdateMSP.prototype.name = 'UpdateMSP';
+		UpdateMSP.prototype.isAbsorbable = function(command) {
+			return this.name === command.name &&
+				this.skillLine === command.skillLine;
+		};
+		UpdateMSP.prototype.absorb = function(newCommand) {
+			this.newValue = newCommand.newValue;
+		};
+
+		//一括操作系コマンドの基本抽象クラス
+		//継承先で _impl() を実装する
+		var PackageCommand = function() {};
+		PackageCommand.prototype.execute = function() {
+			if(this.prevSerial === undefined)
+				this.prevSerial = sim.serialize();
+			var succeeded = this._impl();
+			if(!succeeded) {
+				sim.deserialize(this.prevSerial);
+				return false;
+			}
+			return true;
+		};
+		PackageCommand.prototype.undo = function() {
+			sim.deserialize(this.prevSerial);
+		};
+		PackageCommand.prototype.isAbsorbable = function() { return false; };
+		PackageCommand.prototype._impl = function() {
+			throw 'NotImplemented';
+		};
+
+		//全職業のレベルを一括指定
+		var SetAllLevel = function(newValue) {
+			this.prevSerial = undefined;
+			this.newValue = newValue;
+		};
+		SetAllLevel.prototype = new PackageCommand();
+		SetAllLevel.prototype._impl = function() {
+			for(var vocation in DB.vocations) {
+				var succeeded = sim.updateLevel(vocation, this.newValue);
+				if(!succeeded) return false;
+			}
+			return true;
+		};
+
+		//特定スキルすべてを振り直し
+		var ClearPtsOfSameSkills = function(skillLine) {
+			this.skillLine = skillLine;
+		};
+		ClearPtsOfSameSkills.prototype = new PackageCommand();
+		ClearPtsOfSameSkills.prototype._impl = function() {
+			sim.clearPtsOfSameSkills(this.skillLine);
+			return true;
+		};
+
+		//MSPすべてを振り直し
+		var ClearMSP = function() {};
+		ClearMSP.prototype = new PackageCommand();
+		ClearMSP.prototype._impl = function() {
+			sim.clearMSP();
+			return true;
+		};
+
+		//全スキルを振り直し
+		var ClearAllSkills = function() {};
+		ClearAllSkills.prototype = new PackageCommand();
+		ClearAllSkills.prototype._impl = function() {
+			sim.clearAllSkills();
+			return true;
+		};
+
+		//ステータス上昇パッシブスキルを取得
+		//セミコロン区切りで複数指定可
+		var PresetStatus = function(status) {
+			this.status = status;
+		};
+		PresetStatus.prototype = new PackageCommand();
+		PresetStatus.prototype._impl = function() {
+			var sarray = this.status.split(';');
+			var succeeded = false;
+			for(var i = 0; i < sarray.length; i++) {
+				succeeded = sim.presetStatus(sarray[i]) || succeeded;
+			}
+			return succeeded;
+		};
+
+		//現在のレベルを取得スキルに対する必要レベルにそろえる
+		var BringUpLevelToRequired = function() {};
+		BringUpLevelToRequired.prototype = new PackageCommand();
+		BringUpLevelToRequired.prototype._impl = function() {
+			sim.bringUpLevelToRequired();
+			return true;
+		};
+
+		//API
+		return {
+			//invoke: invoke,
+			undo: undo,
+			redo: redo,
+			isUndoable: isUndoable,
+			isRedoable: isRedoable,
+			addEvent: addEvent,
+
+			updateSkillPt: function(vocation, skillLine, newValue) {
+				return invoke(new UpdateSkillPt(vocation, skillLine, newValue));
+			},
+			updateLevel: function(vocation, newValue) {
+				return invoke(new UpdateLevel(vocation, newValue));
+			},
+			setAllLevel: function(newValue) {
+				return invoke(new SetAllLevel(newValue));
+			},
+			updateTrainingSkillPt : function(vocation, newValue) {
+				return invoke(new UpdateTrainingSkillPt(vocation, newValue));
+			},
+			updateMSP: function(skillLine, newValue) {
+				return invoke(new UpdateMSP(skillLine, newValue));
+			},
+			clearPtsOfSameSkills: function(skillLine) {
+				return invoke(new ClearPtsOfSameSkills(skillLine));
+			},
+			clearMSP: function() {
+				return invoke(new ClearMSP());
+			},
+			clearAllSkills: function() {
+				return invoke(new ClearAllSkills());
+			},
+			presetStatus: function(status) {
+				return invoke(new PresetStatus(status));
+			},
+			bringUpLevelToRequired: function() {
+				return invoke(new BringUpLevelToRequired());
+			}
+		};
+	})(Simulator);
+
 	var SimulatorUI = (function() {
 		var CLASSNAME_SKILL_ENABLED = 'enabled';
 		var CLASSNAME_ERROR = 'error';
 		
 		var sim = Simulator;
+		var com = SimulatorCommandManager;
 
 		var $ptConsole, $lvConsole, $trainingPtConsole;
 		
@@ -467,6 +751,7 @@
 			refreshTotalPassive();
 			refreshControls();
 			refreshSaveUrl();
+			refreshUrlBar();
 		}
 		
 		function refreshVocationInfo(vocation) {
@@ -572,9 +857,9 @@
 		}
 		
 		function refreshUrlBar() {
-			if(window.history && window.history.pushState) {
+			if(window.history && window.history.replaceState) {
 				var url = makeCurrentUrl();
-				history.pushState(url, null, url);
+				history.replaceState(url, null, url);
 			}
 		}
 
@@ -626,7 +911,7 @@
 
 				$select.change(function() {
 					var vocation = getCurrentVocation(this);
-					sim.updateLevel(vocation, $(this).val());
+					com.updateLevel(vocation, $(this).val());
 					refreshVocationInfo(vocation);
 					refreshTotalRequiredExp();
 					refreshTotalExpRemain();
@@ -662,7 +947,7 @@
 				$select.change(function() {
 					var vocation = getCurrentVocation(this);
 
-					if(sim.updateTrainingSkillPt(vocation, parseInt($(this).val(), 10))) {
+					if(com.updateTrainingSkillPt(vocation, parseInt($(this).val(), 10))) {
 						refreshVocationInfo(vocation);
 						refreshTotalRequiredExp();
 						refreshTotalExpRemain();
@@ -702,8 +987,8 @@
 						var skillLine = getCurrentSkillLine(this);
 
 						var succeeded = mspMode ?
-							sim.updateMSP(skillLine, parseInt(ui.value, 10)) :
-							sim.updateSkillPt(vocation, skillLine, parseInt(ui.value, 10));
+							com.updateMSP(skillLine, parseInt(ui.value, 10)) :
+							com.updateSkillPt(vocation, skillLine, parseInt(ui.value, 10));
 
 						if(succeeded) {
 							refreshCurrentSkillPt(vocation, skillLine);
@@ -734,8 +1019,8 @@
 							return false;
 
 						var succeeded = mspMode ?
-							sim.updateMSP(skillLine, newValue) :
-							sim.updateSkillPt(vocation, skillLine, newValue);
+							com.updateMSP(skillLine, newValue) :
+							com.updateSkillPt(vocation, skillLine, newValue);
 
 						if(succeeded) {
 							refreshCurrentSkillPt(vocation, skillLine);
@@ -817,9 +1102,9 @@
 					selectSkillLine(skillLine);
 
 					if(mspMode)
-						sim.updateMSP(skillLine, 0);
+						com.updateMSP(skillLine, 0);
 					else
-						sim.updateSkillPt(vocation, skillLine, 0);
+						com.updateSkillPt(vocation, skillLine, 0);
 					$('#pt_spinner').val(0);
 					refreshCurrentSkillPt(vocation, skillLine);
 					refreshSkillList(skillLine);
@@ -834,7 +1119,7 @@
 						if(!window.confirm('マスタースキルポイントをすべて振りなおします。'))
 							return;
 
-						sim.clearMSP();
+						com.clearMSP();
 						for(skillLine in DB.skillLines) {
 							refreshSkillList(skillLine);
 						}
@@ -845,7 +1130,7 @@
 						if(!window.confirm('スキル「' + skillName + '」をすべて振りなおします。'))
 							return;
 						
-						sim.clearPtsOfSameSkills(skillLine);
+						com.clearPtsOfSameSkills(skillLine);
 						$('.' + skillLine + ' .skill_current').text('0');
 						refreshSkillList(skillLine);
 					}
@@ -873,12 +1158,12 @@
 						totalPtsOfOthers = sim.totalOfSameSkills(skillLine) - sim.getMSP(skillLine);
 						if(requiredPt < totalPtsOfOthers) return;
 
-						if(!sim.updateMSP(skillLine, requiredPt - totalPtsOfOthers)) return;
+						if(!com.updateMSP(skillLine, requiredPt - totalPtsOfOthers)) return;
 					} else {
 						totalPtsOfOthers = sim.totalOfSameSkills(skillLine) - sim.getSkillPt(vocation, skillLine);
 						if(requiredPt < totalPtsOfOthers) return;
 
-						sim.updateSkillPt(vocation, skillLine, requiredPt - totalPtsOfOthers);
+						com.updateSkillPt(vocation, skillLine, requiredPt - totalPtsOfOthers);
 					}
 					
 					refreshCurrentSkillPt(vocation, skillLine);
@@ -992,9 +1277,8 @@
 				$select.val(sim.LEVEL_MAX);
 				
 				$('#setalllevel>button').button().click(function(e) {
-					for(var vocation in DB.vocations) {
-						sim.updateLevel(vocation, $select.val());
-					}
+					if(!com.setAllLevel($select.val())) return;
+
 					refreshAllVocationInfo();
 					refreshTotalRequiredExp();
 					refreshTotalExpRemain();
@@ -1011,7 +1295,7 @@
 					if(!window.confirm('全職業のすべてのスキルを振りなおします。\n（レベル・特訓のポイントは変わりません）'))
 						return;
 					
-					sim.clearAllSkills();
+					com.clearAllSkills();
 					refreshAll();
 					refreshUrlBar();
 				});
@@ -1063,9 +1347,7 @@
 				$select.val('maxhp;maxmp');
 
 				$('#preset>button').button().click(function(e) {
-					for (var v = 0; v < $select.val().split(';').length; v++) {
-						sim.presetStatus($select.val().split(';')[v]);
-					}
+					com.presetStatus($select.val());
 					refreshAll();
 					refreshUrlBar();
 				});
@@ -1079,12 +1361,48 @@
 					if(!window.confirm('全職業のレベルを現在の取得スキルに必要なところまで引き上げます。'))
 						return;
 					
-					sim.bringUpLevelToRequired();
+					com.bringUpLevelToRequired();
 					refreshAllVocationInfo();
 					refreshTotalRequiredExp();
 					refreshTotalExpRemain();
 					refreshControls();
 					refreshUrlBar();
+				});
+			},
+
+			//undo/redo
+			function() {
+				var $undoButton = $('#undo');
+				var $redoButton = $('#redo');
+
+				$undoButton.button({
+					icons: { primary: 'ui-icon-arrowreturnthick-1-w' },
+					disabled: true
+				}).click(function(e) {
+					hideConsoles();
+					com.undo();
+					refreshAll();
+				});
+
+				$redoButton.button({
+					icons: { secondary: 'ui-icon-arrowreturnthick-1-e' },
+					disabled: true
+				}).click(function(e) {
+					hideConsoles();
+					com.redo();
+					refreshAll();
+				});
+
+				com.addEvent(function() {
+					$undoButton.button('option', 'disabled', !com.isUndoable());
+					$redoButton.button('option', 'disabled', !com.isRedoable());
+				});
+
+				shortcut.add('Ctrl+Z', function() {
+					$undoButton.click();
+				});
+				shortcut.add('Ctrl+Y', function() {
+					$redoButton.click();
 				});
 			}
 		];
@@ -1218,9 +1536,9 @@
 		}
 		
 		function refreshUrlBar() {
-			if(window.history && window.history.pushState) {
+			if(window.history && window.history.replaceState) {
 				var url = makeCurrentUrl();
-				window.history.pushState(url, null, url);
+				window.history.replaceState(url, null, url);
 			}
 		}
 
@@ -1369,7 +1687,7 @@
 
 	//ロード時
 	$(function() {
-		function deserialize() {
+		function loadQuery() {
 			var query = window.location.search.substring(1);
 			if(Base64.isValid(query)) {
 				var serial = '';
@@ -1389,20 +1707,11 @@
 		}
 		
 		var ui = window.location.pathname.indexOf('/simple.html') > 0 ? SimpleUI : SimulatorUI;
-		
-		$(window).on('popstate', function(e) {
-			// 最初に開いた状態まで戻ったとき、クエリー文字列がなかったらリロードする
-			if(!e.originalEvent.state && window.location.search.length === 0)
-				window.location.reload();
-			
-			deserialize();
-			ui.refreshAll();
-		});
 
 		$dbLoad.done(function(data) {
 			Simulator.initialize();
 
-			deserialize();
+			loadQuery();
 			ui.setup();
 		});
 	});
