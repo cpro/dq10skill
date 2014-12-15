@@ -46,12 +46,16 @@ a {
       text-align: right;
       white-space: nowrap;
       font-size: 12px; }
-      #header #titleblock #save_url #tw-saveurl {
+      #header #titleblock #save_url #tw-saveurl, #header #titleblock #save_url #undo, #header #titleblock #save_url #redo {
         font-size: 11px;
         height: 18px;
         overflow: hidden; }
-        #header #titleblock #save_url #tw-saveurl .ui-button-text {
+        #header #titleblock #save_url #tw-saveurl .ui-button-text, #header #titleblock #save_url #undo .ui-button-text, #header #titleblock #save_url #redo .ui-button-text {
           padding: 0.2em 0.5em; }
+      #header #titleblock #save_url .ui-button-text-icon-primary {
+        padding-left: 16px; }
+      #header #titleblock #save_url .ui-button-text-icon-secondary {
+        padding-right: 16px; }
       #header #titleblock #save_url #msp_selector {
         display: inline-block;
         font-size: 11px;
