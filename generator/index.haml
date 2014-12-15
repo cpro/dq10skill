@@ -36,6 +36,8 @@
 				%h1<
 					%a{href: @home_uri}= @title
 				#save_url
+					%a#undo 元に戻す
+					%a#redo やり直し
 					#msp_selector
 						%input#msp_normal{type: 'radio', name: 'mspMode', value: 'nomal', checked: 'checked'}
 						%label{for: 'msp_normal'} 通常

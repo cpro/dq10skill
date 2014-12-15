@@ -1362,15 +1362,27 @@
 
 			//undo/redo
 			function() {
-				shortcut.add('Ctrl+Z', function() {
+				$('#undo').button({
+					icons: { primary: 'ui-icon-arrowreturnthick-1-w' }
+				}).click(function(e) {
 					hideConsoles();
 					com.undo();
 					refreshAll();
 				});
-				shortcut.add('Ctrl+Y', function() {
+
+				$('#redo').button({
+					icons: { secondary: 'ui-icon-arrowreturnthick-1-e' }
+				}).click(function(e) {
 					hideConsoles();
 					com.redo();
 					refreshAll();
+				});
+
+				shortcut.add('Ctrl+Z', function() {
+					$('#undo').click();
+				});
+				shortcut.add('Ctrl+Y', function() {
+					$('#redo').click();
 				});
 			}
 		];
