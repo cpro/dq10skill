@@ -453,6 +453,7 @@
 		var UNDO_MAX = 20;
 		var commandStack = [];
 		var cursor = 0;
+		var onCommandStackChanged = function() {};
 
 		function invoke(command) {
 			var succeeded = command.execute();
@@ -474,6 +475,7 @@
 				cursor--;
 			}
 
+			onCommandStackChanged();
 			return true;
 		}
 
@@ -483,6 +485,7 @@
 			cursor--;
 			var command = commandStack[cursor];
 			command.undo();
+			onCommandStackChanged();
 		}
 
 		function redo() {
@@ -491,6 +494,7 @@
 			var command = commandStack[cursor];
 			command.execute();
 			cursor++;
+			onCommandStackChanged();
 		}
 
 		function isUndoable() {
@@ -499,6 +503,10 @@
 
 		function isRedoable() {
 			return (cursor < commandStack.length);
+		}
+
+		function addEvent(f) {
+			onCommandStackChanged = f;
 		}
 
 		//スキルポイント更新
@@ -686,6 +694,7 @@
 			redo: redo,
 			isUndoable: isUndoable,
 			isRedoable: isRedoable,
+			addEvent: addEvent,
 
 			updateSkillPt: function(vocation, skillLine, newValue) {
 				return invoke(new UpdateSkillPt(vocation, skillLine, newValue));
@@ -1362,27 +1371,37 @@
 
 			//undo/redo
 			function() {
-				$('#undo').button({
-					icons: { primary: 'ui-icon-arrowreturnthick-1-w' }
+				var $undoButton = $('#undo');
+				var $redoButton = $('#redo');
+
+				$undoButton.button({
+					icons: { primary: 'ui-icon-arrowreturnthick-1-w' },
+					disabled: true
 				}).click(function(e) {
 					hideConsoles();
 					com.undo();
 					refreshAll();
 				});
 
-				$('#redo').button({
-					icons: { secondary: 'ui-icon-arrowreturnthick-1-e' }
+				$redoButton.button({
+					icons: { secondary: 'ui-icon-arrowreturnthick-1-e' },
+					disabled: true
 				}).click(function(e) {
 					hideConsoles();
 					com.redo();
 					refreshAll();
 				});
 
+				com.addEvent(function() {
+					$undoButton.button('option', 'disabled', !com.isUndoable());
+					$redoButton.button('option', 'disabled', !com.isRedoable());
+				});
+
 				shortcut.add('Ctrl+Z', function() {
-					$('#undo').click();
+					$undoButton.click();
 				});
 				shortcut.add('Ctrl+Y', function() {
-					$('#redo').click();
+					$redoButton.click();
 				});
 			}
 		];

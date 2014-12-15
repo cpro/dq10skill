@@ -36,8 +36,8 @@
 				%h1<
 					%a{href: @home_uri}= @title
 				#save_url
-					%a#undo 元に戻す
-					%a#redo やり直し
+					%a#undo{title: "変更を元に戻す\n(Ctrl + Z)"} 元に戻す
+					%a#redo{title: "取り消した変更をやり直す\n(Ctrl + Y)"} やり直し
 					#msp_selector
 						%input#msp_normal{type: 'radio', name: 'mspMode', value: 'nomal', checked: 'checked'}
 						%label{for: 'msp_normal'} 通常
