@@ -751,6 +751,7 @@
 			refreshTotalPassive();
 			refreshControls();
 			refreshSaveUrl();
+			refreshUrlBar();
 		}
 		
 		function refreshVocationInfo(vocation) {
@@ -856,9 +857,9 @@
 		}
 		
 		function refreshUrlBar() {
-			if(window.history && window.history.pushState) {
+			if(window.history && window.history.replaceState) {
 				var url = makeCurrentUrl();
-				history.pushState(url, null, url);
+				history.replaceState(url, null, url);
 			}
 		}
 
@@ -1535,9 +1536,9 @@
 		}
 		
 		function refreshUrlBar() {
-			if(window.history && window.history.pushState) {
+			if(window.history && window.history.replaceState) {
 				var url = makeCurrentUrl();
-				window.history.pushState(url, null, url);
+				window.history.replaceState(url, null, url);
 			}
 		}
 
@@ -1686,7 +1687,7 @@
 
 	//ロード時
 	$(function() {
-		function deserialize() {
+		function loadQuery() {
 			var query = window.location.search.substring(1);
 			if(Base64.isValid(query)) {
 				var serial = '';
@@ -1706,20 +1707,11 @@
 		}
 		
 		var ui = window.location.pathname.indexOf('/simple.html') > 0 ? SimpleUI : SimulatorUI;
-		
-		$(window).on('popstate', function(e) {
-			// 最初に開いた状態まで戻ったとき、クエリー文字列がなかったらリロードする
-			if(!e.originalEvent.state && window.location.search.length === 0)
-				window.location.reload();
-			
-			deserialize();
-			ui.refreshAll();
-		});
 
 		$dbLoad.done(function(data) {
 			Simulator.initialize();
 
-			deserialize();
+			loadQuery();
 			ui.setup();
 		});
 	});
