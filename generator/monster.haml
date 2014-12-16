@@ -200,15 +200,15 @@
 				%ul#badge-search-buttons-race.badge-search-button-container.button-container
 					- data['badgerace'].each do |k, v|
 						%li.ui-corner-all<
-							%a{'data-search-key' => k} #{v['abbr']}
+							%a{'data-search-key' => k, 'data-filter-type' => 'race'} #{v['abbr']}
 				%ul#badge-search-buttons-class.badge-search-button-container.button-container
 					- data['badgeclass'].each do |k, v|
 						%li{'class' => ['ui-corner-all', k]}<
-							%a{'data-search-key' => k} #{v}
+							%a{'data-search-key' => k, 'data-filter-type' => 'class'} #{v}
 				%ul#badge-search-buttons-feature.badge-search-button-container.button-container
 					- data['badgefeature'].each do |k, v|
 						%li.ui-corner-all<
-							%a{'data-search-key' => k, title: v['name']} #{v['abbr']}
+							%a{'data-search-key' => k, 'data-filter-type' => 'feature', title: v['name']} #{v['abbr']}
 				%ul#badge-search-buttons-sort.badge-search-button-container.button-container
 					%li.ui-corner-all<
 						%a#badge-search-clear すべて表示
