@@ -1216,11 +1216,6 @@
 			//バッジ効果リストのキャッシュ
 			var featureCache = {};
 
-			//検索キャッシュ
-			var raceSearchCache = {};
-			var classSearchCache = {};
-			var featureSearchCache = {};
-
 			//ソート順の昇降を保持
 			var sortByIdDesc = false;
 			var sortByKanaDesc = false;
@@ -1229,6 +1224,106 @@
 			var status = {};
 			var currentBadgeId = null;
 			var badgeEquip = [];
+
+			//検索機能
+			var BadgeSearch = (function() {
+				var univIds = []; //全集合
+
+				//検索フィルター状態保持変数
+				var search = [];
+				//検索キャッシュ
+				var searchCache = {};
+
+				function toggleSearch(filterType, searchKey) {
+					var isTurningOn = true;
+
+					for(var i = 0; i < search.length; i++) {
+						if(search[i].filterType == filterType && search[i].searchKey == searchKey) {
+							isTurningOn = false;
+							search.splice(i, 1);
+							break;
+						}
+						if((filterType == 'race' || filterType == 'class') && search[i].filterType == filterType) {
+							search.splice(i, 1);
+							break;
+						}
+					}
+					if(isTurningOn)
+						search.push({
+							filterType: filterType,
+							searchKey: searchKey
+						});
+
+					return isTurningOn;
+				}
+
+				function getIds() {
+					var retIds = getUnivIds();
+
+					for(var i = 0; i < search.length; i++) {
+						var cacheKey = search[i].filterType + '_' + search[i].searchKey;
+						retIds = arrayIntersect(retIds, getSearchCache(cacheKey));
+					}
+
+					return retIds;
+				}
+
+				function arrayIntersect(array1, array2) {
+					var newArray = $.grep(array1, function(val, i) {
+						return $.inArray(val, array2) >= 0;
+					});
+					return newArray;
+				}
+
+				function getSearchCache(key) {
+					if(searchCache[key])
+						return searchCache[key];
+
+					var _s = key.split('_'),
+						filterType = _s[0],
+						searchKey = _s[1];
+
+					var filterFunc;
+					switch(filterType) {
+						case 'race':
+							filterFunc = function(badge) { return badge['race'] == searchKey; };
+							break;
+						case 'class':
+							filterFunc = function(badge) { return badge['class'] == searchKey; };
+							break;
+						case 'feature':
+							filterFunc = function(badge) { return badge[searchKey] !== undefined; };
+							break;
+						default:
+							throw 'UnknownFilterType';
+					}
+
+					searchCache[key] = $.grep(getUnivIds(), function(id, i) {
+						return filterFunc(DB.badges[id]);
+					});
+					return searchCache[key];
+				}
+
+				function getUnivIds() {
+					if(univIds.length > 0)
+						return univIds;
+
+					for(var id in DB.badges)
+						univIds.push(id);
+
+					return univIds;
+				}
+
+				function clear() {
+					search = [];
+				}
+
+				return {
+					toggleSearch: toggleSearch,
+					getIds: getIds,
+					clear: clear
+				};
+			})();
 
 			function setup() {
 				$dialog = $('#badge-selector');
@@ -1263,20 +1358,19 @@
 				});
 
 				//バッジ検索ボタン
-				$('#badge-search-buttons-race a').click(function(e) {
-					var race = $(this).attr('data-search-key');
-					filterButtons(getRaceSearchCache(race));
-				});
-				$('#badge-search-buttons-class a').click(function(e) {
-					var badgeClass = $(this).attr('data-search-key');
-					filterButtons(getClassSearchCache(badgeClass));
-				});
-				$('#badge-search-buttons-feature a').click(function(e) {
-					var feature = $(this).attr('data-search-key');
-					filterButtons(getFeatureSearchCache(feature));
+				$('#badge-search-buttons-race,' +
+				  '#badge-search-buttons-class,' +
+				  '#badge-search-buttons-feature').find('a').click(function(e) {
+					var searchKey = $(this).attr('data-search-key');
+					var filterType = $(this).attr('data-filter-type');
 
-					if(DB.badgefeature[feature]['type'] == 'int') {
-						sortBadgeByFeatureValue(feature, true);
+					var isTurningOn = BadgeSearch.toggleSearch(filterType, searchKey);
+					toggleSearchButtons(this, isTurningOn, (filterType == 'race' || filterType == 'class'));
+
+					filterButtons(BadgeSearch.getIds());
+
+					if(isTurningOn && filterType == 'feature' && DB.badgefeature[searchKey]['type'] == 'int') {
+						sortBadgeByFeatureValue(searchKey, true);
 					}
 				});
 
@@ -1434,6 +1528,15 @@
 
 			}
 
+			function toggleSearchButtons(anchor, isTurningOn, isUnique) {
+				var $button = $(anchor).parent('li');
+				var $container = $button.parent('ul');
+
+				if(isUnique)
+					$container.find('li').removeClass('selected');
+				$button.toggleClass('selected', isTurningOn);
+			}
+
 			function filterButtons(showIds) {
 				var $allVisibleButtons = $('#badge-selector-list li:visible');
 				var $allHiddenButtons = $('#badge-selector-list li:hidden');
@@ -1446,35 +1549,6 @@
 						var badgeId = getBadgeId(this);
 						return $.inArray(badgeId, showIds) != -1;
 					}).show();
-			}
-
-			function getSearchCache(cacheArray, key, func) {
-				if(cacheArray[key])
-					return cacheArray[key];
-
-				var filteredArray = [];
-				for(var badgeId in DB.badges) {
-					if(func(DB.badges[badgeId]))
-						filteredArray.push(badgeId);
-				}
-
-				cacheArray[key] = filteredArray;
-				return cacheArray[key];
-			}
-			function getRaceSearchCache(race) {
-				return getSearchCache(raceSearchCache, race, function(badge) {
-					return badge['race'] == race;
-				});
-			}
-			function getClassSearchCache(badgeClass) {
-				return getSearchCache(classSearchCache, badgeClass, function(badge) {
-					return badge['class'] == badgeClass;
-				});
-			}
-			function getFeatureSearchCache(feature) {
-				return getSearchCache(featureSearchCache, feature, function(badge) {
-					return badge[feature] !== undefined;
-				});
 			}
 
 			function sortBadgeBy(func, desc) {
@@ -1519,6 +1593,13 @@
 
 			function clearFilter() {
 				$('#badge-selector-list li').show();
+				BadgeSearch.clear();
+				$('#badge-search-buttons-race li,' +
+					'#badge-search-buttons-class li,' +
+					'#badge-search-buttons-feature li').removeClass('selected');
+
+				sortByIdDesc = false;
+				$('#badge-sort-badgeid').click();
 			}
 
 			function apply(badgeId) {

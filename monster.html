@@ -7,13 +7,13 @@
     <link href='http://cpro.jp/dq10/skillsimulator/monster.html' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。まもの使いで仲間にしたモンスター用。' name='description'>
     <title>DQ10 仲間モンスター用スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=m0.7' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=m0.8' rel='stylesheet' type='text/css'>
     <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' type='text/javascript'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
     <script src='js/base64.js' type='text/javascript'></script>
-    <script src='./dq10skill-monster.js?ver=m0.7' type='text/javascript'></script>
+    <script src='./dq10skill-monster.js?ver=m0.8' type='text/javascript'></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -74,7 +74,7 @@
     <div id='body_content'>
       <div class='monster_ent' id='initial-instruction'>
         <p>上のモンスター名のボタンをクリックして仲間モンスターを追加してください。</p>
-        <p class='whatsnew'>（New: バトルロードのモンスターバッジ選択機能追加）</p>
+        <p class='whatsnew'>（New: バッジ選択画面で検索条件を複数指定可能になりました）</p>
       </div>
       <div id='monsters'></div>
       <div class='monster_ent' id='monster_dummy' style='display:none'>
@@ -181,6 +181,7 @@
             <li>
               履歴:
               <ul>
+                <li>2014/12/16 v0.8 バッジ選択画面で複合条件検索を可能にした。</li>
                 <li>
                   2014/12/8 v0.7
                   <ul>
@@ -218,7 +219,7 @@
             ToDo:
             <ul>
               <li>同バッジ・SPバッジ選択制限</li>
-              <li>バッジの複数条件選択</li>
+              <li><del>バッジの複数条件選択</del> (v0.8)</li>
             </ul>
           </li>
           <li>ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。</li>
@@ -230,60 +231,60 @@
     <div id='badge-selector'>
       <div id='badge-selector-header'>
         <ul class='badge-search-button-container button-container' id='badge-search-buttons-race'>
-          <li class='ui-corner-all'><a data-search-key='slime'>スラ</a></li>
-          <li class='ui-corner-all'><a data-search-key='beast'>獣</a></li>
-          <li class='ui-corner-all'><a data-search-key='dragon'>竜</a></li>
-          <li class='ui-corner-all'><a data-search-key='insect'>虫</a></li>
-          <li class='ui-corner-all'><a data-search-key='bird'>鳥</a></li>
-          <li class='ui-corner-all'><a data-search-key='plant'>植物</a></li>
-          <li class='ui-corner-all'><a data-search-key='material'>物質</a></li>
-          <li class='ui-corner-all'><a data-search-key='machine'>機械</a></li>
-          <li class='ui-corner-all'><a data-search-key='zombie'>不死</a></li>
-          <li class='ui-corner-all'><a data-search-key='demon'>悪魔</a></li>
-          <li class='ui-corner-all'><a data-search-key='element'>エレ</a></li>
-          <li class='ui-corner-all'><a data-search-key='mystery'>怪人</a></li>
-          <li class='ui-corner-all'><a data-search-key='water'>水</a></li>
-          <li class='ui-corner-all'><a data-search-key='special'>SP</a></li>
+          <li class='ui-corner-all'><a data-filter-type='race' data-search-key='slime'>スラ</a></li>
+          <li class='ui-corner-all'><a data-filter-type='race' data-search-key='beast'>獣</a></li>
+          <li class='ui-corner-all'><a data-filter-type='race' data-search-key='dragon'>竜</a></li>
+          <li class='ui-corner-all'><a data-filter-type='race' data-search-key='insect'>虫</a></li>
+          <li class='ui-corner-all'><a data-filter-type='race' data-search-key='bird'>鳥</a></li>
+          <li class='ui-corner-all'><a data-filter-type='race' data-search-key='plant'>植物</a></li>
+          <li class='ui-corner-all'><a data-filter-type='race' data-search-key='material'>物質</a></li>
+          <li class='ui-corner-all'><a data-filter-type='race' data-search-key='machine'>機械</a></li>
+          <li class='ui-corner-all'><a data-filter-type='race' data-search-key='zombie'>不死</a></li>
+          <li class='ui-corner-all'><a data-filter-type='race' data-search-key='demon'>悪魔</a></li>
+          <li class='ui-corner-all'><a data-filter-type='race' data-search-key='element'>エレ</a></li>
+          <li class='ui-corner-all'><a data-filter-type='race' data-search-key='mystery'>怪人</a></li>
+          <li class='ui-corner-all'><a data-filter-type='race' data-search-key='water'>水</a></li>
+          <li class='ui-corner-all'><a data-filter-type='race' data-search-key='special'>SP</a></li>
         </ul>
         <ul class='badge-search-button-container button-container' id='badge-search-buttons-class'>
-          <li class='ui-corner-all bronze'><a data-search-key='bronze'>銅</a></li>
-          <li class='ui-corner-all silver'><a data-search-key='silver'>銀</a></li>
-          <li class='ui-corner-all gold'><a data-search-key='gold'>金</a></li>
-          <li class='ui-corner-all luminous'><a data-search-key='luminous'>光</a></li>
+          <li class='ui-corner-all bronze'><a data-filter-type='class' data-search-key='bronze'>銅</a></li>
+          <li class='ui-corner-all silver'><a data-filter-type='class' data-search-key='silver'>銀</a></li>
+          <li class='ui-corner-all gold'><a data-filter-type='class' data-search-key='gold'>金</a></li>
+          <li class='ui-corner-all luminous'><a data-filter-type='class' data-search-key='luminous'>光</a></li>
         </ul>
         <ul class='badge-search-button-container button-container' id='badge-search-buttons-feature'>
-          <li class='ui-corner-all'><a data-search-key='maxhp' title='さいだいＨＰ'>HP</a></li>
-          <li class='ui-corner-all'><a data-search-key='maxmp' title='さいだいＭＰ'>MP</a></li>
-          <li class='ui-corner-all'><a data-search-key='atk' title='こうげき力'>攻撃</a></li>
-          <li class='ui-corner-all'><a data-search-key='def' title='しゅび力'>守備</a></li>
-          <li class='ui-corner-all'><a data-search-key='magic' title='こうげき魔力'>攻魔</a></li>
-          <li class='ui-corner-all'><a data-search-key='heal' title='かいふく魔力'>回魔</a></li>
-          <li class='ui-corner-all'><a data-search-key='spd' title='すばやさ'>素早</a></li>
-          <li class='ui-corner-all'><a data-search-key='dex' title='きようさ'>器用</a></li>
-          <li class='ui-corner-all'><a data-search-key='stylish' title='おしゃれさ'>洒落</a></li>
-          <li class='ui-corner-all'><a data-search-key='weight' title='おもさ'>重さ</a></li>
-          <li class='ui-corner-all'><a data-search-key='shield' title='盾ガード率'>盾ガ</a></li>
-          <li class='ui-corner-all'><a data-search-key='parry' title='武器ガード率'>武ガ</a></li>
-          <li class='ui-corner-all'><a data-search-key='mpdrain' title='ＭＰ吸収率'>MP吸</a></li>
-          <li class='ui-corner-all'><a data-search-key='critical' title='かいしん率'>会心</a></li>
-          <li class='ui-corner-all'><a data-search-key='overload' title='呪文ぼうそう率'>暴走</a></li>
-          <li class='ui-corner-all'><a data-search-key='mpsave' title='ＭＰ消費しない率'>MP消</a></li>
-          <li class='ui-corner-all'><a data-search-key='quick' title='呪文発動速度'>速度</a></li>
-          <li class='ui-corner-all'><a data-search-key='evd' title='みかわし率'>回避</a></li>
-          <li class='ui-corner-all'><a data-search-key='startup' title='開戦時発動'>開戦</a></li>
-          <li class='ui-corner-all'><a data-search-key='win' title='勝利時発動'>勝利</a></li>
-          <li class='ui-corner-all'><a data-search-key='debuff' title='攻撃時弱体効果'>弱体</a></li>
-          <li class='ui-corner-all'><a data-search-key='skill' title='呪文特技使用'>特技</a></li>
-          <li class='ui-corner-all'><a data-search-key='resist' title='状態異常ガード'>異常G</a></li>
-          <li class='ui-corner-all'><a data-search-key='raceup' title='種族へのダメージ増'>種UP</a></li>
-          <li class='ui-corner-all'><a data-search-key='attrup' title='属性特技ダメージ増'>特UP</a></li>
-          <li class='ui-corner-all'><a data-search-key='spellup' title='攻撃系統効果増'>系UP</a></li>
-          <li class='ui-corner-all'><a data-search-key='attrib' title='属性攻撃'>属性</a></li>
-          <li class='ui-corner-all'><a data-search-key='reduce' title='ダメージ耐性'>ダ耐</a></li>
-          <li class='ui-corner-all'><a data-search-key='reflect' title='盾ガード時追加効果'>盾G時</a></li>
-          <li class='ui-corner-all'><a data-search-key='spcharge' title='必殺チャージ'>必C</a></li>
-          <li class='ui-corner-all'><a data-search-key='special' title='ひっさつ使用'>必殺</a></li>
-          <li class='ui-corner-all'><a data-search-key='misc' title='その他の効果'>他</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='maxhp' title='さいだいＨＰ'>HP</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='maxmp' title='さいだいＭＰ'>MP</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='atk' title='こうげき力'>攻撃</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='def' title='しゅび力'>守備</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='magic' title='こうげき魔力'>攻魔</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='heal' title='かいふく魔力'>回魔</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='spd' title='すばやさ'>素早</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='dex' title='きようさ'>器用</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='stylish' title='おしゃれさ'>洒落</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='weight' title='おもさ'>重さ</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='shield' title='盾ガード率'>盾ガ</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='parry' title='武器ガード率'>武ガ</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='mpdrain' title='ＭＰ吸収率'>MP吸</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='critical' title='かいしん率'>会心</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='overload' title='呪文ぼうそう率'>暴走</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='mpsave' title='ＭＰ消費しない率'>MP消</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='quick' title='呪文発動速度'>速度</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='evd' title='みかわし率'>回避</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='startup' title='開戦時発動'>開戦</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='win' title='勝利時発動'>勝利</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='debuff' title='攻撃時弱体効果'>弱体</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='skill' title='呪文特技使用'>特技</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='resist' title='状態異常ガード'>異常G</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='raceup' title='種族へのダメージ増'>種UP</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='attrup' title='属性特技ダメージ増'>特UP</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='spellup' title='攻撃系統効果増'>系UP</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='attrib' title='属性攻撃'>属性</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='reduce' title='ダメージ耐性'>ダ耐</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='reflect' title='盾ガード時追加効果'>盾G時</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='spcharge' title='必殺チャージ'>必C</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='special' title='ひっさつ使用'>必殺</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='misc' title='その他の効果'>他</a></li>
         </ul>
         <ul class='badge-search-button-container button-container' id='badge-search-buttons-sort'>
           <li class='ui-corner-all'><a id='badge-search-clear'>すべて表示</a></li>

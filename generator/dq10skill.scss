@@ -878,6 +878,14 @@ ul.badge-button-container, ul#badge-search-buttons-class {
 		li {
 			width: $badge-search-button-width;
 			margin: 1px;
+
+			&.selected {
+				border-color: white;
+				box-shadow: rgba(96, 160, 240, 0.7) 0 0 3px 1px;
+				a {
+					color: #0ae;
+				}
+			}
 		}
 	}
 	ul#badge-search-buttons-race {
