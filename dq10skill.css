@@ -604,6 +604,11 @@ ul.badge-button-container li a, ul#badge-search-buttons-class li a {
     #badge-selector ul.badge-search-button-container li {
       width: 36px;
       margin: 1px; }
+      #badge-selector ul.badge-search-button-container li.selected {
+        border-color: white;
+        box-shadow: rgba(96, 160, 240, 0.7) 0 0 3px 1px; }
+        #badge-selector ul.badge-search-button-container li.selected a {
+          color: #0ae; }
   #badge-selector ul#badge-search-buttons-race {
     width: 160px; }
   #badge-selector ul#badge-search-buttons-class {
