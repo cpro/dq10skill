@@ -1221,6 +1221,11 @@
 			var classSearchCache = {};
 			var featureSearchCache = {};
 
+			//検索フィルター状態保持変数 バッジ効果は複数指定可
+			var raceSearchFilter = null;
+			var classSearchFilter = null;
+			var featureSearchFilter = [];
+
 			//ソート順の昇降を保持
 			var sortByIdDesc = false;
 			var sortByKanaDesc = false;
@@ -1265,17 +1270,45 @@
 				//バッジ検索ボタン
 				$('#badge-search-buttons-race a').click(function(e) {
 					var race = $(this).attr('data-search-key');
-					filterButtons(getRaceSearchCache(race));
+					if(race == raceSearchFilter)
+						raceSearchFilter = null;
+					else
+						raceSearchFilter = race;
+					
+					$(this).parents('ul').find('li').toggleClass('selected', false);
+					if(raceSearchFilter !== null)
+						$(this).parent('li').toggleClass('selected', true);
+					
+					filterButtons();
 				});
 				$('#badge-search-buttons-class a').click(function(e) {
 					var badgeClass = $(this).attr('data-search-key');
-					filterButtons(getClassSearchCache(badgeClass));
+					if(badgeClass == classSearchFilter)
+						classSearchFilter = null;
+					else
+						classSearchFilter = badgeClass;
+
+					$(this).parents('ul').find('li').toggleClass('selected', false);
+					if(classSearchFilter !== null)
+						$(this).parent('li').toggleClass('selected', true);
+					
+					filterButtons();
 				});
 				$('#badge-search-buttons-feature a').click(function(e) {
 					var feature = $(this).attr('data-search-key');
-					filterButtons(getFeatureSearchCache(feature));
+					var i = $.inArray(feature, featureSearchFilter);
+					var isTurningOn = (i < 0);
 
-					if(DB.badgefeature[feature]['type'] == 'int') {
+					if(isTurningOn)
+						featureSearchFilter.push(feature);
+					else
+						featureSearchFilter.splice(i, 1);
+
+					$(this).parent('li').toggleClass('selected', isTurningOn);
+
+					filterButtons();
+
+					if(isTurningOn && DB.badgefeature[feature]['type'] == 'int') {
 						sortBadgeByFeatureValue(feature, true);
 					}
 				});
@@ -1434,7 +1467,31 @@
 
 			}
 
-			function filterButtons(showIds) {
+			function getArrayIntersection(array1, array2) {
+				var newArray = $.grep(array1, function(val, i) {
+					return $.inArray(val, array2) >= 0;
+				});
+				return newArray;
+			}
+
+			function filterButtons() {
+				var showIds = [];
+
+				if(raceSearchFilter)
+					showIds = getRaceSearchCache(raceSearchFilter);
+				else { //全集合
+					for(var id in DB.badges)
+						showIds.push(id);
+				}
+
+				if(classSearchFilter)
+					showIds = getArrayIntersection(showIds, getClassSearchCache(classSearchFilter));
+
+				for(var i = 0; i < featureSearchFilter.length; i++)
+					showIds = getArrayIntersection(showIds, getFeatureSearchCache(featureSearchFilter[i]));
+				
+				showIds = $.unique(showIds);
+
 				var $allVisibleButtons = $('#badge-selector-list li:visible');
 				var $allHiddenButtons = $('#badge-selector-list li:hidden');
 
