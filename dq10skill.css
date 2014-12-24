@@ -261,13 +261,13 @@ a {
     .ent_title .ent_title_console button {
       width: 18px;
       height: 18px; }
-    .ent_title .ent_title_console .indiv_name, .ent_title .ent_title_console .additional_skill_selector {
+    .ent_title .ent_title_console .indiv_name, .ent_title .ent_title_console .additional_skill_selector, .ent_title .ent_title_console .natsuki200 {
       margin-right: 3px; }
-      .ent_title .ent_title_console .indiv_name label, .ent_title .ent_title_console .additional_skill_selector label {
+      .ent_title .ent_title_console .indiv_name label, .ent_title .ent_title_console .additional_skill_selector label, .ent_title .ent_title_console .natsuki200 label {
         font-size: 80%;
         display: inline-block;
         vertical-align: middle; }
-      .ent_title .ent_title_console .indiv_name input, .ent_title .ent_title_console .indiv_name select, .ent_title .ent_title_console .additional_skill_selector input, .ent_title .ent_title_console .additional_skill_selector select {
+      .ent_title .ent_title_console .indiv_name input, .ent_title .ent_title_console .indiv_name select, .ent_title .ent_title_console .additional_skill_selector input, .ent_title .ent_title_console .additional_skill_selector select, .ent_title .ent_title_console .natsuki200 input, .ent_title .ent_title_console .natsuki200 select {
         display: inline-block;
         vertical-align: middle; }
 
