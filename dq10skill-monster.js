@@ -17,6 +17,7 @@
 		var RESTART_MAX = 6;
 		var SKILL_PTS_PER_RESTART = 10;
 		var SKILL_PTS_PER_RESTART_OVER_5 = 5; //転生6回目以降の増分
+		var SKILL_PTS_NATSUKI200 = 5; //なつき度200時の獲得SP
 		var RESTART_EXP_RATIO = 0.03; //仮数値
 		var BASIC_SKILL_COUNT = 3;
 		var ADDITIONAL_SKILL_MAX = 2;
@@ -53,6 +54,9 @@
 
 			//バッジ
 			this.badgeEquip = [null, null, null, null];
+
+			//なつき度
+			this.natsuki = 1;
 		}
 
 		//スキルポイント取得
@@ -102,13 +106,14 @@
 		
 		//現在のレベルに対するスキルポイント最大値
 		Monster.prototype.maxSkillPts = function() {
-			return DB.skillPtsGiven[this.level];
+			return DB.skillPtsGiven[this.level] + this.getNatsukiSkillPts();
 		};
 		
 		//スキルポイント合計に対する必要レベル取得
 		Monster.prototype.requiredLevel = function() {
 			var restartSkillPt = this.getRestartSkillPt();
-			var total = this.totalSkillPts() - restartSkillPt;
+			var natsukiSkillPts = this.getNatsukiSkillPts();
+			var total = this.totalSkillPts() - restartSkillPt - natsukiSkillPts;
 			
 			for(var l = LEVEL_MIN; l <= LEVEL_MAX; l++) {
 				if(DB.skillPtsGiven[l] >= total)
@@ -195,6 +200,21 @@
 			this.additionalSkills[skillIndex] = newValue;
 			return true;
 		};
+
+		//なつき度200達成状態の取得
+		Monster.prototype.getNatsuki = function() {
+			return (this.natsuki == 1);
+		};
+		//なつき度200達成状態の更新
+		Monster.prototype.updateNatsuki = function(isNatsukiMax) {
+			this.natsuki = (isNatsukiMax ? 1 : 0);
+			return true;
+		};
+		//なつき度に対するSP取得
+		Monster.prototype.getNatsukiSkillPts = function() {
+			return (this.getNatsuki() ? SKILL_PTS_NATSUKI200 : 0);
+		};
+
 		//Lv50時の各種ステータス合計値取得
 		//ちから      : pow
 		//みのまもり  : def
@@ -265,7 +285,7 @@
 		var BITS_SKILL = 6;
 		var BITS_ADDITIONAL_SKILL = 6;
 		var BITS_BADGE = 10;
-
+		var BITS_NATSUKI = 4;
 		var bitDataLength =
 			BITS_MONSTER_TYPE +
 			BITS_LEVEL +
@@ -309,6 +329,9 @@
 
 				bitArray = bitArray.concat(numToBitArray(badgeId, BITS_BADGE));
 			}
+
+			//なつき度
+			bitArray = bitArray.concat(numToBitArray(this.natsuki, BITS_NATSUKI));
 
 			return bitArray;
 		};
@@ -366,6 +389,15 @@
 					monster.badgeEquip[i] = badgeId;
 				}
 			}
+
+			//なつき度
+			if(bitArray.length >= BITS_NATSUKI) {
+				var natsuki = bitArrayToNum(bitArray.splice(0, BITS_NATSUKI));
+				monster.updateNatsuki(natsuki == 1);
+			} else {
+				monster.updateNatsuki(false);
+			}
+
 
 			return monster;
 		};
@@ -669,6 +701,8 @@
 			for(var skillLine in monster.skillPts) {
 				$('#' + monsterId + ' .' + skillLine + ' .ptspinner').spinner('value', monster.getSkillPt(skillLine));
 			}
+
+			$('#' + monsterId + ' .natsuki200 input').prop('checked', monster.getNatsuki());
 		}
 		
 		function refreshSaveUrl() {
@@ -1107,6 +1141,16 @@
 					refreshTotalStatus(monsterId);
 					refreshSaveUrl();
 				});
+			});
+
+			//なつき度200チェックボックス
+			$ent.find('.natsuki200 input').change(function(e) {
+				var monsterId = getCurrentMonsterId(this);
+				var monster = sim.getMonster(monsterId);
+				
+				monster.updateNatsuki($(this).prop('checked'));
+				refreshMonsterInfo(monsterId);
+				refreshSaveUrl();
 			});
 		}
 
