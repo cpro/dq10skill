@@ -11,12 +11,12 @@
 		var SKILL_PTS_MIN = 0;
 		var SKILL_PTS_MAX = 140;
 		var LEVEL_MIN = 1;
-		var LEVEL_MAX = 80;
+		var LEVEL_MAX = 85;
 		var TRAINING_SKILL_PTS_MIN = 0;
 		var TRAINING_SKILL_PTS_MAX = 12;
 		var LEVEL_FOR_TRAINING_MODE = 50;
 		var MSP_MIN = 0;
-		var MSP_MAX = 19;
+		var MSP_MAX = 20;
 
 		//パラメータ格納用
 		var skillPts = {};
