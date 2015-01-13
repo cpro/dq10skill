@@ -1652,11 +1652,6 @@
 		"311": {"name": "クロウズ", "sort": "くろうす", "class": "luminous", "race": "special", "magic": 120, "reduce": {"闇": 20}, "startup": {"しんぴのさとり": 100}, "special": "幻惑のひとみ"},
 		"312": {"name": "ズーボー", "sort": "すうほお", "class": "luminous", "race": "special", "def": 120, "startup": {"キラキラポーン": 50, "盾ガード率上昇": 60}, "special": "鉄壁の守り"}
 	},
-	"badgetrade": {
-		"007": {"001": 1, "010": 1, "049": 1},
-		"008": {"004": 1, "075": 1, "051": 1},
-		"101": {"001": 3}
-	},
 	"specialbadges": [
 	],
 	"badgerace": {
