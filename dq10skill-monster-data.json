@@ -1602,7 +1602,7 @@
 		"261": {"name": "ゴースト", "sort": "こおすと", "class": "gold", "race": "zombie", "maxmp": 85, "magic": 85, "spellup": {"バギ": 20}, "misc": ["たまに　同じ呪文が2回唱えられる"]},
 		"262": {"name": "チャームバット", "sort": "ちやあむはつと", "class": "gold", "race": "zombie", "atk": 55, "spd": 115, "debuff": {"魅了": 15, "呪い": 7}},
 		"263": {"name": "マドハンド", "sort": "まとはんと", "class": "gold", "race": "zombie", "maxhp": 85, "dex": 110, "resist": {"呪い": 100}, "attrib": "土"},
-		"264": {"name": "くさった死体", "sort": "くさつたしたい", "class": "gold", "race": "zombie", "maxhp": 95, "stylish": 130, "debuff": {"呪い": 5, "テンション下げ": 50}},
+		"264": {"name": "くさった死体", "sort": "くさつたしたい", "class": "gold", "race": "zombie", "maxhp": 95, "stylish": 130, "debuff": {"呪い": 10, "テンション下げ": 50}},
 		"265": {"name": "バイキングソウル", "sort": "はいきんくそうる", "class": "gold", "race": "zombie", "atk": 63, "maxhp": 90, "attrib": "闇", "skill": ["バイシオン"]},
 		"266": {"name": "シルバーマント", "sort": "しるはあまんと", "class": "gold", "race": "zombie", "atk": 75, "maxmp": 85, "parry": 8, "attrup": {"闇": 20}},
 		"267": {"name": "デスプリースト", "sort": "てすふりいすと", "class": "gold", "race": "zombie", "heal": 110, "startup": {"聖なる祈り": 50}, "quick": 15, "skill": ["ザオリク"]},
