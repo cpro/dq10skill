@@ -1,4 +1,4 @@
-- VERSION = '0.2.1'
+- @version = '0.2.1'
 !!! 5
 %html
 	%head
@@ -12,13 +12,13 @@
 		- @title = 'DQ10 アンルシア用スキルシミュレータ'
 		%title= @title
 		
-		%link{rel: 'stylesheet', type: 'text/css', href: "./dq10skill.css?ver=#{VERSION}"}/
+		%link{rel: 'stylesheet', type: 'text/css', href: "./dq10skill.css?ver=#{@version}"}/
 		%link{rel: 'stylesheet', type: 'text/css', href: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css'}/
 		
 		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'}
 		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js'}
 		%script{type: 'text/javascript', src: 'js/jquery.socialbutton-1.9.1.min.js'}
-		%script{type: 'text/javascript', src: "./dq10skill-anlucea.js?ver=#{VERSION}"}
+		%script{type: 'text/javascript', src: "./dq10skill-anlucea.js?ver=#{@version}"}
 		:javascript
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
