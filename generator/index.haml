@@ -89,6 +89,10 @@
 					%br
 					%a#hirobaimport{href: 'hiroba-import.html', target: '_blank'} 冒険者の広場からデータを取り込む
 		#body_content
+			.class_group#ie-alert
+				%p.whatsnew 重要なお知らせ:
+				%p.whatsnew スキルシミュレータでは、Internet Explorer 8, 9, 10への対応をまもなく終了する予定です。
+				%p Windows 7以降をお使いの方は、最新のものに更新してください。Windows Vista以前をお使いの方は<a href="https://www.mozilla.org/ja/firefox/new/" target="_blank">Firefox</a>や<a href="https://www.google.co.jp/chrome/browser/desktop/index.html" target="_blank">Google Chrome</a>などへの移行をご検討ください。
 			- data['vocationOrder'].each do |vocation|
 				%div.class_group{id: vocation}
 					.ent_title
@@ -234,6 +238,12 @@
 						=item[:item_title]
 		:javascript
 			jQuery(function($) {
+				//IE alert
+				if(window.navigator.userAgent.indexOf('MSIE') > 0)
+					$('#ie-alert').show();
+				else
+					$('#ie-alert').remove();
+					
 				var sharedUrl = "#{@home_uri}";
 				$('#tw-share').socialbutton('twitter', {
 					button: 'horizontal',
