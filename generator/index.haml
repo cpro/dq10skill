@@ -230,7 +230,8 @@
 				.snsbutton#tw-share
 				.snsbutton#fb-like
 				.snsbutton#g-plusone
-			- item_list.each do |item|
+			#ad-items
+			-# item_list.each do |item|
 				.amazonitem
 					%a{href: item[:item_url], target: '_blank'}<
 						%img{src: item[:img_url], width: item[:img_width], height: item[:img_height], alt: item[:item_title], title: item[:item_title]}>/
@@ -244,6 +245,8 @@
 				else
 					$('#ie-alert').remove();
 					
+				$('#ad-items').load('./amazon_item_cache.html');
+
 				var sharedUrl = "#{@home_uri}";
 				$('#tw-share').socialbutton('twitter', {
 					button: 'horizontal',

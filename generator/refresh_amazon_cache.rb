@@ -3,6 +3,7 @@
 
 require 'rubygems'
 require 'json'
+require 'haml'
 require 'amazon/aws'
 require 'amazon/aws/search'
 
@@ -56,4 +57,15 @@ ITEM_CACHE_PATH = "#{dir}/amazon_item_cache.json"
 #キャッシュ
 File.open(ITEM_CACHE_PATH, 'w') do |file|
   file.puts JSON.generate(item_list)
+end
+
+if ARGV.size < 1
+  cache_html_path = "#{dir}/../amazon_item_cache.html"
+else
+  cache_html_path = ARGV[0].to_s
+end
+
+# HAMLからHTML生成
+File.open(cache_html_path, 'w') do |file|
+  file.puts Haml::Engine.new(File.read("#{dir}/amazon_item_cache.haml")).render(Object.new, {:item_list => item_list})
 end
