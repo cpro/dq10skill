@@ -1,0 +1,6 @@
+- item_list.each do |item|
+	.amazonitem
+		%a{href: item[:item_url], target: '_blank'}<
+			%img{src: item[:img_url], width: item[:img_width], height: item[:img_height], alt: item[:item_title], title: item[:item_title]}>/
+			%br>/
+			=item[:item_title]
