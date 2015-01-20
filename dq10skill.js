@@ -1,4 +1,6 @@
 (function($) {
+	"use strict";
+	
 	//データJSONを格納する変数
 	var DB;
 	var DATA_JSON_URI = window.location.href.replace(/\/[^\/]*$/, '/dq10skill-data.json');
