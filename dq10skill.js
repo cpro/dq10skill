@@ -16,7 +16,7 @@
 		var TRAINING_SKILL_PTS_MAX = 12;
 		var LEVEL_FOR_TRAINING_MODE = 50;
 		var MSP_MIN = 0;
-		var MSP_MAX = 20;
+		var MSP_MAX = 21;
 
 		//パラメータ格納用
 		var skillPts = {};
