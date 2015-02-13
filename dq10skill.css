@@ -751,14 +751,17 @@ ul.badge-button-container li a, ul#badge-search-buttons-class li a {
 #beta_notice {
   font-size: 90%; }
 
-#initial-instruction {
+#initial-instruction, #ie-alert {
   padding-top: 2em;
   padding-bottom: 2em; }
-  #initial-instruction p {
+  #initial-instruction p, #ie-alert p {
     font-size: 100%;
     color: green;
     text-align: center;
     margin: 0;
     padding: 0; }
-  #initial-instruction p.whatsnew {
+  #initial-instruction p.whatsnew, #ie-alert p.whatsnew {
     color: #f75050; }
+
+#ie-alert {
+  /* display: none; */ }

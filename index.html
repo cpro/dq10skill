@@ -7,15 +7,15 @@
     <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
     <title>DQ10 スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=5.7.2a' rel='stylesheet' type='text/css'>
-    <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
-    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' type='text/javascript'></script>
-    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js' type='text/javascript'></script>
+    <link href='./dq10skill.css?ver=5.8' rel='stylesheet' type='text/css'>
+    <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js' type='text/javascript'></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js' type='text/javascript'></script>
     <script src='js/rawdeflate.min.js' type='text/javascript'></script>
     <script src='js/rawinflate.min.js' type='text/javascript'></script>
     <script src='js/shortcut.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=5.7.2a' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=5.8' type='text/javascript'></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -103,6 +103,10 @@
       </div>
     </div>
     <div id='body_content'>
+      <div class='class_group' id='ie-alert'>
+        <p class='whatsnew'>Internet Explorer 8, 9, 10は非対応になりました。</p>
+        <p>Windows 7以降をお使いの方は、最新のものに更新してください。Windows Vista以前をお使いの方は<a href="https://www.mozilla.org/ja/firefox/new/" target="_blank">Firefox</a>や<a href="https://www.google.co.jp/chrome/browser/desktop/index.html" target="_blank">Google Chrome</a>などへの移行をご検討ください。</p>
+      </div>
       <div class='class_group' id='warrior'>
         <div class='ent_title'>
           <h2 class='ui-handler'>戦士 Lv          <span class='lv_h2'>1</span></h2>
@@ -2125,7 +2129,7 @@
       <div id='footer'>
         <ul>
           <li>スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』のスキルポイント割り振りを検討するためのシミュレータです。</li>
-          <li>要JavaScript。Firefox, Google Chrome, IE11で動作確認。IE8, 9は一応動くと思いますが非推奨です。</li>
+          <li>要JavaScript。Firefox, Google Chrome, IE11で動作確認。IE10以前には対応していません。</li>
           <li>
             使い方:
             <ul>
@@ -2153,6 +2157,8 @@
           <li>
             履歴:
             <ul>
+              <li>2015/2/13 v5.8 IE10以下への対応を終了。</li>
+              <li>2015/1/22 v5.7.3 MSP20→21 1/22配信クエストでの追加に対応。</li>
               <li>
                 2014/12/25
                 <ul>
@@ -2169,8 +2175,6 @@
                 </ul>
               </li>
               <li>2014/12/15 v5.7 元に戻す/やり直し機能の追加。</li>
-              <li>2014/12/8 v5.6 特訓スキルポイントの入力をセレクトボックスに変更し、選択欄に特訓スタンプ数を併記。他、データロードの最適化等微調整。</li>
-              <li>2014/11/20 v5.5 140スキルに対応。</li>
               <li>過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。</li>
             </ul>
           </li>
@@ -2204,57 +2208,18 @@
         <div class='snsbutton' id='fb-like'></div>
         <div class='snsbutton' id='g-plusone'></div>
       </div>
-      <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%8810-Wii%E3%83%BBWiiU%E3%83%BBWindows%E3%83%BBd%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%BBN3DS%E7%89%88-%E4%BB%B2%E9%96%93%E3%83%A2%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%BC-%E3%81%BF%E3%82%93%E3%81%AA%E3%81%A7%E3%81%A8%E3%81%A4%E3%81%92%E3%81%8DBOOK-V%E3%82%B8%E3%83%A3%E3%83%B3%E3%83%97%E3%83%96%E3%83%83%E3%82%AF%E3%82%B9/dp/408779699X%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D408779699X' target='_blank'><img alt='ドラゴンクエスト10 オンライン Wii・WiiU・Windows・dゲーム・N3DS版 アンルシア! 仲間モンスター! みんなでとつげきBOOK (Vジャンプブックス)' height='160' src='http://ecx.images-amazon.com/images/I/61x-BHhLtQL._SL160_.jpg' title='ドラゴンクエスト10 オンライン Wii・WiiU・Windows・dゲーム・N3DS版 アンルシア! 仲間モンスター! みんなでとつげきBOOK (Vジャンプブックス)' width='113'><br>ドラゴンクエスト10 オンライン Wii・WiiU・Windows・dゲーム・N3DS版 アンルシア! 仲間モンスター! みんなでとつげきBOOK (Vジャンプブックス)</a>
-      </div>
-      <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88X-%E3%81%BF%E3%81%A1%E3%81%8F%E3%81%95%E5%86%92%E9%99%BA%E3%82%AC%E3%82%A4%E3%83%89Vol-4-SE-MOOK-%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9/dp/475754491X%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D475754491X' target='_blank'><img alt='ドラゴンクエストX みちくさ冒険ガイドVol.4 (SE-MOOK)' height='160' src='http://ecx.images-amazon.com/images/I/612FV2IAAYL._SL160_.jpg' title='ドラゴンクエストX みちくさ冒険ガイドVol.4 (SE-MOOK)' width='131'><br>ドラゴンクエストX みちくさ冒険ガイドVol.4 (SE-MOOK)</a>
-      </div>
-      <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88X-4%E3%82%B3%E3%83%9E%E3%83%9E%E3%83%B3%E3%82%AC%E5%8A%87%E5%A0%B4-3-%E5%AE%8C-%E3%81%82%E3%81%B9%E3%82%86%E3%81%86%E3%81%8D/dp/4757545487%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4757545487' target='_blank'><img alt='ドラゴンクエストX 4コママンガ劇場(3)完' height='113' src='http://ecx.images-amazon.com/images/I/31hn7i4zouL._SL160_.jpg' title='ドラゴンクエストX 4コママンガ劇場(3)完' width='160'><br>ドラゴンクエストX 4コママンガ劇場(3)完</a>
-      </div>
-      <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88X-%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3/dp/B00LL2VVYK%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00LL2VVYK' target='_blank'><img alt='ニンテンドー3DS版 ドラゴンクエストX オンライン' height='150' src='http://ecx.images-amazon.com/images/I/61YEZbU6YGL._SL160_.jpg' title='ニンテンドー3DS版 ドラゴンクエストX オンライン' width='160'><br>ニンテンドー3DS版 ドラゴンクエストX オンライン</a>
-      </div>
-      <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/%E4%BB%BB%E5%A4%A9%E5%A0%82-New-%E3%83%8B%E3%83%B3%E3%83%86%E3%83%B3%E3%83%89%E3%83%BC3DS-LL-%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF/dp/B00NAW5DT8%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00NAW5DT8' target='_blank'><img alt='New ニンテンドー3DS LL メタリックブラック' height='160' src='http://ecx.images-amazon.com/images/I/518kUVig4uL._SL160_.jpg' title='New ニンテンドー3DS LL メタリックブラック' width='160'><br>New ニンテンドー3DS LL メタリックブラック</a>
-      </div>
-      <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%EF%BC%B8-%E3%82%AA%E3%83%BC%E3%83%AB%E3%82%A4%E3%83%B3%E3%83%AF%E3%83%B3%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8-%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89/dp/B00KYKUSEE%3Fpsc%3D1%26SubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00KYKUSEE' target='_blank'><img alt='ドラゴンクエストＸ オールインワンパッケージ [ダウンロード]' height='160' src='http://ecx.images-amazon.com/images/I/614JFEHSG0L._SL160_.jpg' title='ドラゴンクエストＸ オールインワンパッケージ [ダウンロード]' width='160'><br>ドラゴンクエストＸ オールインワンパッケージ [ダウンロード]</a>
-      </div>
-      <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88X-4%E3%82%B3%E3%83%9E%E3%83%9E%E3%83%B3%E3%82%AC%E5%8A%87%E5%A0%B4-2-%E3%83%A4%E3%83%B3%E3%82%B0%E3%82%AC%E3%83%B3%E3%82%AC%E3%83%B3%E3%82%B3%E3%83%9F%E3%83%83%E3%82%AF%E3%82%B9-%E3%81%82%E3%81%B9%E3%82%86%E3%81%86%E3%81%8D/dp/4757544103%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4757544103' target='_blank'><img alt='ドラゴンクエストX 4コママンガ劇場(2) (ヤングガンガンコミックス)' height='160' src='http://ecx.images-amazon.com/images/I/61hiw-JW5JL._SL160_.jpg' title='ドラゴンクエストX 4コママンガ劇場(2) (ヤングガンガンコミックス)' width='113'><br>ドラゴンクエストX 4コママンガ劇場(2) (ヤングガンガンコミックス)</a>
-      </div>
-      <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88X-%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%AC%E3%82%A4%E3%83%89-SE-MOOK-%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9/dp/4757543816%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4757543816' target='_blank'><img alt='ドラゴンクエストX スターティングガイド (SE-MOOK)' height='160' src='http://ecx.images-amazon.com/images/I/61MnyBHUcIL._SL160_.jpg' title='ドラゴンクエストX スターティングガイド (SE-MOOK)' width='112'><br>ドラゴンクエストX スターティングガイド (SE-MOOK)</a>
-      </div>
-      <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88X-%E7%9C%A0%E3%82%8C%E3%82%8B%E5%8B%87%E8%80%85%E3%81%A8%E5%B0%8E%E3%81%8D%E3%81%AE%E7%9B%9F%E5%8F%8B-%E3%82%AA%E3%83%AA%E3%82%B8%E3%83%8A%E3%83%AB%E3%82%B5%E3%82%A6%E3%83%B3%E3%83%89%E3%83%88%E3%83%A9%E3%83%83%E3%82%AF-%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%BA%A4%E9%9F%BF%E6%A5%BD%E5%9B%A3-%E3%81%99%E3%81%8E%E3%82%84%E3%81%BE%E3%81%93%E3%81%86%E3%81%84%E3%81%A1/dp/B00KLHZZCK%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00KLHZZCK' target='_blank'><img alt='ドラゴンクエストX 眠れる勇者と導きの盟友 オリジナルサウンドトラック' height='160' src='http://ecx.images-amazon.com/images/I/61bV9aDKuYL._SL160_.jpg' title='ドラゴンクエストX 眠れる勇者と導きの盟友 オリジナルサウンドトラック' width='159'><br>ドラゴンクエストX 眠れる勇者と導きの盟友 オリジナルサウンドトラック</a>
-      </div>
-      <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/ELECOM-%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%91%E3%83%83%E3%83%89%E3%82%B3%E3%83%B3%E3%83%90%E3%83%BC%E3%82%BF-USB%E6%8E%A5%E7%B6%9A-Wii%E3%82%AF%E3%83%A9%E3%82%B7%E3%83%83%E3%82%AF%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E5%AF%BE%E5%BF%9C-JC-W02UWH/dp/B009PDK670%3Fpsc%3D1%26SubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB009PDK670' target='_blank'><img alt='ELECOM ゲームパッドコンバータ USB接続 Wiiクラシックコントローラ対応 2ポート ホワイト JC-W02UWH' height='160' src='http://ecx.images-amazon.com/images/I/31obGc0J9VL._SL160_.jpg' title='ELECOM ゲームパッドコンバータ USB接続 Wiiクラシックコントローラ対応 2ポート ホワイト JC-W02UWH' width='160'><br>ELECOM ゲームパッドコンバータ USB接続 Wiiクラシックコントローラ対応 2ポート ホワイト JC-W02UWH</a>
-      </div>
-      <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/Wii-U-GamePad-%E3%83%90%E3%83%83%E3%83%86%E3%83%AA%E3%83%BC%E3%83%91%E3%83%83%E3%82%AF-2550mAh/dp/B00D5OOCDY%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00D5OOCDY' target='_blank'><img alt='Wii U GamePad バッテリーパック (2550mAh)' height='160' src='http://ecx.images-amazon.com/images/I/41lqDkqtleL._SL160_.jpg' title='Wii U GamePad バッテリーパック (2550mAh)' width='131'><br>Wii U GamePad バッテリーパック (2550mAh)</a>
-      </div>
-      <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88X-%E3%83%95%E3%82%A1%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3-%E3%83%8F%E3%82%A6%E3%82%B8%E3%83%B3%E3%82%B0%E3%81%8A%E3%81%97%E3%82%83%E3%82%8C%E3%82%AB%E3%82%BF%E3%83%AD%E3%82%B0-2013%E5%A4%8F%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3-%E5%86%92%E9%99%BA%E8%80%85%E3%81%8A%E3%81%86%E3%81%88%E3%82%93%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA/dp/4757540221%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4757540221' target='_blank'><img alt='ドラゴンクエストX ファッション&amp;amp;ハウジングおしゃれカタログ 2013夏コレクション (冒険者おうえんシリーズ)' height='160' src='http://ecx.images-amazon.com/images/I/51OmvOZIWbL._SL160_.jpg' title='ドラゴンクエストX ファッション&amp;amp;ハウジングおしゃれカタログ 2013夏コレクション (冒険者おうえんシリーズ)' width='131'><br>ドラゴンクエストX ファッション&amp;ハウジングおしゃれカタログ 2013夏コレクション (冒険者おうえんシリーズ)</a>
-      </div>
-      <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/%E3%82%B9%E3%82%AF%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%BB%E3%82%A8%E3%83%8B%E3%83%83%E3%82%AF%E3%82%B9-%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88-%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A2%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%BA-%E3%82%AE%E3%83%A3%E3%83%A9%E3%83%AA%E3%83%BC-%E3%81%AF%E3%81%90%E3%82%8C%E3%83%A1%E3%82%BF%E3%83%AB/dp/B000MSMM06%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB000MSMM06' target='_blank'><img alt='ドラゴンクエスト メタリックモンスターズ ギャラリー はぐれメタル' height='90' src='http://ecx.images-amazon.com/images/I/31idtDbkUHL._SL160_.jpg' title='ドラゴンクエスト メタリックモンスターズ ギャラリー はぐれメタル' width='160'><br>ドラゴンクエスト メタリックモンスターズ ギャラリー はぐれメタル</a>
-      </div>
-      <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/%E3%83%AD%E3%82%B8%E3%82%AF%E3%83%BC%E3%83%AB-K270-LOGICOOL-%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89-Unifying%E5%AF%BE%E5%BF%9C%E3%83%AC%E3%82%B7%E3%83%BC%E3%83%90%E3%83%BC%E6%8E%A1%E7%94%A8/dp/B004W1KCCO%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB004W1KCCO' target='_blank'><img alt='LOGICOOL ワイヤレスキーボード Unifying対応レシーバー採用 K270' height='96' src='http://ecx.images-amazon.com/images/I/41IQBT37oiL._SL160_.jpg' title='LOGICOOL ワイヤレスキーボード Unifying対応レシーバー採用 K270' width='160'><br>LOGICOOL ワイヤレスキーボード Unifying対応レシーバー採用 K270</a>
-      </div>
-      <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/%E4%BB%BB%E5%A4%A9%E5%A0%82-203141011-Wii%E5%B0%82%E7%94%A8-LAN%E3%82%A2%E3%83%80%E3%83%97%E3%82%BF/dp/B000KF5LS6%3FSubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB000KF5LS6' target='_blank'><img alt='Wii専用 LANアダプタ' height='127' src='http://ecx.images-amazon.com/images/I/11RiTNGrTIL._SL160_.jpg' title='Wii専用 LANアダプタ' width='160'><br>Wii専用 LANアダプタ</a>
-      </div>
-      <div class='amazonitem'>
-        <a href='http://www.amazon.co.jp/iBUFFALO-USB2-0Hub-%E3%80%90PlayStation4-%E5%8B%95%E4%BD%9C%E7%A2%BA%E8%AA%8D%E6%B8%88%E3%80%91-BSH4U06WH/dp/B002UM5TL6%3Fpsc%3D1%26SubscriptionId%3D0HQZETAJDR9ZDAE23WG2%26tag%3Dmarbleland-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB002UM5TL6' target='_blank'><img alt='iBUFFALO USB2.0Hub バスパワー 4ポート ホワイト 【PlayStation4,PS4,PS3 動作確認済】 BSH4U06WH' height='160' src='http://ecx.images-amazon.com/images/I/314Y3f4kPbL._SL160_.jpg' title='iBUFFALO USB2.0Hub バスパワー 4ポート ホワイト 【PlayStation4,PS4,PS3 動作確認済】 BSH4U06WH' width='160'><br>iBUFFALO USB2.0Hub バスパワー 4ポート ホワイト 【PlayStation4,PS4,PS3 動作確認済】 BSH4U06WH</a>
-      </div>
+      <div id='ad-items'></div>
     </div>
     <script>
   jQuery(function($) {
+  	//IE alert
+  	if(window.navigator.userAgent.indexOf('MSIE') > 0)
+  		$('#ie-alert').show();
+  	else
+  		$('#ie-alert').remove();
+  		
+  	$('#ad-items').load('./amazon_item_cache.html');
+  
   	var sharedUrl = "http://cpro.jp/dq10/skillsimulator/";
   	$('#tw-share').socialbutton('twitter', {
   		button: 'horizontal',

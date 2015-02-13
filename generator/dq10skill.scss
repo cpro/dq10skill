@@ -1077,7 +1077,7 @@ ul.badge-button-container, ul#badge-search-buttons-class {
 	font-size: 90%;
 }
 
-#initial-instruction {
+#initial-instruction, #ie-alert {
 	padding: {
 		top: 2em;
 		bottom: 2em;
@@ -1093,4 +1093,7 @@ ul.badge-button-container, ul#badge-search-buttons-class {
 	p.whatsnew {
 		color: #f75050;
 	}
+}
+#ie-alert {
+	/* display: none; */
 }
