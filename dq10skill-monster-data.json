@@ -1587,7 +1587,7 @@
 		"246": {"name": "ルバンカ", "sort": "るはんか", "class": "gold", "race": "machine", "def": 95, "weight": 120, "reduce": {"土": 20}, "spellup": {"ブレス": 30}},
 		"247": {"name": "メカバーン", "sort": "めかはあん", "class": "gold", "race": "machine", "atk": 80, "def": 95, "raceup": {"ドラゴン": 30}, "startup": {"バイキルト": 25}},
 		"248": {"name": "メラゴースト", "sort": "めらこおすと", "class": "gold", "race": "element", "maxmp": 85, "magic": 85, "spellup": {"メラ": 20}, "quick": 15},
-		"249": {"name": "ギズモ", "sort": "きすも", "class": "gold", "race": "element", "magic": 90, "reduce": {"雷": 20}, "evd": 6, "sikill": ["かすみがくれ"]},
+		"249": {"name": "ギズモ", "sort": "きすも", "class": "gold", "race": "element", "magic": 90, "reduce": {"雷": 20}, "evd": 6, "skill": ["かすみがくれ"]},
 		"250": {"name": "フレイム", "sort": "ふれいむ", "class": "gold", "race": "element", "maxhp": 85, "maxmp": 95, "spd": 105, "attrib": "炎"},
 		"251": {"name": "レッドプリン", "sort": "れつとふりん", "class": "gold", "race": "element", "def": 88, "maxhp": 92, "reduce": {"ブレス": 25}, "skill": ["バイシオン"]},
 		"252": {"name": "リュウイーソー", "sort": "りゆういいそお", "class": "gold", "race": "element", "atk": 72, "maxhp": 95, "reduce": {"炎": 20, "氷": 15}},
