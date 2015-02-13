@@ -90,8 +90,7 @@
 					%a#hirobaimport{href: 'hiroba-import.html', target: '_blank'} 冒険者の広場からデータを取り込む
 		#body_content
 			.class_group#ie-alert
-				%p.whatsnew 重要なお知らせ:
-				%p.whatsnew スキルシミュレータでは、Internet Explorer 8, 9, 10への対応をまもなく終了する予定です。
+				%p.whatsnew Internet Explorer 8, 9, 10は非対応になりました。
 				%p Windows 7以降をお使いの方は、最新のものに更新してください。Windows Vista以前をお使いの方は<a href="https://www.mozilla.org/ja/firefox/new/" target="_blank">Firefox</a>や<a href="https://www.google.co.jp/chrome/browser/desktop/index.html" target="_blank">Google Chrome</a>などへの移行をご検討ください。
 			- data['vocationOrder'].each do |vocation|
 				%div.class_group{id: vocation}
@@ -161,7 +160,7 @@
 			#footer
 				%ul
 					%li スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』のスキルポイント割り振りを検討するためのシミュレータです。
-					%li 要JavaScript。Firefox, Google Chrome, IE11で動作確認。IE8, 9は一応動くと思いますが非推奨です。
+					%li 要JavaScript。Firefox, Google Chrome, IE11で動作確認。IE10以前には対応していません。
 					%li
 						使い方:
 						%ul
