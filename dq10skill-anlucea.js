@@ -9,15 +9,9 @@
 	});
 
 	var Simulator = (function() {
-		//定数
-		var SKILL_PTS_MIN = 0;
-		var SKILL_PTS_MAX = 40;
-		var LEVEL_MIN = 20;
-		var LEVEL_MAX = 55;
-
 		//パラメータ格納用
 		var skillPts = {};
-		var level = LEVEL_MIN;
+		var level;
 		var baseStatus;
 
 		/* メソッド */
@@ -26,6 +20,7 @@
 			for(var skillLine in DB.skillLines) {
 				skillPts[skillLine] = 0;
 			}
+			level = DB.consts.level.min;
 			baseStatus = DB.status[level];
 		}
 		
@@ -36,7 +31,7 @@
 		
 		//スキルポイント更新：不正値の場合falseを返す
 		function updateSkillPt(skillLine, newValue) {
-			if(newValue < SKILL_PTS_MIN || newValue > SKILL_PTS_MAX) {
+			if(newValue < DB.consts.skillPts.min || newValue > DB.consts.skillPts.max) {
 				return false;
 			}
 			
@@ -52,7 +47,7 @@
 		//レベル値更新
 		function updateLevel(newValue) {
 			var oldValue = level;
-			if(newValue < LEVEL_MIN || newValue > LEVEL_MAX) {
+			if(newValue < DB.consts.level.min || newValue > DB.consts.level.max) {
 				return oldValue;
 			}
 			
@@ -86,7 +81,7 @@
 		function requiredLevel() {
 			var total = totalSkillPts();
 			
-			for(var l = LEVEL_MIN; l <= LEVEL_MAX; l++) {
+			for(var l = DB.consts.level.min; l <= DB.consts.level.max; l++) {
 				if(DB.skillPtsGiven[l] >= total)
 					return l;
 			}
@@ -189,13 +184,7 @@
 			totalStatus: totalStatus,
 			bringUpLevelToRequired: bringUpLevelToRequired,
 			serialize: serialize,
-			deserialize: deserialize,
-
-			//定数
-			SKILL_PTS_MIN: SKILL_PTS_MIN,
-			SKILL_PTS_MAX: SKILL_PTS_MAX,
-			LEVEL_MIN: LEVEL_MIN,
-			LEVEL_MAX: LEVEL_MAX
+			deserialize: deserialize
 		};
 	})();
 
@@ -322,7 +311,7 @@
 				var $select = $('#anlucea-data .lv_select>select');
 				var skillPtsGiven;
 
-				for(var i = sim.LEVEL_MIN; i <= sim.LEVEL_MAX; i++) {
+				for(var i = DB.consts.level.min; i <= DB.consts.level.max; i++) {
 					skillPtsGiven = DB.skillPtsGiven[i].toString();
 					if(skillPtsGiven == 'NaN')
 						skillPtsGiven = '-';
@@ -342,8 +331,8 @@
 				var $spinner = $('.ptspinner');
 
 				$spinner.spinner({
-					min: sim.SKILL_PTS_MIN,
-					max: sim.SKILL_PTS_MAX,
+					min: DB.consts.skillPts.min,
+					max: DB.consts.skillPts.max,
 					spin: function (e, ui) {
 						var skillLine = getCurrentSkillLine(this);
 

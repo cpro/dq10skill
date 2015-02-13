@@ -9,17 +9,6 @@
 	});
 
 	var Simulator = (function() {
-		//定数
-		var SKILL_PTS_MIN = 0;
-		var SKILL_PTS_MAX = 140;
-		var LEVEL_MIN = 1;
-		var LEVEL_MAX = 85;
-		var TRAINING_SKILL_PTS_MIN = 0;
-		var TRAINING_SKILL_PTS_MAX = 12;
-		var LEVEL_FOR_TRAINING_MODE = 50;
-		var MSP_MIN = 0;
-		var MSP_MAX = 21;
-
 		//パラメータ格納用
 		var skillPts = {};
 		var levels = {};
@@ -35,8 +24,8 @@
 					var skillLine = DB.vocations[vocation].skillLines[s];
 					skillPts[vocation][skillLine] = 0;
 				}
-				levels[vocation] = LEVEL_MIN;
-				trainingSkillPts[vocation] = TRAINING_SKILL_PTS_MIN;
+				levels[vocation] = DB.consts.level.min;
+				trainingSkillPts[vocation] = DB.consts.trainingSkillPts.min;
 			}
 		}
 		
@@ -48,10 +37,10 @@
 		//スキルポイント更新：不正値の場合falseを返す
 		function updateSkillPt(vocation, skillLine, newValue) {
 			var oldValue = skillPts[vocation][skillLine];
-			if(newValue < SKILL_PTS_MIN || newValue > SKILL_PTS_MAX) {
+			if(newValue < DB.consts.skillPts.min || newValue > DB.consts.skillPts.max) {
 				return false;
 			}
-			if(totalOfSameSkills(skillLine) - oldValue + newValue > SKILL_PTS_MAX) {
+			if(totalOfSameSkills(skillLine) - oldValue + newValue > DB.consts.skillPts.max) {
 				return false;
 			}
 			
@@ -67,7 +56,7 @@
 		//レベル値更新
 		function updateLevel(vocation, newValue) {
 			var oldValue = levels[vocation];
-			if(newValue < LEVEL_MIN || newValue > LEVEL_MAX) {
+			if(newValue < DB.consts.level.min || newValue > DB.consts.level.max) {
 				return false;
 			}
 			
@@ -82,7 +71,7 @@
 		
 		//特訓スキルポイント更新
 		function updateTrainingSkillPt(vocation, newValue) {
-			if(newValue < TRAINING_SKILL_PTS_MIN || newValue > TRAINING_SKILL_PTS_MAX)
+			if(newValue < DB.consts.trainingSkillPts.min || newValue > DB.consts.trainingSkillPts.max)
 				return false;
 			
 			trainingSkillPts[vocation] = newValue;
@@ -97,11 +86,11 @@
 		//マスタースキルポイント更新
 		function updateMSP(skillLine, newValue) {
 			var oldValue = msp[skillLine] || 0;
-			if(newValue < MSP_MIN || newValue > MSP_MAX)
+			if(newValue < DB.consts.msp.min || newValue > DB.consts.msp.max)
 				return false;
-			if(totalMSP() - oldValue + newValue > MSP_MAX)
+			if(totalMSP() - oldValue + newValue > DB.consts.msp.max)
 				return false;
-			if(totalOfSameSkills(skillLine) - oldValue + newValue > SKILL_PTS_MAX)
+			if(totalOfSameSkills(skillLine) - oldValue + newValue > DB.consts.skillPts.max)
 				return false;
 
 			msp[skillLine] = newValue;
@@ -172,11 +161,11 @@
 			var trainingSkillPt = getTrainingSkillPt(vocation);
 			var total = totalSkillPts(vocation) - trainingSkillPt;
 			
-			for(var l = LEVEL_MIN; l <= LEVEL_MAX; l++) {
+			for(var l = DB.consts.level.min; l <= DB.consts.level.max; l++) {
 				if(DB.skillPtsGiven[l] >= total) {
 					//特訓スキルポイントが1以上の場合、最低レベル50必要
-					if(trainingSkillPt > TRAINING_SKILL_PTS_MIN && l < LEVEL_FOR_TRAINING_MODE)
-						return LEVEL_FOR_TRAINING_MODE;
+					if(trainingSkillPt > DB.consts.trainingSkillPts.min && l < DB.consts.level.forTrainingMode)
+						return DB.consts.level.forTrainingMode;
 					else
 						return l;
 				}
@@ -433,18 +422,7 @@
 			bringUpLevelToRequired: bringUpLevelToRequired,
 			serialize: serialize,
 			deserialize: deserialize,
-			deserializeBit: deserializeBit,
-
-			//定数
-			SKILL_PTS_MIN: SKILL_PTS_MIN,
-			SKILL_PTS_MAX: SKILL_PTS_MAX,
-			LEVEL_MIN: LEVEL_MIN,
-			LEVEL_MAX: LEVEL_MAX,
-			TRAINING_SKILL_PTS_MIN: TRAINING_SKILL_PTS_MIN,
-			TRAINING_SKILL_PTS_MAX: TRAINING_SKILL_PTS_MAX,
-			LEVEL_FOR_TRAINING_MODE: LEVEL_FOR_TRAINING_MODE,
-			MSP_MIN: MSP_MIN,
-			MSP_MAX: MSP_MAX
+			deserializeBit: deserializeBit
 		};
 	})();
 
@@ -808,7 +786,7 @@
 			for(var i = 0; i < status.length; i++) {
 				$('#total_' + status[i]).text(sim.totalStatus(status[i]));
 			}
-			$('#msp_remain').text((sim.MSP_MAX - sim.totalMSP()).toString() + 'P');
+			$('#msp_remain').text((DB.consts.msp.max - sim.totalMSP()).toString() + 'P');
 		}
 		
 		function refreshSkillList(skillLine) {
@@ -907,7 +885,7 @@
 			function() {
 				$lvConsole = $('#lv_console');
 				var $select = $('#lv-select');
-				for(var i = sim.LEVEL_MIN; i <= sim.LEVEL_MAX; i++) {
+				for(var i = DB.consts.level.min; i <= DB.consts.level.max; i++) {
 					$select.append($("<option />").val(i).text(i.toString() + ' (' + DB.skillPtsGiven[i].toString() + ')'));
 				}
 
@@ -941,7 +919,7 @@
 			function() {
 				$trainingPtConsole = $('#training_pt_console');
 				var $select = $('#training_pt_select');
-				for(var i = 0; i <= sim.TRAINING_SKILL_PTS_MAX; i++) {
+				for(var i = 0; i <= DB.consts.trainingSkillPts.max; i++) {
 					$select.append($('<option />').val(i).text(i.toString() +
 						' (' + numToFormedStr(DB.trainingPts[i].stamps) + ')'));
 				}
@@ -982,8 +960,8 @@
 				$ptConsole = $('#pt_console');
 				var $spinner = $('#pt_spinner');
 				$spinner.spinner({
-					min: sim.SKILL_PTS_MIN,
-					max: sim.SKILL_PTS_MAX,
+					min: DB.consts.skillPts.min,
+					max: DB.consts.skillPts.max,
 					spin: function (e, ui) {
 						var vocation = getCurrentVocation(this);
 						var skillLine = getCurrentSkillLine(this);
@@ -1273,10 +1251,10 @@
 			function() {
 				//セレクトボックス初期化
 				var $select = $('#setalllevel>select');
-				for(var i = sim.LEVEL_MIN; i <= sim.LEVEL_MAX; i++) {
+				for(var i = DB.consts.level.min; i <= DB.consts.level.max; i++) {
 					$select.append($("<option />").val(i).text(i.toString()));
 				}
-				$select.val(sim.LEVEL_MAX);
+				$select.val(DB.consts.level.max);
 				
 				$('#setalllevel>button').button().click(function(e) {
 					if(!com.setAllLevel($select.val())) return;
@@ -1465,8 +1443,8 @@
 			for(var vocation in DB.vocations) {
 				refreshVocationInfo(vocation);
 			}
-			$('#msp .remain .container').text(sim.MSP_MAX - sim.totalMSP());
-			$('#msp .total .container').text(sim.MSP_MAX);
+			$('#msp .remain .container').text(DB.consts.msp.max - sim.totalMSP());
+			$('#msp .total .container').text(DB.consts.msp.max);
 		}
 		
 		function refreshTotalRequiredExp() {

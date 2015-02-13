@@ -126,5 +126,16 @@
 		{"maxhp": 531, "maxmp": 443, "pow": 386, "def": 462, "spd": 408, "dex": 377, "magic": 447, "heal": 562, "charm": 322, "weight": 120},
 		{"maxhp": 533, "maxmp": 444, "pow": 386, "def": 464, "spd": 410, "dex": 379, "magic": 453, "heal": 566, "charm": 326, "weight": 120},
 		{"maxhp": 534, "maxmp": 445, "pow": 387, "def": 467, "spd": 412, "dex": 381, "magic": 458, "heal": 570, "charm": 330, "weight": 120}
-	]
+	],
+
+	"consts": {
+		"skillPts": {
+			"min": 0,
+			"max": 40
+		},
+		"level": {
+			"min": 20,
+			"max": 55
+		}
+	}
 }
