@@ -455,7 +455,7 @@
 				cursor--;
 			}
 
-			onCommandStackChanged();
+			dispatch('CommandStackChanged');
 			return true;
 		}
 
@@ -465,7 +465,7 @@
 			cursor--;
 			var command = commandStack[cursor];
 			command.undo();
-			onCommandStackChanged();
+			dispatch('CommandStackChanged');
 		}
 
 		function redo() {
@@ -474,7 +474,7 @@
 			var command = commandStack[cursor];
 			command.execute();
 			cursor++;
-			onCommandStackChanged();
+			dispatch('CommandStackChanged');
 		}
 
 		function isUndoable() {
@@ -483,10 +483,6 @@
 
 		function isRedoable() {
 			return (cursor < commandStack.length);
-		}
-
-		function addEvent(f) {
-			onCommandStackChanged = f;
 		}
 
 		//スキルポイント更新
@@ -499,10 +495,13 @@
 		UpdateSkillPt.prototype.execute = function() {
 			if(this.prevValue === undefined)
 				this.prevValue = sim.getSkillPt(this.vocation, this.skillLine);
-			return sim.updateSkillPt(this.vocation, this.skillLine, this.newValue);
+			var ret = sim.updateSkillPt(this.vocation, this.skillLine, this.newValue);
+			if(ret) dispatch('SkillLineChanged', this.vocation, this.skillLine);
+			return ret;
 		};
 		UpdateSkillPt.prototype.undo = function() {
 			sim.updateSkillPt(this.vocation, this.skillLine, this.prevValue);
+			dispatch('SkillLineChanged', this.vocation, this.skillLine);
 		};
 		UpdateSkillPt.prototype.name = 'UpdateSkillPt';
 		UpdateSkillPt.prototype.isAbsorbable = function(command) {
@@ -523,10 +522,13 @@
 		UpdateLevel.prototype.execute = function() {
 			if(this.prevValue === undefined)
 				this.prevValue = sim.getLevel(this.vocation);
-			return sim.updateLevel(this.vocation, this.newValue);
+			var ret = sim.updateLevel(this.vocation, this.newValue);
+			if(ret) dispatch('VocationalInfoChanged', this.vocation);
+			return ret;
 		};
 		UpdateLevel.prototype.undo = function() {
 			sim.updateLevel(this.vocation, this.prevValue);
+			dispatch('VocationalInfoChanged', this.vocation);
 		};
 		UpdateLevel.prototype.name = 'UpdateLevel';
 		UpdateLevel.prototype.isAbsorbable = function(command) {
@@ -546,10 +548,13 @@
 		UpdateTrainingSkillPt.prototype.execute = function() {
 			if(this.prevValue === undefined)
 				this.prevValue = sim.getTrainingSkillPt(this.vocation);
-			return sim.updateTrainingSkillPt(this.vocation, this.newValue);
+			var ret = sim.updateTrainingSkillPt(this.vocation, this.newValue);
+			if(ret) dispatch('VocationalInfoChanged', this.vocation);
+			return ret;
 		};
 		UpdateTrainingSkillPt.prototype.undo = function() {
 			sim.updateTrainingSkillPt(this.vocation, this.prevValue);
+			dispatch('VocationalInfoChanged', this.vocation);
 		};
 		UpdateTrainingSkillPt.prototype.name = 'UpdateTrainingSkillPt';
 		UpdateTrainingSkillPt.prototype.isAbsorbable = function(command) {
@@ -569,10 +574,13 @@
 		UpdateMSP.prototype.execute = function() {
 			if(this.prevValue === undefined)
 				this.prevValue = sim.getMSP(this.skillLine);
-			return sim.updateMSP(this.skillLine, this.newValue);
+			var ret = sim.updateMSP(this.skillLine, this.newValue);
+			if(ret) dispatch('MSPChanged', this.skillLine);
+			return ret;
 		};
 		UpdateMSP.prototype.undo = function() {
 			sim.updateMSP(this.skillLine, this.prevValue);
+			dispatch('MSPChanged', this.skillLine);
 		};
 		UpdateMSP.prototype.name = 'UpdateMSP';
 		UpdateMSP.prototype.isAbsorbable = function(command) {
@@ -594,10 +602,13 @@
 				sim.deserialize(this.prevSerial);
 				return false;
 			}
+
+			dispatch('WholeChanged');
 			return true;
 		};
 		PackageCommand.prototype.undo = function() {
 			sim.deserialize(this.prevSerial);
+			dispatch('WholeChanged');
 		};
 		PackageCommand.prototype.isAbsorbable = function() { return false; };
 		PackageCommand.prototype._impl = function() {
@@ -667,6 +678,44 @@
 			return true;
 		};
 
+		//使用可能イベントの定義
+		var EVENTS_ENABLED = [
+			'CommandStackChanged',
+			'VocationalInfoChanged',
+			'SkillLineChanged',
+			'MSPChanged',
+			'WholeChanged'
+		];
+
+		//イベント管理オブジェクト
+		var eventStocker = {};
+
+		//イベント登録
+		function on(eventName, fn) {
+			if(EVENTS_ENABLED.indexOf(eventName) < 0)
+				throw 'invalid event type.';
+
+			if(eventStocker[eventName] === undefined)
+				eventStocker[eventName] = [];
+
+			eventStocker[eventName].push(fn);
+		}
+
+		//イベント発火
+		function dispatch(eventName) {
+			if(EVENTS_ENABLED.indexOf(eventName) < 0)
+				throw 'invalid event type.';
+
+			if(eventStocker[eventName] === undefined) return;
+
+			var args = Array.prototype.slice.call(arguments);
+			args.shift();
+
+			eventStocker[eventName].forEach(function(listener) {
+				listener.apply(this, args);
+			});
+		}
+
 		//API
 		return {
 			//invoke: invoke,
@@ -674,7 +723,7 @@
 			redo: redo,
 			isUndoable: isUndoable,
 			isRedoable: isRedoable,
-			addEvent: addEvent,
+			on: on,
 
 			updateSkillPt: function(vocation, skillLine, newValue) {
 				return invoke(new UpdateSkillPt(vocation, skillLine, newValue));
@@ -881,6 +930,32 @@
 		}
 		
 		var setupFunctions = [
+			//イベント登録
+			function() {
+				com.on('VocationalInfoChanged', function(vocation) {
+					refreshVocationInfo(vocation);
+					refreshTotalRequiredExp();
+					refreshTotalExpRemain();
+					refreshUrlBar();
+				});
+				com.on('SkillLineChanged', function(vocation, skillLine) {
+					refreshCurrentSkillPt(vocation, skillLine);
+					refreshSkillList(skillLine);
+					refreshAllVocationInfo();
+					refreshTotalExpRemain();
+					refreshTotalPassive();
+					refreshUrlBar();
+				});
+				com.on('MSPChanged', function(skillLine) {
+					refreshSkillList(skillLine);
+					refreshTotalPassive();
+					refreshUrlBar();
+				});
+				com.on('WholeChanged', function() {
+					refreshAll();
+				});
+			},
+
 			//レベル選択セレクトボックス項目設定
 			function() {
 				$lvConsole = $('#lv_console');
@@ -892,10 +967,6 @@
 				$select.change(function() {
 					var vocation = getCurrentVocation(this);
 					com.updateLevel(vocation, $(this).val());
-					refreshVocationInfo(vocation);
-					refreshTotalRequiredExp();
-					refreshTotalExpRemain();
-					refreshUrlBar();
 				});
 			},
 			
@@ -927,15 +998,7 @@
 				$select.change(function() {
 					var vocation = getCurrentVocation(this);
 
-					if(com.updateTrainingSkillPt(vocation, parseInt($(this).val(), 10))) {
-						refreshVocationInfo(vocation);
-						refreshTotalRequiredExp();
-						refreshTotalExpRemain();
-						refreshUrlBar();
-					} else {
-						return false;
-					}
-
+					return com.updateTrainingSkillPt(vocation, parseInt($(this).val(), 10));
 				});
 			},
 			
@@ -971,11 +1034,6 @@
 							com.updateSkillPt(vocation, skillLine, parseInt(ui.value, 10));
 
 						if(succeeded) {
-							refreshCurrentSkillPt(vocation, skillLine);
-							refreshSkillList(skillLine);
-							refreshAllVocationInfo();
-							refreshTotalExpRemain();
-							refreshTotalPassive();
 							e.stopPropagation();
 						} else {
 							return false;
@@ -1002,14 +1060,7 @@
 							com.updateMSP(skillLine, newValue) :
 							com.updateSkillPt(vocation, skillLine, newValue);
 
-						if(succeeded) {
-							refreshCurrentSkillPt(vocation, skillLine);
-							refreshSkillList(skillLine);
-							refreshAllVocationInfo();
-							refreshTotalExpRemain();
-							refreshTotalPassive();
-							refreshUrlBar();
-						} else {
+						if(!succeeded) {
 							$(this).val(oldValue);
 							return false;
 						}
@@ -1017,7 +1068,6 @@
 					stop: function (e, ui) {
 						var skillLine = getCurrentSkillLine(this);
 						selectSkillLine(skillLine);
-						refreshUrlBar();
 					}
 				});
 			},
@@ -1086,12 +1136,6 @@
 					else
 						com.updateSkillPt(vocation, skillLine, 0);
 					$('#pt_spinner').val(0);
-					refreshCurrentSkillPt(vocation, skillLine);
-					refreshSkillList(skillLine);
-					refreshAllVocationInfo();
-					refreshTotalExpRemain();
-					refreshTotalPassive();
-					refreshUrlBar();
 				}).dblclick(function (e) {
 					var skillLine;
 					//ダブルクリック時に各職業の該当スキルをすべて振り直し
@@ -1100,9 +1144,6 @@
 							return;
 
 						com.clearMSP();
-						for(skillLine in DB.skillLines) {
-							refreshSkillList(skillLine);
-						}
 					} else {
 						skillLine = getCurrentSkillLine(this);
 						var skillName = DB.skillLines[skillLine].name;
@@ -1112,14 +1153,9 @@
 						
 						com.clearPtsOfSameSkills(skillLine);
 						$('.' + skillLine + ' .skill_current').text('0');
-						refreshSkillList(skillLine);
 					}
 
 					$('#pt_spinner').val(0);
-					refreshAllVocationInfo();
-					refreshTotalExpRemain();
-					refreshTotalPassive();
-					refreshUrlBar();
 				});
 			},
 			
@@ -1138,20 +1174,13 @@
 						totalPtsOfOthers = sim.totalOfSameSkills(skillLine) - sim.getMSP(skillLine);
 						if(requiredPt < totalPtsOfOthers) return;
 
-						if(!com.updateMSP(skillLine, requiredPt - totalPtsOfOthers)) return;
+						com.updateMSP(skillLine, requiredPt - totalPtsOfOthers);
 					} else {
 						totalPtsOfOthers = sim.totalOfSameSkills(skillLine) - sim.getSkillPt(vocation, skillLine);
 						if(requiredPt < totalPtsOfOthers) return;
 
 						com.updateSkillPt(vocation, skillLine, requiredPt - totalPtsOfOthers);
 					}
-					
-					refreshCurrentSkillPt(vocation, skillLine);
-					refreshSkillList(skillLine);
-					refreshAllVocationInfo();
-					refreshTotalExpRemain();
-					refreshTotalPassive();
-					refreshUrlBar();
 				});
 			},
 			
@@ -1257,13 +1286,7 @@
 				$select.val(DB.consts.level.max);
 				
 				$('#setalllevel>button').button().click(function(e) {
-					if(!com.setAllLevel($select.val())) return;
-
-					refreshAllVocationInfo();
-					refreshTotalRequiredExp();
-					refreshTotalExpRemain();
-					refreshControls();
-					refreshUrlBar();
+					com.setAllLevel($select.val());
 				});
 			},
 			
@@ -1276,8 +1299,6 @@
 						return;
 					
 					com.clearAllSkills();
-					refreshAll();
-					refreshUrlBar();
 				});
 			},
 			
@@ -1328,8 +1349,6 @@
 
 				$('#preset>button').button().click(function(e) {
 					com.presetStatus($select.val());
-					refreshAll();
-					refreshUrlBar();
 				});
 			},
 
@@ -1342,11 +1361,6 @@
 						return;
 					
 					com.bringUpLevelToRequired();
-					refreshAllVocationInfo();
-					refreshTotalRequiredExp();
-					refreshTotalExpRemain();
-					refreshControls();
-					refreshUrlBar();
 				});
 			},
 
@@ -1373,7 +1387,7 @@
 					refreshAll();
 				});
 
-				com.addEvent(function() {
+				com.on('CommandStackChanged', function() {
 					$undoButton.button('option', 'disabled', !com.isUndoable());
 					$redoButton.button('option', 'disabled', !com.isRedoable());
 				});
