@@ -397,12 +397,15 @@
 		/* メソッド */
 
 		//モンスター追加
-		function addMonster (monsterType) {
+		function addMonster (monsterType, index) {
 			if(monsters.length >= MONSTER_MAX)
 				return null;
 
 			var newMonster = new Monster(monsterType);
-			monsters.push(newMonster);
+			if(index === undefined)
+				monsters.push(newMonster);
+			else
+				monsters.splice(index, 0, newMonster);
 			return newMonster;
 		}
 
@@ -414,7 +417,10 @@
 		//指定IDのモンスター削除
 		function deleteMonster(monsterId) {
 			var i = indexOf(monsterId);
-			if(i !== null) monsters.splice(i, 1);
+			if(i !== null)
+				return monsters.splice(i, 1)[0];
+			else
+				return false;
 		}
 
 		//指定IDのモンスターをひとつ下に並び替える
@@ -531,6 +537,7 @@
 			deleteMonster: deleteMonster,
 			movedownMonster: movedownMonster,
 			moveupMonster: moveupMonster,
+			indexOf: indexOf,
 			generateQueryString: generateQueryString,
 			applyQueryString: applyQueryString,
 			validateQueryString: validateQueryString,
@@ -544,12 +551,166 @@
 		};
 	})();
 
+	/* Controller (Command / Event) */
+	var SimulatorCommandManager = (function(simulator) {
+		var sim = simulator;
+
+		var UNDO_MAX = 20;
+		var commandStack = [];
+		var cursor = 0;
+		var onCommandStackChanged = function() {};
+
+		function invoke(command) {
+			var succeeded = command.execute();
+			if(!succeeded) return false;
+
+			//以降のスタックを切捨て
+			commandStack.splice(cursor);
+
+			if(cursor >= 1 && commandStack[cursor - 1].isAbsorbable(command)) {
+				//連続した同種の操作ならひとつの操作にまとめる
+				commandStack[cursor - 1].absorb(command);
+			} else {
+				commandStack.push(command);
+				cursor++;
+			}
+
+			if(commandStack.length > UNDO_MAX) {
+				commandStack.shift();
+				cursor--;
+			}
+
+			dispatch('CommandStackChanged');
+			return true;
+		}
+
+		function undo() {
+			if(!isUndoable()) return;
+
+			cursor--;
+			var command = commandStack[cursor];
+			command.undo();
+			dispatch('CommandStackChanged');
+		}
+
+		function redo() {
+			if(!isRedoable()) return;
+
+			var command = commandStack[cursor];
+			command.execute();
+			cursor++;
+			dispatch('CommandStackChanged');
+		}
+
+		function isUndoable() {
+			return (cursor > 0);
+		}
+
+		function isRedoable() {
+			return (cursor < commandStack.length);
+		}
+
+		//エントリ追加
+		var AddMonster = function(monsterType) {
+			this.monsterType = monsterType;
+		};
+		AddMonster.prototype.execute = function() {
+			var ret = sim.addMonster(this.monsterType);
+			if(ret) {
+				this.monsterId = ret.monsterId;
+				dispatch('MonsterAppended', ret);
+			}
+			return !!ret;
+		};
+		AddMonster.prototype.undo = function() {
+			sim.deleteMonster(this.monsterId);
+			dispatch('MonsterRemoved', this.monsterId);
+		};
+		AddMonster.prototype.isAbsorbable = function() { return false; };
+
+		//エントリ削除
+		var DeleteMonster = function(monsterId) {
+			this.monsterId = monsterId;
+		};
+		DeleteMonster.prototype.execute = function() {
+			this.deletedIndex = sim.indexOf(this.monsterId);
+			var ret = sim.deleteMonster(this.monsterId);
+			if(ret) {
+				this.deletedMonster = ret;
+				dispatch('MonsterRemoved', ret);
+			}
+			return !!ret;
+		};
+		DeleteMonster.prototype.undo = function() {
+			sim.monsters.splice(this.deletedIndex, 0, this.deletedMonster);
+			dispatch('MonsterAppended', this.deletedMonster, this.deletedIndex);
+		};
+		DeleteMonster.prototype.isAbsorbable = function() { return false; };
+
+		//使用可能イベントの定義
+		var EVENTS_ENABLED = [
+			'CommandStackChanged',
+			'MonsterAppended',
+			'MonsterRemoved',
+			'VocationalInfoChanged',
+			'SkillLineChanged',
+			'MSPChanged',
+			'WholeChanged'
+		];
+
+		//イベント管理オブジェクト
+		var eventStocker = {};
+
+		//イベント登録
+		function on(eventName, fn) {
+			if(EVENTS_ENABLED.indexOf(eventName) < 0)
+				throw 'invalid event type.';
+
+			if(eventStocker[eventName] === undefined)
+				eventStocker[eventName] = [];
+
+			eventStocker[eventName].push(fn);
+		}
+
+		//イベント発火
+		function dispatch(eventName) {
+			if(EVENTS_ENABLED.indexOf(eventName) < 0)
+				throw 'invalid event type.';
+
+			if(eventStocker[eventName] === undefined) return;
+
+			var args = Array.prototype.slice.call(arguments);
+			args.shift();
+
+			eventStocker[eventName].forEach(function(listener) {
+				listener.apply(this, args);
+			});
+		}
+
+		//API
+		return {
+			undo: undo,
+			redo: redo,
+			isUndoable: isUndoable,
+			isRedoable: isRedoable,
+			on: on,
+
+			addMonster: function(monsterType) {
+				return invoke(new AddMonster(monsterType));
+			},
+			deleteMonster: function(monsterId) {
+				return invoke(new DeleteMonster(monsterId));
+			}
+		};
+	})(Simulator);
+
 	/* UI */
 	var SimulatorUI = (function() {
 		var CLASSNAME_SKILL_ENABLED = 'enabled';
 		var CLASSNAME_ERROR = 'error';
 		
 		var sim = Simulator;
+		var com = SimulatorCommandManager;
 
 		//モンスターのエントリ追加
 		function drawMonsterEntry (monster) {
@@ -1037,13 +1198,7 @@
 					'」を削除します。よろしいですか？';
 				if(!window.confirm(message)) return;
 
-				sim.deleteMonster(monsterId);
-				$('#' + monsterId).remove();
-
-				refreshSaveUrl();
-
-				if(sim.monsters.length === 0)
-					$('#initial-instruction').show();
+				com.deleteMonster(monsterId);
 			});
 
 			//下へボタン
@@ -1198,9 +1353,12 @@
 
 			$('.appendbuttons a').click(function(e) {
 				var monsterType = $(this).attr('id').replace('append-', '');
-				var monster = sim.addMonster(monsterType);
-				if(monster === null) return;
+				com.addMonster(monsterType);
+			});
+		}
 
+		function setupEvents() {
+			com.on('MonsterAppended', function(monster, index) {
 				$('#initial-instruction').hide();
 
 				$('#monsters').append(drawMonsterEntry(monster));
@@ -1209,10 +1367,19 @@
 
 				$('#' + monster.id + ' .indiv_name input').focus().select();
 			});
+			com.on('MonsterRemoved', function(monster) {
+				$('#' + monster.id).remove();
+
+				refreshSaveUrl();
+
+				if(sim.monsters.length === 0)
+					$('#initial-instruction').show();
+			});
 		}
 
 		function setupAll() {
 			setupConsole();
+			setupEvents();
 			BadgeSelector.setup();
 
 			$('#monsters').empty();
