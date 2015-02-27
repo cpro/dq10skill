@@ -59,8 +59,10 @@
 								%a{id: "fold-#{vocation}"} #{data['vocations'][vocation]['abbr']}
 				%table#total.ui-corner-all
 					%tr
-						%th.ui-corner-tl 総獲得経験値:
-						%td.total_pts#total_exp 0
+						%td.total_pts#cont_total_sp.ui-corner-tl.ui-corner-bl{rowspan: 2}
+							残りSP総計:
+							%br
+							%span#total_sp 0 / 0
 						%th 最大HP:
 						%td.total_pts#total_maxhp 0
 						%th 力:
@@ -72,8 +74,6 @@
 						%th 魅力:
 						%td.total_pts#total_charm.ui-corner-tr 0
 					%tr
-						%th.ui-corner-bl 総不足経験値:
-						%td.total_pts#total_exp_remain 0
 						%th 最大MP:
 						%td.total_pts#total_maxmp 0
 						%th 身守:

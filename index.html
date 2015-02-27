@@ -67,8 +67,11 @@
         </div>
         <table class='ui-corner-all' id='total'>
           <tr>
-            <th class='ui-corner-tl'>総獲得経験値:</th>
-            <td class='total_pts' id='total_exp'>0</td>
+            <td class='total_pts ui-corner-tl ui-corner-bl' id='cont_total_sp' rowspan='2'>
+              残りSP総計:
+              <br>
+              <span id='total_sp'>0 / 0</span>
+            </td>
             <th>最大HP:</th>
             <td class='total_pts' id='total_maxhp'>0</td>
             <th>力:</th>
@@ -81,8 +84,6 @@
             <td class='total_pts ui-corner-tr' id='total_charm'>0</td>
           </tr>
           <tr>
-            <th class='ui-corner-bl'>総不足経験値:</th>
-            <td class='total_pts' id='total_exp_remain'>0</td>
             <th>最大MP:</th>
             <td class='total_pts' id='total_maxmp'>0</td>
             <th>身守:</th>

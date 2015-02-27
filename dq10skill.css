@@ -156,6 +156,16 @@ a {
       #header #consoleblock table#total td#msp_remain {
         color: #5588ee;
         font-weight: bold; }
+      #header #consoleblock table#total td#cont_total_sp {
+        font-size: 11px;
+        line-height: 17px;
+        vertical-align: middle;
+        text-align: left;
+        padding: 0 4px; }
+      #header #consoleblock table#total #total_sp {
+        font-weight: bold;
+        font-size: 16px;
+        padding-right: 5px; }
     #header #consoleblock #navlink {
       position: absolute;
       bottom: 0;

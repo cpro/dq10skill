@@ -172,6 +172,22 @@
 			}
 			return NaN;
 		}
+
+		//全職業の使用可能スキルポイント
+		function wholeSkillPtsAvailable() {
+			return Object.keys(DB.vocations).reduce(function(prev, vocation) {
+				var cur = maxSkillPts(vocation) + getTrainingSkillPt(vocation);
+				return prev + cur;
+			}, 0);
+		}
+
+		//全職業の使用済スキルポイント
+		function wholeSkillPtsUsed() {
+			return Object.keys(DB.vocations).reduce(function(prev, vocation) {
+				var cur = totalSkillPts(vocation);
+				return prev + cur;
+			}, 0);
+		}
 		
 		//職業・レベルによる必要経験値
 		function requiredExp(vocation, level) {
@@ -412,6 +428,8 @@
 			clearMSP: clearMSP,
 			clearAllSkills: clearAllSkills,
 			maxSkillPts: maxSkillPts,
+			wholeSkillPtsAvailable: wholeSkillPtsAvailable,
+			wholeSkillPtsUsed: wholeSkillPtsUsed,
 			requiredLevel: requiredLevel,
 			requiredExp: requiredExp,
 			requiredExpRemain: requiredExpRemain,
@@ -775,8 +793,9 @@
 			for(var skillLine in DB.skillLines) {
 				refreshSkillList(skillLine);
 			}
-			refreshTotalRequiredExp();
-			refreshTotalExpRemain();
+			//refreshTotalRequiredExp();
+			//refreshTotalExpRemain();
+			refreshTotalSkillPt();
 			refreshTotalPassive();
 			refreshControls();
 			refreshSaveUrl();
@@ -870,6 +889,16 @@
 			$('#' + vocation + ' .' + skillLine + ' .skill_current').text(sim.getSkillPt(vocation, skillLine));
 		}
 
+		function refreshTotalSkillPt() {
+			var $cont = $('#total_sp');
+			var available = sim.wholeSkillPtsAvailable();
+			var remain = available - sim.wholeSkillPtsUsed();
+
+			$cont.text(remain.toString() + ' / ' + available.toString());
+			var isLevelError = (remain < 0);
+			$cont.toggleClass(CLASSNAME_ERROR, isLevelError);
+		}
+
 		function refreshSaveUrl() {
 			var url = makeCurrentUrl();
 			
@@ -934,15 +963,17 @@
 			function() {
 				com.on('VocationalInfoChanged', function(vocation) {
 					refreshVocationInfo(vocation);
-					refreshTotalRequiredExp();
-					refreshTotalExpRemain();
+					//refreshTotalRequiredExp();
+					//refreshTotalExpRemain();
+					refreshTotalSkillPt();
 					refreshUrlBar();
 				});
 				com.on('SkillLineChanged', function(vocation, skillLine) {
 					refreshCurrentSkillPt(vocation, skillLine);
 					refreshSkillList(skillLine);
 					refreshAllVocationInfo();
-					refreshTotalExpRemain();
+					//refreshTotalExpRemain();
+					refreshTotalSkillPt();
 					refreshTotalPassive();
 					refreshUrlBar();
 				});
