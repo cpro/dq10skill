@@ -1229,7 +1229,7 @@
 			//おりたたむ・ひろげるボタン設定
 			function() {
 				var HEIGHT_FOLDED = '48px';
-				var HEIGHT_UNFOLDED = $('.class_group').height() + 'px';
+				var HEIGHT_UNFOLDED = $('.class_group:last').height() + 'px';
 				var CLASSNAME_FOLDED = 'folded';
 
 				$('.toggle_ent').button({
