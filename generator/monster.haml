@@ -1,4 +1,4 @@
-- @version = 'm1.0'
+- @version = 'm1.1'
 !!! 5
 %html
 	%head
@@ -47,8 +47,12 @@
 					- %w(monstermaster itemmaster).each do |master_type|
 						%ul.button-container.appendbuttons{id: "#{master_type}"}
 							- data[master_type].each do |monster|
-								%li.button-monster-append.ui-corner-all<
-									%a{id: "append-#{monster}"} #{data['monsters'][monster]['name']}
+								- if data['monsters'][monster]['disabled']
+									%li.button-monster-append.ui-corner-all.disabled<
+										#{data['monsters'][monster]['name']}
+								- else
+									%li.button-monster-append.ui-corner-all<
+										%a{id: "append-#{monster}"} #{data['monsters'][monster]['name']}
 				-# %table#total.ui-corner-all
 				-# #navlink
 					%a{href: './'} プレイヤーキャラクター用シミュレータはこちら
@@ -58,7 +62,7 @@
 				%p Windows 7以降をお使いの方は、最新のものに更新してください。Windows Vista以前をお使いの方は<a href="https://www.mozilla.org/ja/firefox/new/" target="_blank">Firefox</a>や<a href="https://www.google.co.jp/chrome/browser/desktop/index.html" target="_blank">Google Chrome</a>などへの移行をご検討ください。
 			.monster_ent#initial-instruction
 				%p 上のモンスター名のボタンをクリックして仲間モンスターを追加してください。
-				%p.whatsnew （New: ver2.4前期のなつき度200時SP追加に対応しました）
+				%p.whatsnew （New: ver2.4後期の新仲間モンスター・ブラウニーを追加しました）
 			#monsters
 			.monster_ent#monster_dummy{style: 'display:none'}
 				.ent_title
@@ -171,6 +175,8 @@
 						%li
 							履歴:
 							%ul
+								%li
+									2015/3/2 v1.1 ver2.4後期のブラウニー追加に対応。
 								%li 2015/2/13 v1.0 IE10以下への対応を終了。
 								%li 2015/1/13 v0.9.1 バッジ「くさった死体・金」のデータ間違い修正（呪い5%→10%）、特技データ一部補完
 								%li 2014/12/24 v0.9 2.4前期でのなつき度200時追加SPに対応。
