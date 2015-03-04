@@ -1346,8 +1346,8 @@
 			"name": "ブラウニー",
 			"defaultName": "ブラウニー",
 			"skillLines": ["tensionou", "ippatsuya", "hammer"],
-			"status": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
-			"increment": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
+			"status": {"maxhp": 390, "maxmp": 120, "pow": 160, "def": 210, "magic": 28, "heal": 28, "spd": 100, "dex": 250, "charm": 90, "weight": 100},
+			"increment": {"maxhp": 5, "maxmp": 7, "pow": 4, "def": 4, "magic": 3, "heal": 3, "spd": 6, "dex": 8, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 
