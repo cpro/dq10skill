@@ -1087,7 +1087,7 @@
 			"defaultName": "スライム",
 			"skillLines": ["slappler", "slafource", "boomerang"],
 			"status": {"maxhp": 340, "maxmp": 75, "pow": 140, "def": 175, "magic": 80, "heal": 80, "spd": 120, "dex": 110, "charm": 110, "weight": 80},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 3, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1097,7 +1097,7 @@
 			"defaultName": "モーモン",
 			"skillLines": ["lightmormon", "darkmormon", "stick"],
 			"status": {"maxhp": 350, "maxmp": 125, "pow": 130, "def": 155, "magic": 60, "heal": 60, "spd": 110, "dex": 90, "charm": 110, "weight": 80},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 4, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 
@@ -1107,7 +1107,7 @@
 			"defaultName": "プリズニャン",
 			"skillLines": ["martialnyarts", "hyado", "claw"],
 			"status": {"maxhp": 360, "maxmp": 85, "pow": 120, "def": 165, "magic": 100, "heal": 100, "spd": 130, "dex": 100, "charm": 90, "weight": 100},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 
@@ -1117,7 +1117,7 @@
 			"defaultName": "ホイミスライ",
 			"skillLines": ["hoimingrapple", "hoiminheal", "stick"],
 			"status": {"maxhp": 325, "maxmp": 130, "pow": 130, "def": 165, "magic": 120, "heal": 120, "spd": 90, "dex": 90, "charm": 100, "weight": 80},
-			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 3, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1127,7 +1127,7 @@
 			"defaultName": "スライムナイ",
 			"skillLines": ["swordrider", "magicrider", "sword"],
 			"status": {"maxhp": 360, "maxmp": 35, "pow": 170, "def": 115, "magic": 80, "heal": 80, "spd": 100, "dex": 100, "charm": 110, "weight": 100},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1137,7 +1137,7 @@
 			"defaultName": "キメラ",
 			"skillLines": ["chimerawing", "chimeraheal", "stick"],
 			"status": {"maxhp": 295, "maxmp": 100, "pow": 160, "def": 155, "magic": 90, "heal": 90, "spd": 140, "dex": 110, "charm": 90, "weight": 100},
-			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 4, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1147,7 +1147,7 @@
 			"defaultName": "ねこまどう",
 			"skillLines": ["catmagic", "mera", "wand"],
 			"status": {"maxhp": 325, "maxmp": 110, "pow": 130, "def": 145, "magic": 120, "heal": 120, "spd": 150, "dex": 90, "charm": 90, "weight": 100},
-			"increment": {"maxhp": 3, "maxmp": 4, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 4, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 3, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1157,7 +1157,7 @@
 			"defaultName": "リザードマン",
 			"skillLines": ["gekkousword", "gekkoumove", "sword"],
 			"status": {"maxhp": 350, "maxmp": 45, "pow": 140, "def": 155, "magic": 70, "heal": 70, "spd": 180, "dex": 110, "charm": 100, "weight": 120},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 5},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 6, "charm": 0, "weight": 5},
 			"expTable": 1
 		},
 		
@@ -1167,7 +1167,7 @@
 			"defaultName": "バトルレック",
 			"skillLines": ["rexsense", "firebreath", "axe"],
 			"status": {"maxhp": 380, "maxmp": 45, "pow": 170, "def": 135, "magic": 30, "heal": 30, "spd": 60, "dex": 80, "charm": 120, "weight": 150},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 6, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 6, "dex": 3, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1177,7 +1177,7 @@
 			"defaultName": "いたずらもぐ",
 			"skillLines": ["trick", "molefocus", "staff"],
 			"status": {"maxhp": 335, "maxmp": 85, "pow": 150, "def": 175, "magic": 80, "heal": 80, "spd": 80, "dex": 130, "charm": 90, "weight": 80},
-			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1187,7 +1187,7 @@
 			"defaultName": "メタッピー",
 			"skillLines": ["battoppy", "suppoppy", "claw"],
 			"status": {"maxhp": 345, "maxmp": 85, "pow": 115, "def": 200, "magic": 60, "heal": 60, "spd": 180, "dex": 90, "charm": 90, "weight": 80},
-			"increment": {"maxhp": 3, "maxmp": 5, "pow": 2, "def": 10, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 5, "pow": 2, "def": 10, "magic": 8, "heal": 8, "spd": 16, "dex": 6, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1197,7 +1197,7 @@
 			"defaultName": "たけやりへい",
 			"skillLines": ["takeyarihyouhou", "takeyarikaihou", "spear"],
 			"status": {"maxhp": 350, "maxmp": 55, "pow": 160, "def": 180, "magic": 40, "heal": 40, "spd": 80, "dex": 80, "charm": 90, "weight": 100},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1207,7 +1207,7 @@
 			"defaultName": "ニードルマン",
 			"skillLines": ["dirtyharry", "cutyharry", "knife"],
 			"status": {"maxhp": 315, "maxmp": 65, "pow": 165, "def": 135, "magic": 60, "heal": 60, "spd": 180, "dex": 150, "charm": 120, "weight": 80},
-			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1217,7 +1217,7 @@
 			"defaultName": "フォンデュ",
 			"skillLines": ["gourmage", "io", "wand"],
 			"status": {"maxhp": 345, "maxmp": 130, "pow": 120, "def": 195, "magic": 100, "heal": 100, "spd": 60, "dex": 120, "charm": 110, "weight": 100},
-			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 2, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1227,7 +1227,7 @@
 			"defaultName": "エンタシスマ",
 			"skillLines": ["entanohanamichi", "entasistep", "fan"],
 			"status": {"maxhp": 380, "maxmp": 55, "pow": 150, "def": 160, "magic": 80, "heal": 80, "spd": 40, "dex": 100, "charm": 110, "weight": 150},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 4, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1237,7 +1237,7 @@
 			"defaultName": "さまようよろ",
 			"skillLines": ["straysword", "wanderarmor", "sword"],
 			"status": {"maxhp": 340, "maxmp": 65, "pow": 190, "def": 115, "magic": 60, "heal": 60, "spd": 50, "dex": 100, "charm": 100, "weight": 120},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1247,7 +1247,7 @@
 			"defaultName": "ゴーレム",
 			"skillLines": ["tatakauchikara", "mamoruchikara", "twohandedsword"],
 			"status": {"maxhp": 370, "maxmp": 55, "pow": 160, "def": 175, "magic": 40, "heal": 40, "spd": 40, "dex": 70, "charm": 90, "weight": 150},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 4, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1257,7 +1257,7 @@
 			"defaultName": "デビルアーマ",
 			"skillLines": ["demonssword", "demonsshield", "sword"],
 			"status": {"maxhp": 325, "maxmp": 85, "pow": 160, "def": 190, "magic": 50, "heal": 50, "spd": 70, "dex": 80, "charm": 100, "weight": 120},
-			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1267,7 +1267,7 @@
 			"defaultName": "おどるほうせ",
 			"skillLines": ["happyruby", "disasterdiamond", "fan"],
 			"status": {"maxhp": 325, "maxmp": 95, "pow": 120, "def": 180, "magic": 130, "heal": 130, "spd": 150, "dex": 255, "charm": 130, "weight": 80},
-			"increment": {"maxhp": 3, "maxmp": 5, "pow": 2, "def": 10, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 5, "pow": 2, "def": 10, "magic": 16, "heal": 16, "spd": 8, "dex": 12, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1277,7 +1277,7 @@
 			"defaultName": "マジカルハッ",
 			"skillLines": ["hatmagic", "buhibuheal", "wand"],
 			"status": {"maxhp": 315, "maxmp": 270, "pow": 120, "def": 85, "magic": 80, "heal": 80, "spd": 110, "dex": 90, "charm": 110, "weight": 80},
-			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 7, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1287,7 +1287,7 @@
 			"defaultName": "ベビーサタン",
 			"skillLines": ["koakumagic", "icebreath", "spear"],
 			"status": {"maxhp": 315, "maxmp": 120, "pow": 140, "def": 135, "magic": 180, "heal": 180, "spd": 80, "dex": 110, "charm": 110, "weight": 80},
-			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 7, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1297,7 +1297,7 @@
 			"defaultName": "ドラゴンキッ",
 			"skillLines": ["dragonguts", "firebreath", "claw"],
 			"status": {"maxhp": 330, "maxmp": 95, "pow": 160, "def": 145, "magic": 40, "heal": 40, "spd": 120, "dex": 90, "charm": 80, "weight": 100},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1307,7 +1307,7 @@
 			"defaultName": "パペットマン",
 			"skillLines": ["battledance", "magicdance", "knife"],
 			"status": {"maxhp": 295, "maxmp": 170, "pow": 140, "def": 135, "magic": 70, "heal": 70, "spd": 160, "dex": 130, "charm": 100, "weight": 100},
-			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 8, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1317,7 +1317,7 @@
 			"defaultName": "キラーマシン",
 			"skillLines": ["fencerform", "armsgadget", "twohandedsword"],
 			"status": {"maxhp": 345, "maxmp": 25, "pow": 170, "def": 190, "magic": 20, "heal": 20, "spd": 100, "dex": 80, "charm": 100, "weight": 150},
-			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1327,7 +1327,7 @@
 			"defaultName": "ドラキー",
 			"skillLines": ["mahodrakee", "doruma", "wand"],
 			"status": {"maxhp": 325, "maxmp": 80, "pow": 120, "def": 125, "magic": 100, "heal": 100, "spd": 220, "dex": 90, "charm": 90, "weight": 70},
-			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 7, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1337,7 +1337,7 @@
 			"defaultName": "やみしばり",
 			"skillLines": ["meifunojahou", "moujanojubaku", "axe"],
 			"status": {"maxhp": 310, "maxmp": 100, "pow": 155, "def": 170, "magic": 130, "heal": 130, "spd": 85, "dex": 90, "charm": 90, "weight": 110},
-			"increment": {"maxhp": 6, "maxmp": 4, "pow": 6, "def": 4, "magic": 16, "heal": 8, "spd": 4, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 4, "pow": 6, "def": 4, "magic": 16, "heal": 8, "spd": 4, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 
@@ -1346,7 +1346,7 @@
 			"name": "ブラウニー",
 			"defaultName": "ブラウニー",
 			"skillLines": ["tensionou", "ippatsuya", "hammer"],
-			"status": {"maxhp": 390, "maxmp": 120, "pow": 160, "def": 210, "magic": 28, "heal": 28, "spd": 100, "dex": 250, "charm": 90, "weight": 100},
+			"status": {"maxhp": 340, "maxmp": 90, "pow": 150, "def": 210, "magic": 28, "heal": 28, "spd": 100, "dex": 90, "charm": 90, "weight": 100},
 			"increment": {"maxhp": 5, "maxmp": 7, "pow": 4, "def": 4, "magic": 3, "heal": 3, "spd": 6, "dex": 8, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
