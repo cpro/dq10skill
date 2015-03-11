@@ -793,15 +793,41 @@
 			]
 		},
 
+		"tansutaijutsu": {
+			"name": "たんす体術",
+			"skills": [
+				{"pt":   3, "name": "なめまわし", "desc": "敵１体を\nなめまわして\n動けなくする", "mp": 0},
+				{"pt":   7, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
+				{"pt":  12, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  18, "name": "たんすマグナム", "desc": "", "mp": null},
+				{"pt":  25, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
+				{"pt":  32, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n３０増える", "mp": null, "maxhp": 30},
+				{"pt":  40, "name": "チェストー", "desc": "", "mp": null}
+			]
+		},
+
+		"tansuchokin": {
+			"name": "たんす貯金",
+			"skills": [
+				{"pt":   3, "name": "たいあたり", "desc": "", "mp": 3},
+				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
+				{"pt":  12, "name": "たんすのこやし", "desc": "", "mp": null},
+				{"pt":  18, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
+				{"pt":  25, "name": "ビックリたんす", "desc": "", "mp": null},
+				{"pt":  32, "name": "常時みのまもり+50", "desc": "常時\nみのまもりが\n５０増える", "mp": null, "def": 50},
+				{"pt":  40, "name": "へそくりシャワー", "desc": "", "mp": null}
+			]
+		},
+
 		"bow": {
 			"name": "弓",
 			"skills": [
-				{"pt":   3, "name": "装備時こうげき力+10", "desc": "ハンマー装備時の\nこうげき力が\n１０増える", "mp": null, "atk": 10},
+				{"pt":   3, "name": "装備時こうげき力+10", "desc": "弓装備時の\nこうげき力が\n１０増える", "mp": null, "atk": 10},
 				{"pt":   7, "name": "バードシュート", "desc": "鳥系の敵に\n威力を発揮する\nあざやかな弓の技", "mp": 1},
-				{"pt":  12, "name": "装備時こうげき力+15", "desc": "ハンマー装備時の\nこうげき力が\n１５増える", "mp": null, "atk": 15},
-				{"pt":  18, "name": "マジックアロー", "desc": "攻撃呪文に\n弱くなる矢を\n敵１体に放つ", "mp": 3},
+				{"pt":  12, "name": "装備時こうげき力+15", "desc": "弓装備時の\nこうげき力が\n１５増える", "mp": null, "atk": 15},
+				{"pt":  18, "name": "天使の矢", "desc": "敵１体を\n攻撃しつつ\n自分のＭＰも回復", "mp": 0},
 				{"pt":  25, "name": "装備時射程距離+3m", "desc": "弓のこうげきが\n少し遠くから\n当たるようになる", "mp": null},
-				{"pt":  32, "name": "装備時こうげき力+25", "desc": "ハンマー装備時の\nこうげき力が\n２５増える", "mp": null, "atk": 25},
+				{"pt":  32, "name": "装備時こうげき力+25", "desc": "弓装備時の\nこうげき力が\n２５増える", "mp": null, "atk": 25},
 				{"pt":  40, "name": "さみだれうち", "desc": "敵１体めがけて\nうちだされる\nどとうの4連射", "mp": 5}
 			]
 		},
@@ -1352,11 +1378,10 @@
 		},
 
 		"tansumimic": {
-			"disabled": true,
 			"id": 28,
 			"name": "たんすミミック",
 			"defaultName": "たんすミミッ",
-			"skillLines": ["unknown1", "unknown2", "bow"],
+			"skillLines": ["tansutaijutsu", "tansuchokin", "bow"],
 			"status": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
 			"increment": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
 			"expTable": 1
@@ -1371,7 +1396,7 @@
 	"itemmaster": [
 		"metappy", "takeyarihei", "needleman", "fondue", "entasisman",
 		"samayouyoroi", "golem", "devilarmor", "odoruhouseki", "magicalhat",
-		"puppetman", "killermachine", "yamishibari"
+		"puppetman", "killermachine", "yamishibari", "tansumimic"
 	],
 
 	"additionalSkillLines": [
