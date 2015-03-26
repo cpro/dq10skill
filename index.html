@@ -7,7 +7,7 @@
     <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
     <title>DQ10 スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=5.9' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=6.0' rel='stylesheet' type='text/css'>
     <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js' type='text/javascript'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js' type='text/javascript'></script>
@@ -15,7 +15,7 @@
     <script src='js/rawinflate.min.js' type='text/javascript'></script>
     <script src='js/shortcut.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=5.9' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=6.0' type='text/javascript'></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -239,14 +239,14 @@
               </div>
             </caption>
             <tr class='courage_0' title='仲間のかわりに&#x000A;ダメージをうける&#x000A;戦士専用特技&#x000A;（消費MP: 0）'><td class='skill_pt'>8</td><td class='skill_name'>かばう（専）</td></tr>
-            <tr class='courage_1' title='常時&#x000A;みのまもりが&#x000A;５増える'><td class='skill_pt'>16</td><td class='skill_name'>常時みのまもり+5</td></tr>
-            <tr class='courage_2' title='常時&#x000A;ちからが&#x000A;５増える'><td class='skill_pt'>28</td><td class='skill_name'>常時ちから+5</td></tr>
+            <tr class='courage_1' title='全職業で&#x000A;みのまもりが&#x000A;５増える'><td class='skill_pt'>16</td><td class='skill_name'>全職業でみのまもり+5</td></tr>
+            <tr class='courage_2' title='全職業で&#x000A;ちからが&#x000A;５増える'><td class='skill_pt'>28</td><td class='skill_name'>全職業でちから+5</td></tr>
             <tr class='courage_3' title='敵１体に&#x000A;ダメージを与え&#x000A;テンションダウン&#x000A;（消費MP: 4）'><td class='skill_pt'>40</td><td class='skill_name'>ロストアタック</td></tr>
-            <tr class='courage_4' title='常時&#x000A;みのまもりが&#x000A;５増える'><td class='skill_pt'>48</td><td class='skill_name'>常時みのまもり+5</td></tr>
-            <tr class='courage_5' title='常時&#x000A;ちからが&#x000A;５増える'><td class='skill_pt'>56</td><td class='skill_name'>常時ちから+5</td></tr>
+            <tr class='courage_4' title='全職業で&#x000A;みのまもりが&#x000A;５増える'><td class='skill_pt'>48</td><td class='skill_name'>全職業でみのまもり+5</td></tr>
+            <tr class='courage_5' title='全職業で&#x000A;ちからが&#x000A;５増える'><td class='skill_pt'>56</td><td class='skill_name'>全職業でちから+5</td></tr>
             <tr class='courage_6' title='ダメージを与え&#x000A;敵をふっとばす&#x000A;戦士専用特技&#x000A;（消費MP: 4）'><td class='skill_pt'>70</td><td class='skill_name'>たいあたり（専）</td></tr>
-            <tr class='courage_7' title='常時&#x000A;さいだいＨＰが&#x000A;３０増える'><td class='skill_pt'>80</td><td class='skill_name'>常時さいだいＨＰ+30</td></tr>
-            <tr class='courage_8' title='常時&#x000A;みのまもりが&#x000A;１０増える'><td class='skill_pt'>90</td><td class='skill_name'>常時みのまもり+10</td></tr>
+            <tr class='courage_7' title='全職業で&#x000A;さいだいＨＰが&#x000A;３０増える'><td class='skill_pt'>80</td><td class='skill_name'>全職業でさいだいＨＰ+30</td></tr>
+            <tr class='courage_8' title='全職業で&#x000A;みのまもりが&#x000A;１０増える'><td class='skill_pt'>90</td><td class='skill_name'>全職業でみのまもり+10</td></tr>
             <tr class='courage_9' title='敵を攻撃しつつ&#x000A;攻撃力も下げる&#x000A;戦士専用特技&#x000A;（消費MP: 4）'><td class='skill_pt'>100</td><td class='skill_name'>やいばくだき（専）</td></tr>
             <tr class='courage_10' title='かばう中に&#x000A;うけるダメージを&#x000A;減らす'><td class='skill_pt'>110</td><td class='skill_name'>かばうの心得（専）</td></tr>
             <tr class='courage_11' title='戦士時&#x000A;ちからが&#x000A;１０増える'><td class='skill_pt'>120</td><td class='skill_name'>ちから+10（専）</td></tr>
@@ -386,14 +386,14 @@
               </div>
             </caption>
             <tr class='faith_0' title='仲間ひとりの&#x000A;呪いを解く&#x000A;（消費MP: 2）'><td class='skill_pt'>8</td><td class='skill_name'>おはらい</td></tr>
-            <tr class='faith_1' title='常時&#x000A;かいふく魔力が&#x000A;１０増える'><td class='skill_pt'>16</td><td class='skill_name'>常時かいふく魔力+10</td></tr>
+            <tr class='faith_1' title='全職業で&#x000A;かいふく魔力が&#x000A;１０増える'><td class='skill_pt'>16</td><td class='skill_name'>全職業でかいふく魔力+10</td></tr>
             <tr class='faith_2' title='ダメージを受けて&#x000A;ＭＰ回復&#x000A;僧侶専用特技&#x000A;（消費MP: 2）'><td class='skill_pt'>28</td><td class='skill_name'>マホトラのころも（専）</td></tr>
-            <tr class='faith_3' title='常時&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>40</td><td class='skill_name'>常時さいだいＭＰ+10</td></tr>
+            <tr class='faith_3' title='全職業で&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>40</td><td class='skill_name'>全職業でさいだいＭＰ+10</td></tr>
             <tr class='faith_4' title='ＨＰが半分以上時&#x000A;即死をまぬがれる&#x000A;僧侶専用特技&#x000A;（消費MP: 8）'><td class='skill_pt'>48</td><td class='skill_name'>聖女の守り（専）</td></tr>
-            <tr class='faith_5' title='常時&#x000A;かいふく魔力が&#x000A;１０増える'><td class='skill_pt'>56</td><td class='skill_name'>常時かいふく魔力+10</td></tr>
+            <tr class='faith_5' title='全職業で&#x000A;かいふく魔力が&#x000A;１０増える'><td class='skill_pt'>56</td><td class='skill_name'>全職業でかいふく魔力+10</td></tr>
             <tr class='faith_6' title='死んでしまっても&#x000A;確実に生き返る&#x000A;僧侶専用特技&#x000A;（消費MP: 10）'><td class='skill_pt'>70</td><td class='skill_name'>天使の守り（専）</td></tr>
-            <tr class='faith_7' title='常時&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>80</td><td class='skill_name'>常時さいだいＭＰ+10</td></tr>
-            <tr class='faith_8' title='常時&#x000A;かいふく魔力が&#x000A;１０増える'><td class='skill_pt'>90</td><td class='skill_name'>常時かいふく魔力+10</td></tr>
+            <tr class='faith_7' title='全職業で&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>80</td><td class='skill_name'>全職業でさいだいＭＰ+10</td></tr>
+            <tr class='faith_8' title='全職業で&#x000A;かいふく魔力が&#x000A;１０増える'><td class='skill_pt'>90</td><td class='skill_name'>全職業でかいふく魔力+10</td></tr>
             <tr class='faith_9' title='回復呪文の効果を&#x000A;かなり高める&#x000A;僧侶専用特技&#x000A;（消費MP: 8）'><td class='skill_pt'>100</td><td class='skill_name'>聖なる祈り（専）</td></tr>
             <tr class='faith_10' title='僧侶時&#x000A;かいふく魔力が&#x000A;２０増える'><td class='skill_pt'>110</td><td class='skill_name'>かいふく魔力+20（専）</td></tr>
             <tr class='faith_11' title='僧侶時&#x000A;さいだいMPが&#x000A;３０増える'><td class='skill_pt'>120</td><td class='skill_name'>さいだいMP+30（専）</td></tr>
@@ -533,14 +533,14 @@
               </div>
             </caption>
             <tr class='spellcraft_0' title='魔法の結界で&#x000A;攻撃呪文から&#x000A;自分の身を守る&#x000A;（消費MP: 5）'><td class='skill_pt'>8</td><td class='skill_name'>魔結界</td></tr>
-            <tr class='spellcraft_1' title='常時&#x000A;こうげき魔力が&#x000A;１０増える'><td class='skill_pt'>18</td><td class='skill_name'>常時こうげき魔力+10</td></tr>
-            <tr class='spellcraft_2' title='常時&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>26</td><td class='skill_name'>常時さいだいＭＰ+10</td></tr>
+            <tr class='spellcraft_1' title='全職業で&#x000A;こうげき魔力が&#x000A;１０増える'><td class='skill_pt'>18</td><td class='skill_name'>全職業でこうげき魔力+10</td></tr>
+            <tr class='spellcraft_2' title='全職業で&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>26</td><td class='skill_name'>全職業でさいだいＭＰ+10</td></tr>
             <tr class='spellcraft_3' title='敵１体を&#x000A;攻撃呪文に&#x000A;弱くする&#x000A;（消費MP: 2）'><td class='skill_pt'>38</td><td class='skill_name'>ぶきみなひかり</td></tr>
             <tr class='spellcraft_4' title='呪文を唱えた時&#x000A;魔力が&#x000A;暴走しやすくなる'><td class='skill_pt'>46</td><td class='skill_name'>呪文ぼうそう率アップ</td></tr>
-            <tr class='spellcraft_5' title='常時&#x000A;こうげき魔力が&#x000A;１０増える'><td class='skill_pt'>54</td><td class='skill_name'>常時こうげき魔力+10</td></tr>
+            <tr class='spellcraft_5' title='全職業で&#x000A;こうげき魔力が&#x000A;１０増える'><td class='skill_pt'>54</td><td class='skill_name'>全職業でこうげき魔力+10</td></tr>
             <tr class='spellcraft_6' title='動きを止めて&#x000A;ＭＰを徐々に回復&#x000A;魔法使い専用特技&#x000A;（消費MP: 0）'><td class='skill_pt'>68</td><td class='skill_name'>魔力の息吹（専）</td></tr>
-            <tr class='spellcraft_7' title='常時&#x000A;こうげき魔力が&#x000A;１０増える'><td class='skill_pt'>78</td><td class='skill_name'>常時こうげき魔力+10</td></tr>
-            <tr class='spellcraft_8' title='常時&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>88</td><td class='skill_name'>常時さいだいＭＰ+10</td></tr>
+            <tr class='spellcraft_7' title='全職業で&#x000A;こうげき魔力が&#x000A;１０増える'><td class='skill_pt'>78</td><td class='skill_name'>全職業でこうげき魔力+10</td></tr>
+            <tr class='spellcraft_8' title='全職業で&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>88</td><td class='skill_name'>全職業でさいだいＭＰ+10</td></tr>
             <tr class='spellcraft_9' title='呪文のダメージを&#x000A;大幅に上げる&#x000A;魔法使い専用特技&#x000A;（消費MP: 10）'><td class='skill_pt'>100</td><td class='skill_name'>魔力かくせい（専）</td></tr>
             <tr class='spellcraft_10' title='魔法使い時&#x000A;さらに魔力が&#x000A;暴走しやすくなる'><td class='skill_pt'>110</td><td class='skill_name'>呪文ぼうそう率アップ（専）</td></tr>
             <tr class='spellcraft_11' title='魔法使い時&#x000A;こうげき魔力が&#x000A;２０増える'><td class='skill_pt'>120</td><td class='skill_name'>こうげき魔力+20（専）</td></tr>
@@ -680,13 +680,13 @@
               </div>
             </caption>
             <tr class='focus_0' title='チカラをためて&#x000A;テンションアップ&#x000A;武闘家専用特技&#x000A;（消費MP: 0）'><td class='skill_pt'>4</td><td class='skill_name'>ためる（専）</td></tr>
-            <tr class='focus_1' title='常時&#x000A;きようさが&#x000A;２０増える'><td class='skill_pt'>12</td><td class='skill_name'>常時きようさ+20</td></tr>
+            <tr class='focus_1' title='全職業で&#x000A;きようさが&#x000A;２０増える'><td class='skill_pt'>12</td><td class='skill_name'>全職業できようさ+20</td></tr>
             <tr class='focus_2' title='雑念をはらい&#x000A;ブレスダメージに&#x000A;強くなる&#x000A;（消費MP: 2）'><td class='skill_pt'>22</td><td class='skill_name'>心頭滅却</td></tr>
-            <tr class='focus_3' title='常時&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>34</td><td class='skill_name'>常時すばやさ+30</td></tr>
+            <tr class='focus_3' title='全職業で&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>34</td><td class='skill_name'>全職業ですばやさ+30</td></tr>
             <tr class='focus_4' title='自分の悪い効果を&#x000A;はらいのける&#x000A;武闘家専用特技&#x000A;（消費MP: 1）'><td class='skill_pt'>48</td><td class='skill_name'>不撓不屈（専）</td></tr>
-            <tr class='focus_5' title='常時&#x000A;ちからが&#x000A;１０増える'><td class='skill_pt'>56</td><td class='skill_name'>常時ちから+10</td></tr>
+            <tr class='focus_5' title='全職業で&#x000A;ちからが&#x000A;１０増える'><td class='skill_pt'>56</td><td class='skill_name'>全職業でちから+10</td></tr>
             <tr class='focus_6' title='周囲の敵を&#x000A;大声でおどかし&#x000A;動けなくする&#x000A;（消費MP: 3）'><td class='skill_pt'>70</td><td class='skill_name'>おたけび</td></tr>
-            <tr class='focus_7' title='常時&#x000A;さいだいＨＰが&#x000A;４０増える'><td class='skill_pt'>80</td><td class='skill_name'>常時さいだいＨＰ+40</td></tr>
+            <tr class='focus_7' title='全職業で&#x000A;さいだいＨＰが&#x000A;４０増える'><td class='skill_pt'>80</td><td class='skill_name'>全職業でさいだいＨＰ+40</td></tr>
             <tr class='focus_8' title='めいそうして&#x000A;ＨＰを８０～回復&#x000A;武闘家専用特技&#x000A;（消費MP: 5）'><td class='skill_pt'>90</td><td class='skill_name'>めいそう（専）</td></tr>
             <tr class='focus_9' title='チカラを一気に&#x000A;２回ためる&#x000A;武闘家専用特技&#x000A;（消費MP: 5）'><td class='skill_pt'>100</td><td class='skill_name'>ためる弐（専）</td></tr>
             <tr class='focus_10' title='武闘家時&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>110</td><td class='skill_name'>すばやさ+30（専）</td></tr>
@@ -829,12 +829,12 @@
             <tr class='acquisitiveness_0' title='一定の確率で&#x000A;アイテムをぬすむ&#x000A;盗賊専用特技&#x000A;（消費MP: 0）'><td class='skill_pt'>8</td><td class='skill_name'>ぬすむ（専）</td></tr>
             <tr class='acquisitiveness_1' title='敵１体の正体を&#x000A;討伐モンスター&#x000A;リストに書き込む&#x000A;（消費MP: 0）'><td class='skill_pt'>18</td><td class='skill_name'>みやぶる</td></tr>
             <tr class='acquisitiveness_2' title='近くの宝の場所を&#x000A;地図上でしらせる&#x000A;盗賊専用特技&#x000A;（消費MP: 0）'><td class='skill_pt'>26</td><td class='skill_name'>おたからさがし（専）</td></tr>
-            <tr class='acquisitiveness_3' title='常時&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>38</td><td class='skill_name'>常時すばやさ+30</td></tr>
-            <tr class='acquisitiveness_4' title='常時&#x000A;きようさが&#x000A;２０増える'><td class='skill_pt'>46</td><td class='skill_name'>常時きようさ+20</td></tr>
+            <tr class='acquisitiveness_3' title='全職業で&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>38</td><td class='skill_name'>全職業ですばやさ+30</td></tr>
+            <tr class='acquisitiveness_4' title='全職業で&#x000A;きようさが&#x000A;２０増える'><td class='skill_pt'>46</td><td class='skill_name'>全職業できようさ+20</td></tr>
             <tr class='acquisitiveness_5' title='バナナをしかけて&#x000A;転ばせられるぞ&#x000A;盗賊専用特技&#x000A;（消費MP: 1）'><td class='skill_pt'>54</td><td class='skill_name'>バナナトラップ（専）</td></tr>
-            <tr class='acquisitiveness_6' title='常時&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>68</td><td class='skill_name'>常時すばやさ+30</td></tr>
+            <tr class='acquisitiveness_6' title='全職業で&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>68</td><td class='skill_name'>全職業ですばやさ+30</td></tr>
             <tr class='acquisitiveness_7' title='巨大なバクダンで&#x000A;敵をふっとばす&#x000A;盗賊専用特技&#x000A;（消費MP: 6）'><td class='skill_pt'>78</td><td class='skill_name'>メガボンバー（専）</td></tr>
-            <tr class='acquisitiveness_8' title='常時&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>82</td><td class='skill_name'>常時すばやさ+30</td></tr>
+            <tr class='acquisitiveness_8' title='全職業で&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>82</td><td class='skill_name'>全職業ですばやさ+30</td></tr>
             <tr class='acquisitiveness_9' title='死んだふりをして&#x000A;敵から&#x000A;狙われなくなる&#x000A;（消費MP: 4）'><td class='skill_pt'>100</td><td class='skill_name'>しんだふり</td></tr>
             <tr class='acquisitiveness_10' title='盗賊時&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>110</td><td class='skill_name'>すばやさ+30（専）</td></tr>
             <tr class='acquisitiveness_11' title='盗賊時&#x000A;きようさが&#x000A;３０増える'><td class='skill_pt'>120</td><td class='skill_name'>きようさ+30（専）</td></tr>
@@ -974,14 +974,14 @@
               </div>
             </caption>
             <tr class='litheness_0' title='ボケたおして&#x000A;周囲の敵を&#x000A;わらわせる&#x000A;（消費MP: 2）'><td class='skill_pt'>4</td><td class='skill_name'>ボケ</td></tr>
-            <tr class='litheness_1' title='常時&#x000A;みりょくが&#x000A;２０増える'><td class='skill_pt'>12</td><td class='skill_name'>常時みりょく+20</td></tr>
+            <tr class='litheness_1' title='全職業で&#x000A;みりょくが&#x000A;２０増える'><td class='skill_pt'>12</td><td class='skill_name'>全職業でみりょく+20</td></tr>
             <tr class='litheness_2' title='ツッコんで&#x000A;仲間ひとりを&#x000A;われに返す&#x000A;（消費MP: 4）'><td class='skill_pt'>22</td><td class='skill_name'>ツッコミ</td></tr>
-            <tr class='litheness_3' title='常時&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>34</td><td class='skill_name'>常時すばやさ+30</td></tr>
+            <tr class='litheness_3' title='全職業で&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>34</td><td class='skill_name'>全職業ですばやさ+30</td></tr>
             <tr class='litheness_4' title='敵の攻撃を&#x000A;タップで身かわす&#x000A;旅芸人専用特技&#x000A;（消費MP: 3）'><td class='skill_pt'>46</td><td class='skill_name'>タップダンス（専）</td></tr>
-            <tr class='litheness_5' title='常時&#x000A;こうげき魔力が&#x000A;１０増える'><td class='skill_pt'>54</td><td class='skill_name'>常時こうげき魔力+10</td></tr>
+            <tr class='litheness_5' title='全職業で&#x000A;こうげき魔力が&#x000A;１０増える'><td class='skill_pt'>54</td><td class='skill_name'>全職業でこうげき魔力+10</td></tr>
             <tr class='litheness_6' title='嵐のごとく&#x000A;玉をなげつける&#x000A;旅芸人専用特技&#x000A;（消費MP: 8）'><td class='skill_pt'>68</td><td class='skill_name'>キラージャグリング（専）</td></tr>
-            <tr class='litheness_7' title='常時&#x000A;かいふく魔力が&#x000A;１０増える'><td class='skill_pt'>78</td><td class='skill_name'>常時かいふく魔力+10</td></tr>
-            <tr class='litheness_8' title='常時&#x000A;きようさが&#x000A;２０増える'><td class='skill_pt'>82</td><td class='skill_name'>常時きようさ+20</td></tr>
+            <tr class='litheness_7' title='全職業で&#x000A;かいふく魔力が&#x000A;１０増える'><td class='skill_pt'>78</td><td class='skill_name'>全職業でかいふく魔力+10</td></tr>
+            <tr class='litheness_8' title='全職業で&#x000A;きようさが&#x000A;２０増える'><td class='skill_pt'>82</td><td class='skill_name'>全職業できようさ+20</td></tr>
             <tr class='litheness_9' title='周囲の仲間の&#x000A;ＨＰを７０～回復&#x000A;旅芸人専用特技&#x000A;（消費MP: 8）'><td class='skill_pt'>100</td><td class='skill_name'>ハッスルダンス（専）</td></tr>
             <tr class='litheness_10' title='旅芸人時&#x000A;きようさが&#x000A;３０増える'><td class='skill_pt'>110</td><td class='skill_name'>きようさ+30（専）</td></tr>
             <tr class='litheness_11' title='周囲の仲間を&#x000A;われに返す&#x000A;旅芸人専用特技&#x000A;（消費MP: 4）&#x000A;（チャージ: 15秒）'><td class='skill_pt'>120</td><td class='skill_name'>エンドオブシーン（専）</td></tr>
@@ -1121,14 +1121,14 @@
               </div>
             </caption>
             <tr class='guts_0' title='ダメージを与えて&#x000A;テンションアップ&#x000A;バトマス専用特技&#x000A;（消費MP: 2）'><td class='skill_pt'>4</td><td class='skill_name'>とうこん討ち（専）</td></tr>
-            <tr class='guts_1' title='常時&#x000A;きようさが&#x000A;２０増える'><td class='skill_pt'>10</td><td class='skill_name'>常時きようさ+20</td></tr>
-            <tr class='guts_2' title='常時&#x000A;ちからが&#x000A;５増える'><td class='skill_pt'>16</td><td class='skill_name'>常時ちから+5</td></tr>
+            <tr class='guts_1' title='全職業で&#x000A;きようさが&#x000A;２０増える'><td class='skill_pt'>10</td><td class='skill_name'>全職業できようさ+20</td></tr>
+            <tr class='guts_2' title='全職業で&#x000A;ちからが&#x000A;５増える'><td class='skill_pt'>16</td><td class='skill_name'>全職業でちから+5</td></tr>
             <tr class='guts_3' title='守りを捨てて&#x000A;攻撃力を上げる&#x000A;バトマス専用特技&#x000A;（消費MP: 4）'><td class='skill_pt'>22</td><td class='skill_name'>すてみ（専）</td></tr>
-            <tr class='guts_4' title='常時&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>32</td><td class='skill_name'>常時すばやさ+30</td></tr>
+            <tr class='guts_4' title='全職業で&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>32</td><td class='skill_name'>全職業ですばやさ+30</td></tr>
             <tr class='guts_5' title='自分もキズつくが&#x000A;ダメージもアップ&#x000A;バトマス専用特技&#x000A;（消費MP: 0）'><td class='skill_pt'>42</td><td class='skill_name'>もろばぎり（専）</td></tr>
-            <tr class='guts_6' title='常時&#x000A;ちからが&#x000A;５増える'><td class='skill_pt'>55</td><td class='skill_name'>常時ちから+5</td></tr>
+            <tr class='guts_6' title='全職業で&#x000A;ちからが&#x000A;５増える'><td class='skill_pt'>55</td><td class='skill_name'>全職業でちから+5</td></tr>
             <tr class='guts_7' title='心を無にして&#x000A;敵１体を攻撃&#x000A;バトマス専用特技&#x000A;（消費MP: 5）'><td class='skill_pt'>68</td><td class='skill_name'>無心こうげき（専）</td></tr>
-            <tr class='guts_8' title='常時&#x000A;ちからが&#x000A;５増える'><td class='skill_pt'>82</td><td class='skill_name'>常時ちから+5</td></tr>
+            <tr class='guts_8' title='全職業で&#x000A;ちからが&#x000A;５増える'><td class='skill_pt'>82</td><td class='skill_name'>全職業でちから+5</td></tr>
             <tr class='guts_9' title='天下無双の&#x000A;６回攻撃&#x000A;バトマス専用特技&#x000A;（消費MP: 8）'><td class='skill_pt'>100</td><td class='skill_name'>天下無双（専）</td></tr>
             <tr class='guts_10' title='バトマス時&#x000A;ちからが&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>ちから+10（専）</td></tr>
             <tr class='guts_11' title='バトマス時&#x000A;きようさが&#x000A;３０増える'><td class='skill_pt'>120</td><td class='skill_name'>きようさ+30（専）</td></tr>
@@ -1268,14 +1268,14 @@
               </div>
             </caption>
             <tr class='virtue_0' title='やいばに&#x000A;全身を包んで&#x000A;自分の身を守る&#x000A;（消費MP: 3）'><td class='skill_pt'>2</td><td class='skill_name'>やいばのぼうぎょ</td></tr>
-            <tr class='virtue_1' title='常時&#x000A;みのまもりが&#x000A;１０増える'><td class='skill_pt'>12</td><td class='skill_name'>常時みのまもり+10</td></tr>
+            <tr class='virtue_1' title='全職業で&#x000A;みのまもりが&#x000A;１０増える'><td class='skill_pt'>12</td><td class='skill_name'>全職業でみのまもり+10</td></tr>
             <tr class='virtue_2' title='ＨＰの３０％を&#x000A;仲間ひとりに&#x000A;分け与える&#x000A;（消費MP: 0）'><td class='skill_pt'>22</td><td class='skill_name'>HPパサー</td></tr>
-            <tr class='virtue_3' title='常時&#x000A;かいふく魔力が&#x000A;１０増える'><td class='skill_pt'>34</td><td class='skill_name'>常時かいふく魔力+10</td></tr>
+            <tr class='virtue_3' title='全職業で&#x000A;かいふく魔力が&#x000A;１０増える'><td class='skill_pt'>34</td><td class='skill_name'>全職業でかいふく魔力+10</td></tr>
             <tr class='virtue_4' title='周りの仲間を&#x000A;身体をはって守る&#x000A;パラディン専用&#x000A;（消費MP: 0）'><td class='skill_pt'>46</td><td class='skill_name'>におうだち（専）</td></tr>
-            <tr class='virtue_5' title='常時&#x000A;みのまもりが&#x000A;１０増える'><td class='skill_pt'>54</td><td class='skill_name'>常時みのまもり+10</td></tr>
+            <tr class='virtue_5' title='全職業で&#x000A;みのまもりが&#x000A;１０増える'><td class='skill_pt'>54</td><td class='skill_name'>全職業でみのまもり+10</td></tr>
             <tr class='virtue_6' title='自分の重さを&#x000A;アップする&#x000A;パラディン専用&#x000A;（消費MP: 4）'><td class='skill_pt'>68</td><td class='skill_name'>ヘヴィチャージ（専）</td></tr>
-            <tr class='virtue_7' title='常時&#x000A;みのまもりが&#x000A;２０増える'><td class='skill_pt'>78</td><td class='skill_name'>常時みのまもり+20</td></tr>
-            <tr class='virtue_8' title='常時&#x000A;さいだいＨＰが&#x000A;３０増える'><td class='skill_pt'>82</td><td class='skill_name'>常時さいだいＨＰ+30</td></tr>
+            <tr class='virtue_7' title='全職業で&#x000A;みのまもりが&#x000A;２０増える'><td class='skill_pt'>78</td><td class='skill_name'>全職業でみのまもり+20</td></tr>
+            <tr class='virtue_8' title='全職業で&#x000A;さいだいＨＰが&#x000A;３０増える'><td class='skill_pt'>82</td><td class='skill_name'>全職業でさいだいＨＰ+30</td></tr>
             <tr class='virtue_9' title='ダメージを&#x000A;大幅に減らす&#x000A;パラディン専用&#x000A;（消費MP: 8）'><td class='skill_pt'>100</td><td class='skill_name'>大ぼうぎょ（専）</td></tr>
             <tr class='virtue_10' title='におうだち中に&#x000A;うけるダメージを&#x000A;減らす'><td class='skill_pt'>110</td><td class='skill_name'>におうだちの心得（専）</td></tr>
             <tr class='virtue_11' title='パラディン時&#x000A;さいだいＨＰが&#x000A;２０増える'><td class='skill_pt'>120</td><td class='skill_name'>さいだいHP+20（専）</td></tr>
@@ -1415,14 +1415,14 @@
               </div>
             </caption>
             <tr class='fource_0' title='こうげきに&#x000A;炎のチカラを宿す&#x000A;魔法戦士専用特技&#x000A;（消費MP: 2）'><td class='skill_pt'>4</td><td class='skill_name'>ファイアフォース（専）</td></tr>
-            <tr class='fource_1' title='常時&#x000A;ちからが&#x000A;１０増える'><td class='skill_pt'>10</td><td class='skill_name'>常時ちから+10</td></tr>
+            <tr class='fource_1' title='全職業で&#x000A;ちからが&#x000A;１０増える'><td class='skill_pt'>10</td><td class='skill_name'>全職業でちから+10</td></tr>
             <tr class='fource_2' title='こうげきに&#x000A;氷のチカラを宿す&#x000A;魔法戦士専用特技&#x000A;（消費MP: 2）'><td class='skill_pt'>16</td><td class='skill_name'>アイスフォース（専）</td></tr>
-            <tr class='fource_3' title='常時&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>22</td><td class='skill_name'>常時さいだいＭＰ+10</td></tr>
+            <tr class='fource_3' title='全職業で&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>22</td><td class='skill_name'>全職業でさいだいＭＰ+10</td></tr>
             <tr class='fource_4' title='こうげきに風と&#x000A;雷のチカラを宿す&#x000A;魔法戦士専用特技&#x000A;（消費MP: 2）'><td class='skill_pt'>32</td><td class='skill_name'>ストームフォース（専）</td></tr>
-            <tr class='fource_5' title='常時&#x000A;みのまもりが&#x000A;５増える'><td class='skill_pt'>42</td><td class='skill_name'>常時みのまもり+5</td></tr>
+            <tr class='fource_5' title='全職業で&#x000A;みのまもりが&#x000A;５増える'><td class='skill_pt'>42</td><td class='skill_name'>全職業でみのまもり+5</td></tr>
             <tr class='fource_6' title='こうげきに土と&#x000A;闇のチカラを宿す&#x000A;魔法戦士専用特技&#x000A;（消費MP: 2）'><td class='skill_pt'>55</td><td class='skill_name'>ダークフォース（専）</td></tr>
             <tr class='fource_7' title='ＭＰ３８を仲間に&#x000A;分け与える&#x000A;魔法戦士専用特技&#x000A;（消費MP: 38）'><td class='skill_pt'>68</td><td class='skill_name'>ＭＰパサー（専）</td></tr>
-            <tr class='fource_8' title='常時&#x000A;さいだいＨＰが&#x000A;２０増える'><td class='skill_pt'>82</td><td class='skill_name'>常時さいだいＨＰ+20</td></tr>
+            <tr class='fource_8' title='全職業で&#x000A;さいだいＨＰが&#x000A;２０増える'><td class='skill_pt'>82</td><td class='skill_name'>全職業でさいだいＨＰ+20</td></tr>
             <tr class='fource_9' title='こうげきに&#x000A;光のチカラを宿す&#x000A;魔法戦士専用特技&#x000A;（消費MP: 2）'><td class='skill_pt'>100</td><td class='skill_name'>ライトフォース（専）</td></tr>
             <tr class='fource_10' title='魔法戦士時&#x000A;フォースを範囲で&#x000A;かけられる'><td class='skill_pt'>110</td><td class='skill_name'>フォース範囲化（専）</td></tr>
             <tr class='fource_11' title='魔法戦士時&#x000A;さいだいＭＰが&#x000A;３０増える'><td class='skill_pt'>120</td><td class='skill_name'>さいだいMP+30（専）</td></tr>
@@ -1562,14 +1562,14 @@
               </div>
             </caption>
             <tr class='ruggedness_0' title='優しい心で&#x000A;弱い敵を&#x000A;逃がしてあげる&#x000A;（消費MP: 2）'><td class='skill_pt'>2</td><td class='skill_name'>みのがす</td></tr>
-            <tr class='ruggedness_1' title='常時&#x000A;きようさが&#x000A;２０増える'><td class='skill_pt'>12</td><td class='skill_name'>常時きようさ+20</td></tr>
+            <tr class='ruggedness_1' title='全職業で&#x000A;きようさが&#x000A;２０増える'><td class='skill_pt'>12</td><td class='skill_name'>全職業できようさ+20</td></tr>
             <tr class='ruggedness_2' title='モンスターを&#x000A;魅了する&#x000A;レンジャー専用&#x000A;（消費MP: 0）'><td class='skill_pt'>22</td><td class='skill_name'>てなづける（専）</td></tr>
-            <tr class='ruggedness_3' title='常時&#x000A;みりょくが&#x000A;２０増える'><td class='skill_pt'>34</td><td class='skill_name'>常時みりょく+20</td></tr>
+            <tr class='ruggedness_3' title='全職業で&#x000A;みりょくが&#x000A;２０増える'><td class='skill_pt'>34</td><td class='skill_name'>全職業でみりょく+20</td></tr>
             <tr class='ruggedness_4' title='逃げそうな敵を&#x000A;すかさず足止め&#x000A;レンジャー専用&#x000A;（消費MP: 1）'><td class='skill_pt'>46</td><td class='skill_name'>メタルトラップ（専）</td></tr>
-            <tr class='ruggedness_5' title='常時&#x000A;きようさが&#x000A;２０増える'><td class='skill_pt'>54</td><td class='skill_name'>常時きようさ+20</td></tr>
+            <tr class='ruggedness_5' title='全職業で&#x000A;きようさが&#x000A;２０増える'><td class='skill_pt'>54</td><td class='skill_name'>全職業できようさ+20</td></tr>
             <tr class='ruggedness_6' title='不思議なきりで&#x000A;ブレスを1回回避&#x000A;レンジャー専用&#x000A;（消費MP: 5）'><td class='skill_pt'>68</td><td class='skill_name'>まもりのきり（専）</td></tr>
-            <tr class='ruggedness_7' title='常時&#x000A;かいふく魔力が&#x000A;２０増える'><td class='skill_pt'>78</td><td class='skill_name'>常時かいふく魔力+20</td></tr>
-            <tr class='ruggedness_8' title='常時&#x000A;きようさが&#x000A;２０増える'><td class='skill_pt'>82</td><td class='skill_name'>常時きようさ+20</td></tr>
+            <tr class='ruggedness_7' title='全職業で&#x000A;かいふく魔力が&#x000A;２０増える'><td class='skill_pt'>78</td><td class='skill_name'>全職業でかいふく魔力+20</td></tr>
+            <tr class='ruggedness_8' title='全職業で&#x000A;きようさが&#x000A;２０増える'><td class='skill_pt'>82</td><td class='skill_name'>全職業できようさ+20</td></tr>
             <tr class='ruggedness_9' title='オオカミが&#x000A;２回攻撃する&#x000A;レンジャー専用&#x000A;（消費MP: 6）'><td class='skill_pt'>100</td><td class='skill_name'>オオカミアタック（専）</td></tr>
             <tr class='ruggedness_10' title='レンジャー時&#x000A;不意をつく確率が&#x000A;上がる'><td class='skill_pt'>110</td><td class='skill_name'>先制攻撃率アップ（専）</td></tr>
             <tr class='ruggedness_11' title='レンジャー時&#x000A;きようさが&#x000A;３０増える'><td class='skill_pt'>120</td><td class='skill_name'>きようさ+30（専）</td></tr>
@@ -1709,14 +1709,14 @@
               </div>
             </caption>
             <tr class='enlightenment_0' title='仲間をいやす&#x000A;めぐみの雨が降る&#x000A;賢者専用特技&#x000A;（消費MP: 6）'><td class='skill_pt'>4</td><td class='skill_name'>いやしの雨（専）</td></tr>
-            <tr class='enlightenment_1' title='常時&#x000A;かいふく魔力が&#x000A;１０増える'><td class='skill_pt'>10</td><td class='skill_name'>常時かいふく魔力+10</td></tr>
-            <tr class='enlightenment_2' title='常時&#x000A;こうげき魔力が&#x000A;１０増える'><td class='skill_pt'>16</td><td class='skill_name'>常時こうげき魔力+10</td></tr>
+            <tr class='enlightenment_1' title='全職業で&#x000A;かいふく魔力が&#x000A;１０増える'><td class='skill_pt'>10</td><td class='skill_name'>全職業でかいふく魔力+10</td></tr>
+            <tr class='enlightenment_2' title='全職業で&#x000A;こうげき魔力が&#x000A;１０増える'><td class='skill_pt'>16</td><td class='skill_name'>全職業でこうげき魔力+10</td></tr>
             <tr class='enlightenment_3' title='悪い効果に&#x000A;かかりやすくする&#x000A;賢者専用特技&#x000A;（消費MP: 4）'><td class='skill_pt'>22</td><td class='skill_name'>魔導の書（専）</td></tr>
-            <tr class='enlightenment_4' title='常時&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>32</td><td class='skill_name'>常時さいだいＭＰ+10</td></tr>
-            <tr class='enlightenment_5' title='常時&#x000A;かいふく魔力が&#x000A;１０増える'><td class='skill_pt'>42</td><td class='skill_name'>常時かいふく魔力+10</td></tr>
+            <tr class='enlightenment_4' title='全職業で&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>32</td><td class='skill_name'>全職業でさいだいＭＰ+10</td></tr>
+            <tr class='enlightenment_5' title='全職業で&#x000A;かいふく魔力が&#x000A;１０増える'><td class='skill_pt'>42</td><td class='skill_name'>全職業でかいふく魔力+10</td></tr>
             <tr class='enlightenment_6' title='攻撃と回復両方の&#x000A;呪文効果がアップ&#x000A;賢者専用特技&#x000A;（消費MP: 12）'><td class='skill_pt'>55</td><td class='skill_name'>しんぴのさとり（専）</td></tr>
-            <tr class='enlightenment_7' title='常時&#x000A;こうげき魔力が&#x000A;１０増える'><td class='skill_pt'>68</td><td class='skill_name'>常時こうげき魔力+10</td></tr>
-            <tr class='enlightenment_8' title='常時&#x000A;さいだいＭＰが&#x000A;２０増える'><td class='skill_pt'>82</td><td class='skill_name'>常時さいだいＭＰ+20</td></tr>
+            <tr class='enlightenment_7' title='全職業で&#x000A;こうげき魔力が&#x000A;１０増える'><td class='skill_pt'>68</td><td class='skill_name'>全職業でこうげき魔力+10</td></tr>
+            <tr class='enlightenment_8' title='全職業で&#x000A;さいだいＭＰが&#x000A;２０増える'><td class='skill_pt'>82</td><td class='skill_name'>全職業でさいだいＭＰ+20</td></tr>
             <tr class='enlightenment_9' title='敵にかかっている&#x000A;よい効果を解除&#x000A;賢者専用特技&#x000A;（消費MP: 10）'><td class='skill_pt'>100</td><td class='skill_name'>零の洗礼（専）</td></tr>
             <tr class='enlightenment_10' title='賢者時&#x000A;かいふく魔力が&#x000A;３０増える'><td class='skill_pt'>110</td><td class='skill_name'>かいふく魔力+30（専）</td></tr>
             <tr class='enlightenment_11' title='賢者時&#x000A;こうげき魔力が&#x000A;３０増える'><td class='skill_pt'>120</td><td class='skill_name'>こうげき魔力+30（専）</td></tr>
@@ -1856,13 +1856,13 @@
               </div>
             </caption>
             <tr class='jenesaisquoi_0' title='色紙代をはらって&#x000A;敵１体サイン攻撃&#x000A;スパスタ専用特技&#x000A;（25G）'><td class='skill_pt'>4</td><td class='skill_name'>サインぜめ（専）</td></tr>
-            <tr class='jenesaisquoi_1' title='常時&#x000A;みりょくが&#x000A;２０増える'><td class='skill_pt'>10</td><td class='skill_name'>常時みりょく+20</td></tr>
+            <tr class='jenesaisquoi_1' title='全職業で&#x000A;みりょくが&#x000A;２０増える'><td class='skill_pt'>10</td><td class='skill_name'>全職業でみりょく+20</td></tr>
             <tr class='jenesaisquoi_2' title='周囲の敵の&#x000A;目をくらませる&#x000A;スパスタ専用特技&#x000A;（消費MP: 6）'><td class='skill_pt'>16</td><td class='skill_name'>スキャンダル（専）</td></tr>
-            <tr class='jenesaisquoi_3' title='常時&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>22</td><td class='skill_name'>常時すばやさ+30</td></tr>
+            <tr class='jenesaisquoi_3' title='全職業で&#x000A;すばやさが&#x000A;３０増える'><td class='skill_pt'>22</td><td class='skill_name'>全職業ですばやさ+30</td></tr>
             <tr class='jenesaisquoi_4' title='周囲の敵が&#x000A;みとれやすくなる&#x000A;スパスタ専用特技&#x000A;（消費MP: 2）'><td class='skill_pt'>32</td><td class='skill_name'>メイクアップ（専）</td></tr>
-            <tr class='jenesaisquoi_5' title='常時&#x000A;こうげき魔力が&#x000A;１０増える'><td class='skill_pt'>42</td><td class='skill_name'>常時こうげき魔力+10</td></tr>
+            <tr class='jenesaisquoi_5' title='全職業で&#x000A;こうげき魔力が&#x000A;１０増える'><td class='skill_pt'>42</td><td class='skill_name'>全職業でこうげき魔力+10</td></tr>
             <tr class='jenesaisquoi_6' title='ボディーガードを&#x000A;ゴールドでやとう&#x000A;スパスタ専用特技&#x000A;（250G）'><td class='skill_pt'>55</td><td class='skill_name'>ボディーガード（専）</td></tr>
-            <tr class='jenesaisquoi_7' title='常時&#x000A;みりょくが&#x000A;６０増える'><td class='skill_pt'>68</td><td class='skill_name'>常時みりょく+60</td></tr>
+            <tr class='jenesaisquoi_7' title='全職業で&#x000A;みりょくが&#x000A;６０増える'><td class='skill_pt'>68</td><td class='skill_name'>全職業でみりょく+60</td></tr>
             <tr class='jenesaisquoi_8' title='最高のほほえみで&#x000A;経験値アップ&#x000A;スパスタ専用特技&#x000A;（消費MP: 12）'><td class='skill_pt'>82</td><td class='skill_name'>ベストスマイル（専）</td></tr>
             <tr class='jenesaisquoi_9' title='ゴールドを使って&#x000A;セレブなダメージ&#x000A;スパスタ専用特技&#x000A;（1000G）'><td class='skill_pt'>100</td><td class='skill_name'>ゴールドシャワー（専）</td></tr>
             <tr class='jenesaisquoi_10' title='スパスタ時&#x000A;みりょくが&#x000A;３０増える'><td class='skill_pt'>110</td><td class='skill_name'>みりょく+30（専）</td></tr>
@@ -2004,13 +2004,13 @@
             </caption>
             <tr class='monstermaster_0' title='まもの使いでの&#x000A;スカウトアタック&#x000A;成功率アップ'><td class='skill_pt'>2</td><td class='skill_name'>スカウト率アップ（専）</td></tr>
             <tr class='monstermaster_1' title='仲間モンスターを&#x000A;一時的に強化する&#x000A;まもの使い専用&#x000A;（消費MP: 2）'><td class='skill_pt'>12</td><td class='skill_name'>かわいがる（専）</td></tr>
-            <tr class='monstermaster_2' title='常時&#x000A;みのまもりが&#x000A;５増える'><td class='skill_pt'>26</td><td class='skill_name'>常時みのまもり+5</td></tr>
+            <tr class='monstermaster_2' title='全職業で&#x000A;みのまもりが&#x000A;５増える'><td class='skill_pt'>26</td><td class='skill_name'>全職業でみのまもり+5</td></tr>
             <tr class='monstermaster_3' title='敵１体を攻撃し&#x000A;ブレスを封じる&#x000A;まもの使い専用&#x000A;（消費MP: 3）'><td class='skill_pt'>40</td><td class='skill_name'>ブレスクラッシュ（専）</td></tr>
-            <tr class='monstermaster_4' title='常時&#x000A;ちからが&#x000A;５増える'><td class='skill_pt'>48</td><td class='skill_name'>常時ちから+5</td></tr>
+            <tr class='monstermaster_4' title='全職業で&#x000A;ちからが&#x000A;５増える'><td class='skill_pt'>48</td><td class='skill_name'>全職業でちから+5</td></tr>
             <tr class='monstermaster_5' title='仲間ひとりと&#x000A;ＨＰを分かち合う&#x000A;まもの使い専用'><td class='skill_pt'>56</td><td class='skill_name'>ＨＰリンク（専）</td></tr>
-            <tr class='monstermaster_6' title='常時&#x000A;さいだいＨＰが&#x000A;１０増える'><td class='skill_pt'>70</td><td class='skill_name'>常時さいだいＨＰ+10</td></tr>
+            <tr class='monstermaster_6' title='全職業で&#x000A;さいだいＨＰが&#x000A;１０増える'><td class='skill_pt'>70</td><td class='skill_name'>全職業でさいだいＨＰ+10</td></tr>
             <tr class='monstermaster_7' title='仲間ひとりと&#x000A;ＭＰを分かち合う&#x000A;まもの使い専用'><td class='skill_pt'>80</td><td class='skill_name'>ＭＰリンク（専）</td></tr>
-            <tr class='monstermaster_8' title='常時&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>90</td><td class='skill_name'>常時さいだいＭＰ+10</td></tr>
+            <tr class='monstermaster_8' title='全職業で&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>90</td><td class='skill_name'>全職業でさいだいＭＰ+10</td></tr>
             <tr class='monstermaster_9' title='敵モンスターを&#x000A;１体呼び寄せる&#x000A;まもの使い専用&#x000A;（消費MP: 5）'><td class='skill_pt'>100</td><td class='skill_name'>エモノ呼び（専）</td></tr>
             <tr class='monstermaster_10' title='まもの使い時&#x000A;仲間モンスターが&#x000A;なつきやすくなる'><td class='skill_pt'>110</td><td class='skill_name'>なつきやすくなる（専）</td></tr>
             <tr class='monstermaster_11' title='まもの使い時&#x000A;転生モンスターに&#x000A;あいやすくなる'><td class='skill_pt'>120</td><td class='skill_name'>転生遭遇率アップ（専）</td></tr>
@@ -2151,13 +2151,13 @@
             </caption>
             <tr class='itemmaster_0' title='どうぐ使いでの&#x000A;スカウトアタック&#x000A;成功率アップ'><td class='skill_pt'>8</td><td class='skill_name'>スカウト率アップ（専）</td></tr>
             <tr class='itemmaster_1' title='仲間モンスターを&#x000A;一時的に強化する&#x000A;どうぐ使い専用&#x000A;（消費MP: 2）'><td class='skill_pt'>16</td><td class='skill_name'>チューンナップ（専）</td></tr>
-            <tr class='itemmaster_2' title='常時&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>28</td><td class='skill_name'>常時さいだいＭＰ+10</td></tr>
+            <tr class='itemmaster_2' title='全職業で&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>28</td><td class='skill_name'>全職業でさいだいＭＰ+10</td></tr>
             <tr class='itemmaster_3' title='敵の魔法陣や&#x000A;爆弾を横取りする&#x000A;どうぐ使い専用&#x000A;（消費MP: 1）'><td class='skill_pt'>40</td><td class='skill_name'>トラップジャマー（専）</td></tr>
-            <tr class='itemmaster_4' title='常時&#x000A;すばやさが&#x000A;１０増える'><td class='skill_pt'>48</td><td class='skill_name'>常時すばやさ+10</td></tr>
+            <tr class='itemmaster_4' title='全職業で&#x000A;すばやさが&#x000A;１０増える'><td class='skill_pt'>48</td><td class='skill_name'>全職業ですばやさ+10</td></tr>
             <tr class='itemmaster_5' title='消費アイテムの&#x000A;効果をアップする&#x000A;どうぐ使い専用&#x000A;（消費MP: 6）'><td class='skill_pt'>56</td><td class='skill_name'>どうぐ倍化術（専）</td></tr>
-            <tr class='itemmaster_6' title='常時&#x000A;きようさが&#x000A;１０増える'><td class='skill_pt'>70</td><td class='skill_name'>常時きようさ+10</td></tr>
+            <tr class='itemmaster_6' title='全職業で&#x000A;きようさが&#x000A;１０増える'><td class='skill_pt'>70</td><td class='skill_name'>全職業できようさ+10</td></tr>
             <tr class='itemmaster_7' title='ダメージ軽減する&#x000A;魔法陣を作る&#x000A;どうぐ使い専用&#x000A;（消費MP: 2）'><td class='skill_pt'>80</td><td class='skill_name'>磁界シールド（専）</td></tr>
-            <tr class='itemmaster_8' title='常時&#x000A;さいだいＨＰが&#x000A;１０増える'><td class='skill_pt'>90</td><td class='skill_name'>常時さいだいＨＰ+10</td></tr>
+            <tr class='itemmaster_8' title='全職業で&#x000A;さいだいＨＰが&#x000A;１０増える'><td class='skill_pt'>90</td><td class='skill_name'>全職業でさいだいＨＰ+10</td></tr>
             <tr class='itemmaster_9' title='消費アイテムの&#x000A;効果範囲を広げる&#x000A;どうぐ使い専用&#x000A;（消費MP: 8）'><td class='skill_pt'>100</td><td class='skill_name'>どうぐ範囲化術（専）</td></tr>
             <tr class='itemmaster_10' title='どうぐ使い時&#x000A;仲間モンスターが&#x000A;なつきやすくなる'><td class='skill_pt'>110</td><td class='skill_name'>なつきやすくなる（専）</td></tr>
             <tr class='itemmaster_11' title='どうぐ使い時&#x000A;メタル系に&#x000A;あいやすくなる'><td class='skill_pt'>120</td><td class='skill_name'>
@@ -2228,6 +2228,7 @@
           <li>
             履歴:
             <ul>
+              <li>2015/3/26 v6.0 150スキル解放に対応。</li>
               <li>
                 2015/2/27 v5.9
                 <ul>
@@ -2238,14 +2239,6 @@
               </li>
               <li>2015/2/13 v5.8 IE10以下への対応を終了。</li>
               <li>2015/1/22 v5.7.3 MSP20→21 1/22配信クエストでの追加に対応。</li>
-              <li>
-                2014/12/25
-                <ul>
-                  <li>v5.7.2 レベル81-85の追加スキルポイントを1, 2, 2, 2, 2の合計9でひとまず確定。情報は匿名掲示板とツイッターの複数報告を元にしています。</li>
-                  <li>v5.7.2a 必要経験値の増分はLv80までの固定値 199,346 から変化なしとのツイッター情報から、81-85の必要経験値を確定。</li>
-                  <li>2014/12/26 上記をゲーム内でも確認。</li>
-                </ul>
-              </li>
               <li>過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。</li>
             </ul>
           </li>
