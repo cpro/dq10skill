@@ -1,4 +1,4 @@
-- @version = 'm1.2'
+- @version = 'm1.3'
 !!! 5
 %html
 	%head
@@ -62,7 +62,7 @@
 				%p Windows 7以降をお使いの方は、最新のものに更新してください。Windows Vista以前をお使いの方は<a href="https://www.mozilla.org/ja/firefox/new/" target="_blank">Firefox</a>や<a href="https://www.google.co.jp/chrome/browser/desktop/index.html" target="_blank">Google Chrome</a>などへの移行をご検討ください。
 			.monster_ent#initial-instruction
 				%p 上のモンスター名のボタンをクリックして仲間モンスターを追加してください。
-				%p.whatsnew （New: ver2.4後期の新仲間モンスター・ブラウニーを追加しました）
+				%p.whatsnew （New: 全モンスターの特技詳細・ステータスについて対応完了しました）
 			#monsters
 			.monster_ent#monster_dummy{style: 'display:none'}
 				.ent_title
@@ -175,6 +175,7 @@
 						%li
 							履歴:
 							%ul
+								%li 2015/4/3 v1.3 たんすミミックのステータス追加、全モンスターの特技データ補完完了
 								%li
 									ver2.4後期対応
 									%ul
@@ -184,16 +185,6 @@
 								%li 2015/1/13 v0.9.1 バッジ「くさった死体・金」のデータ間違い修正（呪い5%→10%）、特技データ一部補完
 								%li 2014/12/24 v0.9 2.4前期でのなつき度200時追加SPに対応。
 								%li 2014/12/16 v0.8 バッジ選択画面で複合条件検索を可能にした。
-								%li
-									2014/12/8 v0.7
-									%ul
-										%li バッジ選択画面をブラウザのウィンドウサイズに対して中央に表示するよう修正。また、選択画面上部をドラッグ可能に。
-										%li 装備中のバッジのボタンをマウスでポイントしたとき、バッジ効果をヒント表示するようにした。
-										%li データロードの最適化等微調整。
-								%li
-									2014/11/26 v0.6 バトルロードのモンスターバッジ機能を追加。
-									%ul
-										%li 同じバッジや4つめ以外でのSPバッジも選択できてしまいますが、これは修正予定です。
 								%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
 					%li
 						ToDo:

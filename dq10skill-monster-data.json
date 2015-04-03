@@ -1382,8 +1382,8 @@
 			"name": "たんすミミック",
 			"defaultName": "たんすミミッ",
 			"skillLines": ["tansutaijutsu", "tansuchokin", "bow"],
-			"status": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
-			"increment": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
+			"status": {"maxhp": 320, "maxmp": 80, "pow": 140, "def": 120, "magic": 55, "heal": 63, "spd": 70, "dex": 82, "charm": 90, "weight": 120},
+			"increment": {"maxhp": 5, "maxmp": 6, "pow": 3, "def": 6, "magic": 4, "heal": 3, "spd": 2, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		}
 	},
