@@ -1,4 +1,4 @@
-- @version = '5.8'
+- @version = '6.0'
 !!! 5
 %html
 	%head
@@ -59,8 +59,10 @@
 								%a{id: "fold-#{vocation}"} #{data['vocations'][vocation]['abbr']}
 				%table#total.ui-corner-all
 					%tr
-						%th.ui-corner-tl 総獲得経験値:
-						%td.total_pts#total_exp 0
+						%td.total_pts#cont_total_sp.ui-corner-tl.ui-corner-bl{rowspan: 2}
+							残りSP総計:
+							%br
+							%span#total_sp 0 / 0
 						%th 最大HP:
 						%td.total_pts#total_maxhp 0
 						%th 力:
@@ -72,8 +74,6 @@
 						%th 魅力:
 						%td.total_pts#total_charm.ui-corner-tr 0
 					%tr
-						%th.ui-corner-bl 総不足経験値:
-						%td.total_pts#total_exp_remain 0
 						%th 最大MP:
 						%td.total_pts#total_maxmp 0
 						%th 身守:
@@ -184,20 +184,15 @@
 					%li
 						履歴:
 						%ul
+							%li 2015/3/26 v6.0 150スキル解放に対応。
+							%li
+								2015/2/27 v5.9
+								%ul
+									%li 残りスキルポイント総合計の表示を追加。
+									%li ver2.4後期対応。特訓スキルポイント 12→13
+									%li 後期中に解放予定の150スキルに仮対応。
 							%li 2015/2/13 v5.8 IE10以下への対応を終了。
 							%li 2015/1/22 v5.7.3 MSP20→21 1/22配信クエストでの追加に対応。
-							%li
-								2014/12/25
-								%ul
-									%li v5.7.2 レベル81-85の追加スキルポイントを1, 2, 2, 2, 2の合計9でひとまず確定。情報は匿名掲示板とツイッターの複数報告を元にしています。
-									%li v5.7.2a 必要経験値の増分はLv80までの固定値 199,346 から変化なしとのツイッター情報から、81-85の必要経験値を確定。
-									%li 2014/12/26 上記をゲーム内でも確認。
-							%li
-								2014/12/19 v5.7.1
-								%ul
-									%li MSP19→20 12/22配信クエストでの追加に対応。
-									%li ver2.4前期のレベル上限解放(80→85)に仮対応。SPは2ずつ合計10としています。
-							%li 2014/12/15 v5.7 元に戻す/やり直し機能の追加。
 							%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
 					%li
 						ToDo:

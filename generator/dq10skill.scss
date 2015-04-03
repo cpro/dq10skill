@@ -236,6 +236,18 @@ a {
 				color: $msp-color;
 				font-weight: bold;
 			}
+			td#cont_total_sp {
+				font-size: 11px;
+				line-height: 17px;
+				vertical-align: middle;
+				text-align: left;
+				padding: 0 4px;
+			}
+			#total_sp {
+				font-weight: bold;
+				font-size: 16px;
+				padding-right: 5px;
+			}
 		}
 
 		#navlink {

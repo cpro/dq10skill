@@ -9,18 +9,8 @@
 	});
 
 	var Simulator = (function() {
-		var SKILL_PTS_MIN = 0;
-		var SKILL_PTS_MAX = 40;
-		var LEVEL_MIN = 1;
-		var LEVEL_MAX = 50;
 		var MONSTER_MAX = 8;
 		
-		var RESTART_MIN = 0;
-		var RESTART_MAX = 6;
-		var SKILL_PTS_PER_RESTART = 10;
-		var SKILL_PTS_PER_RESTART_OVER_5 = 5; //転生6回目以降の増分
-		var SKILL_PTS_NATSUKI200 = 5; //なつき度200時の獲得SP
-		var RESTART_EXP_RATIO = 0.03; //仮数値
 		var BASIC_SKILL_COUNT = 3;
 		var ADDITIONAL_SKILL_MAX = 2;
 		var BADGE_COUNT = 4;
@@ -37,10 +27,10 @@
 		function Monster (monsterType) {
 			this.data = DB.monsters[monsterType];
 			this.monsterType = monsterType;
-			this.level = LEVEL_MAX;
+			this.level = DB.consts.level.max;
 			this.skillPts = {};
 			this.indivName = this.data.defaultName;
-			this.restartCount = RESTART_MAX;
+			this.restartCount = DB.consts.restart.max;
 
 			this.id = monsterType + '_' + (lastId += 1).toString();
 
@@ -68,7 +58,7 @@
 		
 		//スキルポイント更新：不正値の場合falseを返す
 		Monster.prototype.updateSkillPt = function(skillLine, newValue) {
-			if(newValue < SKILL_PTS_MIN || newValue > SKILL_PTS_MAX) {
+			if(newValue < DB.consts.skillPts.min || newValue > DB.consts.skillPts.max) {
 				return false;
 			}
 			
@@ -84,7 +74,7 @@
 		//レベル値更新
 		Monster.prototype.updateLevel = function(newValue) {
 			var oldValue = this.level;
-			if(newValue < LEVEL_MIN || newValue > LEVEL_MAX) {
+			if(newValue < DB.consts.level.min || newValue > DB.consts.level.max) {
 				return oldValue;
 			}
 			
@@ -117,7 +107,7 @@
 			var natsukiSkillPts = this.getNatsukiSkillPts();
 			var total = this.totalSkillPts() - restartSkillPt - natsukiSkillPts;
 			
-			for(var l = LEVEL_MIN; l <= LEVEL_MAX; l++) {
+			for(var l = DB.consts.level.min; l <= DB.consts.level.max; l++) {
 				if(DB.skillPtsGiven[l] >= total)
 					return l;
 			}
@@ -126,17 +116,17 @@
 		
 		//モンスター・レベルによる必要経験値
 		Monster.prototype.requiredExp = function(level) {
-			return Math.floor(DB.expRequired[this.data.expTable][level] * (1 + this.restartCount * RESTART_EXP_RATIO));
+			return Math.floor(DB.expRequired[this.data.expTable][level] * (1 + this.restartCount * DB.consts.restart.expRatio));
 		};
 		
 		//転生時の必要経験値 Lv50経験値×転生補正値の累計
 		Monster.prototype.additionalExp = function() {
-			var expMax = DB.expRequired[this.data.expTable][LEVEL_MAX];
+			var expMax = DB.expRequired[this.data.expTable][DB.consts.level.max];
 			if(isNaN(expMax)) return 0;
 
 			var additionalExp = 0;
 			for(var r = 0; r < this.restartCount; r++) {
-				additionalExp += Math.floor(expMax * (1 + r * RESTART_EXP_RATIO));
+				additionalExp += Math.floor(expMax * (1 + r * DB.consts.restart.expRatio));
 			}
 
 			return additionalExp;
@@ -165,7 +155,7 @@
 		};
 		//転生回数の更新
 		Monster.prototype.updateRestartCount = function(newValue) {
-			if(newValue < RESTART_MIN || newValue > RESTART_MAX) {
+			if(newValue < DB.consts.restart.min || newValue > DB.consts.restart.max) {
 				return false;
 			}
 			
@@ -180,8 +170,8 @@
 				rcOver5 = rcBase - 5;
 				rcBase = 5;
 			}
-			return rcBase * SKILL_PTS_PER_RESTART +
-				rcOver5 * SKILL_PTS_PER_RESTART_OVER_5;
+			return rcBase * DB.consts.restart.skillPts +
+				rcOver5 * DB.consts.restart.skillPtsOver5;
 		};
 
 		//転生追加スキルの取得
@@ -214,7 +204,7 @@
 		};
 		//なつき度に対するSP取得
 		Monster.prototype.getNatsukiSkillPts = function() {
-			return (this.getNatsuki() ? SKILL_PTS_NATSUKI200 : 0);
+			return (this.getNatsuki() ? DB.consts.skillPts.natsuki : 0);
 		};
 
 		//Lv50時の各種ステータス合計値取得
@@ -407,12 +397,15 @@
 		/* メソッド */
 
 		//モンスター追加
-		function addMonster (monsterType) {
+		function addMonster (monsterType, index) {
 			if(monsters.length >= MONSTER_MAX)
 				return null;
 
 			var newMonster = new Monster(monsterType);
-			monsters.push(newMonster);
+			if(index === undefined)
+				monsters.push(newMonster);
+			else
+				monsters.splice(index, 0, newMonster);
 			return newMonster;
 		}
 
@@ -424,7 +417,10 @@
 		//指定IDのモンスター削除
 		function deleteMonster(monsterId) {
 			var i = indexOf(monsterId);
-			if(i !== null) monsters.splice(i, 1);
+			if(i !== null)
+				return monsters.splice(i, 1)[0];
+			else
+				return false;
 		}
 
 		//指定IDのモンスターをひとつ下に並び替える
@@ -541,6 +537,7 @@
 			deleteMonster: deleteMonster,
 			movedownMonster: movedownMonster,
 			moveupMonster: moveupMonster,
+			indexOf: indexOf,
 			generateQueryString: generateQueryString,
 			applyQueryString: applyQueryString,
 			validateQueryString: validateQueryString,
@@ -549,16 +546,163 @@
 			monsters: monsters,
 
 			//定数
-			SKILL_PTS_MIN: SKILL_PTS_MIN,
-			SKILL_PTS_MAX: SKILL_PTS_MAX,
-			LEVEL_MIN: LEVEL_MIN,
-			LEVEL_MAX: LEVEL_MAX,
-			RESTART_MIN: RESTART_MIN,
-			RESTART_MAX: RESTART_MAX,
 			ADDITIONAL_SKILL_MAX: ADDITIONAL_SKILL_MAX,
 			BADGE_COUNT: BADGE_COUNT
 		};
 	})();
+
+	/* Controller (Command / Event) */
+	var SimulatorCommandManager = (function(simulator) {
+		var sim = simulator;
+
+		var UNDO_MAX = 20;
+		var commandStack = [];
+		var cursor = 0;
+		var onCommandStackChanged = function() {};
+
+		function invoke(command) {
+			var succeeded = command.execute();
+			if(!succeeded) return false;
+
+			//以降のスタックを切捨て
+			commandStack.splice(cursor);
+
+			if(cursor >= 1 && commandStack[cursor - 1].isAbsorbable(command)) {
+				//連続した同種の操作ならひとつの操作にまとめる
+				commandStack[cursor - 1].absorb(command);
+			} else {
+				commandStack.push(command);
+				cursor++;
+			}
+
+			if(commandStack.length > UNDO_MAX) {
+				commandStack.shift();
+				cursor--;
+			}
+
+			dispatch('CommandStackChanged');
+			return true;
+		}
+
+		function undo() {
+			if(!isUndoable()) return;
+
+			cursor--;
+			var command = commandStack[cursor];
+			command.undo();
+			dispatch('CommandStackChanged');
+		}
+
+		function redo() {
+			if(!isRedoable()) return;
+
+			var command = commandStack[cursor];
+			command.execute();
+			cursor++;
+			dispatch('CommandStackChanged');
+		}
+
+		function isUndoable() {
+			return (cursor > 0);
+		}
+
+		function isRedoable() {
+			return (cursor < commandStack.length);
+		}
+
+		//エントリ追加
+		var AddMonster = function(monsterType) {
+			this.monsterType = monsterType;
+		};
+		AddMonster.prototype.execute = function() {
+			var ret = sim.addMonster(this.monsterType);
+			if(ret) {
+				this.monsterId = ret.monsterId;
+				dispatch('MonsterAppended', ret);
+			}
+			return !!ret;
+		};
+		AddMonster.prototype.undo = function() {
+			sim.deleteMonster(this.monsterId);
+			dispatch('MonsterRemoved', this.monsterId);
+		};
+		AddMonster.prototype.isAbsorbable = function() { return false; };
+
+		//エントリ削除
+		var DeleteMonster = function(monsterId) {
+			this.monsterId = monsterId;
+		};
+		DeleteMonster.prototype.execute = function() {
+			this.deletedIndex = sim.indexOf(this.monsterId);
+			var ret = sim.deleteMonster(this.monsterId);
+			if(ret) {
+				this.deletedMonster = ret;
+				dispatch('MonsterRemoved', ret);
+			}
+			return !!ret;
+		};
+		DeleteMonster.prototype.undo = function() {
+			sim.monsters.splice(this.deletedIndex, 0, this.deletedMonster);
+			dispatch('MonsterAppended', this.deletedMonster, this.deletedIndex);
+		};
+		DeleteMonster.prototype.isAbsorbable = function() { return false; };
+
+		//使用可能イベントの定義
+		var EVENTS_ENABLED = [
+			'CommandStackChanged',
+			'MonsterAppended',
+			'MonsterRemoved',
+			'VocationalInfoChanged',
+			'SkillLineChanged',
+			'MSPChanged',
+			'WholeChanged'
+		];
+
+		//イベント管理オブジェクト
+		var eventStocker = {};
+
+		//イベント登録
+		function on(eventName, fn) {
+			if(EVENTS_ENABLED.indexOf(eventName) < 0)
+				throw 'invalid event type.';
+
+			if(eventStocker[eventName] === undefined)
+				eventStocker[eventName] = [];
+
+			eventStocker[eventName].push(fn);
+		}
+
+		//イベント発火
+		function dispatch(eventName) {
+			if(EVENTS_ENABLED.indexOf(eventName) < 0)
+				throw 'invalid event type.';
+
+			if(eventStocker[eventName] === undefined) return;
+
+			var args = Array.prototype.slice.call(arguments);
+			args.shift();
+
+			eventStocker[eventName].forEach(function(listener) {
+				listener.apply(this, args);
+			});
+		}
+
+		//API
+		return {
+			undo: undo,
+			redo: redo,
+			isUndoable: isUndoable,
+			isRedoable: isRedoable,
+			on: on,
+
+			addMonster: function(monsterType) {
+				return invoke(new AddMonster(monsterType));
+			},
+			deleteMonster: function(monsterId) {
+				return invoke(new DeleteMonster(monsterId));
+			}
+		};
+	})(Simulator);
 
 	/* UI */
 	var SimulatorUI = (function() {
@@ -566,6 +710,7 @@
 		var CLASSNAME_ERROR = 'error';
 		
 		var sim = Simulator;
+		var com = SimulatorCommandManager;
 
 		//モンスターのエントリ追加
 		function drawMonsterEntry (monster) {
@@ -853,7 +998,7 @@
 
 			//レベル選択セレクトボックス項目設定
 			var $select = $ent.find('.lv_select>select');
-			for(var i = sim.LEVEL_MIN; i <= sim.LEVEL_MAX; i++) {
+			for(var i = DB.consts.level.min; i <= DB.consts.level.max; i++) {
 				$select.append($("<option />").val(i).text(i.toString() + ' (' + DB.skillPtsGiven[i].toString() + ')'));
 			}
 			//レベル選択セレクトボックス変更時
@@ -867,8 +1012,8 @@
 			//レベル転生回数スピンボタン設定
 			var $spinner = $ent.find('.restart_count');
 			$spinner.spinner({
-				min: sim.RESTART_MIN,
-				max: sim.RESTART_MAX,
+				min: DB.consts.restart.min,
+				max: DB.consts.restart.max,
 				spin: function (e, ui) {
 					var monsterId = getCurrentMonsterId(this);
 					var monster = sim.getMonster(monsterId);
@@ -909,8 +1054,8 @@
 			//スピンボタン設定
 			$spinner = $ent.find('.ptspinner');
 			$spinner.spinner({
-				min: sim.SKILL_PTS_MIN,
-				max: sim.SKILL_PTS_MAX,
+				min: DB.consts.skillPts.min,
+				max: DB.consts.skillPts.max,
 				spin: function (e, ui) {
 					var monsterId = getCurrentMonsterId(this);
 					var skillLine = getCurrentSkillLine(this);
@@ -1053,13 +1198,7 @@
 					'」を削除します。よろしいですか？';
 				if(!window.confirm(message)) return;
 
-				sim.deleteMonster(monsterId);
-				$('#' + monsterId).remove();
-
-				refreshSaveUrl();
-
-				if(sim.monsters.length === 0)
-					$('#initial-instruction').show();
+				com.deleteMonster(monsterId);
 			});
 
 			//下へボタン
@@ -1200,10 +1339,10 @@
 			//レベル一括設定
 			//セレクトボックス初期化
 			var $select = $('#setalllevel>select');
-			for(var i = sim.LEVEL_MIN; i <= sim.LEVEL_MAX; i++) {
+			for(var i = DB.consts.level.min; i <= DB.consts.level.max; i++) {
 				$select.append($("<option />").val(i).text(i.toString()));
 			}
-			$select.val(sim.LEVEL_MAX);
+			$select.val(DB.consts.level.max);
 			
 			$('#setalllevel>button').button().click(function(e) {
 				for(i = 0; i < sim.monsters.length; i++) {
@@ -1214,9 +1353,12 @@
 
 			$('.appendbuttons a').click(function(e) {
 				var monsterType = $(this).attr('id').replace('append-', '');
-				var monster = sim.addMonster(monsterType);
-				if(monster === null) return;
+				com.addMonster(monsterType);
+			});
+		}
 
+		function setupEvents() {
+			com.on('MonsterAppended', function(monster, index) {
 				$('#initial-instruction').hide();
 
 				$('#monsters').append(drawMonsterEntry(monster));
@@ -1225,10 +1367,19 @@
 
 				$('#' + monster.id + ' .indiv_name input').focus().select();
 			});
+			com.on('MonsterRemoved', function(monster) {
+				$('#' + monster.id).remove();
+
+				refreshSaveUrl();
+
+				if(sim.monsters.length === 0)
+					$('#initial-instruction').show();
+			});
 		}
 
 		function setupAll() {
 			setupConsole();
+			setupEvents();
 			BadgeSelector.setup();
 
 			$('#monsters').empty();

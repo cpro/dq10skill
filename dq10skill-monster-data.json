@@ -68,13 +68,13 @@
 		"rexsense": {
 			"name": "レックスセンス",
 			"skills": [
-				{"pt":   3, "name": "テールアタック"},
+				{"pt":   3, "name": "テールアタック", "desc": "敵１体に尻尾を\nたたきつけて攻撃\nたまにマヒさせる", "mp": 3},
 				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
 				{"pt":  12, "name": "ドラゴンビート", "desc": "敵を倒すと\nテンションアップ\nするようになる", "mp": null},
 				{"pt":  18, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
 				{"pt":  25, "name": "はやぶさ斬り", "desc": "はやぶさのごとき\n高速の２回攻撃", "mp": 2},
 				{"pt":  32, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
-				{"pt":  40, "name": "竜のおたけび"}
+				{"pt":  40, "name": "竜のおたけび", "desc": "はげしい咆哮で\n周りの敵を攻撃し\nはじきとばす", "mp": 8}
 			]
 		},
 
@@ -211,7 +211,7 @@
 		"hoimingrapple": {
 			"name": "ホイミン流格闘術",
 			"skills": [
-				{"pt":   3, "name": "スピンアタック", "desc": "", "mp": 1},
+				{"pt":   3, "name": "スピンアタック", "desc": "身体を回転させ\n周りの敵に攻撃", "mp": 1},
 				{"pt":   7, "name": "常時みかわし率+10%", "desc": "常時\n敵の攻撃を\nかわしやすくなる", "mp": null},
 				{"pt":  12, "name": "常時すばやさ+60", "desc": "常時\nすばやさが\n６０増える", "mp": null, "spd": 60},
 				{"pt":  18, "name": "ばくれつけん", "desc": "敵１体に\nしっぷうどとうの\n４回攻撃", "mp": 4},
@@ -237,13 +237,13 @@
 		"chimerawing": {
 			"name": "キメラのはばたき",
 			"skills": [
-				{"pt":   3, "name": "かえんのいき", "desc": "", "mp": 4},
+				{"pt":   3, "name": "かえんのいき", "desc": "火炎の息をはき\n周りの敵に攻撃", "mp": 4},
 				{"pt":   7, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
-				{"pt":  12, "name": "キメラのつばさ", "desc": "", "mp": null},
+				{"pt":  12, "name": "キメラのつばさ", "desc": "おいのりした\n教会のある町に\n瞬時に移動できる", "mp": null},
 				{"pt":  18, "name": "常時すばやさ+60", "desc": "常時\nすばやさが\n６０増える", "mp": null, "spd": 60},
 				{"pt":  25, "name": "おいかぜ", "desc": "１回だけ\nブレス系の攻撃を\nはねかえす", "mp": 6},
 				{"pt":  32, "name": "常時さいだいＭＰ+80", "desc": "常時\nさいだいＭＰが\n８０増える", "mp": null, "maxmp": 80},
-				{"pt":  40, "name": "フェザーストーム", "desc": "", "mp": 8}
+				{"pt":  40, "name": "フェザーストーム", "desc": "無数の羽根で\n周囲の敵に\nどとうの６回攻撃", "mp": 8}
 			]
 		},
 
@@ -395,11 +395,11 @@
 			"skills": [
 				{"pt":   3, "name": "ためる", "desc": "チカラをためて\nテンションアップ", "mp": 0},
 				{"pt":   7, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
-				{"pt":  12, "name": "かげぬい", "desc": "", "mp": null},
+				{"pt":  12, "name": "かげぬい", "desc": "敵１体を攻撃し\n同時に糸で\n動きをとめる", "mp": 3},
 				{"pt":  18, "name": "常時すばやさ+60", "desc": "常時\nすばやさが\n６０増える", "mp": null, "spd": 60},
-				{"pt":  25, "name": "ニードルレイン", "desc": "", "mp": null},
+				{"pt":  25, "name": "ニードルレイン", "desc": "あたまの針で\n周囲の敵を攻撃\nたまにマヒさせる", "mp": 8},
 				{"pt":  32, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
-				{"pt":  40, "name": "アサシンアタック", "desc": "", "mp": null}
+				{"pt":  40, "name": "アサシンアタック", "desc": "敵１体を攻撃し\nまれに即死させる", "mp": 6}
 			]
 		},
 
@@ -409,10 +409,10 @@
 				{"pt":   3, "name": "ピオリム", "desc": "周囲の仲間の\n行動間隔を\n少し短くする", "mp": 4},
 				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
 				{"pt":  12, "name": "常時みのまもり+50", "desc": "常時\nみのまもりが\n５０増える", "mp": null, "def": 50},
-				{"pt":  18, "name": "アップリケ", "desc": "", "mp": null},
+				{"pt":  18, "name": "アップリケ", "desc": "補強布をぬいつけ\nＨＰ回復と同時に\n守備力も上げる", "mp": 4},
 				{"pt":  25, "name": "常時みかわし率+5%", "desc": "常時\n敵の攻撃を\nかわしやすくなる", "mp": null},
 				{"pt":  32, "name": "常時さいだいＭＰ+80", "desc": "常時\nさいだいＭＰが\n８０増える", "mp": null, "maxmp": 80},
-				{"pt":  40, "name": "みがわりドール", "desc": "", "mp": null}
+				{"pt":  40, "name": "みがわりドール", "desc": "みがわりの人形で\n次の攻撃をガード", "mp": 5}
 			]
 		},
 
@@ -484,13 +484,13 @@
 		"demonssword": {
 			"name": "デモンズソード",
 			"skills": [
-				{"pt":   3, "name": "マホトラ斬り", "desc": "", "mp": null},
+				{"pt":   3, "name": "マホトラ斬り", "desc": "敵１体を攻撃し\n同時にＭＰを\n回復する", "mp": 0},
 				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
 				{"pt":  12, "name": "かぶと割り", "desc": "頭上から\n敵１体を斬りつけ\n守備力も下げる", "mp": 4},
 				{"pt":  18, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
 				{"pt":  25, "name": "ロストスラッシュ", "desc": "敵１体に\nダメージを与え\nテンションダウン", "mp": 4},
 				{"pt":  32, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
-				{"pt":  40, "name": "マジックブレイク", "desc": "", "mp": 8}
+				{"pt":  40, "name": "マジックブレイク", "desc": "邪悪な剣技で\n周りの敵を攻撃し\n呪文耐性も下げる", "mp": 8}
 			]
 		},
 
@@ -500,7 +500,7 @@
 				{"pt":   3, "name": "スクルト", "desc": "周囲の仲間の\n守備力を\n少し上げる", "mp": 4},
 				{"pt":   7, "name": "常時みのまもり+30", "desc": "常時\nみのまもりが\n３０増える", "mp": null, "def": 30},
 				{"pt":  12, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n３０増える", "mp": null, "maxhp": 30},
-				{"pt":  18, "name": "ズッシールド", "desc": "", "mp": 4},
+				{"pt":  18, "name": "ズッシールド", "desc": "盾をかかげて\n自分の守備力と\n重さをアップ", "mp": 4},
 				{"pt":  25, "name": "常時みかわし率+5%", "desc": "常時\n敵の攻撃を\nかわしやすくなる", "mp": null},
 				{"pt":  32, "name": "常時みのまもり+80", "desc": "常時\nみのまもりが\n８０増える", "mp": null, "def": 80},
 				{"pt":  40, "name": "シールドカウンター", "desc": "反撃のスキを狙い\n攻撃をはじいて\nカウンターする", "mp": 6}
@@ -575,11 +575,11 @@
 		"happyruby": {
 			"name": "しあわせのルビー",
 			"skills": [
-				{"pt":   3, "name": "マホトラ踊り", "desc": "ふしぎな踊りで\n相手からMPを\n奪って回復する", "mp": 0},
+				{"pt":   3, "name": "マホトラ踊り", "desc": "ふしぎな踊りで\n相手からＭＰを\n奪って回復する", "mp": 0},
 				{"pt":   7, "name": "常時すばやさ+40", "desc": "常時\nすばやさが\n４０増える", "mp": null, "spd": 40},
-				{"pt":  12, "name": "ぬすむ", "desc": "", "mp": null},
+				{"pt":  12, "name": "ぬすむ", "desc": "敵１体から\nアイテムや\nゴールドをぬすむ", "mp": 0},
 				{"pt":  18, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n３０増える", "mp": null, "maxhp": 30},
-				{"pt":  25, "name": "宝石ジャグリング", "desc": "", "mp": null},
+				{"pt":  25, "name": "宝石ジャグリング", "desc": "セレブのごとく\n宝石をなげつけて\n６回攻撃", "mp": 8},
 				{"pt":  32, "name": "常時みのまもり+80", "desc": "常時\nみのまもりが\n８０増える", "mp": null, "def": 80},
 				{"pt":  40, "name": "ラッキーダンス", "desc": "幸運を呼ぶ踊りで\n獲得経験値と\nゴールドがアップ", "mp": 7}
 			]
@@ -588,13 +588,13 @@
 		"disasterdiamond": {
 			"name": "わざわいのダイヤ",
 			"skills": [
-				{"pt":   3, "name": "ルカナン", "desc": "", "mp": null},
+				{"pt":   3, "name": "ルカナン", "desc": "範囲内にいる\n敵の守備力を\n少し下げる", "mp": 4},
 				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
-				{"pt":  12, "name": "ヘナトス", "desc": "", "mp": null},
+				{"pt":  12, "name": "ヘナトス", "desc": "敵１体の攻撃力を\n少し下げる", "mp": 4},
 				{"pt":  18, "name": "常時みかわし率+5%", "desc": "常時\n敵の攻撃を\nかわしやすくなる", "mp": null},
 				{"pt":  25, "name": "くちふうじ踊り", "desc": "範囲内の敵の\nブレスと呪文を\n封じる", "mp": 5},
 				{"pt":  32, "name": "常時こうげき魔力+100", "desc": "常時\nこうげき魔力が\n１００増える", "mp": null, "magic": 100},
-				{"pt":  40, "name": "ディバインスペル", "desc": "", "mp": null}
+				{"pt":  40, "name": "ディバインスペル", "desc": "範囲内の敵が\n攻撃呪文に\n弱くなる", "mp": 4}
 			]
 		},
 
@@ -605,9 +605,9 @@
 				{"pt":   7, "name": "ドルクマ", "desc": "巨大な\n闇のチカラが\n敵１体をおそう", "mp": 7},
 				{"pt":  12, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
 				{"pt":  18, "name": "ドルモーア", "desc": "破滅的な\n闇のチカラが\n敵１体をおそう", "mp": 14},
-				{"pt":  25, "name": "マホトラハット", "desc": "", "mp": null},
+				{"pt":  25, "name": "マホトラハット", "desc": "帽子みずから\n敵１体に攻撃し\nＭＰを回復する", "mp": 0},
 				{"pt":  32, "name": "常時こうげき魔力+100", "desc": "常時\nこうげき魔力が\n１００増える", "mp": null, "magic": 100},
-				{"pt":  40, "name": "ハットイルージョン", "desc": "", "mp": 10}
+				{"pt":  40, "name": "ハットイルージョン", "desc": "帽子からあふれる\n光で味方１人の\n状態異常を解除", "mp": 10}
 			]
 		},
 
@@ -616,11 +616,11 @@
 			"skills": [
 				{"pt":   3, "name": "ザオ", "desc": "仲間ひとりを\nたまにＨＰ１で\n生き返らせる", "mp": 5},
 				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
-				{"pt":  12, "name": "やすらぎハット", "desc": "", "mp": null},
+				{"pt":  12, "name": "やすらぎハット", "desc": "敵が減ると安心し\nＭＰが少し回復\nするようになる", "mp": null},
 				{"pt":  18, "name": "常時みのまもり+50", "desc": "常時\nみのまもりが\n５０増える", "mp": null, "def": 50},
 				{"pt":  25, "name": "ベホイム", "desc": "仲間ひとりの\nＨＰを\n１６４～回復する", "mp": 8},
 				{"pt":  32, "name": "常時かいふく魔力+100", "desc": "常時\nかいふく魔力が\n１００増える", "mp": null, "heal": 100},
-				{"pt":  40, "name": "ザオリク", "desc": "", "mp": null}
+				{"pt":  40, "name": "ザオリク", "desc": "仲間ひとりを\n確実に\n生き返らせる", "mp": 15}
 			]
 		},
 
@@ -754,6 +754,84 @@
 			]
 		},
 
+		"tensionou": {
+			"name": "テンション王",
+			"skills": [
+				{"pt":   3, "name": "ためる", "desc": "チカラをためて\nテンションアップ", "mp": 0},
+				{"pt":   7, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
+				{"pt":  12, "name": "テンションリンク", "desc": "仲間のテンション\nに合わせてまれに\nテンションアップ", "mp": null},
+				{"pt":  18, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
+				{"pt":  25, "name": "テンションバーン", "desc": "なぐられると\nテンションアップ", "mp": 4},
+				{"pt":  32, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n３０増える", "mp": null, "maxhp": 30},
+				{"pt":  40, "name": "超ちからため", "desc": "チカラを集中して\nテンションを\n一気に高める", "mp": 5}
+			]
+		},
+
+		"ippatsuya": {
+			"name": "いっぱつ屋",
+			"skills": [
+				{"pt":   3, "name": "回転たたき", "desc": "身体を回転させ\n周りの敵に攻撃", "mp": 4},
+				{"pt":   7, "name": "常時きようさ+60", "desc": "常時\nきようさが\n６０増える", "mp": null, "dex": 60},
+				{"pt":  12, "name": "パワースタンプ", "desc": "全力の一撃で\n敵１体を叩き付け\n大ダメージ", "mp": 2},
+				{"pt":  18, "name": "常時きようさ+100", "desc": "常時\nきようさが\n１００増える", "mp": null, "dex": 100},
+				{"pt":  25, "name": "会心完全ガード", "desc": "守りをかためて\n痛恨のいちげきを\n受けつけない", "mp": 10},
+				{"pt":  32, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  40, "name": "ウルトラスタンプ", "desc": "渾身の一撃で\n周りの敵を攻撃し\n攻撃力も下げる", "mp": 8}
+			]
+		},
+
+		"hammer": {
+			"name": "ハンマー",
+			"skills": [
+				{"pt":   3, "name": "装備時こうげき力+10", "desc": "ハンマー装備時の\nこうげき力が\n１０増える", "mp": null, "atk": 10},
+				{"pt":   7, "name": "ドラムクラッシュ", "desc": "物質系の敵に\n威力を発揮する\nチカラ強い打撃技", "mp": 1},
+				{"pt":  12, "name": "装備時こうげき力+15", "desc": "ハンマー装備時の\nこうげき力が\n１５増える", "mp": null, "atk": 15},
+				{"pt":  18, "name": "シールドブレイク", "desc": "敵１体を\n攻撃しつつ\n守備力も下げる", "mp": 2},
+				{"pt":  25, "name": "装備時かいしん率+5%", "desc": "ハンマーでの攻撃時\n会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+25", "desc": "ハンマー装備時の\nこうげき力が\n２５増える", "mp": null, "atk": 25},
+				{"pt":  40, "name": "ランドインパクト", "desc": "大地の衝撃波で\n自分の周りの敵を\nふっとばして攻撃", "mp": 8}
+			]
+		},
+
+		"tansutaijutsu": {
+			"name": "たんす体術",
+			"skills": [
+				{"pt":   3, "name": "なめまわし", "desc": "敵１体を\nなめまわして\n動けなくする", "mp": 0},
+				{"pt":   7, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
+				{"pt":  12, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  18, "name": "たんすマグナム", "desc": "敵１体に\n３回攻撃を放ち\nショックを与える", "mp": 5},
+				{"pt":  25, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
+				{"pt":  32, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n３０増える", "mp": null, "maxhp": 30},
+				{"pt":  40, "name": "チェストー", "desc": "子タンスたちと\n力を合わせて\n６回攻撃をする", "mp": 8}
+			]
+		},
+
+		"tansuchokin": {
+			"name": "たんす貯金",
+			"skills": [
+				{"pt":   3, "name": "たいあたり", "desc": "体全体を使って\n敵１体に攻撃する", "mp": 3},
+				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
+				{"pt":  12, "name": "たんすのこやし", "desc": "敵が倒されるたび\nＭＰが少し\n回復していく", "mp": null},
+				{"pt":  18, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
+				{"pt":  25, "name": "ビックリたんす", "desc": "周囲の敵に\n服がからみつき\nテンションダウン", "mp": 8},
+				{"pt":  32, "name": "常時みのまもり+50", "desc": "常時\nみのまもりが\n５０増える", "mp": null, "def": 50},
+				{"pt":  40, "name": "へそくりシャワー", "desc": "ひそかに集めた\nゴールドで放つ\nケチなダメージ", "mp": 10}
+			]
+		},
+
+		"bow": {
+			"name": "弓",
+			"skills": [
+				{"pt":   3, "name": "装備時こうげき力+10", "desc": "弓装備時の\nこうげき力が\n１０増える", "mp": null, "atk": 10},
+				{"pt":   7, "name": "バードシュート", "desc": "鳥系の敵に\n威力を発揮する\nあざやかな弓の技", "mp": 1},
+				{"pt":  12, "name": "装備時こうげき力+15", "desc": "弓装備時の\nこうげき力が\n１５増える", "mp": null, "atk": 15},
+				{"pt":  18, "name": "天使の矢", "desc": "敵１体を\n攻撃しつつ\n自分のＭＰも回復", "mp": 0},
+				{"pt":  25, "name": "装備時射程距離+3m", "desc": "弓のこうげきが\n少し遠くから\n当たるようになる", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+25", "desc": "弓装備時の\nこうげき力が\n２５増える", "mp": null, "atk": 25},
+				{"pt":  40, "name": "さみだれうち", "desc": "敵１体めがけて\nうちだされる\nどとうの4連射", "mp": 5}
+			]
+		},
+
 		"unknown1": {
 			"name": "不明",
 			"skills": [
@@ -811,10 +889,10 @@
 			"skills": [
 				{"pt":   3, "name": "常時さいだいＭＰ+15", "desc": "常時\nさいだいＭＰが\n１５増える", "mp": null, "maxmp": 15},
 				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
-				{"pt":  12, "name": "開戦時20%マホキテ"},
+				{"pt":  12, "name": "開戦時20%マホキテ", "desc": "戦闘開始時\nたまにマホキテ\nが発動する", "mp": null},
 				{"pt":  18, "name": "呪文ぼうそう率アップ", "desc": "呪文を唱えた時\n魔力が\n暴走しやすくなる", "mp": null},
 				{"pt":  25, "name": "常時さいだいＭＰ+45", "desc": "常時\nさいだいＭＰが\n４５増える", "mp": null, "maxmp": 45},
-				{"pt":  32, "name": "攻撃時たまにＭＰ回復", "desc": "", "mp": null},
+				{"pt":  32, "name": "攻撃時たまにＭＰ回復", "desc": "攻撃を行った時\nたまにＭＰを\n回復する", "mp": null},
 				{"pt":  40, "name": "常時さいだいＭＰ+60", "desc": "常時\nさいだいＭＰが\n６０増える", "mp": null, "maxmp": 60}
 			]
 		},
@@ -837,10 +915,10 @@
 			"skills": [
 				{"pt":   3, "name": "常時みのまもり+15", "desc": "常時\nみのまもりが\n１５増える", "mp": null, "def": 15},
 				{"pt":   7, "name": "常時みのまもり+30", "desc": "常時\nみのまもりが\n３０増える", "mp": null, "def": 30},
-				{"pt":  12, "name": "開戦時20%スカラ"},
+				{"pt":  12, "name": "開戦時20%スカラ", "desc": "戦闘開始時\nたまにスカラ\nが発動する", "mp": null},
 				{"pt":  18, "name": "常時みかわし率+5%", "desc": "常時\n敵の攻撃を\nかわしやすくなる", "mp": null},
 				{"pt":  25, "name": "常時みのまもり+45", "desc": "常時\nみのまもりが\n４５増える", "mp": null, "def": 45},
-				{"pt":  32, "name": "致死時たまに生き残る"},
+				{"pt":  32, "name": "致死時たまに生き残る", "desc": "ＨＰが０になる\n攻撃を受けても\nたまに生き残る", "mp": null},
 				{"pt":  40, "name": "常時みのまもり+60", "desc": "常時\nみのまもりが\n６０増える", "mp": null, "def": 60}
 			]
 		},
@@ -900,13 +978,13 @@
 		"weaken": {
 			"name": "じゃくたい",
 			"skills": [
-				{"pt":   3, "name": "ボミオス", "desc": "", "mp": 4},
+				{"pt":   3, "name": "ボミオス", "desc": "範囲内にいる\n敵の行動間隔を\n長くする", "mp": 4},
 				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
-				{"pt":  12, "name": "ルカナン", "desc": "", "mp": 4},
+				{"pt":  12, "name": "ルカナン", "desc": "範囲内にいる\n敵の守備力を\n少し下げる", "mp": 4},
 				{"pt":  18, "name": "常時すばやさ+60", "desc": "常時\nすばやさが\n６０増える", "mp": null, "spd": 60},
-				{"pt":  25, "name": "ヘナトス", "desc": "", "mp": 4},
+				{"pt":  25, "name": "ヘナトス", "desc": "敵１体の攻撃力を\n少し下げる", "mp": 4},
 				{"pt":  32, "name": "常時さいだいＭＰ+60", "desc": "常時\nさいだいＭＰが\n６０増える", "mp": null, "maxmp": 60},
-				{"pt":  40, "name": "ディバインスペル", "desc": "", "mp": null}
+				{"pt":  40, "name": "ディバインスペル", "desc": "範囲内の敵が\n攻撃呪文に\n弱くなる", "mp": 4}
 			]
 		},
 
@@ -965,12 +1043,12 @@
 		"bagi": {
 			"name": "バギの心得",
 			"skills": [
-				{"pt":   3, "name": "バギ", "desc": "", "mp": 2},
+				{"pt":   3, "name": "バギ", "desc": "周囲を巻き込む\n小さな竜巻が\n敵を切り裂く", "mp": 2},
 				{"pt":   7, "name": "常時こうげき魔力+40", "desc": "常時\nこうげき魔力が\n４０増える", "mp": null, "magic": 40},
-				{"pt":  12, "name": "バギマ", "desc": "", "mp": 5},
+				{"pt":  12, "name": "バギマ", "desc": "周囲を巻き込む\nはげしい竜巻が\n敵を切り裂く", "mp": 5},
 				{"pt":  18, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
 				{"pt":  25, "name": "常時こうげき魔力+100", "desc": "常時\nこうげき魔力が\n１００増える", "mp": null, "magic": 100},
-				{"pt":  32, "name": "バギクロス", "desc": "", "mp": 12},
+				{"pt":  32, "name": "バギクロス", "desc": "周囲を巻き込む\nあらぶる竜巻が\n敵を切り刻む", "mp": 12},
 				{"pt":  40, "name": "バギ系効果+20%", "desc": "バギ系の呪文の\n威力があがる", "mp": null}
 			]
 		},
@@ -1035,7 +1113,7 @@
 			"defaultName": "スライム",
 			"skillLines": ["slappler", "slafource", "boomerang"],
 			"status": {"maxhp": 340, "maxmp": 75, "pow": 140, "def": 175, "magic": 80, "heal": 80, "spd": 120, "dex": 110, "charm": 110, "weight": 80},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 3, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1045,7 +1123,7 @@
 			"defaultName": "モーモン",
 			"skillLines": ["lightmormon", "darkmormon", "stick"],
 			"status": {"maxhp": 350, "maxmp": 125, "pow": 130, "def": 155, "magic": 60, "heal": 60, "spd": 110, "dex": 90, "charm": 110, "weight": 80},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 4, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 
@@ -1055,7 +1133,7 @@
 			"defaultName": "プリズニャン",
 			"skillLines": ["martialnyarts", "hyado", "claw"],
 			"status": {"maxhp": 360, "maxmp": 85, "pow": 120, "def": 165, "magic": 100, "heal": 100, "spd": 130, "dex": 100, "charm": 90, "weight": 100},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 
@@ -1065,7 +1143,7 @@
 			"defaultName": "ホイミスライ",
 			"skillLines": ["hoimingrapple", "hoiminheal", "stick"],
 			"status": {"maxhp": 325, "maxmp": 130, "pow": 130, "def": 165, "magic": 120, "heal": 120, "spd": 90, "dex": 90, "charm": 100, "weight": 80},
-			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 3, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1075,7 +1153,7 @@
 			"defaultName": "スライムナイ",
 			"skillLines": ["swordrider", "magicrider", "sword"],
 			"status": {"maxhp": 360, "maxmp": 35, "pow": 170, "def": 115, "magic": 80, "heal": 80, "spd": 100, "dex": 100, "charm": 110, "weight": 100},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1085,7 +1163,7 @@
 			"defaultName": "キメラ",
 			"skillLines": ["chimerawing", "chimeraheal", "stick"],
 			"status": {"maxhp": 295, "maxmp": 100, "pow": 160, "def": 155, "magic": 90, "heal": 90, "spd": 140, "dex": 110, "charm": 90, "weight": 100},
-			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 4, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1095,7 +1173,7 @@
 			"defaultName": "ねこまどう",
 			"skillLines": ["catmagic", "mera", "wand"],
 			"status": {"maxhp": 325, "maxmp": 110, "pow": 130, "def": 145, "magic": 120, "heal": 120, "spd": 150, "dex": 90, "charm": 90, "weight": 100},
-			"increment": {"maxhp": 3, "maxmp": 4, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 4, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 3, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1105,7 +1183,7 @@
 			"defaultName": "リザードマン",
 			"skillLines": ["gekkousword", "gekkoumove", "sword"],
 			"status": {"maxhp": 350, "maxmp": 45, "pow": 140, "def": 155, "magic": 70, "heal": 70, "spd": 180, "dex": 110, "charm": 100, "weight": 120},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 5},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 6, "charm": 0, "weight": 5},
 			"expTable": 1
 		},
 		
@@ -1115,7 +1193,7 @@
 			"defaultName": "バトルレック",
 			"skillLines": ["rexsense", "firebreath", "axe"],
 			"status": {"maxhp": 380, "maxmp": 45, "pow": 170, "def": 135, "magic": 30, "heal": 30, "spd": 60, "dex": 80, "charm": 120, "weight": 150},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 6, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 6, "dex": 3, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1125,7 +1203,7 @@
 			"defaultName": "いたずらもぐ",
 			"skillLines": ["trick", "molefocus", "staff"],
 			"status": {"maxhp": 335, "maxmp": 85, "pow": 150, "def": 175, "magic": 80, "heal": 80, "spd": 80, "dex": 130, "charm": 90, "weight": 80},
-			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1135,7 +1213,7 @@
 			"defaultName": "メタッピー",
 			"skillLines": ["battoppy", "suppoppy", "claw"],
 			"status": {"maxhp": 345, "maxmp": 85, "pow": 115, "def": 200, "magic": 60, "heal": 60, "spd": 180, "dex": 90, "charm": 90, "weight": 80},
-			"increment": {"maxhp": 3, "maxmp": 5, "pow": 2, "def": 10, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 5, "pow": 2, "def": 10, "magic": 8, "heal": 8, "spd": 16, "dex": 6, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1145,7 +1223,7 @@
 			"defaultName": "たけやりへい",
 			"skillLines": ["takeyarihyouhou", "takeyarikaihou", "spear"],
 			"status": {"maxhp": 350, "maxmp": 55, "pow": 160, "def": 180, "magic": 40, "heal": 40, "spd": 80, "dex": 80, "charm": 90, "weight": 100},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1155,7 +1233,7 @@
 			"defaultName": "ニードルマン",
 			"skillLines": ["dirtyharry", "cutyharry", "knife"],
 			"status": {"maxhp": 315, "maxmp": 65, "pow": 165, "def": 135, "magic": 60, "heal": 60, "spd": 180, "dex": 150, "charm": 120, "weight": 80},
-			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1165,7 +1243,7 @@
 			"defaultName": "フォンデュ",
 			"skillLines": ["gourmage", "io", "wand"],
 			"status": {"maxhp": 345, "maxmp": 130, "pow": 120, "def": 195, "magic": 100, "heal": 100, "spd": 60, "dex": 120, "charm": 110, "weight": 100},
-			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 2, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1175,7 +1253,7 @@
 			"defaultName": "エンタシスマ",
 			"skillLines": ["entanohanamichi", "entasistep", "fan"],
 			"status": {"maxhp": 380, "maxmp": 55, "pow": 150, "def": 160, "magic": 80, "heal": 80, "spd": 40, "dex": 100, "charm": 110, "weight": 150},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 4, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1185,7 +1263,7 @@
 			"defaultName": "さまようよろ",
 			"skillLines": ["straysword", "wanderarmor", "sword"],
 			"status": {"maxhp": 340, "maxmp": 65, "pow": 190, "def": 115, "magic": 60, "heal": 60, "spd": 50, "dex": 100, "charm": 100, "weight": 120},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1195,7 +1273,7 @@
 			"defaultName": "ゴーレム",
 			"skillLines": ["tatakauchikara", "mamoruchikara", "twohandedsword"],
 			"status": {"maxhp": 370, "maxmp": 55, "pow": 160, "def": 175, "magic": 40, "heal": 40, "spd": 40, "dex": 70, "charm": 90, "weight": 150},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 4, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1205,7 +1283,7 @@
 			"defaultName": "デビルアーマ",
 			"skillLines": ["demonssword", "demonsshield", "sword"],
 			"status": {"maxhp": 325, "maxmp": 85, "pow": 160, "def": 190, "magic": 50, "heal": 50, "spd": 70, "dex": 80, "charm": 100, "weight": 120},
-			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1215,7 +1293,7 @@
 			"defaultName": "おどるほうせ",
 			"skillLines": ["happyruby", "disasterdiamond", "fan"],
 			"status": {"maxhp": 325, "maxmp": 95, "pow": 120, "def": 180, "magic": 130, "heal": 130, "spd": 150, "dex": 255, "charm": 130, "weight": 80},
-			"increment": {"maxhp": 3, "maxmp": 5, "pow": 2, "def": 10, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 5, "pow": 2, "def": 10, "magic": 16, "heal": 16, "spd": 8, "dex": 12, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1225,7 +1303,7 @@
 			"defaultName": "マジカルハッ",
 			"skillLines": ["hatmagic", "buhibuheal", "wand"],
 			"status": {"maxhp": 315, "maxmp": 270, "pow": 120, "def": 85, "magic": 80, "heal": 80, "spd": 110, "dex": 90, "charm": 110, "weight": 80},
-			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 7, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1235,7 +1313,7 @@
 			"defaultName": "ベビーサタン",
 			"skillLines": ["koakumagic", "icebreath", "spear"],
 			"status": {"maxhp": 315, "maxmp": 120, "pow": 140, "def": 135, "magic": 180, "heal": 180, "spd": 80, "dex": 110, "charm": 110, "weight": 80},
-			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 7, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1245,7 +1323,7 @@
 			"defaultName": "ドラゴンキッ",
 			"skillLines": ["dragonguts", "firebreath", "claw"],
 			"status": {"maxhp": 330, "maxmp": 95, "pow": 160, "def": 145, "magic": 40, "heal": 40, "spd": 120, "dex": 90, "charm": 80, "weight": 100},
-			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1255,7 +1333,7 @@
 			"defaultName": "パペットマン",
 			"skillLines": ["battledance", "magicdance", "knife"],
 			"status": {"maxhp": 295, "maxmp": 170, "pow": 140, "def": 135, "magic": 70, "heal": 70, "spd": 160, "dex": 130, "charm": 100, "weight": 100},
-			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 8, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1265,7 +1343,7 @@
 			"defaultName": "キラーマシン",
 			"skillLines": ["fencerform", "armsgadget", "twohandedsword"],
 			"status": {"maxhp": 345, "maxmp": 25, "pow": 170, "def": 190, "magic": 20, "heal": 20, "spd": 100, "dex": 80, "charm": 100, "weight": 150},
-			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1275,7 +1353,7 @@
 			"defaultName": "ドラキー",
 			"skillLines": ["mahodrakee", "doruma", "wand"],
 			"status": {"maxhp": 325, "maxmp": 80, "pow": 120, "def": 125, "magic": 100, "heal": 100, "spd": 220, "dex": 90, "charm": 90, "weight": 70},
-			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 7, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
 		
@@ -1285,21 +1363,40 @@
 			"defaultName": "やみしばり",
 			"skillLines": ["meifunojahou", "moujanojubaku", "axe"],
 			"status": {"maxhp": 310, "maxmp": 100, "pow": 155, "def": 170, "magic": 130, "heal": 130, "spd": 85, "dex": 90, "charm": 90, "weight": 110},
-			"increment": {"maxhp": 6, "maxmp": 4, "pow": 6, "def": 4, "magic": 16, "heal": 8, "spd": 4, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 6, "maxmp": 4, "pow": 6, "def": 4, "magic": 16, "heal": 8, "spd": 4, "dex": 5, "charm": 0, "weight": 0},
+			"expTable": 1
+		},
+
+		"brownie": {
+			"id": 27,
+			"name": "ブラウニー",
+			"defaultName": "ブラウニー",
+			"skillLines": ["tensionou", "ippatsuya", "hammer"],
+			"status": {"maxhp": 340, "maxmp": 90, "pow": 150, "def": 210, "magic": 28, "heal": 28, "spd": 100, "dex": 90, "charm": 90, "weight": 100},
+			"increment": {"maxhp": 5, "maxmp": 7, "pow": 4, "def": 4, "magic": 3, "heal": 3, "spd": 6, "dex": 8, "charm": 0, "weight": 0},
+			"expTable": 1
+		},
+
+		"tansumimic": {
+			"id": 28,
+			"name": "たんすミミック",
+			"defaultName": "たんすミミッ",
+			"skillLines": ["tansutaijutsu", "tansuchokin", "bow"],
+			"status": {"maxhp": 320, "maxmp": 80, "pow": 140, "def": 120, "magic": 55, "heal": 63, "spd": 70, "dex": 82, "charm": 90, "weight": 120},
+			"increment": {"maxhp": 5, "maxmp": 6, "pow": 3, "def": 6, "magic": 4, "heal": 3, "spd": 2, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		}
-		
 	},
 
 	"monstermaster": [
 		"slime", "mormon", "prisonyan", "hoimislime", "slimeknight",
 		"chimera", "catmage", "lizardman", "battlerex", "itazuramogura",
-		"babysatan", "dragonkids", "drakee"
+		"babysatan", "dragonkids", "drakee", "brownie"
 	],
 	"itemmaster": [
 		"metappy", "takeyarihei", "needleman", "fondue", "entasisman",
 		"samayouyoroi", "golem", "devilarmor", "odoruhouseki", "magicalhat",
-		"puppetman", "killermachine", "yamishibari"
+		"puppetman", "killermachine", "yamishibari", "tansumimic"
 	],
 
 	"additionalSkillLines": [
@@ -1336,6 +1433,25 @@
 			  73071,   83488,   94869,  107259,  120702,  135241,  150923,  167793,  185901,  205293,
 			 226017,   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",   "NaN",  480910
 		]
+	},
+
+	"consts": {
+		"skillPts": {
+			"min": 0,
+			"max": 40,
+			"natsuki": 5
+		},
+		"level": {
+			"min": 1,
+			"max": 50
+		},
+		"restart": {
+			"min": 0,
+			"max": 6,
+			"skillPts": 10,
+			"skillPtsOver5": 5,
+			"expRatio": 0.03
+		}
 	},
 
 	"badges": {
@@ -1587,7 +1703,7 @@
 		"246": {"name": "ルバンカ", "sort": "るはんか", "class": "gold", "race": "machine", "def": 95, "weight": 120, "reduce": {"土": 20}, "spellup": {"ブレス": 30}},
 		"247": {"name": "メカバーン", "sort": "めかはあん", "class": "gold", "race": "machine", "atk": 80, "def": 95, "raceup": {"ドラゴン": 30}, "startup": {"バイキルト": 25}},
 		"248": {"name": "メラゴースト", "sort": "めらこおすと", "class": "gold", "race": "element", "maxmp": 85, "magic": 85, "spellup": {"メラ": 20}, "quick": 15},
-		"249": {"name": "ギズモ", "sort": "きすも", "class": "gold", "race": "element", "magic": 90, "reduce": {"雷": 20}, "evd": 6, "sikill": ["かすみがくれ"]},
+		"249": {"name": "ギズモ", "sort": "きすも", "class": "gold", "race": "element", "magic": 90, "reduce": {"雷": 20}, "evd": 6, "skill": ["かすみがくれ"]},
 		"250": {"name": "フレイム", "sort": "ふれいむ", "class": "gold", "race": "element", "maxhp": 85, "maxmp": 95, "spd": 105, "attrib": "炎"},
 		"251": {"name": "レッドプリン", "sort": "れつとふりん", "class": "gold", "race": "element", "def": 88, "maxhp": 92, "reduce": {"ブレス": 25}, "skill": ["バイシオン"]},
 		"252": {"name": "リュウイーソー", "sort": "りゆういいそお", "class": "gold", "race": "element", "atk": 72, "maxhp": 95, "reduce": {"炎": 20, "氷": 15}},
