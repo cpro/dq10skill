@@ -704,6 +704,54 @@
 			]
 		},
  
+ 		"song": {
+ 			"id": 31,
+			"unique": true,
+ 			"name": "うた",
+ 			"abbr": "",
+ 			"skills": [
+ 				{"pt":   2, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  12, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  26, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  40, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  48, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  56, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  70, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  80, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  90, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt": 100, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt": 110, "name": "（不明）", "desc": "", "mp": null},
+				{"pt": 120, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt": 130, "name": "（不明）", "desc": "", "mp": null},
+				{"pt": 140, "name": "（不明）", "desc": "", "mp": null},
+				{"pt": 150, "name": "（不明）", "desc": "", "mp": null}
+			]
+		},
+ 
+ 		"dance": {
+ 			"id": 32,
+			"unique": true,
+ 			"name": "おどり",
+ 			"abbr": "",
+ 			"skills": [
+ 				{"pt":   2, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  12, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  26, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  40, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  48, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  56, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  70, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  80, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  90, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt": 100, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt": 110, "name": "（不明）", "desc": "", "mp": null},
+				{"pt": 120, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt": 130, "name": "（不明）", "desc": "", "mp": null},
+				{"pt": 140, "name": "（不明）", "desc": "", "mp": null},
+				{"pt": 150, "name": "（不明）", "desc": "", "mp": null}
+			]
+		},
+ 
  		"unknown": {
  			"id": 999,
 			"unique": true,
@@ -820,6 +868,12 @@
  			"abbr": "どう",
  			"skillLines": ["boomerang", "hammer", "spear", "bow", "itemmaster"],
  			"expTable": 2
+		},
+		"dancer": {
+ 			"name": "踊り子",
+ 			"abbr": "踊子",
+ 			"skillLines": ["knife", "stick", "fan", "song", "dance"],
+ 			"expTable": 2
 		}
 	},
 	"_vocations_coming": {
@@ -829,7 +883,7 @@
 	"vocationOrder": [
 		"warrior", "priest", "mage", "martialartist", "thief", "minstrel",
 		"gladiator", "paladin", "armamentalist", "ranger", "sage", "luminary",
-		"monstermaster", "itemmaster"
+		"monstermaster", "itemmaster", "dancer"
 	],
 	
 	"skillPtsGiven": [null,
