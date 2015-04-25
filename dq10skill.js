@@ -295,7 +295,8 @@
 			'gladiator',     //バトルマスター
 			'sage',          //賢者
 			'monstermaster', //まもの使い
-			'itemmaster'     //どうぐ使い
+			'itemmaster',    //どうぐ使い
+			'dancer'         //踊り子
 		];
 
 		function serialize() {
