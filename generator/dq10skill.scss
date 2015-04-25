@@ -137,7 +137,7 @@ a {
 					width: ($width-all + 2px + 1px) * 1;
 				}
 				&#foldbuttons-vocation {
-					width: ($width-each + 2px + 1px) * 7;
+					width: ($width-each + 2px + 1px) * 8;
 				}
 				&.appendbuttons {
 					width: ($width-monster-append + 2px + 1px) * 5;
@@ -206,7 +206,7 @@ a {
 			background-color: $main-background-color;
 			position: absolute;
 			top: 0;
-			left: 10px + 96px + 33px * 7 + 10px;
+			left: 10px + 96px + 33px * 8 + 10px;
 			z-index: 102;
 			
 			td, th {

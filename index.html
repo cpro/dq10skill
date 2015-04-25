@@ -7,7 +7,7 @@
     <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
     <title>DQ10 スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=6.0' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=6.1' rel='stylesheet' type='text/css'>
     <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js' type='text/javascript'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js' type='text/javascript'></script>
@@ -15,7 +15,7 @@
     <script src='js/rawinflate.min.js' type='text/javascript'></script>
     <script src='js/shortcut.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=6.0' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=6.1' type='text/javascript'></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -63,6 +63,7 @@
             <li class='button-each ui-corner-all'><a id='fold-luminary'>スパ</a></li>
             <li class='button-each ui-corner-all'><a id='fold-monstermaster'>まも</a></li>
             <li class='button-each ui-corner-all'><a id='fold-itemmaster'>どう</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-dancer'>踊り</a></li>
           </ul>
         </div>
         <table class='ui-corner-all' id='total'>
@@ -2169,6 +2170,153 @@
             <tr class='itemmaster_14' title='悪い効果を&#x000A;すべて解除する&#x000A;どうぐ使い専用&#x000A;（消費MP: 3）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>150</td><td class='skill_name'>プラズマリムーバー（専）</td></tr>
           </table></div>
       </div>
+      <div class='class_group' id='dancer'>
+        <div class='ent_title'>
+          <h2 class='ui-handler'>踊り子 Lv          <span class='lv_h2'>1</span></h2>
+          <dl class='skill_pt'>
+            <dt>残りSP:</dt>
+            <dd class='pts'>0 / 0</dd>
+            <dt>&nbsp;+&nbsp;</dt>
+          </dl>
+          <dl class='training_pt ui-handler'>
+            <dt>特訓</dt>
+            <dd id='training-dancer'>
+              0
+            </dd>
+          </dl>
+          <dl class='expinfo'>
+            <dt>獲得経験値:</dt>
+            <dd class='exp'>0</dd>
+            <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
+            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
+            </dd>
+          </dl>
+          <div class='ent_title_console'>
+            <button class='toggle_ent'>たたむ/ひろげる</button>
+          </div>
+        </div>
+        <div class='skill_tables'><table class='knife skill_table'>
+            <caption class='ui-handler'>
+              <div class='console_wrapper'>
+                短剣:
+                <span class='skill_current'>0</span>
+                /
+                <span class='skill_total'>0</span>
+              </div>
+            </caption>
+            <tr class='knife_0' title='虫系の敵に&#x000A;威力を発揮する&#x000A;すばやい剣技&#x000A;（消費MP: 1）'><td class='skill_pt'>3</td><td class='skill_name'>キラーブーン</td></tr>
+            <tr class='knife_1' title='短剣装備時の&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='knife_2' title='敵１体を&#x000A;斬りつけて&#x000A;たまに眠らせる&#x000A;（消費MP: 1）'><td class='skill_pt'>13</td><td class='skill_name'>スリープダガー</td></tr>
+            <tr class='knife_3' title='短剣での攻撃時&#x000A;たまにＭＰを&#x000A;回復する'><td class='skill_pt'>22</td><td class='skill_name'>攻撃時たまにＭＰ回復</td></tr>
+            <tr class='knife_4' title='眠りや混乱の敵に&#x000A;威力を発揮する&#x000A;追い打ちの技&#x000A;（消費MP: 3）'><td class='skill_pt'>35</td><td class='skill_name'>ヒュプノスハント</td></tr>
+            <tr class='knife_5' title='短剣装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>42</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='knife_6' title='敵１体を&#x000A;斬りつけて&#x000A;たまに猛毒にする&#x000A;（消費MP: 1）'><td class='skill_pt'>58</td><td class='skill_name'>ヴァイパーファング</td></tr>
+            <tr class='knife_7' title='短剣での攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>76</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='knife_8' title='短剣装備時の&#x000A;こうげき力が&#x000A;１５増える'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+            <tr class='knife_9' title='毒やマヒの敵に&#x000A;威力を発揮する&#x000A;追い打ちの技&#x000A;（消費MP: 3）'><td class='skill_pt'>100</td><td class='skill_name'>タナトスハント</td></tr>
+            <tr class='knife_10' title='短剣での攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='knife_11' title='敵１体を斬りつけ&#x000A;混乱やマヒを&#x000A;起こさせる&#x000A;（消費MP: 1）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>カオスエッジ</td></tr>
+            <tr class='knife_12' title='短剣装備時の&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>130</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='knife_13' title='敵１体を斬りつけ&#x000A;猛毒や眠りを&#x000A;起こさせる&#x000A;（消費MP: 1）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>140</td><td class='skill_name'>ナイトメアファング</td></tr>
+            <tr class='knife_14' title='短剣装備時の&#x000A;状態異常成功率が&#x000A;あがる'><td class='skill_pt'>150</td><td class='skill_name'>状態異常成功率アップ</td></tr>
+          </table><table class='fan skill_table'>
+            <caption class='ui-handler'>
+              <div class='console_wrapper'>
+                扇:
+                <span class='skill_current'>0</span>
+                /
+                <span class='skill_total'>0</span>
+              </div>
+            </caption>
+            <tr class='fan_0' title='扇装備時の&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='fan_1' title='花びらを散らし&#x000A;周囲の敵を&#x000A;幻惑にかける&#x000A;（消費MP: 2）'><td class='skill_pt'>7</td><td class='skill_name'>花ふぶき</td></tr>
+            <tr class='fan_2' title='扇での攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>13</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='fan_3' title='心をしずめ自分の&#x000A;ＨＰを最大１４０&#x000A;少しずつ回復&#x000A;（消費MP: 3）'><td class='skill_pt'>22</td><td class='skill_name'>明鏡止水</td></tr>
+            <tr class='fan_4' title='扇装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>35</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='fan_5' title='水系の敵に&#x000A;威力を発揮する&#x000A;軽やかな扇の技&#x000A;（消費MP: 1）'><td class='skill_pt'>42</td><td class='skill_name'>波紋演舞</td></tr>
+            <tr class='fan_6' title='扇装備時　敵が&#x000A;みとれやすくなる'><td class='skill_pt'>58</td><td class='skill_name'>装備時みとれる+5%</td></tr>
+            <tr class='fan_7' title='優雅な踊りで&#x000A;周囲の敵に&#x000A;４回攻撃&#x000A;（消費MP: 4）'><td class='skill_pt'>76</td><td class='skill_name'>おうぎのまい</td></tr>
+            <tr class='fan_8' title='扇装備時の&#x000A;こうげき力が&#x000A;１５増える'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+            <tr class='fan_9' title='舞い踊る&#x000A;アゲハの群れが&#x000A;周囲の敵を攻撃&#x000A;（消費MP: 6）'><td class='skill_pt'>100</td><td class='skill_name'>アゲハ乱舞</td></tr>
+            <tr class='fan_10' title='扇での攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='fan_11' title='魅惑の旋風で&#x000A;周囲の敵を&#x000A;切りきざむ&#x000A;（消費MP: 3）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ピンクタイフーン</td></tr>
+            <tr class='fan_12' title='扇装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>130</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='fan_13' title='周囲の敵を攻撃し&#x000A;幻惑や攻撃呪文に&#x000A;弱くする&#x000A;（消費MP: 6）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>百花繚乱</td></tr>
+            <tr class='fan_14' title='扇装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>150</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+          </table><table class='stick skill_table'>
+            <caption class='ui-handler'>
+              <div class='console_wrapper'>
+                スティック:
+                <span class='skill_current'>0</span>
+                /
+                <span class='skill_total'>0</span>
+              </div>
+            </caption>
+            <tr class='stick_0' title='スティック攻撃時&#x000A;吸収できる&#x000A;ＭＰが増える'><td class='skill_pt'>3</td><td class='skill_name'>装備時ＭＰ吸収率+2%</td></tr>
+            <tr class='stick_1' title='マジでステキに&#x000A;みりょくアップ&#x000A;（消費MP: 2）'><td class='skill_pt'>7</td><td class='skill_name'>マジステッキ</td></tr>
+            <tr class='stick_2' title='スティック装備で&#x000A;戦闘に勝つと&#x000A;ＭＰが小回復する'><td class='skill_pt'>13</td><td class='skill_name'>戦闘勝利時ＭＰ小回復</td></tr>
+            <tr class='stick_3' title='スティック装備時&#x000A;かいふく魔力が&#x000A;３０増える'><td class='skill_pt'>21</td><td class='skill_name'>装備時かいふく魔力+30</td></tr>
+            <tr class='stick_4' title='悪魔系の敵に&#x000A;威力を発揮し&#x000A;たまに魅了もする&#x000A;（消費MP: 1）'><td class='skill_pt'>31</td><td class='skill_name'>デビルンチャーム</td></tr>
+            <tr class='stick_5' title='スティック装備時&#x000A;さいだいＭＰが&#x000A;３０増える'><td class='skill_pt'>44</td><td class='skill_name'>装備時さいだいＭＰ+30</td></tr>
+            <tr class='stick_6' title='スティック攻撃時&#x000A;吸収できるＭＰが&#x000A;さらに増える'><td class='skill_pt'>57</td><td class='skill_name'>装備時ＭＰ吸収率+2%</td></tr>
+            <tr class='stick_7' title='スティックを&#x000A;グルグル回して&#x000A;敵を混乱させる&#x000A;（消費MP: 4）'><td class='skill_pt'>70</td><td class='skill_name'>パニパニハニー</td></tr>
+            <tr class='stick_8' title='スティック装備時&#x000A;かいふく魔力が&#x000A;３０増える'><td class='skill_pt'>84</td><td class='skill_name'>装備時かいふく魔力+30</td></tr>
+            <tr class='stick_9' title='キラキラパワーで&#x000A;悪い効果から&#x000A;仲間の身を守る&#x000A;（消費MP: 4）'><td class='skill_pt'>100</td><td class='skill_name'>キラキラポーン</td></tr>
+            <tr class='stick_10' title='スティック攻撃時&#x000A;吸収できるＭＰが&#x000A;さらに増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時MP吸収率+4%</td></tr>
+            <tr class='stick_11' title='いつもより&#x000A;すばやく呪文を&#x000A;唱えられる&#x000A;（消費MP: 5）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>120</td><td class='skill_name'>ラピッドステッキ</td></tr>
+            <tr class='stick_12' title='スティック装備で&#x000A;戦闘に勝つと&#x000A;ＭＰが中回復する'><td class='skill_pt'>130</td><td class='skill_name'>戦闘勝利時ＭＰ中回復</td></tr>
+            <tr class='stick_13' title='仲間ひとりの&#x000A;テンションを&#x000A;１段階アップする&#x000A;（消費MP: 2）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>140</td><td class='skill_name'>ティンクルバトン</td></tr>
+            <tr class='stick_14' title='スティック装備時&#x000A;さいだいＭＰが&#x000A;３０増える'><td class='skill_pt'>150</td><td class='skill_name'>装備時さいだいＭＰ+30</td></tr>
+          </table><table class='song skill_table'>
+            <caption class='ui-handler'>
+              <div class='console_wrapper'>
+                うた:
+                <span class='skill_current'>0</span>
+                /
+                <span class='skill_total'>0</span>
+              </div>
+            </caption>
+            <tr class='song_0' title='全職業で&#x000A;きようさが&#x000A;１０増える'><td class='skill_pt'>8</td><td class='skill_name'>全職業できようさ+10</td></tr>
+            <tr class='song_1' title='周囲の味方に&#x000A;攻撃時猛毒の効果&#x000A;踊り子専用&#x000A;（消費MP: 8）'><td class='skill_pt'>16</td><td class='skill_name'>もうどくブルース（専）</td></tr>
+            <tr class='song_2' title='全職業で&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>28</td><td class='skill_name'>全職業でさいだいＭＰ+10</td></tr>
+            <tr class='song_3' title='周囲の味方の会心&#x000A;暴走率アップ&#x000A;踊り子専用&#x000A;（消費MP: 8）'><td class='skill_pt'>40</td><td class='skill_name'>会心まいしんラップ（専）</td></tr>
+            <tr class='song_4' title='全職業で&#x000A;こうげき魔力が&#x000A;５増える'><td class='skill_pt'>48</td><td class='skill_name'>全職業でこうげき魔力+5</td></tr>
+            <tr class='song_5' title=''><td class='skill_pt'>56</td><td class='skill_name'>祈りのゴスペル（専）</td></tr>
+            <tr class='song_6' title='全職業で&#x000A;ちからが&#x000A;５増える'><td class='skill_pt'>70</td><td class='skill_name'>全職業でちから+5</td></tr>
+            <tr class='song_7' title='周囲の味方の呪文&#x000A;ダメージをアップ&#x000A;踊り子専用&#x000A;（消費MP: 8）'><td class='skill_pt'>80</td><td class='skill_name'>覚醒のアリア（専）</td></tr>
+            <tr class='song_8' title='全職業で&#x000A;みりょくが&#x000A;１０増える'><td class='skill_pt'>90</td><td class='skill_name'>全職業でみりょく+10</td></tr>
+            <tr class='song_9' title='周囲の味方を&#x000A;回復し生き返す&#x000A;踊り子専用&#x000A;（消費MP: 10）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>100</td><td class='skill_name'>よみがえり節（専）</td></tr>
+            <tr class='song_10' title=''><td class='skill_pt'>110</td><td class='skill_name'>会心率と暴走率アップ（専）</td></tr>
+            <tr class='song_11' title=''><td class='skill_pt'>120</td><td class='skill_name'>身かわし率+2%（専）</td></tr>
+            <tr class='song_12' title=''><td class='skill_pt'>130</td><td class='skill_name'>魔力のバラード（専）</td></tr>
+            <tr class='song_13' title=''><td class='skill_pt'>140</td><td class='skill_name'>ターン消費しない+1%（専）</td></tr>
+            <tr class='song_14' title='周囲の味方に&#x000A;攻撃時ＨＰ回復&#x000A;踊り子専用&#x000A;（消費MP: 4）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>150</td><td class='skill_name'>回復のララバイ（専）</td></tr>
+          </table><table class='dance skill_table'>
+            <caption class='ui-handler'>
+              <div class='console_wrapper'>
+                おどり:
+                <span class='skill_current'>0</span>
+                /
+                <span class='skill_total'>0</span>
+              </div>
+            </caption>
+            <tr class='dance_0' title='全職業で&#x000A;みりょくが&#x000A;１０増える'><td class='skill_pt'>8</td><td class='skill_name'>全職業でみりょく+10</td></tr>
+            <tr class='dance_1' title=''><td class='skill_pt'>16</td><td class='skill_name'>ふういんのダンス（専）</td></tr>
+            <tr class='dance_2' title='全職業で&#x000A;こうげき魔力が&#x000A;５増える'><td class='skill_pt'>28</td><td class='skill_name'>全職業でこうげき魔力+5</td></tr>
+            <tr class='dance_3' title=''><td class='skill_pt'>40</td><td class='skill_name'>こんらんのダンス（専）</td></tr>
+            <tr class='dance_4' title='全職業で&#x000A;ちからが&#x000A;５増える'><td class='skill_pt'>48</td><td class='skill_name'>全職業でちから+5</td></tr>
+            <tr class='dance_5' title=''><td class='skill_pt'>56</td><td class='skill_name'>ねむりのダンス（専）</td></tr>
+            <tr class='dance_6' title='全職業で&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>70</td><td class='skill_name'>全職業でさいだいＭＰ+10</td></tr>
+            <tr class='dance_7' title=''><td class='skill_pt'>80</td><td class='skill_name'>ドラゴンステップ（専）</td></tr>
+            <tr class='dance_8' title='周囲の敵の雷と&#x000A;風耐性ダウン&#x000A;踊り子専用&#x000A;（消費MP: 8）&#x000A;（チャージ: 40秒）'><td class='skill_pt'>90</td><td class='skill_name'>ビーナスステップ（専）</td></tr>
+            <tr class='dance_9' title=''><td class='skill_pt'>100</td><td class='skill_name'>ロイヤルステップ（専）</td></tr>
+            <tr class='dance_10' title=''><td class='skill_pt'>110</td><td class='skill_name'>会心率と暴走率アップ（専）</td></tr>
+            <tr class='dance_11' title='敵１体に&#x000A;４回攻撃&#x000A;踊り子専用&#x000A;（消費MP: 4）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>身かわし率+2%（専）</td></tr>
+            <tr class='dance_12' title=''><td class='skill_pt'>130</td><td class='skill_name'>つるぎの舞（専）</td></tr>
+            <tr class='dance_13' title=''><td class='skill_pt'>140</td><td class='skill_name'>ターン消費しない+1%（専）</td></tr>
+            <tr class='dance_14' title='自分の攻撃力を&#x000A;増加させる&#x000A;踊り子専用&#x000A;（消費MP: 4）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>150</td><td class='skill_name'>戦鬼の乱れ舞（専）</td></tr>
+          </table></div>
+      </div>
       <div id='pt_console' style='display: none'>
         <input id='pt_spinner'>
         <button id='pt_reset'>リセット</button>
@@ -2228,6 +2376,13 @@
           <li>
             履歴:
             <ul>
+              <li>
+                2015/4/25 v6.1 ver3.0対応。
+                <ul>
+                  <li>踊り子を追加。DQXTVの先行情報に基づくので、実装とは異なる可能性があります。</li>
+                  <li>特訓スキルポイント 13→14</li>
+                </ul>
+              </li>
               <li>2015/3/26 v6.0 150スキル解放に対応。</li>
               <li>
                 2015/2/27 v5.9
@@ -2238,7 +2393,6 @@
                 </ul>
               </li>
               <li>2015/2/13 v5.8 IE10以下への対応を終了。</li>
-              <li>2015/1/22 v5.7.3 MSP20→21 1/22配信クエストでの追加に対応。</li>
               <li>過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。</li>
             </ul>
           </li>
