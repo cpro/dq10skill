@@ -164,14 +164,7 @@
 		};
 		//転生による追加スキルポイントの取得
 		Monster.prototype.getRestartSkillPt = function() {
-			var rcBase = this.restartCount;
-			var rcOver5 = 0;
-			if(rcBase > 5) {
-				rcOver5 = rcBase - 5;
-				rcBase = 5;
-			}
-			return rcBase * DB.consts.restart.skillPts +
-				rcOver5 * DB.consts.restart.skillPtsOver5;
+			return DB.consts.restart.skillPts[this.restartCount];
 		};
 
 		//転生追加スキルの取得

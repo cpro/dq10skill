@@ -1447,9 +1447,8 @@
 		},
 		"restart": {
 			"min": 0,
-			"max": 6,
-			"skillPts": 10,
-			"skillPtsOver5": 5,
+			"max": 7,
+			"skillPts": [0, 10, 20, 30, 40, 50, 55, 60],
 			"expRatio": 0.03
 		}
 	},
