@@ -98,7 +98,7 @@
 		
 		//現在のレベルに対するスキルポイント最大値
 		Monster.prototype.maxSkillPts = function() {
-			return DB.skillPtsGiven[this.level] + this.getNatsukiSkillPts();
+			return DB.skillPtsGiven[this.level];
 		};
 		
 		//スキルポイント合計に対する必要レベル取得
@@ -164,14 +164,7 @@
 		};
 		//転生による追加スキルポイントの取得
 		Monster.prototype.getRestartSkillPt = function() {
-			var rcBase = this.restartCount;
-			var rcOver5 = 0;
-			if(rcBase > 5) {
-				rcOver5 = rcBase - 5;
-				rcBase = 5;
-			}
-			return rcBase * DB.consts.restart.skillPts +
-				rcOver5 * DB.consts.restart.skillPtsOver5;
+			return DB.consts.restart.skillPts[this.restartCount];
 		};
 
 		//転生追加スキルの取得
@@ -805,12 +798,15 @@
 
 			//スキルポイント 残り / 最大値
 			var maxSkillPts = monster.maxSkillPts();
-			var additionalSkillPts = monster.getRestartSkillPt();
-			var remainingSkillPts = maxSkillPts + additionalSkillPts - monster.totalSkillPts();
+			var restartSkillPts = monster.getRestartSkillPt();
+			var natsukiSkillPts = monster.getNatsukiSkillPts();
+			var remainingSkillPts = maxSkillPts + restartSkillPts + natsukiSkillPts - monster.totalSkillPts();
 			var $skillPtsText = $('#' + monsterId + ' .pts');
 			$skillPtsText.text(remainingSkillPts + ' / ' + maxSkillPts);
-			if(additionalSkillPts > 0)
-				$skillPtsText.append('<small> + ' + additionalSkillPts + '</small>');
+			if(restartSkillPts > 0)
+				$skillPtsText.append('<small> +' + restartSkillPts + '</small>');
+			if(natsukiSkillPts > 0)
+				$skillPtsText.append('<small> +' + natsukiSkillPts + '</small>');
 			
 			//Lv不足の処理
 			var isLevelError = (isNaN(requiredLevel) || currentLevel < requiredLevel);
