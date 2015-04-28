@@ -648,6 +648,20 @@
 			return true;
 		};
 
+		//全職業の特訓スキルポイントを一括指定
+		var SetAllTrainingSkillPt = function(newValue) {
+			this.prevSerial = undefined;
+			this.newValue = newValue;
+		};
+		SetAllTrainingSkillPt.prototype = new PackageCommand();
+		SetAllTrainingSkillPt.prototype._impl = function() {
+			for(var vocation in DB.vocations) {
+				var succeeded = sim.updateTrainingSkillPt(vocation, this.newValue);
+				if(!succeeded) return false;
+			}
+			return true;
+		};
+
 		//特定スキルすべてを振り直し
 		var ClearPtsOfSameSkills = function(skillLine) {
 			this.skillLine = skillLine;
@@ -755,6 +769,9 @@
 			},
 			updateTrainingSkillPt : function(vocation, newValue) {
 				return invoke(new UpdateTrainingSkillPt(vocation, newValue));
+			},
+			setAllTrainingSkillPt: function(newValue) {
+				return invoke(new SetAllTrainingSkillPt(newValue));
 			},
 			updateMSP: function(skillLine, newValue) {
 				return invoke(new UpdateMSP(skillLine, newValue));
@@ -1319,6 +1336,15 @@
 				
 				$('#setalllevel>button').button().click(function(e) {
 					com.setAllLevel($select.val());
+				});
+			},
+
+			//特訓スキルポイント一括設定（最大値固定）
+			function() {
+				$('#setalltrainingsp>button').button({
+					icons: { primary: 'ui-icon-star' },
+				}).click(function(e) {
+					com.setAllTrainingSkillPt(DB.consts.trainingSkillPts.max);
 				});
 			},
 			
