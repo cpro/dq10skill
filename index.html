@@ -7,7 +7,7 @@
     <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
     <title>DQ10 スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=6.2' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=6.2.1' rel='stylesheet' type='text/css'>
     <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js' type='text/javascript'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js' type='text/javascript'></script>
@@ -15,7 +15,7 @@
     <script src='js/rawinflate.min.js' type='text/javascript'></script>
     <script src='js/shortcut.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=6.2' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=6.2.1' type='text/javascript'></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -224,7 +224,7 @@
             <tr class='shield_6' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>52</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
             <tr class='shield_7' title='聖なる光で&#x000A;悪い効果から&#x000A;自分の身を守る&#x000A;（消費MP: 4）'><td class='skill_pt'>66</td><td class='skill_name'>まもりのたて</td></tr>
             <tr class='shield_8' title='盾装備時の&#x000A;しゅび力が&#x000A;３０増える'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
-            <tr class='shield_9' title='守りをかためて&#x000A;痛恨のいちげきを&#x000A;受けつけない&#x000A;（消費MP: 10）'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
+            <tr class='shield_9' title='守りをかためて&#x000A;痛恨のいちげきの&#x000A;ダメージを軽減&#x000A;（消費MP: 10）'><td class='skill_pt'>100</td><td class='skill_name'>会心ガード</td></tr>
             <tr class='shield_10' title='盾装備時の&#x000A;しゅび力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時しゅび力+10</td></tr>
             <tr class='shield_11' title='与えるダメージと&#x000A;ひきかえに受ける&#x000A;ダメージを減らす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ファランクス</td></tr>
             <tr class='shield_12' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
@@ -371,7 +371,7 @@
             <tr class='shield_6' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>52</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
             <tr class='shield_7' title='聖なる光で&#x000A;悪い効果から&#x000A;自分の身を守る&#x000A;（消費MP: 4）'><td class='skill_pt'>66</td><td class='skill_name'>まもりのたて</td></tr>
             <tr class='shield_8' title='盾装備時の&#x000A;しゅび力が&#x000A;３０増える'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
-            <tr class='shield_9' title='守りをかためて&#x000A;痛恨のいちげきを&#x000A;受けつけない&#x000A;（消費MP: 10）'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
+            <tr class='shield_9' title='守りをかためて&#x000A;痛恨のいちげきの&#x000A;ダメージを軽減&#x000A;（消費MP: 10）'><td class='skill_pt'>100</td><td class='skill_name'>会心ガード</td></tr>
             <tr class='shield_10' title='盾装備時の&#x000A;しゅび力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時しゅび力+10</td></tr>
             <tr class='shield_11' title='与えるダメージと&#x000A;ひきかえに受ける&#x000A;ダメージを減らす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ファランクス</td></tr>
             <tr class='shield_12' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
@@ -518,7 +518,7 @@
             <tr class='shield_6' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>52</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
             <tr class='shield_7' title='聖なる光で&#x000A;悪い効果から&#x000A;自分の身を守る&#x000A;（消費MP: 4）'><td class='skill_pt'>66</td><td class='skill_name'>まもりのたて</td></tr>
             <tr class='shield_8' title='盾装備時の&#x000A;しゅび力が&#x000A;３０増える'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
-            <tr class='shield_9' title='守りをかためて&#x000A;痛恨のいちげきを&#x000A;受けつけない&#x000A;（消費MP: 10）'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
+            <tr class='shield_9' title='守りをかためて&#x000A;痛恨のいちげきの&#x000A;ダメージを軽減&#x000A;（消費MP: 10）'><td class='skill_pt'>100</td><td class='skill_name'>会心ガード</td></tr>
             <tr class='shield_10' title='盾装備時の&#x000A;しゅび力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時しゅび力+10</td></tr>
             <tr class='shield_11' title='与えるダメージと&#x000A;ひきかえに受ける&#x000A;ダメージを減らす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ファランクス</td></tr>
             <tr class='shield_12' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
@@ -959,7 +959,7 @@
             <tr class='shield_6' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>52</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
             <tr class='shield_7' title='聖なる光で&#x000A;悪い効果から&#x000A;自分の身を守る&#x000A;（消費MP: 4）'><td class='skill_pt'>66</td><td class='skill_name'>まもりのたて</td></tr>
             <tr class='shield_8' title='盾装備時の&#x000A;しゅび力が&#x000A;３０増える'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
-            <tr class='shield_9' title='守りをかためて&#x000A;痛恨のいちげきを&#x000A;受けつけない&#x000A;（消費MP: 10）'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
+            <tr class='shield_9' title='守りをかためて&#x000A;痛恨のいちげきの&#x000A;ダメージを軽減&#x000A;（消費MP: 10）'><td class='skill_pt'>100</td><td class='skill_name'>会心ガード</td></tr>
             <tr class='shield_10' title='盾装備時の&#x000A;しゅび力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時しゅび力+10</td></tr>
             <tr class='shield_11' title='与えるダメージと&#x000A;ひきかえに受ける&#x000A;ダメージを減らす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ファランクス</td></tr>
             <tr class='shield_12' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
@@ -1253,7 +1253,7 @@
             <tr class='shield_6' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>52</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
             <tr class='shield_7' title='聖なる光で&#x000A;悪い効果から&#x000A;自分の身を守る&#x000A;（消費MP: 4）'><td class='skill_pt'>66</td><td class='skill_name'>まもりのたて</td></tr>
             <tr class='shield_8' title='盾装備時の&#x000A;しゅび力が&#x000A;３０増える'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
-            <tr class='shield_9' title='守りをかためて&#x000A;痛恨のいちげきを&#x000A;受けつけない&#x000A;（消費MP: 10）'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
+            <tr class='shield_9' title='守りをかためて&#x000A;痛恨のいちげきの&#x000A;ダメージを軽減&#x000A;（消費MP: 10）'><td class='skill_pt'>100</td><td class='skill_name'>会心ガード</td></tr>
             <tr class='shield_10' title='盾装備時の&#x000A;しゅび力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時しゅび力+10</td></tr>
             <tr class='shield_11' title='与えるダメージと&#x000A;ひきかえに受ける&#x000A;ダメージを減らす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ファランクス</td></tr>
             <tr class='shield_12' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
@@ -1400,7 +1400,7 @@
             <tr class='shield_6' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>52</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
             <tr class='shield_7' title='聖なる光で&#x000A;悪い効果から&#x000A;自分の身を守る&#x000A;（消費MP: 4）'><td class='skill_pt'>66</td><td class='skill_name'>まもりのたて</td></tr>
             <tr class='shield_8' title='盾装備時の&#x000A;しゅび力が&#x000A;３０増える'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
-            <tr class='shield_9' title='守りをかためて&#x000A;痛恨のいちげきを&#x000A;受けつけない&#x000A;（消費MP: 10）'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
+            <tr class='shield_9' title='守りをかためて&#x000A;痛恨のいちげきの&#x000A;ダメージを軽減&#x000A;（消費MP: 10）'><td class='skill_pt'>100</td><td class='skill_name'>会心ガード</td></tr>
             <tr class='shield_10' title='盾装備時の&#x000A;しゅび力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時しゅび力+10</td></tr>
             <tr class='shield_11' title='与えるダメージと&#x000A;ひきかえに受ける&#x000A;ダメージを減らす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ファランクス</td></tr>
             <tr class='shield_12' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
@@ -1694,7 +1694,7 @@
             <tr class='shield_6' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>52</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
             <tr class='shield_7' title='聖なる光で&#x000A;悪い効果から&#x000A;自分の身を守る&#x000A;（消費MP: 4）'><td class='skill_pt'>66</td><td class='skill_name'>まもりのたて</td></tr>
             <tr class='shield_8' title='盾装備時の&#x000A;しゅび力が&#x000A;３０増える'><td class='skill_pt'>82</td><td class='skill_name'>装備時しゅび力+30</td></tr>
-            <tr class='shield_9' title='守りをかためて&#x000A;痛恨のいちげきを&#x000A;受けつけない&#x000A;（消費MP: 10）'><td class='skill_pt'>100</td><td class='skill_name'>会心完全ガード</td></tr>
+            <tr class='shield_9' title='守りをかためて&#x000A;痛恨のいちげきの&#x000A;ダメージを軽減&#x000A;（消費MP: 10）'><td class='skill_pt'>100</td><td class='skill_name'>会心ガード</td></tr>
             <tr class='shield_10' title='盾装備時の&#x000A;しゅび力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時しゅび力+10</td></tr>
             <tr class='shield_11' title='与えるダメージと&#x000A;ひきかえに受ける&#x000A;ダメージを減らす&#x000A;（消費MP: 5）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>ファランクス</td></tr>
             <tr class='shield_12' title='盾装備時&#x000A;さらに盾ガードを&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時盾ガード率+1%</td></tr>
@@ -2281,15 +2281,15 @@
             <tr class='song_2' title='全職業で&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>28</td><td class='skill_name'>全職業でさいだいＭＰ+10</td></tr>
             <tr class='song_3' title='周囲の味方の会心&#x000A;暴走率アップ&#x000A;踊り子専用&#x000A;（消費MP: 8）'><td class='skill_pt'>40</td><td class='skill_name'>会心まいしんラップ（専）</td></tr>
             <tr class='song_4' title='全職業で&#x000A;こうげき魔力が&#x000A;５増える'><td class='skill_pt'>48</td><td class='skill_name'>全職業でこうげき魔力+5</td></tr>
-            <tr class='song_5' title=''><td class='skill_pt'>56</td><td class='skill_name'>祈りのゴスペル（専）</td></tr>
+            <tr class='song_5' title='周囲の味方の&#x000A;回復量をアップ&#x000A;踊り子専用&#x000A;（消費MP: 8）'><td class='skill_pt'>56</td><td class='skill_name'>祈りのゴスペル（専）</td></tr>
             <tr class='song_6' title='全職業で&#x000A;ちからが&#x000A;５増える'><td class='skill_pt'>70</td><td class='skill_name'>全職業でちから+5</td></tr>
             <tr class='song_7' title='周囲の味方の呪文&#x000A;ダメージをアップ&#x000A;踊り子専用&#x000A;（消費MP: 8）'><td class='skill_pt'>80</td><td class='skill_name'>覚醒のアリア（専）</td></tr>
             <tr class='song_8' title='全職業で&#x000A;みりょくが&#x000A;１０増える'><td class='skill_pt'>90</td><td class='skill_name'>全職業でみりょく+10</td></tr>
             <tr class='song_9' title='周囲の味方を&#x000A;回復し生き返す&#x000A;踊り子専用&#x000A;（消費MP: 10）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>100</td><td class='skill_name'>よみがえり節（専）</td></tr>
-            <tr class='song_10' title=''><td class='skill_pt'>110</td><td class='skill_name'>会心率と暴走率アップ（専）</td></tr>
-            <tr class='song_11' title=''><td class='skill_pt'>120</td><td class='skill_name'>身かわし率+2%（専）</td></tr>
-            <tr class='song_12' title=''><td class='skill_pt'>130</td><td class='skill_name'>魔力のバラード（専）</td></tr>
-            <tr class='song_13' title=''><td class='skill_pt'>140</td><td class='skill_name'>ターン消費しない+1%（専）</td></tr>
+            <tr class='song_10' title='踊り子時会心や&#x000A;呪文の暴走が&#x000A;出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>会心率と暴走率アップ（専）</td></tr>
+            <tr class='song_11' title='踊り子時&#x000A;敵の攻撃を&#x000A;かわしやすくなる'><td class='skill_pt'>120</td><td class='skill_name'>身かわし率+2%（専）</td></tr>
+            <tr class='song_12' title='周囲の味方に&#x000A;攻撃時ＭＰ回復&#x000A;踊り子専用&#x000A;（消費MP: 4）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>130</td><td class='skill_name'>魔力のバラード（専）</td></tr>
+            <tr class='song_13' title='踊り子時&#x000A;１％の確率で&#x000A;ターン消費しない'><td class='skill_pt'>140</td><td class='skill_name'>ターン消費しない+1%（専）</td></tr>
             <tr class='song_14' title='周囲の味方に&#x000A;攻撃時ＨＰ回復&#x000A;踊り子専用&#x000A;（消費MP: 4）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>150</td><td class='skill_name'>回復のララバイ（専）</td></tr>
           </table><table class='dance skill_table'>
             <caption class='ui-handler'>
@@ -2301,19 +2301,19 @@
               </div>
             </caption>
             <tr class='dance_0' title='全職業で&#x000A;みりょくが&#x000A;１０増える'><td class='skill_pt'>8</td><td class='skill_name'>全職業でみりょく+10</td></tr>
-            <tr class='dance_1' title=''><td class='skill_pt'>16</td><td class='skill_name'>ふういんのダンス（専）</td></tr>
+            <tr class='dance_1' title='周囲の敵の特技と&#x000A;呪文とブレス封印&#x000A;踊り子専用&#x000A;（消費MP: 8）'><td class='skill_pt'>16</td><td class='skill_name'>ふういんのダンス（専）</td></tr>
             <tr class='dance_2' title='全職業で&#x000A;こうげき魔力が&#x000A;５増える'><td class='skill_pt'>28</td><td class='skill_name'>全職業でこうげき魔力+5</td></tr>
-            <tr class='dance_3' title=''><td class='skill_pt'>40</td><td class='skill_name'>こんらんのダンス（専）</td></tr>
+            <tr class='dance_3' title='周囲の敵を&#x000A;混乱させる&#x000A;踊り子専用&#x000A;（消費MP: 8）'><td class='skill_pt'>40</td><td class='skill_name'>こんらんのダンス（専）</td></tr>
             <tr class='dance_4' title='全職業で&#x000A;ちからが&#x000A;５増える'><td class='skill_pt'>48</td><td class='skill_name'>全職業でちから+5</td></tr>
-            <tr class='dance_5' title=''><td class='skill_pt'>56</td><td class='skill_name'>ねむりのダンス（専）</td></tr>
+            <tr class='dance_5' title='周囲の敵を&#x000A;眠らせる&#x000A;踊り子専用&#x000A;（消費MP: 8）'><td class='skill_pt'>56</td><td class='skill_name'>ねむりのダンス（専）</td></tr>
             <tr class='dance_6' title='全職業で&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>70</td><td class='skill_name'>全職業でさいだいＭＰ+10</td></tr>
-            <tr class='dance_7' title=''><td class='skill_pt'>80</td><td class='skill_name'>ドラゴンステップ（専）</td></tr>
+            <tr class='dance_7' title='周囲の敵の炎と&#x000A;光耐性ダウン&#x000A;踊り子専用&#x000A;（消費MP: 8）&#x000A;（チャージ: 40秒）'><td class='skill_pt'>80</td><td class='skill_name'>ドラゴンステップ（専）</td></tr>
             <tr class='dance_8' title='周囲の敵の雷と&#x000A;風耐性ダウン&#x000A;踊り子専用&#x000A;（消費MP: 8）&#x000A;（チャージ: 40秒）'><td class='skill_pt'>90</td><td class='skill_name'>ビーナスステップ（専）</td></tr>
-            <tr class='dance_9' title=''><td class='skill_pt'>100</td><td class='skill_name'>ロイヤルステップ（専）</td></tr>
-            <tr class='dance_10' title=''><td class='skill_pt'>110</td><td class='skill_name'>会心率と暴走率アップ（専）</td></tr>
-            <tr class='dance_11' title='敵１体に&#x000A;４回攻撃&#x000A;踊り子専用&#x000A;（消費MP: 4）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>身かわし率+2%（専）</td></tr>
-            <tr class='dance_12' title=''><td class='skill_pt'>130</td><td class='skill_name'>つるぎの舞（専）</td></tr>
-            <tr class='dance_13' title=''><td class='skill_pt'>140</td><td class='skill_name'>ターン消費しない+1%（専）</td></tr>
+            <tr class='dance_9' title='周囲の敵の氷と&#x000A;闇と土耐性ダウン&#x000A;踊り子専用&#x000A;（消費MP: 8）&#x000A;（チャージ: 40秒）'><td class='skill_pt'>100</td><td class='skill_name'>ロイヤルステップ（専）</td></tr>
+            <tr class='dance_10' title='踊り子時　会心や&#x000A;呪文の暴走が&#x000A;出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>会心率と暴走率アップ（専）</td></tr>
+            <tr class='dance_11' title='踊り子時&#x000A;敵の攻撃を&#x000A;かわしやすくなる'><td class='skill_pt'>120</td><td class='skill_name'>身かわし率+2%（専）</td></tr>
+            <tr class='dance_12' title='敵１体に&#x000A;４回攻撃&#x000A;踊り子専用&#x000A;（消費MP: 4）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>130</td><td class='skill_name'>つるぎの舞（専）</td></tr>
+            <tr class='dance_13' title='踊り子時&#x000A;１％の確率で&#x000A;ターン消費しない'><td class='skill_pt'>140</td><td class='skill_name'>ターン消費しない+1%（専）</td></tr>
             <tr class='dance_14' title='自分の攻撃力を&#x000A;増加させる&#x000A;踊り子専用&#x000A;（消費MP: 4）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>150</td><td class='skill_name'>戦鬼の乱れ舞（専）</td></tr>
           </table></div>
       </div>
@@ -2376,6 +2376,7 @@
           <li>
             履歴:
             <ul>
+              <li>2015/5/1 v6.2.1 うた・おどりスキルの詳細補完、会心ガードの名称変更に対応。</li>
               <li>2015/4/28 v6.2 「全職特訓完了にする」ボタンを追加。</li>
               <li>
                 2015/4/25 v6.1 ver3.0対応。
@@ -2393,7 +2394,6 @@
                   <li>後期中に解放予定の150スキルに仮対応。</li>
                 </ul>
               </li>
-              <li>2015/2/13 v5.8 IE10以下への対応を終了。</li>
               <li>過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。</li>
             </ul>
           </li>
