@@ -1,4 +1,4 @@
-- @version = 'm1.4'
+- @version = 'm1.4.1'
 !!! 5
 %html
 	%head
@@ -175,6 +175,7 @@
 						%li
 							履歴:
 							%ul
+								%li 2015/5/14 v1.4.1 バッジ「マリーン・金」のデータ間違い修正（炎耐性2%→20%）、コード整理
 								%li
 									2015/4/27 v1.4
 									%ul
@@ -204,10 +205,10 @@
 					- data['badgerace'].each do |k, v|
 						%li.ui-corner-all<
 							%a{'data-search-key' => k, 'data-filter-type' => 'race'} #{v['abbr']}
-				%ul#badge-search-buttons-class.badge-search-button-container.button-container
-					- data['badgeclass'].each do |k, v|
+				%ul#badge-search-buttons-rarity.badge-search-button-container.button-container
+					- data['badgerarity'].each do |k, v|
 						%li{'class' => ['ui-corner-all', k]}<
-							%a{'data-search-key' => k, 'data-filter-type' => 'class'} #{v}
+							%a{'data-search-key' => k, 'data-filter-type' => 'rarity'} #{v}
 				%ul#badge-search-buttons-feature.badge-search-button-container.button-container
 					- data['badgefeature'].each do |k, v|
 						%li.ui-corner-all<
@@ -225,9 +226,9 @@
 						%a#badge-selector-remove バッジをはずす
 				%ul#badge-selector-list.badge-button-container.button-container
 					- data['badges'].each do |id, badge|
-						%li{'class' => ['ui-corner-all', badge['class']], 'data-kana-sort-key' => badge['sort']}<
+						%li{'class' => ['ui-corner-all', badge['rarity']], 'data-kana-sort-key' => badge['sort']}<
 							%a{'data-badge-id' => id}<
-								= "#{id} #{badge['name']}・#{data['badgeclass'][badge['class']]}"
+								= "#{id} #{badge['name']}・#{data['badgerarity'][badge['rarity']]}"
 			#badge-selector-footer
 				#badge-selector-baseinfo
 					%h2#badge-selector-badge-title<

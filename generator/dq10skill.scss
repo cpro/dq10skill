@@ -729,7 +729,7 @@ ul.button-container {
 }
 
 /* バッジ選択ボタン */
-ul.badge-button-container, ul#badge-search-buttons-class {
+ul.badge-button-container, ul#badge-search-buttons-rarity {
 	li {
 		&.blank {
 			background-color: transparent;
@@ -903,7 +903,7 @@ ul.badge-button-container, ul#badge-search-buttons-class {
 	ul#badge-search-buttons-race {
 		width: ($badge-search-button-width + 4px) * 4;
 	}
-	ul#badge-search-buttons-class {
+	ul#badge-search-buttons-rarity {
 		width: ($badge-search-button-width + 4px) * 1;
 
 	}
