@@ -1742,7 +1742,7 @@
 		"286": {"name": "プリズニャン", "sort": "ふりすにやん", "class": "gold", "race": "beast", "atk": 70, "spd": 115, "critical": 5, "evd": 5},
 		"287": {"name": "イエティ", "sort": "いえてい", "class": "gold", "race": "beast", "def": 95, "maxhp": 95, "weight": 110, "reduce": {"氷": 20}},
 		"288": {"name": "キマイラロード", "sort": "きまいらろおと", "class": "gold", "race": "beast", "maxhp": 105, "attrib": "光", "startup": {"テンションバーン": 100}, "skill": ["マホカンタ"]},
-		"289": {"name": "マリーン", "sort": "まりいん", "class": "gold", "race": "special", "spcharge": 2, "reduce": {"炎": 2}, "special": "グラビティハンマー"},
+		"289": {"name": "マリーン", "sort": "まりいん", "class": "gold", "race": "special", "spcharge": 2, "reduce": {"炎": 20}, "special": "グラビティハンマー"},
 		"290": {"name": "セラフィ", "sort": "せらふい", "class": "gold", "race": "special", "misc": ["致死ダメージ時 10%で生存"], "special": "祝福の光", "skill": ["聖なる祈り"]},
 		"291": {"name": "マイユ", "sort": "まいゆ", "class": "gold", "race": "special", "misc": ["攻撃時たまにＭＰ回復"], "special": "クイーンオブハート", "skill": ["心頭滅却"]},
 		"292": {"name": "リゼロッタ", "sort": "りせろつた", "class": "gold", "race": "special", "startup": {"聖女の守り": 25, "メイクアップ": 50}, "special": "執事召喚"},
