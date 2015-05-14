@@ -958,7 +958,7 @@
 			var buttonHintText = '';
 
 			if(badge) {
-				buttonText = badgeId + ' ' + badge.name + '・' + DB.badgeclass[badge['class']];
+				buttonText = badgeId + ' ' + badge.name + '・' + DB.badgerarity[badge.rarity];
 				buttonHintText = BadgeSelector.getFeatureCache(badgeId).join("\n");
 			} else {
 				if(badgeIndex == monster.badgeEquip.length - 1)
@@ -968,10 +968,10 @@
 			}
 			$badgeButton.text(buttonText).attr('title', buttonHintText);
 
-			var bc = badge === null ? 'blank' : badge['class'];
+			var bc = badge === null ? 'blank' : badge.rarity;
 
 			$badgeButtonCont.toggleClass('blank', bc == 'blank');
-			for(var c in DB.badgeclass) {
+			for(var c in DB.badgerarity) {
 				$badgeButtonCont.toggleClass(c, bc == c);
 			}
 		}
@@ -1436,7 +1436,7 @@
 							search.splice(i, 1);
 							break;
 						}
-						if((filterType == 'race' || filterType == 'class') && search[i].filterType == filterType) {
+						if((filterType == 'race' || filterType == 'rarity') && search[i].filterType == filterType) {
 							search.splice(i, 1);
 							break;
 						}
@@ -1479,10 +1479,10 @@
 					var filterFunc;
 					switch(filterType) {
 						case 'race':
-							filterFunc = function(badge) { return badge['race'] == searchKey; };
+							filterFunc = function(badge) { return badge.race == searchKey; };
 							break;
-						case 'class':
-							filterFunc = function(badge) { return badge['class'] == searchKey; };
+						case 'rarity':
+							filterFunc = function(badge) { return badge.rarity == searchKey; };
 							break;
 						case 'feature':
 							filterFunc = function(badge) { return badge[searchKey] !== undefined; };
@@ -1552,13 +1552,13 @@
 
 				//バッジ検索ボタン
 				$('#badge-search-buttons-race,' +
-				  '#badge-search-buttons-class,' +
+				  '#badge-search-buttons-rarity,' +
 				  '#badge-search-buttons-feature').find('a').click(function(e) {
 					var searchKey = $(this).attr('data-search-key');
 					var filterType = $(this).attr('data-filter-type');
 
 					var isTurningOn = BadgeSearch.toggleSearch(filterType, searchKey);
-					toggleSearchButtons(this, isTurningOn, (filterType == 'race' || filterType == 'class'));
+					toggleSearchButtons(this, isTurningOn, (filterType == 'race' || filterType == 'rarity'));
 
 					filterButtons(BadgeSearch.getIds());
 
@@ -1608,7 +1608,7 @@
 
 				$('#badge-selector-badge-id').text(badgeId);
 
-				var badgeName = badge.name + '・' + DB.badgeclass[badge['class']];
+				var badgeName = badge.name + '・' + DB.badgerarity[badge.rarity];
 				$('#badge-selector-badge-name').text(badgeName);
 
 				var raceName;
@@ -1788,7 +1788,7 @@
 				$('#badge-selector-list li').show();
 				BadgeSearch.clear();
 				$('#badge-search-buttons-race li,' +
-					'#badge-search-buttons-class li,' +
+					'#badge-search-buttons-rarity li,' +
 					'#badge-search-buttons-feature li').removeClass('selected');
 
 				sortByIdDesc = false;
