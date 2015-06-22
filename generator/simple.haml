@@ -40,7 +40,7 @@
 					%a#mainui{href: './'} 詳細表示版に切り替え
 			%table#main
 				%tr#header
-					%th
+					%th{colspan: 2}
 					%th.unique 固<br>有<br>ス<br>キ<br>ル
 					%th.msp M<br>S<br>P
 					%th.remain の<br>こ<br>り
@@ -50,8 +50,14 @@
 					%th
 				- data['vocationOrder'].each do |vocation|
 					%tr.vocation{id: "#{vocation}"}
-						%th= data['vocations'][vocation]['name']
-						%td.unique
+						- if vocation == 'dancer'
+							%th= data['vocations'][vocation]['name']
+							%td.unique2{title: 'うた'}
+								.container
+						- else
+							%th{colspan: 2}= data['vocations'][vocation]['name']
+						- @unique_name = data['skillLines'][data['vocations'][vocation]['skillLines'][-1]]['name']
+						%td.unique{title: @unique_name}
 							.container
 						%td.msp
 							.container
@@ -67,7 +73,7 @@
 							.container
 						%td.level
 				%tr#msp
-					%th{colspan: 2} MSP
+					%th{colspan: 3} MSP
 					%td.msp
 					%td.remain
 						.container
@@ -78,7 +84,7 @@
 						.container
 					%td.empty
 				%tr#footer
-					%th{colspan: 4} 合計
+					%th{colspan: 5} 合計
 					- data['skillLineOrder'].each do |skill_line|
 						%td.skill{class: "#{skill_line}"}
 							.container
