@@ -65,7 +65,8 @@ var TRAINING_TABLE = [
 	{stamp: 4500, skillPt: 11},
 	{stamp: 5000, skillPt: 12},
 	{stamp: 5500, skillPt: 13},
-	{stamp: 6000, skillPt: 14}
+	{stamp: 6000, skillPt: 14},
+	{stamp: 6500, skillPt: 15}
 ];
 
 var HirobaStatus = (function($) {
