@@ -1565,8 +1565,14 @@
 		
 		function refreshCurrentSkillPt(vocation, skillLine) {
 			var containerName = skillLine;
-			if(DB.skillLines[skillLine].unique)
-				containerName = 'unique';
+			if(DB.skillLines[skillLine].unique) {
+				//踊り子のパッシブ2種に対応
+				if(skillLine == 'song') {
+					containerName = 'unique2';
+				} else {
+					containerName = 'unique';
+				}
+			}
 
 			$('#' + vocation + ' .' + containerName + ' .container')
 				.text(sim.getSkillPt(vocation, skillLine));

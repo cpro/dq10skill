@@ -113,7 +113,7 @@ table#main {
 			display: table-cell;
 			vertical-align: middle;
 		}
-		&.unique, &.remain, &.total {
+		&.unique, &.unique2, &.remain, &.total {
 			.container {
 				border-color: rgb(192, 176, 176);
 			}
@@ -128,7 +128,7 @@ table#main {
 			background-color: rgb(255, 250, 250);
 		}
 
-		&.skill, &.unique, &.msp, &.remain, &.total {
+		&.skill, &.unique, &.unique2, &.msp, &.remain, &.total {
 			&:before {
 				content: " ";
 				display: inline-block;
@@ -141,7 +141,7 @@ table#main {
 				z-index: 1;
 			}
 		}
-		&.unique:before {
+		&.unique:before, &.unique2:before {
 			left: 10px;
 		}
 		&.total:before {
@@ -158,6 +158,9 @@ table#main {
 			left: ($skill-cell-width - 4px) / 2;
 			background-color: rgb(176, 208, 108);
 			z-index: 2;
+		}
+		&.unique2 {
+			width: $skill-cont-width + $skill-cont-border-width * 2;
 		}
 	}
 	tr#warrior td, tr#warrior th, tr#footer td, tr#footer th{
