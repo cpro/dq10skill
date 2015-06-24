@@ -4,3 +4,5 @@
 /generator/.amazonrc
 /generator/amazon_item_cache.json
 /generator/asin_list.txt
+amazon_item_cache.html
+generator/sass-watch.bat
