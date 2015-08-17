@@ -1447,8 +1447,8 @@
 		},
 		"restart": {
 			"min": 0,
-			"max": 7,
-			"skillPts": [0, 10, 20, 30, 40, 50, 55, 60],
+			"max": 8,
+			"skillPts": [0, 10, 20, 30, 40, 50, 55, 60, 65],
 			"expRatio": 0.03
 		}
 	},
@@ -1682,7 +1682,7 @@
 		"226": {"name": "マジックフライ", "sort": "ましつくふらい", "rarity": "gold", "race": "insect", "magic": 90, "evd": 6, "startup": {"早詠み": 80}, "skill": ["マジックバリア"]},
 		"227": {"name": "キラービー", "sort": "きらあひい", "rarity": "gold", "race": "insect", "atk": 60, "critical": 5, "resist": {"マヒ": 100}, "raceup": {"怪人": 30}},
 		"228": {"name": "げんじかぶと", "sort": "けんしかふと", "rarity": "gold", "race": "insect", "def": 95, "shield": 7, "reduce": {"攻撃呪文": 15, "ブレス": 25}},
-		"229": {"name": "ブラウニー", "sort": "ふらうにい", "rarity": "gold", "race": "mystery", "atk": 55, "maxhp": 85, "startup": {"ためる": 50}, "critical": 5},
+		"229": {"name": "ブラウニー", "sort": "ふらうにい", "rarity": "gold", "race": "mystery", "atk": 55, "maxmp": 85, "startup": {"ためる": 50}, "critical": 5},
 		"230": {"name": "シールドこぞう", "sort": "しいるとこそう", "rarity": "gold", "race": "mystery", "def": 65, "shield": 8, "startup": {"盾ガード率上昇": 50}, "reflect": {"眠らせ": 50}},
 		"231": {"name": "ゆめにゅうどう", "sort": "ゆめにゆうとう", "rarity": "gold", "race": "mystery", "maxhp": 90, "resist": {"魅了": 50, "眠り": 100}, "skill": ["ザメハ"]},
 		"232": {"name": "アローインプ", "sort": "あろおいんふ", "rarity": "gold", "race": "mystery", "def": 90, "spd": 115, "critical": 5, "debuff": {"眠り": 15}},
