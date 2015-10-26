@@ -97,10 +97,10 @@
 				{"pt":   3, "name": "装備時こうげき力+10", "desc": "オノ装備時の\nこうげき力が\n１０増える", "mp": null, "atk": 10},
 				{"pt":   7, "name": "たいぼく斬", "desc": "植物系の敵に\n威力を発揮する\n頼もしいひと振り", "mp": 1},
 				{"pt":  12, "name": "装備時こうげき力+15", "desc": "オノ装備時の\nこうげき力が\n１５増える", "mp": null, "atk": 15},
-				{"pt":  18, "name": "晴天魔斬", "desc": "敵１体を\nたまにマヒさせる\n気合いの大技", "mp": 3},
+				{"pt":  18, "name": "蒼天魔斬", "desc": "敵１体を\nたまにマヒさせる\n気合いの大技", "mp": 10},
 				{"pt":  25, "name": "装備時かいしん率+5%", "desc": "オノでの攻撃時\n会心のいちげきが\n出やすくなる", "mp": null},
 				{"pt":  32, "name": "装備時こうげき力+25", "desc": "オノ装備時の\nこうげき力が\n２５増える", "mp": null, "atk": 25},
-				{"pt":  40, "name": "オノまつり", "desc": "周囲の敵を\n粉砕する\nこんしんの大技", "mp": 8}
+				{"pt":  40, "name": "オノむそう", "desc": "周囲の敵を\n粉砕する\nこんしんの大技", "mp": 15}
 			]
 		},
 
@@ -1014,6 +1014,19 @@
 			]
 		},
 
+		"iyashi": {
+			"name": "いやし",
+			"skills": [
+				{"pt":   3, "name": "（不明）"},
+				{"pt":   7, "name": "（不明）"},
+				{"pt":  12, "name": "（不明）"},
+				{"pt":  18, "name": "（不明）"},
+				{"pt":  25, "name": "（不明）"},
+				{"pt":  32, "name": "（不明）"},
+				{"pt":  40, "name": "（不明）"}
+			]
+		},
+
 		"mera": {
 			"name": "メラの心得",
 			"skills": [
@@ -1515,6 +1528,7 @@
 		{"name": "weaken",        "restartCount": 3, "id":  8},
 		{"name": "cure",          "restartCount": 4, "id":  9},
 		{"name": "enhance",       "restartCount": 5, "id": 10},
+		{"name": "iyashi",        "restartCount": 6, "id": 25},
 		{"name": "mera",          "restartCount": 2, "id": 11},
 		{"name": "hyado",         "restartCount": 3, "id": 12},
 		{"name": "bagi",          "restartCount": 4, "id": 13},
@@ -1522,11 +1536,11 @@
 		{"name": "doruma",        "restartCount": 6, "id": 16},
 		{"name": "mera-ex",       "restartCount": 8, "id": 17, "occupied": ["catmage"]},
 		{"name": "firebreath-ex", "restartCount": 8, "id": 18, "occupied": ["battlerex"]},
-		{"name": "sword-ex",      "restartCount": 8, "id": 19, "occupied": ["slimeknight", "lizardman", "samayouyoroi", "devilarmor"]},
+		{"name": "sword-ex",      "restartCount": 8, "id": 19, "occupied": ["slimeknight", "lizardman"]},
 		{"name": "knightrider",   "restartCount": 8, "id": 20, "occupied": ["slimeknight"]},
 		{"name": "stick-ex",      "restartCount": 8, "id": 21, "occupied": ["mormon", "hoimislime", "chimera"]},
 		{"name": "chimerapray",   "restartCount": 8, "id": 22, "occupied": ["chimera"]},
-		{"name": "claw-ex",       "restartCount": 8, "id": 23, "occupied": ["prisonyan", "dragonkids", "metappy"]},
+		{"name": "claw-ex",       "restartCount": 8, "id": 23, "occupied": ["prisonyan"]},
 		{"name": "hyado-ex",      "restartCount": 8, "id": 24, "occupied": ["prisonyan"]}
 	],
 
@@ -1807,7 +1821,7 @@
 		"239": {"name": "フォンデュ", "sort": "ふおんてゆ", "rarity": "gold", "race": "material", "magic": 90, "heal": 90, "spellup": {"イオ": 20}, "startup": {"早詠みの杖": 100}},
 		"240": {"name": "ひとくいばこ", "sort": "ひとくいはこ", "rarity": "gold", "race": "material", "def": 90, "maxhp": 90, "startup": {"会心率上昇": 50, "心頭滅却": 50}},
 		"241": {"name": "ゴーレム", "sort": "こおれむ", "rarity": "gold", "race": "material", "def": 95, "maxhp": 95, "debuff": {"重さダウン": 20}, "skill": ["ヘヴィチャージ"]},
-		"242": {"name": "エンタシスマン", "sort": "えんたしすまん", "rarity": "gold", "race": "material", "maxhp": 95, "maxmp": 105, "startup": {"マホトラのころも": 60}},
+		"242": {"name": "エンタシスマン", "sort": "えんたしすまん", "rarity": "gold", "race": "material", "maxhp": 95, "maxmp": 105, "startup": {"マホトラのころも": 60}, "resist": {"はどう": 20}},
 		"243": {"name": "メタッピー", "sort": "めたつひい", "rarity": "gold", "race": "machine", "def": 85, "resist": {"転び": 100}, "evd": 6, "startup": {"ピオラ": 100}},
 		"244": {"name": "たけやりへい", "sort": "たけやりへい", "rarity": "gold", "race": "machine", "def": 85, "maxhp": 85, "parry": 8, "startup": {"ためる": 50}},
 		"245": {"name": "キラーマシン", "sort": "きらあましん", "rarity": "gold", "race": "machine", "atk": 75, "maxhp": 100, "startup": {"バイキルト": 40}, "misc": ["たまに 2回攻撃できる"]},
