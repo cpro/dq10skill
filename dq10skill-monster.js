@@ -882,8 +882,8 @@
 					var additionalSkillData = DB.additionalSkillLines[s];
 					var skillData = DB.skillLines[additionalSkillData.name];
 					if(monster.restartCount >= additionalSkillData.restartCount &&
-					   !additionalSkillData.occupied ||
-					   additionalSkillData.occupied.indexOf(monster.monsterType) >= 0) {
+					   (!additionalSkillData.occupied ||
+					   additionalSkillData.occupied.indexOf(monster.monsterType) >= 0)) {
 						$('#' + monsterId + ' .additional_skill_selector select').append(
 							$('<option />').val(additionalSkillData.name).text(skillData.name)
 						);
