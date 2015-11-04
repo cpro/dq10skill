@@ -988,7 +988,7 @@
 		}
 
 		function getHintText(skill) {
-			var hintText = skill.desc;
+			var hintText = skill.desc || '';
 			if((skill.mp !== null) && (skill.mp !== undefined))
 				hintText += '\n（消費MP: ' + skill.mp.toString() + '）';
 			if((skill.charge !== null) && (skill.charge !== undefined))
