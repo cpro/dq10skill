@@ -18,82 +18,82 @@
 		/* メソッド */
 		//パラメータ初期化
 		function initialize() {
-			for(var vocation in DB.vocations) {
-				skillPts[vocation] = {};
-				for(var s = 0; s < DB.vocations[vocation].skillLines.length; s++) {
-					var skillLine = DB.vocations[vocation].skillLines[s];
-					skillPts[vocation][skillLine] = 0;
+			for(var vocationId in DB.vocations) {
+				skillPts[vocationId] = {};
+				for(var s = 0; s < DB.vocations[vocationId].skillLines.length; s++) {
+					var skillLineId = DB.vocations[vocationId].skillLines[s];
+					skillPts[vocationId][skillLineId] = 0;
 				}
-				levels[vocation] = DB.consts.level.min;
-				trainingSkillPts[vocation] = DB.consts.trainingSkillPts.min;
+				levels[vocationId] = DB.consts.level.min;
+				trainingSkillPts[vocationId] = DB.consts.trainingSkillPts.min;
 			}
 		}
 		
 		//スキルポイント取得
-		function getSkillPt(vocation, skillLine) {
-			return skillPts[vocation][skillLine];
+		function getSkillPt(vocationId, skillLineId) {
+			return skillPts[vocationId][skillLineId];
 		}
 		
 		//スキルポイント更新：不正値の場合falseを返す
-		function updateSkillPt(vocation, skillLine, newValue) {
-			var oldValue = skillPts[vocation][skillLine];
+		function updateSkillPt(vocationId, skillLineId, newValue) {
+			var oldValue = skillPts[vocationId][skillLineId];
 			if(newValue < DB.consts.skillPts.min || newValue > DB.consts.skillPts.max) {
 				return false;
 			}
-			if(totalOfSameSkills(skillLine) - oldValue + newValue > DB.consts.skillPts.max) {
+			if(totalOfSameSkills(skillLineId) - oldValue + newValue > DB.consts.skillPts.max) {
 				return false;
 			}
 			
-			skillPts[vocation][skillLine] = newValue;
+			skillPts[vocationId][skillLineId] = newValue;
 			return true;
 		}
 		
 		//レベル値取得
-		function getLevel(vocation) {
-			return levels[vocation];
+		function getLevel(vocationId) {
+			return levels[vocationId];
 		}
 		
 		//レベル値更新
-		function updateLevel(vocation, newValue) {
-			var oldValue = levels[vocation];
+		function updateLevel(vocationId, newValue) {
+			var oldValue = levels[vocationId];
 			if(newValue < DB.consts.level.min || newValue > DB.consts.level.max) {
 				return false;
 			}
 			
-			levels[vocation] = newValue;
+			levels[vocationId] = newValue;
 			return newValue;
 		}
 		
 		//特訓スキルポイント取得
-		function getTrainingSkillPt(vocation) {
-			return trainingSkillPts[vocation];
+		function getTrainingSkillPt(vocationId) {
+			return trainingSkillPts[vocationId];
 		}
 		
 		//特訓スキルポイント更新
-		function updateTrainingSkillPt(vocation, newValue) {
+		function updateTrainingSkillPt(vocationId, newValue) {
 			if(newValue < DB.consts.trainingSkillPts.min || newValue > DB.consts.trainingSkillPts.max)
 				return false;
 			
-			trainingSkillPts[vocation] = newValue;
+			trainingSkillPts[vocationId] = newValue;
 			return true;
 		}
 
 		//マスタースキルポイント取得
-		function getMSP(skillLine) {
-			return msp[skillLine] || 0;
+		function getMSP(skillLineId) {
+			return msp[skillLineId] || 0;
 		}
 
 		//マスタースキルポイント更新
-		function updateMSP(skillLine, newValue) {
-			var oldValue = msp[skillLine] || 0;
+		function updateMSP(skillLineId, newValue) {
+			var oldValue = msp[skillLineId] || 0;
 			if(newValue < DB.consts.msp.min || newValue > DB.consts.msp.max)
 				return false;
 			if(totalMSP() - oldValue + newValue > DB.consts.msp.max)
 				return false;
-			if(totalOfSameSkills(skillLine) - oldValue + newValue > DB.consts.skillPts.max)
+			if(totalOfSameSkills(skillLineId) - oldValue + newValue > DB.consts.skillPts.max)
 				return false;
 
-			msp[skillLine] = newValue;
+			msp[skillLineId] = newValue;
 			return true;
 		}
 
@@ -107,33 +107,33 @@
 		}
 
 		//職業のスキルポイント合計
-		function totalSkillPts(vocation) {
+		function totalSkillPts(vocationId) {
 			var total = 0;
-			for(var skillLine in skillPts[vocation])
-				total += skillPts[vocation][skillLine];
+			for(var skillLineId in skillPts[vocationId])
+				total += skillPts[vocationId][skillLineId];
 			
 			return total;
 		}
 		
 		//同スキルのポイント合計
-		function totalOfSameSkills(skillLine) {
+		function totalOfSameSkills(skillLineId) {
 			var total = 0;
-			for(var vocation in skillPts) {
-				if(skillPts[vocation][skillLine])
-					total += skillPts[vocation][skillLine];
+			for(var vocationId in skillPts) {
+				if(skillPts[vocationId][skillLineId])
+					total += skillPts[vocationId][skillLineId];
 			}
-			total += msp[skillLine] || 0;
+			total += msp[skillLineId] || 0;
 
 			return total;
 		}
 		
 		//特定スキルすべてを振り直し（0にセット）
-		function clearPtsOfSameSkills(skillLine) {
-			for(var vocation in skillPts) {
-				if(skillPts[vocation][skillLine])
-					updateSkillPt(vocation, skillLine, 0);
+		function clearPtsOfSameSkills(skillLineId) {
+			for(var vocationId in skillPts) {
+				if(skillPts[vocationId][skillLineId])
+					updateSkillPt(vocationId, skillLineId, 0);
 			}
-			msp[skillLine] = 0;
+			msp[skillLineId] = 0;
 		}
 
 		//MSPを初期化
@@ -143,23 +143,23 @@
 		
 		//すべてのスキルを振り直し（0にセット）
 		function clearAllSkills() {
-			for(var vocation in skillPts) {
-				for(var skillLine in skillPts[vocation]) {
-					skillPts[vocation][skillLine] = 0;
+			for(var vocationId in skillPts) {
+				for(var skillLineId in skillPts[vocationId]) {
+					skillPts[vocationId][skillLineId] = 0;
 				}
 			}
 			clearMSP();
 		}
 		
 		//職業レベルに対するスキルポイント最大値
-		function maxSkillPts(vocation) {
-			return DB.skillPtsGiven[levels[vocation]];
+		function maxSkillPts(vocationId) {
+			return DB.skillPtsGiven[levels[vocationId]];
 		}
 		
 		//スキルポイント合計に対する必要レベル取得
-		function requiredLevel(vocation) {
-			var trainingSkillPt = getTrainingSkillPt(vocation);
-			var total = totalSkillPts(vocation) - trainingSkillPt;
+		function requiredLevel(vocationId) {
+			var trainingSkillPt = getTrainingSkillPt(vocationId);
+			var total = totalSkillPts(vocationId) - trainingSkillPt;
 			
 			for(var l = DB.consts.level.min; l <= DB.consts.level.max; l++) {
 				if(DB.skillPtsGiven[l] >= total) {
@@ -175,38 +175,38 @@
 
 		//全職業の使用可能スキルポイント
 		function wholeSkillPtsAvailable() {
-			return Object.keys(DB.vocations).reduce(function(prev, vocation) {
-				var cur = maxSkillPts(vocation) + getTrainingSkillPt(vocation);
+			return Object.keys(DB.vocations).reduce(function(prev, vocationId) {
+				var cur = maxSkillPts(vocationId) + getTrainingSkillPt(vocationId);
 				return prev + cur;
 			}, 0);
 		}
 
 		//全職業の使用済スキルポイント
 		function wholeSkillPtsUsed() {
-			return Object.keys(DB.vocations).reduce(function(prev, vocation) {
-				var cur = totalSkillPts(vocation);
+			return Object.keys(DB.vocations).reduce(function(prev, vocationId) {
+				var cur = totalSkillPts(vocationId);
 				return prev + cur;
 			}, 0);
 		}
 		
 		//職業・レベルによる必要経験値
-		function requiredExp(vocation, level) {
-			return DB.expRequired[DB.vocations[vocation].expTable][level];
+		function requiredExp(vocationId, level) {
+			return DB.expRequired[DB.vocations[vocationId].expTable][level];
 		}
 		
 		//不足経験値
-		function requiredExpRemain(vocation) {
-			var required = requiredLevel(vocation);
-			if(required <= levels[vocation]) return 0;
-			var remain = requiredExp(vocation, required) - requiredExp(vocation, levels[vocation]);
+		function requiredExpRemain(vocationId) {
+			var required = requiredLevel(vocationId);
+			if(required <= levels[vocationId]) return 0;
+			var remain = requiredExp(vocationId, required) - requiredExp(vocationId, levels[vocationId]);
 			return remain;
 		}
 		
 		//全職業の必要経験値合計
 		function totalRequiredExp() {
 			var total = 0;
-			for(var vocation in DB.vocations) {
-				total += requiredExp(vocation, levels[vocation]);
+			for(var vocationId in DB.vocations) {
+				total += requiredExp(vocationId, levels[vocationId]);
 			}
 			return total;
 		}
@@ -214,8 +214,8 @@
 		//全職業の不足経験値合計
 		function totalExpRemain() {
 			var total = 0;
-			for(var vocation in DB.vocations) {
-				total += requiredExpRemain(vocation);
+			for(var vocationId in DB.vocations) {
+				total += requiredExpRemain(vocationId);
 			}
 			return total;
 		}
@@ -234,10 +234,10 @@
 			//スキルカテゴリデータの各スキルから上記プロパティを調べ合計する
 			var total = 0;
 			var skills;
-			for(var skillLine in DB.skillLines) {
-				skills = DB.skillLines[skillLine].skills;
+			for(var skillLineId in DB.skillLines) {
+				skills = DB.skillLines[skillLineId].skills;
 				for(var i = 0; i < skills.length; i++) {
-					if(totalOfSameSkills(skillLine) < skills[i].pt)
+					if(totalOfSameSkills(skillLineId) < skills[i].pt)
 						break;
 					
 					if(skills[i][status])
@@ -253,16 +253,16 @@
 		function presetStatus (status) {
 			var returnValue = false;
 
-			for(var vocation in DB.vocations) {
-				for(var s = 0; s < DB.vocations[vocation].skillLines.length; s++) {
-					var skillLine = DB.vocations[vocation].skillLines[s];
+			for(var vocationId in DB.vocations) {
+				for(var s = 0; s < DB.vocations[vocationId].skillLines.length; s++) {
+					var skillLineId = DB.vocations[vocationId].skillLines[s];
 
-					if(!DB.skillLines[skillLine].unique) continue;
+					if(!DB.skillLines[skillLineId].unique) continue;
 
-					var skills = DB.skillLines[skillLine].skills;
+					var skills = DB.skillLines[skillLineId].skills;
 					for (var i = skills.length - 1; i >= 0; i--) {
-						if(skills[i][status] && getSkillPt(vocation, skillLine) < skills[i].pt) {
-							updateSkillPt(vocation, skillLine, skills[i].pt);
+						if(skills[i][status] && getSkillPt(vocationId, skillLineId) < skills[i].pt) {
+							updateSkillPt(vocationId, skillLineId, skills[i].pt);
 							returnValue = true;
 							break;
 						}
@@ -275,9 +275,9 @@
 
 		//現在のレベルを取得スキルに対する必要レベルにそろえる
 		function bringUpLevelToRequired () {
-			for(var vocation in DB.vocations) {
-				if(getLevel(vocation) < requiredLevel(vocation))
-					updateLevel(vocation, requiredLevel(vocation));
+			for(var vocationId in DB.vocations) {
+				if(getLevel(vocationId) < requiredLevel(vocationId))
+					updateLevel(vocationId, requiredLevel(vocationId));
 			}
 		}
 
@@ -307,22 +307,22 @@
 			//先頭に職業の数を含める
 			serial += toByte(vocationCount);
 
-			var skillLine;
+			var skillLineId;
 
 			for(var i = 0; i < vocationCount; i++) {
-				var vocation = VOCATIONS_DATA_ORDER[i];
-				serial += toByte(getLevel(vocation));
-				serial += toByte(getTrainingSkillPt(vocation));
+				var vocationId = VOCATIONS_DATA_ORDER[i];
+				serial += toByte(getLevel(vocationId));
+				serial += toByte(getTrainingSkillPt(vocationId));
 
-				for(var s = 0; s < DB.vocations[vocation].skillLines.length; s++) {
-					skillLine = DB.vocations[vocation].skillLines[s];
-					serial += toByte(getSkillPt(vocation, skillLine));
+				for(var s = 0; s < DB.vocations[vocationId].skillLines.length; s++) {
+					skillLineId = DB.vocations[vocationId].skillLines[s];
+					serial += toByte(getSkillPt(vocationId, skillLineId));
 				}
 			}
 			//末尾にMSPのスキルラインIDとポイントをペアで格納
-			for(skillLine in msp) {
-				if(msp[skillLine] > 0) {
-					serial += toByte(DB.skillLines[skillLine].id) + toByte(msp[skillLine]);
+			for(skillLineId in msp) {
+				if(msp[skillLineId] > 0) {
+					serial += toByte(DB.skillLines[skillLineId].id) + toByte(msp[skillLineId]);
 				}
 			}
 			return serial;
@@ -337,17 +337,17 @@
 			var vocationCount = getData();
 
 			for(var i = 0; i < vocationCount; i++) {
-				var vocation = VOCATIONS_DATA_ORDER[i];
-				var vSkillLines = DB.vocations[vocation].skillLines;
+				var vocationId = VOCATIONS_DATA_ORDER[i];
+				var vSkillLines = DB.vocations[vocationId].skillLines;
 
 				if(serial.length - cur < 1 + 1 + vSkillLines.length)
 					break;
 
-				updateLevel(vocation, getData());
-				updateTrainingSkillPt(vocation, getData());
+				updateLevel(vocationId, getData());
+				updateTrainingSkillPt(vocationId, getData());
 
 				for(var s = 0; s < vSkillLines.length; s++) {
-					updateSkillPt(vocation, vSkillLines[s], getData());
+					updateSkillPt(vocationId, vSkillLines[s], getData());
 				}
 			}
 			//末尾にデータがあればMSPとして取得
@@ -379,18 +379,18 @@
 			
 			var cur = 0;
 			for(i = 0; i < VOCATIONS_DATA_ORDER.length; i++) {
-				var vocation = VOCATIONS_DATA_ORDER[i];
+				var vocationId = VOCATIONS_DATA_ORDER[i];
 
-				updateLevel(vocation, bitArrayToNum(bitArray.slice(cur, cur += BITS_LEVEL)));
+				updateLevel(vocationId, bitArrayToNum(bitArray.slice(cur, cur += BITS_LEVEL)));
 
 				if(isIncludingTrainingPts)
-					updateTrainingSkillPt(vocation, bitArrayToNum(bitArray.slice(cur, cur += BITS_TRAINING)));
+					updateTrainingSkillPt(vocationId, bitArrayToNum(bitArray.slice(cur, cur += BITS_TRAINING)));
 				else
-					updateTrainingSkillPt(vocation, 0);
+					updateTrainingSkillPt(vocationId, 0);
 
-				for(var s = 0; s < DB.vocations[vocation].skillLines.length; s++) {
-					var skillLine = DB.vocations[vocation].skillLines[s];
-					updateSkillPt(vocation, skillLine, bitArrayToNum(bitArray.slice(cur, cur += BITS_SKILL)));
+				for(var s = 0; s < DB.vocations[vocationId].skillLines.length; s++) {
+					var skillLineId = DB.vocations[vocationId].skillLines[s];
+					updateSkillPt(vocationId, skillLineId, bitArrayToNum(bitArray.slice(cur, cur += BITS_SKILL)));
 				}
 			}
 
@@ -505,106 +505,106 @@
 		}
 
 		//スキルポイント更新
-		var UpdateSkillPt = function(vocation, skillLine, newValue) {
-			this.vocation = vocation;
-			this.skillLine = skillLine;
+		var UpdateSkillPt = function(vocationId, skillLineId, newValue) {
+			this.vocationId = vocationId;
+			this.skillLineId = skillLineId;
 			this.prevValue = undefined;
 			this.newValue = newValue;
 		};
 		UpdateSkillPt.prototype.execute = function() {
 			if(this.prevValue === undefined)
-				this.prevValue = sim.getSkillPt(this.vocation, this.skillLine);
-			var ret = sim.updateSkillPt(this.vocation, this.skillLine, this.newValue);
-			if(ret) dispatch('SkillLineChanged', this.vocation, this.skillLine);
+				this.prevValue = sim.getSkillPt(this.vocationId, this.skillLineId);
+			var ret = sim.updateSkillPt(this.vocationId, this.skillLineId, this.newValue);
+			if(ret) dispatch('SkillLineChanged', this.vocationId, this.skillLineId);
 			return ret;
 		};
 		UpdateSkillPt.prototype.undo = function() {
-			sim.updateSkillPt(this.vocation, this.skillLine, this.prevValue);
-			dispatch('SkillLineChanged', this.vocation, this.skillLine);
+			sim.updateSkillPt(this.vocationId, this.skillLineId, this.prevValue);
+			dispatch('SkillLineChanged', this.vocationId, this.skillLineId);
 		};
 		UpdateSkillPt.prototype.name = 'UpdateSkillPt';
 		UpdateSkillPt.prototype.isAbsorbable = function(command) {
 			return this.name === command.name &&
-				this.vocation === command.vocation &&
-				this.skillLine === command.skillLine;
+				this.vocationId === command.vocationId &&
+				this.skillLineId === command.skillLineId;
 		};
 		UpdateSkillPt.prototype.absorb = function(newCommand) {
 			this.newValue = newCommand.newValue;
 		};
 
 		//レベル更新
-		var UpdateLevel = function(vocation, newValue) {
-			this.vocation = vocation;
+		var UpdateLevel = function(vocationId, newValue) {
+			this.vocationId = vocationId;
 			this.prevValue = undefined;
 			this.newValue = newValue;
 		};
 		UpdateLevel.prototype.execute = function() {
 			if(this.prevValue === undefined)
-				this.prevValue = sim.getLevel(this.vocation);
-			var ret = sim.updateLevel(this.vocation, this.newValue);
-			if(ret) dispatch('VocationalInfoChanged', this.vocation);
+				this.prevValue = sim.getLevel(this.vocationId);
+			var ret = sim.updateLevel(this.vocationId, this.newValue);
+			if(ret) dispatch('VocationalInfoChanged', this.vocationId);
 			return ret;
 		};
 		UpdateLevel.prototype.undo = function() {
-			sim.updateLevel(this.vocation, this.prevValue);
-			dispatch('VocationalInfoChanged', this.vocation);
+			sim.updateLevel(this.vocationId, this.prevValue);
+			dispatch('VocationalInfoChanged', this.vocationId);
 		};
 		UpdateLevel.prototype.name = 'UpdateLevel';
 		UpdateLevel.prototype.isAbsorbable = function(command) {
 			return this.name === command.name &&
-				this.vocation === command.vocation;
+				this.vocationId === command.vocationId;
 		};
 		UpdateLevel.prototype.absorb = function(newCommand) {
 			this.newValue = newCommand.newValue;
 		};
 
 		//特訓スキルポイント更新
-		var UpdateTrainingSkillPt = function(vocation, newValue) {
-			this.vocation = vocation;
+		var UpdateTrainingSkillPt = function(vocationId, newValue) {
+			this.vocationId = vocationId;
 			this.prevValue = undefined;
 			this.newValue = newValue;
 		};
 		UpdateTrainingSkillPt.prototype.execute = function() {
 			if(this.prevValue === undefined)
-				this.prevValue = sim.getTrainingSkillPt(this.vocation);
-			var ret = sim.updateTrainingSkillPt(this.vocation, this.newValue);
-			if(ret) dispatch('VocationalInfoChanged', this.vocation);
+				this.prevValue = sim.getTrainingSkillPt(this.vocationId);
+			var ret = sim.updateTrainingSkillPt(this.vocationId, this.newValue);
+			if(ret) dispatch('VocationalInfoChanged', this.vocationId);
 			return ret;
 		};
 		UpdateTrainingSkillPt.prototype.undo = function() {
-			sim.updateTrainingSkillPt(this.vocation, this.prevValue);
-			dispatch('VocationalInfoChanged', this.vocation);
+			sim.updateTrainingSkillPt(this.vocationId, this.prevValue);
+			dispatch('VocationalInfoChanged', this.vocationId);
 		};
 		UpdateTrainingSkillPt.prototype.name = 'UpdateTrainingSkillPt';
 		UpdateTrainingSkillPt.prototype.isAbsorbable = function(command) {
 			return this.name === command.name &&
-				this.vocation === command.vocation;
+				this.vocationId === command.vocationId;
 		};
 		UpdateTrainingSkillPt.prototype.absorb = function(newCommand) {
 			this.newValue = newCommand.newValue;
 		};
 
 		//MSP更新
-		var UpdateMSP = function(skillLine, newValue) {
-			this.skillLine = skillLine;
+		var UpdateMSP = function(skillLineId, newValue) {
+			this.skillLineId = skillLineId;
 			this.prevValue = undefined;
 			this.newValue = newValue;
 		};
 		UpdateMSP.prototype.execute = function() {
 			if(this.prevValue === undefined)
-				this.prevValue = sim.getMSP(this.skillLine);
-			var ret = sim.updateMSP(this.skillLine, this.newValue);
-			if(ret) dispatch('MSPChanged', this.skillLine);
+				this.prevValue = sim.getMSP(this.skillLineId);
+			var ret = sim.updateMSP(this.skillLineId, this.newValue);
+			if(ret) dispatch('MSPChanged', this.skillLineId);
 			return ret;
 		};
 		UpdateMSP.prototype.undo = function() {
-			sim.updateMSP(this.skillLine, this.prevValue);
-			dispatch('MSPChanged', this.skillLine);
+			sim.updateMSP(this.skillLineId, this.prevValue);
+			dispatch('MSPChanged', this.skillLineId);
 		};
 		UpdateMSP.prototype.name = 'UpdateMSP';
 		UpdateMSP.prototype.isAbsorbable = function(command) {
 			return this.name === command.name &&
-				this.skillLine === command.skillLine;
+				this.skillLineId === command.skillLineId;
 		};
 		UpdateMSP.prototype.absorb = function(newCommand) {
 			this.newValue = newCommand.newValue;
@@ -641,8 +641,8 @@
 		};
 		SetAllLevel.prototype = new PackageCommand();
 		SetAllLevel.prototype._impl = function() {
-			for(var vocation in DB.vocations) {
-				var succeeded = sim.updateLevel(vocation, this.newValue);
+			for(var vocationId in DB.vocations) {
+				var succeeded = sim.updateLevel(vocationId, this.newValue);
 				if(!succeeded) return false;
 			}
 			return true;
@@ -655,20 +655,20 @@
 		};
 		SetAllTrainingSkillPt.prototype = new PackageCommand();
 		SetAllTrainingSkillPt.prototype._impl = function() {
-			for(var vocation in DB.vocations) {
-				var succeeded = sim.updateTrainingSkillPt(vocation, this.newValue);
+			for(var vocationId in DB.vocations) {
+				var succeeded = sim.updateTrainingSkillPt(vocationId, this.newValue);
 				if(!succeeded) return false;
 			}
 			return true;
 		};
 
 		//特定スキルすべてを振り直し
-		var ClearPtsOfSameSkills = function(skillLine) {
-			this.skillLine = skillLine;
+		var ClearPtsOfSameSkills = function(skillLineId) {
+			this.skillLineId = skillLineId;
 		};
 		ClearPtsOfSameSkills.prototype = new PackageCommand();
 		ClearPtsOfSameSkills.prototype._impl = function() {
-			sim.clearPtsOfSameSkills(this.skillLine);
+			sim.clearPtsOfSameSkills(this.skillLineId);
 			return true;
 		};
 
@@ -758,26 +758,26 @@
 			isRedoable: isRedoable,
 			on: on,
 
-			updateSkillPt: function(vocation, skillLine, newValue) {
-				return invoke(new UpdateSkillPt(vocation, skillLine, newValue));
+			updateSkillPt: function(vocationId, skillLineId, newValue) {
+				return invoke(new UpdateSkillPt(vocationId, skillLineId, newValue));
 			},
-			updateLevel: function(vocation, newValue) {
-				return invoke(new UpdateLevel(vocation, newValue));
+			updateLevel: function(vocationId, newValue) {
+				return invoke(new UpdateLevel(vocationId, newValue));
 			},
 			setAllLevel: function(newValue) {
 				return invoke(new SetAllLevel(newValue));
 			},
-			updateTrainingSkillPt : function(vocation, newValue) {
-				return invoke(new UpdateTrainingSkillPt(vocation, newValue));
+			updateTrainingSkillPt : function(vocationId, newValue) {
+				return invoke(new UpdateTrainingSkillPt(vocationId, newValue));
 			},
 			setAllTrainingSkillPt: function(newValue) {
 				return invoke(new SetAllTrainingSkillPt(newValue));
 			},
-			updateMSP: function(skillLine, newValue) {
-				return invoke(new UpdateMSP(skillLine, newValue));
+			updateMSP: function(skillLineId, newValue) {
+				return invoke(new UpdateMSP(skillLineId, newValue));
 			},
-			clearPtsOfSameSkills: function(skillLine) {
-				return invoke(new ClearPtsOfSameSkills(skillLine));
+			clearPtsOfSameSkills: function(skillLineId) {
+				return invoke(new ClearPtsOfSameSkills(skillLineId));
 			},
 			clearMSP: function() {
 				return invoke(new ClearMSP());
@@ -808,8 +808,8 @@
 		function refreshAll() {
 			hideConsoles();
 			refreshAllVocationInfo();
-			for(var skillLine in DB.skillLines) {
-				refreshSkillList(skillLine);
+			for(var skillLineId in DB.skillLines) {
+				refreshSkillList(skillLineId);
 			}
 			//refreshTotalRequiredExp();
 			//refreshTotalExpRemain();
@@ -820,40 +820,40 @@
 			refreshUrlBar();
 		}
 		
-		function refreshVocationInfo(vocation) {
-			var currentLevel = sim.getLevel(vocation);
-			var requiredLevel = sim.requiredLevel(vocation);
+		function refreshVocationInfo(vocationId) {
+			var currentLevel = sim.getLevel(vocationId);
+			var requiredLevel = sim.requiredLevel(vocationId);
 			
 			//見出し中のレベル数値
-			$('#' + vocation + ' .lv_h2').text(currentLevel);
-			var $levelH2 = $('#' + vocation + ' h2');
+			$('#' + vocationId + ' .lv_h2').text(currentLevel);
+			var $levelH2 = $('#' + vocationId + ' h2');
 			
 			//必要経験値
-			$('#' + vocation + ' .exp').text(numToFormedStr(sim.requiredExp(vocation, currentLevel)));
+			$('#' + vocationId + ' .exp').text(numToFormedStr(sim.requiredExp(vocationId, currentLevel)));
 			
 			//スキルポイント 残り / 最大値
-			var maxSkillPts = sim.maxSkillPts(vocation);
-			var additionalSkillPts = sim.getTrainingSkillPt(vocation);
-			var remainingSkillPts = maxSkillPts + additionalSkillPts - sim.totalSkillPts(vocation);
-			var $skillPtsText = $('#' + vocation + ' .pts');
+			var maxSkillPts = sim.maxSkillPts(vocationId);
+			var additionalSkillPts = sim.getTrainingSkillPt(vocationId);
+			var remainingSkillPts = maxSkillPts + additionalSkillPts - sim.totalSkillPts(vocationId);
+			var $skillPtsText = $('#' + vocationId + ' .pts');
 			$skillPtsText.text(remainingSkillPts + ' / ' + maxSkillPts);
-			$('#training-' + vocation).text(additionalSkillPts);
+			$('#training-' + vocationId).text(additionalSkillPts);
 			
 			//Lv不足の処理
 			var isLevelError = (isNaN(requiredLevel) || currentLevel < requiredLevel);
 			
 			$levelH2.toggleClass(CLASSNAME_ERROR, isLevelError);
 			$skillPtsText.toggleClass(CLASSNAME_ERROR, isLevelError);
-			$('#' + vocation + ' .error').toggle(isLevelError);
+			$('#' + vocationId + ' .error').toggle(isLevelError);
 			if(isLevelError) {
-				$('#' + vocation + ' .req_lv').text(numToFormedStr(requiredLevel));
-				$('#' + vocation + ' .exp_remain').text(numToFormedStr(sim.requiredExpRemain(vocation)));
+				$('#' + vocationId + ' .req_lv').text(numToFormedStr(requiredLevel));
+				$('#' + vocationId + ' .exp_remain').text(numToFormedStr(sim.requiredExpRemain(vocationId)));
 			}
 		}
 		
 		function refreshAllVocationInfo() {
-			for(var vocation in DB.vocations) {
-				refreshVocationInfo(vocation);
+			for(var vocationId in DB.vocations) {
+				refreshVocationInfo(vocationId);
 			}
 		}
 		
@@ -875,36 +875,36 @@
 			$('#msp_remain').text((DB.consts.msp.max - sim.totalMSP()).toString() + 'P');
 		}
 		
-		function refreshSkillList(skillLine) {
-			$('tr[class^=' + skillLine + '_]').removeClass(CLASSNAME_SKILL_ENABLED); //クリア
-			var totalOfSkill = sim.totalOfSameSkills(skillLine);
-			var skills = DB.skillLines[skillLine].skills;
+		function refreshSkillList(skillLineId) {
+			$('tr[class^=' + skillLineId + '_]').removeClass(CLASSNAME_SKILL_ENABLED); //クリア
+			var totalOfSkill = sim.totalOfSameSkills(skillLineId);
+			var skills = DB.skillLines[skillLineId].skills;
 			for(var s = 0; s < skills.length; s++) {
 				if(totalOfSkill < skills[s].pt)
 					break;
 				
-				$('.' + skillLine + '_' + s.toString()).addClass(CLASSNAME_SKILL_ENABLED);
+				$('.' + skillLineId + '_' + s.toString()).addClass(CLASSNAME_SKILL_ENABLED);
 			}
-			$('.' + skillLine + ' .skill_total').text(totalOfSkill);
+			$('.' + skillLineId + ' .skill_total').text(totalOfSkill);
 
-			var msp = sim.getMSP(skillLine);
+			var msp = sim.getMSP(skillLineId);
 			if(msp > 0)
 				$('<span>(' + msp.toString() + ')</span>')
 					.addClass('msp')
-					.appendTo('.' + skillLine + ' .skill_total');
+					.appendTo('.' + skillLineId + ' .skill_total');
 		}
 		
 		function refreshControls() {
-			for(var vocation in DB.vocations) {
-				for(var s = 0; s < DB.vocations[vocation].skillLines.length; s++) {
-					var skillLine = DB.vocations[vocation].skillLines[s];
-					refreshCurrentSkillPt(vocation, skillLine);
+			for(var vocationId in DB.vocations) {
+				for(var s = 0; s < DB.vocations[vocationId].skillLines.length; s++) {
+					var skillLineId = DB.vocations[vocationId].skillLines[s];
+					refreshCurrentSkillPt(vocationId, skillLineId);
 				}
 			}
 		}
 		
-		function refreshCurrentSkillPt(vocation, skillLine) {
-			$('#' + vocation + ' .' + skillLine + ' .skill_current').text(sim.getSkillPt(vocation, skillLine));
+		function refreshCurrentSkillPt(vocationId, skillLineId) {
+			$('#' + vocationId + ' .' + skillLineId + ' .skill_current').text(sim.getSkillPt(vocationId, skillLineId));
 		}
 
 		function refreshTotalSkillPt() {
@@ -945,9 +945,9 @@
 
 		}
 
-		function selectSkillLine(skillLine) {
+		function selectSkillLine(skillLineId) {
 			$('.skill_table').removeClass('selected');
-			$('.' + skillLine).addClass('selected');
+			$('.' + skillLineId).addClass('selected');
 		}
 
 		function toggleMspMode(mode) {
@@ -979,24 +979,24 @@
 		var setupFunctions = [
 			//イベント登録
 			function() {
-				com.on('VocationalInfoChanged', function(vocation) {
-					refreshVocationInfo(vocation);
+				com.on('VocationalInfoChanged', function(vocationId) {
+					refreshVocationInfo(vocationId);
 					//refreshTotalRequiredExp();
 					//refreshTotalExpRemain();
 					refreshTotalSkillPt();
 					refreshUrlBar();
 				});
-				com.on('SkillLineChanged', function(vocation, skillLine) {
-					refreshCurrentSkillPt(vocation, skillLine);
-					refreshSkillList(skillLine);
+				com.on('SkillLineChanged', function(vocationId, skillLineId) {
+					refreshCurrentSkillPt(vocationId, skillLineId);
+					refreshSkillList(skillLineId);
 					refreshAllVocationInfo();
 					//refreshTotalExpRemain();
 					refreshTotalSkillPt();
 					refreshTotalPassive();
 					refreshUrlBar();
 				});
-				com.on('MSPChanged', function(skillLine) {
-					refreshSkillList(skillLine);
+				com.on('MSPChanged', function(skillLineId) {
+					refreshSkillList(skillLineId);
 					refreshTotalPassive();
 					refreshUrlBar();
 				});
@@ -1014,8 +1014,8 @@
 				}
 
 				$select.change(function() {
-					var vocation = getCurrentVocation(this);
-					com.updateLevel(vocation, $(this).val());
+					var vocationId = getCurrentVocation(this);
+					com.updateLevel(vocationId, $(this).val());
 				});
 			},
 			
@@ -1024,11 +1024,11 @@
 				$('.ent_title h2').click(function(e) {
 					hideConsoles();
 
-					var vocation = getCurrentVocation(this);
+					var vocationId = getCurrentVocation(this);
 					var consoleLeft = $(this).find('.lv_h2').position().left - 3;
 
 					$lvConsole.appendTo($(this)).css({left: consoleLeft});
-					$('#lv-select').val(sim.getLevel(vocation));
+					$('#lv-select').val(sim.getLevel(vocationId));
 
 					$lvConsole.show();
 					e.stopPropagation();
@@ -1045,9 +1045,9 @@
 				}
 
 				$select.change(function() {
-					var vocation = getCurrentVocation(this);
+					var vocationId = getCurrentVocation(this);
 
-					return com.updateTrainingSkillPt(vocation, parseInt($(this).val(), 10));
+					return com.updateTrainingSkillPt(vocationId, parseInt($(this).val(), 10));
 				});
 			},
 			
@@ -1056,11 +1056,11 @@
 				$('.ent_title .training_pt').click(function(e) {
 					hideConsoles();
 					
-					var vocation = getCurrentVocation(this);
-					var consoleLeft = $('#training-' + vocation).position().left - 3;
+					var vocationId = getCurrentVocation(this);
+					var consoleLeft = $('#training-' + vocationId).position().left - 3;
 
 					$trainingPtConsole.appendTo($(this)).css({left: consoleLeft});
-					$('#training_pt_select').val(sim.getTrainingSkillPt(vocation));
+					$('#training_pt_select').val(sim.getTrainingSkillPt(vocationId));
 
 					$trainingPtConsole.show();
 					e.stopPropagation();
@@ -1075,12 +1075,12 @@
 					min: DB.consts.skillPts.min,
 					max: DB.consts.skillPts.max,
 					spin: function (e, ui) {
-						var vocation = getCurrentVocation(this);
-						var skillLine = getCurrentSkillLine(this);
+						var vocationId = getCurrentVocation(this);
+						var skillLineId = getCurrentSkillLine(this);
 
 						var succeeded = mspMode ?
-							com.updateMSP(skillLine, parseInt(ui.value, 10)) :
-							com.updateSkillPt(vocation, skillLine, parseInt(ui.value, 10));
+							com.updateMSP(skillLineId, parseInt(ui.value, 10)) :
+							com.updateSkillPt(vocationId, skillLineId, parseInt(ui.value, 10));
 
 						if(succeeded) {
 							e.stopPropagation();
@@ -1089,12 +1089,12 @@
 						}
 					},
 					change: function (e, ui) {
-						var vocation = getCurrentVocation(this);
-						var skillLine = getCurrentSkillLine(this);
+						var vocationId = getCurrentVocation(this);
+						var skillLineId = getCurrentSkillLine(this);
 						var newValue = $(this).val();
 						var oldValue = mspMode ?
-							sim.getMSP(skillLine) :
-							sim.getSkillPt(vocation, skillLine);
+							sim.getMSP(skillLineId) :
+							sim.getSkillPt(vocationId, skillLineId);
 
 						if(isNaN(newValue)) {
 							$(this).val(oldValue);
@@ -1106,8 +1106,8 @@
 							return false;
 
 						var succeeded = mspMode ?
-							com.updateMSP(skillLine, newValue) :
-							com.updateSkillPt(vocation, skillLine, newValue);
+							com.updateMSP(skillLineId, newValue) :
+							com.updateSkillPt(vocationId, skillLineId, newValue);
 
 						if(!succeeded) {
 							$(this).val(oldValue);
@@ -1115,8 +1115,8 @@
 						}
 					},
 					stop: function (e, ui) {
-						var skillLine = getCurrentSkillLine(this);
-						selectSkillLine(skillLine);
+						var skillLineId = getCurrentSkillLine(this);
+						selectSkillLine(skillLineId);
 					}
 				});
 			},
@@ -1140,8 +1140,8 @@
 				$('.skill_table caption').click(function(e) {
 					hideConsoles();
 					
-					var vocation = getCurrentVocation(this);
-					var skillLine = getCurrentSkillLine(this);
+					var vocationId = getCurrentVocation(this);
+					var skillLineId = getCurrentSkillLine(this);
 
 					//位置決め
 					var $baseSpan = $(this).find('.skill_current');
@@ -1149,9 +1149,9 @@
 					$('#pt_reset').css({'margin-left': $(this).find('.skill_total').width() + 10});
 
 					$ptConsole.appendTo($(this).find('.console_wrapper')).css({left: consoleLeft});
-					$('#pt_spinner').val(mspMode ? sim.getMSP(skillLine) : sim.getSkillPt(vocation, skillLine));
+					$('#pt_spinner').val(mspMode ? sim.getMSP(skillLineId) : sim.getSkillPt(vocationId, skillLineId));
 
-					selectSkillLine(skillLine);
+					selectSkillLine(skillLineId);
 
 					$ptConsole.show();
 					e.stopPropagation();
@@ -1175,18 +1175,18 @@
 					icons: { primary: 'ui-icon-refresh' },
 					text: false
 				}).click(function (e) {
-					var vocation = getCurrentVocation(this);
-					var skillLine = getCurrentSkillLine(this);
+					var vocationId = getCurrentVocation(this);
+					var skillLineId = getCurrentSkillLine(this);
 					
-					selectSkillLine(skillLine);
+					selectSkillLine(skillLineId);
 
 					if(mspMode)
-						com.updateMSP(skillLine, 0);
+						com.updateMSP(skillLineId, 0);
 					else
-						com.updateSkillPt(vocation, skillLine, 0);
+						com.updateSkillPt(vocationId, skillLineId, 0);
 					$('#pt_spinner').val(0);
 				}).dblclick(function (e) {
-					var skillLine;
+					var skillLineId;
 					//ダブルクリック時に各職業の該当スキルをすべて振り直し
 					if(mspMode) {
 						if(!window.confirm('マスタースキルポイントをすべて振りなおします。'))
@@ -1194,14 +1194,14 @@
 
 						com.clearMSP();
 					} else {
-						skillLine = getCurrentSkillLine(this);
-						var skillName = DB.skillLines[skillLine].name;
+						skillLineId = getCurrentSkillLine(this);
+						var skillName = DB.skillLines[skillLineId].name;
 						
 						if(!window.confirm('スキル「' + skillName + '」をすべて振りなおします。'))
 							return;
 						
-						com.clearPtsOfSameSkills(skillLine);
-						$('.' + skillLine + ' .skill_current').text('0');
+						com.clearPtsOfSameSkills(skillLineId);
+						$('.' + skillLineId + ' .skill_current').text('0');
 					}
 
 					$('#pt_spinner').val(0);
@@ -1211,24 +1211,24 @@
 			//スキルテーブル項目クリック時
 			function() {
 				$('.skill_table tr[class]').click(function() {
-					var vocation = getCurrentVocation(this);
-					var skillLine = getCurrentSkillLine(this);
-					var skillIndex = parseInt($(this).attr('class').replace(skillLine + '_', ''), 10);
+					var vocationId = getCurrentVocation(this);
+					var skillLineId = getCurrentSkillLine(this);
+					var skillIndex = parseInt($(this).attr('class').replace(skillLineId + '_', ''), 10);
 					
-					selectSkillLine(skillLine);
+					selectSkillLine(skillLineId);
 
-					var requiredPt = DB.skillLines[skillLine].skills[skillIndex].pt;
+					var requiredPt = DB.skillLines[skillLineId].skills[skillIndex].pt;
 					var totalPtsOfOthers;
 					if(mspMode) {
-						totalPtsOfOthers = sim.totalOfSameSkills(skillLine) - sim.getMSP(skillLine);
+						totalPtsOfOthers = sim.totalOfSameSkills(skillLineId) - sim.getMSP(skillLineId);
 						if(requiredPt < totalPtsOfOthers) return;
 
-						com.updateMSP(skillLine, requiredPt - totalPtsOfOthers);
+						com.updateMSP(skillLineId, requiredPt - totalPtsOfOthers);
 					} else {
-						totalPtsOfOthers = sim.totalOfSameSkills(skillLine) - sim.getSkillPt(vocation, skillLine);
+						totalPtsOfOthers = sim.totalOfSameSkills(skillLineId) - sim.getSkillPt(vocationId, skillLineId);
 						if(requiredPt < totalPtsOfOthers) return;
 
-						com.updateSkillPt(vocation, skillLine, requiredPt - totalPtsOfOthers);
+						com.updateSkillPt(vocationId, skillLineId, requiredPt - totalPtsOfOthers);
 					}
 				});
 			},
@@ -1318,10 +1318,10 @@
 				
 				//特定職業のみひろげる
 				$('#foldbuttons-vocation a').click(function(e) {
-					var vocation = $(this).attr('id').replace('fold-', '');
-					$('body, html').animate({scrollTop: $('#' + vocation).offset().top - bodyTop});
-					if($('#' + vocation).hasClass(CLASSNAME_FOLDED))
-						$('#' + vocation + ' .toggle_ent').click();
+					var vocationId = $(this).attr('id').replace('fold-', '');
+					$('body, html').animate({scrollTop: $('#' + vocationId).offset().top - bodyTop});
+					if($('#' + vocationId).hasClass(CLASSNAME_FOLDED))
+						$('#' + vocationId + ' .toggle_ent').click();
 				});
 			},
 			
@@ -1377,9 +1377,9 @@
 			//スキル選択時に同スキルを強調
 			function() {
 				$('.skill_table').click(function(e) {
-					var skillLine = $(this).attr('class').split(' ')[0];
+					var skillLineId = $(this).attr('class').split(' ')[0];
 					$('.skill_table').removeClass('selected');
-					$('.' + skillLine).addClass('selected');
+					$('.' + skillLineId).addClass('selected');
 				});
 			},
 
@@ -1483,8 +1483,8 @@
 		
 		function refreshAll() {
 			refreshAllVocationInfo();
-			for(var skillLine in DB.skillLines) {
-				refreshSkillList(skillLine);
+			for(var skillLineId in DB.skillLines) {
+				refreshSkillList(skillLineId);
 			}
 			//refreshTotalRequiredExp();
 			//refreshTotalExpRemain();
@@ -1493,27 +1493,27 @@
 			refreshSaveUrl();
 		}
 		
-		function refreshVocationInfo(vocation) {
-			var currentLevel = sim.getLevel(vocation);
-			var requiredLevel = sim.requiredLevel(vocation);
+		function refreshVocationInfo(vocationId) {
+			var currentLevel = sim.getLevel(vocationId);
+			var requiredLevel = sim.requiredLevel(vocationId);
 			
 			//スキルポイント 残り / 最大値
-			var maxSkillPts = sim.maxSkillPts(vocation);
-			var additionalSkillPts = sim.getTrainingSkillPt(vocation);
-			var remainingSkillPts = maxSkillPts + additionalSkillPts - sim.totalSkillPts(vocation);
+			var maxSkillPts = sim.maxSkillPts(vocationId);
+			var additionalSkillPts = sim.getTrainingSkillPt(vocationId);
+			var remainingSkillPts = maxSkillPts + additionalSkillPts - sim.totalSkillPts(vocationId);
 
-			$('#' + vocation + ' .remain .container').text(remainingSkillPts);
-			$('#' + vocation + ' .total .container').text(maxSkillPts + additionalSkillPts);
-			$('#' + vocation + ' .level').text('Lv ' + currentLevel + ' (' + maxSkillPts + ') + 特訓 (' + additionalSkillPts + ')');
+			$('#' + vocationId + ' .remain .container').text(remainingSkillPts);
+			$('#' + vocationId + ' .total .container').text(maxSkillPts + additionalSkillPts);
+			$('#' + vocationId + ' .level').text('Lv ' + currentLevel + ' (' + maxSkillPts + ') + 特訓 (' + additionalSkillPts + ')');
 			
 			//Lv不足の処理
 			var isLevelError = (isNaN(requiredLevel) || currentLevel < requiredLevel);
-			$('#' + vocation + ' .remain .container').toggleClass(CLASSNAME_ERROR, isLevelError);
+			$('#' + vocationId + ' .remain .container').toggleClass(CLASSNAME_ERROR, isLevelError);
 		}
 		
 		function refreshAllVocationInfo() {
-			for(var vocation in DB.vocations) {
-				refreshVocationInfo(vocation);
+			for(var vocationId in DB.vocations) {
+				refreshVocationInfo(vocationId);
 			}
 			$('#msp .remain .container').text(DB.consts.msp.max - sim.totalMSP());
 			$('#msp .total .container').text(DB.consts.msp.max);
@@ -1536,46 +1536,46 @@
 			}
 		}
 		
-		function refreshSkillList(skillLine) {
-			var totalOfSkill = sim.totalOfSameSkills(skillLine);
-			$('#footer .' + skillLine + ' .container').text(totalOfSkill);
+		function refreshSkillList(skillLineId) {
+			var totalOfSkill = sim.totalOfSameSkills(skillLineId);
+			$('#footer .' + skillLineId + ' .container').text(totalOfSkill);
 
-			var containerName = '#msp .' + skillLine;
-			if(DB.skillLines[skillLine].unique) {
-				for(var vocation in DB.vocations) {
-					if($.inArray(skillLine, DB.vocations[vocation].skillLines) >= 0) {
-						containerName = '#' + vocation + ' .msp';
+			var containerName = '#msp .' + skillLineId;
+			if(DB.skillLines[skillLineId].unique) {
+				for(var vocationId in DB.vocations) {
+					if($.inArray(skillLineId, DB.vocations[vocationId].skillLines) >= 0) {
+						containerName = '#' + vocationId + ' .msp';
 						break;
 					}
 				}
 			}
 
-			var msp = sim.getMSP(skillLine);
+			var msp = sim.getMSP(skillLineId);
 			$(containerName + ' .container').text(msp > 0 ? msp : '');
 		}
 		
 		function refreshControls() {
-			for(var vocation in DB.vocations) {
-				for(var s = 0; s < DB.vocations[vocation].skillLines.length; s++) {
-					var skillLine = DB.vocations[vocation].skillLines[s];
-					refreshCurrentSkillPt(vocation, skillLine);
+			for(var vocationId in DB.vocations) {
+				for(var s = 0; s < DB.vocations[vocationId].skillLines.length; s++) {
+					var skillLineId = DB.vocations[vocationId].skillLines[s];
+					refreshCurrentSkillPt(vocationId, skillLineId);
 				}
 			}
 		}
 		
-		function refreshCurrentSkillPt(vocation, skillLine) {
-			var containerName = skillLine;
-			if(DB.skillLines[skillLine].unique) {
+		function refreshCurrentSkillPt(vocationId, skillLineId) {
+			var containerName = skillLineId;
+			if(DB.skillLines[skillLineId].unique) {
 				//踊り子のパッシブ2種に対応
-				if(skillLine == 'song') {
+				if(skillLineId == 'song') {
 					containerName = 'unique2';
 				} else {
 					containerName = 'unique';
 				}
 			}
 
-			$('#' + vocation + ' .' + containerName + ' .container')
-				.text(sim.getSkillPt(vocation, skillLine));
+			$('#' + vocationId + ' .' + containerName + ' .container')
+				.text(sim.getSkillPt(vocationId, skillLineId));
 		}
 
 		function refreshSaveUrl() {
