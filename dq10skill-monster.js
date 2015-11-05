@@ -881,7 +881,9 @@
 				for(s = 0; s < DB.additionalSkillLines.length; s++) {
 					var additionalSkillData = DB.additionalSkillLines[s];
 					var skillData = DB.skillLines[additionalSkillData.name];
-					if(monster.restartCount >= additionalSkillData.restartCount) {
+					if(monster.restartCount >= additionalSkillData.restartCount &&
+					   (!additionalSkillData.occupied ||
+					   additionalSkillData.occupied.indexOf(monster.monsterType) >= 0)) {
 						$('#' + monsterId + ' .additional_skill_selector select').append(
 							$('<option />').val(additionalSkillData.name).text(skillData.name)
 						);
@@ -919,11 +921,7 @@
 					$tr = $table.find('tr.' + tableClass + '_' + i.toString());
 					skill = data.skills[i];
 
-					var hintText = skill.desc;
-					if((skill.mp !== null) && (skill.mp !== undefined))
-						hintText += '\n（消費MP: ' + skill.mp.toString() + '）';
-					if(skill.gold)
-						hintText += '\n（' + skill.gold.toString() + 'G）';
+					var hintText = getHintText(skill);
 					$tr.attr('title', hintText);
 
 					$tr.children('.skill_pt').text(skill.pt);
@@ -987,6 +985,18 @@
 
 		function getCurrentSkillLine(currentNode) {
 			return $(currentNode).parents('.skill_table').attr('class').split(' ')[0];
+		}
+
+		function getHintText(skill) {
+			var hintText = skill.desc || '';
+			if((skill.mp !== null) && (skill.mp !== undefined))
+				hintText += '\n（消費MP: ' + skill.mp.toString() + '）';
+			if((skill.charge !== null) && (skill.charge !== undefined))
+				hintText += '\n（チャージ: ' + skill.charge.toString() + '秒）';
+			if(skill.gold)
+				hintText += '\n（' + skill.gold.toString() + 'G）';
+
+			return hintText;
 		}
 
 		function setupEntry(monsterId) {
@@ -1167,11 +1177,7 @@
 			for(var skillLine in DB.skillLines) {
 				for(var skillIndex = 0; skillIndex < DB.skillLines[skillLine].skills.length; skillIndex++) {
 					var skill = DB.skillLines[skillLine].skills[skillIndex];
-					var hintText = skill.desc;
-					if((skill.mp !== null) && (skill.mp !== undefined))
-						hintText += '\n（消費MP: ' + skill.mp.toString() + '）';
-					if(skill.gold)
-						hintText += '\n（' + skill.gold.toString() + 'G）';
+					var hintText = getHintText(skill);
 					$('.' + skillLine + '_' + skillIndex.toString()).attr('title', hintText);
 				}
 			}
