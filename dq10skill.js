@@ -14,19 +14,21 @@
 		var levels = {};
 		var trainingSkillPts = {};
 		var msp = {}; //マスタースキルポイント
+		var vocationIds = [];
 
 		/* メソッド */
 		//パラメータ初期化
 		function initialize() {
-			for(var vocationId in DB.vocations) {
+			vocationIds = Object.keys(DB.vocations);
+
+			vocationIds.forEach(function(vocationId) {
 				skillPts[vocationId] = {};
-				for(var s = 0; s < DB.vocations[vocationId].skillLines.length; s++) {
-					var skillLineId = DB.vocations[vocationId].skillLines[s];
+				DB.vocations[vocationId].skillLines.forEach(function(skillLineId) {
 					skillPts[vocationId][skillLineId] = 0;
-				}
+				});
 				levels[vocationId] = DB.consts.level.min;
 				trainingSkillPts[vocationId] = DB.consts.trainingSkillPts.min;
-			}
+			});
 		}
 		
 		//スキルポイント取得
@@ -99,29 +101,25 @@
 
 		//使用中のマスタースキルポイント合計
 		function totalMSP() {
-			var total = 0;
-			for(var s in msp)
-				total += msp[s];
-
-			return total;
+			return Object.keys(msp).reduce(function(prev, skillLineId) {
+				return prev + msp[skillLineId];
+			}, 0);
 		}
 
 		//職業のスキルポイント合計
 		function totalSkillPts(vocationId) {
-			var total = 0;
-			for(var skillLineId in skillPts[vocationId])
-				total += skillPts[vocationId][skillLineId];
-			
-			return total;
+			var vSkillPts = skillPts[vocationId];
+			return Object.keys(vSkillPts).reduce(function(prev, skillLineId) {
+				return prev + vSkillPts[skillLineId];
+			}, 0);
 		}
 		
 		//同スキルのポイント合計
 		function totalOfSameSkills(skillLineId) {
-			var total = 0;
-			for(var vocationId in skillPts) {
-				if(skillPts[vocationId][skillLineId])
-					total += skillPts[vocationId][skillLineId];
-			}
+			var total = vocationIds.reduce(function(prev, vocationId) {
+				var cur = skillPts[vocationId][skillLineId] || 0;
+				return prev + cur;
+			}, 0);
 			total += msp[skillLineId] || 0;
 
 			return total;
@@ -129,10 +127,10 @@
 		
 		//特定スキルすべてを振り直し（0にセット）
 		function clearPtsOfSameSkills(skillLineId) {
-			for(var vocationId in skillPts) {
+			vocationIds.forEach(function(vocationId) {
 				if(skillPts[vocationId][skillLineId])
 					updateSkillPt(vocationId, skillLineId, 0);
-			}
+			});
 			msp[skillLineId] = 0;
 		}
 
@@ -143,11 +141,12 @@
 		
 		//すべてのスキルを振り直し（0にセット）
 		function clearAllSkills() {
-			for(var vocationId in skillPts) {
-				for(var skillLineId in skillPts[vocationId]) {
-					skillPts[vocationId][skillLineId] = 0;
-				}
-			}
+			vocationIds.forEach(function(vocationId) {
+				var vSkillPts = skillPts[vocationId];
+				Object.keys(vSkillPts).forEach(function(skillLineId) {
+					vSkillPts[skillLineId] = 0;
+				});
+			});
 			clearMSP();
 		}
 		
@@ -204,20 +203,18 @@
 		
 		//全職業の必要経験値合計
 		function totalRequiredExp() {
-			var total = 0;
-			for(var vocationId in DB.vocations) {
-				total += requiredExp(vocationId, levels[vocationId]);
-			}
-			return total;
+			return vocationIds.reduce(function(prev, vocationId) {
+				var cur = requiredExp(vocationId, levels[vocationId]);
+				return prev + cur;
+			}, 0);
 		}
 		
 		//全職業の不足経験値合計
 		function totalExpRemain() {
-			var total = 0;
-			for(var vocationId in DB.vocations) {
-				total += requiredExpRemain(vocationId);
-			}
-			return total;
+			return vocationIds.reduce(function(prev, vocationId) {
+				var cur = requiredExpRemain(vocationId);
+				return prev + cur;
+			}, 0);
 		}
 		
 		//各種パッシブスキルのステータス加算合計
@@ -231,21 +228,19 @@
 		//さいだいMP  : maxmp
 		//みりょく    : charm
 		function totalStatus(status) {
-			//スキルカテゴリデータの各スキルから上記プロパティを調べ合計する
-			var total = 0;
-			var skills;
-			for(var skillLineId in DB.skillLines) {
-				skills = DB.skillLines[skillLineId].skills;
-				for(var i = 0; i < skills.length; i++) {
-					if(totalOfSameSkills(skillLineId) < skills[i].pt)
-						break;
-					
-					if(skills[i][status])
-						total += skills[i][status];
-				}
-			}
-			
-			return total;
+			//スキルラインデータの各スキルから上記プロパティを調べ合計する
+			var skillLineIds = Object.keys(DB.skillLines);
+
+			return skillLineIds.reduce(function(wholeTotal, skillLineId) {
+				var totalPts = totalOfSameSkills(skillLineId);
+
+				var cur = DB.skillLines[skillLineId].skills.filter(function(skill) {
+					return skill.pt <= totalPts && skill[status];
+				}).reduce(function(skillLineTotal, skill) {
+					return skillLineTotal + skill[status];
+				}, 0);
+				return wholeTotal + cur;
+			}, 0);
 		}
 		
 		//特定のパッシブスキルをすべて取得済みの状態にする
@@ -253,32 +248,31 @@
 		function presetStatus (status) {
 			var returnValue = false;
 
-			for(var vocationId in DB.vocations) {
-				for(var s = 0; s < DB.vocations[vocationId].skillLines.length; s++) {
-					var skillLineId = DB.vocations[vocationId].skillLines[s];
+			vocationIds.forEach(function(vocationId) {
+				DB.vocations[vocationId].skillLines.forEach(function(skillLineId) {
+					if(!DB.skillLines[skillLineId].unique) return;
 
-					if(!DB.skillLines[skillLineId].unique) continue;
-
-					var skills = DB.skillLines[skillLineId].skills;
-					for (var i = skills.length - 1; i >= 0; i--) {
-						if(skills[i][status] && getSkillPt(vocationId, skillLineId) < skills[i].pt) {
-							updateSkillPt(vocationId, skillLineId, skills[i].pt);
-							returnValue = true;
-							break;
-						}
+					var currentPt = getSkillPt(vocationId, skillLineId);
+					var skills = DB.skillLines[skillLineId].skills.filter(function(skill) {
+						return skill.pt > currentPt && skill[status];
+					});
+					if(skills.length > 0) {
+						updateSkillPt(vocationId, skillLineId, skills[skills.length - 1].pt);
+						returnValue = true;
 					}
-				}
-			}
+				});
+			});
 
 			return returnValue;
 		}
 
 		//現在のレベルを取得スキルに対する必要レベルにそろえる
 		function bringUpLevelToRequired () {
-			for(var vocationId in DB.vocations) {
-				if(getLevel(vocationId) < requiredLevel(vocationId))
-					updateLevel(vocationId, requiredLevel(vocationId));
-			}
+			vocationIds.forEach(function(vocationId) {
+				var required = requiredLevel(vocationId);
+				if(getLevel(vocationId) < required)
+					updateLevel(vocationId, required);
+			});
 		}
 
 		var VOCATIONS_DATA_ORDER = [
@@ -303,28 +297,23 @@
 			var serial = '';
 			var toByte = String.fromCharCode;
 
-			var vocationCount = VOCATIONS_DATA_ORDER.length;
 			//先頭に職業の数を含める
-			serial += toByte(vocationCount);
+			serial += toByte(VOCATIONS_DATA_ORDER.length);
 
-			var skillLineId;
-
-			for(var i = 0; i < vocationCount; i++) {
-				var vocationId = VOCATIONS_DATA_ORDER[i];
+			VOCATIONS_DATA_ORDER.forEach(function(vocationId) {
 				serial += toByte(getLevel(vocationId));
 				serial += toByte(getTrainingSkillPt(vocationId));
 
-				for(var s = 0; s < DB.vocations[vocationId].skillLines.length; s++) {
-					skillLineId = DB.vocations[vocationId].skillLines[s];
+				DB.vocations[vocationId].skillLines.forEach(function(skillLineId) {
 					serial += toByte(getSkillPt(vocationId, skillLineId));
-				}
-			}
+				});
+			});
 			//末尾にMSPのスキルラインIDとポイントをペアで格納
-			for(skillLineId in msp) {
+			Object.keys(msp).forEach(function(skillLineId) {
 				if(msp[skillLineId] > 0) {
 					serial += toByte(DB.skillLines[skillLineId].id) + toByte(msp[skillLineId]);
 				}
-			}
+			});
 			return serial;
 		}
 		function deserialize(serial) {
@@ -351,13 +340,16 @@
 				}
 			}
 			//末尾にデータがあればMSPとして取得
+			var skillLineIds = [];
+			Object.keys(DB.skillLines).forEach(function(skillLineId) {
+				skillLineIds[DB.skillLines[skillLineId].id] = skillLineId;
+			});
+
 			while(serial.length - cur >= 2) {
-				var skillLineId = getData();
+				var skillLineId = skillLineIds[getData()];
 				var skillPt = getData();
-				for(var sl in DB.skillLines) {
-					if(DB.skillLines[sl].id == skillLineId)
-						updateMSP(sl, skillPt);
-				}
+				if(skillLineId !== undefined)
+					updateMSP(skillLineId, skillPt);
 			}
 		}
 
