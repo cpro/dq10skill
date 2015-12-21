@@ -1705,7 +1705,8 @@
 		"skillPts": {
 			"min": 0,
 			"max": 40,
-			"natsuki": 5
+			"natsuki": 5,
+			"natsuki300": 5
 		},
 		"level": {
 			"min": 1,
