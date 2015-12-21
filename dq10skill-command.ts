@@ -3,9 +3,7 @@
 
 namespace Dq10.SkillSimulator {
 
-	var sim = Simulator;
-	var DB = SimulatorDB;
-	
+
 	export interface Command {
 		execute: () => boolean;
 		undo: () => void;
@@ -56,13 +54,13 @@ namespace Dq10.SkillSimulator {
 		
 		execute(): boolean {
 			if(this.prevValue === undefined)
-				this.prevValue = sim.getSkillPt(this.vocationId, this.skillLineId);
-			var ret = sim.updateSkillPt(this.vocationId, this.skillLineId, this.newValue);
+				this.prevValue = Simulator.getSkillPt(this.vocationId, this.skillLineId);
+			var ret = Simulator.updateSkillPt(this.vocationId, this.skillLineId, this.newValue);
 			//if(ret) CommandManager.dispatch('SkillLineChanged', this.vocationId, this.skillLineId);
 			return ret;
 		}
 		undo(): void {
-			sim.updateSkillPt(this.vocationId, this.skillLineId, this.prevValue);
+			Simulator.updateSkillPt(this.vocationId, this.skillLineId, this.prevValue);
 			//CommandManager.dispatch('SkillLineChanged', this.vocationId, this.skillLineId);
 		}
 		event(): Event {
@@ -83,13 +81,13 @@ namespace Dq10.SkillSimulator {
 		
 		execute(): boolean {
 			if(this.prevValue === undefined)
-				this.prevValue = sim.getLevel(this.vocationId);
-			var ret = sim.updateLevel(this.vocationId, this.newValue);
+				this.prevValue = Simulator.getLevel(this.vocationId);
+			var ret = Simulator.updateLevel(this.vocationId, this.newValue);
 			// if(ret) CommandManager.dispatch('VocationalInfoChanged', this.vocationId);
 			return ret;
 		}
 		undo(): void {
-			sim.updateLevel(this.vocationId, this.prevValue);
+			Simulator.updateLevel(this.vocationId, this.prevValue);
 			// CommandManager.dispatch('VocationalInfoChanged', this.vocationId);
 		}
 		event(): Event {
@@ -109,13 +107,13 @@ namespace Dq10.SkillSimulator {
 		}
 		execute(): boolean {
 			if(this.prevValue === undefined)
-				this.prevValue = sim.getTrainingSkillPt(this.vocationId);
-			var ret = sim.updateTrainingSkillPt(this.vocationId, this.newValue);
+				this.prevValue = Simulator.getTrainingSkillPt(this.vocationId);
+			var ret = Simulator.updateTrainingSkillPt(this.vocationId, this.newValue);
 			// if(ret) CommandManager.dispatch('VocationalInfoChanged', this.vocationId);
 			return ret;
 		}
 		undo(): void {
-			sim.updateTrainingSkillPt(this.vocationId, this.prevValue);
+			Simulator.updateTrainingSkillPt(this.vocationId, this.prevValue);
 			// CommandManager.dispatch('VocationalInfoChanged', this.vocationId);
 		}
 		event(): Event {
@@ -135,13 +133,13 @@ namespace Dq10.SkillSimulator {
 		}
 		execute(): boolean {
 			if(this.prevValue === undefined)
-				this.prevValue = sim.getMSP(this.skillLineId);
-			var ret = sim.updateMSP(this.skillLineId, this.newValue);
+				this.prevValue = Simulator.getMSP(this.skillLineId);
+			var ret = Simulator.updateMSP(this.skillLineId, this.newValue);
 			// if(ret) CommandManager.dispatch('MSPChanged', this.skillLineId);
 			return ret;
 		}
 		undo(): void {
-			sim.updateMSP(this.skillLineId, this.prevValue);
+			Simulator.updateMSP(this.skillLineId, this.prevValue);
 			// CommandManager.dispatch('MSPChanged', this.skillLineId);
 		}
 		event(): Event {
@@ -162,10 +160,10 @@ namespace Dq10.SkillSimulator {
 		
 		execute(): boolean {
 			if(this.prevSerial === undefined)
-				this.prevSerial = sim.serialize();
+				this.prevSerial = Simulator.serialize();
 			var succeeded = this._impl();
 			if(!succeeded) {
-				sim.deserialize(this.prevSerial);
+				Simulator.deserialize(this.prevSerial);
 				return false;
 			}
 
@@ -173,7 +171,7 @@ namespace Dq10.SkillSimulator {
 			return true;
 		}
 		undo(): void {
-			sim.deserialize(this.prevSerial);
+			Simulator.deserialize(this.prevSerial);
 			// CommandManager.dispatch('WholeChanged');
 		}
 		isAbsorbable(command: Command): boolean {
@@ -199,8 +197,8 @@ namespace Dq10.SkillSimulator {
 			this.newValue = newValue;
 		}
 		_impl(): boolean {
-			for(var vocationId in DB.vocations) {
-				var succeeded = sim.updateLevel(vocationId, this.newValue);
+			for(var vocationId in SimulatorDB.vocations) {
+				var succeeded = Simulator.updateLevel(vocationId, this.newValue);
 				if(!succeeded) return false;
 			}
 			return true;
@@ -213,8 +211,8 @@ namespace Dq10.SkillSimulator {
 			this.newValue = newValue;
 		}
 		_impl(): boolean {
-			for(var vocationId in DB.vocations) {
-				var succeeded = sim.updateTrainingSkillPt(vocationId, this.newValue);
+			for(var vocationId in SimulatorDB.vocations) {
+				var succeeded = Simulator.updateTrainingSkillPt(vocationId, this.newValue);
 				if(!succeeded) return false;
 			}
 			return true;
@@ -227,21 +225,21 @@ namespace Dq10.SkillSimulator {
 			this.skillLineId = skillLineId;
 		}
 		_impl(): boolean {
-			sim.clearPtsOfSameSkills(this.skillLineId);
+			Simulator.clearPtsOfSameSkills(this.skillLineId);
 			return true;
 		}
 	}
 	
 	class ClearMSP extends PackageCommand {
 		_impl(): boolean {
-			sim.clearMSP();
+			Simulator.clearMSP();
 			return true;
 		}
 	}
 	
 	class ClearAllSkills extends PackageCommand {
 		_impl(): boolean {
-			sim.clearAllSkills();
+			Simulator.clearAllSkills();
 			return true;
 		}
 	}
@@ -256,7 +254,7 @@ namespace Dq10.SkillSimulator {
 			var sarray = this.status.split(';');
 			var succeeded = false;
 			for(var i = 0; i < sarray.length; i++) {
-				succeeded = sim.presetStatus(sarray[i]) || succeeded;
+				succeeded = Simulator.presetStatus(sarray[i]) || succeeded;
 			}
 			return succeeded;
 		}
@@ -264,7 +262,7 @@ namespace Dq10.SkillSimulator {
 	
 	class BringUpLevelToRequired extends PackageCommand {
 		_impl(): boolean {
-			sim.bringUpLevelToRequired();
+			Simulator.bringUpLevelToRequired();
 			return true;
 		}
 	}
