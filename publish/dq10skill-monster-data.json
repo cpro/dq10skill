@@ -1717,7 +1717,12 @@
 			"max": 8,
 			"skillPts": [0, 10, 20, 30, 40, 50, 55, 60, 65],
 			"expRatio": 0.03
-		}
+		},
+		"natsuki": [
+			{"natsukido": "0", "pts": 0},
+			{"natsukido": "200", "pts": 5},
+			{"natsukido": "300", "pts": 10}
+		]
 	},
 
 	"badges": {

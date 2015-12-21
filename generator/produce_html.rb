@@ -9,12 +9,12 @@ produce_table = [
 		output: '../publish/index.html'
 	},
 	{
-		data: '../dq10skill-monster-data.json',
+		data: '../publish/dq10skill-monster-data.json',
 		template: 'monster.haml',
 		output: '../publish/monster.html'
 	},
 	{
-		data: '../dq10skill-anlucea-data.json',
+		data: '../publish/dq10skill-anlucea-data.json',
 		template: 'anlucea.haml',
 		output: '../publish/anlucea.html'
 	}

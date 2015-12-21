@@ -48,7 +48,7 @@
 			this.badgeEquip = [null, null, null, null];
 
 			//なつき度
-			this.natsuki = 1;
+			this.natsuki = DB.consts.natsuki.length - 1;
 		}
 
 		//スキルポイント取得
@@ -188,16 +188,16 @@
 
 		//なつき度200達成状態の取得
 		Monster.prototype.getNatsuki = function() {
-			return (this.natsuki == 1);
+			return this.natsuki;
 		};
 		//なつき度200達成状態の更新
-		Monster.prototype.updateNatsuki = function(isNatsukiMax) {
-			this.natsuki = (isNatsukiMax ? 1 : 0);
+		Monster.prototype.updateNatsuki = function(natsuki) {
+			this.natsuki = natsuki;
 			return true;
 		};
 		//なつき度に対するSP取得
 		Monster.prototype.getNatsukiSkillPts = function() {
-			return (this.getNatsuki() ? DB.consts.skillPts.natsuki : 0);
+			return DB.consts.natsuki[this.getNatsuki()].pts;
 		};
 
 		//Lv50時の各種ステータス合計値取得
@@ -845,7 +845,7 @@
 				$('#' + monsterId + ' .' + skillLine + ' .ptspinner').spinner('value', monster.getSkillPt(skillLine));
 			}
 
-			$('#' + monsterId + ' .natsuki200 input').prop('checked', monster.getNatsuki());
+			$('#' + monsterId + ' .natsuki-selector>select').val(monster.getNatsuki());
 		}
 		
 		function refreshSaveUrl() {
@@ -1286,12 +1286,17 @@
 				});
 			});
 
-			//なつき度200チェックボックス
-			$ent.find('.natsuki200 input').change(function(e) {
+			//なつき度選択セレクトボックス
+			var $natsukiSelect = $ent.find('.natsuki-selector>select');
+			for(var n = 0; n < DB.consts.natsuki.length; n++) {
+				$natsukiSelect.append($("<option />").val(n).text(DB.consts.natsuki[n].natsukido + ' (' + DB.consts.natsuki[n].pts + ')'));
+			}
+			//なつき度選択セレクトボックス変更時
+			$natsukiSelect.change(function() {
 				var monsterId = getCurrentMonsterId(this);
 				var monster = sim.getMonster(monsterId);
-				
-				monster.updateNatsuki($(this).prop('checked'));
+
+				monster.updateNatsuki(parseInt($(this).val()));
 				refreshMonsterInfo(monsterId);
 				refreshSaveUrl();
 			});
