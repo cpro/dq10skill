@@ -1,26 +1,20 @@
-/* global shortcut */
-/* global RawDeflate */
 /// <reference path="typings/jquery/jquery.d.ts" />
-/// <reference path="dq10skill-command.ts" />
-/// <reference path="base64.ts" />
+/// <reference path="typings/dq10skill.d.ts" />
+/// <reference path="typings/rawdeflate.d.ts" />
+/// <reference path="typings/shortcut.d.ts" />
 
-declare var RawDeflate: {
-	deflate: (string) => any;
-	inflate: (string) => any;
-}
-declare var shortcut: {
-	add: (string, Function) => any;
-}
+/// <reference path="dq10skill-simulatorcommand.ts" />
+/// <reference path="base64.ts" />
 
 namespace Dq10.SkillSimulator {
 	export var Simulator;
-	export var SimulatorDB;
+	export var SimulatorDB: SkillSimulatorDB;
 
 (function($) {
 	"use strict";
 
 	//データJSONを格納する変数
-	var DB;
+	var DB: SkillSimulatorDB;
 	var DATA_JSON_URI = window.location.href.replace(/\/[^\/]*$/, '/dq10skill-data.json');
 	var $dbLoad = $.getJSON(DATA_JSON_URI, function(data) {
 		DB = data;
@@ -455,15 +449,13 @@ namespace Dq10.SkillSimulator {
 		};
 	})();
 	Dq10.SkillSimulator.Simulator = Simulator;
-	
-	var SimulatorCommandManager = new CommandManager();
 
 	var SimulatorUI = (function() {
 		var CLASSNAME_SKILL_ENABLED = 'enabled';
 		var CLASSNAME_ERROR = 'error';
 		
 		var sim = Simulator;
-		var com = SimulatorCommandManager;
+		var com = new SimulatorCommandManager();
 
 		var $ptConsole, $lvConsole, $trainingPtConsole;
 		
@@ -815,7 +807,7 @@ namespace Dq10.SkillSimulator {
 					$ptConsole.appendTo($(this).find('.console_wrapper')).css({left: consoleLeft});
 					$('#pt_spinner').val(mspMode ? sim.getMSP(skillLineId) : sim.getSkillPt(vocationId, skillLineId));
 
-					selectSkillLine(skillLineId);
+					//selectSkillLine(skillLineId);
 
 					$ptConsole.show();
 					e.stopPropagation();
