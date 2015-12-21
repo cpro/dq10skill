@@ -1,7 +1,7 @@
 /// <reference path="typings/jquery/jquery.d.ts" />
 /// <reference path="typings/dq10skill.d.ts" />
 
-/// <reference path="dq10skill-command.ts" />
+/// <reference path="dq10skill-simulatorcommand.ts" />
 /// <reference path="base64.ts" />
 
 declare var RawDeflate: {
@@ -455,15 +455,13 @@ namespace Dq10.SkillSimulator {
 		};
 	})();
 	Dq10.SkillSimulator.Simulator = Simulator;
-	
-	var SimulatorCommandManager = new CommandManager();
 
 	var SimulatorUI = (function() {
 		var CLASSNAME_SKILL_ENABLED = 'enabled';
 		var CLASSNAME_ERROR = 'error';
 		
 		var sim = Simulator;
-		var com = SimulatorCommandManager;
+		var com = new SimulatorCommandManager();
 
 		var $ptConsole, $lvConsole, $trainingPtConsole;
 		

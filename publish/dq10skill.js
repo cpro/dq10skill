@@ -40,12 +40,83 @@ var Dq10;
     })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
 })(Dq10 || (Dq10 = {}));
 /// <reference path="eventdispatcher.ts" />
-/// <reference path="dq10skill-main.ts" />
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var Dq10;
+(function (Dq10) {
+    var SkillSimulator;
+    (function (SkillSimulator) {
+        var UNDO_MAX = 20;
+        var CommandManager = (function (_super) {
+            __extends(CommandManager, _super);
+            function CommandManager() {
+                _super.apply(this, arguments);
+                this.commandStack = [];
+                this.cursor = 0;
+            }
+            CommandManager.prototype.invoke = function (command) {
+                var succeeded = command.execute();
+                if (!succeeded)
+                    return false;
+                //イベント発行
+                if (command.event !== undefined)
+                    this.dispatch.apply(this, [command.event().name].concat(command.event().args));
+                //以降のスタックを切捨て
+                this.commandStack.splice(this.cursor);
+                if (this.cursor >= 1 && this.commandStack[this.cursor - 1].isAbsorbable(command)) {
+                    //連続した同種の操作ならひとつの操作にまとめる
+                    this.commandStack[this.cursor - 1].absorb(command);
+                }
+                else {
+                    this.commandStack.push(command);
+                    this.cursor++;
+                }
+                if (this.commandStack.length > UNDO_MAX) {
+                    this.commandStack.shift();
+                    this.cursor--;
+                }
+                this.dispatch('CommandStackChanged');
+                return true;
+            };
+            CommandManager.prototype.undo = function () {
+                if (!this.isUndoable())
+                    return;
+                this.cursor--;
+                var command = this.commandStack[this.cursor];
+                command.undo();
+                if (command.event !== undefined)
+                    this.dispatch.apply(this, [command.event().name].concat(command.event().args));
+                this.dispatch('CommandStackChanged');
+            };
+            CommandManager.prototype.redo = function () {
+                if (!this.isRedoable())
+                    return;
+                var command = this.commandStack[this.cursor];
+                command.execute();
+                if (command.event !== undefined)
+                    this.dispatch.apply(this, [command.event().name].concat(command.event().args));
+                this.cursor++;
+                this.dispatch('CommandStackChanged');
+            };
+            CommandManager.prototype.isUndoable = function () {
+                return (this.cursor > 0);
+            };
+            CommandManager.prototype.isRedoable = function () {
+                return (this.cursor < this.commandStack.length);
+            };
+            return CommandManager;
+        })(SkillSimulator.EventDispatcher);
+        SkillSimulator.CommandManager = CommandManager;
+    })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
+})(Dq10 || (Dq10 = {}));
+/**
+ * @file dq10skill-command.ts のスキルシミュレータ用実装
+ */
+/// <reference path="dq10skill-command.ts" />
+/// <reference path="dq10skill-main.ts" />
 var Dq10;
 (function (Dq10) {
     var SkillSimulator;
@@ -296,100 +367,47 @@ var Dq10;
             };
             return BringUpLevelToRequired;
         })(PackageCommand);
-        var UNDO_MAX = 20;
-        var CommandManager = (function (_super) {
-            __extends(CommandManager, _super);
-            function CommandManager() {
+        var SimulatorCommandManager = (function (_super) {
+            __extends(SimulatorCommandManager, _super);
+            function SimulatorCommandManager() {
                 _super.apply(this, arguments);
-                this.commandStack = [];
-                this.cursor = 0;
             }
-            CommandManager.prototype.invoke = function (command) {
-                var succeeded = command.execute();
-                if (!succeeded)
-                    return false;
-                //イベント発行
-                if (command.event !== undefined)
-                    this.dispatch.apply(this, [command.event().name].concat(command.event().args));
-                //以降のスタックを切捨て
-                this.commandStack.splice(this.cursor);
-                if (this.cursor >= 1 && this.commandStack[this.cursor - 1].isAbsorbable(command)) {
-                    //連続した同種の操作ならひとつの操作にまとめる
-                    this.commandStack[this.cursor - 1].absorb(command);
-                }
-                else {
-                    this.commandStack.push(command);
-                    this.cursor++;
-                }
-                if (this.commandStack.length > UNDO_MAX) {
-                    this.commandStack.shift();
-                    this.cursor--;
-                }
-                this.dispatch('CommandStackChanged');
-                return true;
-            };
-            CommandManager.prototype.undo = function () {
-                if (!this.isUndoable())
-                    return;
-                this.cursor--;
-                var command = this.commandStack[this.cursor];
-                command.undo();
-                if (command.event !== undefined)
-                    this.dispatch.apply(this, [command.event().name].concat(command.event().args));
-                this.dispatch('CommandStackChanged');
-            };
-            CommandManager.prototype.redo = function () {
-                if (!this.isRedoable())
-                    return;
-                var command = this.commandStack[this.cursor];
-                command.execute();
-                if (command.event !== undefined)
-                    this.dispatch.apply(this, [command.event().name].concat(command.event().args));
-                this.cursor++;
-                this.dispatch('CommandStackChanged');
-            };
-            CommandManager.prototype.isUndoable = function () {
-                return (this.cursor > 0);
-            };
-            CommandManager.prototype.isRedoable = function () {
-                return (this.cursor < this.commandStack.length);
-            };
-            CommandManager.prototype.updateSkillPt = function (vocationId, skillLineId, newValue) {
+            SimulatorCommandManager.prototype.updateSkillPt = function (vocationId, skillLineId, newValue) {
                 return this.invoke(new UpdateSkillPt(vocationId, skillLineId, newValue));
             };
-            CommandManager.prototype.updateLevel = function (vocationId, newValue) {
+            SimulatorCommandManager.prototype.updateLevel = function (vocationId, newValue) {
                 return this.invoke(new UpdateLevel(vocationId, newValue));
             };
-            CommandManager.prototype.setAllLevel = function (newValue) {
+            SimulatorCommandManager.prototype.setAllLevel = function (newValue) {
                 return this.invoke(new SetAllLevel(newValue));
             };
-            CommandManager.prototype.updateTrainingSkillPt = function (vocationId, newValue) {
+            SimulatorCommandManager.prototype.updateTrainingSkillPt = function (vocationId, newValue) {
                 return this.invoke(new UpdateTrainingSkillPt(vocationId, newValue));
             };
-            CommandManager.prototype.setAllTrainingSkillPt = function (newValue) {
+            SimulatorCommandManager.prototype.setAllTrainingSkillPt = function (newValue) {
                 return this.invoke(new SetAllTrainingSkillPt(newValue));
             };
-            CommandManager.prototype.updateMSP = function (skillLineId, newValue) {
+            SimulatorCommandManager.prototype.updateMSP = function (skillLineId, newValue) {
                 return this.invoke(new UpdateMSP(skillLineId, newValue));
             };
-            CommandManager.prototype.clearPtsOfSameSkills = function (skillLineId) {
+            SimulatorCommandManager.prototype.clearPtsOfSameSkills = function (skillLineId) {
                 return this.invoke(new ClearPtsOfSameSkills(skillLineId));
             };
-            CommandManager.prototype.clearMSP = function () {
+            SimulatorCommandManager.prototype.clearMSP = function () {
                 return this.invoke(new ClearMSP());
             };
-            CommandManager.prototype.clearAllSkills = function () {
+            SimulatorCommandManager.prototype.clearAllSkills = function () {
                 return this.invoke(new ClearAllSkills());
             };
-            CommandManager.prototype.presetStatus = function (status) {
+            SimulatorCommandManager.prototype.presetStatus = function (status) {
                 return this.invoke(new PresetStatus(status));
             };
-            CommandManager.prototype.bringUpLevelToRequired = function () {
+            SimulatorCommandManager.prototype.bringUpLevelToRequired = function () {
                 return this.invoke(new BringUpLevelToRequired());
             };
-            return CommandManager;
-        })(SkillSimulator.EventDispatcher);
-        SkillSimulator.CommandManager = CommandManager;
+            return SimulatorCommandManager;
+        })(SkillSimulator.CommandManager);
+        SkillSimulator.SimulatorCommandManager = SimulatorCommandManager;
     })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
 })(Dq10 || (Dq10 = {}));
 /**
@@ -426,7 +444,7 @@ var Base64 = (function () {
 })();
 /// <reference path="typings/jquery/jquery.d.ts" />
 /// <reference path="typings/dq10skill.d.ts" />
-/// <reference path="dq10skill-command.ts" />
+/// <reference path="dq10skill-simulatorcommand.ts" />
 /// <reference path="base64.ts" />
 var Dq10;
 (function (Dq10) {
@@ -811,12 +829,11 @@ var Dq10;
                 };
             })();
             Dq10.SkillSimulator.Simulator = Simulator;
-            var SimulatorCommandManager = new SkillSimulator.CommandManager();
             var SimulatorUI = (function () {
                 var CLASSNAME_SKILL_ENABLED = 'enabled';
                 var CLASSNAME_ERROR = 'error';
                 var sim = Simulator;
-                var com = SimulatorCommandManager;
+                var com = new SkillSimulator.SimulatorCommandManager();
                 var $ptConsole, $lvConsole, $trainingPtConsole;
                 var mspMode = false; //MSP編集モードフラグ
                 function refreshAll() {
