@@ -56,12 +56,10 @@ namespace Dq10.SkillSimulator {
 			if(this.prevValue === undefined)
 				this.prevValue = Simulator.getSkillPt(this.vocationId, this.skillLineId);
 			var ret = Simulator.updateSkillPt(this.vocationId, this.skillLineId, this.newValue);
-			//if(ret) CommandManager.dispatch('SkillLineChanged', this.vocationId, this.skillLineId);
 			return ret;
 		}
 		undo(): void {
 			Simulator.updateSkillPt(this.vocationId, this.skillLineId, this.prevValue);
-			//CommandManager.dispatch('SkillLineChanged', this.vocationId, this.skillLineId);
 		}
 		event(): Event {
 			return {
@@ -83,12 +81,10 @@ namespace Dq10.SkillSimulator {
 			if(this.prevValue === undefined)
 				this.prevValue = Simulator.getLevel(this.vocationId);
 			var ret = Simulator.updateLevel(this.vocationId, this.newValue);
-			// if(ret) CommandManager.dispatch('VocationalInfoChanged', this.vocationId);
 			return ret;
 		}
 		undo(): void {
 			Simulator.updateLevel(this.vocationId, this.prevValue);
-			// CommandManager.dispatch('VocationalInfoChanged', this.vocationId);
 		}
 		event(): Event {
 			return {
@@ -109,12 +105,10 @@ namespace Dq10.SkillSimulator {
 			if(this.prevValue === undefined)
 				this.prevValue = Simulator.getTrainingSkillPt(this.vocationId);
 			var ret = Simulator.updateTrainingSkillPt(this.vocationId, this.newValue);
-			// if(ret) CommandManager.dispatch('VocationalInfoChanged', this.vocationId);
 			return ret;
 		}
 		undo(): void {
 			Simulator.updateTrainingSkillPt(this.vocationId, this.prevValue);
-			// CommandManager.dispatch('VocationalInfoChanged', this.vocationId);
 		}
 		event(): Event {
 			return {
@@ -135,12 +129,10 @@ namespace Dq10.SkillSimulator {
 			if(this.prevValue === undefined)
 				this.prevValue = Simulator.getMSP(this.skillLineId);
 			var ret = Simulator.updateMSP(this.skillLineId, this.newValue);
-			// if(ret) CommandManager.dispatch('MSPChanged', this.skillLineId);
 			return ret;
 		}
 		undo(): void {
 			Simulator.updateMSP(this.skillLineId, this.prevValue);
-			// CommandManager.dispatch('MSPChanged', this.skillLineId);
 		}
 		event(): Event {
 			return {
@@ -167,12 +159,10 @@ namespace Dq10.SkillSimulator {
 				return false;
 			}
 
-			// CommandManager.dispatch('WholeChanged');
 			return true;
 		}
 		undo(): void {
 			Simulator.deserialize(this.prevSerial);
-			// CommandManager.dispatch('WholeChanged');
 		}
 		isAbsorbable(command: Command): boolean {
 			return false;

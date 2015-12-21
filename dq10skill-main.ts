@@ -1,6 +1,6 @@
-/* global shortcut */
-/* global RawDeflate */
 /// <reference path="typings/jquery/jquery.d.ts" />
+/// <reference path="typings/dq10skill.d.ts" />
+
 /// <reference path="dq10skill-command.ts" />
 /// <reference path="base64.ts" />
 
@@ -14,13 +14,13 @@ declare var shortcut: {
 
 namespace Dq10.SkillSimulator {
 	export var Simulator;
-	export var SimulatorDB;
+	export var SimulatorDB: SkillSimulatorDB;
 
 (function($) {
 	"use strict";
 
 	//データJSONを格納する変数
-	var DB;
+	var DB: SkillSimulatorDB;
 	var DATA_JSON_URI = window.location.href.replace(/\/[^\/]*$/, '/dq10skill-data.json');
 	var $dbLoad = $.getJSON(DATA_JSON_URI, function(data) {
 		DB = data;
@@ -815,7 +815,7 @@ namespace Dq10.SkillSimulator {
 					$ptConsole.appendTo($(this).find('.console_wrapper')).css({left: consoleLeft});
 					$('#pt_spinner').val(mspMode ? sim.getMSP(skillLineId) : sim.getSkillPt(vocationId, skillLineId));
 
-					selectSkillLine(skillLineId);
+					//selectSkillLine(skillLineId);
 
 					$ptConsole.show();
 					e.stopPropagation();
