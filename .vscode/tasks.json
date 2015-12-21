@@ -21,7 +21,7 @@
 			"taskName": "build TypeScript",
 			"args": ["tsc", "--out", "dq10skill.js", "dq10skill-main.ts"],
 			"isBuildCommand": true,
-			"suppressTaskName": true
+			"showOutput": "silent"
 		},
 		
 		{
