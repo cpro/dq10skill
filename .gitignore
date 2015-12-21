@@ -6,3 +6,4 @@
 /generator/asin_list.txt
 amazon_item_cache.html
 generator/sass-watch.bat
+/_*/*

@@ -1,16 +1,10 @@
 /// <reference path="typings/jquery/jquery.d.ts" />
 /// <reference path="typings/dq10skill.d.ts" />
+/// <reference path="typings/rawdeflate.d.ts" />
+/// <reference path="typings/shortcut.d.ts" />
 
 /// <reference path="dq10skill-simulatorcommand.ts" />
 /// <reference path="base64.ts" />
-
-declare var RawDeflate: {
-	deflate: (string) => any;
-	inflate: (string) => any;
-}
-declare var shortcut: {
-	add: (string, Function) => any;
-}
 
 namespace Dq10.SkillSimulator {
 	export var Simulator;
