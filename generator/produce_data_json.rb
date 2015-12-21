@@ -8,7 +8,7 @@
 
 dir = File.dirname(__FILE__)
 source_json_path = "#{dir}/dq10skill-data-full.json"
-produced_json_path = "#{dir}/../dq10skill-data.json"
+produced_json_path = "#{dir}/../publish/dq10skill-data.json"
 
 require 'json'
 

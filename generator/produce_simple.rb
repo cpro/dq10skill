@@ -12,7 +12,7 @@ opts.on('-a') {|v| refresh_item_cache = true}
 opts.parse!(ARGV)
 
 if ARGV.size < 1
-  index_html_path = "#{dir}/../simple.html"
+  index_html_path = "#{dir}/../publish/simple.html"
 else
   index_html_path = ARGV[0].to_s
 end

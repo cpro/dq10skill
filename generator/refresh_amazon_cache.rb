@@ -60,7 +60,7 @@ File.open(ITEM_CACHE_PATH, 'w') do |file|
 end
 
 if ARGV.size < 1
-  cache_html_path = "#{dir}/../amazon_item_cache.html"
+  cache_html_path = "#{dir}/../publish/amazon_item_cache.html"
 else
   cache_html_path = ARGV[0].to_s
 end
