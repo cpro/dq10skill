@@ -21,7 +21,7 @@
 	"showOutput": "silent",
 
 	// args is the HelloWorld program to compile.
-	"args": ["--out", "dq10skill.ts.js", "dq10skill-main.ts"],
+	"args": ["--out", "dq10skill.js", "dq10skill-main.ts"],
 
 	// use the standard tsc problem matcher to find compile problems
 	// in the output.
