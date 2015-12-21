@@ -801,7 +801,7 @@ namespace Dq10.SkillSimulator {
 
 			//スキルライン名クリック時にUI表示
 			function() {
-				$('.skill_table caption').click(function(e) {
+				$('.skill_table caption').mouseenter(function(e) {
 					hideConsoles();
 					
 					var vocationId = getCurrentVocation(this);
@@ -819,6 +819,9 @@ namespace Dq10.SkillSimulator {
 
 					$ptConsole.show();
 					e.stopPropagation();
+				}).mouseleave(function(e) {
+					if($('#pt_spinner:focus').length === 0)
+						hideConsoles();
 				});
 			},
 
