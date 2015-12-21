@@ -106,7 +106,7 @@ interface MonsterSimulatorDB {
             abbr: string;
         };
     };
-    badgeclass: { [className: string]: string };
+    badgerarity: { [rarityName: string]: string };
     badgefeature: { [featureName: string]: BadgeFeature; };
 }
 
@@ -136,7 +136,7 @@ interface StatusSet {
 interface Badge {
     name: string;
     sort: string;
-    class: string;
+    rarity: string;
     race: string;
     // maxhp?: number;
     // maxmp?: number;
