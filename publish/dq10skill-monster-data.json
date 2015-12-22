@@ -1704,8 +1704,7 @@
 	"consts": {
 		"skillPts": {
 			"min": 0,
-			"max": 40,
-			"natsuki": 5
+			"max": 40
 		},
 		"level": {
 			"min": 1,
@@ -1719,6 +1718,12 @@
 		}
 	},
 
+	"natsukiPts": [
+		{"natsukido":   0, "pt":  0},
+		{"natsukido": 200, "pt":  5},
+		{"natsukido": 300, "pt": 10}
+	],
+	
 	"badges": {
 		"001": {"name": "スライム", "sort": "すらいむ", "rarity": "bronze", "race": "slime", "maxhp": 40, "critical": 2},
 		"002": {"name": "バブルスライム", "sort": "はふるすらいむ", "rarity": "bronze", "race": "slime", "debuff": {"猛毒": 15}, "skill": ["キアリー"]},

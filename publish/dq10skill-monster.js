@@ -48,7 +48,7 @@
 			this.badgeEquip = [null, null, null, null];
 
 			//なつき度
-			this.natsuki = 1;
+			this.natsuki = DB.natsukiPts.length - 1;
 		}
 
 		//スキルポイント取得
@@ -186,18 +186,18 @@
 			return true;
 		};
 
-		//なつき度200達成状態の取得
+		//なつき度達成状態の取得
 		Monster.prototype.getNatsuki = function() {
-			return (this.natsuki == 1);
+			return this.natsuki;
 		};
-		//なつき度200達成状態の更新
-		Monster.prototype.updateNatsuki = function(isNatsukiMax) {
-			this.natsuki = (isNatsukiMax ? 1 : 0);
+		//なつき度達成状態の更新
+		Monster.prototype.updateNatsuki = function(natsuki) {
+			this.natsuki = natsuki;
 			return true;
 		};
 		//なつき度に対するSP取得
 		Monster.prototype.getNatsukiSkillPts = function() {
-			return (this.getNatsuki() ? DB.consts.skillPts.natsuki : 0);
+			return DB.natsukiPts[this.getNatsuki()].pt;
 		};
 
 		//Lv50時の各種ステータス合計値取得
@@ -378,11 +378,10 @@
 			//なつき度
 			if(bitArray.length >= BITS_NATSUKI) {
 				var natsuki = bitArrayToNum(bitArray.splice(0, BITS_NATSUKI));
-				monster.updateNatsuki(natsuki == 1);
+				monster.updateNatsuki(natsuki);
 			} else {
-				monster.updateNatsuki(false);
+				monster.updateNatsuki(0);
 			}
-
 
 			return monster;
 		};
@@ -845,7 +844,7 @@
 				$('#' + monsterId + ' .' + skillLine + ' .ptspinner').spinner('value', monster.getSkillPt(skillLine));
 			}
 
-			$('#' + monsterId + ' .natsuki200 input').prop('checked', monster.getNatsuki());
+			$('#' + monsterId + ' .natsuki-selector>select').val(monster.getNatsuki());
 		}
 		
 		function refreshSaveUrl() {
@@ -1286,12 +1285,17 @@
 				});
 			});
 
-			//なつき度200チェックボックス
-			$ent.find('.natsuki200 input').change(function(e) {
+			//なつき度選択セレクトボックス
+			var $natsukiSelect = $ent.find('.natsuki-selector>select');
+			DB.natsukiPts.forEach(function(natukiData, i) {
+				$natsukiSelect.append($("<option />").val(i).text(natukiData.natsukido.toString() + '(' + natukiData.pt.toString() + ')'));
+			});
+			//なつき度選択セレクトボックス変更時
+			$natsukiSelect.change(function() {
 				var monsterId = getCurrentMonsterId(this);
 				var monster = sim.getMonster(monsterId);
-				
-				monster.updateNatsuki($(this).prop('checked'));
+
+				monster.updateNatsuki(parseInt($(this).val()));
 				refreshMonsterInfo(monsterId);
 				refreshSaveUrl();
 			});
