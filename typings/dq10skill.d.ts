@@ -91,7 +91,7 @@ interface MonsterSimulatorDB {
 		restart: {
 			min: number;
 			max: number;
-			skillPts: number;
+			skillPts: number[];
 			skillPtsOver5: number;
 			expRatio: number;
 		}
