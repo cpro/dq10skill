@@ -7,3 +7,4 @@
 amazon_item_cache.html
 generator/sass-watch.bat
 /_*/*
+/publish/*.map
