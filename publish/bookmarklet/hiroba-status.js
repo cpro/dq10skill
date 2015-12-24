@@ -1,3 +1,4 @@
+/* global skillMap */
 (function() {
 
 var SIMULATOR_URL = 'http://cpro.jp/dq10/skillsimulator/';
@@ -67,7 +68,8 @@ var TRAINING_TABLE = [
 	{stamp: 5500, skillPt: 13},
 	{stamp: 6000, skillPt: 14},
 	{stamp: 6500, skillPt: 15},
-	{stamp: 7000, skillPt: 16}
+	{stamp: 7000, skillPt: 16},
+	{stamp: 8000, skillPt: 17}
 ];
 
 var HirobaStatus = (function($) {
