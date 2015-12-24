@@ -1326,6 +1326,253 @@
 			]
 		},
 
+		"claw-ex-metappy": {
+			"name": "ツメの極意",
+			"skills": [
+				{"pt":   3, "name": "常時すばやさ+80", "desc": "常時\nすばやさが\n８０増える", "mp": null, "spd": 80},
+				{"pt":   7, "name": "マシン系威力+5%", "desc": "", "mp": null},
+				{"pt":  12, "name": "ゴールドフィンガー", "desc": "敵１体をなぐり\nよい効果を\n光で吹きとばす", "mp": 12},
+				{"pt":  18, "name": "常時みかわし率+2%", "desc": "敵の攻撃を\nかわしやすくなる", "mp": null},
+				{"pt":  25, "name": "マシン系威力+5%", "desc": "", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+30", "desc": "ツメ装備時の\nこうげき力が\n３０増える", "mp": null, "atk": 30},
+				{"pt":  40, "name": "ライガークラッシュ", "desc": "獣神のごとく\n敵１体を\n５連続で斬り刻む", "mp": 8, "charge": 65}
+			]
+		},
+
+		"mechappy": {
+			"name": "メカッピー",
+			"skills": [
+				{"pt":   3, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
+				{"pt":   7, "name": "装備時こうげき力+80", "desc": "棍装備時の\nこうげき力が\n８０増える", "mp": null, "atk": 80},
+				{"pt":  12, "name": "クイックリペア", "desc": "", "mp": null},
+				{"pt":  18, "name": "常時みのまもり+45", "desc": "常時\nみのまもりが\n４５増える", "mp": null, "def": 45},
+				{"pt":  25, "name": "常時ちから+15", "desc": "常時\nちからが\n１５増える", "mp": null, "pow": 15},
+				{"pt":  32, "name": "常時みかわし率+5%", "desc": "敵の攻撃を\nかわしやすくなる", "mp": null},
+				{"pt":  40, "name": "魔導集束砲", "desc": "", "mp": null}
+			]
+		},
+
+		"spear-ex": {
+			"name": "ヤリの極意",
+			"skills": [
+				{"pt":   3, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
+				{"pt":   7, "name": "獣系威力+5%", "desc": "", "mp": null},
+				{"pt":  12, "name": "一閃突き", "desc": "失敗しやすいが\nうまく当たれば\n会心のいちげき", "mp": 8},
+				{"pt":  18, "name": "装備時武器ガード率+5%", "desc": "ヤリ装備時\n武器ガードを\nしやすくなる", "mp": null},
+				{"pt":  25, "name": "獣系威力+5%", "desc": "", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+30", "desc": "ヤリ装備時の\nこうげき力が\n３０増える", "mp": null, "atk": 30},
+				{"pt":  40, "name": "ジゴスパーク", "desc": "地獄のいかずちで\nダメージを与え\nたまにマヒさせる", "mp": 8, "charge": 60}
+			]
+		},
+
+		"takeyarisenpou": {
+			"name": "たけやり戦法",
+			"skills": [
+				{"pt":   3, "name": "常時かいふく魔力+80", "desc": "常時\nかいふく魔力が\n８０増える", "mp": null, "heal": 80},
+				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
+				{"pt":  12, "name": "オーバーヒート", "desc": "", "mp": null},
+				{"pt":  18, "name": "常時みのまもり+60", "desc": "常時\nみのまもりが\n６０増える", "mp": null, "def": 60},
+				{"pt":  25, "name": "常時さいだいＨＰ+40", "desc": "常時\nさいだいＨＰが\n４０増える", "mp": null, "maxhp": 40},
+				{"pt":  32, "name": "緊急メンテナンス", "desc": "", "mp": null},
+				{"pt":  40, "name": "雷光さみだれ突き", "desc": "", "mp": null}
+			]
+		},
+
+		"knife-ex": {
+			"name": "短剣の極意",
+			"skills": [
+				{"pt":   3, "name": "常時すばやさ+80", "desc": "常時\nすばやさが\n８０増える", "mp": null, "spd": 80},
+				{"pt":   7, "name": "虫系威力+5%", "desc": "", "mp": null},
+				{"pt":  12, "name": "カオスエッジ", "desc": "敵１体を斬りつけ\n混乱やマヒを\n起こさせる", "mp": 1, "charge": 60},
+				{"pt":  18, "name": "状態異常成功率アップ", "desc": "短剣装備時の\n状態異常成功率が\nあがる", "mp": null},
+				{"pt":  25, "name": "虫系威力+5%", "desc": "", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+30", "desc": "短剣装備時の\nこうげき力が\n３０増える", "mp": null, "atk": 30},
+				{"pt":  40, "name": "ナイトメアファング", "desc": "敵１体を斬りつけ\n猛毒や眠りを\n起こさせる", "mp": 1, "charge": 60}
+			]
+		},
+
+		"hurryup": {
+			"name": "ハリィアップ",
+			"skills": [
+				{"pt":   3, "name": "常時みのまもり+45", "desc": "常時\nみのまもりが\n４５増える", "mp": null, "def": 45},
+				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
+				{"pt":  12, "name": "かげしばり", "desc": "", "mp": null},
+				{"pt":  18, "name": "常時ちから+15", "desc": "常時\nちからが\n１５増える", "mp": null, "pow": 15},
+				{"pt":  25, "name": "常時さいだいＨＰ+40", "desc": "常時\nさいだいＨＰが\n４０増える", "mp": null, "maxhp": 40},
+				{"pt":  32, "name": "常時みかわし率+5%", "desc": "常時\n敵の攻撃を\nかわしやすくなる", "mp": null},
+				{"pt":  40, "name": "ダークレイン", "desc": "", "mp": null}
+			]
+		},
+
+		"wand-ex-fondue": {
+			"name": "両手杖の極意",
+			"skills": [
+				{"pt":   3, "name": "常時こうげき魔力+30", "desc": "常時\nこうげき魔力が\n３０増える", "mp": null, "magic": 30},
+				{"pt":   7, "name": "悪魔系威力+5%", "desc": "", "mp": null},
+				{"pt":  12, "name": "復活の杖", "desc": "仲間ひとりを\n確実に\n生き返らせる", "mp": 10, "charge": 60},
+				{"pt":  18, "name": "装備時ＭＰ吸収率+5%", "desc": "両手杖での攻撃時\n吸収できる\nＭＰが増える", "mp": null},
+				{"pt":  25, "name": "悪魔系威力+5%", "desc": "", "mp": null},
+				{"pt":  32, "name": "常時こうげき魔力+30", "desc": "常時\nこうげき魔力が\n３０増える", "mp": null, "magic": 30},
+				{"pt":  40, "name": "超暴走魔法陣", "desc": "さらに呪文が\n暴走しやすくなる\n魔法陣を作る", "mp": 4, "charge": 60}
+			]
+		},
+
+		"io-ex": {
+			"name": "イオの極意",
+			"skills": [
+				{"pt":   3, "name": "常時こうげき魔力+20", "desc": "常時\nこうげき魔力が\n２０増える", "mp": null, "magic": 20},
+				{"pt":   7, "name": "常時さいだいＭＰ+45", "desc": "常時\nさいだいＭＰが\n４５増える", "mp": null, "maxmp": 45},
+				{"pt":  12, "name": "イオ系効果+5%", "desc": "イオ系の呪文の\n威力があがる", "mp": null},
+				{"pt":  18, "name": "常時こうげき魔力+80", "desc": "常時\nこうげき魔力が\n８０増える", "mp": null, "magic": 80},
+				{"pt":  25, "name": "イオ系効果+5%", "desc": "イオ系の呪文の\n威力があがる", "mp": null},
+				{"pt":  32, "name": "常時呪文発動速度+10%", "desc": "", "mp": null},
+				{"pt":  40, "name": "イオグランデ", "desc": "想像を絶する\n大爆発で自分の\n周りの敵を攻撃", "mp": 25, "charge": 50}
+			]
+		},
+
+		"fan-ex": {
+			"name": "扇の極意",
+			"skills": [
+				{"pt":   3, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
+				{"pt":   7, "name": "水系威力+5%", "desc": "", "mp": null},
+				{"pt":  12, "name": "ピンクタイフーン", "desc": "魅惑の旋風で\n周囲の敵を\n切りきざむ", "mp": 3, "charge": 60},
+				{"pt":  18, "name": "装備時みとれる+5%", "desc": "扇装備時　敵が\nみとれやすくなる", "mp": null},
+				{"pt":  25, "name": "水系威力+5%", "desc": "", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+30", "desc": "扇装備時の\nこうげき力が\n３０増える", "mp": null, "atk": 30},
+				{"pt":  40, "name": "百花繚乱", "desc": "周囲の敵を攻撃し\n幻惑や攻撃呪文に\n弱くする", "mp": 6, "charge": 60}
+			]
+		},
+
+		"entertainer": {
+			"name": "エンターテイナー",
+			"skills": [
+				{"pt":   3, "name": "常時すばやさ+80", "desc": "常時\nすばやさが\n８０増える", "mp": null, "spd": 80},
+				{"pt":   7, "name": "常時ちから+15", "desc": "常時\nちからが\n１５増える", "mp": null, "pow": 15},
+				{"pt":  12, "name": "エンドオブシーン", "desc": "周囲の仲間を\nわれに返す", "mp": 4, "charge": 15},
+				{"pt":  18, "name": "常時みのまもり+45", "desc": "常時\nみのまもりが\n４５増える", "mp": null, "def": 45},
+				{"pt":  25, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
+				{"pt":  32, "name": "常時みかわし率+5%", "desc": "常時\n敵の攻撃を\nかわしやすくなる", "mp": null},
+				{"pt":  40, "name": "たたかいの踊り", "desc": "", "mp": null}
+			]
+		},
+
+		"livingarmor": {
+			"name": "リビングアーマー",
+			"skills": [
+				{"pt":   3, "name": "常時みのまもり+60", "desc": "常時\nみのまもりが\n６０増える", "mp": null, "def": 60},
+				{"pt":   7, "name": "常時かいふく魔力+60", "desc": "常時\nかいふく魔力が\n６０増える", "mp": null, "heal": 60},
+				{"pt":  12, "name": "ファランクス", "desc": "与えるダメージと\nひきかえに受ける\nダメージを減らす", "mp": 5, "charge": 60},
+				{"pt":  18, "name": "常時こうげき魔力+80", "desc": "常時\nこうげき魔力が\n８０増える", "mp": null, "magic": 80},
+				{"pt":  25, "name": "常時さいだいＨＰ+40", "desc": "常時\nさいだいＨＰが\n４０増える", "mp": null, "maxhp": 40},
+				{"pt":  32, "name": "オートアーマー", "desc": "", "mp": null},
+				{"pt":  40, "name": "真・やいばくだき", "desc": "攻撃力を２段階\n下げる斬撃", "mp": 4, "charge": 60}
+			]
+		},
+
+		"twohandedsword-ex": {
+			"name": "両手剣の極意",
+			"skills": [
+				{"pt":   3, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
+				{"pt":   7, "name": "ドラゴン系威力+5%", "desc": "", "mp": null},
+				{"pt":  12, "name": "ビッグバン", "desc": "周囲の敵を\n大爆発で\n焼きつくす", "mp": 6, "charge": 60},
+				{"pt":  18, "name": "装備時武器ガード率+5%", "desc": "両手剣装備時に\n武器ガードが\nできるようになる", "mp": null},
+				{"pt":  25, "name": "ドラゴン系威力+5%", "desc": "", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+30", "desc": "両手剣装備時の\nこうげき力が\n２５３０増える", "mp": null, "atk": 30},
+				{"pt":  40, "name": "全身全霊斬り", "desc": "フルパワーで\n敵１体を斬りつけ\n大ダメージ", "mp": 6, "charge": 65}
+			]
+		},
+
+		"semeruchikara": {
+			"name": "せめるチカラ",
+			"skills": [
+				{"pt":   3, "name": "常時みのまもり+45", "desc": "常時\nみのまもりが\n４５増える", "mp": null, "def": 45},
+				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
+				{"pt":  12, "name": "スタンブロー", "desc": "", "mp": null},
+				{"pt":  18, "name": "常時さいだいＨＰ+40", "desc": "常時\nさいだいＨＰが\n４０増える", "mp": null, "maxhp": 40},
+				{"pt":  25, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
+				{"pt":  32, "name": "快眠チャージ", "desc": "", "mp": null},
+				{"pt":  40, "name": "フィニッシュブロー", "desc": "", "mp": null}
+			]
+		},
+
+		"sword-ex-devilarmor": {
+			"name": "片手剣の極意",
+			"skills": [
+				{"pt":   3, "name": "常時みのまもり+45", "desc": "常時\nみのまもりが\n４５増える", "mp": null, "def": 45},
+				{"pt":   7, "name": "ドラゴン系威力+5%", "desc": "", "mp": null},
+				{"pt":  12, "name": "ギガスラッシュ", "desc": "光の刃を剣にかえ\n周囲をなぎはらう\n剣の奥義", "mp": 12},
+				{"pt":  18, "name": "装備時武器ガード率+5%", "desc": "片手剣装備時に\n武器ガードが\nできるようになる", "mp": null},
+				{"pt":  25, "name": "ドラゴン系威力+5%", "desc": "", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+30", "desc": "片手剣装備時の\nこうげき力が\n３０増える", "mp": null, "atk": 30},
+				{"pt":  40, "name": "超はやぶさ斬り", "desc": "はやぶさをこえる\n神速の４回攻撃", "mp": 2, "charge": 45}
+			]
+		},
+
+		"demonsmail": {
+			"name": "デモンズメイル",
+			"skills": [
+				{"pt":   3, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
+				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
+				{"pt":  12, "name": "ビッグシールド", "desc": "盾ガード率が\n大幅に上がる\n守りのかまえ", "mp": 4},
+				{"pt":  18, "name": "常時ちから+15", "desc": "常時\nちからが\n１５増える", "mp": null, "pow": 15},
+				{"pt":  25, "name": "常時さいだいＨＰ+40", "desc": "常時\nさいだいＨＰが\n４０増える", "mp": null, "maxhp": 40},
+				{"pt":  32, "name": "常時みかわし率+5%", "desc": "敵の攻撃を\nかわしやすくなる", "mp": null},
+				{"pt":  40, "name": "真・かぶと割り", "desc": "", "mp": null}
+			]
+		},
+
+		"fan-ex-odoruhouseki": {
+			"name": "扇の極意",
+			"skills": [
+				{"pt":   3, "name": "常時すばやさ+80", "desc": "常時\nすばやさが\n８０増える", "mp": null, "spd": 80},
+				{"pt":   7, "name": "水系威力+5%", "desc": "", "mp": null},
+				{"pt":  12, "name": "ピンクタイフーン", "desc": "魅惑の旋風で\n周囲の敵を\n切りきざむ", "mp": 3, "charge": 60},
+				{"pt":  18, "name": "装備時みとれる+5%", "desc": "扇装備時　敵が\nみとれやすくなる", "mp": null},
+				{"pt":  25, "name": "水系威力+5%", "desc": "", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+30", "desc": "扇装備時の\nこうげき力が\n３０増える", "mp": null, "atk": 30},
+				{"pt":  40, "name": "百花繚乱", "desc": "周囲の敵を攻撃し\n幻惑や攻撃呪文に\n弱くする", "mp": 6, "charge": 60}
+			]
+		},
+
+		"fortuneemerald": {
+			"name": "運命のエメラルド",
+			"skills": [
+				{"pt":   3, "name": "常時さいだいＨＰ+40", "desc": "常時\nさいだいＨＰが\n４０増える", "mp": null, "maxhp": 40},
+				{"pt":   7, "name": "常時みのまもり+60", "desc": "常時\nみのまもりが\n６０増える", "mp": null, "def": 60},
+				{"pt":  12, "name": "ビューティアップ", "desc": "", "mp": null},
+				{"pt":  18, "name": "常時こうげき魔力+80", "desc": "常時\nこうげき魔力が\n８０増える", "mp": null, "magic": 80},
+				{"pt":  25, "name": "常時きようさ+60", "desc": "常時\nきようさが\n６０増える", "mp": null, "dex": 60},
+				{"pt":  32, "name": "因果の魔石", "desc": "", "mp": null},
+				{"pt":  40, "name": "鉄球ジャグリング", "desc": "", "mp": null}
+			]
+		},
+
+		"wand-ex-magicalhat": {
+			"name": "両手杖の極意",
+			"skills": [
+				{"pt":   3, "name": "常時こうげき魔力+30", "desc": "常時\nこうげき魔力が\n３０増える", "mp": null, "magic": 30},
+				{"pt":   7, "name": "悪魔系威力+5%", "desc": "", "mp": null},
+				{"pt":  12, "name": "早詠みの杖", "desc": "いつもより\nすばやく呪文を\n唱えられる", "mp": 5},
+				{"pt":  18, "name": "装備時ＭＰ吸収率+5%", "desc": "両手杖での攻撃時\n吸収できる\nＭＰが増える", "mp": null},
+				{"pt":  25, "name": "悪魔系威力+5%", "desc": "", "mp": null},
+				{"pt":  32, "name": "常時こうげき魔力+30", "desc": "常時\nこうげき魔力が\n３０増える", "mp": null, "magic": 30},
+				{"pt":  40, "name": "超暴走魔法陣", "desc": "さらに呪文が\n暴走しやすくなる\n魔法陣を作る", "mp": 4, "charge": 60}
+			]
+		},
+
+		"magicalcap": {
+			"name": "マジカルキャップ",
+			"skills": [
+				{"pt":   3, "name": "常時かいふく魔力+80", "desc": "常時\nかいふく魔力が\n８０増える", "mp": null, "heal": 80},
+				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
+				{"pt":  12, "name": "マジカルブレイク", "desc": "", "mp": null},
+				{"pt":  18, "name": "常時みのまもり+45", "desc": "常時\nみのまもりが\n４５増える", "mp": null, "def": 45},
+				{"pt":  25, "name": "常時こうげき魔力+80", "desc": "常時\nこうげき魔力が\n８０増える", "mp": null, "magic": 80},
+				{"pt":  32, "name": "やすらぎキャップ", "desc": "", "mp": null},
+				{"pt":  40, "name": "マジカルヒール", "desc": "", "mp": null}
+			]
+		},
+
 		"additional0": {
 			"name": "追加スキル0ダミー",
 			"skills": [
@@ -1647,41 +1894,60 @@
 	],
 
 	"additionalSkillLines": [
-		{"name": "raisehp",         "restartCount": 1, "id":  1},
-		{"name": "raisemp",         "restartCount": 1, "id":  2},
-		{"name": "raisepow",        "restartCount": 1, "id":  3},
-		{"name": "raisedef",        "restartCount": 1, "id":  4},
-		{"name": "raisespd",        "restartCount": 1, "id":  5},
-		{"name": "raisemagic",      "restartCount": 1, "id":  6},
-		{"name": "raisedex",        "restartCount": 1, "id": 15},
-		{"name": "heal",            "restartCount": 2, "id":  7},
-		{"name": "weaken",          "restartCount": 3, "id":  8},
-		{"name": "cure",            "restartCount": 4, "id":  9},
-		{"name": "enhance",         "restartCount": 5, "id": 10},
-		{"name": "iyashi",          "restartCount": 6, "id": 17},
-		{"name": "mera",            "restartCount": 2, "id": 11},
-		{"name": "hyado",           "restartCount": 3, "id": 12},
-		{"name": "bagi",            "restartCount": 4, "id": 13},
-		{"name": "io",              "restartCount": 5, "id": 14},
-		{"name": "doruma",          "restartCount": 6, "id": 16},
-		{"name": "boomerang-ex",    "restartCount": 7, "id": 18, "occupied": ["slime"]},
-		{"name": "slasoul",         "restartCount": 8, "id": 19, "occupied": ["slime"]},
-		{"name": "stick-ex-mormon", "restartCount": 7, "id": 20, "occupied": ["mormon"]},
-		{"name": "satorimoromon",   "restartCount": 8, "id": 21, "occupied": ["mormon"]},
-		{"name": "claw-ex",         "restartCount": 7, "id": 22, "occupied": ["prisonyan"]},
-		{"name": "hyado-ex",        "restartCount": 8, "id": 23, "occupied": ["prisonyan"]},
-		{"name": "stick-ex",        "restartCount": 7, "id": 24, "occupied": ["hoimislime", "chimera"]},
-		{"name": "hoiminsenjutsu",  "restartCount": 8, "id": 25, "occupied": ["hoimislime"]},
-		{"name": "sword-ex",        "restartCount": 7, "id": 26, "occupied": ["slimeknight", "lizardman"]},
-		{"name": "knightrider",     "restartCount": 8, "id": 27, "occupied": ["slimeknight"]},
-		{"name": "chimerapray",     "restartCount": 8, "id": 28, "occupied": ["chimera"]},
-		{"name": "wand-ex",         "restartCount": 7, "id": 29, "occupied": ["catmage"]},
-		{"name": "mera-ex",         "restartCount": 8, "id": 30, "occupied": ["catmage"]},
-		{"name": "gekkousword-ex",  "restartCount": 8, "id": 31, "occupied": ["lizardman"]},
-		{"name": "axe-ex",          "restartCount": 7, "id": 32, "occupied": ["battlerex"]},
-		{"name": "firebreath-ex",   "restartCount": 8, "id": 33, "occupied": ["battlerex"]},
-		{"name": "staff-ex",        "restartCount": 7, "id": 34, "occupied": ["itazuramogura"]},
-		{"name": "moleguts",        "restartCount": 8, "id": 35, "occupied": ["itazuramogura"]}
+		{"name": "raisehp",             "restartCount": 1, "id":  1},
+		{"name": "raisemp",             "restartCount": 1, "id":  2},
+		{"name": "raisepow",            "restartCount": 1, "id":  3},
+		{"name": "raisedef",            "restartCount": 1, "id":  4},
+		{"name": "raisespd",            "restartCount": 1, "id":  5},
+		{"name": "raisemagic",          "restartCount": 1, "id":  6},
+		{"name": "raisedex",            "restartCount": 1, "id": 15},
+		{"name": "heal",                "restartCount": 2, "id":  7},
+		{"name": "weaken",              "restartCount": 3, "id":  8},
+		{"name": "cure",                "restartCount": 4, "id":  9},
+		{"name": "enhance",             "restartCount": 5, "id": 10},
+		{"name": "iyashi",              "restartCount": 6, "id": 17},
+		{"name": "mera",                "restartCount": 2, "id": 11},
+		{"name": "hyado",               "restartCount": 3, "id": 12},
+		{"name": "bagi",                "restartCount": 4, "id": 13},
+		{"name": "io",                  "restartCount": 5, "id": 14},
+		{"name": "doruma",              "restartCount": 6, "id": 16},
+		{"name": "boomerang-ex",        "restartCount": 7, "id": 18, "occupied": ["slime"]},
+		{"name": "slasoul",             "restartCount": 8, "id": 19, "occupied": ["slime"]},
+		{"name": "stick-ex-mormon",     "restartCount": 7, "id": 20, "occupied": ["mormon"]},
+		{"name": "satorimoromon",       "restartCount": 8, "id": 21, "occupied": ["mormon"]},
+		{"name": "claw-ex",             "restartCount": 7, "id": 22, "occupied": ["prisonyan"]},
+		{"name": "hyado-ex",            "restartCount": 8, "id": 23, "occupied": ["prisonyan"]},
+		{"name": "stick-ex",            "restartCount": 7, "id": 24, "occupied": ["hoimislime", "chimera"]},
+		{"name": "hoiminsenjutsu",      "restartCount": 8, "id": 25, "occupied": ["hoimislime"]},
+		{"name": "sword-ex",            "restartCount": 7, "id": 26, "occupied": ["slimeknight", "lizardman", "samayouyoroi"]},
+		{"name": "knightrider",         "restartCount": 8, "id": 27, "occupied": ["slimeknight"]},
+		{"name": "chimerapray",         "restartCount": 8, "id": 28, "occupied": ["chimera"]},
+		{"name": "wand-ex",             "restartCount": 7, "id": 29, "occupied": ["catmage"]},
+		{"name": "mera-ex",             "restartCount": 8, "id": 30, "occupied": ["catmage"]},
+		{"name": "gekkousword-ex",      "restartCount": 8, "id": 31, "occupied": ["lizardman"]},
+		{"name": "axe-ex",              "restartCount": 7, "id": 32, "occupied": ["battlerex"]},
+		{"name": "firebreath-ex",       "restartCount": 8, "id": 33, "occupied": ["battlerex"]},
+		{"name": "staff-ex",            "restartCount": 7, "id": 34, "occupied": ["itazuramogura"]},
+		{"name": "moleguts",            "restartCount": 8, "id": 35, "occupied": ["itazuramogura"]},
+		{"name": "claw-ex-metappy",     "restartCount": 7, "id": 36, "occupied": ["metappy"]},
+		{"name": "mechappy",            "restartCount": 8, "id": 37, "occupied": ["metappy"]},
+		{"name": "spear-ex",            "restartCount": 7, "id": 38, "occupied": ["takeyarihei"]},
+		{"name": "takeyarisenpou",      "restartCount": 8, "id": 39, "occupied": ["takeyarihei"]},
+		{"name": "knife-ex",            "restartCount": 7, "id": 40, "occupied": ["needleman"]},
+		{"name": "hurryup",             "restartCount": 8, "id": 41, "occupied": ["needleman"]},
+		{"name": "wand-ex-fondue",      "restartCount": 7, "id": 42, "occupied": ["fondue"]},
+		{"name": "io-ex",               "restartCount": 8, "id": 43, "occupied": ["fondue"]},
+		{"name": "fan-ex",              "restartCount": 7, "id": 44, "occupied": ["entasisman"]},
+		{"name": "entertainer",         "restartCount": 8, "id": 45, "occupied": ["entasisman"]},
+		{"name": "livingarmor",         "restartCount": 8, "id": 46, "occupied": ["samayouyoroi"]},
+		{"name": "twohandedsword-ex",   "restartCount": 7, "id": 47, "occupied": ["golem"]},
+		{"name": "semeruchikara",       "restartCount": 8, "id": 48, "occupied": ["golem"]},
+		{"name": "sword-ex-devilarmor", "restartCount": 7, "id": 49, "occupied": ["devilarmor"]},
+		{"name": "demonsmail",          "restartCount": 8, "id": 50, "occupied": ["devilarmor"]},
+		{"name": "fan-ex-odoruhouseki", "restartCount": 7, "id": 51, "occupied": ["odoruhouseki"]},
+		{"name": "fortuneemerald",      "restartCount": 8, "id": 52, "occupied": ["odoruhouseki"]},
+		{"name": "wand-ex-magicalhat",  "restartCount": 7, "id": 53, "occupied": ["magicalhat"]},
+		{"name": "magicalcap",          "restartCount": 8, "id": 54, "occupied": ["magicalhat"]}
 	],
 
 	"skillPtsGiven": [null,
