@@ -12,6 +12,7 @@ namespace Dq10.SkillSimulator {
 		skillLineId?: string;
 		newValue?: number;
 		event?: () => Event;
+		monsterId?: string;
 	}
 
 	const UNDO_MAX = 20;
