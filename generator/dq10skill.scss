@@ -400,7 +400,7 @@ a {
 			height: 18px;
 		}
 
-		.indiv_name, .additional_skill_selector, .natsuki200 {
+		.indiv_name, .additional_skill_selector, .natsuki-selector {
 			margin-right: 3px;
 
 			label {
@@ -412,6 +412,9 @@ a {
 				display: inline-block;
 				vertical-align: middle;
 			}
+		}
+		.indiv_name input {
+			width: 90px;
 		}
 	}
 }

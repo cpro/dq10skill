@@ -19,23 +19,23 @@
 	"tasks": [
 		{
 			"taskName": "build TypeScript",
-			"args": ["tsc", "--out", "dq10skill.js", "dq10skill-main.ts"],
+			"args": ["tsc --out publish/dq10skill.js dq10skill-main.ts"],
 			"isBuildCommand": true,
-			"showOutput": "silent"
+			"suppressTaskName": true
 		},
 		
 		{
 			"taskName": "produce HTMLs",
 			"args": ["ruby generator/produce_html.rb"],
-			"isBuildCommand": false,
+			"isBuildCommand": true,
 			"suppressTaskName": true,
-			"showOutput": "never"
+			"showOutput": "silent"
 		},
 		
 		{
 			"taskName": "produce data JSON",
 			"args": ["ruby generator/produce_data_json.rb"],
-			"isBuildCommand": false,
+			"isBuildCommand": true,
 			"suppressTaskName": true,
 			"showOutput": "never"
 		},
@@ -43,7 +43,7 @@
 		{
 			"taskName": "refresh Amazon cache",
 			"args": ["ruby generator/refresh_amazon_cache.rb"],
-			"isBuildCommand": false,
+			"isBuildCommand": true,
 			"suppressTaskName": true
 		}
 	]

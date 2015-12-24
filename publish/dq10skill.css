@@ -28,7 +28,7 @@ a {
   position: fixed;
   top: 0;
   left: 0;
-  border-bottom: 3px solid #ddcccc;
+  border-bottom: 3px solid #dcc;
   z-index: 99; }
   #header #titleblock {
     height: 25px;
@@ -51,7 +51,7 @@ a {
         height: 18px;
         overflow: hidden; }
         #header #titleblock #save_url #tw-saveurl .ui-button-text, #header #titleblock #save_url #undo .ui-button-text, #header #titleblock #save_url #redo .ui-button-text {
-          padding: 0.2em 0.5em; }
+          padding: .2em .5em; }
       #header #titleblock #save_url .ui-button-text-icon-primary {
         padding-left: 16px; }
       #header #titleblock #save_url .ui-button-text-icon-secondary {
@@ -61,7 +61,7 @@ a {
         font-size: 11px;
         margin-right: 10px; }
         #header #titleblock #save_url #msp_selector label[for="msp_msp"] {
-          color: #5588ee; }
+          color: #58e; }
   #header #consoleblock {
     width: auto;
     height: 39px;
@@ -93,7 +93,7 @@ a {
           overflow: hidden;
           white-space: nowrap;
           margin: 0 1px 3px 0;
-          border: 1px solid #aaaabb;
+          border: 1px solid #aab;
           background-color: #f0f0f7; }
           #header #consoleblock #foldbuttons ul.button-container li:hover {
             cursor: pointer;
@@ -128,8 +128,8 @@ a {
       margin: 0;
       border-collapse: separate;
       border-spacing: 0;
-      border-left: 1px solid #aaaabb;
-      border-top: 1px solid #aaaabb;
+      border-left: 1px solid #aab;
+      border-top: 1px solid #aab;
       background-color: #fcfcfd;
       position: absolute;
       top: 0;
@@ -141,7 +141,7 @@ a {
         vertical-align: bottom;
         height: 16px;
         text-align: right;
-        border-bottom: 1px solid #aaaabb; }
+        border-bottom: 1px solid #aab; }
       #header #consoleblock table#total th {
         font-size: 11px;
         font-weight: normal;
@@ -150,11 +150,11 @@ a {
         padding: 0 4px 0 3px;
         font-size: 12px;
         width: 22px;
-        border-right: 1px solid #aaaabb; }
+        border-right: 1px solid #aab; }
         #header #consoleblock table#total td.total_pts#total_exp, #header #consoleblock table#total td.total_pts#total_exp_remain {
           width: 64px; }
       #header #consoleblock table#total td#msp_remain {
-        color: #5588ee;
+        color: #58e;
         font-weight: bold; }
       #header #consoleblock table#total td#cont_total_sp {
         font-size: 11px;
@@ -182,7 +182,7 @@ a {
       #header #consoleblock #navlink .ui-widget {
         font-size: 1em; }
       #header #consoleblock #navlink .ui-button-text {
-        padding: 0.2em 0.5em; }
+        padding: .2em .5em; }
 
 #body-for-monster #header {
   height: 110px; }
@@ -194,7 +194,7 @@ a {
 
 /* エントリボックス */
 .class_group, .monster_ent {
-  border: 2px solid #9999aa;
+  border: 2px solid #99a;
   border-radius: 5px;
   clear: both;
   margin: 3px 0;
@@ -226,7 +226,7 @@ a {
   padding: 1px 0 2px 0;
   position: relative;
   height: 18px;
-  border-bottom: 1px solid #9999aa; }
+  border-bottom: 1px solid #99a; }
   .ent_title h2, .ent_title dl, .ent_title dt, .ent_title dd {
     display: inline-block; }
   .ent_title h2 {
@@ -271,15 +271,17 @@ a {
     .ent_title .ent_title_console button {
       width: 18px;
       height: 18px; }
-    .ent_title .ent_title_console .indiv_name, .ent_title .ent_title_console .additional_skill_selector, .ent_title .ent_title_console .natsuki200 {
+    .ent_title .ent_title_console .indiv_name, .ent_title .ent_title_console .additional_skill_selector, .ent_title .ent_title_console .natsuki-selector {
       margin-right: 3px; }
-      .ent_title .ent_title_console .indiv_name label, .ent_title .ent_title_console .additional_skill_selector label, .ent_title .ent_title_console .natsuki200 label {
+      .ent_title .ent_title_console .indiv_name label, .ent_title .ent_title_console .additional_skill_selector label, .ent_title .ent_title_console .natsuki-selector label {
         font-size: 80%;
         display: inline-block;
         vertical-align: middle; }
-      .ent_title .ent_title_console .indiv_name input, .ent_title .ent_title_console .indiv_name select, .ent_title .ent_title_console .additional_skill_selector input, .ent_title .ent_title_console .additional_skill_selector select, .ent_title .ent_title_console .natsuki200 input, .ent_title .ent_title_console .natsuki200 select {
+      .ent_title .ent_title_console .indiv_name input, .ent_title .ent_title_console .indiv_name select, .ent_title .ent_title_console .additional_skill_selector input, .ent_title .ent_title_console .additional_skill_selector select, .ent_title .ent_title_console .natsuki-selector input, .ent_title .ent_title_console .natsuki-selector select {
         display: inline-block;
         vertical-align: middle; }
+    .ent_title .ent_title_console .indiv_name input {
+      width: 90px; }
 
 .monster_ent .ent_title {
   height: 22px; }
@@ -295,7 +297,7 @@ a {
   height: 200px;
   position: relative;
   text-align: center;
-  border-right: 1px solid #9999aa;
+  border-right: 1px solid #99a;
   vertical-align: top; }
   .class_info dt {
     font-weight: normal; }
@@ -362,7 +364,7 @@ a {
           right: -14px;
           top: -9px;
           font-size: 80%;
-          color: #5588ee; }
+          color: #58e; }
   .skill_table .skill_pt {
     width: 2em;
     text-align: right; }
@@ -405,7 +407,7 @@ a {
   margin: 7px auto 0 auto;
   padding: 2px 0 1px 0;
   position: relative;
-  border-top: 1px solid #9999aa;
+  border-top: 1px solid #99a;
   height: 22px;
   white-space: nowrap; }
   .status_info h3 {
@@ -438,7 +440,7 @@ a {
 
 /* フッタコンソール */
 #footconsole {
-  border: 2px solid #9999aa;
+  border: 2px solid #99a;
   border-radius: 5px;
   width: 920px;
   overflow: auto;
@@ -449,7 +451,7 @@ a {
     font-size: 80%;
     margin: 0;
     padding: 0 10px;
-    border-right: 1px solid #9999aa; }
+    border-right: 1px solid #99a; }
     #footconsole p:last-child {
       border-right: none; }
     #footconsole p .ui-button-text-icon-primary {
@@ -457,7 +459,7 @@ a {
     #footconsole p .ui-widget {
       font-size: 1em; }
     #footconsole p .ui-button-text {
-      padding: 0.2em 0.5em; }
+      padding: .2em .5em; }
 
 #body-for-monster #footconsole {
   width: 65.5em; }
@@ -500,7 +502,7 @@ ul.button-container {
     height: 16px;
     overflow: hidden;
     white-space: nowrap;
-    border: 1px solid #aaaabb;
+    border: 1px solid #aab;
     background-color: #f0f0f7; }
     ul.button-container li:hover {
       cursor: pointer;
@@ -559,18 +561,18 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
   padding: 0;
   width: 878px;
   height: 527px;
-  border: 3px solid #9999aa;
+  border: 3px solid #99a;
   border-radius: 6px;
   background-color: #fcfcfd;
   /* バッジ検索ボタン */ }
   #badge-selector #badge-selector-header {
     position: relative;
     height: 105px;
-    border-bottom: 1px solid #9999aa; }
+    border-bottom: 1px solid #99a; }
   #badge-selector #badge-selector-footer {
     position: relative;
     height: 120px;
-    border-top: 1px solid #9999aa; }
+    border-top: 1px solid #99a; }
   #badge-selector #badge-selector-body {
     position: relative;
     height: 300px;
@@ -603,7 +605,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
     margin-top: 15px;
     height: 80px;
     margin-right: 6px;
-    border-right: 1px solid #9999aa;
+    border-right: 1px solid #99a;
     padding-right: 6px; }
     #badge-selector ul.badge-search-button-container:first-child {
       margin-left: 15px; }
@@ -712,7 +714,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
   #ad_sidebar h2 {
     font-size: 90%;
     margin: 0;
-    border-bottom: 1px solid #9999aa; }
+    border-bottom: 1px solid #99a; }
   #ad_sidebar div.amazonitem {
     position: relative;
     width: 160px;
@@ -775,3 +777,5 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
 
 #ie-alert {
   /* display: none; */ }
+
+/*# sourceMappingURL=dq10skill.css.map */

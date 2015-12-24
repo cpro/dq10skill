@@ -1,4 +1,4 @@
-- @version = 'm1.5.2'
+- @version = 'm1.6'
 !!! 5
 %html
 	%head
@@ -70,9 +70,9 @@
 						<span class="monstertype"></span> Lv
 						%span.lv_h2> 1
 					.ent_title_console
-						%span.natsuki200
-							%input#checkbox-natsuki200-dummy{type: 'checkbox'}
-							%label{for: 'checkbox-natsuki200-dummy'} 懐200
+						%span.natsuki-selector
+							%label{for: 'select-natsuki-dummy'} なつき度:
+							%select#select-natsuki-dummy
 						%span.additional_skill_selector.additional_skill_selector-0
 							%label{for: 'select-additional0-dummy'} 追加スキル1:
 							%select#select-additional0-dummy
@@ -81,7 +81,7 @@
 							%select#select-additional1-dummy
 						%span.indiv_name
 							%label{for: "indiv_name-dummy"} 名前:
-							%input#indiv_name-dummy.ui-widget-content.ui-corner-all{type: 'text', size: 20}>/
+							%input#indiv_name-dummy.ui-widget-content.ui-corner-all{type: 'text'}>/
 						%button.toggle_ent たたむ/ひろげる
 						%button.movedown 下へ
 						%button.moveup 上へ
@@ -176,6 +176,11 @@
 							履歴:
 							%ul
 								%li
+									2015/12/24 v1.6 ver3.2前期対応
+									%ul
+										%li どうぐ使い系モンスター10種の新スキルラインを追加。
+										%li なつき度300達成時のSP+5に対応し、入力をチェックボックスから選択式に変更。
+								%li
 									2015/10/28 v1.5.2 ver3.1後期対応
 									%ul
 										%li 新スキルラインを追加
@@ -187,8 +192,6 @@
 									%ul
 										%li 2015/10/21 v1.5.1 Vジャンプブログ公開分のキメラ・プリズニャンのスキルライン追加
 								%li 2015/8/17 v1.4.3 ver3.1前期の転生8回目に対応（追加SPは5と仮定）
-								%li 2015/8/7 v1.4.2 バッジ「ブラウニー・金」のデータ間違い修正（最大HP+85→最大MP+85）
-								%li 2015/5/14 v1.4.1 バッジ「マリーン・金」のデータ間違い修正（炎耐性2%→20%）、コード整理
 								%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
 					%li
 						ToDo:
