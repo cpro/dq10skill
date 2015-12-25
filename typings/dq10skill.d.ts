@@ -77,6 +77,7 @@ interface MonsterSimulatorDB {
 		name: string;
 		restartCount: number;
 		id: number;
+		occupied: string[];
 	}[];
 	skillPtsGiven: number[];
 	expRequired: {
