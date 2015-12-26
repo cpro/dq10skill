@@ -2,6 +2,8 @@
 /// <reference path="typings/dq10skill.d.ts" />
 
 /// <reference path="dq10skill-monster-monster.ts" />
+/// <reference path="dq10skill-monster-command.ts" />
+
 declare var Base64: any;
 
 namespace Dq10.SkillSimulator {
@@ -149,156 +151,7 @@ namespace Dq10.SkillSimulator {
 			monsters: monsters
 		};
 	})();
-
-	/* Controller (Command / Event) */
-	var SimulatorCommandManager = (function(simulator) {
-		var sim = simulator;
-
-		var UNDO_MAX = 20;
-		var commandStack = [];
-		var cursor = 0;
-		var onCommandStackChanged = function() {};
-
-		function invoke(command) {
-			var succeeded = command.execute();
-			if(!succeeded) return false;
-
-			//以降のスタックを切捨て
-			commandStack.splice(cursor);
-
-			if(cursor >= 1 && commandStack[cursor - 1].isAbsorbable(command)) {
-				//連続した同種の操作ならひとつの操作にまとめる
-				commandStack[cursor - 1].absorb(command);
-			} else {
-				commandStack.push(command);
-				cursor++;
-			}
-
-			if(commandStack.length > UNDO_MAX) {
-				commandStack.shift();
-				cursor--;
-			}
-
-			dispatch('CommandStackChanged');
-			return true;
-		}
-
-		function undo() {
-			if(!isUndoable()) return;
-
-			cursor--;
-			var command = commandStack[cursor];
-			command.undo();
-			dispatch('CommandStackChanged');
-		}
-
-		function redo() {
-			if(!isRedoable()) return;
-
-			var command = commandStack[cursor];
-			command.execute();
-			cursor++;
-			dispatch('CommandStackChanged');
-		}
-
-		function isUndoable() {
-			return (cursor > 0);
-		}
-
-		function isRedoable() {
-			return (cursor < commandStack.length);
-		}
-
-		//エントリ追加
-		var AddMonster = function(monsterType) {
-			this.monsterType = monsterType;
-		};
-		AddMonster.prototype.execute = function() {
-			var ret = sim.addMonster(this.monsterType);
-			if(ret) {
-				this.monsterId = ret.monsterId;
-				dispatch('MonsterAppended', ret);
-			}
-			return !!ret;
-		};
-		AddMonster.prototype.undo = function() {
-			sim.deleteMonster(this.monsterId);
-			dispatch('MonsterRemoved', this.monsterId);
-		};
-		AddMonster.prototype.isAbsorbable = function() { return false; };
-
-		//エントリ削除
-		var DeleteMonster = function(monsterId: string) {
-			this.monsterId = monsterId;
-		};
-		DeleteMonster.prototype.execute = function() {
-			this.deletedIndex = sim.indexOf(this.monsterId);
-			var ret = sim.deleteMonster(this.monsterId);
-			if(ret) {
-				this.deletedMonster = ret;
-				dispatch('MonsterRemoved', ret);
-			}
-			return !!ret;
-		};
-		DeleteMonster.prototype.undo = function() {
-			sim.monsters.splice(this.deletedIndex, 0, this.deletedMonster);
-			dispatch('MonsterAppended', this.deletedMonster, this.deletedIndex);
-		};
-		DeleteMonster.prototype.isAbsorbable = function() { return false; };
-
-		//使用可能イベントの定義
-		var EVENTS_ENABLED = [
-			'CommandStackChanged',
-			'MonsterAppended',
-			'MonsterRemoved',
-			'VocationalInfoChanged',
-			'SkillLineChanged',
-			'MSPChanged',
-			'WholeChanged'
-		];
-
-		//イベント管理オブジェクト
-		var eventStocker = {};
-
-		//イベント登録
-		function on(eventName, fn) {
-			if(EVENTS_ENABLED.indexOf(eventName) < 0)
-				throw 'invalid event type.';
-
-			if(eventStocker[eventName] === undefined)
-				eventStocker[eventName] = [];
-
-			eventStocker[eventName].push(fn);
-		}
-
-		//イベント発火
-		function dispatch(eventName, ...args) {
-			if(EVENTS_ENABLED.indexOf(eventName) < 0)
-				throw 'invalid event type.';
-
-			if(eventStocker[eventName] === undefined) return;
-
-			eventStocker[eventName].forEach(function(listener) {
-				listener.apply(this, args);
-			});
-		}
-
-		//API
-		return {
-			undo: undo,
-			redo: redo,
-			isUndoable: isUndoable,
-			isRedoable: isRedoable,
-			on: on,
-
-			addMonster: function(monsterType: string) {
-				return invoke(new AddMonster(monsterType));
-			},
-			deleteMonster: function(monsterId: string) {
-				return invoke(new DeleteMonster(monsterId));
-			}
-		};
-	})(Simulator);
+	Dq10.SkillSimulator.Simulator = Simulator;
 
 	/* UI */
 	var SimulatorUI = (function() {
@@ -306,7 +159,7 @@ namespace Dq10.SkillSimulator {
 		var CLASSNAME_ERROR = 'error';
 		
 		var sim = Simulator;
-		var com = SimulatorCommandManager;
+		var com = new SimulatorCommandManager();
 
 		//モンスターのエントリ追加
 		function drawMonsterEntry (monster: MonsterUnit) {
