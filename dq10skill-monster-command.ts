@@ -94,7 +94,7 @@ namespace Dq10.SkillSimulator {
 			return !!deleted;
 		}
 		undo() {
-			Simulator.splice(this.deletedIndex, 0, this.deletedMonster);
+			Simulator.monsters.splice(this.deletedIndex, 0, this.deletedMonster);
 		}
 		isAbsorbable(command: MCommand) { return false; }
 		absorb() {}

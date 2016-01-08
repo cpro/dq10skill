@@ -9,7 +9,7 @@
 declare var Base64: any;
 
 namespace Dq10.SkillSimulator {
-	export var Simulator;
+	export var Simulator: SimulatorModel;
 	export var MonsterDB: MonsterSimulatorDB;
 
 	export const MONSTER_MAX = 8;
@@ -33,80 +33,69 @@ namespace Dq10.SkillSimulator {
 		BITS_SKILL * (BASIC_SKILL_COUNT + ADDITIONAL_SKILL_MAX) +
 		BITS_ADDITIONAL_SKILL * ADDITIONAL_SKILL_MAX; // +
 		//BITS_BADGE * BADGE_COUNT;
-	
-(function($: JQueryStatic) {
-	"use strict";
 
-	//データJSONを格納する変数
-	var DB: MonsterSimulatorDB;
-	var DATA_JSON_URI = window.location.href.replace(/\/[^\/]*$/, '/dq10skill-monster-data.json');
-	var $dbLoad = $.getJSON(DATA_JSON_URI, (data) => {
-		DB = data;
-		MonsterDB = DB;
-	});
-	
-	var Simulator = (function() {
+	export class SimulatorModel {
 		//パラメータ格納用
-		var monsters: MonsterUnit[] = [];
+		monsters: MonsterUnit[] = [];
 		
 		//モンスターID管理
-		var lastId = 0;
+		private lastId = 0;
 
 		/* メソッド */
 
 		//モンスター追加
-		function addMonster (monsterType: string, index: number) {
-			if(monsters.length >= MONSTER_MAX)
+		addMonster(monsterType: string, index?: number) {
+			if(this.monsters.length >= MONSTER_MAX)
 				return null;
 
-			var newMonster = new MonsterUnit(monsterType, lastId++);
+			var newMonster = new MonsterUnit(monsterType, this.lastId++);
 			if(index === undefined)
-				monsters.push(newMonster);
+				this.monsters.push(newMonster);
 			else
-				monsters.splice(index, 0, newMonster);
+				this.monsters.splice(index, 0, newMonster);
 			return newMonster;
 		}
 
 		//IDからモンスター取得
-		function getMonster(monsterId: string) {
-			return monsters[indexOf(monsterId)];
+		getMonster(monsterId: string) {
+			return this.monsters[this.indexOf(monsterId)];
 		}
 
 		//指定IDのモンスター削除
-		function deleteMonster(monsterId: string): any {
-			var i = indexOf(monsterId);
+		deleteMonster(monsterId: string): any {
+			var i = this.indexOf(monsterId);
 			if(i !== null)
-				return monsters.splice(i, 1)[0];
+				return this.monsters.splice(i, 1)[0];
 			else
 				return false;
 		}
 
 		//指定IDのモンスターをひとつ下に並び替える
-		function movedownMonster(monsterId: string) {
-			var i = indexOf(monsterId);
-			if(i > monsters.length) return;
+		movedownMonster(monsterId: string) {
+			var i = this.indexOf(monsterId);
+			if(i > this.monsters.length) return;
 
-			monsters.splice(i, 2, monsters[i + 1], monsters[i]);
+			this.monsters.splice(i, 2, this.monsters[i + 1], this.monsters[i]);
 		}
 
 		//指定IDのモンスターをひとつ上に並び替える
-		function moveupMonster(monsterId: string) {
-			var i = indexOf(monsterId);
+		moveupMonster(monsterId: string) {
+			var i = this.indexOf(monsterId);
 			if(i < 0) return;
 			
-			monsters.splice(i - 1, 2, monsters[i], monsters[i - 1]);
+			this.monsters.splice(i - 1, 2, this.monsters[i], this.monsters[i - 1]);
 		}
 
-		function indexOf(monsterId: string) {
-			for(var i = 0; i < monsters.length; i++) {
-				if(monsters[i].id == monsterId) return i;
+		indexOf(monsterId: string) {
+			for(var i = 0; i < this.monsters.length; i++) {
+				if(this.monsters[i].id == monsterId) return i;
 			}
 			return null;
 		}
 
-		function generateQueryString() {
+		generateQueryString() {
 			var query = [];
-			monsters.forEach((monster) => {
+			this.monsters.forEach((monster) => {
 				query.push(Base64forBit.encode(monster.serialize()));
 				query.push(Base64.encode(monster.indivName, true));
 			});
@@ -114,16 +103,16 @@ namespace Dq10.SkillSimulator {
 			return query.join(';');
 		}
 
-		function applyQueryString(queryString: string) {
+		applyQueryString(queryString: string) {
 			var query = queryString.split(';');
 			while(query.length > 0) {
-				var newMonster = MonsterUnit.deserialize(Base64forBit.decode(query.shift()), lastId++);
+				var newMonster = MonsterUnit.deserialize(Base64forBit.decode(query.shift()), this.lastId++);
 				newMonster.updateIndividualName(Base64.decode(query.shift()));
-				monsters.push(newMonster);
+				this.monsters.push(newMonster);
 			}
 		}
 
-		function validateQueryString(queryString: string) {
+		validateQueryString(queryString: string) {
 			if(!queryString.match(/^[A-Za-z0-9-_;]+$/))
 				return false;
 
@@ -135,36 +124,26 @@ namespace Dq10.SkillSimulator {
 				return (q.length * Base64forBit.BITS_ENCODE >= bitDataLength);
 			});
 		}
-
-		//API
-		return {
-			//メソッド
-			addMonster: addMonster,
-			getMonster: getMonster,
-			deleteMonster: deleteMonster,
-			movedownMonster: movedownMonster,
-			moveupMonster: moveupMonster,
-			indexOf: indexOf,
-			generateQueryString: generateQueryString,
-			applyQueryString: applyQueryString,
-			validateQueryString: validateQueryString,
-
-			//プロパティ
-			monsters: monsters
-		};
-	})();
-	Dq10.SkillSimulator.Simulator = Simulator;
+	}
 
 	/* UI */
-	var SimulatorUI = (function() {
-		var CLASSNAME_SKILL_ENABLED = 'enabled';
-		var CLASSNAME_ERROR = 'error';
+	class SimulatorUI {
+		private CLASSNAME_SKILL_ENABLED = 'enabled';
+		private CLASSNAME_ERROR = 'error';
 		
-		var sim = Simulator;
-		var com = new SimulatorCommandManager();
-
+		private sim = Simulator;
+		private com = new SimulatorCommandManager();
+		private DB: MonsterSimulatorDB;
+		
+		private badgeSelector: BadgeSelector;
+		
+		constructor(sim: SimulatorModel) {
+			this.sim = sim;
+			this.DB = MonsterDB;
+		}
+		
 		//モンスターのエントリ追加
-		function drawMonsterEntry (monster: MonsterUnit) {
+		private drawMonsterEntry (monster: MonsterUnit) {
 			var $ent = $('#monster_dummy').clone()
 				.attr('id', monster.id)
 				.css('display', 'block');
@@ -181,12 +160,12 @@ namespace Dq10.SkillSimulator {
 			var skillLine, $table, $skillContainer = $ent.find('.skill_tables');
 
 			monster.data.skillLines.forEach((skillLine) => {
-				$table = drawSkillTable(skillLine);
+				$table = this.drawSkillTable(skillLine);
 				$skillContainer.append($table);
 			});
 			for(var s = 0; s < ADDITIONAL_SKILL_MAX; s++) {
 				skillLine = 'additional' + s.toString();
-				$table = drawSkillTable(skillLine);
+				$table = this.drawSkillTable(skillLine);
 
 				if(monster.restartCount < s + 1 || monster.getAdditionalSkill(s) === null)
 					$table.hide();
@@ -196,14 +175,14 @@ namespace Dq10.SkillSimulator {
 
 			return $ent;
 		}
-		function drawSkillTable(skillLineId: string) {
+		private drawSkillTable(skillLineId: string) {
 			var $table = $('<table />').addClass(skillLineId).addClass('skill_table');
 			$table.append('<caption><span class="skill_line_name">' +
-				DB.skillLines[skillLineId].name +
+				this.DB.skillLines[skillLineId].name +
 				'</span>: <span class="skill_total">0</span></caption>')
 				.append('<tr><th class="console" colspan="2"><input class="ptspinner" /> <button class="reset">リセット</button></th></tr>');
 
-			DB.skillLines[skillLineId].skills.forEach((skill, s) => {
+			this.DB.skillLines[skillLineId].skills.forEach((skill, s) => {
 				$('<tr />').addClass([skillLineId, s].join('_'))
 					.append('<td class="skill_pt">' + skill.pt + '</td>')
 					.append('<td class="skill_name">' + skill.name + '</td>')
@@ -213,25 +192,25 @@ namespace Dq10.SkillSimulator {
 			return $table;
 		}
 
-		function refreshEntry(monsterId: string) {
-			refreshAdditionalSkillSelector(monsterId);
-			refreshAdditionalSkill(monsterId);
-			refreshMonsterInfo(monsterId);
-			Object.keys(DB.skillLines).forEach((skillLineId) => 
-				refreshSkillList(monsterId, skillLineId)
+		private refreshEntry(monsterId: string) {
+			this.refreshAdditionalSkillSelector(monsterId);
+			this.refreshAdditionalSkill(monsterId);
+			this.refreshMonsterInfo(monsterId);
+			Object.keys(this.DB.skillLines).forEach((skillLineId) => 
+				this.refreshSkillList(monsterId, skillLineId)
 			);
-			refreshTotalStatus(monsterId);
-			refreshControls(monsterId);
-			refreshBadgeButtons(monsterId);
-			refreshSaveUrl();
+			this.refreshTotalStatus(monsterId);
+			this.refreshControls(monsterId);
+			this.refreshBadgeButtons(monsterId);
+			this.refreshSaveUrl();
 		}
 
-		function refreshAll() {
-			sim.monsters.forEach((monster) => refreshEntry(monster.id));
+		private refreshAll() {
+			this.sim.monsters.forEach((monster) => this.refreshEntry(monster.id));
 		}
 
-		function refreshMonsterInfo(monsterId: string) {
-			var monster = sim.getMonster(monsterId);
+		private refreshMonsterInfo(monsterId: string) {
+			var monster = this.sim.getMonster(monsterId);
 			var currentLevel = monster.getLevel();
 			var requiredLevel = monster.requiredLevel();
 			
@@ -263,8 +242,8 @@ namespace Dq10.SkillSimulator {
 			//Lv不足の処理
 			var isLevelError = (isNaN(requiredLevel) || currentLevel < requiredLevel);
 			
-			$levelH2.toggleClass(CLASSNAME_ERROR, isLevelError);
-			$skillPtsText.toggleClass(CLASSNAME_ERROR, isLevelError);
+			$levelH2.toggleClass(this.CLASSNAME_ERROR, isLevelError);
+			$skillPtsText.toggleClass(this.CLASSNAME_ERROR, isLevelError);
 			$(`#${monsterId} .error`).toggle(isLevelError);
 			if(isLevelError) {
 				$(`#${monsterId} .req_lv`).text(numToFormedStr(requiredLevel));
@@ -272,24 +251,24 @@ namespace Dq10.SkillSimulator {
 			}
 		}
 		
-		function refreshSkillList(monsterId: string, skillLineId: string) {
-			$(`#${monsterId} tr[class^=${skillLineId}_]`).removeClass(CLASSNAME_SKILL_ENABLED); //クリア
-			var monster = sim.getMonster(monsterId);
+		private refreshSkillList(monsterId: string, skillLineId: string) {
+			$(`#${monsterId} tr[class^=${skillLineId}_]`).removeClass(this.CLASSNAME_SKILL_ENABLED); //クリア
+			var monster = this.sim.getMonster(monsterId);
 
 			var skillPt = monster.getSkillPt(skillLineId);
-			var skills = DB.skillLines[skillLineId].skills;
-			DB.skillLines[skillLineId].skills.some((skill, s) => {
+			var skills = this.DB.skillLines[skillLineId].skills;
+			this.DB.skillLines[skillLineId].skills.some((skill, s) => {
 				if(skillPt < skill.pt)
 					return true;
 				
-				$(`#${monsterId} .${skillLineId}_${s}`).addClass(CLASSNAME_SKILL_ENABLED);
+				$(`#${monsterId} .${skillLineId}_${s}`).addClass(this.CLASSNAME_SKILL_ENABLED);
 				return false;
 			});
 			$(`#${monsterId} .${skillLineId} .skill_total`).text(skillPt);
 		}
 		
-		function refreshControls(monsterId: string) {
-			var monster = sim.getMonster(monsterId);
+		private refreshControls(monsterId: string) {
+			var monster = this.sim.getMonster(monsterId);
 
 			$(`#${monsterId} .lv_select>select`).val(monster.getLevel());
 			$(`#${monsterId} .restart_count`).val(monster.getRestartCount());
@@ -301,8 +280,8 @@ namespace Dq10.SkillSimulator {
 			$(`#${monsterId} .natsuki-selector>select`).val(monster.getNatsuki());
 		}
 		
-		function refreshSaveUrl() {
-			var queryString = sim.generateQueryString();
+		private refreshSaveUrl() {
+			var queryString = this.sim.generateQueryString();
 			if(queryString.length === 0) {
 				$('#url_text').val(url);
 				$('#tw-saveurl').attr('href', '');
@@ -322,8 +301,8 @@ namespace Dq10.SkillSimulator {
 			$('#tw-saveurl').attr('href', 'https://twitter.com/intent/tweet?' + $.param(params));
 		}
 
-		function refreshAdditionalSkillSelector(monsterId: string) {
-			var monster = sim.getMonster(monsterId);
+		private refreshAdditionalSkillSelector(monsterId: string) {
+			var monster = this.sim.getMonster(monsterId);
 			for(var s = 0; s < ADDITIONAL_SKILL_MAX; s++) {
 				$(`#${monsterId} .additional_skill_selector-${s}`).toggle(monster.restartCount > s);
 			}
@@ -331,8 +310,8 @@ namespace Dq10.SkillSimulator {
 			$(`#${monsterId} .additional_skill_selector select`).empty();
 
 			if(monster.restartCount >= 1) {
-				DB.additionalSkillLines.forEach((additionalSkillData) => {
-					var skillData = DB.skillLines[additionalSkillData.name];
+				this.DB.additionalSkillLines.forEach((additionalSkillData) => {
+					var skillData = this.DB.skillLines[additionalSkillData.name];
 					if(monster.restartCount >= additionalSkillData.restartCount &&
 					   (!additionalSkillData.occupied ||
 					   additionalSkillData.occupied.indexOf(monster.monsterType) >= 0)) {
@@ -348,40 +327,40 @@ namespace Dq10.SkillSimulator {
 			}
 		}
 
-		function refreshAdditionalSkill(monsterId: string) {
-			var monster = sim.getMonster(monsterId);
+		private refreshAdditionalSkill(monsterId: string) {
+			var monster = this.sim.getMonster(monsterId);
 			var $table;
 
 			for(var s = 0; s < ADDITIONAL_SKILL_MAX; s++) {
 				$table = $(`#${monsterId} .additional${s}`);
 				if(monster.restartCount >= s + 1 && monster.getAdditionalSkill(s) !== null) {
-					refreshAdditionalSkillTable($table, monster.getAdditionalSkill(s));
+					this.refreshAdditionalSkillTable($table, monster.getAdditionalSkill(s));
 					$table.show();
 				} else {
 					$table.hide();
 				}
 			}
-
-			function refreshAdditionalSkillTable($table, newSkillLine: string) {
-				var data = DB.skillLines[newSkillLine];
-				var tableClass = $table.attr('class').split(' ')[0];
-
-				$table.find('caption .skill_line_name').text(data.name);
-
-				data.skills.forEach((skill, i) =>  {
-					var $tr = $table.find(`tr.${tableClass}_${i}`);
-
-					var hintText = getHintText(skill);
-					$tr.attr('title', hintText);
-
-					$tr.children('.skill_pt').text(skill.pt);
-					$tr.children('.skill_name').text(skill.name);
-				});
-			}
 		}
 
-		function refreshTotalStatus(monsterId: string) {
-			var monster = sim.getMonster(monsterId);
+		private refreshAdditionalSkillTable($table: JQuery, newSkillLine: string) {
+			var data = this.DB.skillLines[newSkillLine];
+			var tableClass = $table.attr('class').split(' ')[0];
+
+			$table.find('caption .skill_line_name').text(data.name);
+
+			data.skills.forEach((skill, i) =>  {
+				var $tr = $table.find(`tr.${tableClass}_${i}`);
+
+				var hintText = this.getHintText(skill);
+				$tr.attr('title', hintText);
+
+				$tr.children('.skill_pt').text(skill.pt);
+				$tr.children('.skill_name').text(skill.name);
+			});
+		}
+		
+		private refreshTotalStatus(monsterId: string) {
+			var monster = this.sim.getMonster(monsterId);
 			var statusArray = 'maxhp,maxmp,atk,pow,def,magic,heal,spd,dex,charm,weight'.split(',');
 
 			var $cont = $(`#${monsterId} .status_info dl`);
@@ -390,21 +369,21 @@ namespace Dq10.SkillSimulator {
 			});
 		}
 
-		function drawBadgeButton(monsterId: string, badgeIndex: number) {
-			var monster = sim.getMonster(monsterId);
+		private drawBadgeButton(monsterId: string, badgeIndex: number) {
+			var monster = this.sim.getMonster(monsterId);
 
 			var $badgeButton = $(`#append-badge${badgeIndex}-${monsterId}`);
 			var $badgeButtonCont = $badgeButton.closest('li');
 
 			var badgeId = monster.badgeEquip[badgeIndex];
-			var badge = badgeId ? DB.badges[badgeId] : null;
+			var badge = badgeId ? this.DB.badges[badgeId] : null;
 
 			var buttonText = '';
 			var buttonHintText = '';
 
 			if(badge) {
-				buttonText = badgeId + ' ' + badge.name + '・' + DB.badgerarity[badge.rarity];
-				buttonHintText = BadgeSelector.getFeatureCache(badgeId).join("\n");
+				buttonText = badgeId + ' ' + badge.name + '・' + this.DB.badgerarity[badge.rarity];
+				buttonHintText = this.badgeSelector.getFeatureCache(badgeId).join("\n");
 			} else {
 				if(badgeIndex == monster.badgeEquip.length - 1)
 					buttonText = 'スペシャルバッジ';
@@ -416,25 +395,25 @@ namespace Dq10.SkillSimulator {
 			var rarityClass = badge === null ? 'blank' : badge.rarity;
 
 			$badgeButtonCont.toggleClass('blank', rarityClass == 'blank');
-			Object.keys(DB.badgerarity).forEach((rarity) => {
+			Object.keys(this.DB.badgerarity).forEach((rarity) => {
 				$badgeButtonCont.toggleClass(rarity, rarityClass == rarity);
 			});
 		}
 
-		function refreshBadgeButtons(monsterId: string) {
+		private refreshBadgeButtons(monsterId: string) {
 			for(var i = 0; i < BADGE_COUNT; i++)
-				drawBadgeButton(monsterId, i);
+				this.drawBadgeButton(monsterId, i);
 		}
 
-		function getCurrentMonsterId(currentNode: HTMLElement) {
+		private getCurrentMonsterId(currentNode: Element | EventTarget) {
 			return $(currentNode).parents('.monster_ent').attr('id');
 		}
 
-		function getCurrentSkillLine(currentNode: HTMLElement) {
+		private getCurrentSkillLine(currentNode: Element | EventTarget) {
 			return $(currentNode).parents('.skill_table').attr('class').split(' ')[0];
 		}
 
-		function getHintText(skill: Skill) {
+		private getHintText(skill: Skill) {
 			var hintText = skill.desc || '';
 			if((skill.mp !== null) && (skill.mp !== undefined))
 				hintText += `\n（消費MP: ${skill.mp}）`;
@@ -446,114 +425,115 @@ namespace Dq10.SkillSimulator {
 			return hintText;
 		}
 
-		function setupEntry(monsterId: string) {
+		private setupEntry(monsterId: string) {
 			var $ent = $('#' + monsterId);
 
 			//レベル選択セレクトボックス項目設定
 			var $select = $ent.find('.lv_select>select');
-			for(var i = DB.consts.level.min; i <= DB.consts.level.max; i++) {
-				$select.append($("<option />").val(i).text(`${i} (${DB.skillPtsGiven[i]})`));
+			for(var i = this.DB.consts.level.min; i <= this.DB.consts.level.max; i++) {
+				$select.append($("<option />").val(i).text(`${i} (${this.DB.skillPtsGiven[i]})`));
 			}
 			//レベル選択セレクトボックス変更時
-			$select.change(function() {
-				var monsterId = getCurrentMonsterId(this);
-				sim.getMonster(monsterId).updateLevel($(this).val());
-				refreshMonsterInfo(monsterId);
+			$select.change((e) => {
+				var monsterId = this.getCurrentMonsterId(e.currentTarget);
+				this.sim.getMonster(monsterId).updateLevel($(e.currentTarget).val());
+				this.refreshMonsterInfo(monsterId);
 				//refreshSaveUrl();
 			});
 
 			//レベル転生回数スピンボタン設定
 			var $spinner = $ent.find('.restart_count');
 			$spinner.spinner({
-				min: DB.consts.restart.min,
-				max: DB.consts.restart.max,
-				spin: function (e, ui) {
-					var monsterId = getCurrentMonsterId(this);
-					var monster = sim.getMonster(monsterId);
+				min: this.DB.consts.restart.min,
+				max: this.DB.consts.restart.max,
+				spin: (e, ui) => {
+					var monsterId = this.getCurrentMonsterId(e.currentTarget);
+					var monster = this.sim.getMonster(monsterId);
 
 					if(monster.updateRestartCount(ui.value)) {
-						refreshAdditionalSkillSelector(monsterId);
-						refreshAdditionalSkill(monsterId);
-						refreshMonsterInfo(monsterId);
-						refreshTotalStatus(monsterId);
+						this.refreshAdditionalSkillSelector(monsterId);
+						this.refreshAdditionalSkill(monsterId);
+						this.refreshMonsterInfo(monsterId);
+						this.refreshTotalStatus(monsterId);
 					} else {
 						return false;
 					}
 				},
-				change: function (e, ui) {
-					var monsterId = getCurrentMonsterId(this);
-					var monster = sim.getMonster(monsterId);
+				change: (e, ui) => {
+					var monsterId = this.getCurrentMonsterId(e.currentTarget);
+					var monster = this.sim.getMonster(monsterId);
 					
-					if(isNaN($(this).val())) {
-						$(this).val(monster.getRestartCount());
+					if(isNaN($(e.currentTarget).val())) {
+						$(e.currentTarget).val(monster.getRestartCount());
 						return false;
 					}
-					if(monster.updateRestartCount(parseInt($(this).val(), 10))) {
-						refreshAdditionalSkillSelector(monsterId);
-						refreshAdditionalSkill(monsterId);
-						refreshMonsterInfo(monsterId);
-						refreshTotalStatus(monsterId);
-						refreshSaveUrl();
+					if(monster.updateRestartCount(parseInt($(e.currentTarget).val(), 10))) {
+						this.refreshAdditionalSkillSelector(monsterId);
+						this.refreshAdditionalSkill(monsterId);
+						this.refreshMonsterInfo(monsterId);
+						this.refreshTotalStatus(monsterId);
+						this.refreshSaveUrl();
 					} else {
-						$(this).val(monster.getRestartCount());
+						$(e.currentTarget).val(monster.getRestartCount());
 						return false;
 					}
 				},
-				stop: function (e, ui) {
-					refreshSaveUrl();
+				stop: (e, ui) => {
+					this.refreshSaveUrl();
 				}
 			});
 
 			//スピンボタン設定
 			$spinner = $ent.find('.ptspinner');
 			$spinner.spinner({
-				min: DB.consts.skillPts.min,
-				max: DB.consts.skillPts.max,
-				spin: function (e, ui) {
-					var monsterId = getCurrentMonsterId(this);
-					var skillLineId = getCurrentSkillLine(this);
+				min: this.DB.consts.skillPts.min,
+				max: this.DB.consts.skillPts.max,
+				spin: (e, ui) => {
+					var monsterId = this.getCurrentMonsterId(e.currentTarget);
+					var skillLineId = this.getCurrentSkillLine(e.currentTarget);
 					
-					if(sim.getMonster(monsterId).updateSkillPt(skillLineId, ui.value)) {
-						refreshSkillList(monsterId, skillLineId);
-						refreshMonsterInfo(monsterId);
-						refreshTotalStatus(monsterId);
+					if(this.sim.getMonster(monsterId).updateSkillPt(skillLineId, ui.value)) {
+						this.refreshSkillList(monsterId, skillLineId);
+						this.refreshMonsterInfo(monsterId);
+						this.refreshTotalStatus(monsterId);
 						e.stopPropagation();
 					} else {
 						return false;
 					}
 				},
-				change: function (e, ui) {
-					var monsterId = getCurrentMonsterId(this);
-					var skillLineId = getCurrentSkillLine(this);
-					var monster = sim.getMonster(monsterId);
+				change: (e, ui) => {
+					var target = e.currentTarget || e.target;
+					var monsterId = this.getCurrentMonsterId(target);
+					var skillLineId = this.getCurrentSkillLine(target);
+					var monster = this.sim.getMonster(monsterId);
 
-					if(isNaN($(this).val())) {
-						$(this).val(monster.getSkillPt(skillLineId));
+					if(isNaN($(target).val())) {
+						$(target).val(monster.getSkillPt(skillLineId));
 						return false;
 					}
-					if(monster.updateSkillPt(skillLineId, parseInt($(this).val(), 10))) {
-						refreshSkillList(monsterId, skillLineId);
-						refreshMonsterInfo(monsterId);
-						refreshTotalStatus(monsterId);
-						refreshSaveUrl();
+					if(monster.updateSkillPt(skillLineId, parseInt($(target).val(), 10))) {
+						this.refreshSkillList(monsterId, skillLineId);
+						this.refreshMonsterInfo(monsterId);
+						this.refreshTotalStatus(monsterId);
+						this.refreshSaveUrl();
 					} else {
-						$(this).val(monster.getSkillPt(skillLineId));
+						$(target).val(monster.getSkillPt(skillLineId));
 						return false;
 					}
 				},
-				stop: function (e, ui) {
-					refreshSaveUrl();
+				stop: (e, ui) => {
+					this.refreshSaveUrl();
 				}
 			});
 			//テキストボックスクリック時数値を選択状態に
-			$spinner.click(function(e) {
-				$(this).select();
+			$spinner.click((e) => {
+				$(e.currentTarget).select();
 			});
 			//テキストボックスでEnter押下時更新して選択状態に
-			$spinner.keypress(function(e) {
+			$spinner.keypress((e) => {
 				if(e.which == 13) {
 					$('#url_text').focus();
-					$(this).focus().select();
+					$(e.currentTarget).focus().select();
 				}
 			});
 
@@ -561,35 +541,35 @@ namespace Dq10.SkillSimulator {
 			$ent.find('.reset').button({
 				icons: { primary: 'ui-icon-refresh' },
 				text: false
-			}).click(function (e) {
-				var monsterId = getCurrentMonsterId(this);
-				var skillLineId = getCurrentSkillLine(this);
-				var monster = sim.getMonster(monsterId);
+			}).click((e) => {
+				var monsterId = this.getCurrentMonsterId(e.currentTarget);
+				var skillLineId = this.getCurrentSkillLine(e.currentTarget);
+				var monster = this.sim.getMonster(monsterId);
 				
 				monster.updateSkillPt(skillLineId, 0);
 				$(`#${monsterId} .${skillLineId} .ptspinner`).spinner('value', monster.getSkillPt(skillLineId));
-				refreshSkillList(monsterId, skillLineId);
-				refreshMonsterInfo(monsterId);
-				refreshTotalStatus(monsterId);
-				refreshSaveUrl();
+				this.refreshSkillList(monsterId, skillLineId);
+				this.refreshMonsterInfo(monsterId);
+				this.refreshTotalStatus(monsterId);
+				this.refreshSaveUrl();
 			});
 			
 			//スキルテーブル項目クリック時
-			$ent.find('.skill_table tr[class]').click(function() {
-				var monsterId = getCurrentMonsterId(this);
-				var skillLineId = getCurrentSkillLine(this);
-				var skillIndex = parseInt($(this).attr('class').replace(skillLineId + '_', ''), 10);
-				var monster = sim.getMonster(monsterId);
+			$ent.find('.skill_table tr[class]').click((e) => {
+				var monsterId = this.getCurrentMonsterId(e.currentTarget);
+				var skillLineId = this.getCurrentSkillLine(e.currentTarget);
+				var skillIndex = parseInt($(e.currentTarget).attr('class').replace(skillLineId + '_', ''), 10);
+				var monster = this.sim.getMonster(monsterId);
 
-				var requiredPt = DB.skillLines[skillLineId].skills[skillIndex].pt;
+				var requiredPt = this.DB.skillLines[skillLineId].skills[skillIndex].pt;
 				
 				monster.updateSkillPt(skillLineId, requiredPt);
 				$(`#${monsterId} .${skillLineId} .ptspinner`).spinner('value', monster.getSkillPt(skillLineId));
 				
-				refreshSkillList(monsterId, skillLineId);
-				refreshMonsterInfo(monsterId);
-				refreshTotalStatus(monsterId);
-				refreshSaveUrl();
+				this.refreshSkillList(monsterId, skillLineId);
+				this.refreshMonsterInfo(monsterId);
+				this.refreshTotalStatus(monsterId);
+				this.refreshSaveUrl();
 			});
 
 			//おりたたむ・ひろげるボタン設定
@@ -601,19 +581,19 @@ namespace Dq10.SkillSimulator {
 				icons: { primary: 'ui-icon-arrowthickstop-1-n' },
 				text: false,
 				label: 'おりたたむ'
-			}).click(function() {
-				var $entry = $(this).parents('.monster_ent');
+			}).click((e) => {
+				var $entry = $(e.currentTarget).parents('.monster_ent');
 				$entry.toggleClass(CLASSNAME_FOLDED);
 
 				if($entry.hasClass(CLASSNAME_FOLDED)) {
 					$entry.animate({height: HEIGHT_FOLDED});
-					$(this).button('option', {
+					$(e.currentTarget).button('option', {
 						icons: {primary: 'ui-icon-arrowthickstop-1-s'},
 						label: 'ひろげる'
 					});
 				} else {
 					$entry.animate({height: HEIGHT_UNFOLDED});
-					$(this).button('option', {
+					$(e.currentTarget).button('option', {
 						icons: {primary: 'ui-icon-arrowthickstop-1-n'},
 						label: 'おりたたむ'
 					});
@@ -621,9 +601,9 @@ namespace Dq10.SkillSimulator {
 			});
 
 			//ヒントテキスト設定
-			Object.keys(DB.skillLines).forEach((skillLineId) => {
-				DB.skillLines[skillLineId].skills.forEach((skill, i) => {
-					var hintText = getHintText(skill);
+			Object.keys(this.DB.skillLines).forEach((skillLineId) => {
+				this.DB.skillLines[skillLineId].skills.forEach((skill, i) => {
+					var hintText = this.getHintText(skill);
 					$(`.${skillLineId}_${i}`).attr('title', hintText);
 				})
 			})
@@ -632,9 +612,9 @@ namespace Dq10.SkillSimulator {
 			$ent.find('.delete_entry').button({
 				icons: { primary: 'ui-icon-close' },
 				text: false
-			}).click(function (e) {
-				var monsterId = getCurrentMonsterId(this);
-				var monster = sim.getMonster(monsterId);
+			}).click((e) => {
+				var monsterId = this.getCurrentMonsterId(e.currentTarget);
+				var monster = this.sim.getMonster(monsterId);
 
 				var additionalLevel = '';
 				if(monster.getRestartCount() > 0)
@@ -646,15 +626,15 @@ namespace Dq10.SkillSimulator {
 					'\nよろしいですか？';
 				if(!window.confirm(message)) return;
 
-				com.deleteMonster(monsterId);
+				this.com.deleteMonster(monsterId);
 			});
 
 			//下へボタン
 			$ent.find('.movedown').button({
 				icons: { primary: 'ui-icon-triangle-1-s' },
 				text: false
-			}).click(function (e) {
-				var monsterId = getCurrentMonsterId(this);
+			}).click((e) => {
+				var monsterId = this.getCurrentMonsterId(e.currentTarget);
 				var $ent = $('#' + monsterId);
 
 				if($ent.next().length === 0) return;
@@ -663,19 +643,19 @@ namespace Dq10.SkillSimulator {
 				var pos = $ent.position();
 
 				$ent.css({position: 'absolute', top: pos.top, left: pos.left, 'z-index': 1});
-				$ent.animate({top: $ent.next().position().top + $ent.next().height()}, function() {
+				$ent.animate({top: $ent.next().position().top + $ent.next().height()}, () => {
 					$ent.insertAfter($ent.next());
 					$ent.css({position: 'relative', top: 0, left: 0, 'z-index': zIndex});
-					sim.movedownMonster(monsterId);
-					refreshSaveUrl();
+					this.sim.movedownMonster(monsterId);
+					this.refreshSaveUrl();
 				});
 			});
 			//上へボタン
 			$ent.find('.moveup').button({
 				icons: { primary: 'ui-icon-triangle-1-n' },
 				text: false
-			}).click(function (e) {
-				var monsterId = getCurrentMonsterId(this);
+			}).click((e) => {
+				var monsterId = this.getCurrentMonsterId(e.currentTarget);
 				var $ent = $('#' + monsterId);
 
 				if($ent.prev().length === 0) return;
@@ -684,79 +664,79 @@ namespace Dq10.SkillSimulator {
 				var pos = $ent.position();
 
 				$ent.css({position: 'absolute', top: pos.top, left: pos.left, 'z-index': 1});
-				$ent.animate({top: $ent.prev().position().top}, function() {
+				$ent.animate({top: $ent.prev().position().top}, () => {
 					$ent.insertBefore($ent.prev());
 					$ent.css({position: 'relative', top: 0, left: 0, 'z-index': zIndex});
-					sim.moveupMonster(monsterId);
-					refreshSaveUrl();
+					this.sim.moveupMonster(monsterId);
+					this.refreshSaveUrl();
 				});
 			});
 
 			//個体名テキストボックス
-			$ent.find('.indiv_name input').change(function(e) {
-				var monsterId = getCurrentMonsterId(this);
-				var monster = sim.getMonster(monsterId);
+			$ent.find('.indiv_name input').change((e) => {
+				var monsterId = this.getCurrentMonsterId(e.currentTarget);
+				var monster = this.sim.getMonster(monsterId);
 
-				monster.updateIndividualName($(this).val());
-				refreshSaveUrl();
+				monster.updateIndividualName($(e.currentTarget).val());
+				this.refreshSaveUrl();
 			});
 
 			//転生追加スキルセレクトボックス
-			$ent.find('.additional_skill_selector select').change(function(e) {
-				var monsterId = getCurrentMonsterId(this);
-				var monster = sim.getMonster(monsterId);
+			$ent.find('.additional_skill_selector select').change((e) => {
+				var monsterId = this.getCurrentMonsterId(e.currentTarget);
+				var monster = this.sim.getMonster(monsterId);
 
-				var selectorId = parseInt($(this).attr('id').match(/^select-additional(\d+)-/)[1]);
-				if(monster.updateAdditionalSkill(selectorId, $(this).val())) {
-					refreshAdditionalSkill(monsterId);
-					refreshMonsterInfo(monsterId);
-					refreshTotalStatus(monsterId);
-					refreshSaveUrl();
+				var selectorId = parseInt($(e.currentTarget).attr('id').match(/^select-additional(\d+)-/)[1]);
+				if(monster.updateAdditionalSkill(selectorId, $(e.currentTarget).val())) {
+					this.refreshAdditionalSkill(monsterId);
+					this.refreshMonsterInfo(monsterId);
+					this.refreshTotalStatus(monsterId);
+					this.refreshSaveUrl();
 				} else {
-					$(this).val(monster.getAdditionalSkill(selectorId));
+					$(e.currentTarget).val(monster.getAdditionalSkill(selectorId));
 					return false;
 				}
 			});
 
 			//バッジ選択ボタン
-			$ent.find('.badge-button-container a').click(function(e) {
-				var monsterId = getCurrentMonsterId(this);
-				var badgeIndex = parseInt($(this).attr('id').match(/^append-badge(\d+)-/)[1], 10);
+			$ent.find('.badge-button-container a').click((e) => {
+				var monsterId = this.getCurrentMonsterId(e.currentTarget);
+				var badgeIndex = parseInt($(e.currentTarget).attr('id').match(/^append-badge(\d+)-/)[1], 10);
 
-				BadgeSelector.setCurrentMonster(sim.getMonster(monsterId), badgeIndex);
-				BadgeSelector.show((badgeId) => {
-					sim.getMonster(monsterId).badgeEquip[badgeIndex] = badgeId;
-					drawBadgeButton(monsterId, badgeIndex);
-					refreshTotalStatus(monsterId);
-					refreshSaveUrl();
+				this.badgeSelector.setCurrentMonster(this.sim.getMonster(monsterId), badgeIndex);
+				this.badgeSelector.show((badgeId) => {
+					this.sim.getMonster(monsterId).badgeEquip[badgeIndex] = badgeId;
+					this.drawBadgeButton(monsterId, badgeIndex);
+					this.refreshTotalStatus(monsterId);
+					this.refreshSaveUrl();
 				});
 			});
 
 			//なつき度選択セレクトボックス
 			var $natsukiSelect = $ent.find('.natsuki-selector>select');
-			DB.natsukiPts.forEach((natukiData, i) => {
+			this.DB.natsukiPts.forEach((natukiData, i) => {
 				$natsukiSelect.append($("<option />").val(i).text(natukiData.natsukido.toString() + '(' + natukiData.pt.toString() + ')'));
 			});
 			//なつき度選択セレクトボックス変更時
-			$natsukiSelect.change(function() {
-				var monsterId = getCurrentMonsterId(this);
-				var monster = sim.getMonster(monsterId);
+			$natsukiSelect.change((e) => {
+				var monsterId = this.getCurrentMonsterId(e.currentTarget);
+				var monster = this.sim.getMonster(monsterId);
 
-				monster.updateNatsuki(parseInt($(this).val()));
-				refreshMonsterInfo(monsterId);
-				refreshSaveUrl();
+				monster.updateNatsuki(parseInt($(e.currentTarget).val()));
+				this.refreshMonsterInfo(monsterId);
+				this.refreshSaveUrl();
 			});
 		}
 
-		function setupConsole() {
+		private setupConsole() {
 			//URLテキストボックスクリック時
-			$('#url_text').click(function() {
-				$(this).select();
+			$('#url_text').click((e) => {
+				$(e.currentTarget).select();
 			});
 
 			//保存用URLツイートボタン設定
-			$('#tw-saveurl').button().click(function(e) {
-				if($(this).attr('href') === '') return false;
+			$('#tw-saveurl').button().click((e) => {
+				if($(e.currentTarget).attr('href') === '') return false;
 
 				var screenWidth = screen.width, screenHeight = screen.height;
 				var windowWidth = 550, windowHeight = 420;
@@ -773,18 +753,18 @@ namespace Dq10.SkillSimulator {
 					top: windowTop
 				};
 				var windowParam = $.map(windowParams, (val, key) => key + '=' + val).join(',');
-				window.open(this.href, null, windowParam);
+				window.open((<HTMLAnchorElement>e.currentTarget).href, null, windowParam);
 				
 				return false;
 			});
 
 			//すべておりたたむ・すべてひろげるボタン
 			var CLASSNAME_FOLDED = 'folded';
-			$('#fold-all').click(function(e) {
+			$('#fold-all').click((e) => {
 				$('.monster_ent:not([class*="' + CLASSNAME_FOLDED + '"]) .toggle_ent').click();
 				$('body, html').animate({scrollTop: 0});
 			});
-			$('#unfold-all').click(function(e) {
+			$('#unfold-all').click((e) => {
 				$('.' + CLASSNAME_FOLDED + ' .toggle_ent').click();
 				$('body, html').animate({scrollTop: 0});
 			});
@@ -792,491 +772,483 @@ namespace Dq10.SkillSimulator {
 			//レベル一括設定
 			//セレクトボックス初期化
 			var $select = $('#setalllevel>select');
-			for(var i = DB.consts.level.min; i <= DB.consts.level.max; i++) {
+			for(var i = this.DB.consts.level.min; i <= this.DB.consts.level.max; i++) {
 				$select.append($("<option />").val(i).text(i.toString()));
 			}
-			$select.val(DB.consts.level.max);
+			$select.val(this.DB.consts.level.max);
 			
-			$('#setalllevel>button').button().click(function(e) {
-				sim.monsters.forEach((monster) => monster.updateLevel($select.val()));
-				refreshAll();
+			$('#setalllevel>button').button().click((e) => {
+				this.sim.monsters.forEach((monster) => monster.updateLevel($select.val()));
+				this.refreshAll();
 			});
 
-			$('.appendbuttons a').click(function(e) {
-				var monsterType = $(this).attr('id').replace('append-', '');
-				com.addMonster(monsterType);
+			$('.appendbuttons a').click((e) => {
+				var monsterType = $(e.currentTarget).attr('id').replace('append-', '');
+				this.com.addMonster(monsterType);
 			});
 		}
 
-		function setupEvents() {
-			com.on('MonsterAppended', (monster, index) => {
+		private setupEvents() {
+			this.com.on('MonsterAppended', (monster, index) => {
 				$('#initial-instruction').hide();
 
-				$('#monsters').append(drawMonsterEntry(monster));
-				setupEntry(monster.id);
-				refreshEntry(monster.id);
+				$('#monsters').append(this.drawMonsterEntry(monster));
+				this.setupEntry(monster.id);
+				this.refreshEntry(monster.id);
 
 				$('#' + monster.id + ' .indiv_name input').focus().select();
 			});
-			com.on('MonsterRemoved', (monster) => {
+			this.com.on('MonsterRemoved', (monster) => {
 				$('#' + monster.id).remove();
 
-				refreshSaveUrl();
+				this.refreshSaveUrl();
 
-				if(sim.monsters.length === 0)
+				if(this.sim.monsters.length === 0)
 					$('#initial-instruction').show();
 			});
 		}
 
-		function setupAll() {
-			setupConsole();
-			setupEvents();
-			BadgeSelector.setup();
+		setupAll() {
+			this.setupConsole();
+			this.setupEvents();
+			this.badgeSelector = new BadgeSelector();
+			this.badgeSelector.setup();
 
 			$('#monsters').empty();
 
-			if(sim.monsters.length > 0)
+			if(this.sim.monsters.length > 0)
 				$('#initial-instruction').hide();
 
-			sim.monsters.forEach((monster) => $('#monsters').append(drawMonsterEntry(monster)));
-			setupEntry('monsters');
+			this.sim.monsters.forEach((monster) => $('#monsters').append(this.drawMonsterEntry(monster)));
+			this.setupEntry('monsters');
 
-			refreshAll();
+			this.refreshAll();
+		}
+	}
+
+	//バッジ選択ダイアログ
+	class BadgeSelector {
+		private $dialog;
+		private $maskScreen;
+
+		private dialogResult = false;
+		private selectedBadgeId: string = null;
+		private closingCallback: (badgeId: string) => void;
+
+		//バッジ効果リストのキャッシュ
+		private featureCache: {[badgeId: string]: string[]} = {};
+
+		//ソート順の昇降を保持
+		private sortByIdDesc = false;
+		private sortByKanaDesc = false;
+
+		//モンスターデータを一部保持
+		private status: {[statusType: string]: number} = {};
+		private currentBadgeId: string = null;
+		private badgeEquip: string[] = [];
+
+		private DB: MonsterSimulatorDB;
+		private badgeSearch: BadgeSearch;
+		
+		constructor() {
+			this.DB = MonsterDB;
+			this.badgeSearch = new BadgeSearch();
+		}
+		
+		setup() {
+			this.$dialog = $('#badge-selector');
+			this.$maskScreen = $('#dark-screen');
+
+			this.$maskScreen.click((e) => {
+				this.cancel();
+			});
+
+			//ヘッダー部ドラッグで画面移動可能
+			this.$dialog.draggable({
+				handle: '#badge-selector-header',
+				cursor: 'move'
+			});
+
+			//バッジをはずすボタン
+			$('#badge-selector-remove').click((e) => {
+				this.apply(null);
+			}).hover((e) => {
+				this.clearBadgeInfo();
+				this.refreshStatusAfter(null);
+			});
+
+			//バッジ設定ボタン
+			$('#badge-selector-list a').click((e) => {
+				var badgeId = this.getBadgeId(<Element>e.currentTarget);
+				this.apply(badgeId);
+			}).hover((e) => {
+				var badgeId = this.getBadgeId(<Element>e.currentTarget);
+				this.refreshBadgeInfo(badgeId);
+				this.refreshStatusAfter(badgeId);
+			});
+
+			//バッジ検索ボタン
+			$('#badge-search-buttons-race,' +
+				'#badge-search-buttons-rarity,' +
+				'#badge-search-buttons-feature').find('a').click((e) => {
+				var searchKey = $(e.currentTarget).attr('data-search-key');
+				var filterType = $(e.currentTarget).attr('data-filter-type');
+
+				var isTurningOn = this.badgeSearch.toggleSearch(filterType, searchKey);
+				this.toggleSearchButtons(<HTMLAnchorElement>e.currentTarget, isTurningOn, (filterType == 'race' || filterType == 'rarity'));
+
+				this.filterButtons(this.badgeSearch.getIds());
+
+				if(isTurningOn && filterType == 'feature' && this.DB.badgefeature[searchKey]['type'] == 'int') {
+					this.sortBadgeByFeatureValue(searchKey, true);
+				}
+			});
+
+			//バッジソートボタン
+			$('#badge-sort-badgeid').click((e) => {
+				this.sortBadgeById(this.sortByIdDesc);
+				this.sortByIdDesc = !this.sortByIdDesc;
+				this.sortByKanaDesc = false;
+			});
+			$('#badge-sort-kana').click((e) => {
+				this.sortBadgeByKana(this.sortByKanaDesc);
+				this.sortByKanaDesc = !this.sortByKanaDesc;
+				this.sortByIdDesc = false;
+			});
+
+			//検索クリアボタン
+			$('#badge-search-clear').click((e) => {
+				this.clearFilter();
+			});
 		}
 
-		//数値を3桁区切りに整形
-		function numToFormedStr(num: number) {
-			if(isNaN(num)) return 'N/A';
-			return num.toString().split(/(?=(?:\d{3})+$)/).join(',');
+		private getBadgeId(elem: Element): string {
+			if(elem.tagName.toUpperCase() == 'LI')
+				elem = $(elem).find('a').get(0);
+
+			if($(elem).attr('id') == 'badge-selector-remove')
+				return null;
+			else
+				return $(elem).attr('data-badge-id');
 		}
 
-		//バッジ選択ダイアログ
-		var BadgeSelector = (function() {
-			var $dialog;
-			var $maskScreen;
+		private clearBadgeInfo() {
+			$('#badge-selector-badge-id').text('');
+			$('#badge-selector-badge-name').text('');
+			$('#badge-selector-race').text('');
+			$('#badge-selector-feature-list').empty();
+		}
 
-			var dialogResult = false;
-			var selectedBadgeId: string = null;
-			var closingCallback: (badgeId: string) => void;
+		private refreshBadgeInfo(badgeId: string) {
+			var badge = this.DB.badges[badgeId];
+			if(!badge) return;
 
-			//バッジ効果リストのキャッシュ
-			var featureCache: {[badgeId: string]: string[]} = {};
+			$('#badge-selector-badge-id').text(badgeId);
 
-			//ソート順の昇降を保持
-			var sortByIdDesc = false;
-			var sortByKanaDesc = false;
+			var badgeName = badge.name + '・' + this.DB.badgerarity[badge.rarity];
+			$('#badge-selector-badge-name').text(badgeName);
 
-			//モンスターデータを一部保持
-			var status: {[statusType: string]: number} = {};
-			var currentBadgeId: string = null;
-			var badgeEquip: string[] = [];
+			var raceName;
+			if(badge.race == 'special')
+				raceName = 'スペシャルバッジ';
+			else
+				raceName = this.DB.badgerace[badge.race].name + '系';
+			$('#badge-selector-race').text(raceName);
 
-			//検索機能
-			var BadgeSearch = (function() {
-				var univIds: string[] = []; //全集合
+			var features = this.getFeatureCache(badgeId);
 
-				//検索フィルター状態保持変数
-				interface SearchFilter {
-					filterType: string;
-					searchKey: string;
-				};
-				var search: SearchFilter[] = [];
-				
-				//検索キャッシュ
-				var searchCache = {};
+			var $featureList = $('#badge-selector-feature-list');
+			$featureList.empty();
+			features.forEach((feature) => $('<li>').text(feature).appendTo($featureList));
+		}
+		getFeatureCache(badgeId: string) {
+			if(this.featureCache[badgeId])
+				return this.featureCache[badgeId];
 
-				function toggleSearch(filterType: string, searchKey: string) {
-					var isTurningOn = true;
+			var badge = this.DB.badges[badgeId];
 
-					search.some((filter, i) => {
-						if(filter.filterType == filterType && filter.searchKey == searchKey) {
-							isTurningOn = false;
-							search.splice(i, 1);
-							return true;
-						}
-						if((filterType == 'race' || filterType == 'rarity') && filter.filterType == filterType) {
-							search.splice(i, 1);
-							return true;
-						}
-					});
+			var features: string[] = [];
+			Object.keys(this.DB.badgefeature).forEach((f) => {
+				var feature = this.DB.badgefeature[f];
+				var val = badge[f];
+
+				if(val) {
+					switch(feature.type) {
+						case 'int':
+						case 'string':
+							if(feature.format)
+								features.push(feature.format.replace('@v', val));
+							else
+								features.push(feature.name + ' +' + val.toString());
+							break;
+						case 'array':
+							features = features.concat(getFeatureArrayFromArray(feature.format, val));
+							break;
+						case 'hash':
+							features = features.concat(getFeatureArrayFromHash(feature.format, val));
+							break;
+					}
+				}
+			});
+
+			this.featureCache[badgeId] = features;
+			return this.featureCache[badgeId];
+
+			function getFeatureArrayFromArray(format: string, fromArray: string[]) {
+				return fromArray.map((ent) => format.replace('@v', ent));
+			}
+			function getFeatureArrayFromHash(format: string, fromHash: {[key: string]: any}) {
+				return Object.keys(fromHash).map((key) => {
+					var value = fromHash[key];
+					return format.replace('@k', key).replace('@v', value);
+				});
+			}
+		}
+
+		private STATUS_ARRAY = 'atk,def,maxhp,maxmp,magic,heal,spd,dex,stylish,weight'.split(',');
+
+		setCurrentMonster(monster: MonsterUnit, badgeIndex: number) {
+			this.STATUS_ARRAY.forEach((s) => {
+				this.status[s] = monster.getTotalStatus(s);
+
+				$('#badge-status-current-' + s).text(this.status[s]);
+			});
+			this.currentBadgeId = monster.badgeEquip[badgeIndex];
+
+			this.refreshStatusAfter(null);
+		}
+
+		private refreshStatusAfter(badgeId: string) {
+			var currentBadge: Badge = null;
+			if(this.currentBadgeId !== null)
+				currentBadge = this.DB.badges[this.currentBadgeId];
+			var newBadge: Badge = null;
+			if(badgeId !== null)
+				newBadge = this.DB.badges[badgeId];
+
+			this.STATUS_ARRAY.forEach((s) => {
+				var before = this.status[s];
+
+				var after = before;
+				if(currentBadge !== null && currentBadge[s])
+					after -= currentBadge[s];
+				if(newBadge !== null && newBadge[s])
+					after += newBadge[s];
+
+				$('#badge-status-after-' + s).text(before == after ? '' : after)
+					.toggleClass('badge-status-plus', before < after)
+					.toggleClass('badge-status-minus', before > after);
+			});
+		}
+
+		private toggleSearchButtons(anchor: HTMLAnchorElement, isTurningOn: boolean, isUnique: boolean) {
+			var $button = $(anchor).parent('li');
+			var $container = $button.parent('ul');
+
+			if(isUnique)
+				$container.find('li').removeClass('selected');
+			$button.toggleClass('selected', isTurningOn);
+		}
+
+		private filterButtons(showIds: string[]) {
+			var $allVisibleButtons = $('#badge-selector-list li:visible');
+			var $allHiddenButtons = $('#badge-selector-list li:hidden');
+
+			$allVisibleButtons.filter((i, elem) => {
+				var badgeId = this.getBadgeId(elem);
+				return showIds.indexOf(badgeId) == -1;
+			}).hide();
+			$allHiddenButtons.filter((i, elem) => {
+				var badgeId = this.getBadgeId(elem);
+				return showIds.indexOf(badgeId) != -1;
+			}).show();
+		}
+
+		private sortBadgeBy(func: (li: HTMLLIElement) => any, desc: boolean) {
+			if(desc === undefined) desc = false;
+
+			$('#badge-selector-list').append(
+				$('#badge-selector-list li').toArray().sort((a, b) => {
+					var key_a = func(a);
+					var key_b = func(b);
 					
-					if(isTurningOn)
-						search.push({
-							filterType: filterType,
-							searchKey: searchKey
-						});
-
-					return isTurningOn;
-				}
-
-				function getIds() {
-					return search.reduce((ids, filter) => {
-						var cacheKey = filter.filterType + '_' + filter.searchKey;
-						return arrayIntersect(ids, getSearchCache(cacheKey));
-					}, getUnivIds());
-				}
-
-				function arrayIntersect(array1: string[], array2: string[]) {
-					return array1.filter((val) => array2.indexOf(val) >= 0);
-				}
-
-				function getSearchCache(key: string) {
-					if(searchCache[key])
-						return searchCache[key];
-
-					var _s = key.split('_'),
-						filterType = _s[0],
-						searchKey = _s[1];
-
-					var filterFunc: (badge: Badge) => boolean;
-					switch(filterType) {
-						case 'race':
-							filterFunc = (badge) => badge.race == searchKey;
-							break;
-						case 'rarity':
-							filterFunc = (badge) => badge.rarity == searchKey;
-							break;
-						case 'feature':
-							filterFunc = (badge) => badge[searchKey] !== undefined;
-							break;
-						default:
-							throw 'UnknownFilterType';
+					var ascend = key_a < key_b;
+					if(desc) ascend = !ascend;
+					
+					if(key_a == key_b) {
+						key_a = this.getBadgeId(a);
+						key_b = this.getBadgeId(b);
+						ascend = key_a < key_b;
 					}
 
-					return getUnivIds().filter((id) => filterFunc(DB.badges[id]));
+					return ascend ? -1 : 1;
+				})
+			);
+		}
+		private sortBadgeById(desc: boolean) {
+			this.sortBadgeBy((li) => this.getBadgeId(li), desc);
+		}
+		private sortBadgeByKana(desc: boolean) {
+			this.sortBadgeBy((li) => $(li).attr('data-kana-sort-key'), desc);
+		}
+		private sortBadgeByFeatureValue(feature: string, desc: boolean) {
+			this.sortBadgeBy((li) => {
+				var badgeId = this.getBadgeId(li);
+				var ret: any = this.DB.badges[badgeId][feature];
+
+				return ret !== undefined ? ret : 0;
+			}, desc);
+		}
+
+		private clearFilter() {
+			$('#badge-selector-list li').show();
+			this.badgeSearch.clear();
+			$('#badge-search-buttons-race li,' +
+				'#badge-search-buttons-rarity li,' +
+				'#badge-search-buttons-feature li').removeClass('selected');
+
+			this.sortByIdDesc = false;
+			$('#badge-sort-badgeid').click();
+		}
+
+		private apply(badgeId: string) {
+			this.closingCallback(badgeId);
+			this.hide();
+		}
+		private cancel() {
+			this.hide();
+		}
+		show(callback: (badgeId: string) => void) {
+			this.clearBadgeInfo();
+			this.$maskScreen.show();
+			this.$dialog.show();
+			this.selectedBadgeId = null;
+			this.closingCallback = callback;
+		}
+		private hide() {
+			this.$dialog.hide();
+			this.$maskScreen.hide();
+		}
+	}
+	
+	//検索フィルター状態保持変数
+	interface SearchFilter {
+		filterType: string;
+		searchKey: string;
+	};
+	
+	//検索機能
+	class BadgeSearch {
+		private univIds: string[] = []; //全集合
+		private search: SearchFilter[] = [];
+		
+		//検索キャッシュ
+		private searchCache = {};
+		
+		private DB: MonsterSimulatorDB;
+		
+		constructor() {
+			this.DB = MonsterDB;
+		}
+		
+		toggleSearch(filterType: string, searchKey: string) {
+			var isTurningOn = true;
+
+			this.search.some((filter, i) => {
+				if(filter.filterType == filterType && filter.searchKey == searchKey) {
+					isTurningOn = false;
+					this.search.splice(i, 1);
+					return true;
 				}
-
-				function getUnivIds() {
-					if(univIds.length > 0)
-						return univIds;
-
-					univIds = Object.keys(DB.badges);
-					return univIds;
+				if((filterType == 'race' || filterType == 'rarity') && filter.filterType == filterType) {
+					this.search.splice(i, 1);
+					return true;
 				}
-
-				function clear() {
-					search = [];
-				}
-
-				return {
-					toggleSearch: toggleSearch,
-					getIds: getIds,
-					clear: clear
-				};
-			})();
-
-			function setup() {
-				$dialog = $('#badge-selector');
-				$maskScreen = $('#dark-screen');
-
-				$maskScreen.click(function(e) {
-					cancel();
+			});
+			
+			if(isTurningOn)
+				this.search.push({
+					filterType: filterType,
+					searchKey: searchKey
 				});
 
-				//ヘッダー部ドラッグで画面移動可能
-				$dialog.draggable({
-					handle: '#badge-selector-header',
-					cursor: 'move'
-				});
+			return isTurningOn;
+		}
 
-				//バッジをはずすボタン
-				$('#badge-selector-remove').click(function(e) {
-					apply(null);
-				}).hover(function(e) {
-					clearBadgeInfo();
-					refreshStatusAfter(null);
-				});
+		getIds() {
+			return this.search.reduce((ids, filter) => {
+				var cacheKey = filter.filterType + '_' + filter.searchKey;
+				return this.arrayIntersect(ids, this.getSearchCache(cacheKey));
+			}, this.getUnivIds());
+		}
 
-				//バッジ設定ボタン
-				$('#badge-selector-list a').click(function(e) {
-					var badgeId = getBadgeId(this);
-					apply(badgeId);
-				}).hover(function(e) {
-					var badgeId = getBadgeId(this);
-					refreshBadgeInfo(badgeId);
-					refreshStatusAfter(badgeId);
-				});
+		private arrayIntersect(array1: string[], array2: string[]) {
+			return array1.filter((val) => array2.indexOf(val) >= 0);
+		}
 
-				//バッジ検索ボタン
-				$('#badge-search-buttons-race,' +
-				  '#badge-search-buttons-rarity,' +
-				  '#badge-search-buttons-feature').find('a').click(function(e) {
-					var searchKey = $(this).attr('data-search-key');
-					var filterType = $(this).attr('data-filter-type');
+		private getSearchCache(key: string) {
+			if(this.searchCache[key])
+				return this.searchCache[key];
 
-					var isTurningOn = BadgeSearch.toggleSearch(filterType, searchKey);
-					toggleSearchButtons(this, isTurningOn, (filterType == 'race' || filterType == 'rarity'));
+			var _s = key.split('_'),
+				filterType = _s[0],
+				searchKey = _s[1];
 
-					filterButtons(BadgeSearch.getIds());
-
-					if(isTurningOn && filterType == 'feature' && DB.badgefeature[searchKey]['type'] == 'int') {
-						sortBadgeByFeatureValue(searchKey, true);
-					}
-				});
-
-				//バッジソートボタン
-				$('#badge-sort-badgeid').click(function(e) {
-					sortBadgeById(sortByIdDesc);
-					sortByIdDesc = !sortByIdDesc;
-					sortByKanaDesc = false;
-				});
-				$('#badge-sort-kana').click(function(e) {
-					sortBadgeByKana(sortByKanaDesc);
-					sortByKanaDesc = !sortByKanaDesc;
-					sortByIdDesc = false;
-				});
-
-				//検索クリアボタン
-				$('#badge-search-clear').click(function(e) {
-					clearFilter();
-				});
+			var filterFunc: (badge: Badge) => boolean;
+			switch(filterType) {
+				case 'race':
+					filterFunc = (badge) => badge.race == searchKey;
+					break;
+				case 'rarity':
+					filterFunc = (badge) => badge.rarity == searchKey;
+					break;
+				case 'feature':
+					filterFunc = (badge) => badge[searchKey] !== undefined;
+					break;
+				default:
+					throw 'UnknownFilterType';
 			}
 
-			function getBadgeId(elem: HTMLElement): string {
-				if(elem.tagName.toUpperCase() == 'LI')
-					elem = $(elem).find('a').get(0);
+			return this.getUnivIds().filter((id) => filterFunc(this.DB.badges[id]));
+		}
 
-				if($(elem).attr('id') == 'badge-selector-remove')
-					return null;
-				else
-					return $(elem).attr('data-badge-id');
-			}
+		private getUnivIds() {
+			if(this.univIds.length > 0)
+				return this.univIds;
 
-			function clearBadgeInfo() {
-				$('#badge-selector-badge-id').text('');
-				$('#badge-selector-badge-name').text('');
-				$('#badge-selector-race').text('');
-				$('#badge-selector-feature-list').empty();
-			}
+			this.univIds = Object.keys(this.DB.badges);
+			return this.univIds;
+		}
 
-			function refreshBadgeInfo(badgeId: string) {
-				var badge = DB.badges[badgeId];
-				if(!badge) return;
+		clear() {
+			this.search = [];
+		}
+	}
+	//数値を3桁区切りに整形
+	function numToFormedStr(num: number) {
+		if(isNaN(num)) return 'N/A';
+		return num.toString().split(/(?=(?:\d{3})+$)/).join(',');
+	}
 
-				$('#badge-selector-badge-id').text(badgeId);
+(function($: JQueryStatic) {
+	Simulator = new SimulatorModel();
 
-				var badgeName = badge.name + '・' + DB.badgerarity[badge.rarity];
-				$('#badge-selector-badge-name').text(badgeName);
-
-				var raceName;
-				if(badge.race == 'special')
-					raceName = 'スペシャルバッジ';
-				else
-					raceName = DB.badgerace[badge.race].name + '系';
-				$('#badge-selector-race').text(raceName);
-
-				var features = getFeatureCache(badgeId);
-
-				var $featureList = $('#badge-selector-feature-list');
-				$featureList.empty();
-				features.forEach((feature) => $('<li>').text(feature).appendTo($featureList));
-			}
-			function getFeatureCache(badgeId: string) {
-				if(featureCache[badgeId])
-					return featureCache[badgeId];
-
-				var badge = DB.badges[badgeId];
-
-				var features: string[] = [];
-				Object.keys(DB.badgefeature).forEach((f) => {
-					var feature = DB.badgefeature[f];
-					var val = badge[f];
-
-					if(val) {
-						switch(feature.type) {
-							case 'int':
-							case 'string':
-								if(feature.format)
-									features.push(feature.format.replace('@v', val));
-								else
-									features.push(feature.name + ' +' + val.toString());
-								break;
-							case 'array':
-								features = features.concat(getFeatureArrayFromArray(feature.format, val));
-								break;
-							case 'hash':
-								features = features.concat(getFeatureArrayFromHash(feature.format, val));
-								break;
-						}
-					}
-				});
-
-				featureCache[badgeId] = features;
-				return featureCache[badgeId];
-
-				function getFeatureArrayFromArray(format: string, fromArray: string[]) {
-					var retArray: string[] = [];
-
-					fromArray.forEach((ent) => {
-						var ret = format.replace('@v', ent);
-						retArray.push(ret);
-					});
-
-					return retArray;
-				}
-				function getFeatureArrayFromHash(format: string, fromHash: {[key: string]: any}) {
-					var retArray: string[] = [];
-
-					Object.keys(fromHash).forEach((k) => {
-						var v = fromHash[k];
-						var ret = format.replace('@k', k).replace('@v', v);
-						retArray.push(ret);
-					});
-
-					return retArray;
-				}
-			}
-
-			var STATUS_ARRAY = 'atk,def,maxhp,maxmp,magic,heal,spd,dex,stylish,weight'.split(',');
-
-			function setCurrentMonster(monster: MonsterUnit, badgeIndex: number) {
-				STATUS_ARRAY.forEach((s) => {
-					status[s] = monster.getTotalStatus(s);
-
-					$('#badge-status-current-' + s).text(status[s]);
-				});
-				currentBadgeId = monster.badgeEquip[badgeIndex];
-
-				refreshStatusAfter(null);
-			}
-
-			function refreshStatusAfter(badgeId: string) {
-				var currentBadge: Badge = null;
-				if(currentBadgeId !== null)
-					currentBadge = DB.badges[currentBadgeId];
-				var newBadge: Badge = null;
-				if(badgeId !== null)
-					newBadge = DB.badges[badgeId];
-
-				STATUS_ARRAY.forEach((s) => {
-					var before = status[s];
-
-					var after = before;
-					if(currentBadge !== null && currentBadge[s])
-						after -= currentBadge[s];
-					if(newBadge !== null && newBadge[s])
-						after += newBadge[s];
-
-					$('#badge-status-after-' + s).text(before == after ? '' : after)
-						.toggleClass('badge-status-plus', before < after)
-						.toggleClass('badge-status-minus', before > after);
-				});
-			}
-
-			function toggleSearchButtons(anchor: HTMLAnchorElement, isTurningOn: boolean, isUnique: boolean) {
-				var $button = $(anchor).parent('li');
-				var $container = $button.parent('ul');
-
-				if(isUnique)
-					$container.find('li').removeClass('selected');
-				$button.toggleClass('selected', isTurningOn);
-			}
-
-			function filterButtons(showIds: string[]) {
-				var $allVisibleButtons = $('#badge-selector-list li:visible');
-				var $allHiddenButtons = $('#badge-selector-list li:hidden');
-
-				$allVisibleButtons.filter(function() {
-						var badgeId = getBadgeId(this);
-						return showIds.indexOf(badgeId) == -1;
-					}).hide();
-				$allHiddenButtons.filter(function() {
-						var badgeId = getBadgeId(this);
-						return showIds.indexOf(badgeId) != -1;
-					}).show();
-			}
-
-			function sortBadgeBy(func: (li: HTMLLIElement) => any, desc: boolean) {
-				if(desc === undefined) desc = false;
-
-				$('#badge-selector-list').append(
-					$('#badge-selector-list li').toArray().sort((a, b) => {
-						var key_a = func(a);
-						var key_b = func(b);
-						
-						var ascend = key_a < key_b;
-						if(desc) ascend = !ascend;
-						
-						if(key_a == key_b) {
-							key_a = getBadgeId(a);
-							key_b = getBadgeId(b);
-							ascend = key_a < key_b;
-						}
-
-						return ascend ? -1 : 1;
-					})
-				);
-			}
-			function sortBadgeById(desc: boolean) {
-				sortBadgeBy((li) => getBadgeId(li), desc);
-			}
-			function sortBadgeByKana(desc: boolean) {
-				sortBadgeBy((li) => $(li).attr('data-kana-sort-key'), desc);
-			}
-			function sortBadgeByFeatureValue(feature: string, desc: boolean) {
-				sortBadgeBy((li) => {
-					var badgeId = getBadgeId(li);
-					var ret: any = DB.badges[badgeId][feature];
-
-					return ret !== undefined ? ret : 0;
-				}, desc);
-			}
-
-			function clearFilter() {
-				$('#badge-selector-list li').show();
-				BadgeSearch.clear();
-				$('#badge-search-buttons-race li,' +
-					'#badge-search-buttons-rarity li,' +
-					'#badge-search-buttons-feature li').removeClass('selected');
-
-				sortByIdDesc = false;
-				$('#badge-sort-badgeid').click();
-			}
-
-			function apply(badgeId: string) {
-				closingCallback(badgeId);
-				hide();
-			}
-			function cancel() {
-				hide();
-			}
-			function show(callback: (badgeId: string) => void) {
-				clearBadgeInfo();
-				$maskScreen.show();
-				$dialog.show();
-				selectedBadgeId = null;
-				closingCallback = callback;
-			}
-			function hide() {
-				$dialog.hide();
-				$maskScreen.hide();
-			}
-
-			//API
-			return {
-				//メソッド
-				setup: setup,
-				setCurrentMonster: setCurrentMonster,
-				show: show,
-				getFeatureCache: getFeatureCache
-			};
-		})();
-
-		//API
-		return {
-			setupAll: setupAll
-		};
-	})();
+	//データJSONを格納する変数
+	var DATA_JSON_URI = window.location.href.replace(/\/[^\/]*$/, '/dq10skill-monster-data.json');
+	var $dbLoad = $.getJSON(DATA_JSON_URI, (data) => {
+		MonsterDB = data;
+	});
 
 	//ロード時
-	$(function() {
+	$(() => {
 		$dbLoad.done((data) => {
 			var query = window.location.search.substring(1);
 			if(Simulator.validateQueryString(query)) {
 				Simulator.applyQueryString(query);
 			}
 
-			SimulatorUI.setupAll();
+			var ui = new SimulatorUI(Simulator);
+			ui.setupAll();
 		});
 	});
 })(jQuery);
