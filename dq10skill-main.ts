@@ -1,4 +1,6 @@
 /// <reference path="typings/jquery/jquery.d.ts" />
+/// <reference path="typings/jqueryui/jqueryui.d.ts" />
+
 /// <reference path="typings/dq10skill.d.ts" />
 /// <reference path="typings/rawdeflate.d.ts" />
 /// <reference path="typings/shortcut.d.ts" />
@@ -10,7 +12,7 @@ namespace Dq10.SkillSimulator {
 	export var Simulator;
 	export var SimulatorDB: SkillSimulatorDB;
 
-(function($) {
+(function($: JQueryStatic) {
 	"use strict";
 
 	//データJSONを格納する変数
@@ -459,7 +461,7 @@ namespace Dq10.SkillSimulator {
 		var sim = Simulator;
 		var com = new SimulatorCommandManager();
 
-		var $ptConsole, $lvConsole, $trainingPtConsole;
+		var $ptConsole: JQuery, $lvConsole: JQuery, $trainingPtConsole: JQuery;
 		
 		var mspMode = false; //MSP編集モードフラグ
 
@@ -725,8 +727,8 @@ namespace Dq10.SkillSimulator {
 						var skillLineId = getCurrentSkillLine(this);
 
 						var succeeded = mspMode ?
-							com.updateMSP(skillLineId, parseInt(ui.value, 10)) :
-							com.updateSkillPt(vocationId, skillLineId, parseInt(ui.value, 10));
+							com.updateMSP(skillLineId, ui.value) :
+							com.updateSkillPt(vocationId, skillLineId, ui.value);
 
 						if(succeeded) {
 							e.stopPropagation();

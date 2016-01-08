@@ -1,4 +1,6 @@
 /// <reference path="typings/jquery/jquery.d.ts" />
+/// <reference path="typings/jqueryui/jqueryui.d.ts" />
+
 /// <reference path="typings/dq10skill.d.ts" />
 
 /// <reference path="dq10skill-monster-monster.ts" />
@@ -32,7 +34,7 @@ namespace Dq10.SkillSimulator {
 		BITS_ADDITIONAL_SKILL * ADDITIONAL_SKILL_MAX; // +
 		//BITS_BADGE * BADGE_COUNT;
 	
-(function($) {
+(function($: JQueryStatic) {
 	"use strict";
 
 	//データJSONを格納する変数
@@ -469,7 +471,7 @@ namespace Dq10.SkillSimulator {
 					var monsterId = getCurrentMonsterId(this);
 					var monster = sim.getMonster(monsterId);
 
-					if(monster.updateRestartCount(parseInt(ui.value, 10))) {
+					if(monster.updateRestartCount(ui.value)) {
 						refreshAdditionalSkillSelector(monsterId);
 						refreshAdditionalSkill(monsterId);
 						refreshMonsterInfo(monsterId);
@@ -511,7 +513,7 @@ namespace Dq10.SkillSimulator {
 					var monsterId = getCurrentMonsterId(this);
 					var skillLineId = getCurrentSkillLine(this);
 					
-					if(sim.getMonster(monsterId).updateSkillPt(skillLineId, parseInt(ui.value, 10))) {
+					if(sim.getMonster(monsterId).updateSkillPt(skillLineId, ui.value)) {
 						refreshSkillList(monsterId, skillLineId);
 						refreshMonsterInfo(monsterId);
 						refreshTotalStatus(monsterId);
@@ -704,7 +706,7 @@ namespace Dq10.SkillSimulator {
 				var monsterId = getCurrentMonsterId(this);
 				var monster = sim.getMonster(monsterId);
 
-				var selectorId = $(this).attr('id').match(/^select-additional(\d+)-/)[1];
+				var selectorId = parseInt($(this).attr('id').match(/^select-additional(\d+)-/)[1]);
 				if(monster.updateAdditionalSkill(selectorId, $(this).val())) {
 					refreshAdditionalSkill(monsterId);
 					refreshMonsterInfo(monsterId);
@@ -1038,7 +1040,7 @@ namespace Dq10.SkillSimulator {
 
 			function getBadgeId(elem: HTMLElement): string {
 				if(elem.tagName.toUpperCase() == 'LI')
-					elem = $(elem).find('a');
+					elem = $(elem).find('a').get(0);
 
 				if($(elem).attr('id') == 'badge-selector-remove')
 					return null;
@@ -1194,7 +1196,7 @@ namespace Dq10.SkillSimulator {
 				if(desc === undefined) desc = false;
 
 				$('#badge-selector-list').append(
-					$('#badge-selector-list li').sort(function(a, b) {
+					$('#badge-selector-list li').toArray().sort(function(a, b) {
 						var key_a = func(a);
 						var key_b = func(b);
 						

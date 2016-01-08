@@ -443,6 +443,7 @@ var Base64 = (function () {
     return Base64;
 })();
 /// <reference path="typings/jquery/jquery.d.ts" />
+/// <reference path="typings/jqueryui/jqueryui.d.ts" />
 /// <reference path="typings/dq10skill.d.ts" />
 /// <reference path="typings/rawdeflate.d.ts" />
 /// <reference path="typings/shortcut.d.ts" />
@@ -1055,8 +1056,8 @@ var Dq10;
                                 var vocationId = getCurrentVocation(this);
                                 var skillLineId = getCurrentSkillLine(this);
                                 var succeeded = mspMode ?
-                                    com.updateMSP(skillLineId, parseInt(ui.value, 10)) :
-                                    com.updateSkillPt(vocationId, skillLineId, parseInt(ui.value, 10));
+                                    com.updateMSP(skillLineId, ui.value) :
+                                    com.updateSkillPt(vocationId, skillLineId, ui.value);
                                 if (succeeded) {
                                     e.stopPropagation();
                                 }
