@@ -18,7 +18,7 @@ namespace Dq10.SkillSimulator {
 	//データJSONを格納する変数
 	var DB: SkillSimulatorDB;
 	var DATA_JSON_URI = window.location.href.replace(/\/[^\/]*$/, '/dq10skill-data.json');
-	var $dbLoad = $.getJSON(DATA_JSON_URI, function(data) {
+	var $dbLoad = $.getJSON(DATA_JSON_URI, (data) => {
 		DB = data;
 		SimulatorDB = DB;
 	});
@@ -919,7 +919,7 @@ namespace Dq10.SkillSimulator {
 						left: windowLeft,
 						top: windowTop
 					};
-					var windowParam = $.map(windowParams, function(val, key) { return key + '=' + val; }).join(',');
+					var windowParam = $.map(windowParams, (val, key) => key + '=' + val).join(',');
 					window.open(this.href, null, windowParam);
 					
 					return false;
@@ -1096,17 +1096,13 @@ namespace Dq10.SkillSimulator {
 					refreshAll();
 				});
 
-				com.on('CommandStackChanged', function() {
+				com.on('CommandStackChanged', () => {
 					$undoButton.button('option', 'disabled', !com.isUndoable());
 					$redoButton.button('option', 'disabled', !com.isRedoable());
 				});
 
-				shortcut.add('Ctrl+Z', function() {
-					$undoButton.click();
-				});
-				shortcut.add('Ctrl+Y', function() {
-					$redoButton.click();
-				});
+				shortcut.add('Ctrl+Z', () => $undoButton.click());
+				shortcut.add('Ctrl+Y', () => $redoButton.click());
 			}
 		];
 		
@@ -1298,7 +1294,7 @@ namespace Dq10.SkillSimulator {
 						left: windowLeft,
 						top: windowTop
 					};
-					var windowParam = $.map(windowParams, function(val, key) { return key + '=' + val; }).join(',');
+					var windowParam = $.map(windowParams, (val, key) => key + '=' + val).join(',');
 					window.open(this.href, null, windowParam);
 					
 					return false;
@@ -1354,7 +1350,7 @@ namespace Dq10.SkillSimulator {
 		
 		var ui = window.location.pathname.indexOf('/simple.html') > 0 ? SimpleUI : SimulatorUI;
 
-		$dbLoad.done(function(data) {
+		$dbLoad.done((data) => {
 			Simulator.initialize();
 
 			loadQuery();

@@ -40,7 +40,7 @@ namespace Dq10.SkillSimulator {
 	//データJSONを格納する変数
 	var DB: MonsterSimulatorDB;
 	var DATA_JSON_URI = window.location.href.replace(/\/[^\/]*$/, '/dq10skill-monster-data.json');
-	var $dbLoad = $.getJSON(DATA_JSON_URI, function(data) {
+	var $dbLoad = $.getJSON(DATA_JSON_URI, (data) => {
 		DB = data;
 		MonsterDB = DB;
 	});
@@ -169,11 +169,11 @@ namespace Dq10.SkillSimulator {
 				.attr('id', monster.id)
 				.css('display', 'block');
 			$ent.find('.monstertype').text(monster.data.name);
-			$ent.find('[id$=-dummy]').each(function() {
-				var dummyId = $(this).attr('id');
+			$ent.find('[id$=-dummy]').each((i, elem) => {
+				var dummyId = $(elem).attr('id');
 				var newId = dummyId.replace('-dummy', '-' + monster.id);
 
-				$(this).attr('id', newId);
+				$(elem).attr('id', newId);
 				$ent.find('label[for=' + dummyId + ']').attr('for', newId);
 			});
 			$ent.find('.indiv_name input').val(monster.indivName);
@@ -724,7 +724,7 @@ namespace Dq10.SkillSimulator {
 				var badgeIndex = parseInt($(this).attr('id').match(/^append-badge(\d+)-/)[1], 10);
 
 				BadgeSelector.setCurrentMonster(sim.getMonster(monsterId), badgeIndex);
-				BadgeSelector.show(function(badgeId) {
+				BadgeSelector.show((badgeId) => {
 					sim.getMonster(monsterId).badgeEquip[badgeIndex] = badgeId;
 					drawBadgeButton(monsterId, badgeIndex);
 					refreshTotalStatus(monsterId);
@@ -734,7 +734,7 @@ namespace Dq10.SkillSimulator {
 
 			//なつき度選択セレクトボックス
 			var $natsukiSelect = $ent.find('.natsuki-selector>select');
-			DB.natsukiPts.forEach(function(natukiData, i) {
+			DB.natsukiPts.forEach((natukiData, i) => {
 				$natsukiSelect.append($("<option />").val(i).text(natukiData.natsukido.toString() + '(' + natukiData.pt.toString() + ')'));
 			});
 			//なつき度選択セレクトボックス変更時
@@ -772,7 +772,7 @@ namespace Dq10.SkillSimulator {
 					left: windowLeft,
 					top: windowTop
 				};
-				var windowParam = $.map(windowParams, function(val, key) { return key + '=' + val; }).join(',');
+				var windowParam = $.map(windowParams, (val, key) => key + '=' + val).join(',');
 				window.open(this.href, null, windowParam);
 				
 				return false;
@@ -809,7 +809,7 @@ namespace Dq10.SkillSimulator {
 		}
 
 		function setupEvents() {
-			com.on('MonsterAppended', function(monster, index) {
+			com.on('MonsterAppended', (monster, index) => {
 				$('#initial-instruction').hide();
 
 				$('#monsters').append(drawMonsterEntry(monster));
@@ -818,7 +818,7 @@ namespace Dq10.SkillSimulator {
 
 				$('#' + monster.id + ' .indiv_name input').focus().select();
 			});
-			com.on('MonsterRemoved', function(monster) {
+			com.on('MonsterRemoved', (monster) => {
 				$('#' + monster.id).remove();
 
 				refreshSaveUrl();
@@ -912,15 +912,12 @@ namespace Dq10.SkillSimulator {
 				function getIds() {
 					return search.reduce((ids, filter) => {
 						var cacheKey = filter.filterType + '_' + filter.searchKey;
-						return arrayIntersect(ids, getSearchCache(cacheKey));	
+						return arrayIntersect(ids, getSearchCache(cacheKey));
 					}, getUnivIds());
 				}
 
 				function arrayIntersect(array1: string[], array2: string[]) {
-					var newArray = $.grep(array1, function(val, i) {
-						return $.inArray(val, array2) >= 0;
-					});
-					return newArray;
+					return array1.filter((val) => array2.indexOf(val) >= 0);
 				}
 
 				function getSearchCache(key: string) {
@@ -931,25 +928,22 @@ namespace Dq10.SkillSimulator {
 						filterType = _s[0],
 						searchKey = _s[1];
 
-					var filterFunc;
+					var filterFunc: (badge: Badge) => boolean;
 					switch(filterType) {
 						case 'race':
-							filterFunc = function(badge) { return badge.race == searchKey; };
+							filterFunc = (badge) => badge.race == searchKey;
 							break;
 						case 'rarity':
-							filterFunc = function(badge) { return badge.rarity == searchKey; };
+							filterFunc = (badge) => badge.rarity == searchKey;
 							break;
 						case 'feature':
-							filterFunc = function(badge) { return badge[searchKey] !== undefined; };
+							filterFunc = (badge) => badge[searchKey] !== undefined;
 							break;
 						default:
 							throw 'UnknownFilterType';
 					}
 
-					searchCache[key] = $.grep(getUnivIds(), function(id, i) {
-						return filterFunc(DB.badges[id]);
-					});
-					return searchCache[key];
+					return getUnivIds().filter((id) => filterFunc(DB.badges[id]));
 				}
 
 				function getUnivIds() {
@@ -1196,7 +1190,7 @@ namespace Dq10.SkillSimulator {
 				if(desc === undefined) desc = false;
 
 				$('#badge-selector-list').append(
-					$('#badge-selector-list li').toArray().sort(function(a, b) {
+					$('#badge-selector-list li').toArray().sort((a, b) => {
 						var key_a = func(a);
 						var key_b = func(b);
 						
@@ -1214,17 +1208,13 @@ namespace Dq10.SkillSimulator {
 				);
 			}
 			function sortBadgeById(desc: boolean) {
-				sortBadgeBy(function(li) {
-					return getBadgeId(li);
-				}, desc);
+				sortBadgeBy((li) => getBadgeId(li), desc);
 			}
 			function sortBadgeByKana(desc: boolean) {
-				sortBadgeBy(function(li) {
-					return $(li).attr('data-kana-sort-key');
-				}, desc);
+				sortBadgeBy((li) => $(li).attr('data-kana-sort-key'), desc);
 			}
 			function sortBadgeByFeatureValue(feature: string, desc: boolean) {
-				sortBadgeBy(function(li) {
+				sortBadgeBy((li) => {
 					var badgeId = getBadgeId(li);
 					var ret: any = DB.badges[badgeId][feature];
 
@@ -1280,7 +1270,7 @@ namespace Dq10.SkillSimulator {
 
 	//ロード時
 	$(function() {
-		$dbLoad.done(function(data) {
+		$dbLoad.done((data) => {
 			var query = window.location.search.substring(1);
 			if(Simulator.validateQueryString(query)) {
 				Simulator.applyQueryString(query);

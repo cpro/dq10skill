@@ -1399,12 +1399,8 @@ var Dq10;
                             $undoButton.button('option', 'disabled', !com.isUndoable());
                             $redoButton.button('option', 'disabled', !com.isRedoable());
                         });
-                        shortcut.add('Ctrl+Z', function () {
-                            $undoButton.click();
-                        });
-                        shortcut.add('Ctrl+Y', function () {
-                            $redoButton.click();
-                        });
+                        shortcut.add('Ctrl+Z', function () { return $undoButton.click(); });
+                        shortcut.add('Ctrl+Y', function () { return $redoButton.click(); });
                     }
                 ];
                 //数値を3桁区切りに整形
