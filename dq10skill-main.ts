@@ -9,187 +9,181 @@
 /// <reference path="base64.ts" />
 
 namespace Dq10.SkillSimulator {
-	export var Simulator;
+	export var Simulator: SimulatorModel;
 	export var SimulatorDB: SkillSimulatorDB;
 
-(function($: JQueryStatic) {
-	"use strict";
-
-	//データJSONを格納する変数
-	var DB: SkillSimulatorDB;
-	var DATA_JSON_URI = window.location.href.replace(/\/[^\/]*$/, '/dq10skill-data.json');
-	var $dbLoad = $.getJSON(DATA_JSON_URI, (data) => {
-		DB = data;
-		SimulatorDB = DB;
-	});
-
-	var Simulator = (function() {
+	export class SimulatorModel {
 		//パラメータ格納用
-		var skillPts: {
+		private skillPts: {
 			[vocationId: string]: {
 				[skillLineId: string]: number;
 			}
 		} = {};
-		var levels: {
+		private levels: {
 			[vocationId: string]: number
 		} = {};
-		var trainingSkillPts: {
+		private trainingSkillPts: {
 			[vocationId: string]: number
 		} = {};
 		//マスタースキルポイント
-		var msp: {
+		private msp: {
 			[skillLineId: string]: number
 		} = {};
-		var vocationIds: string[] = [];
-
+		private vocationIds: string[] = [];
+		private DB: SkillSimulatorDB;
+		
+		constructor() {
+		}
+		
 		/* メソッド */
 		//パラメータ初期化
-		function initialize() {
-			vocationIds = Object.keys(DB.vocations);
+		initialize() {
+			this.DB = SimulatorDB;
+			this.vocationIds = Object.keys(this.DB.vocations);
 
-			vocationIds.forEach((vocationId) => {
-				skillPts[vocationId] = {};
-				DB.vocations[vocationId].skillLines.forEach((skillLineId) => {
-					skillPts[vocationId][skillLineId] = 0;
+			this.vocationIds.forEach((vocationId) => {
+				this.skillPts[vocationId] = {};
+				this.DB.vocations[vocationId].skillLines.forEach((skillLineId) => {
+					this.skillPts[vocationId][skillLineId] = 0;
 				});
-				levels[vocationId] = DB.consts.level.min;
-				trainingSkillPts[vocationId] = DB.consts.trainingSkillPts.min;
+				this.levels[vocationId] = this.DB.consts.level.min;
+				this.trainingSkillPts[vocationId] = this.DB.consts.trainingSkillPts.min;
 			});
 		}
 		
 		//スキルポイント取得
-		function getSkillPt(vocationId: string, skillLineId: string) {
-			return skillPts[vocationId][skillLineId];
+		getSkillPt(vocationId: string, skillLineId: string) {
+			return this.skillPts[vocationId][skillLineId];
 		}
 		
 		//スキルポイント更新：不正値の場合falseを返す
-		function updateSkillPt(vocationId: string, skillLineId: string, newValue: number) {
-			var oldValue = skillPts[vocationId][skillLineId];
-			if(newValue < DB.consts.skillPts.min || newValue > DB.consts.skillPts.max) {
+		updateSkillPt(vocationId: string, skillLineId: string, newValue: number) {
+			var oldValue = this.skillPts[vocationId][skillLineId];
+			if(newValue < this.DB.consts.skillPts.min || newValue > this.DB.consts.skillPts.max) {
 				return false;
 			}
-			if(totalOfSameSkills(skillLineId) - oldValue + newValue > DB.consts.skillPts.max) {
+			if(this.totalOfSameSkills(skillLineId) - oldValue + newValue > this.DB.consts.skillPts.max) {
 				return false;
 			}
 			
-			skillPts[vocationId][skillLineId] = newValue;
+			this.skillPts[vocationId][skillLineId] = newValue;
 			return true;
 		}
 		
 		//レベル値取得
-		function getLevel(vocationId: string) {
-			return levels[vocationId];
+		getLevel(vocationId: string) {
+			return this.levels[vocationId];
 		}
 		
 		//レベル値更新
-		function updateLevel(vocationId: string, newValue: number) {
-			if(newValue < DB.consts.level.min || newValue > DB.consts.level.max) {
+		updateLevel(vocationId: string, newValue: number) {
+			if(newValue < this.DB.consts.level.min || newValue > this.DB.consts.level.max) {
 				return false;
 			}
 			
-			levels[vocationId] = newValue;
+			this.levels[vocationId] = newValue;
 			return true;
 		}
 		
 		//特訓スキルポイント取得
-		function getTrainingSkillPt(vocationId: string) {
-			return trainingSkillPts[vocationId];
+		getTrainingSkillPt(vocationId: string) {
+			return this.trainingSkillPts[vocationId];
 		}
 		
 		//特訓スキルポイント更新
-		function updateTrainingSkillPt(vocationId: string, newValue: number) {
-			if(newValue < DB.consts.trainingSkillPts.min || newValue > DB.consts.trainingSkillPts.max)
+		updateTrainingSkillPt(vocationId: string, newValue: number) {
+			if(newValue < this.DB.consts.trainingSkillPts.min || newValue > this.DB.consts.trainingSkillPts.max)
 				return false;
 			
-			trainingSkillPts[vocationId] = newValue;
+			this.trainingSkillPts[vocationId] = newValue;
 			return true;
 		}
 
 		//マスタースキルポイント取得
-		function getMSP(skillLineId: string) {
-			return msp[skillLineId] || 0;
+		getMSP(skillLineId: string) {
+			return this.msp[skillLineId] || 0;
 		}
 
 		//マスタースキルポイント更新
-		function updateMSP(skillLineId: string, newValue: number) {
-			var oldValue = msp[skillLineId] || 0;
-			if(newValue < DB.consts.msp.min || newValue > DB.consts.msp.max)
+		updateMSP(skillLineId: string, newValue: number) {
+			var oldValue = this.msp[skillLineId] || 0;
+			if(newValue < this.DB.consts.msp.min || newValue > this.DB.consts.msp.max)
 				return false;
-			if(totalMSP() - oldValue + newValue > DB.consts.msp.max)
+			if(this.totalMSP() - oldValue + newValue > this.DB.consts.msp.max)
 				return false;
-			if(totalOfSameSkills(skillLineId) - oldValue + newValue > DB.consts.skillPts.max)
+			if(this.totalOfSameSkills(skillLineId) - oldValue + newValue > this.DB.consts.skillPts.max)
 				return false;
 
-			msp[skillLineId] = newValue;
+			this.msp[skillLineId] = newValue;
 			return true;
 		}
 
 		//使用中のマスタースキルポイント合計
-		function totalMSP() {
-			return Object.keys(msp).reduce((prev, skillLineId) => {
-				return prev + msp[skillLineId];
+		totalMSP() {
+			return Object.keys(this.msp).reduce((prev, skillLineId) => {
+				return prev + this.msp[skillLineId];
 			}, 0);
 		}
 
 		//職業のスキルポイント合計
-		function totalSkillPts(vocationId: string) {
-			var vSkillPts = skillPts[vocationId];
+		totalSkillPts(vocationId: string) {
+			var vSkillPts = this.skillPts[vocationId];
 			return Object.keys(vSkillPts).reduce((prev, skillLineId) => {
 				return prev + vSkillPts[skillLineId];
 			}, 0);
 		}
 		
 		//同スキルのポイント合計
-		function totalOfSameSkills(skillLineId: string) {
-			var total = vocationIds.reduce((prev, vocationId) => {
-				var cur = skillPts[vocationId][skillLineId] || 0;
+		totalOfSameSkills(skillLineId: string) {
+			var total = this.vocationIds.reduce((prev, vocationId) => {
+				var cur = this.skillPts[vocationId][skillLineId] || 0;
 				return prev + cur;
 			}, 0);
-			total += msp[skillLineId] || 0;
+			total += this.msp[skillLineId] || 0;
 
 			return total;
 		}
 		
 		//特定スキルすべてを振り直し（0にセット）
-		function clearPtsOfSameSkills(skillLineId: string) {
-			vocationIds.forEach((vocationId) => {
-				if(skillPts[vocationId][skillLineId])
-					updateSkillPt(vocationId, skillLineId, 0);
+		clearPtsOfSameSkills(skillLineId: string) {
+			this.vocationIds.forEach((vocationId) => {
+				if(this.skillPts[vocationId][skillLineId])
+					this.updateSkillPt(vocationId, skillLineId, 0);
 			});
-			msp[skillLineId] = 0;
+			this.msp[skillLineId] = 0;
 		}
 
 		//MSPを初期化
-		function clearMSP() {
-			msp = {};
+		clearMSP() {
+			this.msp = {};
 		}
 		
 		//すべてのスキルを振り直し（0にセット）
-		function clearAllSkills() {
-			vocationIds.forEach((vocationId) => {
-				var vSkillPts = skillPts[vocationId];
+		clearAllSkills() {
+			this.vocationIds.forEach((vocationId) => {
+				var vSkillPts = this.skillPts[vocationId];
 				Object.keys(vSkillPts).forEach((skillLineId) => {
 					vSkillPts[skillLineId] = 0;
 				});
 			});
-			clearMSP();
+			this.clearMSP();
 		}
 		
 		//職業レベルに対するスキルポイント最大値
-		function maxSkillPts(vocationId: string) {
-			return DB.skillPtsGiven[levels[vocationId]];
+		maxSkillPts(vocationId: string) {
+			return this.DB.skillPtsGiven[this.levels[vocationId]];
 		}
 		
 		//スキルポイント合計に対する必要レベル取得
-		function requiredLevel(vocationId: string) {
-			var trainingSkillPt = getTrainingSkillPt(vocationId);
-			var total = totalSkillPts(vocationId) - trainingSkillPt;
+		requiredLevel(vocationId: string) {
+			var trainingSkillPt = this.getTrainingSkillPt(vocationId);
+			var total = this.totalSkillPts(vocationId) - trainingSkillPt;
 			
-			for(var l = DB.consts.level.min; l <= DB.consts.level.max; l++) {
-				if(DB.skillPtsGiven[l] >= total) {
+			for(var l = this.DB.consts.level.min; l <= this.DB.consts.level.max; l++) {
+				if(this.DB.skillPtsGiven[l] >= total) {
 					//特訓スキルポイントが1以上の場合、最低レベル50必要
-					if(trainingSkillPt > DB.consts.trainingSkillPts.min && l < DB.consts.level.forTrainingMode)
-						return DB.consts.level.forTrainingMode;
+					if(trainingSkillPt > this.DB.consts.trainingSkillPts.min && l < this.DB.consts.level.forTrainingMode)
+						return this.DB.consts.level.forTrainingMode;
 					else
 						return l;
 				}
@@ -198,46 +192,46 @@ namespace Dq10.SkillSimulator {
 		}
 
 		//全職業の使用可能スキルポイント
-		function wholeSkillPtsAvailable() {
-			return Object.keys(DB.vocations).reduce((prev, vocationId) => {
-				var cur = maxSkillPts(vocationId) + getTrainingSkillPt(vocationId);
+		wholeSkillPtsAvailable() {
+			return Object.keys(this.DB.vocations).reduce((prev, vocationId) => {
+				var cur = this.maxSkillPts(vocationId) + this.getTrainingSkillPt(vocationId);
 				return prev + cur;
 			}, 0);
 		}
 
 		//全職業の使用済スキルポイント
-		function wholeSkillPtsUsed() {
-			return Object.keys(DB.vocations).reduce((prev, vocationId) => {
-				var cur = totalSkillPts(vocationId);
+		wholeSkillPtsUsed() {
+			return Object.keys(this.DB.vocations).reduce((prev, vocationId) => {
+				var cur = this.totalSkillPts(vocationId);
 				return prev + cur;
 			}, 0);
 		}
 		
 		//職業・レベルによる必要経験値
-		function requiredExp(vocationId: string, level: number) {
-			return DB.expRequired[DB.vocations[vocationId].expTable][level];
+		requiredExp(vocationId: string, level: number) {
+			return this.DB.expRequired[this.DB.vocations[vocationId].expTable][level];
 		}
 		
 		//不足経験値
-		function requiredExpRemain(vocationId: string) {
-			var required = requiredLevel(vocationId);
-			if(required <= levels[vocationId]) return 0;
-			var remain = requiredExp(vocationId, required) - requiredExp(vocationId, levels[vocationId]);
+		requiredExpRemain(vocationId: string) {
+			var required = this.requiredLevel(vocationId);
+			if(required <= this.levels[vocationId]) return 0;
+			var remain = this.requiredExp(vocationId, required) - this.requiredExp(vocationId, this.levels[vocationId]);
 			return remain;
 		}
 		
 		//全職業の必要経験値合計
-		function totalRequiredExp() {
-			return vocationIds.reduce((prev, vocationId) => {
-				var cur = requiredExp(vocationId, levels[vocationId]);
+		totalRequiredExp() {
+			return this.vocationIds.reduce((prev, vocationId) => {
+				var cur = this.requiredExp(vocationId, this.levels[vocationId]);
 				return prev + cur;
 			}, 0);
 		}
 		
 		//全職業の不足経験値合計
-		function totalExpRemain() {
-			return vocationIds.reduce((prev, vocationId) => {
-				var cur = requiredExpRemain(vocationId);
+		totalExpRemain() {
+			return this.vocationIds.reduce((prev, vocationId) => {
+				var cur = this.requiredExpRemain(vocationId);
 				return prev + cur;
 			}, 0);
 		}
@@ -252,14 +246,14 @@ namespace Dq10.SkillSimulator {
 		//さいだいHP  : maxhp
 		//さいだいMP  : maxmp
 		//みりょく    : charm
-		function totalStatus(status: string) {
+		totalStatus(status: string) {
 			//スキルラインデータの各スキルから上記プロパティを調べ合計する
-			var skillLineIds = Object.keys(DB.skillLines);
+			var skillLineIds = Object.keys(this.DB.skillLines);
 
 			return skillLineIds.reduce((wholeTotal, skillLineId) => {
-				var totalPts = totalOfSameSkills(skillLineId);
+				var totalPts = this.totalOfSameSkills(skillLineId);
 
-				var cur = DB.skillLines[skillLineId].skills.filter((skill) => {
+				var cur = this.DB.skillLines[skillLineId].skills.filter((skill) => {
 					return skill.pt <= totalPts && skill[status];
 				}).reduce((skillLineTotal, skill) => {
 					return skillLineTotal + skill[status];
@@ -270,19 +264,19 @@ namespace Dq10.SkillSimulator {
 		
 		//特定のパッシブスキルをすべて取得済みの状態にする
 		//ステータスが変動した場合trueを返す
-		function presetStatus (status: string) {
+		presetStatus (status: string) {
 			var returnValue = false;
 
-			vocationIds.forEach((vocationId) => {
-				DB.vocations[vocationId].skillLines.forEach((skillLineId) => {
-					if(!DB.skillLines[skillLineId].unique) return;
+			this.vocationIds.forEach((vocationId) => {
+				this.DB.vocations[vocationId].skillLines.forEach((skillLineId) => {
+					if(!this.DB.skillLines[skillLineId].unique) return;
 
-					var currentPt = getSkillPt(vocationId, skillLineId);
-					var skills = DB.skillLines[skillLineId].skills.filter((skill) => {
+					var currentPt = this.getSkillPt(vocationId, skillLineId);
+					var skills = this.DB.skillLines[skillLineId].skills.filter((skill) => {
 						return skill.pt > currentPt && skill[status];
 					});
 					if(skills.length > 0) {
-						updateSkillPt(vocationId, skillLineId, skills[skills.length - 1].pt);
+						this.updateSkillPt(vocationId, skillLineId, skills[skills.length - 1].pt);
 						returnValue = true;
 					}
 				});
@@ -292,15 +286,15 @@ namespace Dq10.SkillSimulator {
 		}
 
 		//現在のレベルを取得スキルに対する必要レベルにそろえる
-		function bringUpLevelToRequired () {
-			vocationIds.forEach((vocationId) => {
-				var required = requiredLevel(vocationId);
-				if(getLevel(vocationId) < required)
-					updateLevel(vocationId, required);
+		bringUpLevelToRequired () {
+			this.vocationIds.forEach((vocationId) => {
+				var required = this.requiredLevel(vocationId);
+				if(this.getLevel(vocationId) < required)
+					this.updateLevel(vocationId, required);
 			});
 		}
 
-		var VOCATIONS_DATA_ORDER = [
+		private VOCATIONS_DATA_ORDER = [
 			'warrior',       //戦士
 			'priest',        //僧侶
 			'mage',          //魔法使い
@@ -318,30 +312,30 @@ namespace Dq10.SkillSimulator {
 			'dancer'         //踊り子
 		];
 
-		function serialize() {
+		serialize() {
 			var serial = '';
 			var toByte = String.fromCharCode;
 
 			//先頭に職業の数を含める
-			serial += toByte(VOCATIONS_DATA_ORDER.length);
+			serial += toByte(this.VOCATIONS_DATA_ORDER.length);
 
-			VOCATIONS_DATA_ORDER.forEach((vocationId) => {
-				serial += toByte(getLevel(vocationId));
-				serial += toByte(getTrainingSkillPt(vocationId));
+			this.VOCATIONS_DATA_ORDER.forEach((vocationId) => {
+				serial += toByte(this.getLevel(vocationId));
+				serial += toByte(this.getTrainingSkillPt(vocationId));
 
-				DB.vocations[vocationId].skillLines.forEach((skillLineId) => {
-					serial += toByte(getSkillPt(vocationId, skillLineId));
+				this.DB.vocations[vocationId].skillLines.forEach((skillLineId) => {
+					serial += toByte(this.getSkillPt(vocationId, skillLineId));
 				});
 			});
 			//末尾にMSPのスキルラインIDとポイントをペアで格納
-			Object.keys(msp).forEach((skillLineId) => {
-				if(msp[skillLineId] > 0) {
-					serial += toByte(DB.skillLines[skillLineId].id) + toByte(msp[skillLineId]);
+			Object.keys(this.msp).forEach((skillLineId) => {
+				if(this.msp[skillLineId] > 0) {
+					serial += toByte(this.DB.skillLines[skillLineId].id) + toByte(this.msp[skillLineId]);
 				}
 			});
 			return serial;
 		}
-		function deserialize(serial: string) {
+		deserialize(serial: string) {
 			var cur = 0;
 			var getData = () => serial.charCodeAt(cur++);
 			
@@ -349,34 +343,34 @@ namespace Dq10.SkillSimulator {
 			var vocationCount = getData();
 
 			for(var i = 0; i < vocationCount; i++) {
-				var vocationId = VOCATIONS_DATA_ORDER[i];
-				var vSkillLines = DB.vocations[vocationId].skillLines;
+				var vocationId = this.VOCATIONS_DATA_ORDER[i];
+				var vSkillLines = this.DB.vocations[vocationId].skillLines;
 
 				if(serial.length - cur < 1 + 1 + vSkillLines.length)
 					break;
 
-				updateLevel(vocationId, getData());
-				updateTrainingSkillPt(vocationId, getData());
+				this.updateLevel(vocationId, getData());
+				this.updateTrainingSkillPt(vocationId, getData());
 
 				for(var s = 0; s < vSkillLines.length; s++) {
-					updateSkillPt(vocationId, vSkillLines[s], getData());
+					this.updateSkillPt(vocationId, vSkillLines[s], getData());
 				}
 			}
 			//末尾にデータがあればMSPとして取得
 			var skillLineIds = [];
-			Object.keys(DB.skillLines).forEach((skillLineId) => {
-				skillLineIds[DB.skillLines[skillLineId].id] = skillLineId;
+			Object.keys(this.DB.skillLines).forEach((skillLineId) => {
+				skillLineIds[this.DB.skillLines[skillLineId].id] = skillLineId;
 			});
 
 			while(serial.length - cur >= 2) {
 				var skillLineId = skillLineIds[getData()];
 				var skillPt = getData();
 				if(skillLineId !== undefined)
-					updateMSP(skillLineId, skillPt);
+					this.updateMSP(skillLineId, skillPt);
 			}
 		}
 
-		function deserializeBit(serial: string) {
+		deserializeBit(serial: string) {
 			var BITS_LEVEL = 8; //レベルは8ビット確保
 			var BITS_SKILL = 7; //スキルは7ビット
 			var BITS_TRAINING = 7; //特訓スキルポイント7ビット
@@ -389,20 +383,20 @@ namespace Dq10.SkillSimulator {
 			var isIncludingTrainingPts = bitArray.length >= (
 				BITS_LEVEL +
 				BITS_TRAINING +
-				BITS_SKILL * DB.vocations[VOCATIONS_DATA_ORDER[0]].skillLines.length
+				BITS_SKILL * this.DB.vocations[this.VOCATIONS_DATA_ORDER[0]].skillLines.length
 			) * 10; //1.2VU（特訓モード実装）時点の職業数
 			
 			var cur = 0;
-			VOCATIONS_DATA_ORDER.forEach((vocationId) => {
-				updateLevel(vocationId, bitArrayToNum(bitArray.slice(cur, cur += BITS_LEVEL)));
+			this.VOCATIONS_DATA_ORDER.forEach((vocationId) => {
+				this.updateLevel(vocationId, bitArrayToNum(bitArray.slice(cur, cur += BITS_LEVEL)));
 
 				if(isIncludingTrainingPts)
-					updateTrainingSkillPt(vocationId, bitArrayToNum(bitArray.slice(cur, cur += BITS_TRAINING)));
+					this.updateTrainingSkillPt(vocationId, bitArrayToNum(bitArray.slice(cur, cur += BITS_TRAINING)));
 				else
-					updateTrainingSkillPt(vocationId, 0);
+					this.updateTrainingSkillPt(vocationId, 0);
 
-				DB.vocations[vocationId].skillLines.forEach((skillLineId) => {
-					updateSkillPt(vocationId, skillLineId, bitArrayToNum(bitArray.slice(cur, cur += BITS_SKILL)));
+				this.DB.vocations[vocationId].skillLines.forEach((skillLineId) => {
+					this.updateSkillPt(vocationId, skillLineId, bitArrayToNum(bitArray.slice(cur, cur += BITS_SKILL)));
 				});
 			});
 
@@ -417,80 +411,55 @@ namespace Dq10.SkillSimulator {
 				return bitArray;
 			}
 		}
+	}
 
-		//API
-		return {
-			//メソッド
-			initialize: initialize,
-			getSkillPt: getSkillPt,
-			updateSkillPt: updateSkillPt,
-			getLevel: getLevel,
-			updateLevel: updateLevel,
-			getTrainingSkillPt : getTrainingSkillPt,
-			updateTrainingSkillPt : updateTrainingSkillPt,
-			getMSP: getMSP,
-			updateMSP: updateMSP,
-			totalMSP: totalMSP,
-			totalSkillPts: totalSkillPts,
-			totalOfSameSkills: totalOfSameSkills,
-			clearPtsOfSameSkills: clearPtsOfSameSkills,
-			clearMSP: clearMSP,
-			clearAllSkills: clearAllSkills,
-			maxSkillPts: maxSkillPts,
-			wholeSkillPtsAvailable: wholeSkillPtsAvailable,
-			wholeSkillPtsUsed: wholeSkillPtsUsed,
-			requiredLevel: requiredLevel,
-			requiredExp: requiredExp,
-			requiredExpRemain: requiredExpRemain,
-			totalRequiredExp: totalRequiredExp,
-			totalExpRemain: totalExpRemain,
-			totalStatus: totalStatus,
-			presetStatus: presetStatus,
-			bringUpLevelToRequired: bringUpLevelToRequired,
-			serialize: serialize,
-			deserialize: deserialize,
-			deserializeBit: deserializeBit
-		};
-	})();
-	Dq10.SkillSimulator.Simulator = Simulator;
-
-	var SimulatorUI = (function() {
-		var CLASSNAME_SKILL_ENABLED = 'enabled';
-		var CLASSNAME_ERROR = 'error';
+	class SimulatorUI {
+		private CLASSNAME_SKILL_ENABLED = 'enabled';
+		private CLASSNAME_ERROR = 'error';
 		
-		var sim = Simulator;
-		var com = new SimulatorCommandManager();
+		private sim: typeof Simulator;
+		private com: SimulatorCommandManager;
 
-		var $ptConsole: JQuery, $lvConsole: JQuery, $trainingPtConsole: JQuery;
+		private $ptConsole: JQuery;
+		private $lvConsole: JQuery;
+		private $trainingPtConsole: JQuery;
 		
-		var mspMode = false; //MSP編集モードフラグ
+		private mspMode = false; //MSP編集モードフラグ
 
-		function refreshAll() {
-			hideConsoles();
-			refreshAllVocationInfo();
-			Object.keys(DB.skillLines).forEach((skillLineId) => refreshSkillList(skillLineId));
-			refreshTotalSkillPt();
-			refreshTotalPassive();
-			refreshControls();
-			refreshSaveUrl();
-			refreshUrlBar();
+		private DB: SkillSimulatorDB;
+		
+		constructor(sim: SimulatorModel) {
+			this.DB = SimulatorDB;
+			this.sim = sim;
+			this.com = new SimulatorCommandManager();
 		}
 		
-		function refreshVocationInfo(vocationId: string) {
-			var currentLevel = sim.getLevel(vocationId);
-			var requiredLevel = sim.requiredLevel(vocationId);
+		private refreshAll() {
+			this.hideConsoles();
+			this.refreshAllVocationInfo();
+			Object.keys(this.DB.skillLines).forEach((skillLineId) => this.refreshSkillList(skillLineId));
+			this.refreshTotalSkillPt();
+			this.refreshTotalPassive();
+			this.refreshControls();
+			this.refreshSaveUrl();
+			this.refreshUrlBar();
+		}
+		
+		private refreshVocationInfo(vocationId: string) {
+			var currentLevel = this.sim.getLevel(vocationId);
+			var requiredLevel = this.sim.requiredLevel(vocationId);
 			
 			//見出し中のレベル数値
 			$(`#${vocationId} .lv_h2`).text(currentLevel);
 			var $levelH2 = $(`#${vocationId} h2`);
 			
 			//必要経験値
-			$(`#${vocationId} .exp`).text(numToFormedStr(sim.requiredExp(vocationId, currentLevel)));
+			$(`#${vocationId} .exp`).text(numToFormedStr(this.sim.requiredExp(vocationId, currentLevel)));
 			
 			//スキルポイント 残り / 最大値
-			var maxSkillPts = sim.maxSkillPts(vocationId);
-			var additionalSkillPts = sim.getTrainingSkillPt(vocationId);
-			var remainingSkillPts = maxSkillPts + additionalSkillPts - sim.totalSkillPts(vocationId);
+			var maxSkillPts = this.sim.maxSkillPts(vocationId);
+			var additionalSkillPts = this.sim.getTrainingSkillPt(vocationId);
+			var remainingSkillPts = maxSkillPts + additionalSkillPts - this.sim.totalSkillPts(vocationId);
 			var $skillPtsText = $(`#${vocationId} .pts`);
 			$skillPtsText.text(remainingSkillPts + ' / ' + maxSkillPts);
 			$('#training-' + vocationId).text(additionalSkillPts);
@@ -498,77 +467,77 @@ namespace Dq10.SkillSimulator {
 			//Lv不足の処理
 			var isLevelError = (isNaN(requiredLevel) || currentLevel < requiredLevel);
 			
-			$levelH2.toggleClass(CLASSNAME_ERROR, isLevelError);
-			$skillPtsText.toggleClass(CLASSNAME_ERROR, isLevelError);
+			$levelH2.toggleClass(this.CLASSNAME_ERROR, isLevelError);
+			$skillPtsText.toggleClass(this.CLASSNAME_ERROR, isLevelError);
 			$(`#${vocationId} .error`).toggle(isLevelError);
 			if(isLevelError) {
 				$(`#${vocationId} .req_lv`).text(numToFormedStr(requiredLevel));
-				$(`#${vocationId} .exp_remain`).text(numToFormedStr(sim.requiredExpRemain(vocationId)));
+				$(`#${vocationId} .exp_remain`).text(numToFormedStr(this.sim.requiredExpRemain(vocationId)));
 			}
 		}
 		
-		function refreshAllVocationInfo() {
-			Object.keys(DB.vocations).forEach((vocationId) => refreshVocationInfo(vocationId));
+		private refreshAllVocationInfo() {
+			Object.keys(this.DB.vocations).forEach((vocationId) => this.refreshVocationInfo(vocationId));
 		}
 		
-		function refreshTotalRequiredExp() {
-			$('#total_exp').text(numToFormedStr(sim.totalRequiredExp()));
+		private refreshTotalRequiredExp() {
+			$('#total_exp').text(numToFormedStr(this.sim.totalRequiredExp()));
 		}
 		
-		function refreshTotalExpRemain() {
-			var totalExpRemain = sim.totalExpRemain();
-			$('#total_exp_remain, #total_exp_remain_label').toggleClass(CLASSNAME_ERROR, totalExpRemain > 0);
+		private refreshTotalExpRemain() {
+			var totalExpRemain = this.sim.totalExpRemain();
+			$('#total_exp_remain, #total_exp_remain_label').toggleClass(this.CLASSNAME_ERROR, totalExpRemain > 0);
 			$('#total_exp_remain').text(numToFormedStr(totalExpRemain));
 		}
 		
-		function refreshTotalPassive() {
+		private refreshTotalPassive() {
 			var status = 'maxhp,maxmp,pow,def,dex,spd,magic,heal,charm'.split(',');
-			status.forEach((s) => $('#total_' + s).text(sim.totalStatus(s)));
-			$('#msp_remain').text((DB.consts.msp.max - sim.totalMSP()).toString() + 'P');
+			status.forEach((s) => $('#total_' + s).text(this.sim.totalStatus(s)));
+			$('#msp_remain').text((this.DB.consts.msp.max - this.sim.totalMSP()).toString() + 'P');
 		}
 		
-		function refreshSkillList(skillLineId: string) {
-			$(`tr[class^=${skillLineId}_]`).removeClass(CLASSNAME_SKILL_ENABLED); //クリア
-			var totalOfSkill = sim.totalOfSameSkills(skillLineId);
-			DB.skillLines[skillLineId].skills.some((skill, i) => {
+		private refreshSkillList(skillLineId: string) {
+			$(`tr[class^=${skillLineId}_]`).removeClass(this.CLASSNAME_SKILL_ENABLED); //クリア
+			var totalOfSkill = this.sim.totalOfSameSkills(skillLineId);
+			this.DB.skillLines[skillLineId].skills.some((skill, i) => {
 				if(totalOfSkill < skill.pt) return true;
 				
-				$(`.${skillLineId}_${i}`).addClass(CLASSNAME_SKILL_ENABLED);
+				$(`.${skillLineId}_${i}`).addClass(this.CLASSNAME_SKILL_ENABLED);
 				return false;
 			});
 			$(`.${skillLineId} .skill_total`).text(totalOfSkill);
 
-			var msp = sim.getMSP(skillLineId);
+			var msp = this.sim.getMSP(skillLineId);
 			if(msp > 0)
 				$(`<span>(${msp})</span>`)
 					.addClass('msp')
 					.appendTo(`.${skillLineId} .skill_total`);
 		}
 		
-		function refreshControls() {
-			Object.keys(DB.vocations).forEach((vocationId) => {
-				DB.vocations[vocationId].skillLines.forEach((skillLineId) => {
-					refreshCurrentSkillPt(vocationId, skillLineId);
+		private refreshControls() {
+			Object.keys(this.DB.vocations).forEach((vocationId) => {
+				this.DB.vocations[vocationId].skillLines.forEach((skillLineId) => {
+					this.refreshCurrentSkillPt(vocationId, skillLineId);
 				})
 			});
 		}
 		
-		function refreshCurrentSkillPt(vocationId: string, skillLineId: string) {
-			$(`#${vocationId} .${skillLineId} .skill_current`).text(sim.getSkillPt(vocationId, skillLineId));
+		private refreshCurrentSkillPt(vocationId: string, skillLineId: string) {
+			$(`#${vocationId} .${skillLineId} .skill_current`).text(this.sim.getSkillPt(vocationId, skillLineId));
 		}
 
-		function refreshTotalSkillPt() {
+		private refreshTotalSkillPt() {
 			var $cont = $('#total_sp');
-			var available = sim.wholeSkillPtsAvailable();
-			var remain = available - sim.wholeSkillPtsUsed();
+			var available = this.sim.wholeSkillPtsAvailable();
+			var remain = available - this.sim.wholeSkillPtsUsed();
 
 			$cont.text(`${remain} / ${available}`);
 			var isLevelError = (remain < 0);
-			$cont.toggleClass(CLASSNAME_ERROR, isLevelError);
+			$cont.toggleClass(this.CLASSNAME_ERROR, isLevelError);
 		}
 
-		function refreshSaveUrl() {
-			var url = makeCurrentUrl();
+		private refreshSaveUrl() {
+			var url = this.makeCurrentUrl();
 			
 			$('#url_text').val(url);
 			
@@ -582,153 +551,153 @@ namespace Dq10.SkillSimulator {
 			$('#tw-saveurl').attr('href', 'https://twitter.com/intent/tweet?' + $.param(params));
 		}
 		
-		function refreshUrlBar() {
+		private refreshUrlBar() {
 			if(window.history && window.history.replaceState) {
-				var url = makeCurrentUrl();
+				var url = this.makeCurrentUrl();
 				history.replaceState(url, null, url);
 			}
 		}
 
-		function makeCurrentUrl() {
+		private makeCurrentUrl() {
 			return window.location.href.replace(window.location.search, "") + '?' +
-				Base64.btoa(RawDeflate.deflate(sim.serialize()));
+				Base64.btoa(RawDeflate.deflate(this.sim.serialize()));
 
 		}
 
-		function selectSkillLine(skillLineId: string) {
+		private selectSkillLine(skillLineId: string) {
 			$('.skill_table').removeClass('selected');
 			$('.' + skillLineId).addClass('selected');
 		}
 
-		function toggleMspMode(mode: boolean) {
-			mspMode = mode;
+		private toggleMspMode(mode: boolean) {
+			this.mspMode = mode;
 			$('body').toggleClass('msp', mode);
 		}
 
-		function getCurrentVocation(currentNode: HTMLElement) {
+		private getCurrentVocation(currentNode: Element|EventTarget) {
 			return $(currentNode).parents('.class_group').attr('id');
 		}
 
-		function getCurrentSkillLine(currentNode: HTMLElement) {
+		private getCurrentSkillLine(currentNode: Element|EventTarget) {
 			return $(currentNode).parents('.skill_table').attr('class').split(' ')[0];
 		}
 
-		function hideConsoles() {
-			$ptConsole.hide();
-			$lvConsole.hide();
-			$trainingPtConsole.hide();
+		private hideConsoles() {
+			this.$ptConsole.hide();
+			this.$lvConsole.hide();
+			this.$trainingPtConsole.hide();
 		}
 
-		function setup() {
-			setupFunctions.forEach((func) => func());
-			refreshAll();
+		setup() {
+			this.setupFunctions.forEach((func) => func());
+			this.refreshAll();
 		}
 		
-		var setupFunctions = [
+		private setupFunctions = [
 			//イベント登録
-			function() {
-				com.on('VocationalInfoChanged', (vocationId: string) => {
-					refreshVocationInfo(vocationId);
+			() => {
+				this.com.on('VocationalInfoChanged', (vocationId: string) => {
+					this.refreshVocationInfo(vocationId);
 					//refreshTotalRequiredExp();
 					//refreshTotalExpRemain();
-					refreshTotalSkillPt();
-					refreshUrlBar();
+					this.refreshTotalSkillPt();
+					this.refreshUrlBar();
 				});
-				com.on('SkillLineChanged', (vocationId: string, skillLineId: string) => {
-					refreshCurrentSkillPt(vocationId, skillLineId);
-					refreshSkillList(skillLineId);
-					refreshAllVocationInfo();
+				this.com.on('SkillLineChanged', (vocationId: string, skillLineId: string) => {
+					this.refreshCurrentSkillPt(vocationId, skillLineId);
+					this.refreshSkillList(skillLineId);
+					this.refreshAllVocationInfo();
 					//refreshTotalExpRemain();
-					refreshTotalSkillPt();
-					refreshTotalPassive();
-					refreshUrlBar();
+					this.refreshTotalSkillPt();
+					this.refreshTotalPassive();
+					this.refreshUrlBar();
 				});
-				com.on('MSPChanged', (skillLineId: string) => {
-					refreshSkillList(skillLineId);
-					refreshTotalPassive();
-					refreshUrlBar();
+				this.com.on('MSPChanged', (skillLineId: string) => {
+					this.refreshSkillList(skillLineId);
+					this.refreshTotalPassive();
+					this.refreshUrlBar();
 				});
-				com.on('WholeChanged', () => {
-					refreshAll();
+				this.com.on('WholeChanged', () => {
+					this.refreshAll();
 				});
 			},
 
 			//レベル選択セレクトボックス項目設定
-			function() {
-				$lvConsole = $('#lv_console');
+			() => {
+				this.$lvConsole = $('#lv_console');
 				var $select = $('#lv-select');
-				for(var i = DB.consts.level.min; i <= DB.consts.level.max; i++) {
-					$select.append($("<option />").val(i).text(`${i} (${DB.skillPtsGiven[i]})`));
+				for(var i = this.DB.consts.level.min; i <= this.DB.consts.level.max; i++) {
+					$select.append($("<option />").val(i).text(`${i} (${this.DB.skillPtsGiven[i]})`));
 				}
 
-				$select.change(function() {
-					var vocationId = getCurrentVocation(this);
-					com.updateLevel(vocationId, $(this).val());
+				$select.change((e) => {
+					var vocationId = this.getCurrentVocation(<Element>e.currentTarget);
+					this.com.updateLevel(vocationId, $(e.currentTarget).val());
 				});
 			},
 			
 			//レベル欄クリック時にUI表示
-			function() {
-				$('.ent_title h2').click(function(e) {
-					hideConsoles();
+			() => {
+				$('.ent_title h2').click((e) => {
+					this.hideConsoles();
 
-					var vocationId = getCurrentVocation(this);
-					var consoleLeft = $(this).find('.lv_h2').position().left - 3;
+					var vocationId = this.getCurrentVocation(<Element>e.currentTarget);
+					var consoleLeft = $(e.currentTarget).find('.lv_h2').position().left - 3;
 
-					$lvConsole.appendTo($(this)).css({left: consoleLeft});
-					$('#lv-select').val(sim.getLevel(vocationId));
+					this.$lvConsole.appendTo($(e.currentTarget)).css({left: consoleLeft});
+					$('#lv-select').val(this.sim.getLevel(vocationId));
 
-					$lvConsole.show();
+					this.$lvConsole.show();
 					e.stopPropagation();
 				});
 			},
 
 			//特訓ポイント選択セレクトボックス設定
-			function() {
-				$trainingPtConsole = $('#training_pt_console');
+			() => {
+				this.$trainingPtConsole = $('#training_pt_console');
 				var $select = $('#training_pt_select');
-				for(var i = 0; i <= DB.consts.trainingSkillPts.max; i++) {
+				for(var i = 0; i <= this.DB.consts.trainingSkillPts.max; i++) {
 					$select.append($('<option />').val(i).text(i.toString() +
-						' (' + numToFormedStr(DB.trainingPts[i].stamps) + ')'));
+						' (' + numToFormedStr(this.DB.trainingPts[i].stamps) + ')'));
 				}
 
-				$select.change(function() {
-					var vocationId = getCurrentVocation(this);
+				$select.change((e) => {
+					var vocationId = this.getCurrentVocation(<Element>e.currentTarget);
 
-					return com.updateTrainingSkillPt(vocationId, parseInt($(this).val(), 10));
+					return this.com.updateTrainingSkillPt(vocationId, parseInt($(e.currentTarget).val(), 10));
 				});
 			},
 			
 			//特訓表示欄クリック時にUI表示
-			function() {
-				$('.ent_title .training_pt').click(function(e) {
-					hideConsoles();
+			() => {
+				$('.ent_title .training_pt').click((e) => {
+					this.hideConsoles();
 					
-					var vocationId = getCurrentVocation(this);
+					var vocationId = this.getCurrentVocation(<Element>e.currentTarget);
 					var consoleLeft = $('#training-' + vocationId).position().left - 3;
 
-					$trainingPtConsole.appendTo($(this)).css({left: consoleLeft});
-					$('#training_pt_select').val(sim.getTrainingSkillPt(vocationId));
+					this.$trainingPtConsole.appendTo($(e.currentTarget)).css({left: consoleLeft});
+					$('#training_pt_select').val(this.sim.getTrainingSkillPt(vocationId));
 
-					$trainingPtConsole.show();
+					this.$trainingPtConsole.show();
 					e.stopPropagation();
 				});
 			},
 			
 			//スピンボタン設定
-			function() {
-				$ptConsole = $('#pt_console');
+			() => {
+				this.$ptConsole = $('#pt_console');
 				var $spinner = $('#pt_spinner');
 				$spinner.spinner({
-					min: DB.consts.skillPts.min,
-					max: DB.consts.skillPts.max,
-					spin: function (e, ui) {
-						var vocationId = getCurrentVocation(this);
-						var skillLineId = getCurrentSkillLine(this);
+					min: this.DB.consts.skillPts.min,
+					max: this.DB.consts.skillPts.max,
+					spin: (e, ui) => {
+						var vocationId = this.getCurrentVocation(e.currentTarget);
+						var skillLineId = this.getCurrentSkillLine(e.currentTarget);
 
-						var succeeded = mspMode ?
-							com.updateMSP(skillLineId, ui.value) :
-							com.updateSkillPt(vocationId, skillLineId, ui.value);
+						var succeeded = this.mspMode ?
+							this.com.updateMSP(skillLineId, ui.value) :
+							this.com.updateSkillPt(vocationId, skillLineId, ui.value);
 
 						if(succeeded) {
 							e.stopPropagation();
@@ -736,16 +705,16 @@ namespace Dq10.SkillSimulator {
 							return false;
 						}
 					},
-					change: function (e, ui) {
-						var vocationId = getCurrentVocation(this);
-						var skillLineId = getCurrentSkillLine(this);
-						var newValue = $(this).val();
-						var oldValue = mspMode ?
-							sim.getMSP(skillLineId) :
-							sim.getSkillPt(vocationId, skillLineId);
+					change: (e, ui) => {
+						var vocationId = this.getCurrentVocation(e.currentTarget);
+						var skillLineId = this.getCurrentSkillLine(e.currentTarget);
+						var newValue = $(e.currentTarget).val();
+						var oldValue = this.mspMode ?
+							this.sim.getMSP(skillLineId) :
+							this.sim.getSkillPt(vocationId, skillLineId);
 
 						if(isNaN(newValue)) {
-							$(this).val(oldValue);
+							$(e.currentTarget).val(oldValue);
 							return false;
 						}
 						
@@ -753,105 +722,105 @@ namespace Dq10.SkillSimulator {
 						if(newValue == oldValue)
 							return false;
 
-						var succeeded = mspMode ?
-							com.updateMSP(skillLineId, newValue) :
-							com.updateSkillPt(vocationId, skillLineId, newValue);
+						var succeeded = this.mspMode ?
+							this.com.updateMSP(skillLineId, newValue) :
+							this.com.updateSkillPt(vocationId, skillLineId, newValue);
 
 						if(!succeeded) {
-							$(this).val(oldValue);
+							$(e.currentTarget).val(oldValue);
 							return false;
 						}
 					},
-					stop: function (e, ui) {
-						var skillLineId = getCurrentSkillLine(this);
-						selectSkillLine(skillLineId);
+					stop: (e, ui) => {
+						var skillLineId = this.getCurrentSkillLine(e.currentTarget);
+						this.selectSkillLine(skillLineId);
 					}
 				});
 			},
 			
 			//スピンコントロール共通
-			function() {
-				$('input.ui-spinner-input').click(function(e) {
+			() => {
+				$('input.ui-spinner-input').click((e) => {
 					//テキストボックスクリック時数値を選択状態に
-					$(this).select();
-				}).keypress(function(e) {
+					$(e.currentTarget).select();
+				}).keypress((e) => {
 					//テキストボックスでEnter押下時更新して選択状態に
 					if(e.which == 13) {
 						$('#url_text').focus();
-						$(this).focus().select();
+						$(e.currentTarget).focus().select();
 					}
 				});
 			},
 
 			//スキルライン名クリック時にUI表示
-			function() {
-				$('.skill_table caption').mouseenter(function(e) {
-					hideConsoles();
+			() => {
+				$('.skill_table caption').mouseenter((e) => {
+					this.hideConsoles();
 					
-					var vocationId = getCurrentVocation(this);
-					var skillLineId = getCurrentSkillLine(this);
+					var vocationId = this.getCurrentVocation(<Element>e.currentTarget);
+					var skillLineId = this.getCurrentSkillLine(<Element>e.currentTarget);
 
 					//位置決め
-					var $baseSpan = $(this).find('.skill_current');
+					var $baseSpan = $(e.currentTarget).find('.skill_current');
 					var consoleLeft = $baseSpan.position().left + $baseSpan.width() - 50;
-					$('#pt_reset').css({'margin-left': $(this).find('.skill_total').width() + 10});
+					$('#pt_reset').css({'margin-left': $(e.currentTarget).find('.skill_total').width() + 10});
 
-					$ptConsole.appendTo($(this).find('.console_wrapper')).css({left: consoleLeft});
-					$('#pt_spinner').val(mspMode ? sim.getMSP(skillLineId) : sim.getSkillPt(vocationId, skillLineId));
+					this.$ptConsole.appendTo($(e.currentTarget).find('.console_wrapper')).css({left: consoleLeft});
+					$('#pt_spinner').val(this.mspMode ? this.sim.getMSP(skillLineId) : this.sim.getSkillPt(vocationId, skillLineId));
 
 					//selectSkillLine(skillLineId);
 
-					$ptConsole.show();
+					this.$ptConsole.show();
 					e.stopPropagation();
-				}).mouseleave(function(e) {
+				}).mouseleave((e) => {
 					if($('#pt_spinner:focus').length === 0)
-						hideConsoles();
+						this.hideConsoles();
 				});
 			},
 
 			//範囲外クリック時・ESCキー押下時にUI非表示
-			function() {
-				$ptConsole.click(function(e) {e.stopPropagation();});
-				$lvConsole.click(function(e) {e.stopPropagation();});
-				$trainingPtConsole.click(function(e) {e.stopPropagation();});
+			() => {
+				this.$ptConsole.click((e) => e.stopPropagation());
+				this.$lvConsole.click((e) => e.stopPropagation());
+				this.$trainingPtConsole.click((e) => e.stopPropagation());
 
-				$('body').click(hideConsoles).keydown(function(e) {
-					if(e.which == 27) hideConsoles();
+				$('body').click((e) => this.hideConsoles()).keydown((e) => {
+					if(e.which == 27) this.hideConsoles();
 				});
 			},
 
 			//リセットボタン設定
-			function() {
+			() => {
 				$('#pt_reset').button({
 					icons: { primary: 'ui-icon-refresh' },
 					text: false
-				}).click(function (e) {
-					var vocationId = getCurrentVocation(this);
-					var skillLineId = getCurrentSkillLine(this);
+				}).click((e) => {
+					var vocationId = this.getCurrentVocation(<Element>e.currentTarget);
+					var skillLineId = this.getCurrentSkillLine(<Element>e.currentTarget);
 					
-					selectSkillLine(skillLineId);
+					this.selectSkillLine(skillLineId);
 
-					if(mspMode)
-						com.updateMSP(skillLineId, 0);
+					if(this.mspMode)
+						this.com.updateMSP(skillLineId, 0);
 					else
-						com.updateSkillPt(vocationId, skillLineId, 0);
+						this.com.updateSkillPt(vocationId, skillLineId, 0);
 					$('#pt_spinner').val(0);
-				}).dblclick(function (e) {
+				}).dblclick((e) => {
 					var skillLineId;
 					//ダブルクリック時に各職業の該当スキルをすべて振り直し
-					if(mspMode) {
+					if(this.mspMode) {
 						if(!window.confirm('マスタースキルポイントをすべて振りなおします。'))
 							return;
 
-						com.clearMSP();
+						this.com.clearMSP();
 					} else {
-						skillLineId = getCurrentSkillLine(this);
-						var skillName = DB.skillLines[skillLineId].name;
+						skillLineId = this.getCurrentSkillLine(<Element>e.currentTarget);
+						var skillName = this.DB.skillLines[skillLineId].name;
 						
 						if(!window.confirm('スキル「' + skillName + '」をすべて振りなおします。'))
 							return;
 						
-						com.clearPtsOfSameSkills(skillLineId);
+						this.com.clearPtsOfSameSkills(skillLineId);
 						$('.' + skillLineId + ' .skill_current').text('0');
 					}
 
@@ -860,50 +829,50 @@ namespace Dq10.SkillSimulator {
 			},
 			
 			//スキルテーブル項目クリック時
-			function() {
-				$('.skill_table tr[class]').click(function() {
-					var vocationId = getCurrentVocation(this);
-					var skillLineId = getCurrentSkillLine(this);
-					var skillIndex = parseInt($(this).attr('class').replace(skillLineId + '_', ''), 10);
+			() => {
+				$('.skill_table tr[class]').click((e) => {
+					var vocationId = this.getCurrentVocation(<Element>e.currentTarget);
+					var skillLineId = this.getCurrentSkillLine(<Element>e.currentTarget);
+					var skillIndex = parseInt($(e.currentTarget).attr('class').replace(skillLineId + '_', ''), 10);
 					
-					selectSkillLine(skillLineId);
+					this.selectSkillLine(skillLineId);
 
-					var requiredPt = DB.skillLines[skillLineId].skills[skillIndex].pt;
+					var requiredPt = this.DB.skillLines[skillLineId].skills[skillIndex].pt;
 					var totalPtsOfOthers;
-					if(mspMode) {
-						totalPtsOfOthers = sim.totalOfSameSkills(skillLineId) - sim.getMSP(skillLineId);
+					if(this.mspMode) {
+						totalPtsOfOthers = this.sim.totalOfSameSkills(skillLineId) - this.sim.getMSP(skillLineId);
 						if(requiredPt < totalPtsOfOthers) return;
 
-						com.updateMSP(skillLineId, requiredPt - totalPtsOfOthers);
+						this.com.updateMSP(skillLineId, requiredPt - totalPtsOfOthers);
 					} else {
-						totalPtsOfOthers = sim.totalOfSameSkills(skillLineId) - sim.getSkillPt(vocationId, skillLineId);
+						totalPtsOfOthers = this.sim.totalOfSameSkills(skillLineId) - this.sim.getSkillPt(vocationId, skillLineId);
 						if(requiredPt < totalPtsOfOthers) return;
 
-						com.updateSkillPt(vocationId, skillLineId, requiredPt - totalPtsOfOthers);
+						this.com.updateSkillPt(vocationId, skillLineId, requiredPt - totalPtsOfOthers);
 					}
 				});
 			},
 			
 			//MSPモード切替ラジオボタン
-			function() {
-				$('#msp_selector input').change(function(e) {
-					toggleMspMode($(this).val() == 'msp');
+			() => {
+				$('#msp_selector input').change((e) => {
+					this.toggleMspMode($(e.currentTarget).val() == 'msp');
 				});
 			},
 
 			//URLテキストボックスクリック・フォーカス時
-			function() {
-				$('#url_text').focus(function() {
-					refreshSaveUrl();
-				}).click(function() {
-					$(this).select();
+			() => {
+				$('#url_text').focus((e) => {
+					this.refreshSaveUrl();
+				}).click((e) => {
+					$(e.currentTarget).select();
 				});
 			},
 			
 			//保存用URLツイートボタン設定
-			function() {
-				$('#tw-saveurl').button().click(function(e) {
-					refreshSaveUrl();
+			() => {
+				$('#tw-saveurl').button().click((e) => {
+					this.refreshSaveUrl();
 
 					var screenWidth = screen.width, screenHeight = screen.height;
 					var windowWidth = 550, windowHeight = 420;
@@ -920,14 +889,14 @@ namespace Dq10.SkillSimulator {
 						top: windowTop
 					};
 					var windowParam = $.map(windowParams, (val, key) => key + '=' + val).join(',');
-					window.open(this.href, null, windowParam);
+					window.open((<HTMLAnchorElement>e.currentTarget).href, null, windowParam);
 					
 					return false;
 				});
 			},
 			
 			//おりたたむ・ひろげるボタン設定
-			function() {
+			() => {
 				var HEIGHT_FOLDED = '48px';
 				var HEIGHT_UNFOLDED = $('.class_group:last').height() + 'px';
 				var CLASSNAME_FOLDED = 'folded';
@@ -936,19 +905,19 @@ namespace Dq10.SkillSimulator {
 					icons: { primary: 'ui-icon-arrowthickstop-1-n' },
 					text: false,
 					label: 'おりたたむ'
-				}).click(function() {
-					var $entry = $(this).parents('.class_group');
+				}).click((e) => {
+					var $entry = $(e.currentTarget).parents('.class_group');
 					$entry.toggleClass(CLASSNAME_FOLDED);
 
 					if($entry.hasClass(CLASSNAME_FOLDED)) {
 						$entry.animate({height: HEIGHT_FOLDED});
-						$(this).button('option', {
+						$(e.currentTarget).button('option', {
 							icons: {primary: 'ui-icon-arrowthickstop-1-s'},
 							label: 'ひろげる'
 						});
 					} else {
 						$entry.animate({height: HEIGHT_UNFOLDED});
-						$(this).button('option', {
+						$(e.currentTarget).button('option', {
 							icons: {primary: 'ui-icon-arrowthickstop-1-n'},
 							label: 'おりたたむ'
 						});
@@ -956,11 +925,11 @@ namespace Dq10.SkillSimulator {
 				});
 				
 				//すべておりたたむ・すべてひろげる
-				$('#fold-all').click(function(e) {
+				$('#fold-all').click((e) => {
 					$(`.class_group:not([class*="${CLASSNAME_FOLDED}"]) .toggle_ent`).click();
 					$('body, html').animate({scrollTop: 0});
 				});
-				$('#unfold-all').click(function(e) {
+				$('#unfold-all').click((e) => {
 					$('.' + CLASSNAME_FOLDED + ' .toggle_ent').click();
 					$('body, html').animate({scrollTop: 0});
 				});
@@ -968,8 +937,8 @@ namespace Dq10.SkillSimulator {
 				var bodyTop = $('#body_content').offset().top;
 				
 				//特定職業のみひろげる
-				$('#foldbuttons-vocation a').click(function(e) {
-					var vocationId = $(this).attr('id').replace('fold-', '');
+				$('#foldbuttons-vocation a').click((e) => {
+					var vocationId = $(e.currentTarget).attr('id').replace('fold-', '');
 					$('body, html').animate({scrollTop: $('#' + vocationId).offset().top - bodyTop});
 					if($('#' + vocationId).hasClass(CLASSNAME_FOLDED))
 						$(`#${vocationId} .toggle_ent`).click();
@@ -977,65 +946,66 @@ namespace Dq10.SkillSimulator {
 			},
 			
 			//レベル一括設定
-			function() {
+			() => {
 				//セレクトボックス初期化
 				var $select = $('#setalllevel>select');
-				for(var i = DB.consts.level.min; i <= DB.consts.level.max; i++) {
+				for(var i = this.DB.consts.level.min; i <= this.DB.consts.level.max; i++) {
 					$select.append($("<option />").val(i).text(i.toString()));
 				}
-				$select.val(DB.consts.level.max);
+				$select.val(this.DB.consts.level.max);
 				
-				$('#setalllevel>button').button().click(function(e) {
-					com.setAllLevel($select.val());
+				$('#setalllevel>button').button().click((e) => {
+					this.com.setAllLevel($select.val());
 				});
 			},
 
 			//特訓スキルポイント一括設定（最大値固定）
-			function() {
+			() => {
 				$('#setalltrainingsp>button').button({
 					icons: { primary: 'ui-icon-star' },
-				}).click(function(e) {
-					com.setAllTrainingSkillPt(DB.consts.trainingSkillPts.max);
+				}).click((e) => {
+					this.com.setAllTrainingSkillPt(this.DB.consts.trainingSkillPts.max);
 				});
 			},
 			
 			//全スキルをリセット
-			function() {
+			() => {
 				$('#clearallskills>button').button({
 					icons: { primary: 'ui-icon-refresh' },
-				}).click(function(e) {
+				}).click((e) => {
 					if(!window.confirm('全職業のすべてのスキルを振りなおします。\n（レベル・特訓のポイントは変わりません）'))
 						return;
 					
-					com.clearAllSkills();
+					this.com.clearAllSkills();
 				});
 			},
 			
 			//ナビゲーションボタン
-			function() {
+			() => {
 				$('a#hirobaimport').button({
 					icons: { primary: 'ui-icon-arrowreturnthick-1-s'}
 				});
 				$('a#simpleui').button({
 					icons: { primary: 'ui-icon-transfer-e-w'}
-				}).click(function(e) {
-					this.href = this.href.replace(/\?.+$/, '') + '?' +
-						Base64.btoa(RawDeflate.deflate(sim.serialize()));
+				}).click((e) => {
+					var a = <HTMLAnchorElement>e.currentTarget;
+					a.href = a.href.replace(/\?.+$/, '') + '?' +
+						Base64.btoa(RawDeflate.deflate(this.sim.serialize()));
 				});
 
 			},
 			
 			//スキル選択時に同スキルを強調
-			function() {
-				$('.skill_table').click(function(e) {
-					var skillLineId = $(this).attr('class').split(' ')[0];
+			() => {
+				$('.skill_table').click((e) => {
+					var skillLineId = $(e.currentTarget).attr('class').split(' ')[0];
 					$('.skill_table').removeClass('selected');
 					$('.' + skillLineId).addClass('selected');
 				});
 			},
 
 			//パッシブプリセット
-			function() {
+			() => {
 				//セレクトボックス初期化
 				var SELECT_TABLE = [
 					{val: 'pow',   text: 'ちから'},
@@ -1056,98 +1026,94 @@ namespace Dq10.SkillSimulator {
 				}
 				$select.val('maxhp;maxmp');
 
-				$('#preset>button').button().click(function(e) {
-					com.presetStatus($select.val());
+				$('#preset>button').button().click((e) => {
+					this.com.presetStatus($select.val());
 				});
 			},
 
 			//全職業のレベルを取得スキルに応じて引き上げ
-			function() {
+			() => {
 				$('#bringUpLevel>button').button({
 					icons: { primary: 'ui-icon-arrowthickstop-1-n' },
-				}).click(function(e) {
+				}).click((e) => {
 					if(!window.confirm('全職業のレベルを現在の取得スキルに必要なところまで引き上げます。'))
 						return;
 					
-					com.bringUpLevelToRequired();
+					this.com.bringUpLevelToRequired();
 				});
 			},
 
 			//undo/redo
-			function() {
+			() => {
 				var $undoButton = $('#undo');
 				var $redoButton = $('#redo');
 
 				$undoButton.button({
 					icons: { primary: 'ui-icon-arrowreturnthick-1-w' },
 					disabled: true
-				}).click(function(e) {
-					hideConsoles();
-					com.undo();
-					refreshAll();
+				}).click((e) => {
+					this.hideConsoles();
+					this.com.undo();
+					this.refreshAll();
 				});
 
 				$redoButton.button({
 					icons: { secondary: 'ui-icon-arrowreturnthick-1-e' },
 					disabled: true
-				}).click(function(e) {
-					hideConsoles();
-					com.redo();
-					refreshAll();
+				}).click((e) => {
+					this.hideConsoles();
+					this.com.redo();
+					this.refreshAll();
 				});
 
-				com.on('CommandStackChanged', () => {
-					$undoButton.button('option', 'disabled', !com.isUndoable());
-					$redoButton.button('option', 'disabled', !com.isRedoable());
+				this.com.on('CommandStackChanged', () => {
+					$undoButton.button('option', 'disabled', !this.com.isUndoable());
+					$redoButton.button('option', 'disabled', !this.com.isRedoable());
 				});
 
 				shortcut.add('Ctrl+Z', () => $undoButton.click());
 				shortcut.add('Ctrl+Y', () => $redoButton.click());
 			}
 		];
+	}
+	
+
+	class SimpleUI {
+		private CLASSNAME_SKILL_ENABLED = 'enabled';
+		private CLASSNAME_ERROR = 'error';
 		
-		//数値を3桁区切りに整形
-		function numToFormedStr(num: number) {
-			if(isNaN(num)) return 'N/A';
-			return num.toString().split(/(?=(?:\d{3})+$)/).join(',');
+		private sim: typeof Simulator;
+
+		private $ptConsole: JQuery;
+		private $lvConsole: JQuery;
+		private $trainingPtConsole: JQuery;
+		
+		private DB: SkillSimulatorDB;
+		
+		constructor(sim: SimulatorModel) {
+			this.sim = sim;
+			this.DB = SimulatorDB;
 		}
-		
-		//API
-		return {
-			setup: setup,
-			refreshAll: refreshAll
-		};
-
-	})();
-
-	var SimpleUI = (function() {
-		var CLASSNAME_SKILL_ENABLED = 'enabled';
-		var CLASSNAME_ERROR = 'error';
-		
-		var sim = Simulator;
-
-		var $ptConsole, $lvConsole, $trainingPtConsole;
-		
-		function refreshAll() {
-			refreshAllVocationInfo();
-			for(var skillLineId in DB.skillLines) {
-				refreshSkillList(skillLineId);
+		private refreshAll() {
+			this.refreshAllVocationInfo();
+			for(var skillLineId in this.DB.skillLines) {
+				this.refreshSkillList(skillLineId);
 			}
 			//refreshTotalRequiredExp();
 			//refreshTotalExpRemain();
 			// refreshTotalPassive();
-			refreshControls();
-			refreshSaveUrl();
+			this.refreshControls();
+			this.refreshSaveUrl();
 		}
 		
-		function refreshVocationInfo(vocationId: string) {
-			var currentLevel = sim.getLevel(vocationId);
-			var requiredLevel = sim.requiredLevel(vocationId);
+		private refreshVocationInfo(vocationId: string) {
+			var currentLevel = this.sim.getLevel(vocationId);
+			var requiredLevel = this.sim.requiredLevel(vocationId);
 			
 			//スキルポイント 残り / 最大値
-			var maxSkillPts = sim.maxSkillPts(vocationId);
-			var additionalSkillPts = sim.getTrainingSkillPt(vocationId);
-			var remainingSkillPts = maxSkillPts + additionalSkillPts - sim.totalSkillPts(vocationId);
+			var maxSkillPts = this.sim.maxSkillPts(vocationId);
+			var additionalSkillPts = this.sim.getTrainingSkillPt(vocationId);
+			var remainingSkillPts = maxSkillPts + additionalSkillPts - this.sim.totalSkillPts(vocationId);
 
 			$(`#${vocationId} .remain .container`).text(remainingSkillPts);
 			$(`#${vocationId} .total .container`).text(maxSkillPts + additionalSkillPts);
@@ -1155,40 +1121,40 @@ namespace Dq10.SkillSimulator {
 			
 			//Lv不足の処理
 			var isLevelError = (isNaN(requiredLevel) || currentLevel < requiredLevel);
-			$(`#${vocationId} .remain .container`).toggleClass(CLASSNAME_ERROR, isLevelError);
+			$(`#${vocationId} .remain .container`).toggleClass(this.CLASSNAME_ERROR, isLevelError);
 		}
 		
-		function refreshAllVocationInfo() {
-			for(var vocationId in DB.vocations) {
-				refreshVocationInfo(vocationId);
+		private refreshAllVocationInfo() {
+			for(var vocationId in this.DB.vocations) {
+				this.refreshVocationInfo(vocationId);
 			}
-			$('#msp .remain .container').text(DB.consts.msp.max - sim.totalMSP());
-			$('#msp .total .container').text(DB.consts.msp.max);
+			$('#msp .remain .container').text(this.DB.consts.msp.max - this.sim.totalMSP());
+			$('#msp .total .container').text(this.DB.consts.msp.max);
 		}
 		
-		function refreshTotalRequiredExp() {
-			$('#total_exp').text(numToFormedStr(sim.totalRequiredExp()));
+		private refreshTotalRequiredExp() {
+			$('#total_exp').text(numToFormedStr(this.sim.totalRequiredExp()));
 		}
 		
-		function refreshTotalExpRemain() {
-			var totalExpRemain = sim.totalExpRemain();
-			$('#total_exp_remain, #total_exp_remain_label').toggleClass(CLASSNAME_ERROR, totalExpRemain > 0);
+		private refreshTotalExpRemain() {
+			var totalExpRemain = this.sim.totalExpRemain();
+			$('#total_exp_remain, #total_exp_remain_label').toggleClass(this.CLASSNAME_ERROR, totalExpRemain > 0);
 			$('#total_exp_remain').text(numToFormedStr(totalExpRemain));
 		}
 		
-		function refreshTotalPassive() {
+		private refreshTotalPassive() {
 			var status = 'maxhp,maxmp,pow,def,dex,spd,magic,heal,charm'.split(',');
-			status.forEach((s) => $('#total_' + s).text(sim.totalStatus(s)));
+			status.forEach((s) => $('#total_' + s).text(this.sim.totalStatus(s)));
 		}
 		
-		function refreshSkillList(skillLineId: string) {
-			var totalOfSkill = sim.totalOfSameSkills(skillLineId);
+		private refreshSkillList(skillLineId: string) {
+			var totalOfSkill = this.sim.totalOfSameSkills(skillLineId);
 			$(`#footer .${skillLineId} .container`).text(totalOfSkill);
 
 			var containerName = '#msp .' + skillLineId;
-			if(DB.skillLines[skillLineId].unique) {
-				Object.keys(DB.vocations).some((vocationId) => {
-					if(DB.vocations[vocationId].skillLines.indexOf(skillLineId) >= 0) {
+			if(this.DB.skillLines[skillLineId].unique) {
+				Object.keys(this.DB.vocations).some((vocationId) => {
+					if(this.DB.vocations[vocationId].skillLines.indexOf(skillLineId) >= 0) {
 						containerName = '#' + vocationId + ' .msp';
 						return true;
 					}
@@ -1196,21 +1162,21 @@ namespace Dq10.SkillSimulator {
 				});
 			}
 
-			var msp = sim.getMSP(skillLineId);
+			var msp = this.sim.getMSP(skillLineId);
 			$(containerName + ' .container').text(msp > 0 ? msp : '');
 		}
 		
-		function refreshControls() {
-			Object.keys(DB.vocations).forEach((vocationId) => {
-				DB.vocations[vocationId].skillLines.forEach((skillLineId) => {
-					refreshCurrentSkillPt(vocationId, skillLineId);
+		private refreshControls() {
+			Object.keys(this.DB.vocations).forEach((vocationId) => {
+				this.DB.vocations[vocationId].skillLines.forEach((skillLineId) => {
+					this.refreshCurrentSkillPt(vocationId, skillLineId);
 				})
 			});
 		}
 		
-		function refreshCurrentSkillPt(vocationId: string, skillLineId: string) {
+		private refreshCurrentSkillPt(vocationId: string, skillLineId: string) {
 			var containerName = skillLineId;
-			if(DB.skillLines[skillLineId].unique) {
+			if(this.DB.skillLines[skillLineId].unique) {
 				//踊り子のパッシブ2種に対応
 				if(skillLineId == 'song') {
 					containerName = 'unique2';
@@ -1220,11 +1186,11 @@ namespace Dq10.SkillSimulator {
 			}
 
 			$(`#${vocationId} .${containerName} .container`)
-				.text(sim.getSkillPt(vocationId, skillLineId));
+				.text(this.sim.getSkillPt(vocationId, skillLineId));
 		}
 
-		function refreshSaveUrl() {
-			var url = makeCurrentUrl();
+		private refreshSaveUrl() {
+			var url = this.makeCurrentUrl();
 
 			$('#url_text').val(url);
 			
@@ -1238,47 +1204,47 @@ namespace Dq10.SkillSimulator {
 			$('#tw-saveurl').attr('href', 'https://twitter.com/intent/tweet?' + $.param(params));
 		}
 		
-		function refreshUrlBar() {
+		private refreshUrlBar() {
 			if(window.history && window.history.replaceState) {
-				var url = makeCurrentUrl();
+				var url = this.makeCurrentUrl();
 				window.history.replaceState(url, null, url);
 			}
 		}
 
-		function makeCurrentUrl() {
+		private makeCurrentUrl() {
 			return window.location.href.replace(window.location.search, "") + '?' +
-				Base64.btoa(RawDeflate.deflate(sim.serialize()));
+				Base64.btoa(RawDeflate.deflate(this.sim.serialize()));
 
 		}
 
-		function getCurrentVocation(currentNode: HTMLElement) {
+		private getCurrentVocation(currentNode: HTMLElement) {
 			return $(currentNode).parents('.class_group').attr('id');
 		}
 
-		function getCurrentSkillLine(currentNode: HTMLElement) {
+		private getCurrentSkillLine(currentNode: HTMLElement) {
 			return $(currentNode).parents('.skill_table').attr('class').split(' ')[0];
 		}
 
-		function setup() {
-			setupFunctions.forEach((func) => func());
-			refreshAll();
+		setup() {
+			this.setupFunctions.forEach((func) => func());
+			this.refreshAll();
 		}
 		
-		var setupFunctions = [
+		private setupFunctions = [
 			
 			//URLテキストボックスクリック・フォーカス時
-			function() {
-				$('#url_text').focus(function() {
-					refreshSaveUrl();
-				}).click(function() {
-					$(this).select();
+			() => {
+				$('#url_text').focus((e) => {
+					this.refreshSaveUrl();
+				}).click((e) => {
+					$(e.currentTarget).select();
 				});
 			},
 			
 			//保存用URLツイートボタン設定
-			function() {
-				$('#tw-saveurl').button().click(function(e) {
-					refreshSaveUrl();
+			() => {
+				$('#tw-saveurl').button().click((e) => {
+					this.refreshSaveUrl();
 
 					var screenWidth = screen.width, screenHeight = screen.height;
 					var windowWidth = 550, windowHeight = 420;
@@ -1295,40 +1261,44 @@ namespace Dq10.SkillSimulator {
 						top: windowTop
 					};
 					var windowParam = $.map(windowParams, (val, key) => key + '=' + val).join(',');
-					window.open(this.href, null, windowParam);
+					window.open((<HTMLAnchorElement>e.currentTarget).href, null, windowParam);
 					
 					return false;
 				});
 			},
 			
 			//ナビゲーションボタン
-			function() {
+			() => {
 				$('a#mainui').button({
 					icons: { primary: 'ui-icon-transfer-e-w'}
-				}).click(function(e) {
-					this.href = this.href.replace(/\?.+$/, '') + '?' +
-						Base64.btoa(RawDeflate.deflate(sim.serialize()));
+				}).click((e) => {
+					var a = <HTMLAnchorElement>e.currentTarget;
+					a.href = a.href.replace(/\?.+$/, '') + '?' +
+						Base64.btoa(RawDeflate.deflate(this.sim.serialize()));
 				});
-
 			}
 		];
-		
-		//数値を3桁区切りに整形
-		function numToFormedStr(num: number) {
-			if(isNaN(num)) return 'N/A';
-			return num.toString().split(/(?=(?:\d{3})+$)/).join(',');
-		}
-		
-		//API
-		return {
-			setup: setup,
-			refreshAll: refreshAll
-		};
+	}
+	
+	//ユーティリティ
+	
+	//数値を3桁区切りに整形
+	function numToFormedStr(num: number) {
+		if(isNaN(num)) return 'N/A';
+		return num.toString().split(/(?=(?:\d{3})+$)/).join(',');
+	}
+	
+(function($: JQueryStatic) {
+	Simulator = new SimulatorModel();
 
-	})();
-
+	//データJSONを格納する変数
+	var DATA_JSON_URI = window.location.href.replace(/\/[^\/]*$/, '/dq10skill-data.json');
+	var $dbLoad = $.getJSON(DATA_JSON_URI, (data) => {
+		SimulatorDB = data;
+	});
+	
 	//ロード時
-	$(function() {
+	$(() => {
 		function loadQuery() {
 			var query = window.location.search.substring(1);
 			if(Base64.isValid(query)) {
@@ -1348,7 +1318,7 @@ namespace Dq10.SkillSimulator {
 			}
 		}
 		
-		var ui = window.location.pathname.indexOf('/simple.html') > 0 ? SimpleUI : SimulatorUI;
+		var ui = window.location.pathname.indexOf('/simple.html') > 0 ? new SimpleUI(Simulator) : new SimulatorUI(Simulator);
 
 		$dbLoad.done((data) => {
 			Simulator.initialize();

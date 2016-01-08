@@ -19,7 +19,7 @@
 	"tasks": [
 		{
 			"taskName": "build dq10skill",
-			"args": ["tsc --out publish/dq10skill.js dq10skill-main.ts"],
+			"args": ["tsc --out publish/dq10skill.js dq10skill-main.ts", "-sourcemap"],
 			"isBuildCommand": true,
 			"suppressTaskName": true
 		},
