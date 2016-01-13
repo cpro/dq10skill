@@ -12,6 +12,7 @@ namespace Dq10.SkillSimulator {
 		skillLineId?: string;
 		newValue?: number;
 		event?: () => Event;
+		undoEvent?: () => Event;
 	}
 
 	const UNDO_MAX = 20;
@@ -54,8 +55,16 @@ namespace Dq10.SkillSimulator {
 			this.cursor--;
 			var command = this.commandStack[this.cursor];
 			command.undo();
-			if(command.event !== undefined)
-				this.dispatch(command.event().name, ...command.event().args);
+			
+			//イベント発行: undoEvent()が定義されていればそちらを優先
+			var event: Event = null;
+			if(command.undoEvent !== undefined) {
+				event = command.undoEvent();
+			} else if(command.event !== undefined) {
+				event = command.event();
+			}
+			if(event !== null)
+				this.dispatch(event.name, ...event.args);
 			this.dispatch('CommandStackChanged');
 		}
 		

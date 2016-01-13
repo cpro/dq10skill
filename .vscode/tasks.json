@@ -18,12 +18,17 @@
 
 	"tasks": [
 		{
-			"taskName": "build TypeScript",
-			"args": ["tsc --out publish/dq10skill.js dq10skill-main.ts"],
+			"taskName": "build dq10skill",
+			"args": ["tsc --out publish/dq10skill.js dq10skill-main.ts", "-sourcemap"],
 			"isBuildCommand": true,
 			"suppressTaskName": true
 		},
-		
+		{
+			"taskName": "build dq10skill-monster",
+			"args": ["tsc --out publish/dq10skill-monster.js dq10skill-monster-main.ts", "-sourcemap"],
+			"isBuildCommand": true,
+			"suppressTaskName": true
+		},
 		{
 			"taskName": "produce HTMLs",
 			"args": ["ruby generator/produce_html.rb"],

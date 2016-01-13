@@ -176,11 +176,9 @@ namespace Dq10.SkillSimulator {
 			this.newValue = newValue;
 		}
 		_impl(): boolean {
-			for(var vocationId in SimulatorDB.vocations) {
-				var succeeded = Simulator.updateLevel(vocationId, this.newValue);
-				if(!succeeded) return false;
-			}
-			return true;
+			return Object.keys(SimulatorDB.vocations).every((vocationId) => {
+				return Simulator.updateLevel(vocationId, this.newValue);
+			});
 		}
 	}
 
@@ -190,11 +188,9 @@ namespace Dq10.SkillSimulator {
 			this.newValue = newValue;
 		}
 		_impl(): boolean {
-			for(var vocationId in SimulatorDB.vocations) {
-				var succeeded = Simulator.updateTrainingSkillPt(vocationId, this.newValue);
-				if(!succeeded) return false;
-			}
-			return true;
+			return Object.keys(SimulatorDB.vocations).every((vocationId) => {
+				return Simulator.updateTrainingSkillPt(vocationId, this.newValue);
+			});
 		}
 	}
 	
@@ -231,11 +227,7 @@ namespace Dq10.SkillSimulator {
 		}
 		_impl(): boolean {
 			var sarray = this.status.split(';');
-			var succeeded = false;
-			for(var i = 0; i < sarray.length; i++) {
-				succeeded = Simulator.presetStatus(sarray[i]) || succeeded;
-			}
-			return succeeded;
+			return sarray.reduce((succeeded, s) => Simulator.presetStatus(s) || succeeded, false);
 		}
 	}
 	
