@@ -25,7 +25,7 @@
 		},
 		{
 			"taskName": "build dq10skill-monster",
-			"args": ["tsc --out publish/dq10skill-monster.ts.js dq10skill-monster-main.ts", "-sourcemap"],
+			"args": ["tsc --out publish/dq10skill-monster.js dq10skill-monster-main.ts", "-sourcemap"],
 			"isBuildCommand": true,
 			"suppressTaskName": true
 		},
