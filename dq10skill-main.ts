@@ -12,25 +12,38 @@ namespace Dq10.SkillSimulator {
 	export var Simulator: SimulatorModel;
 	export var SimulatorDB: SkillSimulatorDB;
 
+	interface VocationData {
+		id: string;
+		level: number;
+		trainingSkillPt: number;
+		skillPts: SkillPt[];
+	}
+	interface SkillLineData {
+		id: string;
+		skillPts: SkillPt[];
+		msp: number;
+	}
+	interface SkillPt {
+		vocationId: string;
+		skillLineId: string;
+		pt: number;
+	}
+	
 	export class SimulatorModel {
+		private DB: SkillSimulatorDB;
+		
 		//パラメータ格納用
-		private skillPts: {
+		private vocations: VocationData[] = [];
+		private vocationDic: { [vocationId: string]: VocationData } = {};
+		private skillLines: SkillLineData[] = [];
+		private skillLineDic: { [skillLineId: string]: SkillLineData } = {};
+		/** 全スキルポイント情報を保持する配列 */
+		private wholePts: SkillPt[] = [];
+		private skillPtDic: {
 			[vocationId: string]: {
-				[skillLineId: string]: number;
+				[skillLineId: string]: SkillPt;
 			}
 		} = {};
-		private levels: {
-			[vocationId: string]: number
-		} = {};
-		private trainingSkillPts: {
-			[vocationId: string]: number
-		} = {};
-		//マスタースキルポイント
-		private msp: {
-			[skillLineId: string]: number
-		} = {};
-		private vocationIds: string[] = [];
-		private DB: SkillSimulatorDB;
 		
 		constructor() {
 		}
@@ -39,26 +52,49 @@ namespace Dq10.SkillSimulator {
 		//パラメータ初期化
 		initialize() {
 			this.DB = SimulatorDB;
-			this.vocationIds = Object.keys(this.DB.vocations);
 
-			this.vocationIds.forEach((vocationId) => {
-				this.skillPts[vocationId] = {};
-				this.DB.vocations[vocationId].skillLines.forEach((skillLineId) => {
-					this.skillPts[vocationId][skillLineId] = 0;
+			this.vocations = Object.keys(this.DB.vocations).map((vocationId) => {
+				var vocation: VocationData = {
+					id: vocationId,
+					level: this.DB.consts.level.min,
+					trainingSkillPt: this.DB.consts.trainingSkillPts.min,
+					skillPts: []
+				};
+				this.skillPtDic[vocationId] = {};
+				vocation.skillPts = this.DB.vocations[vocationId].skillLines.map((skillLineId) => {
+					var pt: SkillPt = {
+						vocationId: vocationId,
+						skillLineId: skillLineId,
+						pt: 0
+					};
+					this.skillPtDic[vocationId][skillLineId] = pt;
+					return pt;
 				});
-				this.levels[vocationId] = this.DB.consts.level.min;
-				this.trainingSkillPts[vocationId] = this.DB.consts.trainingSkillPts.min;
+				this.wholePts = this.wholePts.concat(vocation.skillPts);
+				this.vocationDic[vocationId] = vocation;
+				return vocation;
+			});
+			
+			this.skillLines = Object.keys(this.DB.skillLines).map((skillLineId) => {
+				var skillLine: SkillLineData = {
+					id: skillLineId,
+					skillPts: this.wholePts.filter((skillPt) => skillPt.skillLineId == skillLineId),
+					msp: this.DB.consts.msp.min
+				}
+				this.skillLineDic[skillLineId] = skillLine;
+				return skillLine;
 			});
 		}
 		
 		//スキルポイント取得
-		getSkillPt(vocationId: string, skillLineId: string) {
-			return this.skillPts[vocationId][skillLineId];
+		getSkillPt(vocationId: string, skillLineId: string): number {
+			return this.skillPtDic[vocationId][skillLineId].pt;
 		}
 		
 		//スキルポイント更新：不正値の場合falseを返す
-		updateSkillPt(vocationId: string, skillLineId: string, newValue: number) {
-			var oldValue = this.skillPts[vocationId][skillLineId];
+		updateSkillPt(vocationId: string, skillLineId: string, newValue: number): boolean {
+			var skillPt = this.skillPtDic[vocationId][skillLineId];
+			var oldValue = skillPt.pt;
 			if(newValue < this.DB.consts.skillPts.min || newValue > this.DB.consts.skillPts.max) {
 				return false;
 			}
@@ -66,47 +102,47 @@ namespace Dq10.SkillSimulator {
 				return false;
 			}
 			
-			this.skillPts[vocationId][skillLineId] = newValue;
+			skillPt.pt = newValue;
 			return true;
 		}
 		
 		//レベル値取得
-		getLevel(vocationId: string) {
-			return this.levels[vocationId];
+		getLevel(vocationId: string): number {
+			return this.vocationDic[vocationId].level;
 		}
 		
 		//レベル値更新
-		updateLevel(vocationId: string, newValue: number) {
+		updateLevel(vocationId: string, newValue: number): boolean {
 			if(newValue < this.DB.consts.level.min || newValue > this.DB.consts.level.max) {
 				return false;
 			}
 			
-			this.levels[vocationId] = newValue;
+			this.vocationDic[vocationId].level = newValue;
 			return true;
 		}
 		
 		//特訓スキルポイント取得
-		getTrainingSkillPt(vocationId: string) {
-			return this.trainingSkillPts[vocationId];
+		getTrainingSkillPt(vocationId: string): number {
+			return this.vocationDic[vocationId].trainingSkillPt;
 		}
 		
 		//特訓スキルポイント更新
-		updateTrainingSkillPt(vocationId: string, newValue: number) {
+		updateTrainingSkillPt(vocationId: string, newValue: number): boolean {
 			if(newValue < this.DB.consts.trainingSkillPts.min || newValue > this.DB.consts.trainingSkillPts.max)
 				return false;
 			
-			this.trainingSkillPts[vocationId] = newValue;
+			this.vocationDic[vocationId].trainingSkillPt = newValue;
 			return true;
 		}
 
 		//マスタースキルポイント取得
-		getMSP(skillLineId: string) {
-			return this.msp[skillLineId] || 0;
+		getMSP(skillLineId: string): number {
+			return this.skillLineDic[skillLineId].msp;
 		}
 
 		//マスタースキルポイント更新
-		updateMSP(skillLineId: string, newValue: number) {
-			var oldValue = this.msp[skillLineId] || 0;
+		updateMSP(skillLineId: string, newValue: number): boolean {
+			var oldValue = this.skillLineDic[skillLineId].msp || 0;
 			if(newValue < this.DB.consts.msp.min || newValue > this.DB.consts.msp.max)
 				return false;
 			if(this.totalMSP() - oldValue + newValue > this.DB.consts.msp.max)
@@ -114,68 +150,56 @@ namespace Dq10.SkillSimulator {
 			if(this.totalOfSameSkills(skillLineId) - oldValue + newValue > this.DB.consts.skillPts.max)
 				return false;
 
-			this.msp[skillLineId] = newValue;
+			this.skillLineDic[skillLineId].msp = newValue;
 			return true;
 		}
 
 		//使用中のマスタースキルポイント合計
-		totalMSP() {
-			return Object.keys(this.msp).reduce((prev, skillLineId) => {
-				return prev + this.msp[skillLineId];
-			}, 0);
+		totalMSP(): number {
+			return this.skillLines.reduce((prev, skillLine) => prev + skillLine.msp, 0);
 		}
 
 		//職業のスキルポイント合計
-		totalSkillPts(vocationId: string) {
-			var vSkillPts = this.skillPts[vocationId];
-			return Object.keys(vSkillPts).reduce((prev, skillLineId) => {
-				return prev + vSkillPts[skillLineId];
+		totalSkillPts(vocationId: string): number {
+			return this.vocationDic[vocationId].skillPts.reduce((prev, skillPt) => {
+				return prev + skillPt.pt;
 			}, 0);
 		}
 		
 		//同スキルのポイント合計
-		totalOfSameSkills(skillLineId: string) {
-			var total = this.vocationIds.reduce((prev, vocationId) => {
-				var cur = this.skillPts[vocationId][skillLineId] || 0;
-				return prev + cur;
-			}, 0);
-			total += this.msp[skillLineId] || 0;
-
-			return total;
+		totalOfSameSkills(skillLineId: string): number {
+			var skillLine = this.skillLineDic[skillLineId];
+			return skillLine.skillPts.reduce((prev, skillPt) => prev + skillPt.pt, 0) +
+				skillLine.msp;
 		}
 		
 		//特定スキルすべてを振り直し（0にセット）
-		clearPtsOfSameSkills(skillLineId: string) {
-			this.vocationIds.forEach((vocationId) => {
-				if(this.skillPts[vocationId][skillLineId])
-					this.updateSkillPt(vocationId, skillLineId, 0);
-			});
-			this.msp[skillLineId] = 0;
+		clearPtsOfSameSkills(skillLineId: string): boolean {
+			var skillLine = this.skillLineDic[skillLineId];
+			skillLine.skillPts.forEach((skillPt) => skillPt.pt = 0);
+			skillLine.msp = 0;
+			return true;
 		}
 
 		//MSPを初期化
-		clearMSP() {
-			this.msp = {};
+		clearMSP(): boolean {
+			this.skillLines.forEach((skillLine) => skillLine.msp = 0);
+			return true;
 		}
 		
 		//すべてのスキルを振り直し（0にセット）
 		clearAllSkills() {
-			this.vocationIds.forEach((vocationId) => {
-				var vSkillPts = this.skillPts[vocationId];
-				Object.keys(vSkillPts).forEach((skillLineId) => {
-					vSkillPts[skillLineId] = 0;
-				});
-			});
+			this.wholePts.forEach((skillPt) => skillPt.pt = 0);
 			this.clearMSP();
 		}
 		
 		//職業レベルに対するスキルポイント最大値
-		maxSkillPts(vocationId: string) {
-			return this.DB.skillPtsGiven[this.levels[vocationId]];
+		maxSkillPts(vocationId: string): number {
+			return this.DB.skillPtsGiven[this.vocationDic[vocationId].level];
 		}
 		
 		//スキルポイント合計に対する必要レベル取得
-		requiredLevel(vocationId: string) {
+		requiredLevel(vocationId: string): number {
 			var trainingSkillPt = this.getTrainingSkillPt(vocationId);
 			var total = this.totalSkillPts(vocationId) - trainingSkillPt;
 			
@@ -192,46 +216,44 @@ namespace Dq10.SkillSimulator {
 		}
 
 		//全職業の使用可能スキルポイント
-		wholeSkillPtsAvailable() {
-			return Object.keys(this.DB.vocations).reduce((prev, vocationId) => {
-				var cur = this.maxSkillPts(vocationId) + this.getTrainingSkillPt(vocationId);
+		wholeSkillPtsAvailable(): number {
+			return this.vocations.reduce((prev, vocation) => {
+				var cur = this.maxSkillPts(vocation.id) + this.getTrainingSkillPt(vocation.id);
 				return prev + cur;
 			}, 0);
 		}
 
 		//全職業の使用済スキルポイント
-		wholeSkillPtsUsed() {
-			return Object.keys(this.DB.vocations).reduce((prev, vocationId) => {
-				var cur = this.totalSkillPts(vocationId);
-				return prev + cur;
-			}, 0);
+		wholeSkillPtsUsed(): number {
+			return this.wholePts.reduce((prev, skillPt) => prev + skillPt.pt, 0);
 		}
 		
 		//職業・レベルによる必要経験値
-		requiredExp(vocationId: string, level: number) {
+		requiredExp(vocationId: string, level: number): number {
 			return this.DB.expRequired[this.DB.vocations[vocationId].expTable][level];
 		}
 		
 		//不足経験値
-		requiredExpRemain(vocationId: string) {
+		requiredExpRemain(vocationId: string): number {
 			var required = this.requiredLevel(vocationId);
-			if(required <= this.levels[vocationId]) return 0;
-			var remain = this.requiredExp(vocationId, required) - this.requiredExp(vocationId, this.levels[vocationId]);
+			var current = this.vocationDic[vocationId].level;
+			if(required <= current) return 0;
+			var remain = this.requiredExp(vocationId, required) - this.requiredExp(vocationId, current);
 			return remain;
 		}
 		
 		//全職業の必要経験値合計
-		totalRequiredExp() {
-			return this.vocationIds.reduce((prev, vocationId) => {
-				var cur = this.requiredExp(vocationId, this.levels[vocationId]);
+		totalRequiredExp(): number {
+			return this.vocations.reduce((prev, vocation) => {
+				var cur = this.requiredExp(vocation.id, vocation.level);
 				return prev + cur;
 			}, 0);
 		}
 		
 		//全職業の不足経験値合計
-		totalExpRemain() {
-			return this.vocationIds.reduce((prev, vocationId) => {
-				var cur = this.requiredExpRemain(vocationId);
+		totalExpRemain(): number {
+			return this.vocations.reduce((prev, vocation) => {
+				var cur = this.requiredExpRemain(vocation.id);
 				return prev + cur;
 			}, 0);
 		}
@@ -246,14 +268,12 @@ namespace Dq10.SkillSimulator {
 		//さいだいHP  : maxhp
 		//さいだいMP  : maxmp
 		//みりょく    : charm
-		totalStatus(status: string) {
+		totalStatus(status: string): number {
 			//スキルラインデータの各スキルから上記プロパティを調べ合計する
-			var skillLineIds = Object.keys(this.DB.skillLines);
+			return this.skillLines.reduce((wholeTotal, skillLine) => {
+				var totalPts = this.totalOfSameSkills(skillLine.id);
 
-			return skillLineIds.reduce((wholeTotal, skillLineId) => {
-				var totalPts = this.totalOfSameSkills(skillLineId);
-
-				var cur = this.DB.skillLines[skillLineId].skills.filter((skill) => {
+				var cur = this.DB.skillLines[skillLine.id].skills.filter((skill) => {
 					return skill.pt <= totalPts && skill[status];
 				}).reduce((skillLineTotal, skill) => {
 					return skillLineTotal + skill[status];
@@ -264,19 +284,19 @@ namespace Dq10.SkillSimulator {
 		
 		//特定のパッシブスキルをすべて取得済みの状態にする
 		//ステータスが変動した場合trueを返す
-		presetStatus (status: string) {
+		presetStatus (status: string): boolean {
 			var returnValue = false;
 
-			this.vocationIds.forEach((vocationId) => {
-				this.DB.vocations[vocationId].skillLines.forEach((skillLineId) => {
+			this.vocations.forEach((vocation) => {
+				this.DB.vocations[vocation.id].skillLines.forEach((skillLineId) => {
 					if(!this.DB.skillLines[skillLineId].unique) return;
 
-					var currentPt = this.getSkillPt(vocationId, skillLineId);
+					var currentPt = this.getSkillPt(vocation.id, skillLineId);
 					var skills = this.DB.skillLines[skillLineId].skills.filter((skill) => {
 						return skill.pt > currentPt && skill[status];
 					});
 					if(skills.length > 0) {
-						this.updateSkillPt(vocationId, skillLineId, skills[skills.length - 1].pt);
+						this.updateSkillPt(vocation.id, skillLineId, skills[skills.length - 1].pt);
 						returnValue = true;
 					}
 				});
@@ -286,12 +306,13 @@ namespace Dq10.SkillSimulator {
 		}
 
 		//現在のレベルを取得スキルに対する必要レベルにそろえる
-		bringUpLevelToRequired () {
-			this.vocationIds.forEach((vocationId) => {
-				var required = this.requiredLevel(vocationId);
-				if(this.getLevel(vocationId) < required)
-					this.updateLevel(vocationId, required);
+		bringUpLevelToRequired (): boolean {
+			this.vocations.forEach((vocation) => {
+				var required = this.requiredLevel(vocation.id);
+				if(vocation.level < required)
+					this.updateLevel(vocation.id, required);
 			});
+			return true;
 		}
 
 		private VOCATIONS_DATA_ORDER = [
@@ -312,7 +333,7 @@ namespace Dq10.SkillSimulator {
 			'dancer'         //踊り子
 		];
 
-		serialize() {
+		serialize(): string {
 			var serial = '';
 			var toByte = String.fromCharCode;
 
@@ -328,14 +349,14 @@ namespace Dq10.SkillSimulator {
 				});
 			});
 			//末尾にMSPのスキルラインIDとポイントをペアで格納
-			Object.keys(this.msp).forEach((skillLineId) => {
-				if(this.msp[skillLineId] > 0) {
-					serial += toByte(this.DB.skillLines[skillLineId].id) + toByte(this.msp[skillLineId]);
+			this.skillLines.forEach((skillLine) => {
+				if(skillLine.msp > 0) {
+					serial += toByte(this.DB.skillLines[skillLine.id].id) + toByte(skillLine.msp);
 				}
 			});
 			return serial;
 		}
-		deserialize(serial: string) {
+		deserialize(serial: string): void {
 			var cur = 0;
 			var getData = () => serial.charCodeAt(cur++);
 			
@@ -370,7 +391,7 @@ namespace Dq10.SkillSimulator {
 			}
 		}
 
-		deserializeBit(serial: string) {
+		deserializeBit(serial: string): void {
 			var BITS_LEVEL = 8; //レベルは8ビット確保
 			var BITS_SKILL = 7; //スキルは7ビット
 			var BITS_TRAINING = 7; //特訓スキルポイント7ビット
@@ -1096,9 +1117,9 @@ namespace Dq10.SkillSimulator {
 		}
 		private refreshAll() {
 			this.refreshAllVocationInfo();
-			for(var skillLineId in this.DB.skillLines) {
+			Object.keys(this.DB.skillLines).forEach((skillLineId) => {
 				this.refreshSkillList(skillLineId);
-			}
+			});
 			//refreshTotalRequiredExp();
 			//refreshTotalExpRemain();
 			// refreshTotalPassive();
@@ -1125,9 +1146,9 @@ namespace Dq10.SkillSimulator {
 		}
 		
 		private refreshAllVocationInfo() {
-			for(var vocationId in this.DB.vocations) {
+			Object.keys(this.DB.vocations).forEach((vocationId) => {
 				this.refreshVocationInfo(vocationId);
-			}
+			});
 			$('#msp .remain .container').text(this.DB.consts.msp.max - this.sim.totalMSP());
 			$('#msp .total .container').text(this.DB.consts.msp.max);
 		}
