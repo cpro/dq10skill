@@ -14,7 +14,11 @@
 		pt: number;
 	}[];
 	consts: {
-		skillPts: MinMax;
+		skillPts: {
+			min: number,
+			max: number,
+			valid: number
+		};
 		level: {
 			min: number;
 			max: number;

@@ -827,7 +827,7 @@ var Dq10;
                         _this.com.on('SkillLineChanged', function (vocationId, skillLineId) {
                             _this.refreshCurrentSkillPt(vocationId, skillLineId);
                             _this.refreshSkillList(skillLineId);
-                            _this.refreshAllVocationInfo();
+                            _this.refreshVocationInfo(vocationId);
                             //refreshTotalExpRemain();
                             _this.refreshTotalSkillPt();
                             _this.refreshTotalPassive();
@@ -939,7 +939,7 @@ var Dq10;
                                 }
                             },
                             stop: function (e, ui) {
-                                var skillLineId = _this.getCurrentSkillLine(e.currentTarget);
+                                var skillLineId = _this.getCurrentSkillLine(e.currentTarget || e.target);
                                 _this.selectSkillLine(skillLineId);
                             }
                         });
@@ -1289,7 +1289,7 @@ var Dq10;
                 var isLevelError = (isNaN(requiredLevel) || currentLevel < requiredLevel);
                 $levelH2.toggleClass(this.CLASSNAME_ERROR, isLevelError);
                 $skillPtsText.toggleClass(this.CLASSNAME_ERROR, isLevelError);
-                $("#" + vocationId + " .error").toggle(isLevelError);
+                $("#" + vocationId + " .expinfo .error").toggle(isLevelError);
                 if (isLevelError) {
                     $("#" + vocationId + " .req_lv").text(numToFormedStr(requiredLevel));
                     $("#" + vocationId + " .exp_remain").text(numToFormedStr(this.sim.requiredExpRemain(vocationId)));
@@ -1323,7 +1323,10 @@ var Dq10;
                     $("." + skillLineId + "_" + i).addClass(_this.CLASSNAME_SKILL_ENABLED);
                     return false;
                 });
-                $("." + skillLineId + " .skill_total").text(totalOfSkill);
+                var isError = totalOfSkill > this.DB.consts.skillPts.valid;
+                $("." + skillLineId + " .skill_total")
+                    .text(totalOfSkill)
+                    .toggleClass(this.CLASSNAME_ERROR, isError);
                 var msp = this.sim.getMSP(skillLineId);
                 if (msp > 0)
                     $("<span>(" + msp + ")</span>")

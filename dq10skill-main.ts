@@ -490,7 +490,7 @@ namespace Dq10.SkillSimulator {
 			
 			$levelH2.toggleClass(this.CLASSNAME_ERROR, isLevelError);
 			$skillPtsText.toggleClass(this.CLASSNAME_ERROR, isLevelError);
-			$(`#${vocationId} .error`).toggle(isLevelError);
+			$(`#${vocationId} .expinfo .error`).toggle(isLevelError);
 			if(isLevelError) {
 				$(`#${vocationId} .req_lv`).text(numToFormedStr(requiredLevel));
 				$(`#${vocationId} .exp_remain`).text(numToFormedStr(this.sim.requiredExpRemain(vocationId)));
@@ -526,7 +526,10 @@ namespace Dq10.SkillSimulator {
 				$(`.${skillLineId}_${i}`).addClass(this.CLASSNAME_SKILL_ENABLED);
 				return false;
 			});
-			$(`.${skillLineId} .skill_total`).text(totalOfSkill);
+			var isError = totalOfSkill > this.DB.consts.skillPts.valid;
+			$(`.${skillLineId} .skill_total`)
+				.text(totalOfSkill)
+				.toggleClass(this.CLASSNAME_ERROR, isError);
 
 			var msp = this.sim.getMSP(skillLineId);
 			if(msp > 0)
@@ -627,7 +630,7 @@ namespace Dq10.SkillSimulator {
 				this.com.on('SkillLineChanged', (vocationId: string, skillLineId: string) => {
 					this.refreshCurrentSkillPt(vocationId, skillLineId);
 					this.refreshSkillList(skillLineId);
-					this.refreshAllVocationInfo();
+					this.refreshVocationInfo(vocationId);
 					//refreshTotalExpRemain();
 					this.refreshTotalSkillPt();
 					this.refreshTotalPassive();
@@ -753,7 +756,7 @@ namespace Dq10.SkillSimulator {
 						}
 					},
 					stop: (e, ui) => {
-						var skillLineId = this.getCurrentSkillLine(e.currentTarget);
+						var skillLineId = this.getCurrentSkillLine(e.currentTarget || e.target);
 						this.selectSkillLine(skillLineId);
 					}
 				});

@@ -947,7 +947,8 @@
 	"consts": {
 		"skillPts": {
 			"min": 0,
-			"max": 150
+			"valid": 150,
+			"max": 255
 		},
 		"level": {
 			"min": 1,
