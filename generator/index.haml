@@ -89,9 +89,6 @@
 					%br
 					%a#hirobaimport{href: 'hiroba-import.html', target: '_blank'} 冒険者の広場からデータを取り込む
 		#body_content
-			.class_group#ie-alert
-				%p.whatsnew Internet Explorer 8, 9, 10は非対応になりました。
-				%p Windows 7以降をお使いの方は、最新のものに更新してください。Windows Vista以前をお使いの方は<a href="https://www.mozilla.org/ja/firefox/new/" target="_blank">Firefox</a>や<a href="https://www.google.co.jp/chrome/browser/desktop/index.html" target="_blank">Google Chrome</a>などへの移行をご検討ください。
 			- data['vocationOrder'].each do |vocation|
 				%div.class_group{id: vocation}
 					.ent_title
@@ -249,12 +246,6 @@
 			#ad-items
 		:javascript
 			jQuery(function($) {
-				//IE alert
-				if(window.navigator.userAgent.indexOf('MSIE') > 0)
-					$('#ie-alert').show();
-				else
-					$('#ie-alert').remove();
-					
 				$('#ad-items').load('./amazon_item_cache.html');
 
 				var sharedUrl = "#{@home_uri}";
