@@ -534,6 +534,7 @@ a {
 		padding: 1px 3px 0 3px;
 		color: #889;
 		cursor: pointer;
+		position: relative;
 	}
 	th {
 		padding: 1px 3px 2px 3px;
@@ -563,6 +564,26 @@ a {
 	}
 	tr.enabled:hover td {
 		color: #211;
+	}
+}
+
+#mspmax_console {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	height: 22px;
+	width: 60px;
+}
+#max-with-msp {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	height: 22px;
+	
+	.ui-button-text {
+		padding: 2px 6px 2px 22px;
+		font-size: 9px;
+		color: $msp-color;
 	}
 }
 
@@ -1108,7 +1129,4 @@ ul.badge-button-container, ul#badge-search-buttons-rarity {
 	p.whatsnew {
 		color: #f75050;
 	}
-}
-#ie-alert {
-	/* display: none; */
 }

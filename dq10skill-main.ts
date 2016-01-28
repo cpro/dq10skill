@@ -444,6 +444,7 @@ namespace Dq10.SkillSimulator {
 		private $ptConsole: JQuery;
 		private $lvConsole: JQuery;
 		private $trainingPtConsole: JQuery;
+		private $mspMaxConsole: JQuery;
 		
 		private mspMode = false; //MSP編集モードフラグ
 
@@ -610,6 +611,7 @@ namespace Dq10.SkillSimulator {
 			this.$ptConsole.hide();
 			this.$lvConsole.hide();
 			this.$trainingPtConsole.hide();
+			this.$mspMaxConsole.hide();
 		}
 
 		setup() {
@@ -800,6 +802,41 @@ namespace Dq10.SkillSimulator {
 					if($('#pt_spinner:focus').length === 0)
 						this.hideConsoles();
 				});
+			},
+			
+			//MSP込み最大値設定ボタン
+			() => {
+				var maxPtWithMsp: number = this.DB.consts.skillPts.valid - this.DB.consts.msp.max;
+				
+				$('#max-with-msp').button({
+					icons: { primary: 'ui-icon-circle-arrow-s' },
+					text: true
+				}).click((e) => {
+					var vocationId = this.getCurrentVocation(<Element>e.currentTarget);
+					var skillLineId = this.getCurrentSkillLine(<Element>e.currentTarget);
+					this.com.updateSkillPt(vocationId, skillLineId, maxPtWithMsp);
+					e.stopPropagation();
+				});
+			},
+			
+			//職固有スキルホバー時にUI表示
+			() => {
+				this.$mspMaxConsole = $('#mspmax_console');
+				Object.keys(this.DB.skillLines).forEach((skillLineId) => {
+					var skillLine = this.DB.skillLines[skillLineId];
+					if(!skillLine.unique) return;
+					
+					var lastSkill = skillLineId + '_' + (skillLine.skills.length - 1).toString();
+					
+					$('.' + lastSkill).mouseenter((e) => {
+						this.hideConsoles();
+						$(e.currentTarget).find('.skill_name').append(this.$mspMaxConsole);
+						this.$mspMaxConsole.show();
+						e.stopPropagation();
+					}).mouseleave((e) => {
+						this.hideConsoles();
+					});
+				})
 			},
 
 			//範囲外クリック時・ESCキー押下時にUI非表示

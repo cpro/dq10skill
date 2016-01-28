@@ -374,7 +374,8 @@ a {
   .skill_table td {
     padding: 1px 3px 0 3px;
     color: #889;
-    cursor: pointer; }
+    cursor: pointer;
+    position: relative; }
   .skill_table th {
     padding: 1px 3px 2px 3px; }
   .skill_table .console {
@@ -395,6 +396,23 @@ a {
       color: #877; }
   .skill_table tr.enabled:hover td {
     color: #211; }
+
+#mspmax_console {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 22px;
+  width: 60px; }
+
+#max-with-msp {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 22px; }
+  #max-with-msp .ui-button-text {
+    padding: 2px 6px 2px 22px;
+    font-size: 9px;
+    color: #58e; }
 
 .class_group .skill_table.selected {
   border-color: rgba(0, 208, 0, 0.6);
@@ -774,8 +792,5 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
     padding: 0; }
   #initial-instruction p.whatsnew, #ie-alert p.whatsnew {
     color: #f75050; }
-
-#ie-alert {
-  /* display: none; */ }
 
 /*# sourceMappingURL=dq10skill.css.map */

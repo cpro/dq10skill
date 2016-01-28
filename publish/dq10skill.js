@@ -979,6 +979,39 @@ var Dq10;
                                 _this.hideConsoles();
                         });
                     },
+                    //MSP込み最大値設定ボタン
+                    //MSP込み最大値設定ボタン
+                    function () {
+                        var maxPtWithMsp = _this.DB.consts.skillPts.valid - _this.DB.consts.msp.max;
+                        $('#max-with-msp').button({
+                            icons: { primary: 'ui-icon-circle-arrow-s' },
+                            text: true
+                        }).click(function (e) {
+                            var vocationId = _this.getCurrentVocation(e.currentTarget);
+                            var skillLineId = _this.getCurrentSkillLine(e.currentTarget);
+                            _this.com.updateSkillPt(vocationId, skillLineId, maxPtWithMsp);
+                            e.stopPropagation();
+                        });
+                    },
+                    //職固有スキルホバー時にUI表示
+                    //職固有スキルホバー時にUI表示
+                    function () {
+                        _this.$mspMaxConsole = $('#mspmax_console');
+                        Object.keys(_this.DB.skillLines).forEach(function (skillLineId) {
+                            var skillLine = _this.DB.skillLines[skillLineId];
+                            if (!skillLine.unique)
+                                return;
+                            var lastSkill = skillLineId + '_' + (skillLine.skills.length - 1).toString();
+                            $('.' + lastSkill).mouseenter(function (e) {
+                                _this.hideConsoles();
+                                $(e.currentTarget).find('.skill_name').append(_this.$mspMaxConsole);
+                                _this.$mspMaxConsole.show();
+                                e.stopPropagation();
+                            }).mouseleave(function (e) {
+                                _this.hideConsoles();
+                            });
+                        });
+                    },
                     //範囲外クリック時・ESCキー押下時にUI非表示
                     //範囲外クリック時・ESCキー押下時にUI非表示
                     function () {
@@ -1392,6 +1425,7 @@ var Dq10;
                 this.$ptConsole.hide();
                 this.$lvConsole.hide();
                 this.$trainingPtConsole.hide();
+                this.$mspMaxConsole.hide();
             };
             SimulatorUI.prototype.setup = function () {
                 this.setupFunctions.forEach(function (func) { return func(); });
