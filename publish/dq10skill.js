@@ -456,12 +456,13 @@ var Dq10;
         var SimulatorModel = (function () {
             function SimulatorModel() {
                 //パラメータ格納用
-                this.skillPts = {};
-                this.levels = {};
-                this.trainingSkillPts = {};
-                //マスタースキルポイント
-                this.msp = {};
-                this.vocationIds = [];
+                this.vocations = [];
+                this.vocationDic = {};
+                this.skillLines = [];
+                this.skillLineDic = {};
+                /** 全スキルポイント情報を保持する配列 */
+                this.wholePts = [];
+                this.skillPtDic = {};
                 this.VOCATIONS_DATA_ORDER = [
                     'warrior',
                     'priest',
@@ -485,122 +486,129 @@ var Dq10;
             SimulatorModel.prototype.initialize = function () {
                 var _this = this;
                 this.DB = SkillSimulator.SimulatorDB;
-                this.vocationIds = Object.keys(this.DB.vocations);
-                this.vocationIds.forEach(function (vocationId) {
-                    _this.skillPts[vocationId] = {};
-                    _this.DB.vocations[vocationId].skillLines.forEach(function (skillLineId) {
-                        _this.skillPts[vocationId][skillLineId] = 0;
+                this.vocations = Object.keys(this.DB.vocations).map(function (vocationId) {
+                    var vocation = {
+                        id: vocationId,
+                        level: _this.DB.consts.level.min,
+                        trainingSkillPt: _this.DB.consts.trainingSkillPts.min,
+                        skillPts: []
+                    };
+                    _this.skillPtDic[vocationId] = {};
+                    vocation.skillPts = _this.DB.vocations[vocationId].skillLines.map(function (skillLineId) {
+                        var pt = {
+                            vocationId: vocationId,
+                            skillLineId: skillLineId,
+                            pt: 0
+                        };
+                        _this.skillPtDic[vocationId][skillLineId] = pt;
+                        return pt;
                     });
-                    _this.levels[vocationId] = _this.DB.consts.level.min;
-                    _this.trainingSkillPts[vocationId] = _this.DB.consts.trainingSkillPts.min;
+                    _this.wholePts = _this.wholePts.concat(vocation.skillPts);
+                    _this.vocationDic[vocationId] = vocation;
+                    return vocation;
+                });
+                this.skillLines = Object.keys(this.DB.skillLines).map(function (skillLineId) {
+                    var skillLine = {
+                        id: skillLineId,
+                        skillPts: _this.wholePts.filter(function (skillPt) { return skillPt.skillLineId == skillLineId; }),
+                        msp: _this.DB.consts.msp.min
+                    };
+                    _this.skillLineDic[skillLineId] = skillLine;
+                    return skillLine;
                 });
             };
             //スキルポイント取得
             SimulatorModel.prototype.getSkillPt = function (vocationId, skillLineId) {
-                return this.skillPts[vocationId][skillLineId];
+                return this.skillPtDic[vocationId][skillLineId].pt;
             };
             //スキルポイント更新：不正値の場合falseを返す
             SimulatorModel.prototype.updateSkillPt = function (vocationId, skillLineId, newValue) {
-                var oldValue = this.skillPts[vocationId][skillLineId];
+                var skillPt = this.skillPtDic[vocationId][skillLineId];
+                var oldValue = skillPt.pt;
                 if (newValue < this.DB.consts.skillPts.min || newValue > this.DB.consts.skillPts.max) {
                     return false;
                 }
                 if (this.totalOfSameSkills(skillLineId) - oldValue + newValue > this.DB.consts.skillPts.max) {
                     return false;
                 }
-                this.skillPts[vocationId][skillLineId] = newValue;
+                skillPt.pt = newValue;
                 return true;
             };
             //レベル値取得
             SimulatorModel.prototype.getLevel = function (vocationId) {
-                return this.levels[vocationId];
+                return this.vocationDic[vocationId].level;
             };
             //レベル値更新
             SimulatorModel.prototype.updateLevel = function (vocationId, newValue) {
                 if (newValue < this.DB.consts.level.min || newValue > this.DB.consts.level.max) {
                     return false;
                 }
-                this.levels[vocationId] = newValue;
+                this.vocationDic[vocationId].level = newValue;
                 return true;
             };
             //特訓スキルポイント取得
             SimulatorModel.prototype.getTrainingSkillPt = function (vocationId) {
-                return this.trainingSkillPts[vocationId];
+                return this.vocationDic[vocationId].trainingSkillPt;
             };
             //特訓スキルポイント更新
             SimulatorModel.prototype.updateTrainingSkillPt = function (vocationId, newValue) {
                 if (newValue < this.DB.consts.trainingSkillPts.min || newValue > this.DB.consts.trainingSkillPts.max)
                     return false;
-                this.trainingSkillPts[vocationId] = newValue;
+                this.vocationDic[vocationId].trainingSkillPt = newValue;
                 return true;
             };
             //マスタースキルポイント取得
             SimulatorModel.prototype.getMSP = function (skillLineId) {
-                return this.msp[skillLineId] || 0;
+                return this.skillLineDic[skillLineId].msp;
             };
             //マスタースキルポイント更新
             SimulatorModel.prototype.updateMSP = function (skillLineId, newValue) {
-                var oldValue = this.msp[skillLineId] || 0;
+                var oldValue = this.skillLineDic[skillLineId].msp || 0;
                 if (newValue < this.DB.consts.msp.min || newValue > this.DB.consts.msp.max)
                     return false;
                 if (this.totalMSP() - oldValue + newValue > this.DB.consts.msp.max)
                     return false;
                 if (this.totalOfSameSkills(skillLineId) - oldValue + newValue > this.DB.consts.skillPts.max)
                     return false;
-                this.msp[skillLineId] = newValue;
+                this.skillLineDic[skillLineId].msp = newValue;
                 return true;
             };
             //使用中のマスタースキルポイント合計
             SimulatorModel.prototype.totalMSP = function () {
-                var _this = this;
-                return Object.keys(this.msp).reduce(function (prev, skillLineId) {
-                    return prev + _this.msp[skillLineId];
-                }, 0);
+                return this.skillLines.reduce(function (prev, skillLine) { return prev + skillLine.msp; }, 0);
             };
             //職業のスキルポイント合計
             SimulatorModel.prototype.totalSkillPts = function (vocationId) {
-                var vSkillPts = this.skillPts[vocationId];
-                return Object.keys(vSkillPts).reduce(function (prev, skillLineId) {
-                    return prev + vSkillPts[skillLineId];
+                return this.vocationDic[vocationId].skillPts.reduce(function (prev, skillPt) {
+                    return prev + skillPt.pt;
                 }, 0);
             };
             //同スキルのポイント合計
             SimulatorModel.prototype.totalOfSameSkills = function (skillLineId) {
-                var _this = this;
-                var total = this.vocationIds.reduce(function (prev, vocationId) {
-                    var cur = _this.skillPts[vocationId][skillLineId] || 0;
-                    return prev + cur;
-                }, 0);
-                total += this.msp[skillLineId] || 0;
-                return total;
+                var skillLine = this.skillLineDic[skillLineId];
+                return skillLine.skillPts.reduce(function (prev, skillPt) { return prev + skillPt.pt; }, 0) +
+                    skillLine.msp;
             };
             //特定スキルすべてを振り直し（0にセット）
             SimulatorModel.prototype.clearPtsOfSameSkills = function (skillLineId) {
-                var _this = this;
-                this.vocationIds.forEach(function (vocationId) {
-                    if (_this.skillPts[vocationId][skillLineId])
-                        _this.updateSkillPt(vocationId, skillLineId, 0);
-                });
-                this.msp[skillLineId] = 0;
+                var skillLine = this.skillLineDic[skillLineId];
+                skillLine.skillPts.forEach(function (skillPt) { return skillPt.pt = 0; });
+                skillLine.msp = 0;
+                return true;
             };
             //MSPを初期化
             SimulatorModel.prototype.clearMSP = function () {
-                this.msp = {};
+                this.skillLines.forEach(function (skillLine) { return skillLine.msp = 0; });
+                return true;
             };
             //すべてのスキルを振り直し（0にセット）
             SimulatorModel.prototype.clearAllSkills = function () {
-                var _this = this;
-                this.vocationIds.forEach(function (vocationId) {
-                    var vSkillPts = _this.skillPts[vocationId];
-                    Object.keys(vSkillPts).forEach(function (skillLineId) {
-                        vSkillPts[skillLineId] = 0;
-                    });
-                });
+                this.wholePts.forEach(function (skillPt) { return skillPt.pt = 0; });
                 this.clearMSP();
             };
             //職業レベルに対するスキルポイント最大値
             SimulatorModel.prototype.maxSkillPts = function (vocationId) {
-                return this.DB.skillPtsGiven[this.levels[vocationId]];
+                return this.DB.skillPtsGiven[this.vocationDic[vocationId].level];
             };
             //スキルポイント合計に対する必要レベル取得
             SimulatorModel.prototype.requiredLevel = function (vocationId) {
@@ -620,18 +628,14 @@ var Dq10;
             //全職業の使用可能スキルポイント
             SimulatorModel.prototype.wholeSkillPtsAvailable = function () {
                 var _this = this;
-                return Object.keys(this.DB.vocations).reduce(function (prev, vocationId) {
-                    var cur = _this.maxSkillPts(vocationId) + _this.getTrainingSkillPt(vocationId);
+                return this.vocations.reduce(function (prev, vocation) {
+                    var cur = _this.maxSkillPts(vocation.id) + _this.getTrainingSkillPt(vocation.id);
                     return prev + cur;
                 }, 0);
             };
             //全職業の使用済スキルポイント
             SimulatorModel.prototype.wholeSkillPtsUsed = function () {
-                var _this = this;
-                return Object.keys(this.DB.vocations).reduce(function (prev, vocationId) {
-                    var cur = _this.totalSkillPts(vocationId);
-                    return prev + cur;
-                }, 0);
+                return this.wholePts.reduce(function (prev, skillPt) { return prev + skillPt.pt; }, 0);
             };
             //職業・レベルによる必要経験値
             SimulatorModel.prototype.requiredExp = function (vocationId, level) {
@@ -640,24 +644,25 @@ var Dq10;
             //不足経験値
             SimulatorModel.prototype.requiredExpRemain = function (vocationId) {
                 var required = this.requiredLevel(vocationId);
-                if (required <= this.levels[vocationId])
+                var current = this.vocationDic[vocationId].level;
+                if (required <= current)
                     return 0;
-                var remain = this.requiredExp(vocationId, required) - this.requiredExp(vocationId, this.levels[vocationId]);
+                var remain = this.requiredExp(vocationId, required) - this.requiredExp(vocationId, current);
                 return remain;
             };
             //全職業の必要経験値合計
             SimulatorModel.prototype.totalRequiredExp = function () {
                 var _this = this;
-                return this.vocationIds.reduce(function (prev, vocationId) {
-                    var cur = _this.requiredExp(vocationId, _this.levels[vocationId]);
+                return this.vocations.reduce(function (prev, vocation) {
+                    var cur = _this.requiredExp(vocation.id, vocation.level);
                     return prev + cur;
                 }, 0);
             };
             //全職業の不足経験値合計
             SimulatorModel.prototype.totalExpRemain = function () {
                 var _this = this;
-                return this.vocationIds.reduce(function (prev, vocationId) {
-                    var cur = _this.requiredExpRemain(vocationId);
+                return this.vocations.reduce(function (prev, vocation) {
+                    var cur = _this.requiredExpRemain(vocation.id);
                     return prev + cur;
                 }, 0);
             };
@@ -674,10 +679,9 @@ var Dq10;
             SimulatorModel.prototype.totalStatus = function (status) {
                 var _this = this;
                 //スキルラインデータの各スキルから上記プロパティを調べ合計する
-                var skillLineIds = Object.keys(this.DB.skillLines);
-                return skillLineIds.reduce(function (wholeTotal, skillLineId) {
-                    var totalPts = _this.totalOfSameSkills(skillLineId);
-                    var cur = _this.DB.skillLines[skillLineId].skills.filter(function (skill) {
+                return this.skillLines.reduce(function (wholeTotal, skillLine) {
+                    var totalPts = _this.totalOfSameSkills(skillLine.id);
+                    var cur = _this.DB.skillLines[skillLine.id].skills.filter(function (skill) {
                         return skill.pt <= totalPts && skill[status];
                     }).reduce(function (skillLineTotal, skill) {
                         return skillLineTotal + skill[status];
@@ -690,16 +694,16 @@ var Dq10;
             SimulatorModel.prototype.presetStatus = function (status) {
                 var _this = this;
                 var returnValue = false;
-                this.vocationIds.forEach(function (vocationId) {
-                    _this.DB.vocations[vocationId].skillLines.forEach(function (skillLineId) {
+                this.vocations.forEach(function (vocation) {
+                    _this.DB.vocations[vocation.id].skillLines.forEach(function (skillLineId) {
                         if (!_this.DB.skillLines[skillLineId].unique)
                             return;
-                        var currentPt = _this.getSkillPt(vocationId, skillLineId);
+                        var currentPt = _this.getSkillPt(vocation.id, skillLineId);
                         var skills = _this.DB.skillLines[skillLineId].skills.filter(function (skill) {
                             return skill.pt > currentPt && skill[status];
                         });
                         if (skills.length > 0) {
-                            _this.updateSkillPt(vocationId, skillLineId, skills[skills.length - 1].pt);
+                            _this.updateSkillPt(vocation.id, skillLineId, skills[skills.length - 1].pt);
                             returnValue = true;
                         }
                     });
@@ -709,11 +713,12 @@ var Dq10;
             //現在のレベルを取得スキルに対する必要レベルにそろえる
             SimulatorModel.prototype.bringUpLevelToRequired = function () {
                 var _this = this;
-                this.vocationIds.forEach(function (vocationId) {
-                    var required = _this.requiredLevel(vocationId);
-                    if (_this.getLevel(vocationId) < required)
-                        _this.updateLevel(vocationId, required);
+                this.vocations.forEach(function (vocation) {
+                    var required = _this.requiredLevel(vocation.id);
+                    if (vocation.level < required)
+                        _this.updateLevel(vocation.id, required);
                 });
+                return true;
             };
             SimulatorModel.prototype.serialize = function () {
                 var _this = this;
@@ -729,9 +734,9 @@ var Dq10;
                     });
                 });
                 //末尾にMSPのスキルラインIDとポイントをペアで格納
-                Object.keys(this.msp).forEach(function (skillLineId) {
-                    if (_this.msp[skillLineId] > 0) {
-                        serial += toByte(_this.DB.skillLines[skillLineId].id) + toByte(_this.msp[skillLineId]);
+                this.skillLines.forEach(function (skillLine) {
+                    if (skillLine.msp > 0) {
+                        serial += toByte(_this.DB.skillLines[skillLine.id].id) + toByte(skillLine.msp);
                     }
                 });
                 return serial;
@@ -1446,10 +1451,11 @@ var Dq10;
                 this.DB = SkillSimulator.SimulatorDB;
             }
             SimpleUI.prototype.refreshAll = function () {
+                var _this = this;
                 this.refreshAllVocationInfo();
-                for (var skillLineId in this.DB.skillLines) {
-                    this.refreshSkillList(skillLineId);
-                }
+                Object.keys(this.DB.skillLines).forEach(function (skillLineId) {
+                    _this.refreshSkillList(skillLineId);
+                });
                 //refreshTotalRequiredExp();
                 //refreshTotalExpRemain();
                 // refreshTotalPassive();
@@ -1471,9 +1477,10 @@ var Dq10;
                 $("#" + vocationId + " .remain .container").toggleClass(this.CLASSNAME_ERROR, isLevelError);
             };
             SimpleUI.prototype.refreshAllVocationInfo = function () {
-                for (var vocationId in this.DB.vocations) {
-                    this.refreshVocationInfo(vocationId);
-                }
+                var _this = this;
+                Object.keys(this.DB.vocations).forEach(function (vocationId) {
+                    _this.refreshVocationInfo(vocationId);
+                });
                 $('#msp .remain .container').text(this.DB.consts.msp.max - this.sim.totalMSP());
                 $('#msp .total .container').text(this.DB.consts.msp.max);
             };
