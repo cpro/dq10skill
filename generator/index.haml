@@ -1,4 +1,4 @@
-- @version = '6.3.1'
+- @version = '7.0'
 !!! 5
 %html
 	%head
@@ -13,10 +13,10 @@
 		%title= @title
 		
 		%link{rel: 'stylesheet', type: 'text/css', href: "./dq10skill.css?ver=#{@version}"}/
-		%link{rel: 'stylesheet', type: 'text/css', href: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'}/
+		%link{rel: 'stylesheet', type: 'text/css', href: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css'}/
 		
-		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'}
-		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'}
+		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js'}
+		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'}
 		%script{type: 'text/javascript', src: 'js/rawdeflate.min.js'}
 		%script{type: 'text/javascript', src: 'js/rawinflate.min.js'}
 		%script{type: 'text/javascript', src: 'js/shortcut.min.js'}
@@ -89,9 +89,6 @@
 					%br
 					%a#hirobaimport{href: 'hiroba-import.html', target: '_blank'} 冒険者の広場からデータを取り込む
 		#body_content
-			.class_group#ie-alert
-				%p.whatsnew Internet Explorer 8, 9, 10は非対応になりました。
-				%p Windows 7以降をお使いの方は、最新のものに更新してください。Windows Vista以前をお使いの方は<a href="https://www.mozilla.org/ja/firefox/new/" target="_blank">Firefox</a>や<a href="https://www.google.co.jp/chrome/browser/desktop/index.html" target="_blank">Google Chrome</a>などへの移行をご検討ください。
 			- data['vocationOrder'].each do |vocation|
 				%div.class_group{id: vocation}
 					.ent_title
@@ -144,6 +141,8 @@
 				%select#lv-select.ui-widget-content.ui-corner-all{size: 1}
 			#training_pt_console{style: 'display: none'}
 				%select#training_pt_select.ui-widget-content.ui-corner-all
+			#mspmax_console{style: 'display: none'}
+				%button#max-with-msp{title: 'MSP込みの最大値にする'} MSP
 			#footconsole
 				%p#setalllevel
 					レベル一括設定
@@ -173,6 +172,7 @@
 								%ul
 									%li ダブルクリックすると複数の職で振ったそのスキルのポイントをすべて0にします。
 									%li 職業欄下部の「全スキルをリセット」で、全職業で振ったスキルのポイントをすべて0にします。レベルと特訓は変化しません。
+							%li 「ゆうかん」など職業固有スキルラインの最後のスキル(150)にマウスカーソルを当てると、「MSP込みの最大値にする」ボタンが表示され、クリックすると最大値から現在取得可能なマスタースキルポイントを引いた数値に設定されます。
 							%li ページ上部の「マスタースキル」をチェックすると、マスタースキルポイントを編集するモードに切り替わります。
 							%li ページ上部の「元に戻す」ボタンまたはキーボードのCtrl+Zで、直前の変更を元に戻せます。元に戻した変更は「やり直し」ボタンまたはCtrl+Yでもう一度適用できます。
 							%li 「保存用URL」欄に表示されるURLは、アクセスすることで現在の状態を再現できます。メモ用・掲示板に貼る用などにどうぞ。
@@ -187,6 +187,11 @@
 					%li
 						履歴:
 						%ul
+							%li
+								2016/1/28 v7.0
+								%ul
+									%li スキルポイントを150より多く振れるように変更。複数職でポイントをやりとりしやすくしました。
+									%li 「MSP込みの最大値にする」ボタン（一発で128ポイントにする）追加。職固有の150スキルホバー時に表示されます。
 							%li 2015/12/24 v6.3.1 ver3.2前期の特訓スタンプ上限解放（7000→8000、SP16→17）に対応。
 							%li
 								2015/12/21 v6.3
@@ -204,11 +209,7 @@
 								%ul
 									%li 特訓スキルポイント 15→16
 									%li はくあいスキル120「さいだいHP+20（専）」を「さいだいHP+60（専）」に変更
-							%li
-								2015/6/22 v6.2.2 ver3.0後期対応。
-								%ul
-									%li 特訓スキルポイント 14→15
-									%li 各種チャージタイム変更に対応。
+
 							%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
 					%li
 						ToDo:
@@ -245,12 +246,6 @@
 			#ad-items
 		:javascript
 			jQuery(function($) {
-				//IE alert
-				if(window.navigator.userAgent.indexOf('MSIE') > 0)
-					$('#ie-alert').show();
-				else
-					$('#ie-alert').remove();
-					
 				$('#ad-items').load('./amazon_item_cache.html');
 
 				var sharedUrl = "#{@home_uri}";

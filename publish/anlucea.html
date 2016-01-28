@@ -33,10 +33,6 @@
       </div>
     </div>
     <div id='body_content'>
-      <div class='class_group' id='ie-alert'>
-        <p class='whatsnew'>Internet Explorer 8, 9, 10は非対応になりました。</p>
-        <p>Windows 7以降をお使いの方は、最新のものに更新してください。Windows Vista以前をお使いの方は<a href="https://www.mozilla.org/ja/firefox/new/" target="_blank">Firefox</a>や<a href="https://www.google.co.jp/chrome/browser/desktop/index.html" target="_blank">Google Chrome</a>などへの移行をご検討ください。</p>
-      </div>
       <div class='class_group' id='anlucea-data'>
         <div class='ent_title'>
           <h2>アンルシア Lv
@@ -253,12 +249,6 @@
     </div>
     <script>
     jQuery(function($) {
-    	//IE alert
-    	if(window.navigator.userAgent.indexOf('MSIE') > 0)
-    		$('#ie-alert').show();
-    	else
-    		$('#ie-alert').remove();
-    
     	$('#ad-items').load('./amazon_item_cache.html');
     
     	var sharedUrl = "http://cpro.jp/dq10/skillsimulator/anlucea.html";

@@ -57,12 +57,10 @@
 				-# #navlink
 					%a{href: './'} プレイヤーキャラクター用シミュレータはこちら
 		#body_content
-			.monster_ent#ie-alert
-				%p.whatsnew Internet Explorer 8, 9, 10は非対応になりました。
-				%p Windows 7以降をお使いの方は、最新のものに更新してください。Windows Vista以前をお使いの方は<a href="https://www.mozilla.org/ja/firefox/new/" target="_blank">Firefox</a>や<a href="https://www.google.co.jp/chrome/browser/desktop/index.html" target="_blank">Google Chrome</a>などへの移行をご検討ください。
 			.monster_ent#initial-instruction
 				%p 上のモンスター名のボタンをクリックして仲間モンスターを追加してください。
-				%p.whatsnew （New: ver3.1後期の新スキルラインを追加しました）
+				%p.whatsnew （New: ver3.2前期の新スキルラインを追加しました）
+				%p.whatsnew （New: なつき度300の追加スキルポイントに対応しました）
 			#monsters
 			.monster_ent#monster_dummy{style: 'display:none'}
 				.ent_title
@@ -314,12 +312,6 @@
 			#ad-items
 		:javascript
 			jQuery(function($) {
-				//IE alert
-				if(window.navigator.userAgent.indexOf('MSIE') > 0)
-					$('#ie-alert').show();
-				else
-					$('#ie-alert').remove();
-
 				$('#ad-items').load('./amazon_item_cache.html');
 
 				var sharedUrl = "#{@home_uri}";
