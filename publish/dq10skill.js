@@ -1619,7 +1619,7 @@ var Dq10;
             //データJSONを格納する変数
             var DATA_JSON_URI = window.location.href.replace(/\/[^\/]*$/, '/dq10skill-data.json');
             var $dbLoad = $.getJSON(DATA_JSON_URI, function (data) {
-                SkillSimulator.SimulatorDB = data;
+                //SimulatorDB = data;
             });
             //ロード時
             $(function () {
@@ -1641,10 +1641,11 @@ var Dq10;
                         }
                     }
                 }
-                var ui = window.location.pathname.indexOf('/simple.html') > 0 ? new SimpleUI(SkillSimulator.Simulator) : new SimulatorUI(SkillSimulator.Simulator);
                 $dbLoad.done(function (data) {
+                    SkillSimulator.SimulatorDB = data;
                     SkillSimulator.Simulator.initialize();
                     loadQuery();
+                    var ui = window.location.pathname.indexOf('/simple.html') > 0 ? new SimpleUI(SkillSimulator.Simulator) : new SimulatorUI(SkillSimulator.Simulator);
                     ui.setup();
                 });
             });
