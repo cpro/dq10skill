@@ -1355,7 +1355,7 @@ namespace Dq10.SkillSimulator {
 	//データJSONを格納する変数
 	var DATA_JSON_URI = window.location.href.replace(/\/[^\/]*$/, '/dq10skill-data.json');
 	var $dbLoad = $.getJSON(DATA_JSON_URI, (data) => {
-		SimulatorDB = data;
+		//SimulatorDB = data;
 	});
 	
 	//ロード時
@@ -1379,12 +1379,13 @@ namespace Dq10.SkillSimulator {
 			}
 		}
 		
-		var ui = window.location.pathname.indexOf('/simple.html') > 0 ? new SimpleUI(Simulator) : new SimulatorUI(Simulator);
-
 		$dbLoad.done((data) => {
+			SimulatorDB = data;
 			Simulator.initialize();
 
 			loadQuery();
+			
+			var ui = window.location.pathname.indexOf('/simple.html') > 0 ? new SimpleUI(Simulator) : new SimulatorUI(Simulator);
 			ui.setup();
 		});
 	});
