@@ -36,7 +36,7 @@
 			"suppressTaskName": true,
 			"showOutput": "silent"
 		},
-		
+
 		{
 			"taskName": "produce data JSON",
 			"args": ["ruby generator/produce_data_json.rb"],
@@ -44,10 +44,19 @@
 			"suppressTaskName": true,
 			"showOutput": "never"
 		},
-		
+
 		{
 			"taskName": "refresh Amazon cache",
 			"args": ["ruby generator/refresh_amazon_cache.rb"],
+			"isBuildCommand": true,
+			"suppressTaskName": true
+		},
+
+		{
+			"taskName": "sass - start watching dq10skill.scss",
+			"args": [
+				"sass --watch -E UTF-8 generator/dq10skill.scss:publish/dq10skill.css"
+			],
 			"isBuildCommand": true,
 			"suppressTaskName": true
 		}

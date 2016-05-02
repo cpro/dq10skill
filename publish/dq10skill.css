@@ -333,7 +333,8 @@ a {
   border-spacing: 0;
   border: 2px solid rgba(255, 0, 0, 0);
   border-radius: 4px;
-  display: inline-block; }
+  display: inline-block;
+  vertical-align: top; }
   .skill_table caption {
     overflow: visible;
     white-space: nowrap;

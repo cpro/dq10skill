@@ -1,6 +1,6 @@
 *.sublime-workspace
 *.sublime-project
-/generator/.sass-cache
+*.scssc
 /generator/.amazonrc
 /generator/amazon_item_cache.json
 /generator/asin_list.txt

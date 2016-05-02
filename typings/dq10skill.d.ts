@@ -17,7 +17,8 @@
 		skillPts: {
 			min: number,
 			max: number,
-			valid: number
+			valid: number,
+			validUnique: number
 		};
 		level: {
 			min: number;

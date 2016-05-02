@@ -63,26 +63,26 @@ a {
 		width: auto;
 		margin: 15px 0 7px 0;
 		padding: 0 10px;
-		
+
 		h1 {
 			font-size: 18px;
 			margin: 0 10px 0 0;
 			height: 25px;
 			float: left;
 		}
-	
+
 		#save_url {
 			padding: 2px 0;
 			height: 21px;
 			text-align: right;
 			white-space: nowrap;
 			font-size: 12px;
-			
+
 			#tw-saveurl, #undo, #redo {
 				font-size: 11px;
 				height: 18px;
 				overflow: hidden;
-				
+
 				.ui-button-text {
 					padding: .2em .5em;
 				}
@@ -105,21 +105,21 @@ a {
 			}
 		}
 	}
-	
+
 	#consoleblock {
 		width: auto;
 		height: 39px;
 		padding: 0;
 		position: relative;
 		white-space: nowrap;
-		
+
 		#foldbuttons {
 			font-size: 11px;
 			position: absolute;
 			top: 0;
 			left: 10px;
 			z-index: 102;
-			
+
 			ul.button-container {
 				$width-all: 96px;
 				$width-each: 30px;
@@ -132,7 +132,7 @@ a {
 				list-style-type: none;
 				margin: 0;
 				padding: 0;
-				
+
 				&#foldbuttons-all {
 					width: ($width-all + 2px + 1px) * 1;
 				}
@@ -151,7 +151,7 @@ a {
 					margin: 0 1px 3px 0;
 					border: 1px solid #aab;
 					background-color: #f0f0f7;
-					
+
 					&:hover {
 						cursor: pointer;
 						border-color: #445;
@@ -208,7 +208,7 @@ a {
 			top: 0;
 			left: 10px + 96px + 33px * 8 + 10px;
 			z-index: 102;
-			
+
 			td, th {
 				margin: 0;
 				white-space: nowrap;
@@ -227,7 +227,7 @@ a {
 				font-size: 12px;
 				width: 22px;
 				border-right: 1px solid #aab;
-				
+
 				&#total_exp, &#total_exp_remain {
 					width: 64px;
 				}
@@ -435,7 +435,7 @@ a {
 	text-align: center;
 	border-right: 1px solid $border-color-general;
 	vertical-align: top;
-	
+
 	dt {
 		font-weight: normal;
 	}
@@ -481,6 +481,7 @@ a {
 	border-radius: 4px;
 
 	display: inline-block;
+	vertical-align: top;
 
 	caption {
 		overflow: visible;
@@ -490,7 +491,7 @@ a {
 
 		.console_wrapper {
 			position: relative;
-			
+
 			#pt_console {
 				position: absolute;
 				top: -2px;
@@ -541,7 +542,7 @@ a {
 	}
 	.console {
 		text-align: center;
-		
+
 		.ptspinner {
 			width: 2em;
 			text-align: right;
@@ -579,7 +580,7 @@ a {
 	right: 0;
 	bottom: 0;
 	height: 22px;
-	
+
 	.ui-button-text {
 		padding: 2px 6px 2px 22px;
 		font-size: 9px;
@@ -647,7 +648,7 @@ a {
 	overflow: auto;
 	margin: 3px 0;
 	padding: $entry-padding;
-	
+
 	p {
 		float: left;
 		font-size: 80%;
@@ -657,7 +658,7 @@ a {
 		&:last-child {
 			border-right: none;
 		}
-		
+
 		.ui-button-text-icon-primary {
 			padding-left: 16px;
 		}
@@ -736,7 +737,7 @@ ul.button-container {
 		white-space: nowrap;
 		border: 1px solid #aab;
 		background-color: #f0f0f7;
-		
+
 		&:hover {
 			cursor: pointer;
 			border-color: #445;
@@ -1048,7 +1049,7 @@ ul.badge-button-container, ul#badge-search-buttons-rarity {
 	left: $body-content-width + $body-margin + 10px;
 	top: $header-height + 5px;
 	z-index: 1;
-	
+
 	ul {
 		font-size: 80%;
 		margin: 0;

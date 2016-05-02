@@ -1,3 +1,8 @@
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var Dq10;
 (function (Dq10) {
     var SkillSimulator;
@@ -35,16 +40,11 @@ var Dq10;
                 }
             };
             return EventDispatcher;
-        })();
+        }());
         SkillSimulator.EventDispatcher = EventDispatcher;
     })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
 })(Dq10 || (Dq10 = {}));
 /// <reference path="eventdispatcher.ts" />
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 var Dq10;
 (function (Dq10) {
     var SkillSimulator;
@@ -116,7 +116,7 @@ var Dq10;
                 return (this.cursor < this.commandStack.length);
             };
             return CommandManager;
-        })(SkillSimulator.EventDispatcher);
+        }(SkillSimulator.EventDispatcher));
         SkillSimulator.CommandManager = CommandManager;
     })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
 })(Dq10 || (Dq10 = {}));
@@ -150,7 +150,7 @@ var Dq10;
                 this.newValue = newCommand.newValue;
             };
             return SingleValueCommand;
-        })();
+        }());
         var UpdateSkillPt = (function (_super) {
             __extends(UpdateSkillPt, _super);
             function UpdateSkillPt(vocationId, skillLineId, newValue) {
@@ -175,7 +175,7 @@ var Dq10;
                 };
             };
             return UpdateSkillPt;
-        })(SingleValueCommand);
+        }(SingleValueCommand));
         var UpdateLevel = (function (_super) {
             __extends(UpdateLevel, _super);
             function UpdateLevel(vocationId, newValue) {
@@ -199,7 +199,7 @@ var Dq10;
                 };
             };
             return UpdateLevel;
-        })(SingleValueCommand);
+        }(SingleValueCommand));
         var UpdateTrainingSkillPt = (function (_super) {
             __extends(UpdateTrainingSkillPt, _super);
             function UpdateTrainingSkillPt(vocationId, newValue) {
@@ -223,7 +223,7 @@ var Dq10;
                 };
             };
             return UpdateTrainingSkillPt;
-        })(SingleValueCommand);
+        }(SingleValueCommand));
         var UpdateMSP = (function (_super) {
             __extends(UpdateMSP, _super);
             function UpdateMSP(skillLineId, newValue) {
@@ -247,7 +247,7 @@ var Dq10;
                 };
             };
             return UpdateMSP;
-        })(SingleValueCommand);
+        }(SingleValueCommand));
         var PackageCommand = (function () {
             function PackageCommand() {
                 this.name = '';
@@ -281,7 +281,7 @@ var Dq10;
                 };
             };
             return PackageCommand;
-        })();
+        }());
         var SetAllLevel = (function (_super) {
             __extends(SetAllLevel, _super);
             function SetAllLevel(newValue) {
@@ -295,7 +295,7 @@ var Dq10;
                 });
             };
             return SetAllLevel;
-        })(PackageCommand);
+        }(PackageCommand));
         var SetAllTrainingSkillPt = (function (_super) {
             __extends(SetAllTrainingSkillPt, _super);
             function SetAllTrainingSkillPt(newValue) {
@@ -309,7 +309,7 @@ var Dq10;
                 });
             };
             return SetAllTrainingSkillPt;
-        })(PackageCommand);
+        }(PackageCommand));
         var ClearPtsOfSameSkills = (function (_super) {
             __extends(ClearPtsOfSameSkills, _super);
             function ClearPtsOfSameSkills(skillLineId) {
@@ -321,7 +321,7 @@ var Dq10;
                 return true;
             };
             return ClearPtsOfSameSkills;
-        })(PackageCommand);
+        }(PackageCommand));
         var ClearMSP = (function (_super) {
             __extends(ClearMSP, _super);
             function ClearMSP() {
@@ -332,7 +332,7 @@ var Dq10;
                 return true;
             };
             return ClearMSP;
-        })(PackageCommand);
+        }(PackageCommand));
         var ClearAllSkills = (function (_super) {
             __extends(ClearAllSkills, _super);
             function ClearAllSkills() {
@@ -343,7 +343,7 @@ var Dq10;
                 return true;
             };
             return ClearAllSkills;
-        })(PackageCommand);
+        }(PackageCommand));
         var PresetStatus = (function (_super) {
             __extends(PresetStatus, _super);
             function PresetStatus(status) {
@@ -355,7 +355,7 @@ var Dq10;
                 return sarray.reduce(function (succeeded, s) { return SkillSimulator.Simulator.presetStatus(s) || succeeded; }, false);
             };
             return PresetStatus;
-        })(PackageCommand);
+        }(PackageCommand));
         var BringUpLevelToRequired = (function (_super) {
             __extends(BringUpLevelToRequired, _super);
             function BringUpLevelToRequired() {
@@ -366,7 +366,7 @@ var Dq10;
                 return true;
             };
             return BringUpLevelToRequired;
-        })(PackageCommand);
+        }(PackageCommand));
         var SimulatorCommandManager = (function (_super) {
             __extends(SimulatorCommandManager, _super);
             function SimulatorCommandManager() {
@@ -406,7 +406,7 @@ var Dq10;
                 return this.invoke(new BringUpLevelToRequired());
             };
             return SimulatorCommandManager;
-        })(SkillSimulator.CommandManager);
+        }(SkillSimulator.CommandManager));
         SkillSimulator.SimulatorCommandManager = SimulatorCommandManager;
     })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
 })(Dq10 || (Dq10 = {}));
@@ -441,7 +441,7 @@ var Base64 = (function () {
         return (/^[A-Za-z0-9-_]+$/).test(a);
     };
     return Base64;
-})();
+}());
 /// <reference path="typings/jquery/jquery.d.ts" />
 /// <reference path="typings/jqueryui/jqueryui.d.ts" />
 /// <reference path="typings/dq10skill.d.ts" />
@@ -805,7 +805,7 @@ var Dq10;
                 }
             };
             return SimulatorModel;
-        })();
+        }());
         SkillSimulator.SimulatorModel = SimulatorModel;
         var SimulatorUI = (function () {
             function SimulatorUI(sim) {
@@ -814,7 +814,6 @@ var Dq10;
                 this.CLASSNAME_ERROR = 'error';
                 this.mspMode = false; //MSP編集モードフラグ
                 this.setupFunctions = [
-                    //イベント登録
                     //イベント登録
                     function () {
                         _this.com.on('VocationalInfoChanged', function (vocationId) {
@@ -843,7 +842,6 @@ var Dq10;
                         });
                     },
                     //レベル選択セレクトボックス項目設定
-                    //レベル選択セレクトボックス項目設定
                     function () {
                         _this.$lvConsole = $('#lv_console');
                         var $select = $('#lv-select');
@@ -856,7 +854,6 @@ var Dq10;
                         });
                     },
                     //レベル欄クリック時にUI表示
-                    //レベル欄クリック時にUI表示
                     function () {
                         $('.ent_title h2').click(function (e) {
                             _this.hideConsoles();
@@ -868,7 +865,6 @@ var Dq10;
                             e.stopPropagation();
                         });
                     },
-                    //特訓ポイント選択セレクトボックス設定
                     //特訓ポイント選択セレクトボックス設定
                     function () {
                         _this.$trainingPtConsole = $('#training_pt_console');
@@ -883,7 +879,6 @@ var Dq10;
                         });
                     },
                     //特訓表示欄クリック時にUI表示
-                    //特訓表示欄クリック時にUI表示
                     function () {
                         $('.ent_title .training_pt').click(function (e) {
                             _this.hideConsoles();
@@ -895,7 +890,6 @@ var Dq10;
                             e.stopPropagation();
                         });
                     },
-                    //スピンボタン設定
                     //スピンボタン設定
                     function () {
                         _this.$ptConsole = $('#pt_console');
@@ -945,7 +939,6 @@ var Dq10;
                         });
                     },
                     //スピンコントロール共通
-                    //スピンコントロール共通
                     function () {
                         $('input.ui-spinner-input').click(function (e) {
                             //テキストボックスクリック時数値を選択状態に
@@ -958,7 +951,6 @@ var Dq10;
                             }
                         });
                     },
-                    //スキルライン名クリック時にUI表示
                     //スキルライン名クリック時にUI表示
                     function () {
                         $('.skill_table caption').mouseenter(function (e) {
@@ -980,20 +972,19 @@ var Dq10;
                         });
                     },
                     //MSP込み最大値設定ボタン
-                    //MSP込み最大値設定ボタン
                     function () {
                         var maxPtWithMsp = _this.DB.consts.skillPts.valid - _this.DB.consts.msp.max;
+                        var maxPtWithMspUnique = _this.DB.consts.skillPts.validUnique - _this.DB.consts.msp.max;
                         $('#max-with-msp').button({
                             icons: { primary: 'ui-icon-circle-arrow-s' },
                             text: true
                         }).click(function (e) {
                             var vocationId = _this.getCurrentVocation(e.currentTarget);
                             var skillLineId = _this.getCurrentSkillLine(e.currentTarget);
-                            _this.com.updateSkillPt(vocationId, skillLineId, maxPtWithMsp);
+                            _this.com.updateSkillPt(vocationId, skillLineId, _this.DB.skillLines[skillLineId].unique ? maxPtWithMspUnique : maxPtWithMsp);
                             e.stopPropagation();
                         });
                     },
-                    //職固有スキルホバー時にUI表示
                     //職固有スキルホバー時にUI表示
                     function () {
                         _this.$mspMaxConsole = $('#mspmax_console');
@@ -1013,7 +1004,6 @@ var Dq10;
                         });
                     },
                     //範囲外クリック時・ESCキー押下時にUI非表示
-                    //範囲外クリック時・ESCキー押下時にUI非表示
                     function () {
                         _this.$ptConsole.click(function (e) { return e.stopPropagation(); });
                         _this.$lvConsole.click(function (e) { return e.stopPropagation(); });
@@ -1023,7 +1013,6 @@ var Dq10;
                                 _this.hideConsoles();
                         });
                     },
-                    //リセットボタン設定
                     //リセットボタン設定
                     function () {
                         $('#pt_reset').button({
@@ -1058,7 +1047,6 @@ var Dq10;
                         });
                     },
                     //スキルテーブル項目クリック時
-                    //スキルテーブル項目クリック時
                     function () {
                         $('.skill_table tr[class]').click(function (e) {
                             var vocationId = _this.getCurrentVocation(e.currentTarget);
@@ -1082,13 +1070,11 @@ var Dq10;
                         });
                     },
                     //MSPモード切替ラジオボタン
-                    //MSPモード切替ラジオボタン
                     function () {
                         $('#msp_selector input').change(function (e) {
                             _this.toggleMspMode($(e.currentTarget).val() == 'msp');
                         });
                     },
-                    //URLテキストボックスクリック・フォーカス時
                     //URLテキストボックスクリック・フォーカス時
                     function () {
                         $('#url_text').focus(function (e) {
@@ -1097,7 +1083,6 @@ var Dq10;
                             $(e.currentTarget).select();
                         });
                     },
-                    //保存用URLツイートボタン設定
                     //保存用URLツイートボタン設定
                     function () {
                         $('#tw-saveurl').button().click(function (e) {
@@ -1121,7 +1106,6 @@ var Dq10;
                             return false;
                         });
                     },
-                    //おりたたむ・ひろげるボタン設定
                     //おりたたむ・ひろげるボタン設定
                     function () {
                         var HEIGHT_FOLDED = '48px';
@@ -1168,7 +1152,6 @@ var Dq10;
                         });
                     },
                     //レベル一括設定
-                    //レベル一括設定
                     function () {
                         //セレクトボックス初期化
                         var $select = $('#setalllevel>select');
@@ -1181,7 +1164,6 @@ var Dq10;
                         });
                     },
                     //特訓スキルポイント一括設定（最大値固定）
-                    //特訓スキルポイント一括設定（最大値固定）
                     function () {
                         $('#setalltrainingsp>button').button({
                             icons: { primary: 'ui-icon-star' }
@@ -1189,7 +1171,6 @@ var Dq10;
                             _this.com.setAllTrainingSkillPt(_this.DB.consts.trainingSkillPts.max);
                         });
                     },
-                    //全スキルをリセット
                     //全スキルをリセット
                     function () {
                         $('#clearallskills>button').button({
@@ -1200,7 +1181,6 @@ var Dq10;
                             _this.com.clearAllSkills();
                         });
                     },
-                    //ナビゲーションボタン
                     //ナビゲーションボタン
                     function () {
                         $('a#hirobaimport').button({
@@ -1215,7 +1195,6 @@ var Dq10;
                         });
                     },
                     //スキル選択時に同スキルを強調
-                    //スキル選択時に同スキルを強調
                     function () {
                         $('.skill_table').click(function (e) {
                             var skillLineId = $(e.currentTarget).attr('class').split(' ')[0];
@@ -1223,7 +1202,6 @@ var Dq10;
                             $('.' + skillLineId).addClass('selected');
                         });
                     },
-                    //パッシブプリセット
                     //パッシブプリセット
                     function () {
                         //セレクトボックス初期化
@@ -1249,7 +1227,6 @@ var Dq10;
                         });
                     },
                     //全職業のレベルを取得スキルに応じて引き上げ
-                    //全職業のレベルを取得スキルに応じて引き上げ
                     function () {
                         $('#bringUpLevel>button').button({
                             icons: { primary: 'ui-icon-arrowthickstop-1-n' }
@@ -1259,7 +1236,6 @@ var Dq10;
                             _this.com.bringUpLevelToRequired();
                         });
                     },
-                    //undo/redo
                     //undo/redo
                     function () {
                         var $undoButton = $('#undo');
@@ -1356,7 +1332,9 @@ var Dq10;
                     $("." + skillLineId + "_" + i).addClass(_this.CLASSNAME_SKILL_ENABLED);
                     return false;
                 });
-                var isError = totalOfSkill > this.DB.consts.skillPts.valid;
+                var isError = totalOfSkill > (this.DB.skillLines[skillLineId].unique ?
+                    this.DB.consts.skillPts.validUnique :
+                    this.DB.consts.skillPts.valid);
                 $("." + skillLineId + " .skill_total")
                     .text(totalOfSkill)
                     .toggleClass(this.CLASSNAME_ERROR, isError);
@@ -1432,14 +1410,13 @@ var Dq10;
                 this.refreshAll();
             };
             return SimulatorUI;
-        })();
+        }());
         var SimpleUI = (function () {
             function SimpleUI(sim) {
                 var _this = this;
                 this.CLASSNAME_SKILL_ENABLED = 'enabled';
                 this.CLASSNAME_ERROR = 'error';
                 this.setupFunctions = [
-                    //URLテキストボックスクリック・フォーカス時
                     //URLテキストボックスクリック・フォーカス時
                     function () {
                         $('#url_text').focus(function (e) {
@@ -1448,7 +1425,6 @@ var Dq10;
                             $(e.currentTarget).select();
                         });
                     },
-                    //保存用URLツイートボタン設定
                     //保存用URLツイートボタン設定
                     function () {
                         $('#tw-saveurl').button().click(function (e) {
@@ -1472,7 +1448,6 @@ var Dq10;
                             return false;
                         });
                     },
-                    //ナビゲーションボタン
                     //ナビゲーションボタン
                     function () {
                         $('a#mainui').button({
@@ -1606,7 +1581,7 @@ var Dq10;
                 this.refreshAll();
             };
             return SimpleUI;
-        })();
+        }());
         //ユーティリティ
         //数値を3桁区切りに整形
         function numToFormedStr(num) {
