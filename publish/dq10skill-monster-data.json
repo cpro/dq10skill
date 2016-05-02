@@ -1637,7 +1637,7 @@
 				{"pt":  40, "name": "ドルマドン", "desc": "神もおそれる\n闇のチカラが\n敵１体をおそう", "mp": 18, "charge": 60}
 			]
 		},
-		
+
 		"hammer-ex": {
 			"name": "ハンマーの極意",
 			"skills": [
@@ -1805,7 +1805,7 @@
 			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 3, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"mormon": {
 			"id": 2,
 			"name": "モーモン",
@@ -1835,7 +1835,7 @@
 			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 3, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"slimeknight": {
 			"id": 5,
 			"name": "スライムナイト",
@@ -1845,7 +1845,7 @@
 			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"chimera": {
 			"id": 6,
 			"name": "キメラ",
@@ -1855,7 +1855,7 @@
 			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 4, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"catmage": {
 			"id": 7,
 			"name": "ねこまどう",
@@ -1865,7 +1865,7 @@
 			"increment": {"maxhp": 3, "maxmp": 4, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 3, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"lizardman": {
 			"id": 8,
 			"name": "リザードマン",
@@ -1875,7 +1875,7 @@
 			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 6, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"battlerex": {
 			"id": 9,
 			"name": "バトルレックス",
@@ -1885,7 +1885,7 @@
 			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 6, "dex": 3, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"itazuramogura": {
 			"id": 10,
 			"name": "いたずらもぐら",
@@ -1895,7 +1895,7 @@
 			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"metappy": {
 			"id": 11,
 			"name": "メタッピー",
@@ -1905,7 +1905,7 @@
 			"increment": {"maxhp": 3, "maxmp": 5, "pow": 2, "def": 10, "magic": 8, "heal": 8, "spd": 16, "dex": 6, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"takeyarihei": {
 			"id": 12,
 			"name": "たけやりへい",
@@ -1915,7 +1915,7 @@
 			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"needleman": {
 			"id": 13,
 			"name": "ニードルマン",
@@ -1925,7 +1925,7 @@
 			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"fondue": {
 			"id": 14,
 			"name": "フォンデュ",
@@ -1935,7 +1935,7 @@
 			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 2, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"entasisman": {
 			"id": 15,
 			"name": "エンタシスマン",
@@ -1945,7 +1945,7 @@
 			"increment": {"maxhp": 6, "maxmp": 5, "pow": 2, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 4, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"samayouyoroi": {
 			"id": 16,
 			"name": "さまようよろい",
@@ -1955,7 +1955,7 @@
 			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"golem": {
 			"id": 17,
 			"name": "ゴーレム",
@@ -1965,7 +1965,7 @@
 			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 4, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"devilarmor": {
 			"id": 18,
 			"name": "デビルアーマー",
@@ -1975,7 +1975,7 @@
 			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"odoruhouseki": {
 			"id": 19,
 			"name": "おどるほうせき",
@@ -1985,7 +1985,7 @@
 			"increment": {"maxhp": 3, "maxmp": 5, "pow": 2, "def": 10, "magic": 16, "heal": 16, "spd": 8, "dex": 12, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"magicalhat": {
 			"id": 20,
 			"name": "マジカルハット",
@@ -1995,7 +1995,7 @@
 			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 7, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"babysatan": {
 			"id": 21,
 			"name": "ベビーサタン",
@@ -2005,7 +2005,7 @@
 			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 7, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"dragonkids": {
 			"id": 22,
 			"name": "ドラゴンキッズ",
@@ -2015,7 +2015,7 @@
 			"increment": {"maxhp": 6, "maxmp": 5, "pow": 4, "def": 5, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"puppetman": {
 			"id": 23,
 			"name": "パペットマン",
@@ -2025,7 +2025,7 @@
 			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 8, "heal": 8, "spd": 16, "dex": 8, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"killermachine": {
 			"id": 24,
 			"name": "キラーマシン",
@@ -2035,7 +2035,7 @@
 			"increment": {"maxhp": 3, "maxmp": 5, "pow": 4, "def": 10, "magic": 8, "heal": 8, "spd": 8, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"drakee": {
 			"id": 25,
 			"name": "ドラキー",
@@ -2045,7 +2045,7 @@
 			"increment": {"maxhp": 3, "maxmp": 10, "pow": 2, "def": 5, "magic": 16, "heal": 16, "spd": 8, "dex": 7, "charm": 0, "weight": 0},
 			"expTable": 1
 		},
-		
+
 		"yamishibari": {
 			"id": 26,
 			"name": "やみしばり",
@@ -2199,7 +2199,7 @@
 		{"natsukido": 200, "pt":  5},
 		{"natsukido": 300, "pt": 10}
 	],
-	
+
 	"badges": {
 		"001": {"name": "スライム", "sort": "すらいむ", "rarity": "bronze", "race": "slime", "maxhp": 40, "critical": 2},
 		"002": {"name": "バブルスライム", "sort": "はふるすらいむ", "rarity": "bronze", "race": "slime", "debuff": {"猛毒": 15}, "skill": ["キアリー"]},
@@ -2263,7 +2263,7 @@
 		"060": {"name": "ガニラス", "sort": "かにらす", "rarity": "bronze", "race": "water", "atk": 27, "critical": 3},
 		"061": {"name": "ゴースト", "sort": "こおすと", "rarity": "bronze", "race": "zombie", "maxmp": 35, "spellup": {"バギ": 10}},
 		"062": {"name": "チャームバット", "sort": "ちやあむはつと", "rarity": "bronze", "race": "zombie", "spd": 50, "debuff": {"魅了": 10}},
-		"063": {"name": "マドハンド", "sort": "まとはんと", "rarity": "bronze", "race": "zombie", "maxhp": 38, "attrib": "土"},
+		"063": {"name": "マドハンド", "sort": "まとはんと", "rarity": "bronze", "race": "zombie", "maxhp": 38, "attrup": {"土": 10}},
 		"064": {"name": "くさった死体", "sort": "くさつたしたい", "rarity": "bronze", "race": "zombie", "maxhp": 42, "debuff": {"呪い": 5}},
 		"065": {"name": "バイキングソウル", "sort": "はいきんくそうる", "rarity": "bronze", "race": "zombie", "atk": 20, "attrib": "闇"},
 		"066": {"name": "シルバーマント", "sort": "しるはあまんと", "rarity": "bronze", "race": "zombie", "atk": 25, "attrup": {"闇": 10}},
@@ -2285,7 +2285,7 @@
 		"082": {"name": "ファーラット", "sort": "ふああらつと", "rarity": "bronze", "race": "beast", "def": 35, "evd": 4},
 		"083": {"name": "ねこまどう", "sort": "ねこまとう", "rarity": "bronze", "race": "beast", "magic": 45, "quick": 10},
 		"084": {"name": "アルミラージ", "sort": "あるみらあし", "rarity": "bronze", "race": "beast", "atk": 17, "def": 38},
-		"085": {"name": "トンブレロ", "sort": "とんふれろ", "rarity": "bronze", "race": "beast", "def": 40, "attrup": {"土": 10}},
+		"085": {"name": "トンブレロ", "sort": "とんふれろ", "rarity": "bronze", "race": "beast", "def": 40, "attrib": "土"},
 		"086": {"name": "プリズニャン", "sort": "ふりすにやん", "rarity": "bronze", "race": "beast", "atk": 22, "critical": 3},
 		"087": {"name": "イエティ", "sort": "いえてい", "rarity": "bronze", "race": "beast", "maxhp": 42, "reduce": {"氷": 10}},
 		"088": {"name": "キマイラロード", "sort": "きまいらろおと", "rarity": "bronze", "race": "beast", "maxhp": 50, "attrib": "光"},
@@ -2363,7 +2363,7 @@
 		"160": {"name": "ガニラス", "sort": "かにらす", "rarity": "silver", "race": "water", "atk": 52, "def": 65, "critical": 4},
 		"161": {"name": "ゴースト", "sort": "こおすと", "rarity": "silver", "race": "zombie", "maxmp": 55, "magic": 55, "spellup": {"バギ": 15}},
 		"162": {"name": "チャームバット", "sort": "ちやあむはつと", "rarity": "silver", "race": "zombie", "spd": 75, "debuff": {"魅了": 12, "呪い": 5}},
-		"163": {"name": "マドハンド", "sort": "まとはんと", "rarity": "silver", "race": "zombie", "maxhp": 56, "dex": 85, "attrib": "土"},
+		"163": {"name": "マドハンド", "sort": "まとはんと", "rarity": "silver", "race": "zombie", "maxhp": 56, "dex": 85, "attrup": {"土": 15}},
 		"164": {"name": "くさった死体", "sort": "くさつたしたい", "rarity": "silver", "race": "zombie", "maxhp": 63, "stylish": 90, "debuff": {"呪い": 7}},
 		"165": {"name": "バイキングソウル", "sort": "はいきんくそうる", "rarity": "silver", "race": "zombie", "atk": 42, "maxhp": 65, "attrib": "闇"},
 		"166": {"name": "シルバーマント", "sort": "しるはあまんと", "rarity": "silver", "race": "zombie", "atk": 50, "parry": 6, "attrup": {"闇": 15}},
@@ -2385,7 +2385,7 @@
 		"182": {"name": "ファーラット", "sort": "ふああらつと", "rarity": "silver", "race": "beast", "def": 55, "spd": 70, "evd": 5},
 		"183": {"name": "ねこまどう", "sort": "ねこまとう", "rarity": "silver", "race": "beast", "magic": 65, "quick": 12, "overload": 4},
 		"184": {"name": "アルミラージ", "sort": "あるみらあし", "rarity": "silver", "race": "beast", "atk": 32, "def": 58, "debuff": {"眠り": 10}},
-		"185": {"name": "トンブレロ", "sort": "とんふれろ", "rarity": "silver", "race": "beast", "def": 60, "maxhp": 55, "attrup": {"土": 15}},
+		"185": {"name": "トンブレロ", "sort": "とんふれろ", "rarity": "silver", "race": "beast", "def": 60, "maxhp": 55, "attrib": "土"},
 		"186": {"name": "プリズニャン", "sort": "ふりすにやん", "rarity": "silver", "race": "beast", "atk": 45, "critical": 4, "evd": 4},
 		"187": {"name": "イエティ", "sort": "いえてい", "rarity": "silver", "race": "beast", "def": 65, "maxhp": 65, "reduce": {"氷": 15}},
 		"188": {"name": "キマイラロード", "sort": "きまいらろおと", "rarity": "silver", "race": "beast", "maxhp": 75, "attrib": "光", "skill": ["マホカンタ"]},
@@ -2463,7 +2463,7 @@
 		"260": {"name": "ガニラス", "sort": "かにらす", "rarity": "gold", "race": "water", "atk": 77, "def": 95, "critical": 5, "reduce": {"氷": 20}},
 		"261": {"name": "ゴースト", "sort": "こおすと", "rarity": "gold", "race": "zombie", "maxmp": 85, "magic": 85, "spellup": {"バギ": 20}, "misc": ["たまに　同じ呪文が2回唱えられる"]},
 		"262": {"name": "チャームバット", "sort": "ちやあむはつと", "rarity": "gold", "race": "zombie", "atk": 55, "spd": 115, "debuff": {"魅了": 15, "呪い": 7}},
-		"263": {"name": "マドハンド", "sort": "まとはんと", "rarity": "gold", "race": "zombie", "maxhp": 85, "dex": 110, "resist": {"呪い": 100}, "attrib": "土"},
+		"263": {"name": "マドハンド", "sort": "まとはんと", "rarity": "gold", "race": "zombie", "maxhp": 85, "dex": 110, "resist": {"呪い": 100}, "attrup": {"土": 20}},
 		"264": {"name": "くさった死体", "sort": "くさつたしたい", "rarity": "gold", "race": "zombie", "maxhp": 95, "stylish": 130, "debuff": {"呪い": 10, "テンション下げ": 50}},
 		"265": {"name": "バイキングソウル", "sort": "はいきんくそうる", "rarity": "gold", "race": "zombie", "atk": 63, "maxhp": 90, "attrib": "闇", "skill": ["バイシオン"]},
 		"266": {"name": "シルバーマント", "sort": "しるはあまんと", "rarity": "gold", "race": "zombie", "atk": 75, "maxmp": 85, "parry": 8, "attrup": {"闇": 20}},
@@ -2485,7 +2485,7 @@
 		"282": {"name": "ファーラット", "sort": "ふああらつと", "rarity": "gold", "race": "beast", "def": 85, "spd": 110, "evd": 6, "startup": {"ためる": 50}},
 		"283": {"name": "ねこまどう", "sort": "ねこまとう", "rarity": "gold", "race": "beast", "spd": 80, "magic": 95, "quick": 15, "overload": 5},
 		"284": {"name": "アルミラージ", "sort": "あるみらあし", "rarity": "gold", "race": "beast", "atk": 58, "def": 88, "debuff": {"眠り": 15}, "skill": ["ちからため"]},
-		"285": {"name": "トンブレロ", "sort": "とんふれろ", "rarity": "gold", "race": "beast", "def": 90, "maxmp": 85, "attrup": {"土": 20}, "skill": ["フバーハ"]},
+		"285": {"name": "トンブレロ", "sort": "とんふれろ", "rarity": "gold", "race": "beast", "def": 90, "maxmp": 85, "attrib": "土", "skill": ["フバーハ"]},
 		"286": {"name": "プリズニャン", "sort": "ふりすにやん", "rarity": "gold", "race": "beast", "atk": 70, "spd": 115, "critical": 5, "evd": 5},
 		"287": {"name": "イエティ", "sort": "いえてい", "rarity": "gold", "race": "beast", "def": 95, "maxhp": 95, "weight": 110, "reduce": {"氷": 20}},
 		"288": {"name": "キマイラロード", "sort": "きまいらろおと", "rarity": "gold", "race": "beast", "maxhp": 105, "attrib": "光", "startup": {"テンションバーン": 100}, "skill": ["マホカンタ"]},
