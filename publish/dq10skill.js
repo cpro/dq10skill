@@ -720,6 +720,45 @@ var Dq10;
                 });
                 return true;
             };
+            /** 160以降のカスタムスキルをセット */
+            SimulatorModel.prototype.setCustomSkill = function (skillLineId, pt, customId) {
+                var skill = this.DB.skillLines[skillLineId].skills.filter(function (skill) {
+                    return skill.pt == pt;
+                })[0];
+                if (skill === undefined)
+                    return false;
+                var custom = this.DB.skillLines[skillLineId].customSkills.filter(function (skill) {
+                    return skill.id == customId;
+                })[0];
+                if (custom === undefined)
+                    return false;
+                var rank = [160, 170, 180].indexOf(pt);
+                var rankName = 'ⅠⅡⅢ'.charAt(rank);
+                skill.name = custom.viewName.replace('%r', rankName);
+                var rankValue = custom.val[rank];
+                if (custom.charge !== undefined && rankValue !== undefined) {
+                    skill.charge = rankValue;
+                }
+                skill.atk = custom.atk;
+                skill.mp = custom.mp;
+                skill.name = skill.name.replace('%i', Math.floor(rankValue).toString())
+                    .replace('%f', rankValue.toFixed(1));
+                skill.desc = custom.desc.replace('%z', rankValue.toString().replace(/[0-9.]/g, function (m) { return String.fromCharCode(m.charCodeAt(0) + 0xFEE0); }));
+                return true;
+            };
+            SimulatorModel.prototype.clearCustomSkill = function (skillLineId, pt) {
+                var skill = this.DB.skillLines[skillLineId].skills.filter(function (skill) {
+                    return skill.pt == pt;
+                })[0];
+                if (skill === undefined)
+                    return false;
+                skill.name = '（なし）';
+                skill.desc = '';
+                skill.mp = null;
+                skill.charge = null;
+                skill.atk = null;
+                return true;
+            };
             SimulatorModel.prototype.serialize = function () {
                 var _this = this;
                 var serial = '';

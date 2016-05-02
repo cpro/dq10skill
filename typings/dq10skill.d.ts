@@ -48,6 +48,7 @@ interface SkillLine {
 	name: string;
 	abbr?: string;
 	skills: Skill[];
+	customSkills: CustomSkill[];
 }
 
 interface Skill {
@@ -67,6 +68,17 @@ interface Skill {
 	charm?: number;
 	gold?: number;
 	charge?: number;
+}
+
+interface CustomSkill {
+	id: number;
+	name: string;
+	viewName: string;
+	desc: string;
+	val: number[];
+	mp?: number;
+	charge?: number;
+	atk?: number;
 }
 
 interface MonsterSimulatorDB {

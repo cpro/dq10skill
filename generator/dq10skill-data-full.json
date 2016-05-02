@@ -23,6 +23,18 @@
 				{"pt": 160, "name": "（なし）"},
 				{"pt": 170, "name": "（なし）"},
 				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "不死鳥天舞", "viewName": "不死鳥天舞%r", "desc": "会心率を上げつつ\n敵１体に４回攻撃\nキズもいやす秘剣", "mp": 8, "charge": 0, "val": [150, 140, 130]},
+				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "desc": "片手剣装備時の\nこうげき力が\n%z増える", "val": [5, 8, 10]},
+				{"id":  3, "name": "かいしん率", "viewName": "装備時かいしん率+%f%", "desc": "片手剣装備時の\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.4]},
+				{"id":  4, "name": "武器ガード率", "viewName": "装備時武器ガード率+%f%", "desc": "", "val": []},
+				{"id":  5, "name": "かえん斬りの強化", "viewName": "かえん斬りの強化", "desc": "", "val": []},
+				{"id":  6, "name": "ドラゴン斬りの強化", "viewName": "ドラゴン斬りの強化", "desc": "", "val": []},
+				{"id":  7, "name": "ミラクルソードの強化", "viewName": "ミラクルソードの強化", "desc": "", "val": []},
+				{"id":  8, "name": "はやぶさ斬りの強化", "viewName": "はやぶさ斬りの強化", "desc": "", "val": []},
+				{"id":  9, "name": "ギガスラッシュの強化", "viewName": "ギガスラッシュの強化", "desc": "", "val": []},
+				{"id": 10, "name": "超はやぶさ斬りの強化", "viewName": "超はやぶさ斬りの強化", "desc": "", "val": []}
 			]
 		},
 
@@ -49,6 +61,9 @@
 				{"pt": 160, "name": "（なし）"},
 				{"pt": 170, "name": "（なし）"},
 				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "プラズマブレード", "viewName": "プラズマブレード%r", "desc": "", "mp": null, "charge": null, "val": []}
 			]
 		},
 
@@ -75,6 +90,9 @@
 				{"pt": 160, "name": "（なし）"},
 				{"pt": 170, "name": "（なし）"},
 				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "降魔紅蓮斬", "viewName": "降魔紅蓮斬%r", "desc": "", "mp": null, "charge": null, "val": []}
 			]
 		},
 
@@ -101,6 +119,9 @@
 				{"pt": 160, "name": "（なし）"},
 				{"pt": 170, "name": "（なし）"},
 				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "アイギスの守り", "viewName": "アイギスの守り%r", "desc": "", "mp": null, "charge": null, "val": []}
 			]
 		},
 
@@ -151,6 +172,9 @@
 				{"pt": 160, "name": "（なし）"},
 				{"pt": 170, "name": "（なし）"},
 				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "武神の護法", "viewName": "武神の護法%r", "desc": "", "mp": null, "charge": null, "val": []}
 			]
 		},
 
@@ -177,6 +201,9 @@
 				{"pt": 160, "name": "（なし）"},
 				{"pt": 170, "name": "（なし）"},
 				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "ホップスティック", "viewName": "ホップスティック%r", "desc": "", "mp": null, "charge": null, "val": []}
 			]
 		},
 
@@ -203,6 +230,9 @@
 				{"pt": 160, "name": "（なし）"},
 				{"pt": 170, "name": "（なし）"},
 				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "断空なぎはらい", "viewName": "断空なぎはらい%r", "desc": "", "mp": null, "charge": null, "val": []}
 			]
 		},
 
@@ -253,6 +283,9 @@
 				{"pt": 160, "name": "（なし）"},
 				{"pt": 170, "name": "（なし）"},
 				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "活命の杖", "viewName": "活命の杖%r", "desc": "", "mp": null, "charge": null, "val": []}
 			]
 		},
 
@@ -279,6 +312,9 @@
 				{"pt": 160, "name": "（なし）"},
 				{"pt": 170, "name": "（なし）"},
 				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "オネロスハント", "viewName": "オネロスハント%r", "desc": "", "mp": null, "charge": null, "val": []}
 			]
 		},
 
@@ -305,6 +341,9 @@
 				{"pt": 160, "name": "（なし）"},
 				{"pt": 170, "name": "（なし）"},
 				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "バイキルショット", "viewName": "バイキルショット%r", "desc": "", "mp": null, "charge": null, "val": []}
 			]
 		},
 
@@ -355,6 +394,9 @@
 				{"pt": 160, "name": "（なし）"},
 				{"pt": 170, "name": "（なし）"},
 				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "牙神昇誕", "viewName": "牙神昇誕%r", "desc": "", "mp": null, "charge": null, "val": []}
 			]
 		},
 
@@ -381,6 +423,9 @@
 				{"pt": 160, "name": "（なし）"},
 				{"pt": 170, "name": "（なし）"},
 				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "風斬りの舞", "viewName": "風斬りの舞%r", "desc": "", "mp": null, "charge": null, "val": []}
 			]
 		},
 
@@ -407,6 +452,9 @@
 				{"pt": 160, "name": "（なし）"},
 				{"pt": 170, "name": "（なし）"},
 				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "しんくうは", "viewName": "しんくうは%r", "desc": "", "mp": null, "charge": null, "val": []}
 			]
 		},
 
@@ -505,6 +553,9 @@
 				{"pt": 160, "name": "（なし）"},
 				{"pt": 170, "name": "（なし）"},
 				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "デビルクラッシュ", "viewName": "デビルクラッシュ%r", "desc": "", "mp": null, "charge": null, "val": []}
 			]
 		},
 
@@ -555,6 +606,9 @@
 				{"pt": 160, "name": "（なし）"},
 				{"pt": 170, "name": "（なし）"},
 				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "ロストスナイプ", "viewName": "ロストスナイプ%r", "desc": "", "mp": null, "charge": null, "val": []}
 			]
 		},
 
@@ -581,6 +635,9 @@
 				{"pt": 160, "name": "（なし）"},
 				{"pt": 170, "name": "（なし）"},
 				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "レボルスライサー", "viewName": "レボルスライサー%r", "desc": "", "mp": null, "charge": null, "val": []}
 			]
 		},
 
