@@ -52,7 +52,7 @@ interface SkillLine {
 	name: string;
 	abbr?: string;
 	skills: Skill[];
-	customSkills: CustomSkill[];
+	customSkills?: CustomSkill[];
 }
 
 interface Skill {
@@ -78,6 +78,7 @@ interface CustomSkill {
 	id: number;
 	name: string;
 	viewName: string;
+	selectorName: string;
 	desc: string;
 	val: number[];
 	mp?: number;

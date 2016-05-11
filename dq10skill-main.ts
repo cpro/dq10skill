@@ -554,6 +554,7 @@ namespace Dq10.SkillSimulator {
 			id: 0,
 			name: '（なし）',
 			viewName: '（なし）',
+			selectorName: '',
 			desc: '',
 			mp: null,
 			charge: null,
@@ -573,20 +574,28 @@ namespace Dq10.SkillSimulator {
 			return this.data.name;
 		}
 
-		getViewName(rank): string {
-			var viewName = this.data.viewName;
-
+		getViewName(rank: number): string {
+			return this.replaceRankValue(this.data.viewName, rank);
+		}
+		
+		getSelectorName(rank: number): string {
+			return this.replaceRankValue(this.data.selectorName, rank);
+		}
+		
+		private replaceRankValue(template: string, rank: number){
+			var ret = template;
+			
 			var rankName = 'ⅠⅡⅢ'.charAt(rank);
-			viewName = viewName.replace('%r', rankName);
+			ret = ret.replace('%r', rankName);
 
 			var rankValue = this.data.val[rank];
-			viewName = viewName.replace('%i', rankValue.toFixed(0)) //整数値
-			                   .replace('%f', rankValue.toFixed(1)); //小数値
+			ret = ret.replace('%i', rankValue.toFixed(0)) //整数値
+			         .replace('%f', rankValue.toFixed(1)); //小数値
 
-			return viewName;
+			return ret;
 		}
 
-		getHintText(rank): string {
+		getHintText(rank: number): string {
 			const FULLWIDTH_ADJUSTER = 0xFEE0;
 			var hint = this.data.desc;
 			var rankValue = this.data.val[rank];
