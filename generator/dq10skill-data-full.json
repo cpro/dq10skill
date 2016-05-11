@@ -121,7 +121,16 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "アイギスの守り", "viewName": "アイギスの守り%r", "desc": "", "mp": null, "charge": null, "val": []}
+				{"id":  1, "name": "アイギスの守り", "viewName": "アイギスの守り%r", "desc": "", "mp": null, "charge": null, "val": []},
+				{"id":  2, "name": "しゅび力", "viewName": "装備時しゅび力+%i", "desc": "", "val": [10, 15, 20]},
+				{"id":  3, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "desc": "", "val": [20, 30, 45]},
+				{"id":  4, "name": "会心完全ガード率", "viewName": "装備時会心完全ガード率+%f%", "desc": "", "val": [1, 1.5, 2]},
+				{"id":  5, "name": "盾ガード時ルカニ", "viewName": "盾ガード時ルカニ+%i%", "desc": "", "val": [2, 3, 5]},
+				{"id":  6, "name": "盾ガード時ヘナトス", "viewName": "盾ガード時ヘナトス+%i%", "desc": "", "val": [2, 3, 5]},
+				{"id":  7, "name": "ビッグシールド効果時間", "viewName": "ビッグシールド効果時間+%i秒", "desc": "", "val": [2, 3, 6]},
+				{"id":  8, "name": "まもりのたて効果時間", "viewName": "まもりのたて効果時間+%i秒", "desc": "", "val": [2, 3, 6]},
+				{"id":  9, "name": "会心ガード効果時間", "viewName": "会心ガード効果時間+%i秒", "desc": "", "val": [2, 3, 6]},
+				{"id": 10, "name": "瀕死時（　）でみかわし率+30%", "viewName": "瀕死時+%i%でみかわし率+30%", "desc": "", "val": [2, 4, 6]}
 			]
 		},
 
@@ -203,7 +212,15 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "ホップスティック", "viewName": "ホップスティック%r", "desc": "", "mp": null, "charge": null, "val": []}
+				{"id":  1, "name": "ホップスティック", "viewName": "ホップスティック%r", "desc": "", "mp": null, "charge": null, "val": []},
+				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "desc": "スティック装備時\nこうげき力が\n%z増える", "val": [15, 20, 30]},
+				{"id":  3, "name": "こうげき魔力", "viewName": "装備時こうげき魔力+%i", "desc": "スティック装備時\nこうげき魔力が\n%z増える", "val": [20, 30, 40]},
+				{"id":  4, "name": "かいふく魔力", "viewName": "装備時かいふく魔力+%i", "desc": "スティック装備時\nかいふく魔力が\n%z増える", "val": [20, 30, 40]},
+				{"id":  5, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "desc": "スティック装備時\nさいだいＭＰが\n%z増える", "val": [20, 30, 45]},
+				{"id":  6, "name": "メラ系とギラ系呪文", "viewName": "メラ系とギラ系呪文+%i%", "desc": "", "val": [1, 2, 3]},
+				{"id":  7, "name": "バギ系呪文", "viewName": "バギ系呪文+%i%", "desc": "", "val": [1, 2, 3]},
+				{"id":  8, "name": "ホイミの回復量", "viewName": "ホイミの回復量+%i%", "desc": "", "val": [6, 8, 10]},
+				{"id":  9, "name": "ベホイミの回復量", "viewName": "ベホイミの回復量+%i%", "desc": "", "val": [6, 8, 10]}
 			]
 		},
 
@@ -232,7 +249,8 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "断空なぎはらい", "viewName": "断空なぎはらい%r", "desc": "", "mp": null, "charge": null, "val": []}
+				{"id":  1, "name": "断空なぎはらい", "viewName": "断空なぎはらい%r", "desc": "", "mp": null, "charge": null, "val": []},
+				{"id":  2, "name": "氷結らんげきの強化", "viewName": "氷結らんげき+%i%", "desc": "", "val": [2, 4, 8]}
 			]
 		},
 
@@ -285,7 +303,18 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "活命の杖", "viewName": "活命の杖%r", "desc": "", "mp": null, "charge": null, "val": []}
+				{"id":  1, "name": "活命の杖", "viewName": "活命の杖%r", "desc": "", "mp": null, "charge": null, "val": []},
+				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "desc": "両手杖装備時の\nこうげき力が\n%z増える", "val": [15, 20, 30]},
+				{"id":  3, "name": "こうげき魔力", "viewName": "装備時こうげき魔力+%i", "desc": "両手杖装備時の\nこうげき魔力が\n%z増える", "val": [20, 30, 40]},
+				{"id":  4, "name": "呪文ぼうそう率", "viewName": "呪文ぼうそう率+%f%", "desc": "", "val": [1, 1.2, 1.5]},
+				{"id":  5, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "desc": "両手杖装備時の\nさいだいＭＰが\n%z増える", "val": [20, 30, 45]},
+				{"id":  6, "name": "メラ系呪文", "viewName": "メラ系呪文+%i%", "desc": "", "val": [1, 2, 3]},
+				{"id":  7, "name": "ヒャド系呪文", "viewName": "ヒャド系呪文+%i%", "desc": "", "val": [1, 2, 3]},
+				{"id":  8, "name": "イオ系呪文", "viewName": "イオ系呪文+%i%", "desc": "", "val": [1, 2, 3]},
+				{"id":  9, "name": "ドルマ系呪文", "viewName": "ドルマ系呪文+%i%", "desc": "", "val": [1, 2, 3]},
+				{"id": 10, "name": "マダンテ", "viewName": "マダンテ+%i%", "desc": "", "val": [1, 2, 3]},
+				{"id": 11, "name": "ホイミの回復量", "viewName": "ホイミの回復量+%i%", "desc": "", "val": [6, 8, 10]},
+				{"id": 12, "name": "ベホイミの回復量", "viewName": "ベホイミの回復量+%i%", "desc": "", "val": [6, 8, 10]}
 			]
 		},
 
@@ -396,7 +425,8 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "牙神昇誕", "viewName": "牙神昇誕%r", "desc": "", "mp": null, "charge": null, "val": []}
+				{"id":  1, "name": "牙神昇誕", "viewName": "牙神昇誕%r", "desc": "", "mp": null, "charge": null, "val": []},
+				{"id":  2, "name": "タイガークローの強化", "viewName": "タイガークロー+%i%", "desc": "", "val": [2, 3, 5]}
 			]
 		},
 
