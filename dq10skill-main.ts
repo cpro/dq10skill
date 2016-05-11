@@ -362,6 +362,13 @@ namespace Dq10.SkillSimulator {
 		const BITS_SKILL = 7; //スキルは7ビット
 		const BITS_TRAINING = 7; //特訓スキルポイント7ビット
 
+		/** 最初期の独自ビット圧縮していたバージョン */
+		const VERSION_FIRST = 1;
+		/** バージョン番号管理開始以前のバージョン */
+		const VERSION_UNMANAGED = 2;
+		/** 現在のSerializerのバージョン */
+		const VERSION_CURRENT_SERIALIZER = 3;
+
 		export class Serializer {
 			constructor() {
 			}
@@ -371,6 +378,9 @@ namespace Dq10.SkillSimulator {
 
 				var serial = '';
 				var toByte = String.fromCharCode;
+
+				// バージョン番号
+				serial += toByte(this.createVersionByteData());
 
 				//先頭に職業の数を含める
 				serial += toByte(VOCATIONS_DATA_ORDER.length);
@@ -383,33 +393,53 @@ namespace Dq10.SkillSimulator {
 						serial += toByte(sim.getSkillPt(vocationId, skillLineId));
 					});
 				});
-				//末尾にMSPのスキルラインIDとポイントをペアで格納
+
+				// カスタムスキルデータ長を格納
+				serial += toByte(DB.consts.customSkill.count);
+
+				//末尾にスキルライン別データ（MSP、カスタムスキル）をIDとペアで格納
 				Object.keys(DB.skillLines).forEach((skillLineId) => {
 					var msp = sim.getMSP(skillLineId);
-					if(msp > 0) {
-						serial += toByte(DB.skillLines[skillLineId].id) + toByte(msp);
+					var customSkills = sim.getCustomSkills(skillLineId);
+
+					// MSP・カスタムスキルいずれかに0でない値が入っている場合のみ格納
+					if(msp > 0 || customSkills.some((val) => val > 0)) {
+						serial += toByte(DB.skillLines[skillLineId].id);
+						serial += toByte(msp);
+						serial += customSkills.map((val) => toByte(val)).join('');
 					}
 				})
 
 				return serial;
 			}
+
+			/** 現在のバージョン番号の最上位ビットにバージョン管理フラグとして1を立てる */
+			private createVersionByteData() {
+				return (VERSION_CURRENT_SERIALIZER | 0x80);
+			}
 		}
 
 		export class Deserializer {
 			constructor(private serial: string, private isFirstVersion: boolean = false) {
-
 			}
 
 			exec(sim: SimulatorModel): void {
-				if(this.isFirstVersion) {
-					this.execAsFirstVersion(sim);
-					return
+				var cur = 0;
+				var getData = () => this.serial.charCodeAt(cur++);
+
+				var version = this.judgeVersion();
+				switch (version) {
+					case VERSION_FIRST:
+						this.execAsFirstVersion(sim);
+						return;
+					case VERSION_UNMANAGED:
+						break;
+					default:
+						cur++;
+						break;
 				}
 
 				var DB = SimulatorDB;
-
-				var cur = 0;
-				var getData = () => this.serial.charCodeAt(cur++);
 
 				//先頭に格納されている職業の数を取得
 				var vocationCount = getData();
@@ -428,18 +458,51 @@ namespace Dq10.SkillSimulator {
 						sim.updateSkillPt(vocationId, vSkillLines[s], getData());
 					}
 				}
-				//末尾にデータがあればMSPとして取得
-				var skillLineIds = [];
+
+				// スキルラインのid番号からID文字列を得るための配列作成
+				var skillLineIds: string[] = [];
 				Object.keys(DB.skillLines).forEach((skillLineId) => {
 					skillLineIds[DB.skillLines[skillLineId].id] = skillLineId;
 				});
 
-				while(this.serial.length - cur >= 2) {
+				var skillLineCount: number;
+				var customSkillLength: number;
+				var skillLineDataLength: number;
+
+				if(version === VERSION_UNMANAGED)
+					customSkillLength = 0;
+				else
+					customSkillLength = getData();
+
+				skillLineDataLength = customSkillLength + 2; //スキルライン番号1byte+MSP1byte+カスタムスキルデータ長
+
+				// スキルライン別データ取得（MSP、カスタムスキル）
+				while(this.serial.length - cur >= skillLineDataLength) {
 					var skillLineId = skillLineIds[getData()];
 					var skillPt = getData();
 					if(skillLineId !== undefined)
 						sim.updateMSP(skillLineId, skillPt);
+
+					for(var i = 0; i < customSkillLength; i++) {
+						var customId = getData();
+						sim.setCustomSkill(skillLineId, i, customId);
+					}
 				}
+			}
+
+			private judgeVersion(): number {
+				// コンストラクタで初期バージョンのスイッチが与えられている場合
+				if(this.isFirstVersion)
+					return VERSION_FIRST;
+
+				// 最上位ビットに1が立っていなければバージョン管理前と判定する
+				// （管理前は先頭バイトに職業の数（15以下）を格納していたので、必ず0となる）
+				var firstByte = this.serial.charCodeAt(0);
+				if((firstByte & 0x80) === 0)
+					return VERSION_UNMANAGED;
+
+				// 先頭ビットを除去したものをバージョン番号とする
+				return (firstByte & 0x7f);
 			}
 
 			private execAsFirstVersion(sim: SimulatorModel): void {

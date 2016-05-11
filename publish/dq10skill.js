@@ -747,6 +747,12 @@ var Dq10;
             var BITS_LEVEL = 8; //レベルは8ビット確保
             var BITS_SKILL = 7; //スキルは7ビット
             var BITS_TRAINING = 7; //特訓スキルポイント7ビット
+            /** 最初期の独自ビット圧縮していたバージョン */
+            var VERSION_FIRST = 1;
+            /** バージョン番号管理開始以前のバージョン */
+            var VERSION_UNMANAGED = 2;
+            /** 現在のSerializerのバージョン */
+            var VERSION_CURRENT_SERIALIZER = 3;
             var Serializer = (function () {
                 function Serializer() {
                 }
@@ -754,6 +760,8 @@ var Dq10;
                     var DB = SkillSimulator.SimulatorDB;
                     var serial = '';
                     var toByte = String.fromCharCode;
+                    // バージョン番号
+                    serial += toByte(this.createVersionByteData());
                     //先頭に職業の数を含める
                     serial += toByte(VOCATIONS_DATA_ORDER.length);
                     VOCATIONS_DATA_ORDER.forEach(function (vocationId) {
@@ -763,14 +771,24 @@ var Dq10;
                             serial += toByte(sim.getSkillPt(vocationId, skillLineId));
                         });
                     });
-                    //末尾にMSPのスキルラインIDとポイントをペアで格納
+                    // カスタムスキルデータ長を格納
+                    serial += toByte(DB.consts.customSkill.count);
+                    //末尾にスキルライン別データ（MSP、カスタムスキル）をIDとペアで格納
                     Object.keys(DB.skillLines).forEach(function (skillLineId) {
                         var msp = sim.getMSP(skillLineId);
-                        if (msp > 0) {
-                            serial += toByte(DB.skillLines[skillLineId].id) + toByte(msp);
+                        var customSkills = sim.getCustomSkills(skillLineId);
+                        // MSP・カスタムスキルいずれかに0でない値が入っている場合のみ格納
+                        if (msp > 0 || customSkills.some(function (val) { return val > 0; })) {
+                            serial += toByte(DB.skillLines[skillLineId].id);
+                            serial += toByte(msp);
+                            serial += customSkills.map(function (val) { return toByte(val); }).join('');
                         }
                     });
                     return serial;
+                };
+                /** 現在のバージョン番号の最上位ビットにバージョン管理フラグとして1を立てる */
+                Serializer.prototype.createVersionByteData = function () {
+                    return (VERSION_CURRENT_SERIALIZER | 0x80);
                 };
                 return Serializer;
             }());
@@ -783,13 +801,20 @@ var Dq10;
                 }
                 Deserializer.prototype.exec = function (sim) {
                     var _this = this;
-                    if (this.isFirstVersion) {
-                        this.execAsFirstVersion(sim);
-                        return;
-                    }
-                    var DB = SkillSimulator.SimulatorDB;
                     var cur = 0;
                     var getData = function () { return _this.serial.charCodeAt(cur++); };
+                    var version = this.judgeVersion();
+                    switch (version) {
+                        case VERSION_FIRST:
+                            this.execAsFirstVersion(sim);
+                            return;
+                        case VERSION_UNMANAGED:
+                            break;
+                        default:
+                            cur++;
+                            break;
+                    }
+                    var DB = SkillSimulator.SimulatorDB;
                     //先頭に格納されている職業の数を取得
                     var vocationCount = getData();
                     for (var i = 0; i < vocationCount; i++) {
@@ -803,17 +828,42 @@ var Dq10;
                             sim.updateSkillPt(vocationId, vSkillLines[s], getData());
                         }
                     }
-                    //末尾にデータがあればMSPとして取得
+                    // スキルラインのid番号からID文字列を得るための配列作成
                     var skillLineIds = [];
                     Object.keys(DB.skillLines).forEach(function (skillLineId) {
                         skillLineIds[DB.skillLines[skillLineId].id] = skillLineId;
                     });
-                    while (this.serial.length - cur >= 2) {
+                    var skillLineCount;
+                    var customSkillLength;
+                    var skillLineDataLength;
+                    if (version === VERSION_UNMANAGED)
+                        customSkillLength = 0;
+                    else
+                        customSkillLength = getData();
+                    skillLineDataLength = customSkillLength + 2; //スキルライン番号1byte+MSP1byte+カスタムスキルデータ長
+                    // スキルライン別データ取得（MSP、カスタムスキル）
+                    while (this.serial.length - cur >= skillLineDataLength) {
                         var skillLineId = skillLineIds[getData()];
                         var skillPt = getData();
                         if (skillLineId !== undefined)
                             sim.updateMSP(skillLineId, skillPt);
+                        for (var i = 0; i < customSkillLength; i++) {
+                            var customId = getData();
+                            sim.setCustomSkill(skillLineId, i, customId);
+                        }
                     }
+                };
+                Deserializer.prototype.judgeVersion = function () {
+                    // コンストラクタで初期バージョンのスイッチが与えられている場合
+                    if (this.isFirstVersion)
+                        return VERSION_FIRST;
+                    // 最上位ビットに1が立っていなければバージョン管理前と判定する
+                    // （管理前は先頭バイトに職業の数（15以下）を格納していたので、必ず0となる）
+                    var firstByte = this.serial.charCodeAt(0);
+                    if ((firstByte & 0x80) === 0)
+                        return VERSION_UNMANAGED;
+                    // 先頭ビットを除去したものをバージョン番号とする
+                    return (firstByte & 0x7f);
                 };
                 Deserializer.prototype.execAsFirstVersion = function (sim) {
                     var DB = SkillSimulator.SimulatorDB;
