@@ -22,6 +22,7 @@ namespace Dq10.SkillSimulator {
 		id: string;
 		skillPts: SkillPt[];
 		msp: number;
+		custom: number[];
 	}
 	interface SkillPt {
 		vocationId: string;
@@ -79,7 +80,8 @@ namespace Dq10.SkillSimulator {
 				var skillLine: SkillLineData = {
 					id: skillLineId,
 					skillPts: this.wholePts.filter((skillPt) => skillPt.skillLineId == skillLineId),
-					msp: this.DB.consts.msp.min
+					msp: this.DB.consts.msp.min,
+					custom: [0, 0, 0]
 				}
 				this.skillLineDic[skillLineId] = skillLine;
 				return skillLine;
@@ -315,50 +317,15 @@ namespace Dq10.SkillSimulator {
 			return true;
 		}
 
-		/** 160以降のカスタムスキルをセット */
-		setCustomSkill(skillLineId: string, pt: number, customId: number): boolean {
-			var skill = this.DB.skillLines[skillLineId].skills.filter((skill) => {
-				return skill.pt == pt;
-			})[0];
-			if(skill === undefined) return false;
-
-			var custom = this.DB.skillLines[skillLineId].customSkills.filter((skill) => {
-				return skill.id == customId;
-			})[0];
-			if(custom === undefined) return false;
-
-			var rank: number = [160, 170, 180].indexOf(pt);
-			var rankName = 'ⅠⅡⅢ'.charAt(rank);
-			skill.name = custom.viewName.replace('%r', rankName);
-
-			var rankValue: number = custom.val[rank];
-
-			if(custom.charge !== undefined && rankValue !== undefined) {
-				skill.charge = rankValue;
-			}
-			skill.atk = custom.atk;
-			skill.mp = custom.mp;
-
-			skill.name = skill.name.replace('%i', Math.floor(rankValue).toString())
-				.replace('%f', rankValue.toFixed(1));
-			skill.desc = custom.desc.replace('%z', rankValue.toString().replace(/[0-9.]/g, (m) => String.fromCharCode(m.charCodeAt(0) + 0xFEE0)));
-
-			return true;
+		getCustomSkills(skillLineId: string): number[] {
+			return this.skillLineDic[skillLineId].custom;
 		}
 
-		clearCustomSkill(skillLineId: string, pt: number): boolean {
-			var skill = this.DB.skillLines[skillLineId].skills.filter((skill) => {
-				return skill.pt == pt;
-			})[0];
-			if(skill === undefined) return false;
+		setCustomSkill(skillLineId: string, index: number, customId: number): boolean {
+			if(index < 0 || index >= this.DB.consts.customSkill.count)
+				return false;
 
-			skill.name = '（なし）'
-			skill.desc = '';
-			skill.mp = null;
-			skill.charge = null;
-			skill.atk = null;
-
-			return true;
+			this.skillLineDic[skillLineId][index] = customId;
 		}
 
 		private VOCATIONS_DATA_ORDER = [
@@ -477,6 +444,64 @@ namespace Dq10.SkillSimulator {
 				}
 				return bitArray;
 			}
+		}
+	}
+
+	class SimulatorCustomSkill {
+		private data: CustomSkill;
+
+		static emptySkill: CustomSkill = {
+			id: 0,
+			name: '（なし）',
+			viewName: '（なし）',
+			desc: '',
+			mp: null,
+			charge: null,
+			atk: null,
+			val: [0, 0, 0]
+		}
+
+		constructor(private skillLineId: string, private customSkillId: number) {
+			this.data = SimulatorDB.skillLines[skillLineId].customSkills.filter((custom) => custom.id == customSkillId)[0];
+
+			if(this.data === undefined) {
+				this.data = SimulatorCustomSkill.emptySkill;
+			}
+		}
+
+		getName(): string {
+			return this.data.name;
+		}
+
+		getViewName(rank): string {
+			var viewName = this.data.viewName;
+
+			var rankName = 'ⅠⅡⅢ'.charAt(rank);
+			viewName = viewName.replace('%r', rankName);
+
+			var rankValue = this.data.val[rank];
+			viewName = viewName.replace('%i', rankValue.toFixed(0)) //整数値
+			                   .replace('%f', rankValue.toFixed(1)); //小数値
+
+			return viewName;
+		}
+
+		getHintText(rank): string {
+			const FULLWIDTH_ADJUSTER = 0xFEE0;
+			var hint = this.data.desc;
+			var rankValue = this.data.val[rank];
+
+			var rankValFullWidth = rankValue.toString().replace(/[0-9.]/g, (m) =>
+				String.fromCharCode(m.charCodeAt(0) + 0xFEE0)
+			);
+			hint = hint.replace('%z', rankValFullWidth);
+
+			if((this.data.mp !== null) && (this.data.mp !== undefined))
+				hint += `\n（消費MP: ${this.data.mp}）`;
+			if((this.data.charge !== null) && (this.data.charge !== undefined))
+				hint += `\n（チャージ: ${rankValue}秒）`;
+
+			return hint;
 		}
 	}
 

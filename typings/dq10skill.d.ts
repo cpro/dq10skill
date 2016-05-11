@@ -27,6 +27,10 @@
 		};
 		trainingSkillPts: MinMax;
 		msp: MinMax;
+		customSkill: {
+			pts: number[];
+			count: number;
+		}
 	};
 }
 interface MinMax {
