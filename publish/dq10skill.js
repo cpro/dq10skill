@@ -463,23 +463,6 @@ var Dq10;
                 /** 全スキルポイント情報を保持する配列 */
                 this.wholePts = [];
                 this.skillPtDic = {};
-                this.VOCATIONS_DATA_ORDER = [
-                    'warrior',
-                    'priest',
-                    'mage',
-                    'martialartist',
-                    'thief',
-                    'minstrel',
-                    'ranger',
-                    'paladin',
-                    'armamentalist',
-                    'luminary',
-                    'gladiator',
-                    'sage',
-                    'monstermaster',
-                    'itemmaster',
-                    'dancer' //踊り子
-                ];
             }
             /* メソッド */
             //パラメータ初期化
@@ -511,7 +494,8 @@ var Dq10;
                     var skillLine = {
                         id: skillLineId,
                         skillPts: _this.wholePts.filter(function (skillPt) { return skillPt.skillLineId == skillLineId; }),
-                        msp: _this.DB.consts.msp.min
+                        msp: _this.DB.consts.msp.min,
+                        custom: [0, 0, 0]
                     };
                     _this.skillLineDic[skillLineId] = skillLine;
                     return skillLine;
@@ -720,132 +704,199 @@ var Dq10;
                 });
                 return true;
             };
-            /** 160以降のカスタムスキルをセット */
-            SimulatorModel.prototype.setCustomSkill = function (skillLineId, pt, customId) {
-                var skill = this.DB.skillLines[skillLineId].skills.filter(function (skill) {
-                    return skill.pt == pt;
-                })[0];
-                if (skill === undefined)
-                    return false;
-                var custom = this.DB.skillLines[skillLineId].customSkills.filter(function (skill) {
-                    return skill.id == customId;
-                })[0];
-                if (custom === undefined)
-                    return false;
-                var rank = [160, 170, 180].indexOf(pt);
-                var rankName = 'ⅠⅡⅢ'.charAt(rank);
-                skill.name = custom.viewName.replace('%r', rankName);
-                var rankValue = custom.val[rank];
-                if (custom.charge !== undefined && rankValue !== undefined) {
-                    skill.charge = rankValue;
-                }
-                skill.atk = custom.atk;
-                skill.mp = custom.mp;
-                skill.name = skill.name.replace('%i', Math.floor(rankValue).toString())
-                    .replace('%f', rankValue.toFixed(1));
-                skill.desc = custom.desc.replace('%z', rankValue.toString().replace(/[0-9.]/g, function (m) { return String.fromCharCode(m.charCodeAt(0) + 0xFEE0); }));
-                return true;
+            SimulatorModel.prototype.getCustomSkills = function (skillLineId) {
+                return this.skillLineDic[skillLineId].custom;
             };
-            SimulatorModel.prototype.clearCustomSkill = function (skillLineId, pt) {
-                var skill = this.DB.skillLines[skillLineId].skills.filter(function (skill) {
-                    return skill.pt == pt;
-                })[0];
-                if (skill === undefined)
+            SimulatorModel.prototype.setCustomSkill = function (skillLineId, index, customId) {
+                if (index < 0 || index >= this.DB.consts.customSkill.count)
                     return false;
-                skill.name = '（なし）';
-                skill.desc = '';
-                skill.mp = null;
-                skill.charge = null;
-                skill.atk = null;
-                return true;
+                this.skillLineDic[skillLineId][index] = customId;
             };
             SimulatorModel.prototype.serialize = function () {
-                var _this = this;
-                var serial = '';
-                var toByte = String.fromCharCode;
-                //先頭に職業の数を含める
-                serial += toByte(this.VOCATIONS_DATA_ORDER.length);
-                this.VOCATIONS_DATA_ORDER.forEach(function (vocationId) {
-                    serial += toByte(_this.getLevel(vocationId));
-                    serial += toByte(_this.getTrainingSkillPt(vocationId));
-                    _this.DB.vocations[vocationId].skillLines.forEach(function (skillLineId) {
-                        serial += toByte(_this.getSkillPt(vocationId, skillLineId));
-                    });
-                });
-                //末尾にMSPのスキルラインIDとポイントをペアで格納
-                this.skillLines.forEach(function (skillLine) {
-                    if (skillLine.msp > 0) {
-                        serial += toByte(_this.DB.skillLines[skillLine.id].id) + toByte(skillLine.msp);
-                    }
-                });
+                var serial = new SimulatorSaveData.Serializer().exec(this);
                 return serial;
             };
             SimulatorModel.prototype.deserialize = function (serial) {
-                var _this = this;
-                var cur = 0;
-                var getData = function () { return serial.charCodeAt(cur++); };
-                //先頭に格納されている職業の数を取得
-                var vocationCount = getData();
-                for (var i = 0; i < vocationCount; i++) {
-                    var vocationId = this.VOCATIONS_DATA_ORDER[i];
-                    var vSkillLines = this.DB.vocations[vocationId].skillLines;
-                    if (serial.length - cur < 1 + 1 + vSkillLines.length)
-                        break;
-                    this.updateLevel(vocationId, getData());
-                    this.updateTrainingSkillPt(vocationId, getData());
-                    for (var s = 0; s < vSkillLines.length; s++) {
-                        this.updateSkillPt(vocationId, vSkillLines[s], getData());
-                    }
-                }
-                //末尾にデータがあればMSPとして取得
-                var skillLineIds = [];
-                Object.keys(this.DB.skillLines).forEach(function (skillLineId) {
-                    skillLineIds[_this.DB.skillLines[skillLineId].id] = skillLineId;
-                });
-                while (serial.length - cur >= 2) {
-                    var skillLineId = skillLineIds[getData()];
-                    var skillPt = getData();
-                    if (skillLineId !== undefined)
-                        this.updateMSP(skillLineId, skillPt);
-                }
+                new SimulatorSaveData.Deserializer(serial).exec(this);
             };
             SimulatorModel.prototype.deserializeBit = function (serial) {
-                var _this = this;
-                var BITS_LEVEL = 8; //レベルは8ビット確保
-                var BITS_SKILL = 7; //スキルは7ビット
-                var BITS_TRAINING = 7; //特訓スキルポイント7ビット
-                var bitArray = [];
-                for (var i = 0; i < serial.length; i++)
-                    bitArray = bitArray.concat(numToBitArray(serial.charCodeAt(i), 8));
-                //特訓ポイントを含むかどうか: ビット列の長さで判断
-                var isIncludingTrainingPts = bitArray.length >= (BITS_LEVEL +
-                    BITS_TRAINING +
-                    BITS_SKILL * this.DB.vocations[this.VOCATIONS_DATA_ORDER[0]].skillLines.length) * 10; //1.2VU（特訓モード実装）時点の職業数
-                var cur = 0;
-                this.VOCATIONS_DATA_ORDER.forEach(function (vocationId) {
-                    _this.updateLevel(vocationId, bitArrayToNum(bitArray.slice(cur, cur += BITS_LEVEL)));
-                    if (isIncludingTrainingPts)
-                        _this.updateTrainingSkillPt(vocationId, bitArrayToNum(bitArray.slice(cur, cur += BITS_TRAINING)));
-                    else
-                        _this.updateTrainingSkillPt(vocationId, 0);
-                    _this.DB.vocations[vocationId].skillLines.forEach(function (skillLineId) {
-                        _this.updateSkillPt(vocationId, skillLineId, bitArrayToNum(bitArray.slice(cur, cur += BITS_SKILL)));
-                    });
-                });
-                function bitArrayToNum(bitArray) {
-                    return bitArray.reduce(function (prev, bit) { return prev << 1 | bit; }, 0);
-                }
-                function numToBitArray(num, digits) {
-                    var bitArray = [];
-                    for (var i = digits - 1; i >= 0; i--) {
-                        bitArray.push(num >> i & 1);
-                    }
-                    return bitArray;
-                }
+                new SimulatorSaveData.Deserializer(serial, true).exec(this);
             };
             return SimulatorModel;
         }());
         SkillSimulator.SimulatorModel = SimulatorModel;
+        var SimulatorSaveData;
+        (function (SimulatorSaveData) {
+            var VOCATIONS_DATA_ORDER = [
+                'warrior',
+                'priest',
+                'mage',
+                'martialartist',
+                'thief',
+                'minstrel',
+                'ranger',
+                'paladin',
+                'armamentalist',
+                'luminary',
+                'gladiator',
+                'sage',
+                'monstermaster',
+                'itemmaster',
+                'dancer' //踊り子
+            ];
+            var BITS_LEVEL = 8; //レベルは8ビット確保
+            var BITS_SKILL = 7; //スキルは7ビット
+            var BITS_TRAINING = 7; //特訓スキルポイント7ビット
+            var Serializer = (function () {
+                function Serializer() {
+                }
+                Serializer.prototype.exec = function (sim) {
+                    var DB = SkillSimulator.SimulatorDB;
+                    var serial = '';
+                    var toByte = String.fromCharCode;
+                    //先頭に職業の数を含める
+                    serial += toByte(VOCATIONS_DATA_ORDER.length);
+                    VOCATIONS_DATA_ORDER.forEach(function (vocationId) {
+                        serial += toByte(sim.getLevel(vocationId));
+                        serial += toByte(sim.getTrainingSkillPt(vocationId));
+                        DB.vocations[vocationId].skillLines.forEach(function (skillLineId) {
+                            serial += toByte(sim.getSkillPt(vocationId, skillLineId));
+                        });
+                    });
+                    //末尾にMSPのスキルラインIDとポイントをペアで格納
+                    Object.keys(DB.skillLines).forEach(function (skillLineId) {
+                        var msp = sim.getMSP(skillLineId);
+                        if (msp > 0) {
+                            serial += toByte(DB.skillLines[skillLineId].id) + toByte(msp);
+                        }
+                    });
+                    return serial;
+                };
+                return Serializer;
+            }());
+            SimulatorSaveData.Serializer = Serializer;
+            var Deserializer = (function () {
+                function Deserializer(serial, isFirstVersion) {
+                    if (isFirstVersion === void 0) { isFirstVersion = false; }
+                    this.serial = serial;
+                    this.isFirstVersion = isFirstVersion;
+                }
+                Deserializer.prototype.exec = function (sim) {
+                    var _this = this;
+                    if (this.isFirstVersion) {
+                        this.execAsFirstVersion(sim);
+                        return;
+                    }
+                    var DB = SkillSimulator.SimulatorDB;
+                    var cur = 0;
+                    var getData = function () { return _this.serial.charCodeAt(cur++); };
+                    //先頭に格納されている職業の数を取得
+                    var vocationCount = getData();
+                    for (var i = 0; i < vocationCount; i++) {
+                        var vocationId = VOCATIONS_DATA_ORDER[i];
+                        var vSkillLines = DB.vocations[vocationId].skillLines;
+                        if (this.serial.length - cur < 1 + 1 + vSkillLines.length)
+                            break;
+                        sim.updateLevel(vocationId, getData());
+                        sim.updateTrainingSkillPt(vocationId, getData());
+                        for (var s = 0; s < vSkillLines.length; s++) {
+                            sim.updateSkillPt(vocationId, vSkillLines[s], getData());
+                        }
+                    }
+                    //末尾にデータがあればMSPとして取得
+                    var skillLineIds = [];
+                    Object.keys(DB.skillLines).forEach(function (skillLineId) {
+                        skillLineIds[DB.skillLines[skillLineId].id] = skillLineId;
+                    });
+                    while (this.serial.length - cur >= 2) {
+                        var skillLineId = skillLineIds[getData()];
+                        var skillPt = getData();
+                        if (skillLineId !== undefined)
+                            sim.updateMSP(skillLineId, skillPt);
+                    }
+                };
+                Deserializer.prototype.execAsFirstVersion = function (sim) {
+                    var DB = SkillSimulator.SimulatorDB;
+                    var bitArray = [];
+                    for (var i = 0; i < this.serial.length; i++)
+                        bitArray = bitArray.concat(numToBitArray(this.serial.charCodeAt(i), 8));
+                    //特訓ポイントを含むかどうか: ビット列の長さで判断
+                    var isIncludingTrainingPts = bitArray.length >= (BITS_LEVEL +
+                        BITS_TRAINING +
+                        BITS_SKILL * DB.vocations[VOCATIONS_DATA_ORDER[0]].skillLines.length) * 10; //1.2VU（特訓モード実装）時点の職業数
+                    var cur = 0;
+                    VOCATIONS_DATA_ORDER.forEach(function (vocationId) {
+                        sim.updateLevel(vocationId, bitArrayToNum(bitArray.slice(cur, cur += BITS_LEVEL)));
+                        if (isIncludingTrainingPts)
+                            sim.updateTrainingSkillPt(vocationId, bitArrayToNum(bitArray.slice(cur, cur += BITS_TRAINING)));
+                        else
+                            sim.updateTrainingSkillPt(vocationId, 0);
+                        DB.vocations[vocationId].skillLines.forEach(function (skillLineId) {
+                            sim.updateSkillPt(vocationId, skillLineId, bitArrayToNum(bitArray.slice(cur, cur += BITS_SKILL)));
+                        });
+                    });
+                    function bitArrayToNum(bitArray) {
+                        return bitArray.reduce(function (prev, bit) { return prev << 1 | bit; }, 0);
+                    }
+                    function numToBitArray(num, digits) {
+                        var bitArray = [];
+                        for (var i = digits - 1; i >= 0; i--) {
+                            bitArray.push(num >> i & 1);
+                        }
+                        return bitArray;
+                    }
+                };
+                return Deserializer;
+            }());
+            SimulatorSaveData.Deserializer = Deserializer;
+        })(SimulatorSaveData || (SimulatorSaveData = {}));
+        var SimulatorCustomSkill = (function () {
+            function SimulatorCustomSkill(skillLineId, customSkillId) {
+                this.skillLineId = skillLineId;
+                this.customSkillId = customSkillId;
+                this.data = SkillSimulator.SimulatorDB.skillLines[skillLineId].customSkills.filter(function (custom) { return custom.id == customSkillId; })[0];
+                if (this.data === undefined) {
+                    this.data = SimulatorCustomSkill.emptySkill;
+                }
+            }
+            SimulatorCustomSkill.prototype.getName = function () {
+                return this.data.name;
+            };
+            SimulatorCustomSkill.prototype.getViewName = function (rank) {
+                var viewName = this.data.viewName;
+                var rankName = 'ⅠⅡⅢ'.charAt(rank);
+                viewName = viewName.replace('%r', rankName);
+                var rankValue = this.data.val[rank];
+                viewName = viewName.replace('%i', rankValue.toFixed(0)) //整数値
+                    .replace('%f', rankValue.toFixed(1)); //小数値
+                return viewName;
+            };
+            SimulatorCustomSkill.prototype.getHintText = function (rank) {
+                var FULLWIDTH_ADJUSTER = 0xFEE0;
+                var hint = this.data.desc;
+                var rankValue = this.data.val[rank];
+                var rankValFullWidth = rankValue.toString().replace(/[0-9.]/g, function (m) {
+                    return String.fromCharCode(m.charCodeAt(0) + 0xFEE0);
+                });
+                hint = hint.replace('%z', rankValFullWidth);
+                if ((this.data.mp !== null) && (this.data.mp !== undefined))
+                    hint += "\n\uFF08\u6D88\u8CBBMP: " + this.data.mp + "\uFF09";
+                if ((this.data.charge !== null) && (this.data.charge !== undefined))
+                    hint += "\n\uFF08\u30C1\u30E3\u30FC\u30B8: " + rankValue + "\u79D2\uFF09";
+                return hint;
+            };
+            SimulatorCustomSkill.emptySkill = {
+                id: 0,
+                name: '（なし）',
+                viewName: '（なし）',
+                desc: '',
+                mp: null,
+                charge: null,
+                atk: null,
+                val: [0, 0, 0]
+            };
+            return SimulatorCustomSkill;
+        }());
         var SimulatorUI = (function () {
             function SimulatorUI(sim) {
                 var _this = this;
