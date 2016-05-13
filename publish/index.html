@@ -2591,6 +2591,514 @@
         <address><p class='contact'>連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a></p></address>
       </div>
     </div>
+    <div id='dark-screen'></div>
+    <div class='modal-dialog' id='customskill-selector'>
+      <div class='modal-dialog-header' id='customskill-selector-header'>
+        <h2 class='modal-dialog-caption'>
+          スキル編集 -&nbsp;
+          <span id='customskill-selector-skillline'>片手剣</span>
+        </h2>
+        <a class='x-button' id='customskill-selector-close-button' title='閉じる'>×</a>
+      </div>
+      <div class='modal-dialog-body' id='customskill-selector-body'>
+        <div id='customskill-selector-entrylists'>
+          <table class='customskill-entrylist' id='customskill-selector-entrylist-fisticuffs'>
+            <tr class='customskill-entrylist-header'>
+              <th></th>
+              <th>160P</th>
+              <th>170P</th>
+              <th>180P</th>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>しんくうは</th>
+              <td class='customskill-entry-selector' id='customskill-selector-fisticuffs-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='fisticuffs'>Ⅰ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-fisticuffs-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='fisticuffs'>Ⅱ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-fisticuffs-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='fisticuffs'>Ⅲ (CT0)</a></td>
+            </tr>
+          </table>
+          <table class='customskill-entrylist' id='customskill-selector-entrylist-shield'>
+            <tr class='customskill-entrylist-header'>
+              <th></th>
+              <th>160P</th>
+              <th>170P</th>
+              <th>180P</th>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>アイギスの守り</th>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='shield'>Ⅰ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='shield'>Ⅱ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='shield'>Ⅲ (CT0)</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>しゅび力</th>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='shield'>+10</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='shield'>+15</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='shield'>+20</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>さいだいＭＰ</th>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='shield'>+20</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='shield'>+30</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='shield'>+45</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>会心完全ガード率</th>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='shield'>+1.0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='shield'>+1.5%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='shield'>+2.0%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>盾ガード時ルカニ</th>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='shield'>+2%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='shield'>+3%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='shield'>+5%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>盾ガード時ヘナトス</th>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='shield'>+2%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='shield'>+3%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='shield'>+5%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>ビッグシールド効果時間</th>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='shield'>+2秒</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='shield'>+3秒</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='shield'>+6秒</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>まもりのたて効果時間</th>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-8-0'><a data-customskill-id='8' data-rank='0' data-skillline='shield'>+2秒</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-8-1'><a data-customskill-id='8' data-rank='1' data-skillline='shield'>+3秒</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-8-2'><a data-customskill-id='8' data-rank='2' data-skillline='shield'>+6秒</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>会心ガード効果時間</th>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-9-0'><a data-customskill-id='9' data-rank='0' data-skillline='shield'>+2秒</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-9-1'><a data-customskill-id='9' data-rank='1' data-skillline='shield'>+3秒</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-9-2'><a data-customskill-id='9' data-rank='2' data-skillline='shield'>+6秒</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>瀕死時（　）でみかわし率+30%</th>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-10-0'><a data-customskill-id='10' data-rank='0' data-skillline='shield'>+2%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-10-1'><a data-customskill-id='10' data-rank='1' data-skillline='shield'>+4%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-shield-10-2'><a data-customskill-id='10' data-rank='2' data-skillline='shield'>+6%</a></td>
+            </tr>
+          </table>
+          <table class='customskill-entrylist' id='customskill-selector-entrylist-sword'>
+            <tr class='customskill-entrylist-header'>
+              <th></th>
+              <th>160P</th>
+              <th>170P</th>
+              <th>180P</th>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>不死鳥天舞</th>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='sword'>Ⅰ (CT150)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='sword'>Ⅱ (CT140)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='sword'>Ⅲ (CT130)</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>こうげき力</th>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='sword'>+5</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='sword'>+8</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='sword'>+10</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>かいしん率</th>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='sword'>+1.0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='sword'>+1.2%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='sword'>+1.4%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>武器ガード率</th>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='sword'>+0.0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='sword'>+0.0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='sword'>+0.0%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>かえん斬りの強化</th>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='sword'>+0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='sword'>+0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='sword'>+0%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>ドラゴン斬りの強化</th>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='sword'>+0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='sword'>+0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='sword'>+0%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>ミラクルソードの強化</th>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='sword'>+0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='sword'>+0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='sword'>+0%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>はやぶさ斬りの強化</th>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-8-0'><a data-customskill-id='8' data-rank='0' data-skillline='sword'>+0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-8-1'><a data-customskill-id='8' data-rank='1' data-skillline='sword'>+0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-8-2'><a data-customskill-id='8' data-rank='2' data-skillline='sword'>+0%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>ギガスラッシュの強化</th>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-9-0'><a data-customskill-id='9' data-rank='0' data-skillline='sword'>+0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-9-1'><a data-customskill-id='9' data-rank='1' data-skillline='sword'>+0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-9-2'><a data-customskill-id='9' data-rank='2' data-skillline='sword'>+0%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>超はやぶさ斬りの強化</th>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-10-0'><a data-customskill-id='10' data-rank='0' data-skillline='sword'>+0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-10-1'><a data-customskill-id='10' data-rank='1' data-skillline='sword'>+0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-sword-10-2'><a data-customskill-id='10' data-rank='2' data-skillline='sword'>+0%</a></td>
+            </tr>
+          </table>
+          <table class='customskill-entrylist' id='customskill-selector-entrylist-twohandedsword'>
+            <tr class='customskill-entrylist-header'>
+              <th></th>
+              <th>160P</th>
+              <th>170P</th>
+              <th>180P</th>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>プラズマブレード</th>
+              <td class='customskill-entry-selector' id='customskill-selector-twohandedsword-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='twohandedsword'>Ⅰ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-twohandedsword-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='twohandedsword'>Ⅱ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-twohandedsword-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='twohandedsword'>Ⅲ (CT0)</a></td>
+            </tr>
+          </table>
+          <table class='customskill-entrylist' id='customskill-selector-entrylist-knife'>
+            <tr class='customskill-entrylist-header'>
+              <th></th>
+              <th>160P</th>
+              <th>170P</th>
+              <th>180P</th>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>オネロスハント</th>
+              <td class='customskill-entry-selector' id='customskill-selector-knife-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='knife'>Ⅰ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-knife-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='knife'>Ⅱ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-knife-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='knife'>Ⅲ (CT0)</a></td>
+            </tr>
+          </table>
+          <table class='customskill-entrylist' id='customskill-selector-entrylist-stick'>
+            <tr class='customskill-entrylist-header'>
+              <th></th>
+              <th>160P</th>
+              <th>170P</th>
+              <th>180P</th>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>ホップスティック</th>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='stick'>Ⅰ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='stick'>Ⅱ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='stick'>Ⅲ (CT0)</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>こうげき力</th>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='stick'>+15</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='stick'>+20</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='stick'>+30</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>こうげき魔力</th>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='stick'>+20</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='stick'>+30</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='stick'>+40</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>かいふく魔力</th>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='stick'>+20</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='stick'>+30</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='stick'>+40</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>さいだいＭＰ</th>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='stick'>+20</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='stick'>+30</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='stick'>+45</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>メラ系とギラ系呪文</th>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='stick'>+1%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='stick'>+2%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='stick'>+3%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>バギ系呪文</th>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='stick'>+1%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='stick'>+2%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='stick'>+3%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>ホイミの回復量</th>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-8-0'><a data-customskill-id='8' data-rank='0' data-skillline='stick'>+6%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-8-1'><a data-customskill-id='8' data-rank='1' data-skillline='stick'>+8%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-8-2'><a data-customskill-id='8' data-rank='2' data-skillline='stick'>+10%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>ベホイミの回復量</th>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-9-0'><a data-customskill-id='9' data-rank='0' data-skillline='stick'>+6%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-9-1'><a data-customskill-id='9' data-rank='1' data-skillline='stick'>+8%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-stick-9-2'><a data-customskill-id='9' data-rank='2' data-skillline='stick'>+10%</a></td>
+            </tr>
+          </table>
+          <table class='customskill-entrylist' id='customskill-selector-entrylist-wand'>
+            <tr class='customskill-entrylist-header'>
+              <th></th>
+              <th>160P</th>
+              <th>170P</th>
+              <th>180P</th>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>活命の杖</th>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='wand'>Ⅰ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='wand'>Ⅱ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='wand'>Ⅲ (CT0)</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>こうげき力</th>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='wand'>+15</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='wand'>+20</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='wand'>+30</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>こうげき魔力</th>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='wand'>+20</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='wand'>+30</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='wand'>+40</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>呪文ぼうそう率</th>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='wand'>+1.0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='wand'>+1.2%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='wand'>+1.5%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>さいだいＭＰ</th>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='wand'>+20</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='wand'>+30</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='wand'>+45</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>メラ系呪文</th>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='wand'>+1%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='wand'>+2%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='wand'>+3%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>ヒャド系呪文</th>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='wand'>+1%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='wand'>+2%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='wand'>+3%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>イオ系呪文</th>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-8-0'><a data-customskill-id='8' data-rank='0' data-skillline='wand'>+1%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-8-1'><a data-customskill-id='8' data-rank='1' data-skillline='wand'>+2%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-8-2'><a data-customskill-id='8' data-rank='2' data-skillline='wand'>+3%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>ドルマ系呪文</th>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-9-0'><a data-customskill-id='9' data-rank='0' data-skillline='wand'>+1%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-9-1'><a data-customskill-id='9' data-rank='1' data-skillline='wand'>+2%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-9-2'><a data-customskill-id='9' data-rank='2' data-skillline='wand'>+3%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>マダンテ</th>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-10-0'><a data-customskill-id='10' data-rank='0' data-skillline='wand'>+1%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-10-1'><a data-customskill-id='10' data-rank='1' data-skillline='wand'>+2%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-10-2'><a data-customskill-id='10' data-rank='2' data-skillline='wand'>+3%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>ホイミの回復量</th>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-11-0'><a data-customskill-id='11' data-rank='0' data-skillline='wand'>+6%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-11-1'><a data-customskill-id='11' data-rank='1' data-skillline='wand'>+8%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-11-2'><a data-customskill-id='11' data-rank='2' data-skillline='wand'>+10%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>ベホイミの回復量</th>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-12-0'><a data-customskill-id='12' data-rank='0' data-skillline='wand'>+6%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-12-1'><a data-customskill-id='12' data-rank='1' data-skillline='wand'>+8%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-wand-12-2'><a data-customskill-id='12' data-rank='2' data-skillline='wand'>+10%</a></td>
+            </tr>
+          </table>
+          <table class='customskill-entrylist' id='customskill-selector-entrylist-spear'>
+            <tr class='customskill-entrylist-header'>
+              <th></th>
+              <th>160P</th>
+              <th>170P</th>
+              <th>180P</th>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>武神の護法</th>
+              <td class='customskill-entry-selector' id='customskill-selector-spear-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='spear'>Ⅰ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-spear-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='spear'>Ⅱ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-spear-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='spear'>Ⅲ (CT0)</a></td>
+            </tr>
+          </table>
+          <table class='customskill-entrylist' id='customskill-selector-entrylist-axe'>
+            <tr class='customskill-entrylist-header'>
+              <th></th>
+              <th>160P</th>
+              <th>170P</th>
+              <th>180P</th>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>降魔紅蓮斬</th>
+              <td class='customskill-entry-selector' id='customskill-selector-axe-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='axe'>Ⅰ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-axe-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='axe'>Ⅱ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-axe-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='axe'>Ⅲ (CT0)</a></td>
+            </tr>
+          </table>
+          <table class='customskill-entrylist' id='customskill-selector-entrylist-hammer'>
+            <tr class='customskill-entrylist-header'>
+              <th></th>
+              <th>160P</th>
+              <th>170P</th>
+              <th>180P</th>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>デビルクラッシュ</th>
+              <td class='customskill-entry-selector' id='customskill-selector-hammer-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='hammer'>Ⅰ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-hammer-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='hammer'>Ⅱ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-hammer-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='hammer'>Ⅲ (CT0)</a></td>
+            </tr>
+          </table>
+          <table class='customskill-entrylist' id='customskill-selector-entrylist-staff'>
+            <tr class='customskill-entrylist-header'>
+              <th></th>
+              <th>160P</th>
+              <th>170P</th>
+              <th>180P</th>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>断空なぎはらい</th>
+              <td class='customskill-entry-selector' id='customskill-selector-staff-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='staff'>Ⅰ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-staff-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='staff'>Ⅱ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-staff-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='staff'>Ⅲ (CT0)</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>氷結らんげきの強化</th>
+              <td class='customskill-entry-selector' id='customskill-selector-staff-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='staff'>+2%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-staff-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='staff'>+4%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-staff-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='staff'>+8%</a></td>
+            </tr>
+          </table>
+          <table class='customskill-entrylist' id='customskill-selector-entrylist-claw'>
+            <tr class='customskill-entrylist-header'>
+              <th></th>
+              <th>160P</th>
+              <th>170P</th>
+              <th>180P</th>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>牙神昇誕</th>
+              <td class='customskill-entry-selector' id='customskill-selector-claw-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='claw'>Ⅰ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-claw-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='claw'>Ⅱ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-claw-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='claw'>Ⅲ (CT0)</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>タイガークローの強化</th>
+              <td class='customskill-entry-selector' id='customskill-selector-claw-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='claw'>+2%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-claw-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='claw'>+3%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-claw-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='claw'>+5%</a></td>
+            </tr>
+          </table>
+          <table class='customskill-entrylist' id='customskill-selector-entrylist-fan'>
+            <tr class='customskill-entrylist-header'>
+              <th></th>
+              <th>160P</th>
+              <th>170P</th>
+              <th>180P</th>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>風斬りの舞</th>
+              <td class='customskill-entry-selector' id='customskill-selector-fan-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='fan'>Ⅰ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-fan-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='fan'>Ⅱ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-fan-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='fan'>Ⅲ (CT0)</a></td>
+            </tr>
+          </table>
+          <table class='customskill-entrylist' id='customskill-selector-entrylist-whip'>
+            <tr class='customskill-entrylist-header'>
+              <th></th>
+              <th>160P</th>
+              <th>170P</th>
+              <th>180P</th>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>バイキルショット</th>
+              <td class='customskill-entry-selector' id='customskill-selector-whip-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='whip'>Ⅰ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-whip-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='whip'>Ⅱ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-whip-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='whip'>Ⅲ (CT0)</a></td>
+            </tr>
+          </table>
+          <table class='customskill-entrylist' id='customskill-selector-entrylist-boomerang'>
+            <tr class='customskill-entrylist-header'>
+              <th></th>
+              <th>160P</th>
+              <th>170P</th>
+              <th>180P</th>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>レボルスライサー</th>
+              <td class='customskill-entry-selector' id='customskill-selector-boomerang-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='boomerang'>Ⅰ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-boomerang-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='boomerang'>Ⅱ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-boomerang-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='boomerang'>Ⅲ (CT0)</a></td>
+            </tr>
+          </table>
+          <table class='customskill-entrylist' id='customskill-selector-entrylist-bow'>
+            <tr class='customskill-entrylist-header'>
+              <th></th>
+              <th>160P</th>
+              <th>170P</th>
+              <th>180P</th>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name'>ロストスナイプ</th>
+              <td class='customskill-entry-selector' id='customskill-selector-bow-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='bow'>Ⅰ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-bow-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='bow'>Ⅱ (CT0)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-bow-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='bow'>Ⅲ (CT0)</a></td>
+            </tr>
+          </table>
+        </div>
+        <div id='customskill-selector-pallette'>
+          <dl>
+            <dt class='customskill-palette-pt'>160P</dt>
+            <dd class='customskill-palette-name' id='customskill-selector-palette-0'>（なし）</dd>
+            <a class='customsukill-palette-delete x-button' data-rank='0'>×</a>
+          </dl>
+          <dl>
+            <dt class='customskill-palette-pt'>170P</dt>
+            <dd class='customskill-palette-name' id='customskill-selector-palette-1'>（なし）</dd>
+            <a class='customsukill-palette-delete x-button' data-rank='1'>×</a>
+          </dl>
+          <dl>
+            <dt class='customskill-palette-pt'>180P</dt>
+            <dd class='customskill-palette-name' id='customskill-selector-palette-2'>（なし）</dd>
+            <a class='customsukill-palette-delete x-button' data-rank='2'>×</a>
+          </dl>
+          <ul class='button-container' id='customskill-selector-skillline-buttons'>
+            <li class='ui-corner-all'><a data-skillline='fisticuffs'>格闘</a></li>
+            <li class='ui-corner-all'><a data-skillline='shield'>盾</a></li>
+            <li class='ui-corner-all'><a data-skillline='sword'>片手剣</a></li>
+            <li class='ui-corner-all'><a data-skillline='twohandedsword'>両手剣</a></li>
+            <li class='ui-corner-all'><a data-skillline='knife'>短剣</a></li>
+            <li class='ui-corner-all'><a data-skillline='stick'>スティック</a></li>
+            <li class='ui-corner-all'><a data-skillline='wand'>両手杖</a></li>
+            <li class='ui-corner-all'><a data-skillline='spear'>ヤリ</a></li>
+            <li class='ui-corner-all'><a data-skillline='axe'>オノ</a></li>
+            <li class='ui-corner-all'><a data-skillline='hammer'>ハンマー</a></li>
+            <li class='ui-corner-all'><a data-skillline='staff'>棍</a></li>
+            <li class='ui-corner-all'><a data-skillline='claw'>ツメ</a></li>
+            <li class='ui-corner-all'><a data-skillline='fan'>扇</a></li>
+            <li class='ui-corner-all'><a data-skillline='whip'>ムチ</a></li>
+            <li class='ui-corner-all'><a data-skillline='boomerang'>ブーメラン</a></li>
+            <li class='ui-corner-all'><a data-skillline='bow'>弓</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class='modal-dialog-footer' id='customskill-selector-footer'></div>
+    </div>
     <div id='ad_sidebar'>
       <h2>サイト内リンク</h2>
       <ul>
