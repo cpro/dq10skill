@@ -712,6 +712,22 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
           width: 80px;
           margin: 1px; }
 
+#customskill_console {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 22px;
+  width: 70px; }
+
+#show-customskill-dialog {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 22px; }
+  #show-customskill-dialog .ui-button-text {
+    padding: 2px 6px 2px 22px;
+    font-size: 12px; }
+
 /* バッジ選択ダイアログ */
 #badge-selector {
   display: none;

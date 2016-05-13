@@ -577,14 +577,14 @@ namespace Dq10.SkillSimulator {
 		getViewName(rank: number): string {
 			return this.replaceRankValue(this.data.viewName, rank);
 		}
-		
+
 		getSelectorName(rank: number): string {
 			return this.replaceRankValue(this.data.selectorName, rank);
 		}
-		
+
 		private replaceRankValue(template: string, rank: number){
 			var ret = template;
-			
+
 			var rankName = 'ⅠⅡⅢ'.charAt(rank);
 			ret = ret.replace('%r', rankName);
 
@@ -625,10 +625,13 @@ namespace Dq10.SkillSimulator {
 		private $lvConsole: JQuery;
 		private $trainingPtConsole: JQuery;
 		private $mspMaxConsole: JQuery;
+		private $customSkillConsole: JQuery;
 
 		private mspMode = false; //MSP編集モードフラグ
 
 		private DB: SkillSimulatorDB;
+
+		private customSkillSelector: CustomSkillSelector;
 
 		constructor(sim: SimulatorModel) {
 			this.DB = SimulatorDB;
@@ -794,6 +797,7 @@ namespace Dq10.SkillSimulator {
 			this.$lvConsole.hide();
 			this.$trainingPtConsole.hide();
 			this.$mspMaxConsole.hide();
+			this.$customSkillConsole.hide();
 		}
 
 		setup() {
@@ -1020,6 +1024,35 @@ namespace Dq10.SkillSimulator {
 						this.hideConsoles();
 					});
 				})
+			},
+
+			() => {
+				this.customSkillSelector = new CustomSkillSelector();
+				this.customSkillSelector.setup();
+			},
+
+			//カスタムスキル編集ボタン
+			() => {
+				$('#show-customskill-dialog').button({
+					icons: { primary: 'ui-icon-pencil'},
+					text: true
+				}).click((e) => {
+					this.customSkillSelector.show();
+					e.stopPropagation();
+				});
+			},
+
+			//160以上スキルホバー時にUI表示
+			() => {
+				this.$customSkillConsole = $('#customskill_console');
+
+				$('.skill_table tr[class$="_15"],.skill_table tr[class$="_16"],.skill_table tr[class$="_17"]').mouseenter((e) => {
+					$(e.currentTarget).parent().children().last().find('.skill_name').append(this.$customSkillConsole);
+					this.$customSkillConsole.show();
+					e.stopPropagation();
+				}).mouseleave((e) => {
+					this.hideConsoles();
+				});
 			},
 
 			//範囲外クリック時・ESCキー押下時にUI非表示
@@ -1321,6 +1354,37 @@ namespace Dq10.SkillSimulator {
 		];
 	}
 
+	class CustomSkillSelector {
+		private $dialog: JQuery;
+		private $maskScreen: JQuery;
+
+		setup() {
+			this.$dialog = $('#customskill-selector');
+			this.$maskScreen = $('#dark-screen');
+
+			this.$maskScreen.click((e) => {
+				this.hide();
+			});
+			$('#customskill-selector-close-button').click((e) => {
+				this.hide();
+			});
+
+			//ヘッダー部ドラッグで画面移動可能
+			this.$dialog.draggable({
+				handle: '#customskill-selector-header',
+				cursor: 'move'
+			});
+		}
+
+		show() {
+			this.$maskScreen.show();
+			this.$dialog.show();
+		}
+		private hide() {
+			this.$dialog.hide();
+			this.$maskScreen.hide();
+		}
+	}
 
 	class SimpleUI {
 		private CLASSNAME_SKILL_ENABLED = 'enabled';

@@ -913,13 +913,19 @@ var Dq10;
                 return this.data.name;
             };
             SimulatorCustomSkill.prototype.getViewName = function (rank) {
-                var viewName = this.data.viewName;
+                return this.replaceRankValue(this.data.viewName, rank);
+            };
+            SimulatorCustomSkill.prototype.getSelectorName = function (rank) {
+                return this.replaceRankValue(this.data.selectorName, rank);
+            };
+            SimulatorCustomSkill.prototype.replaceRankValue = function (template, rank) {
+                var ret = template;
                 var rankName = 'ⅠⅡⅢ'.charAt(rank);
-                viewName = viewName.replace('%r', rankName);
+                ret = ret.replace('%r', rankName);
                 var rankValue = this.data.val[rank];
-                viewName = viewName.replace('%i', rankValue.toFixed(0)) //整数値
+                ret = ret.replace('%i', rankValue.toFixed(0)) //整数値
                     .replace('%f', rankValue.toFixed(1)); //小数値
-                return viewName;
+                return ret;
             };
             SimulatorCustomSkill.prototype.getHintText = function (rank) {
                 var FULLWIDTH_ADJUSTER = 0xFEE0;
@@ -939,6 +945,7 @@ var Dq10;
                 id: 0,
                 name: '（なし）',
                 viewName: '（なし）',
+                selectorName: '',
                 desc: '',
                 mp: null,
                 charge: null,
@@ -1141,6 +1148,31 @@ var Dq10;
                             }).mouseleave(function (e) {
                                 _this.hideConsoles();
                             });
+                        });
+                    },
+                    function () {
+                        _this.customSkillSelector = new CustomSkillSelector();
+                        _this.customSkillSelector.setup();
+                    },
+                    //カスタムスキル編集ボタン
+                    function () {
+                        $('#show-customskill-dialog').button({
+                            icons: { primary: 'ui-icon-pencil' },
+                            text: true
+                        }).click(function (e) {
+                            _this.customSkillSelector.show();
+                            e.stopPropagation();
+                        });
+                    },
+                    //160以上スキルホバー時にUI表示
+                    function () {
+                        _this.$customSkillConsole = $('#customskill_console');
+                        $('.skill_table tr[class$="_15"],.skill_table tr[class$="_16"],.skill_table tr[class$="_17"]').mouseenter(function (e) {
+                            $(e.currentTarget).parent().children().last().find('.skill_name').append(_this.$customSkillConsole);
+                            _this.$customSkillConsole.show();
+                            e.stopPropagation();
+                        }).mouseleave(function (e) {
+                            _this.hideConsoles();
                         });
                     },
                     //範囲外クリック時・ESCキー押下時にUI非表示
@@ -1544,12 +1576,42 @@ var Dq10;
                 this.$lvConsole.hide();
                 this.$trainingPtConsole.hide();
                 this.$mspMaxConsole.hide();
+                this.$customSkillConsole.hide();
             };
             SimulatorUI.prototype.setup = function () {
                 this.setupFunctions.forEach(function (func) { return func(); });
                 this.refreshAll();
             };
             return SimulatorUI;
+        }());
+        var CustomSkillSelector = (function () {
+            function CustomSkillSelector() {
+            }
+            CustomSkillSelector.prototype.setup = function () {
+                var _this = this;
+                this.$dialog = $('#customskill-selector');
+                this.$maskScreen = $('#dark-screen');
+                this.$maskScreen.click(function (e) {
+                    _this.hide();
+                });
+                $('#customskill-selector-close-button').click(function (e) {
+                    _this.hide();
+                });
+                //ヘッダー部ドラッグで画面移動可能
+                this.$dialog.draggable({
+                    handle: '#customskill-selector-header',
+                    cursor: 'move'
+                });
+            };
+            CustomSkillSelector.prototype.show = function () {
+                this.$maskScreen.show();
+                this.$dialog.show();
+            };
+            CustomSkillSelector.prototype.hide = function () {
+                this.$dialog.hide();
+                this.$maskScreen.hide();
+            };
+            return CustomSkillSelector;
         }());
         var SimpleUI = (function () {
             function SimpleUI(sim) {
