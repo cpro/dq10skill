@@ -321,11 +321,18 @@ namespace Dq10.SkillSimulator {
 			return this.skillLineDic[skillLineId].custom;
 		}
 
-		setCustomSkill(skillLineId: string, index: number, customId: number): boolean {
-			if(index < 0 || index >= this.DB.consts.customSkill.count)
+		setCustomSkill(skillLineId: string, rank: number, customId: number): boolean {
+			if(rank < 0 || rank >= this.DB.consts.customSkill.count)
 				return false;
 
-			this.skillLineDic[skillLineId][index] = customId;
+			this.skillLineDic[skillLineId].custom.forEach((c, r, custom) => {
+				if(r == rank)
+					custom[r] = customId;
+				else if(c == customId)
+					//他のランクに同じカスタムスキルが設定されていたらそれを解除する
+					custom[r] = 0;
+			})
+			return true;
 		}
 
 		serialize(): string {
@@ -550,7 +557,7 @@ namespace Dq10.SkillSimulator {
 	class SimulatorCustomSkill {
 		private data: CustomSkill;
 
-		static emptySkill: CustomSkill = {
+		static emptySkillData: CustomSkill = {
 			id: 0,
 			name: '（なし）',
 			viewName: '（なし）',
@@ -562,12 +569,22 @@ namespace Dq10.SkillSimulator {
 			val: [0, 0, 0]
 		}
 
-		constructor(private skillLineId: string, private customSkillId: number) {
-			this.data = SimulatorDB.skillLines[skillLineId].customSkills.filter((custom) => custom.id == customSkillId)[0];
+		private skillLineId: string;
+		private customSkillId: number;
 
-			if(this.data === undefined) {
-				this.data = SimulatorCustomSkill.emptySkill;
+		constructor(skillLineId?: string, customSkillId?: number) {
+			if(skillLineId === undefined) {
+				this.data = SimulatorCustomSkill.emptySkillData;
+			} else {
+				this.data = SimulatorDB.skillLines[skillLineId].customSkills.filter((custom) => custom.id == customSkillId)[0];
+
+				if(this.data === undefined) {
+					this.data = SimulatorCustomSkill.emptySkillData;
+				}
 			}
+		}
+		static emptySkill(): SimulatorCustomSkill {
+			return new SimulatorCustomSkill();
 		}
 
 		getName(): string {
@@ -1027,7 +1044,7 @@ namespace Dq10.SkillSimulator {
 			},
 
 			() => {
-				this.customSkillSelector = new CustomSkillSelector();
+				this.customSkillSelector = new CustomSkillSelector(this.sim);
 				this.customSkillSelector.setup();
 			},
 
@@ -1037,7 +1054,8 @@ namespace Dq10.SkillSimulator {
 					icons: { primary: 'ui-icon-pencil'},
 					text: true
 				}).click((e) => {
-					this.customSkillSelector.show();
+					var skillLineId = this.getCurrentSkillLine(e.currentTarget);
+					this.customSkillSelector.show(skillLineId);
 					e.stopPropagation();
 				});
 			},
@@ -1357,6 +1375,12 @@ namespace Dq10.SkillSimulator {
 	class CustomSkillSelector {
 		private $dialog: JQuery;
 		private $maskScreen: JQuery;
+		private currentSkillLineId: string;
+		private DB: SkillSimulatorDB;
+
+		constructor(private sim: SimulatorModel) {
+			this.DB = SimulatorDB;
+		}
 
 		setup() {
 			this.$dialog = $('#customskill-selector');
@@ -1374,9 +1398,69 @@ namespace Dq10.SkillSimulator {
 				handle: '#customskill-selector-header',
 				cursor: 'move'
 			});
+
+			this.$dialog.find('.customskill-entry-selector a').click((e) => {
+				var $a = $(e.currentTarget);
+				var skillLineId = $a.data('skillline');
+				var customSkillId = $a.data('customskillId');
+				var rank = $a.data('rank');
+
+				this.setCustomSkill(customSkillId, rank);
+			});
+
+			//スキルライン選択ボタン
+			this.$dialog.find('#customskill-selector-skillline-buttons a').click((e) => {
+				var skillLineId = $(e.currentTarget).data('skillline');
+				this.showEntryList(skillLineId);
+				this.loadCustomPalette();
+			});
+
+			//パレット削除ボタン
+			this.$dialog.find('a.customskill-palette-delete').click((e) => {
+				var rank = $(e.currentTarget).data('rank');
+				this.clearPalette(rank);
+			});
 		}
 
-		show() {
+		private setCustomSkill(customSkillId: number, rank: number) {
+			if(this.sim.setCustomSkill(this.currentSkillLineId, rank, customSkillId) == true)
+				this.loadCustomPalette();
+		}
+		private showEntryList(skillLineId: string) {
+			this.$dialog.find('.customskill-entrylist:visible').hide();
+			this.$dialog.find('#customskill-selector-entrylist-' + skillLineId).show();
+			this.$dialog.find('#customskill-selector-skillline').text(this.DB.skillLines[skillLineId].name);
+			this.currentSkillLineId = skillLineId;
+		}
+		private loadCustomPalette() {
+			var skillLineId = this.currentSkillLineId;
+			var skills = this.sim.getCustomSkills(skillLineId);
+			this.$dialog.find(`#customskill-selector-entrylist-${skillLineId} .customskill-entry-selector a`).toggleClass('selected', false);
+			skills.forEach((customId, rank) => {
+				this.toggleEntrySelection(customId, rank, true);
+				var customSkill = new SimulatorCustomSkill(skillLineId, customId);
+				this.fillPalette(rank, customSkill);
+			})
+		}
+		private clearPalette(rank: number) {
+			var currentCustomSkillId = this.sim.getCustomSkills(this.currentSkillLineId)[rank];
+			if(this.sim.setCustomSkill(this.currentSkillLineId, rank, 0) == true) {
+				this.fillPalette(rank, SimulatorCustomSkill.emptySkill());
+				this.toggleEntrySelection(currentCustomSkillId, rank, false);
+			}
+		}
+		private fillPalette(rank: number, customSkill: SimulatorCustomSkill) {
+			var $palette = $('#customskill-selector-palette-' + rank.toString());
+			$palette.text(customSkill.getViewName(rank));
+			$palette.attr('title', customSkill.getHintText(rank));
+		}
+		private toggleEntrySelection(customSkillId: number, rank: number, isSelected?: boolean) {
+			$(`#customskill-selector-${this.currentSkillLineId}-${customSkillId}-${rank} a`).toggleClass('selected', isSelected);
+		}
+
+		show(skillLineId: string = 'sword') {
+			this.showEntryList(skillLineId);
+			this.loadCustomPalette();
 			this.$maskScreen.show();
 			this.$dialog.show();
 		}

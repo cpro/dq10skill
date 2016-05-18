@@ -960,9 +960,6 @@ $dialog-outer-border-width: 3px;
 					}
 				}
 			}
-			#customskill-selector-entrylist-sword {
-				display: block;
-			}
 		}
 		#customskill-selector-pallette {
 			position: absolute;
@@ -989,14 +986,14 @@ $dialog-outer-border-width: 3px;
 					padding: 0 0 0 10px;
 					font-size: 14px;
 				}
-				a.customsukill-palette-delete {
+				a.customskill-palette-delete {
 					display: none;
 					top: 1px;
 					right: 8px;
 					height: 18px;
 					width: 18px;
 				}
-				&:hover a.customsukill-palette-delete {
+				&:hover a.customskill-palette-delete {
 					display: block;
 				}
 			}

@@ -707,10 +707,17 @@ var Dq10;
             SimulatorModel.prototype.getCustomSkills = function (skillLineId) {
                 return this.skillLineDic[skillLineId].custom;
             };
-            SimulatorModel.prototype.setCustomSkill = function (skillLineId, index, customId) {
-                if (index < 0 || index >= this.DB.consts.customSkill.count)
+            SimulatorModel.prototype.setCustomSkill = function (skillLineId, rank, customId) {
+                if (rank < 0 || rank >= this.DB.consts.customSkill.count)
                     return false;
-                this.skillLineDic[skillLineId][index] = customId;
+                this.skillLineDic[skillLineId].custom.forEach(function (c, r, custom) {
+                    if (r == rank)
+                        custom[r] = customId;
+                    else if (c == customId)
+                        //他のランクに同じカスタムスキルが設定されていたらそれを解除する
+                        custom[r] = 0;
+                });
+                return true;
             };
             SimulatorModel.prototype.serialize = function () {
                 var serial = new SimulatorSaveData.Serializer().exec(this);
@@ -902,13 +909,19 @@ var Dq10;
         })(SimulatorSaveData || (SimulatorSaveData = {}));
         var SimulatorCustomSkill = (function () {
             function SimulatorCustomSkill(skillLineId, customSkillId) {
-                this.skillLineId = skillLineId;
-                this.customSkillId = customSkillId;
-                this.data = SkillSimulator.SimulatorDB.skillLines[skillLineId].customSkills.filter(function (custom) { return custom.id == customSkillId; })[0];
-                if (this.data === undefined) {
-                    this.data = SimulatorCustomSkill.emptySkill;
+                if (skillLineId === undefined) {
+                    this.data = SimulatorCustomSkill.emptySkillData;
+                }
+                else {
+                    this.data = SkillSimulator.SimulatorDB.skillLines[skillLineId].customSkills.filter(function (custom) { return custom.id == customSkillId; })[0];
+                    if (this.data === undefined) {
+                        this.data = SimulatorCustomSkill.emptySkillData;
+                    }
                 }
             }
+            SimulatorCustomSkill.emptySkill = function () {
+                return new SimulatorCustomSkill();
+            };
             SimulatorCustomSkill.prototype.getName = function () {
                 return this.data.name;
             };
@@ -941,7 +954,7 @@ var Dq10;
                     hint += "\n\uFF08\u30C1\u30E3\u30FC\u30B8: " + rankValue + "\u79D2\uFF09";
                 return hint;
             };
-            SimulatorCustomSkill.emptySkill = {
+            SimulatorCustomSkill.emptySkillData = {
                 id: 0,
                 name: '（なし）',
                 viewName: '（なし）',
@@ -1151,7 +1164,7 @@ var Dq10;
                         });
                     },
                     function () {
-                        _this.customSkillSelector = new CustomSkillSelector();
+                        _this.customSkillSelector = new CustomSkillSelector(_this.sim);
                         _this.customSkillSelector.setup();
                     },
                     //カスタムスキル編集ボタン
@@ -1160,7 +1173,8 @@ var Dq10;
                             icons: { primary: 'ui-icon-pencil' },
                             text: true
                         }).click(function (e) {
-                            _this.customSkillSelector.show();
+                            var skillLineId = _this.getCurrentSkillLine(e.currentTarget);
+                            _this.customSkillSelector.show(skillLineId);
                             e.stopPropagation();
                         });
                     },
@@ -1585,7 +1599,9 @@ var Dq10;
             return SimulatorUI;
         }());
         var CustomSkillSelector = (function () {
-            function CustomSkillSelector() {
+            function CustomSkillSelector(sim) {
+                this.sim = sim;
+                this.DB = SkillSimulator.SimulatorDB;
             }
             CustomSkillSelector.prototype.setup = function () {
                 var _this = this;
@@ -1602,8 +1618,65 @@ var Dq10;
                     handle: '#customskill-selector-header',
                     cursor: 'move'
                 });
+                this.$dialog.find('.customskill-entry-selector a').click(function (e) {
+                    var $a = $(e.currentTarget);
+                    var skillLineId = $a.data('skillline');
+                    var customSkillId = $a.data('customskillId');
+                    var rank = $a.data('rank');
+                    _this.setCustomSkill(customSkillId, rank);
+                });
+                //スキルライン選択ボタン
+                this.$dialog.find('#customskill-selector-skillline-buttons a').click(function (e) {
+                    var skillLineId = $(e.currentTarget).data('skillline');
+                    _this.showEntryList(skillLineId);
+                    _this.loadCustomPalette();
+                });
+                //パレット削除ボタン
+                this.$dialog.find('a.customskill-palette-delete').click(function (e) {
+                    var rank = $(e.currentTarget).data('rank');
+                    _this.clearPalette(rank);
+                });
             };
-            CustomSkillSelector.prototype.show = function () {
+            CustomSkillSelector.prototype.setCustomSkill = function (customSkillId, rank) {
+                if (this.sim.setCustomSkill(this.currentSkillLineId, rank, customSkillId) == true)
+                    this.loadCustomPalette();
+            };
+            CustomSkillSelector.prototype.showEntryList = function (skillLineId) {
+                this.$dialog.find('.customskill-entrylist:visible').hide();
+                this.$dialog.find('#customskill-selector-entrylist-' + skillLineId).show();
+                this.$dialog.find('#customskill-selector-skillline').text(this.DB.skillLines[skillLineId].name);
+                this.currentSkillLineId = skillLineId;
+            };
+            CustomSkillSelector.prototype.loadCustomPalette = function () {
+                var _this = this;
+                var skillLineId = this.currentSkillLineId;
+                var skills = this.sim.getCustomSkills(skillLineId);
+                this.$dialog.find("#customskill-selector-entrylist-" + skillLineId + " .customskill-entry-selector a").toggleClass('selected', false);
+                skills.forEach(function (customId, rank) {
+                    _this.toggleEntrySelection(customId, rank, true);
+                    var customSkill = new SimulatorCustomSkill(skillLineId, customId);
+                    _this.fillPalette(rank, customSkill);
+                });
+            };
+            CustomSkillSelector.prototype.clearPalette = function (rank) {
+                var currentCustomSkillId = this.sim.getCustomSkills(this.currentSkillLineId)[rank];
+                if (this.sim.setCustomSkill(this.currentSkillLineId, rank, 0) == true) {
+                    this.fillPalette(rank, SimulatorCustomSkill.emptySkill());
+                    this.toggleEntrySelection(currentCustomSkillId, rank, false);
+                }
+            };
+            CustomSkillSelector.prototype.fillPalette = function (rank, customSkill) {
+                var $palette = $('#customskill-selector-palette-' + rank.toString());
+                $palette.text(customSkill.getViewName(rank));
+                $palette.attr('title', customSkill.getHintText(rank));
+            };
+            CustomSkillSelector.prototype.toggleEntrySelection = function (customSkillId, rank, isSelected) {
+                $("#customskill-selector-" + this.currentSkillLineId + "-" + customSkillId + "-" + rank + " a").toggleClass('selected', isSelected);
+            };
+            CustomSkillSelector.prototype.show = function (skillLineId) {
+                if (skillLineId === void 0) { skillLineId = 'sword'; }
+                this.showEntryList(skillLineId);
+                this.loadCustomPalette();
                 this.$maskScreen.show();
                 this.$dialog.show();
             };

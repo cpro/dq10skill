@@ -672,8 +672,6 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
               text-decoration: none;
               color: #b57;
               border-bottom-color: #e79; }
-      #customskill-selector #customskill-selector-body #customskill-selector-entrylists #customskill-selector-entrylist-sword {
-        display: block; }
     #customskill-selector #customskill-selector-body #customskill-selector-pallette {
       position: absolute;
       height: 400px;
@@ -692,13 +690,13 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
           margin: 0;
           padding: 0 0 0 10px;
           font-size: 14px; }
-        #customskill-selector #customskill-selector-body #customskill-selector-pallette dl a.customsukill-palette-delete {
+        #customskill-selector #customskill-selector-body #customskill-selector-pallette dl a.customskill-palette-delete {
           display: none;
           top: 1px;
           right: 8px;
           height: 18px;
           width: 18px; }
-        #customskill-selector #customskill-selector-body #customskill-selector-pallette dl:hover a.customsukill-palette-delete {
+        #customskill-selector #customskill-selector-body #customskill-selector-pallette dl:hover a.customskill-palette-delete {
           display: block; }
       #customskill-selector #customskill-selector-body #customskill-selector-pallette #customskill-selector-skillline-buttons {
         position: absolute;
