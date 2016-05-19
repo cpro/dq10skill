@@ -1079,7 +1079,8 @@
 		{ "stamps": 6000, "pt": 14 },
 		{ "stamps": 6500, "pt": 15 },
 		{ "stamps": 7000, "pt": 16 },
-		{ "stamps": 8000, "pt": 17 }
+		{ "stamps": 8000, "pt": 17 },
+		{ "stamps": 9000, "pt": 18 }
 	],
 
 	"consts": {
@@ -1096,7 +1097,7 @@
 		},
 		"trainingSkillPts": {
 			"min": 0,
-			"max": 17
+			"max": 18
 		},
 		"msp": {
 			"min": 0,
