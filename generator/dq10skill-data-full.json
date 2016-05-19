@@ -19,7 +19,22 @@
 				{"pt": 120, "name": "超はやぶさ斬り", "desc": "はやぶさをこえる\n神速の４回攻撃", "mp": 2, "charge": 45},
 				{"pt": 130, "name": "装備時武器ガード率+2%", "desc": "片手剣装備時\nさらに武器ガード\nしやすくなる", "mp": null},
 				{"pt": 140, "name": "ギガブレイク", "desc": "光の刃で周囲の\n敵を撃ち滅ぼす\n究極の剣技", "mp": 12, "charge": 60},
-				{"pt": 150, "name": "装備時こうげき力+10", "desc": "片手剣装備時の\nこうげき力が\n１０増える", "mp": null}
+				{"pt": 150, "name": "装備時こうげき力+10", "desc": "片手剣装備時の\nこうげき力が\n１０増える", "mp": null},
+				{"pt": 160, "name": "（なし）"},
+				{"pt": 170, "name": "（なし）"},
+				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "不死鳥天舞", "viewName": "不死鳥天舞%r", "selectorName": "%r (CT%i)", "desc": "会心率を上げつつ\n敵１体に４回攻撃\nキズもいやす秘剣", "mp": 8, "charge": 0, "val": [150, 140, 130]},
+				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "片手剣装備時の\nこうげき力が\n%z増える", "val": [5, 8, 10]},
+				{"id":  3, "name": "かいしん率", "viewName": "装備時かいしん率+%f%", "selectorName": "+%f%", "desc": "片手剣装備時の\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.4]},
+				{"id":  4, "name": "武器ガード率", "viewName": "装備時武器ガード率+%f%", "selectorName": "+%f%", "desc": "", "val": [0, 0, 0]},
+				{"id":  5, "name": "かえん斬りの強化", "viewName": "かえん斬り+%i%", "selectorName": "+%i%", "desc": "", "val": [0, 0, 0]},
+				{"id":  6, "name": "ドラゴン斬りの強化", "viewName": "ドラゴン斬り+%i%", "selectorName": "+%i%", "desc": "", "val": [0, 0, 0]},
+				{"id":  7, "name": "ミラクルソードの強化", "viewName": "ミラクルソード+%i%", "selectorName": "+%i%", "desc": "", "val": [0, 0, 0]},
+				{"id":  8, "name": "はやぶさ斬りの強化", "viewName": "はやぶさ斬り+%i%", "selectorName": "+%i%", "desc": "", "val": [0, 0, 0]},
+				{"id":  9, "name": "ギガスラッシュの強化", "viewName": "ギガスラッシュ+%i%", "selectorName": "+%i%", "desc": "", "val": [0, 0, 0]},
+				{"id": 10, "name": "超はやぶさ斬りの強化", "viewName": "超はやぶさ斬り+%i%", "selectorName": "+%i%", "desc": "", "val": [0, 0, 0]}
 			]
 		},
 
@@ -42,7 +57,13 @@
 				{"pt": 120, "name": "ビッグバン", "desc": "周囲の敵を\n大爆発で\n焼きつくす", "mp": 6, "charge": 60},
 				{"pt": 130, "name": "装備時武器ガード率+4%", "desc": "両手剣装備時\nさらに武器ガード\nしやすくなる", "mp": null},
 				{"pt": 140, "name": "全身全霊斬り", "desc": "フルパワーで\n敵１体を斬りつけ\n大ダメージ", "mp": 6, "charge": 65},
-				{"pt": 150, "name": "装備時こうげき力+10", "desc": "両手剣装備時の\nこうげき力が\n１０増える", "mp": null}
+				{"pt": 150, "name": "装備時こうげき力+10", "desc": "両手剣装備時の\nこうげき力が\n１０増える", "mp": null},
+				{"pt": 160, "name": "（なし）"},
+				{"pt": 170, "name": "（なし）"},
+				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "プラズマブレード", "viewName": "プラズマブレード%r", "selectorName": "%r (CT%i)", "desc": "", "mp": null, "charge": null, "val": [0, 0, 0]}
 			]
 		},
 
@@ -65,7 +86,13 @@
 				{"pt": 120, "name": "鉄甲斬", "desc": "敵１体を斬りつけ\n守備力を下げて\n行動間隔ものばす", "mp": 5, "charge": 60},
 				{"pt": 130, "name": "装備時かいしん率+3%", "desc": "オノでの攻撃時\n会心のいちげきが\nより出やすくなる", "mp": null},
 				{"pt": 140, "name": "真・オノむそう", "desc": "周囲の敵を\n２回ずつ攻撃する\n真のオノむそう", "mp": 15, "charge": 60},
-				{"pt": 150, "name": "装備時こうげき力+10", "desc": "オノ装備時の\nこうげき力が\n１０増える", "mp": null}
+				{"pt": 150, "name": "装備時こうげき力+10", "desc": "オノ装備時の\nこうげき力が\n１０増える", "mp": null},
+				{"pt": 160, "name": "（なし）"},
+				{"pt": 170, "name": "（なし）"},
+				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "降魔紅蓮斬", "viewName": "降魔紅蓮斬%r", "selectorName": "%r (CT%i)", "desc": "", "mp": null, "charge": null, "val": [0, 0, 0]}
 			]
 		},
 
@@ -88,7 +115,22 @@
 				{"pt": 120, "name": "ファランクス", "desc": "与えるダメージと\nひきかえに受ける\nダメージを減らす", "mp": 5, "charge": 60},
 				{"pt": 130, "name": "装備時盾ガード率+1%", "desc": "盾装備時\nさらに盾ガードを\nしやすくなる", "mp": null},
 				{"pt": 140, "name": "スペルガード", "desc": "自分自身に\n呪文をかき消す\nバリアを張る", "mp": 5, "charge": 30},
-				{"pt": 150, "name": "装備時しゅび力+10", "desc": "盾装備時の\nしゅび力が\n１０増える", "mp": null}
+				{"pt": 150, "name": "装備時しゅび力+10", "desc": "盾装備時の\nしゅび力が\n１０増える", "mp": null},
+				{"pt": 160, "name": "（なし）"},
+				{"pt": 170, "name": "（なし）"},
+				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "アイギスの守り", "viewName": "アイギスの守り%r", "selectorName": "%r (CT%i)", "desc": "", "mp": null, "charge": null, "val": [0, 0, 0]},
+				{"id":  2, "name": "しゅび力", "viewName": "装備時しゅび力+%i", "selectorName": "+%i", "desc": "", "val": [10, 15, 20]},
+				{"id":  3, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "selectorName": "+%i", "desc": "", "val": [20, 30, 45]},
+				{"id":  4, "name": "会心完全ガード率", "viewName": "装備時会心完全ガード率+%f%", "selectorName": "+%f%", "desc": "", "val": [1, 1.5, 2]},
+				{"id":  5, "name": "盾ガード時ルカニ", "viewName": "盾ガード時ルカニ+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 3, 5]},
+				{"id":  6, "name": "盾ガード時ヘナトス", "viewName": "盾ガード時ヘナトス+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 3, 5]},
+				{"id":  7, "name": "ビッグシールド効果時間", "viewName": "ビッグシールド効果時間+%i秒", "selectorName": "+%i秒", "desc": "", "val": [2, 3, 6]},
+				{"id":  8, "name": "まもりのたて効果時間", "viewName": "まもりのたて効果時間+%i秒", "selectorName": "+%i秒", "desc": "", "val": [2, 3, 6]},
+				{"id":  9, "name": "会心ガード効果時間", "viewName": "会心ガード効果時間+%i秒", "selectorName": "+%i秒", "desc": "", "val": [2, 3, 6]},
+				{"id": 10, "name": "瀕死時（　）でみかわし率+30%", "viewName": "瀕死時+%i%でみかわし率+30%", "selectorName": "+%i%", "desc": "", "val": [2, 4, 6]}
 			]
 		},
 
@@ -135,7 +177,13 @@
 				{"pt": 120, "name": "さみだれ突き", "desc": "敵を選ばず\n突きまくる\nどとうの４回攻撃", "mp": 4, "charge": 25},
 				{"pt": 130, "name": "装備時武器ガード率+3%", "desc": "ヤリ装備時\nさらに武器ガード\nしやすくなる", "mp": null},
 				{"pt": 140, "name": "ジゴスパーク", "desc": "地獄のいかずちで\nダメージを与え\nたまにマヒさせる", "mp": 8, "charge": 60},
-				{"pt": 150, "name": "装備時こうげき力+10", "desc": "ヤリ装備時の\nこうげき力が\n１０増える", "mp": null}
+				{"pt": 150, "name": "装備時こうげき力+10", "desc": "ヤリ装備時の\nこうげき力が\n１０増える", "mp": null},
+				{"pt": 160, "name": "（なし）"},
+				{"pt": 170, "name": "（なし）"},
+				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "武神の護法", "viewName": "武神の護法%r", "selectorName": "%r (CT%i)", "desc": "", "mp": null, "charge": null, "val": [0, 0, 0]}
 			]
 		},
 
@@ -158,7 +206,21 @@
 				{"pt": 120, "name": "ラピッドステッキ", "desc": "いつもより\nすばやく呪文を\n唱えられる", "mp": 5, "charge": 90},
 				{"pt": 130, "name": "戦闘勝利時ＭＰ中回復", "desc": "スティック装備で\n戦闘に勝つと\nＭＰが中回復する", "mp": null},
 				{"pt": 140, "name": "ティンクルバトン", "desc": "仲間ひとりの\nテンションを\n１段階アップする", "mp": 2, "charge": 90},
-				{"pt": 150, "name": "装備時さいだいＭＰ+30", "desc": "スティック装備時\nさいだいＭＰが\n３０増える", "mp": null}
+				{"pt": 150, "name": "装備時さいだいＭＰ+30", "desc": "スティック装備時\nさいだいＭＰが\n３０増える", "mp": null},
+				{"pt": 160, "name": "（なし）"},
+				{"pt": 170, "name": "（なし）"},
+				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "ホップスティック", "viewName": "ホップスティック%r", "selectorName": "%r (CT%i)", "desc": "", "mp": null, "charge": null, "val": [0, 0, 0]},
+				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "スティック装備時\nこうげき力が\n%z増える", "val": [15, 20, 30]},
+				{"id":  3, "name": "こうげき魔力", "viewName": "装備時こうげき魔力+%i", "selectorName": "+%i", "desc": "スティック装備時\nこうげき魔力が\n%z増える", "val": [20, 30, 40]},
+				{"id":  4, "name": "かいふく魔力", "viewName": "装備時かいふく魔力+%i", "selectorName": "+%i", "desc": "スティック装備時\nかいふく魔力が\n%z増える", "val": [20, 30, 40]},
+				{"id":  5, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "selectorName": "+%i", "desc": "スティック装備時\nさいだいＭＰが\n%z増える", "val": [20, 30, 45]},
+				{"id":  6, "name": "メラ系とギラ系呪文", "viewName": "メラ系とギラ系呪文+%i%", "selectorName": "+%i%", "desc": "", "val": [1, 2, 3]},
+				{"id":  7, "name": "バギ系呪文", "viewName": "バギ系呪文+%i%", "selectorName": "+%i%", "desc": "", "val": [1, 2, 3]},
+				{"id":  8, "name": "ホイミの回復量", "viewName": "ホイミの回復量+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]},
+				{"id":  9, "name": "ベホイミの回復量", "viewName": "ベホイミの回復量+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]}
 			]
 		},
 
@@ -181,7 +243,14 @@
 				{"pt": 120, "name": "水流のかまえ", "desc": "武器ガード率が\n大幅に上がる\n棍のかまえ", "mp": 2, "charge": 90},
 				{"pt": 130, "name": "装備時武器ガード率+4%", "desc": "棍装備時\nさらに武器ガード\nしやすくなる", "mp": null},
 				{"pt": 140, "name": "奥義・棍閃殺", "desc": "敵１体に強烈な\nダメージを与える\n棍の奥義", "mp": 5, "charge": 70},
-				{"pt": 150, "name": "装備時こうげき力+10", "desc": "棍装備時の\nこうげき力が\n１０増える", "mp": null}
+				{"pt": 150, "name": "装備時こうげき力+10", "desc": "棍装備時の\nこうげき力が\n１０増える", "mp": null},
+				{"pt": 160, "name": "（なし）"},
+				{"pt": 170, "name": "（なし）"},
+				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "断空なぎはらい", "viewName": "断空なぎはらい%r", "selectorName": "%r (CT%i)", "desc": "", "mp": null, "charge": null, "val": [0, 0, 0]},
+				{"id":  2, "name": "氷結らんげきの強化", "viewName": "氷結らんげき+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 4, 8]}
 			]
 		},
 
@@ -228,7 +297,24 @@
 				{"pt": 120, "name": "超暴走魔法陣", "desc": "さらに呪文が\n暴走しやすくなる\n魔法陣を作る", "mp": 4, "charge": 60},
 				{"pt": 130, "name": "装備時こうげき魔力+10", "desc": "両手杖装備時の\nこうげき魔力が\n１０増える", "mp": null},
 				{"pt": 140, "name": "復活の杖", "desc": "仲間ひとりを\n確実に\n生き返らせる", "mp": 10, "charge": 60},
-				{"pt": 150, "name": "装備時さいだいＭＰ+30", "desc": "両手杖装備時\nさいだいＭＰが\n３０増える", "mp": null}
+				{"pt": 150, "name": "装備時さいだいＭＰ+30", "desc": "両手杖装備時\nさいだいＭＰが\n３０増える", "mp": null},
+				{"pt": 160, "name": "（なし）"},
+				{"pt": 170, "name": "（なし）"},
+				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "活命の杖", "viewName": "活命の杖%r", "selectorName": "%r (CT%i)", "desc": "", "mp": null, "charge": null, "val": [0, 0, 0]},
+				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "両手杖装備時の\nこうげき力が\n%z増える", "val": [15, 20, 30]},
+				{"id":  3, "name": "こうげき魔力", "viewName": "装備時こうげき魔力+%i", "selectorName": "+%i", "desc": "両手杖装備時の\nこうげき魔力が\n%z増える", "val": [20, 30, 40]},
+				{"id":  4, "name": "呪文ぼうそう率", "viewName": "呪文ぼうそう率+%f%", "selectorName": "+%f%", "desc": "", "val": [1, 1.2, 1.5]},
+				{"id":  5, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "selectorName": "+%i", "desc": "両手杖装備時の\nさいだいＭＰが\n%z増える", "val": [20, 30, 45]},
+				{"id":  6, "name": "メラ系呪文", "viewName": "メラ系呪文+%i%", "selectorName": "+%i%", "desc": "", "val": [1, 2, 3]},
+				{"id":  7, "name": "ヒャド系呪文", "viewName": "ヒャド系呪文+%i%", "selectorName": "+%i%", "desc": "", "val": [1, 2, 3]},
+				{"id":  8, "name": "イオ系呪文", "viewName": "イオ系呪文+%i%", "selectorName": "+%i%", "desc": "", "val": [1, 2, 3]},
+				{"id":  9, "name": "ドルマ系呪文", "viewName": "ドルマ系呪文+%i%", "selectorName": "+%i%", "desc": "", "val": [1, 2, 3]},
+				{"id": 10, "name": "マダンテ", "viewName": "マダンテ+%i%", "selectorName": "+%i%", "desc": "", "val": [1, 2, 3]},
+				{"id": 11, "name": "ホイミの回復量", "viewName": "ホイミの回復量+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]},
+				{"id": 12, "name": "ベホイミの回復量", "viewName": "ベホイミの回復量+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]}
 			]
 		},
 
@@ -251,7 +337,13 @@
 				{"pt": 120, "name": "カオスエッジ", "desc": "敵１体を斬りつけ\n混乱やマヒを\n起こさせる", "mp": 1, "charge": 60},
 				{"pt": 130, "name": "装備時こうげき力+5", "desc": "短剣装備時の\nこうげき力が\n５増える", "mp": null},
 				{"pt": 140, "name": "ナイトメアファング", "desc": "敵１体を斬りつけ\n猛毒や眠りを\n起こさせる", "mp": 1, "charge": 60},
-				{"pt": 150, "name": "状態異常成功率アップ", "desc": "短剣装備時の\n状態異常成功率が\nあがる", "mp": null}
+				{"pt": 150, "name": "状態異常成功率アップ", "desc": "短剣装備時の\n状態異常成功率が\nあがる", "mp": null},
+				{"pt": 160, "name": "（なし）"},
+				{"pt": 170, "name": "（なし）"},
+				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "オネロスハント", "viewName": "オネロスハント%r", "selectorName": "%r (CT%i)", "desc": "", "mp": null, "charge": null, "val": [0, 0, 0]}
 			]
 		},
 
@@ -274,7 +366,13 @@
 				{"pt": 120, "name": "疾風迅雷", "desc": "雷をまとった\nムチの一閃が\n敵集団をなぎ払う", "mp": 4, "charge": 45},
 				{"pt": 130, "name": "装備時かいしん率+4%", "desc": "ムチでの攻撃時\n会心のいちげきが\n出やすくなる", "mp": null},
 				{"pt": 140, "name": "極竜打ち", "desc": "敵１体に３連撃の\nダメージを与え\nよい効果も消す", "mp": 8, "charge": 50},
-				{"pt": 150, "name": "装備時こうげき力+10", "desc": "ムチ装備時の\nこうげき力が\n１０増える", "mp": null}
+				{"pt": 150, "name": "装備時こうげき力+10", "desc": "ムチ装備時の\nこうげき力が\n１０増える", "mp": null},
+				{"pt": 160, "name": "（なし）"},
+				{"pt": 170, "name": "（なし）"},
+				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "バイキルショット", "viewName": "バイキルショット%r", "selectorName": "%r (CT%i)", "desc": "", "mp": null, "charge": null, "val": [0, 0, 0]}
 			]
 		},
 
@@ -321,7 +419,14 @@
 				{"pt": 120, "name": "サイクロンアッパー", "desc": "旋風を巻き起こし\n敵１体を打ち抜く\n必殺のアッパー", "mp": 5, "charge": 45},
 				{"pt": 130, "name": "装備時かいしん率+2%", "desc": "ツメでの攻撃時\n会心のいちげきが\nより出やすくなる", "mp": null},
 				{"pt": 140, "name": "ライガークラッシュ", "desc": "獣神のごとく\n敵１体を\n５連続で斬り刻む", "mp": 8, "charge": 65},
-				{"pt": 150, "name": "装備時こうげき力+5", "desc": "ツメ装備時の\nこうげき力が\n５増える", "mp": null}
+				{"pt": 150, "name": "装備時こうげき力+5", "desc": "ツメ装備時の\nこうげき力が\n５増える", "mp": null},
+				{"pt": 160, "name": "（なし）"},
+				{"pt": 170, "name": "（なし）"},
+				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "牙神昇誕", "viewName": "牙神昇誕%r", "selectorName": "%r (CT%i)", "desc": "", "mp": null, "charge": null, "val": [0, 0, 0]},
+				{"id":  2, "name": "タイガークローの強化", "viewName": "タイガークロー+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 3, 5]}
 			]
 		},
 
@@ -344,7 +449,13 @@
 				{"pt": 120, "name": "ピンクタイフーン", "desc": "魅惑の旋風で\n周囲の敵を\n切りきざむ", "mp": 3, "charge": 60},
 				{"pt": 130, "name": "装備時こうげき力+10", "desc": "扇装備時の\nこうげき力が\n１０増える", "mp": null},
 				{"pt": 140, "name": "百花繚乱", "desc": "周囲の敵を攻撃し\n幻惑や攻撃呪文に\n弱くする", "mp": 6, "charge": 60},
-				{"pt": 150, "name": "装備時こうげき力+10", "desc": "扇装備時の\nこうげき力が\n１０増える", "mp": null}
+				{"pt": 150, "name": "装備時こうげき力+10", "desc": "扇装備時の\nこうげき力が\n１０増える", "mp": null},
+				{"pt": 160, "name": "（なし）"},
+				{"pt": 170, "name": "（なし）"},
+				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "風斬りの舞", "viewName": "風斬りの舞%r", "selectorName": "%r (CT%i)", "desc": "", "mp": null, "charge": null, "val": [0, 0, 0]}
 			]
 		},
 
@@ -367,7 +478,13 @@
 				{"pt": 120, "name": "達人の呼吸", "desc": "呼吸をととのえ\n少しずつ\nＨＰを回復", "mp": 4, "charge": 90},
 				{"pt": 130, "name": "岩石おとし", "desc": "敵の頭上めがけて\n巨大な岩石を\n投げ落とす", "mp": 5, "charge": 45},
 				{"pt": 140, "name": "せいけん爆撃", "desc": "チカラをタメて\n敵１体に\n強烈な一撃", "mp": 3, "charge": 45},
-				{"pt": 150, "name": "素手時こうげき力+50", "desc": "格闘の時の\nこうげき力が\n５０増える", "mp": null}
+				{"pt": 150, "name": "素手時こうげき力+50", "desc": "格闘の時の\nこうげき力が\n５０増える", "mp": null},
+				{"pt": 160, "name": "（なし）"},
+				{"pt": 170, "name": "（なし）"},
+				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "しんくうは", "viewName": "しんくうは%r", "selectorName": "%r (CT%i)", "desc": "", "mp": null, "charge": null, "val": [0, 0, 0]}
 			]
 		},
 
@@ -462,7 +579,13 @@
 				{"pt": 120, "name": "スタンショット", "desc": "なぐった相手を\nひるませる\n強烈な一撃", "mp": 5, "charge": 120},
 				{"pt": 130, "name": "装備時かいしん率+2%", "desc": "ハンマーで攻撃時\n会心のいちげきが\nより出やすくなる", "mp": null},
 				{"pt": 140, "name": "プレートインパクト", "desc": "自分の周りの敵に\nダメージを与え\n守備と重さダウン", "mp": 8, "charge": 75},
-				{"pt": 150, "name": "装備時さいだいＨＰ+10", "desc": "ハンマー装備時の\nさいだいＨＰが\n１０増える", "mp": null}
+				{"pt": 150, "name": "装備時さいだいＨＰ+10", "desc": "ハンマー装備時の\nさいだいＨＰが\n１０増える", "mp": null},
+				{"pt": 160, "name": "（なし）"},
+				{"pt": 170, "name": "（なし）"},
+				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "デビルクラッシュ", "viewName": "デビルクラッシュ%r", "selectorName": "%r (CT%i)", "desc": "", "mp": null, "charge": null, "val": [0, 0, 0]}
 			]
 		},
 
@@ -509,7 +632,13 @@
 				{"pt": 120, "name": "シャイニングボウ", "desc": "敵を選ばず\nするどい光の矢が\nふりそそぐ", "mp": 4, "charge": 60},
 				{"pt": 130, "name": "装備時かいしん率+3%", "desc": "弓での攻撃時\n会心のいちげきが\n出やすくなる", "mp": null},
 				{"pt": 140, "name": "弓聖の守り星", "desc": "範囲内の仲間を\n悪い効果から\n１度だけ守る", "mp": 8, "charge": 30},
-				{"pt": 150, "name": "ダークネスショット", "desc": "闇のチカラで\n敵１体を攻撃し\n光耐性を下げる", "mp": 3, "charge": 60}
+				{"pt": 150, "name": "ダークネスショット", "desc": "闇のチカラで\n敵１体を攻撃し\n光耐性を下げる", "mp": 3, "charge": 60},
+				{"pt": 160, "name": "（なし）"},
+				{"pt": 170, "name": "（なし）"},
+				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "ロストスナイプ", "viewName": "ロストスナイプ%r", "selectorName": "%r (CT%i)", "desc": "", "mp": null, "charge": null, "val": [0, 0, 0]}
 			]
 		},
 
@@ -532,7 +661,13 @@
 				{"pt": 120, "name": "フローズンバード", "desc": "氷の刃となった\nブーメランが\n敵をメッタ切り", "mp": 6, "charge": 60},
 				{"pt": 130, "name": "装備時かいしん率+2%", "desc": "ブーメラン攻撃時\n会心のいちげきが\n出やすくなる", "mp": null},
 				{"pt": 140, "name": "デュアルブレイカー", "desc": "状態異常の耐性を\n下げる２回連続の\nブーメラン攻撃", "mp": 8, "charge": 75},
-				{"pt": 150, "name": "装備時こうげき力+10", "desc": "ブーメラン装備時\nこうげき力が\n１０増える", "mp": null}
+				{"pt": 150, "name": "装備時こうげき力+10", "desc": "ブーメラン装備時\nこうげき力が\n１０増える", "mp": null},
+				{"pt": 160, "name": "（なし）"},
+				{"pt": 170, "name": "（なし）"},
+				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+				{"id":  1, "name": "レボルスライサー", "viewName": "レボルスライサー%r", "selectorName": "%r (CT%i)", "desc": "", "mp": null, "charge": null, "val": [0, 0, 0]}
 			]
 		},
 
@@ -559,7 +694,7 @@
 				{"pt": 150, "name": "フェンリルアタック（専）", "desc": "白いオオカミが\n４回攻撃する\nレンジャー専用", "mp": 6, "charge": 60}
 			]
 		},
-		
+
 		"fource": {
 			"id": 25,
 			"unique": true,
@@ -583,7 +718,7 @@
 				{"pt": 150, "name": "マダンテ（専）", "desc": "ＭＰをすべて使い\n敵を打ち滅ぼす\n最強の呪文", "mp": "残りＭＰ全部", "charge": 120}
 			]
 		},
-		
+
 		"jenesaisquoi": {
 			"id": 26,
 			"unique": true,
@@ -607,7 +742,7 @@
 				{"pt": 150, "name": "ミリオンスマイル（専）", "desc": "経験値とゴールド\n特訓スタンプ増加\nスパスタ専用特技", "mp": 12, "charge": 30}
 			]
 		},
-		
+
 		"guts": {
 			"id": 27,
 			"unique": true,
@@ -631,7 +766,7 @@
 				{"pt": 150, "name": "ミラクルブースト（専）", "desc": "攻撃時ＨＰ回復の\n効果をえる\nバトマス専用特技", "mp": 4, "charge": 90}
 			]
 		},
-		
+
 		"enlightenment": {
 			"id": 28,
 			"unique": true,
@@ -655,7 +790,7 @@
 				{"pt": 150, "name": "ドルマドン（専）", "desc": "神もおそれる\n闇のチカラが\n敵１体をおそう", "mp": 18, "charge": 60}
 			]
 		},
-		
+
 		"monstermaster": {
 			"id": 29,
 			"unique": true,
@@ -679,7 +814,7 @@
 				{"pt": 150, "name": "ウォークライ（専）", "desc": "与えるダメージを\nアップする\nまもの使い専用", "mp": 4, "charge": 120}
 			]
 		},
- 
+
  		"itemmaster": {
  			"id": 30,
 			"unique": true,
@@ -697,13 +832,13 @@
  				{"pt":  90, "name": "全職業でさいだいＨＰ+10", "desc": "全職業で\nさいだいＨＰが\n１０増える", "mp": null, "maxhp": 10},
  				{"pt": 100, "name": "どうぐ範囲化術（専）", "desc": "消費アイテムの\n効果範囲を広げる\nどうぐ使い専用", "mp": 8},
 				{"pt": 110, "name": "なつきやすくなる（専）", "desc": "どうぐ使い時\n仲間モンスターが\nなつきやすくなる", "mp": null},
-				{"pt": 120, "name": "メタル遭遇率アップ\n(専）", "desc": "どうぐ使い時\nメタル系に\nあいやすくなる", "mp": null},
+				{"pt": 120, "name": "メタル遭遇率アップ（専）", "desc": "どうぐ使い時\nメタル系に\nあいやすくなる", "mp": null},
 				{"pt": 130, "name": "メディカルデバイス（専）", "desc": "HP回復する\n魔法陣を作る\nどうぐ使い専用", "mp": 2, "charge": 60},
 				{"pt": 140, "name": "どうぐ発動速度短縮（専）", "desc": "どうぐ使い時\nどうぐ発動速度が\n短くなる", "mp": null},
 				{"pt": 150, "name": "プラズマリムーバー（専）", "desc": "悪い効果を\nすべて解除する\nどうぐ使い専用", "mp": 3, "charge": 15}
 			]
 		},
- 
+
  		"song": {
  			"id": 31,
 			"unique": true,
@@ -727,7 +862,7 @@
 				{"pt": 150, "name": "回復のララバイ（専）", "desc": "周囲の味方に\n攻撃時ＨＰ回復\n踊り子専用", "mp": 4, "charge": 90}
 			]
 		},
- 
+
  		"dance": {
  			"id": 32,
 			"unique": true,
@@ -751,7 +886,7 @@
 				{"pt": 150, "name": "戦鬼の乱れ舞（専）", "desc": "自分の攻撃力を\n増加させる\n踊り子専用", "mp": 4, "charge": 45}
 			]
 		},
- 
+
  		"unknown": {
  			"id": 999,
 			"unique": true,
@@ -781,7 +916,7 @@
 		"sword", "twohandedsword", "knife", "stick", "wand", "spear", "axe",
 		"hammer", "staff", "claw", "fan", "whip", "boomerang", "bow"
 	],
-	
+
 	"vocations": {
 		"warrior": {
 			"name": "戦士",
@@ -879,13 +1014,13 @@
 	"_vocations_coming": {
 		"_description": "今後予想される追加職業。判明し次第上に移動"
 	},
-	
+
 	"vocationOrder": [
 		"warrior", "priest", "mage", "martialartist", "thief", "minstrel",
 		"gladiator", "paladin", "armamentalist", "ranger", "sage", "luminary",
 		"monstermaster", "itemmaster", "dancer"
 	],
-	
+
 	"skillPtsGiven": [null,
 		  0,   0,   0,   0,   0,   0,   0,   0,   0,   3,
 		  6,   6,   9,  13,  13,  17,  21,  21,  25,  29,
@@ -898,7 +1033,7 @@
 		171, 173, 175, 177, 179, 180, 182, 183, 184, 186,
 		187, 188, 190
 	],
-	
+
 	"expRequired": {
 		"1": [null,
 			      0,       7,      22,      48,      88,     147,     234,     362,     546,     810,
@@ -925,7 +1060,7 @@
 			9172448, 9921794, 10881140
 		]
 	},
-	
+
 	"trainingPts": [
 		{ "stamps":    0, "pt":  0 },
 		{ "stamps":  100, "pt":  1 },
@@ -950,7 +1085,8 @@
 	"consts": {
 		"skillPts": {
 			"min": 0,
-			"valid": 150,
+			"valid": 180,
+			"validUnique": 150,
 			"max": 255
 		},
 		"level": {
@@ -965,6 +1101,10 @@
 		"msp": {
 			"min": 0,
 			"max": 22
+		},
+		"customSkill": {
+			"pts": [160, 170, 180],
+			"count": 3
 		}
 	}
 }

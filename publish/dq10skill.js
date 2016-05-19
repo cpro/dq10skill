@@ -1,3 +1,8 @@
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var Dq10;
 (function (Dq10) {
     var SkillSimulator;
@@ -35,16 +40,11 @@ var Dq10;
                 }
             };
             return EventDispatcher;
-        })();
+        }());
         SkillSimulator.EventDispatcher = EventDispatcher;
     })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
 })(Dq10 || (Dq10 = {}));
 /// <reference path="eventdispatcher.ts" />
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 var Dq10;
 (function (Dq10) {
     var SkillSimulator;
@@ -116,7 +116,7 @@ var Dq10;
                 return (this.cursor < this.commandStack.length);
             };
             return CommandManager;
-        })(SkillSimulator.EventDispatcher);
+        }(SkillSimulator.EventDispatcher));
         SkillSimulator.CommandManager = CommandManager;
     })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
 })(Dq10 || (Dq10 = {}));
@@ -150,7 +150,7 @@ var Dq10;
                 this.newValue = newCommand.newValue;
             };
             return SingleValueCommand;
-        })();
+        }());
         var UpdateSkillPt = (function (_super) {
             __extends(UpdateSkillPt, _super);
             function UpdateSkillPt(vocationId, skillLineId, newValue) {
@@ -175,7 +175,7 @@ var Dq10;
                 };
             };
             return UpdateSkillPt;
-        })(SingleValueCommand);
+        }(SingleValueCommand));
         var UpdateLevel = (function (_super) {
             __extends(UpdateLevel, _super);
             function UpdateLevel(vocationId, newValue) {
@@ -199,7 +199,7 @@ var Dq10;
                 };
             };
             return UpdateLevel;
-        })(SingleValueCommand);
+        }(SingleValueCommand));
         var UpdateTrainingSkillPt = (function (_super) {
             __extends(UpdateTrainingSkillPt, _super);
             function UpdateTrainingSkillPt(vocationId, newValue) {
@@ -223,7 +223,7 @@ var Dq10;
                 };
             };
             return UpdateTrainingSkillPt;
-        })(SingleValueCommand);
+        }(SingleValueCommand));
         var UpdateMSP = (function (_super) {
             __extends(UpdateMSP, _super);
             function UpdateMSP(skillLineId, newValue) {
@@ -247,7 +247,39 @@ var Dq10;
                 };
             };
             return UpdateMSP;
-        })(SingleValueCommand);
+        }(SingleValueCommand));
+        var UpdateCustomSkill = (function (_super) {
+            __extends(UpdateCustomSkill, _super);
+            function UpdateCustomSkill(skillLineId, newValue, rank) {
+                _super.call(this, newValue);
+                this.prevArray = [];
+                this.newArray = [];
+                this.name = 'UpdateCustomSkill';
+                this.skillLineId = skillLineId;
+                this.rank = rank;
+                this.prevArray = SkillSimulator.Simulator.getCustomSkills(this.skillLineId).slice();
+                this.newArray = this.prevArray.slice();
+                this.newArray[rank] = newValue;
+            }
+            UpdateCustomSkill.prototype.execute = function () {
+                var ret = SkillSimulator.Simulator.setCustomSkills(this.skillLineId, this.newArray, this.rank);
+                this.newArray = SkillSimulator.Simulator.getCustomSkills(this.skillLineId).slice();
+                return ret;
+            };
+            UpdateCustomSkill.prototype.undo = function () {
+                SkillSimulator.Simulator.setCustomSkills(this.skillLineId, this.prevArray, 0);
+            };
+            UpdateCustomSkill.prototype.absorb = function (newCommand) {
+                this.newArray = newCommand.newArray.slice();
+            };
+            UpdateCustomSkill.prototype.event = function () {
+                return {
+                    name: 'CustomSkillChanged',
+                    args: [this.skillLineId]
+                };
+            };
+            return UpdateCustomSkill;
+        }(SingleValueCommand));
         var PackageCommand = (function () {
             function PackageCommand() {
                 this.name = '';
@@ -281,7 +313,7 @@ var Dq10;
                 };
             };
             return PackageCommand;
-        })();
+        }());
         var SetAllLevel = (function (_super) {
             __extends(SetAllLevel, _super);
             function SetAllLevel(newValue) {
@@ -295,7 +327,7 @@ var Dq10;
                 });
             };
             return SetAllLevel;
-        })(PackageCommand);
+        }(PackageCommand));
         var SetAllTrainingSkillPt = (function (_super) {
             __extends(SetAllTrainingSkillPt, _super);
             function SetAllTrainingSkillPt(newValue) {
@@ -309,7 +341,7 @@ var Dq10;
                 });
             };
             return SetAllTrainingSkillPt;
-        })(PackageCommand);
+        }(PackageCommand));
         var ClearPtsOfSameSkills = (function (_super) {
             __extends(ClearPtsOfSameSkills, _super);
             function ClearPtsOfSameSkills(skillLineId) {
@@ -321,7 +353,7 @@ var Dq10;
                 return true;
             };
             return ClearPtsOfSameSkills;
-        })(PackageCommand);
+        }(PackageCommand));
         var ClearMSP = (function (_super) {
             __extends(ClearMSP, _super);
             function ClearMSP() {
@@ -332,7 +364,7 @@ var Dq10;
                 return true;
             };
             return ClearMSP;
-        })(PackageCommand);
+        }(PackageCommand));
         var ClearAllSkills = (function (_super) {
             __extends(ClearAllSkills, _super);
             function ClearAllSkills() {
@@ -343,7 +375,7 @@ var Dq10;
                 return true;
             };
             return ClearAllSkills;
-        })(PackageCommand);
+        }(PackageCommand));
         var PresetStatus = (function (_super) {
             __extends(PresetStatus, _super);
             function PresetStatus(status) {
@@ -355,7 +387,7 @@ var Dq10;
                 return sarray.reduce(function (succeeded, s) { return SkillSimulator.Simulator.presetStatus(s) || succeeded; }, false);
             };
             return PresetStatus;
-        })(PackageCommand);
+        }(PackageCommand));
         var BringUpLevelToRequired = (function (_super) {
             __extends(BringUpLevelToRequired, _super);
             function BringUpLevelToRequired() {
@@ -366,7 +398,7 @@ var Dq10;
                 return true;
             };
             return BringUpLevelToRequired;
-        })(PackageCommand);
+        }(PackageCommand));
         var SimulatorCommandManager = (function (_super) {
             __extends(SimulatorCommandManager, _super);
             function SimulatorCommandManager() {
@@ -390,6 +422,9 @@ var Dq10;
             SimulatorCommandManager.prototype.updateMSP = function (skillLineId, newValue) {
                 return this.invoke(new UpdateMSP(skillLineId, newValue));
             };
+            SimulatorCommandManager.prototype.updateCustomSkill = function (skillLineId, newValue, rank) {
+                return this.invoke(new UpdateCustomSkill(skillLineId, newValue, rank));
+            };
             SimulatorCommandManager.prototype.clearPtsOfSameSkills = function (skillLineId) {
                 return this.invoke(new ClearPtsOfSameSkills(skillLineId));
             };
@@ -406,7 +441,7 @@ var Dq10;
                 return this.invoke(new BringUpLevelToRequired());
             };
             return SimulatorCommandManager;
-        })(SkillSimulator.CommandManager);
+        }(SkillSimulator.CommandManager));
         SkillSimulator.SimulatorCommandManager = SimulatorCommandManager;
     })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
 })(Dq10 || (Dq10 = {}));
@@ -441,7 +476,7 @@ var Base64 = (function () {
         return (/^[A-Za-z0-9-_]+$/).test(a);
     };
     return Base64;
-})();
+}());
 /// <reference path="typings/jquery/jquery.d.ts" />
 /// <reference path="typings/jqueryui/jqueryui.d.ts" />
 /// <reference path="typings/dq10skill.d.ts" />
@@ -463,23 +498,6 @@ var Dq10;
                 /** 全スキルポイント情報を保持する配列 */
                 this.wholePts = [];
                 this.skillPtDic = {};
-                this.VOCATIONS_DATA_ORDER = [
-                    'warrior',
-                    'priest',
-                    'mage',
-                    'martialartist',
-                    'thief',
-                    'minstrel',
-                    'ranger',
-                    'paladin',
-                    'armamentalist',
-                    'luminary',
-                    'gladiator',
-                    'sage',
-                    'monstermaster',
-                    'itemmaster',
-                    'dancer' //踊り子
-                ];
             }
             /* メソッド */
             //パラメータ初期化
@@ -511,7 +529,8 @@ var Dq10;
                     var skillLine = {
                         id: skillLineId,
                         skillPts: _this.wholePts.filter(function (skillPt) { return skillPt.skillLineId == skillLineId; }),
-                        msp: _this.DB.consts.msp.min
+                        msp: _this.DB.consts.msp.min,
+                        custom: [0, 0, 0]
                     };
                     _this.skillLineDic[skillLineId] = skillLine;
                     return skillLine;
@@ -720,93 +739,272 @@ var Dq10;
                 });
                 return true;
             };
+            SimulatorModel.prototype.getCustomSkills = function (skillLineId) {
+                return this.skillLineDic[skillLineId].custom;
+            };
+            SimulatorModel.prototype.setCustomSkills = function (skillLineId, customIds, rank) {
+                if (customIds.length != this.skillLineDic[skillLineId].custom.length)
+                    return false;
+                for (var r = 0; r < this.DB.consts.customSkill.count; r++) {
+                    //設定しようとしているランク以外に同じカスタムスキルが設定されていたらそれを解除する
+                    if (r != rank && customIds[r] == customIds[rank])
+                        this.skillLineDic[skillLineId].custom[r] = 0;
+                    else
+                        this.skillLineDic[skillLineId].custom[r] = customIds[r];
+                }
+                return true;
+            };
             SimulatorModel.prototype.serialize = function () {
-                var _this = this;
-                var serial = '';
-                var toByte = String.fromCharCode;
-                //先頭に職業の数を含める
-                serial += toByte(this.VOCATIONS_DATA_ORDER.length);
-                this.VOCATIONS_DATA_ORDER.forEach(function (vocationId) {
-                    serial += toByte(_this.getLevel(vocationId));
-                    serial += toByte(_this.getTrainingSkillPt(vocationId));
-                    _this.DB.vocations[vocationId].skillLines.forEach(function (skillLineId) {
-                        serial += toByte(_this.getSkillPt(vocationId, skillLineId));
-                    });
-                });
-                //末尾にMSPのスキルラインIDとポイントをペアで格納
-                this.skillLines.forEach(function (skillLine) {
-                    if (skillLine.msp > 0) {
-                        serial += toByte(_this.DB.skillLines[skillLine.id].id) + toByte(skillLine.msp);
-                    }
-                });
+                var serial = new SimulatorSaveData.Serializer().exec(this);
                 return serial;
             };
             SimulatorModel.prototype.deserialize = function (serial) {
-                var _this = this;
-                var cur = 0;
-                var getData = function () { return serial.charCodeAt(cur++); };
-                //先頭に格納されている職業の数を取得
-                var vocationCount = getData();
-                for (var i = 0; i < vocationCount; i++) {
-                    var vocationId = this.VOCATIONS_DATA_ORDER[i];
-                    var vSkillLines = this.DB.vocations[vocationId].skillLines;
-                    if (serial.length - cur < 1 + 1 + vSkillLines.length)
-                        break;
-                    this.updateLevel(vocationId, getData());
-                    this.updateTrainingSkillPt(vocationId, getData());
-                    for (var s = 0; s < vSkillLines.length; s++) {
-                        this.updateSkillPt(vocationId, vSkillLines[s], getData());
-                    }
-                }
-                //末尾にデータがあればMSPとして取得
-                var skillLineIds = [];
-                Object.keys(this.DB.skillLines).forEach(function (skillLineId) {
-                    skillLineIds[_this.DB.skillLines[skillLineId].id] = skillLineId;
-                });
-                while (serial.length - cur >= 2) {
-                    var skillLineId = skillLineIds[getData()];
-                    var skillPt = getData();
-                    if (skillLineId !== undefined)
-                        this.updateMSP(skillLineId, skillPt);
-                }
+                new SimulatorSaveData.Deserializer(serial).exec(this);
             };
             SimulatorModel.prototype.deserializeBit = function (serial) {
-                var _this = this;
-                var BITS_LEVEL = 8; //レベルは8ビット確保
-                var BITS_SKILL = 7; //スキルは7ビット
-                var BITS_TRAINING = 7; //特訓スキルポイント7ビット
-                var bitArray = [];
-                for (var i = 0; i < serial.length; i++)
-                    bitArray = bitArray.concat(numToBitArray(serial.charCodeAt(i), 8));
-                //特訓ポイントを含むかどうか: ビット列の長さで判断
-                var isIncludingTrainingPts = bitArray.length >= (BITS_LEVEL +
-                    BITS_TRAINING +
-                    BITS_SKILL * this.DB.vocations[this.VOCATIONS_DATA_ORDER[0]].skillLines.length) * 10; //1.2VU（特訓モード実装）時点の職業数
-                var cur = 0;
-                this.VOCATIONS_DATA_ORDER.forEach(function (vocationId) {
-                    _this.updateLevel(vocationId, bitArrayToNum(bitArray.slice(cur, cur += BITS_LEVEL)));
-                    if (isIncludingTrainingPts)
-                        _this.updateTrainingSkillPt(vocationId, bitArrayToNum(bitArray.slice(cur, cur += BITS_TRAINING)));
-                    else
-                        _this.updateTrainingSkillPt(vocationId, 0);
-                    _this.DB.vocations[vocationId].skillLines.forEach(function (skillLineId) {
-                        _this.updateSkillPt(vocationId, skillLineId, bitArrayToNum(bitArray.slice(cur, cur += BITS_SKILL)));
-                    });
-                });
-                function bitArrayToNum(bitArray) {
-                    return bitArray.reduce(function (prev, bit) { return prev << 1 | bit; }, 0);
-                }
-                function numToBitArray(num, digits) {
-                    var bitArray = [];
-                    for (var i = digits - 1; i >= 0; i--) {
-                        bitArray.push(num >> i & 1);
-                    }
-                    return bitArray;
-                }
+                new SimulatorSaveData.Deserializer(serial, true).exec(this);
             };
             return SimulatorModel;
-        })();
+        }());
         SkillSimulator.SimulatorModel = SimulatorModel;
+        var SimulatorSaveData;
+        (function (SimulatorSaveData) {
+            var VOCATIONS_DATA_ORDER = [
+                'warrior',
+                'priest',
+                'mage',
+                'martialartist',
+                'thief',
+                'minstrel',
+                'ranger',
+                'paladin',
+                'armamentalist',
+                'luminary',
+                'gladiator',
+                'sage',
+                'monstermaster',
+                'itemmaster',
+                'dancer' //踊り子
+            ];
+            var BITS_LEVEL = 8; //レベルは8ビット確保
+            var BITS_SKILL = 7; //スキルは7ビット
+            var BITS_TRAINING = 7; //特訓スキルポイント7ビット
+            /** 最初期の独自ビット圧縮していたバージョン */
+            var VERSION_FIRST = 1;
+            /** バージョン番号管理開始以前のバージョン */
+            var VERSION_UNMANAGED = 2;
+            /** 現在のSerializerのバージョン */
+            var VERSION_CURRENT_SERIALIZER = 3;
+            var Serializer = (function () {
+                function Serializer() {
+                }
+                Serializer.prototype.exec = function (sim) {
+                    var DB = SkillSimulator.SimulatorDB;
+                    var serial = '';
+                    var toByte = String.fromCharCode;
+                    // バージョン番号
+                    serial += toByte(this.createVersionByteData());
+                    //先頭に職業の数を含める
+                    serial += toByte(VOCATIONS_DATA_ORDER.length);
+                    VOCATIONS_DATA_ORDER.forEach(function (vocationId) {
+                        serial += toByte(sim.getLevel(vocationId));
+                        serial += toByte(sim.getTrainingSkillPt(vocationId));
+                        DB.vocations[vocationId].skillLines.forEach(function (skillLineId) {
+                            serial += toByte(sim.getSkillPt(vocationId, skillLineId));
+                        });
+                    });
+                    // カスタムスキルデータ長を格納
+                    serial += toByte(DB.consts.customSkill.count);
+                    //末尾にスキルライン別データ（MSP、カスタムスキル）をIDとペアで格納
+                    Object.keys(DB.skillLines).forEach(function (skillLineId) {
+                        var msp = sim.getMSP(skillLineId);
+                        var customSkills = sim.getCustomSkills(skillLineId);
+                        // MSP・カスタムスキルいずれかに0でない値が入っている場合のみ格納
+                        if (msp > 0 || customSkills.some(function (val) { return val > 0; })) {
+                            serial += toByte(DB.skillLines[skillLineId].id);
+                            serial += toByte(msp);
+                            serial += customSkills.map(function (val) { return toByte(val); }).join('');
+                        }
+                    });
+                    return serial;
+                };
+                /** 現在のバージョン番号の最上位ビットにバージョン管理フラグとして1を立てる */
+                Serializer.prototype.createVersionByteData = function () {
+                    return (VERSION_CURRENT_SERIALIZER | 0x80);
+                };
+                return Serializer;
+            }());
+            SimulatorSaveData.Serializer = Serializer;
+            var Deserializer = (function () {
+                function Deserializer(serial, isFirstVersion) {
+                    if (isFirstVersion === void 0) { isFirstVersion = false; }
+                    this.serial = serial;
+                    this.isFirstVersion = isFirstVersion;
+                }
+                Deserializer.prototype.exec = function (sim) {
+                    var _this = this;
+                    var cur = 0;
+                    var getData = function () { return _this.serial.charCodeAt(cur++); };
+                    var version = this.judgeVersion();
+                    switch (version) {
+                        case VERSION_FIRST:
+                            this.execAsFirstVersion(sim);
+                            return;
+                        case VERSION_UNMANAGED:
+                            break;
+                        default:
+                            cur++;
+                            break;
+                    }
+                    var DB = SkillSimulator.SimulatorDB;
+                    //先頭に格納されている職業の数を取得
+                    var vocationCount = getData();
+                    for (var i = 0; i < vocationCount; i++) {
+                        var vocationId = VOCATIONS_DATA_ORDER[i];
+                        var vSkillLines = DB.vocations[vocationId].skillLines;
+                        if (this.serial.length - cur < 1 + 1 + vSkillLines.length)
+                            break;
+                        sim.updateLevel(vocationId, getData());
+                        sim.updateTrainingSkillPt(vocationId, getData());
+                        for (var s = 0; s < vSkillLines.length; s++) {
+                            sim.updateSkillPt(vocationId, vSkillLines[s], getData());
+                        }
+                    }
+                    // スキルラインのid番号からID文字列を得るための配列作成
+                    var skillLineIds = [];
+                    Object.keys(DB.skillLines).forEach(function (skillLineId) {
+                        skillLineIds[DB.skillLines[skillLineId].id] = skillLineId;
+                    });
+                    var skillLineCount;
+                    var customSkillLength;
+                    var skillLineDataLength;
+                    if (version === VERSION_UNMANAGED)
+                        customSkillLength = 0;
+                    else
+                        customSkillLength = getData();
+                    skillLineDataLength = customSkillLength + 2; //スキルライン番号1byte+MSP1byte+カスタムスキルデータ長
+                    // スキルライン別データ取得（MSP、カスタムスキル）
+                    while (this.serial.length - cur >= skillLineDataLength) {
+                        var skillLineId = skillLineIds[getData()];
+                        var skillPt = getData();
+                        if (skillLineId !== undefined)
+                            sim.updateMSP(skillLineId, skillPt);
+                        var customIds = [];
+                        for (var i = 0; i < customSkillLength; i++) {
+                            customIds.push(getData());
+                        }
+                        sim.setCustomSkills(skillLineId, customIds, 0);
+                    }
+                };
+                Deserializer.prototype.judgeVersion = function () {
+                    // コンストラクタで初期バージョンのスイッチが与えられている場合
+                    if (this.isFirstVersion)
+                        return VERSION_FIRST;
+                    // 最上位ビットに1が立っていなければバージョン管理前と判定する
+                    // （管理前は先頭バイトに職業の数（15以下）を格納していたので、必ず0となる）
+                    var firstByte = this.serial.charCodeAt(0);
+                    if ((firstByte & 0x80) === 0)
+                        return VERSION_UNMANAGED;
+                    // 先頭ビットを除去したものをバージョン番号とする
+                    return (firstByte & 0x7f);
+                };
+                Deserializer.prototype.execAsFirstVersion = function (sim) {
+                    var DB = SkillSimulator.SimulatorDB;
+                    var bitArray = [];
+                    for (var i = 0; i < this.serial.length; i++)
+                        bitArray = bitArray.concat(numToBitArray(this.serial.charCodeAt(i), 8));
+                    //特訓ポイントを含むかどうか: ビット列の長さで判断
+                    var isIncludingTrainingPts = bitArray.length >= (BITS_LEVEL +
+                        BITS_TRAINING +
+                        BITS_SKILL * DB.vocations[VOCATIONS_DATA_ORDER[0]].skillLines.length) * 10; //1.2VU（特訓モード実装）時点の職業数
+                    var cur = 0;
+                    VOCATIONS_DATA_ORDER.forEach(function (vocationId) {
+                        sim.updateLevel(vocationId, bitArrayToNum(bitArray.slice(cur, cur += BITS_LEVEL)));
+                        if (isIncludingTrainingPts)
+                            sim.updateTrainingSkillPt(vocationId, bitArrayToNum(bitArray.slice(cur, cur += BITS_TRAINING)));
+                        else
+                            sim.updateTrainingSkillPt(vocationId, 0);
+                        DB.vocations[vocationId].skillLines.forEach(function (skillLineId) {
+                            sim.updateSkillPt(vocationId, skillLineId, bitArrayToNum(bitArray.slice(cur, cur += BITS_SKILL)));
+                        });
+                    });
+                    function bitArrayToNum(bitArray) {
+                        return bitArray.reduce(function (prev, bit) { return prev << 1 | bit; }, 0);
+                    }
+                    function numToBitArray(num, digits) {
+                        var bitArray = [];
+                        for (var i = digits - 1; i >= 0; i--) {
+                            bitArray.push(num >> i & 1);
+                        }
+                        return bitArray;
+                    }
+                };
+                return Deserializer;
+            }());
+            SimulatorSaveData.Deserializer = Deserializer;
+        })(SimulatorSaveData || (SimulatorSaveData = {}));
+        var SimulatorCustomSkill = (function () {
+            function SimulatorCustomSkill(skillLineId, customSkillId) {
+                if (skillLineId === undefined ||
+                    skillLineId === null ||
+                    SkillSimulator.SimulatorDB.skillLines[skillLineId].customSkills === undefined) {
+                    this.data = SimulatorCustomSkill.emptySkillData;
+                }
+                else {
+                    this.data = SkillSimulator.SimulatorDB.skillLines[skillLineId].customSkills.filter(function (custom) { return custom.id == customSkillId; })[0];
+                    if (this.data === undefined) {
+                        this.data = SimulatorCustomSkill.emptySkillData;
+                    }
+                }
+            }
+            SimulatorCustomSkill.emptySkill = function () {
+                return new SimulatorCustomSkill();
+            };
+            SimulatorCustomSkill.prototype.getName = function () {
+                return this.data.name;
+            };
+            SimulatorCustomSkill.prototype.getViewName = function (rank) {
+                return this.replaceRankValue(this.data.viewName, rank);
+            };
+            SimulatorCustomSkill.prototype.getSelectorName = function (rank) {
+                return this.replaceRankValue(this.data.selectorName, rank);
+            };
+            SimulatorCustomSkill.prototype.replaceRankValue = function (template, rank) {
+                var ret = template;
+                var rankName = 'ⅠⅡⅢ'.charAt(rank);
+                ret = ret.replace('%r', rankName);
+                var rankValue = this.data.val[rank];
+                ret = ret.replace('%i', rankValue.toFixed(0)) //整数値
+                    .replace('%f', rankValue.toFixed(1)); //小数値
+                return ret;
+            };
+            SimulatorCustomSkill.prototype.getHintText = function (rank) {
+                var FULLWIDTH_ADJUSTER = 0xFEE0;
+                var hint = this.data.desc;
+                var rankValue = this.data.val[rank];
+                var rankValFullWidth = rankValue.toString().replace(/[0-9.]/g, function (m) {
+                    return String.fromCharCode(m.charCodeAt(0) + 0xFEE0);
+                });
+                hint = hint.replace('%z', rankValFullWidth);
+                if ((this.data.mp !== null) && (this.data.mp !== undefined))
+                    hint += "\n\uFF08\u6D88\u8CBBMP: " + this.data.mp + "\uFF09";
+                if ((this.data.charge !== null) && (this.data.charge !== undefined))
+                    hint += "\n\uFF08\u30C1\u30E3\u30FC\u30B8: " + rankValue + "\u79D2\uFF09";
+                return hint;
+            };
+            SimulatorCustomSkill.emptySkillData = {
+                id: 0,
+                name: '（なし）',
+                viewName: '（なし）',
+                selectorName: '',
+                desc: '',
+                mp: null,
+                charge: null,
+                atk: null,
+                val: [0, 0, 0]
+            };
+            return SimulatorCustomSkill;
+        }());
         var SimulatorUI = (function () {
             function SimulatorUI(sim) {
                 var _this = this;
@@ -814,7 +1012,6 @@ var Dq10;
                 this.CLASSNAME_ERROR = 'error';
                 this.mspMode = false; //MSP編集モードフラグ
                 this.setupFunctions = [
-                    //イベント登録
                     //イベント登録
                     function () {
                         _this.com.on('VocationalInfoChanged', function (vocationId) {
@@ -841,8 +1038,10 @@ var Dq10;
                         _this.com.on('WholeChanged', function () {
                             _this.refreshAll();
                         });
+                        _this.com.on('CustomSkillChanged', function (skillLineId) {
+                            _this.refreshCustomSkill(skillLineId);
+                        });
                     },
-                    //レベル選択セレクトボックス項目設定
                     //レベル選択セレクトボックス項目設定
                     function () {
                         _this.$lvConsole = $('#lv_console');
@@ -856,7 +1055,6 @@ var Dq10;
                         });
                     },
                     //レベル欄クリック時にUI表示
-                    //レベル欄クリック時にUI表示
                     function () {
                         $('.ent_title h2').click(function (e) {
                             _this.hideConsoles();
@@ -868,7 +1066,6 @@ var Dq10;
                             e.stopPropagation();
                         });
                     },
-                    //特訓ポイント選択セレクトボックス設定
                     //特訓ポイント選択セレクトボックス設定
                     function () {
                         _this.$trainingPtConsole = $('#training_pt_console');
@@ -883,7 +1080,6 @@ var Dq10;
                         });
                     },
                     //特訓表示欄クリック時にUI表示
-                    //特訓表示欄クリック時にUI表示
                     function () {
                         $('.ent_title .training_pt').click(function (e) {
                             _this.hideConsoles();
@@ -895,7 +1091,6 @@ var Dq10;
                             e.stopPropagation();
                         });
                     },
-                    //スピンボタン設定
                     //スピンボタン設定
                     function () {
                         _this.$ptConsole = $('#pt_console');
@@ -945,7 +1140,6 @@ var Dq10;
                         });
                     },
                     //スピンコントロール共通
-                    //スピンコントロール共通
                     function () {
                         $('input.ui-spinner-input').click(function (e) {
                             //テキストボックスクリック時数値を選択状態に
@@ -958,7 +1152,6 @@ var Dq10;
                             }
                         });
                     },
-                    //スキルライン名クリック時にUI表示
                     //スキルライン名クリック時にUI表示
                     function () {
                         $('.skill_table caption').mouseenter(function (e) {
@@ -980,20 +1173,19 @@ var Dq10;
                         });
                     },
                     //MSP込み最大値設定ボタン
-                    //MSP込み最大値設定ボタン
                     function () {
                         var maxPtWithMsp = _this.DB.consts.skillPts.valid - _this.DB.consts.msp.max;
+                        var maxPtWithMspUnique = _this.DB.consts.skillPts.validUnique - _this.DB.consts.msp.max;
                         $('#max-with-msp').button({
                             icons: { primary: 'ui-icon-circle-arrow-s' },
                             text: true
                         }).click(function (e) {
                             var vocationId = _this.getCurrentVocation(e.currentTarget);
                             var skillLineId = _this.getCurrentSkillLine(e.currentTarget);
-                            _this.com.updateSkillPt(vocationId, skillLineId, maxPtWithMsp);
+                            _this.com.updateSkillPt(vocationId, skillLineId, _this.DB.skillLines[skillLineId].unique ? maxPtWithMspUnique : maxPtWithMsp);
                             e.stopPropagation();
                         });
                     },
-                    //職固有スキルホバー時にUI表示
                     //職固有スキルホバー時にUI表示
                     function () {
                         _this.$mspMaxConsole = $('#mspmax_console');
@@ -1012,7 +1204,32 @@ var Dq10;
                             });
                         });
                     },
-                    //範囲外クリック時・ESCキー押下時にUI非表示
+                    function () {
+                        _this.customSkillSelector = new CustomSkillSelector(_this.sim, _this.com);
+                        _this.customSkillSelector.setup();
+                    },
+                    //カスタムスキル編集ボタン
+                    function () {
+                        $('#show-customskill-dialog').button({
+                            icons: { primary: 'ui-icon-pencil' },
+                            text: true
+                        }).click(function (e) {
+                            var skillLineId = _this.getCurrentSkillLine(e.currentTarget);
+                            _this.customSkillSelector.show(skillLineId);
+                            e.stopPropagation();
+                        });
+                    },
+                    //160以上スキルホバー時にUI表示
+                    function () {
+                        _this.$customSkillConsole = $('#customskill_console');
+                        $('.skill_table tr[class$="_15"],.skill_table tr[class$="_16"],.skill_table tr[class$="_17"]').mouseenter(function (e) {
+                            $(e.currentTarget).parent().children().last().find('.skill_name').append(_this.$customSkillConsole);
+                            _this.$customSkillConsole.show();
+                            e.stopPropagation();
+                        }).mouseleave(function (e) {
+                            _this.hideConsoles();
+                        });
+                    },
                     //範囲外クリック時・ESCキー押下時にUI非表示
                     function () {
                         _this.$ptConsole.click(function (e) { return e.stopPropagation(); });
@@ -1023,7 +1240,6 @@ var Dq10;
                                 _this.hideConsoles();
                         });
                     },
-                    //リセットボタン設定
                     //リセットボタン設定
                     function () {
                         $('#pt_reset').button({
@@ -1058,7 +1274,6 @@ var Dq10;
                         });
                     },
                     //スキルテーブル項目クリック時
-                    //スキルテーブル項目クリック時
                     function () {
                         $('.skill_table tr[class]').click(function (e) {
                             var vocationId = _this.getCurrentVocation(e.currentTarget);
@@ -1082,13 +1297,11 @@ var Dq10;
                         });
                     },
                     //MSPモード切替ラジオボタン
-                    //MSPモード切替ラジオボタン
                     function () {
                         $('#msp_selector input').change(function (e) {
                             _this.toggleMspMode($(e.currentTarget).val() == 'msp');
                         });
                     },
-                    //URLテキストボックスクリック・フォーカス時
                     //URLテキストボックスクリック・フォーカス時
                     function () {
                         $('#url_text').focus(function (e) {
@@ -1097,7 +1310,6 @@ var Dq10;
                             $(e.currentTarget).select();
                         });
                     },
-                    //保存用URLツイートボタン設定
                     //保存用URLツイートボタン設定
                     function () {
                         $('#tw-saveurl').button().click(function (e) {
@@ -1121,7 +1333,6 @@ var Dq10;
                             return false;
                         });
                     },
-                    //おりたたむ・ひろげるボタン設定
                     //おりたたむ・ひろげるボタン設定
                     function () {
                         var HEIGHT_FOLDED = '48px';
@@ -1168,7 +1379,6 @@ var Dq10;
                         });
                     },
                     //レベル一括設定
-                    //レベル一括設定
                     function () {
                         //セレクトボックス初期化
                         var $select = $('#setalllevel>select');
@@ -1181,7 +1391,6 @@ var Dq10;
                         });
                     },
                     //特訓スキルポイント一括設定（最大値固定）
-                    //特訓スキルポイント一括設定（最大値固定）
                     function () {
                         $('#setalltrainingsp>button').button({
                             icons: { primary: 'ui-icon-star' }
@@ -1189,7 +1398,6 @@ var Dq10;
                             _this.com.setAllTrainingSkillPt(_this.DB.consts.trainingSkillPts.max);
                         });
                     },
-                    //全スキルをリセット
                     //全スキルをリセット
                     function () {
                         $('#clearallskills>button').button({
@@ -1200,7 +1408,6 @@ var Dq10;
                             _this.com.clearAllSkills();
                         });
                     },
-                    //ナビゲーションボタン
                     //ナビゲーションボタン
                     function () {
                         $('a#hirobaimport').button({
@@ -1215,7 +1422,6 @@ var Dq10;
                         });
                     },
                     //スキル選択時に同スキルを強調
-                    //スキル選択時に同スキルを強調
                     function () {
                         $('.skill_table').click(function (e) {
                             var skillLineId = $(e.currentTarget).attr('class').split(' ')[0];
@@ -1223,7 +1429,6 @@ var Dq10;
                             $('.' + skillLineId).addClass('selected');
                         });
                     },
-                    //パッシブプリセット
                     //パッシブプリセット
                     function () {
                         //セレクトボックス初期化
@@ -1249,7 +1454,6 @@ var Dq10;
                         });
                     },
                     //全職業のレベルを取得スキルに応じて引き上げ
-                    //全職業のレベルを取得スキルに応じて引き上げ
                     function () {
                         $('#bringUpLevel>button').button({
                             icons: { primary: 'ui-icon-arrowthickstop-1-n' }
@@ -1259,7 +1463,6 @@ var Dq10;
                             _this.com.bringUpLevelToRequired();
                         });
                     },
-                    //undo/redo
                     //undo/redo
                     function () {
                         var $undoButton = $('#undo');
@@ -1302,6 +1505,7 @@ var Dq10;
                 this.refreshControls();
                 this.refreshSaveUrl();
                 this.refreshUrlBar();
+                Object.keys(this.DB.skillLines).forEach(function (skillLineId) { return _this.refreshCustomSkill(skillLineId); });
             };
             SimulatorUI.prototype.refreshVocationInfo = function (vocationId) {
                 var currentLevel = this.sim.getLevel(vocationId);
@@ -1356,7 +1560,9 @@ var Dq10;
                     $("." + skillLineId + "_" + i).addClass(_this.CLASSNAME_SKILL_ENABLED);
                     return false;
                 });
-                var isError = totalOfSkill > this.DB.consts.skillPts.valid;
+                var isError = totalOfSkill > (this.DB.skillLines[skillLineId].unique ?
+                    this.DB.consts.skillPts.validUnique :
+                    this.DB.consts.skillPts.valid);
                 $("." + skillLineId + " .skill_total")
                     .text(totalOfSkill)
                     .toggleClass(this.CLASSNAME_ERROR, isError);
@@ -1403,6 +1609,17 @@ var Dq10;
                     history.replaceState(url, null, url);
                 }
             };
+            SimulatorUI.prototype.refreshCustomSkill = function (skillLineId) {
+                var $skillLineTable = $("." + skillLineId);
+                if ($skillLineTable.length === 0)
+                    return;
+                this.sim.getCustomSkills(skillLineId).forEach(function (customId, rank) {
+                    var customSkill = new SimulatorCustomSkill(skillLineId, customId);
+                    var $skill = $skillLineTable.find("tr." + skillLineId + "_" + (rank + 15));
+                    $skill.find('.custom_skill_name').text(customSkill.getViewName(rank));
+                    $skill.attr('title', customSkill.getHintText(rank));
+                });
+            };
             SimulatorUI.prototype.makeCurrentUrl = function () {
                 return window.location.href.replace(window.location.search, "") + '?' +
                     Base64.btoa(RawDeflate.deflate(this.sim.serialize()));
@@ -1426,20 +1643,109 @@ var Dq10;
                 this.$lvConsole.hide();
                 this.$trainingPtConsole.hide();
                 this.$mspMaxConsole.hide();
+                this.$customSkillConsole.hide();
             };
             SimulatorUI.prototype.setup = function () {
                 this.setupFunctions.forEach(function (func) { return func(); });
                 this.refreshAll();
             };
             return SimulatorUI;
-        })();
+        }());
+        var CustomSkillSelector = (function () {
+            function CustomSkillSelector(sim, com) {
+                this.sim = sim;
+                this.com = com;
+                this.DB = SkillSimulator.SimulatorDB;
+            }
+            CustomSkillSelector.prototype.setup = function () {
+                var _this = this;
+                this.$dialog = $('#customskill-selector');
+                this.$maskScreen = $('#dark-screen');
+                this.$maskScreen.click(function (e) {
+                    _this.hide();
+                });
+                $('#customskill-selector-close-button').click(function (e) {
+                    _this.hide();
+                });
+                //ヘッダー部ドラッグで画面移動可能
+                this.$dialog.draggable({
+                    handle: '#customskill-selector-header',
+                    cursor: 'move'
+                });
+                this.$dialog.find('.customskill-entry-selector a').click(function (e) {
+                    var $a = $(e.currentTarget);
+                    var skillLineId = $a.data('skillline');
+                    var customSkillId = $a.data('customskillId');
+                    var rank = $a.data('rank');
+                    _this.setCustomSkill(customSkillId, rank);
+                });
+                //スキルライン選択ボタン
+                this.$dialog.find('#customskill-selector-skillline-buttons a').click(function (e) {
+                    var skillLineId = $(e.currentTarget).data('skillline');
+                    _this.showEntryList(skillLineId);
+                    _this.loadCustomPalette();
+                });
+                //パレット削除ボタン
+                this.$dialog.find('a.customskill-palette-delete').click(function (e) {
+                    var rank = $(e.currentTarget).data('rank');
+                    _this.clearPalette(rank);
+                });
+            };
+            CustomSkillSelector.prototype.setCustomSkill = function (customSkillId, rank) {
+                if (this.com.updateCustomSkill(this.currentSkillLineId, customSkillId, rank) == true)
+                    this.loadCustomPalette();
+            };
+            CustomSkillSelector.prototype.showEntryList = function (skillLineId) {
+                this.$dialog.find('.customskill-entrylist').hide();
+                this.$dialog.find('#customskill-selector-entrylist-' + skillLineId).show();
+                this.$dialog.find('#customskill-selector-skillline').text(this.DB.skillLines[skillLineId].name);
+                this.currentSkillLineId = skillLineId;
+            };
+            CustomSkillSelector.prototype.loadCustomPalette = function () {
+                var _this = this;
+                var skillLineId = this.currentSkillLineId;
+                var skills = this.sim.getCustomSkills(skillLineId);
+                this.$dialog.find("#customskill-selector-entrylist-" + skillLineId + " .customskill-entry-selector a").toggleClass('selected', false);
+                skills.forEach(function (customId, rank) {
+                    _this.toggleEntrySelection(customId, rank, true);
+                    var customSkill = new SimulatorCustomSkill(skillLineId, customId);
+                    _this.fillPalette(rank, customSkill);
+                });
+            };
+            CustomSkillSelector.prototype.clearPalette = function (rank) {
+                var currentCustomSkillId = this.sim.getCustomSkills(this.currentSkillLineId)[rank];
+                if (this.com.updateCustomSkill(this.currentSkillLineId, 0, rank) == true) {
+                    this.fillPalette(rank, SimulatorCustomSkill.emptySkill());
+                    this.toggleEntrySelection(currentCustomSkillId, rank, false);
+                }
+            };
+            CustomSkillSelector.prototype.fillPalette = function (rank, customSkill) {
+                var $palette = $('#customskill-selector-palette-' + rank.toString());
+                $palette.text(customSkill.getViewName(rank));
+                $palette.attr('title', customSkill.getHintText(rank));
+            };
+            CustomSkillSelector.prototype.toggleEntrySelection = function (customSkillId, rank, isSelected) {
+                $("#customskill-selector-" + this.currentSkillLineId + "-" + customSkillId + "-" + rank + " a").toggleClass('selected', isSelected);
+            };
+            CustomSkillSelector.prototype.show = function (skillLineId) {
+                if (skillLineId === void 0) { skillLineId = 'sword'; }
+                this.showEntryList(skillLineId);
+                this.loadCustomPalette();
+                this.$maskScreen.show();
+                this.$dialog.show();
+            };
+            CustomSkillSelector.prototype.hide = function () {
+                this.$dialog.hide();
+                this.$maskScreen.hide();
+            };
+            return CustomSkillSelector;
+        }());
         var SimpleUI = (function () {
             function SimpleUI(sim) {
                 var _this = this;
                 this.CLASSNAME_SKILL_ENABLED = 'enabled';
                 this.CLASSNAME_ERROR = 'error';
                 this.setupFunctions = [
-                    //URLテキストボックスクリック・フォーカス時
                     //URLテキストボックスクリック・フォーカス時
                     function () {
                         $('#url_text').focus(function (e) {
@@ -1448,7 +1754,6 @@ var Dq10;
                             $(e.currentTarget).select();
                         });
                     },
-                    //保存用URLツイートボタン設定
                     //保存用URLツイートボタン設定
                     function () {
                         $('#tw-saveurl').button().click(function (e) {
@@ -1472,7 +1777,6 @@ var Dq10;
                             return false;
                         });
                     },
-                    //ナビゲーションボタン
                     //ナビゲーションボタン
                     function () {
                         $('a#mainui').button({
@@ -1606,7 +1910,7 @@ var Dq10;
                 this.refreshAll();
             };
             return SimpleUI;
-        })();
+        }());
         //ユーティリティ
         //数値を3桁区切りに整形
         function numToFormedStr(num) {

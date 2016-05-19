@@ -17,7 +17,8 @@
 		skillPts: {
 			min: number,
 			max: number,
-			valid: number
+			valid: number,
+			validUnique: number
 		};
 		level: {
 			min: number;
@@ -26,6 +27,10 @@
 		};
 		trainingSkillPts: MinMax;
 		msp: MinMax;
+		customSkill: {
+			pts: number[];
+			count: number;
+		}
 	};
 }
 interface MinMax {
@@ -47,6 +52,7 @@ interface SkillLine {
 	name: string;
 	abbr?: string;
 	skills: Skill[];
+	customSkills?: CustomSkill[];
 }
 
 interface Skill {
@@ -66,6 +72,18 @@ interface Skill {
 	charm?: number;
 	gold?: number;
 	charge?: number;
+}
+
+interface CustomSkill {
+	id: number;
+	name: string;
+	viewName: string;
+	selectorName: string;
+	desc: string;
+	val: number[];
+	mp?: number;
+	charge?: number;
+	atk?: number;
 }
 
 interface MonsterSimulatorDB {

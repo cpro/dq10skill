@@ -333,7 +333,8 @@ a {
   border-spacing: 0;
   border: 2px solid rgba(255, 0, 0, 0);
   border-radius: 4px;
-  display: inline-block; }
+  display: inline-block;
+  vertical-align: top; }
   .skill_table caption {
     overflow: visible;
     white-space: nowrap;
@@ -565,6 +566,166 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
     width: auto; }
   .monster_ent .class_info ul.badge-button-container a {
     padding: 0 3px; }
+
+.modal-dialog {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 200;
+  margin: auto;
+  padding: 0;
+  border: 3px solid #99a;
+  border-radius: 6px;
+  background-color: #fcfcfd; }
+  .modal-dialog .modal-dialog-header {
+    position: relative;
+    border-bottom: 1px solid #99a;
+    width: 100%; }
+  .modal-dialog .modal-dialog-footer {
+    position: relative;
+    border-top: 1px solid #99a;
+    width: 100%; }
+  .modal-dialog .modal-dialog-body {
+    position: relative;
+    width: 100%; }
+  .modal-dialog .modal-dialog-caption {
+    margin: 3px 10px;
+    font-size: 16px; }
+
+#customskill-selector {
+  display: none;
+  width: 741px;
+  height: 432px;
+  overflow: hidden; }
+  #customskill-selector a.x-button {
+    display: block;
+    position: absolute;
+    border-radius: 2px;
+    background-color: transparent;
+    color: #505056;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    margin: 0;
+    padding: 0; }
+    #customskill-selector a.x-button:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+      text-decoration: none; }
+  #customskill-selector #customskill-selector-header {
+    height: 30px; }
+    #customskill-selector #customskill-selector-header #customskill-selector-skillline {
+      font-size: 18px; }
+    #customskill-selector #customskill-selector-header #customskill-selector-close-button {
+      font-size: 14px;
+      width: 21px;
+      height: 21px;
+      top: 3px;
+      right: 5px; }
+  #customskill-selector #customskill-selector-footer {
+    display: none; }
+  #customskill-selector #customskill-selector-body {
+    height: 400px;
+    font-size: 12px; }
+    #customskill-selector #customskill-selector-body #customskill-selector-entrylists {
+      position: absolute;
+      height: 400px;
+      width: 500px;
+      top: 0;
+      left: 0;
+      border-right: 1px solid #99a;
+      overflow-y: scroll;
+      overflow-x: hidden; }
+      #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist {
+        display: none;
+        position: absolute;
+        width: 482px;
+        top: 0;
+        left: 0;
+        border-collapse: collapse; }
+        #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist th, #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist td {
+          border-bottom: 1px solid #99a; }
+        #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist .customskill-entrylist-header th {
+          height: 16px; }
+        #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist .customskill-entry-name {
+          text-align: right;
+          width: 182px; }
+        #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist .customskill-entry-selector {
+          height: 30px;
+          width: 100px;
+          font-size: 14px;
+          text-align: center;
+          vertical-align: middle; }
+          #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist .customskill-entry-selector a {
+            text-decoration: none;
+            display: block;
+            width: 94px;
+            padding: 0;
+            margin: auto;
+            border-bottom: 4px solid transparent;
+            cursor: pointer; }
+            #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist .customskill-entry-selector a.selected {
+              color: #347;
+              border-bottom-color: #89d; }
+            #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist .customskill-entry-selector a:hover {
+              text-decoration: none;
+              color: #b57;
+              border-bottom-color: #e79; }
+    #customskill-selector #customskill-selector-body #customskill-selector-pallette {
+      position: absolute;
+      height: 400px;
+      width: 240px;
+      top: 0;
+      right: 0; }
+      #customskill-selector #customskill-selector-body #customskill-selector-pallette dl {
+        margin: 5px 10px;
+        padding: 0;
+        position: relative;
+        border-bottom: 1px solid #99a; }
+        #customskill-selector #customskill-selector-body #customskill-selector-pallette dl dt.customskill-palette-pt {
+          font-weight: bold;
+          margin: 0;
+          padding: 0; }
+        #customskill-selector #customskill-selector-body #customskill-selector-pallette dl dd.customskill-palette-name {
+          margin: 0;
+          padding: 0 0 0 10px;
+          font-size: 14px; }
+        #customskill-selector #customskill-selector-body #customskill-selector-pallette dl a.customskill-palette-delete {
+          display: none;
+          top: 1px;
+          right: 8px;
+          height: 18px;
+          width: 18px; }
+        #customskill-selector #customskill-selector-body #customskill-selector-pallette dl:hover a.customskill-palette-delete {
+          display: block; }
+      #customskill-selector #customskill-selector-body #customskill-selector-pallette #customskill-selector-skillline-buttons {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 16px;
+        height: 160px;
+        width: 168px;
+        margin: auto; }
+        #customskill-selector #customskill-selector-body #customskill-selector-pallette #customskill-selector-skillline-buttons li {
+          width: 80px;
+          margin: 1px; }
+
+#customskill_console {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 22px;
+  width: 70px; }
+
+#show-customskill-dialog {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 22px; }
+  #show-customskill-dialog .ui-button-text {
+    padding: 2px 6px 2px 22px;
+    font-size: 12px; }
 
 /* バッジ選択ダイアログ */
 #badge-selector {

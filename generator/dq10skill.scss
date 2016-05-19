@@ -63,26 +63,26 @@ a {
 		width: auto;
 		margin: 15px 0 7px 0;
 		padding: 0 10px;
-		
+
 		h1 {
 			font-size: 18px;
 			margin: 0 10px 0 0;
 			height: 25px;
 			float: left;
 		}
-	
+
 		#save_url {
 			padding: 2px 0;
 			height: 21px;
 			text-align: right;
 			white-space: nowrap;
 			font-size: 12px;
-			
+
 			#tw-saveurl, #undo, #redo {
 				font-size: 11px;
 				height: 18px;
 				overflow: hidden;
-				
+
 				.ui-button-text {
 					padding: .2em .5em;
 				}
@@ -105,21 +105,21 @@ a {
 			}
 		}
 	}
-	
+
 	#consoleblock {
 		width: auto;
 		height: 39px;
 		padding: 0;
 		position: relative;
 		white-space: nowrap;
-		
+
 		#foldbuttons {
 			font-size: 11px;
 			position: absolute;
 			top: 0;
 			left: 10px;
 			z-index: 102;
-			
+
 			ul.button-container {
 				$width-all: 96px;
 				$width-each: 30px;
@@ -132,7 +132,7 @@ a {
 				list-style-type: none;
 				margin: 0;
 				padding: 0;
-				
+
 				&#foldbuttons-all {
 					width: ($width-all + 2px + 1px) * 1;
 				}
@@ -151,7 +151,7 @@ a {
 					margin: 0 1px 3px 0;
 					border: 1px solid #aab;
 					background-color: #f0f0f7;
-					
+
 					&:hover {
 						cursor: pointer;
 						border-color: #445;
@@ -208,7 +208,7 @@ a {
 			top: 0;
 			left: 10px + 96px + 33px * 8 + 10px;
 			z-index: 102;
-			
+
 			td, th {
 				margin: 0;
 				white-space: nowrap;
@@ -227,7 +227,7 @@ a {
 				font-size: 12px;
 				width: 22px;
 				border-right: 1px solid #aab;
-				
+
 				&#total_exp, &#total_exp_remain {
 					width: 64px;
 				}
@@ -435,7 +435,7 @@ a {
 	text-align: center;
 	border-right: 1px solid $border-color-general;
 	vertical-align: top;
-	
+
 	dt {
 		font-weight: normal;
 	}
@@ -481,6 +481,7 @@ a {
 	border-radius: 4px;
 
 	display: inline-block;
+	vertical-align: top;
 
 	caption {
 		overflow: visible;
@@ -490,7 +491,7 @@ a {
 
 		.console_wrapper {
 			position: relative;
-			
+
 			#pt_console {
 				position: absolute;
 				top: -2px;
@@ -541,7 +542,7 @@ a {
 	}
 	.console {
 		text-align: center;
-		
+
 		.ptspinner {
 			width: 2em;
 			text-align: right;
@@ -579,7 +580,7 @@ a {
 	right: 0;
 	bottom: 0;
 	height: 22px;
-	
+
 	.ui-button-text {
 		padding: 2px 6px 2px 22px;
 		font-size: 9px;
@@ -647,7 +648,7 @@ a {
 	overflow: auto;
 	margin: 3px 0;
 	padding: $entry-padding;
-	
+
 	p {
 		float: left;
 		font-size: 80%;
@@ -657,7 +658,7 @@ a {
 		&:last-child {
 			border-right: none;
 		}
-		
+
 		.ui-button-text-icon-primary {
 			padding-left: 16px;
 		}
@@ -736,7 +737,7 @@ ul.button-container {
 		white-space: nowrap;
 		border: 1px solid #aab;
 		background-color: #f0f0f7;
-		
+
 		&:hover {
 			cursor: pointer;
 			border-color: #445;
@@ -798,6 +799,242 @@ ul.badge-button-container, ul#badge-search-buttons-rarity {
 	}
 	a {
 		padding: 0 3px;
+	}
+}
+
+$dialog-inner-border-width: 1px;
+$dialog-outer-border-width: 3px;
+
+.modal-dialog {
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+
+	z-index: 200;
+
+	margin: auto;
+	padding: 0;
+
+	border: $dialog-outer-border-width solid $border-color-general;
+	border-radius: $dialog-outer-border-width * 2;
+	background-color: $main-background-color;
+
+	.modal-dialog-header {
+		position: relative;
+		border-bottom: $dialog-inner-border-width solid $border-color-general;
+		width: 100%;
+
+	}
+	.modal-dialog-footer {
+		position: relative;
+		border-top: $dialog-inner-border-width solid $border-color-general;
+		width: 100%;
+	}
+	.modal-dialog-body {
+		position: relative;
+		width: 100%;
+	}
+	.modal-dialog-caption {
+		margin: 3px 10px;
+		font-size: 16px;
+	}
+}
+
+#customskill-selector {
+	display: none;
+
+	$body-height: 400px;
+	$body-padding: 0px;
+	$header-height: 30px;
+	$footer-height: 0px;
+
+	$entrylist-width: 500px;
+	$entrylist-scrollbar-margin: 18px;
+	$entrylist-selector-width: 100px;
+	$palette-width: 240px;
+
+	width: $entrylist-width + $dialog-inner-border-width + $palette-width;
+	height: $header-height + $body-height + $footer-height + $dialog-inner-border-width * 2;
+	overflow: hidden;
+
+	a.x-button {
+		display: block;
+		position: absolute;
+		border-radius: 2px;
+		background-color: transparent;
+		color: #505056;
+		font-weight: bold;
+		text-align: center;
+		cursor: pointer;
+		margin: 0;
+		padding: 0;
+
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.2);
+			text-decoration: none;
+		}
+	}
+
+	#customskill-selector-header {
+		height: $header-height;
+
+		#customskill-selector-skillline {
+			font-size: 18px;
+		}
+
+		#customskill-selector-close-button {
+			font-size: 14px;
+			width: 21px;
+			height: 21px;
+			top: 3px;
+			right: 5px;
+		}
+	}
+
+	#customskill-selector-footer {
+		//height: $footer-height;
+		display: none;
+	}
+
+	#customskill-selector-body {
+		height: $body-height;
+		font-size: 12px;
+
+		#customskill-selector-entrylists {
+			position: absolute;
+			height: $body-height;
+			width: $entrylist-width;
+			top: 0;
+			left: 0;
+			border-right: $dialog-inner-border-width solid $border-color-general;
+			overflow-y: scroll;
+			overflow-x: hidden;
+
+			.customskill-entrylist {
+				display: none;
+
+				position: absolute;
+				width: $entrylist-width - $entrylist-scrollbar-margin;
+				top: 0;
+				left: 0;
+
+				border-collapse: collapse;
+
+				th, td {
+					border-bottom: $dialog-inner-border-width solid $border-color-general;
+				}
+				.customskill-entrylist-header th {
+					height: 16px;
+				}
+				.customskill-entry-name {
+					text-align: right;
+					width: $entrylist-width - $entrylist-scrollbar-margin - $entrylist-selector-width * 3;
+				}
+				.customskill-entry-selector {
+					height: 30px;
+					width: $entrylist-selector-width;
+					font-size: 14px;
+					text-align: center;
+					vertical-align: middle;
+
+					a {
+						text-decoration: none;
+						display: block;
+						width: $entrylist-selector-width - 6px;
+						padding: 0;
+						margin: auto;
+						border-bottom: 4px solid rgba(0, 0, 0, 0);
+						cursor: pointer;
+
+						&.selected {
+							color: #347;
+							border-bottom-color: #89d;
+						}
+						&:hover {
+							text-decoration: none;
+							color: #b57;
+							border-bottom-color: #e79;
+						}
+					}
+				}
+			}
+		}
+		#customskill-selector-pallette {
+			position: absolute;
+			height: $body-height;
+			width: $palette-width;
+			top: 0;
+			right: 0;
+
+			dl {
+				//box-sizing: border-box;
+				margin: 5px 10px;
+				padding: 0;
+				//width: $palette-width - 8px;
+				position: relative;
+				border-bottom: $dialog-inner-border-width solid $border-color-general;
+
+				dt.customskill-palette-pt {
+					font-weight: bold;
+					margin: 0;
+					padding: 0;
+				}
+				dd.customskill-palette-name {
+					//box-sizing: border-box;
+					margin: 0;
+					padding: 0 0 0 10px;
+					font-size: 14px;
+				}
+				a.customskill-palette-delete {
+					display: none;
+					top: 1px;
+					right: 8px;
+					height: 18px;
+					width: 18px;
+				}
+				&:hover a.customskill-palette-delete {
+					display: block;
+				}
+			}
+
+			#customskill-selector-skillline-buttons {
+				$skillline-button-width: 80px;
+
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 16px;
+				height: ($button-height + 4px) * 8;
+				width: ($skillline-button-width + 4px) * 2;
+				margin: auto;
+
+				li {
+					width: $skillline-button-width;
+					margin: 1px;
+				}
+			}
+		}
+	}
+}
+
+#customskill_console {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	height: 22px;
+	width: 70px;
+}
+#show-customskill-dialog {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	height: 22px;
+
+	.ui-button-text {
+		padding: 2px 6px 2px 22px;
+		font-size: 12px;
 	}
 }
 
@@ -1048,7 +1285,7 @@ ul.badge-button-container, ul#badge-search-buttons-rarity {
 	left: $body-content-width + $body-margin + 10px;
 	top: $header-height + 5px;
 	z-index: 1;
-	
+
 	ul {
 		font-size: 80%;
 		margin: 0;

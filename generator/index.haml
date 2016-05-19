@@ -8,13 +8,13 @@
 		- @home_uri = 'http://cpro.jp/dq10/skillsimulator/'
 		%link{rel: 'canonical', href: @home_uri}/
 		%meta{name: 'description', content: 'ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。'}/
-		
+
 		- @title = 'DQ10 スキルシミュレータ'
 		%title= @title
-		
+
 		%link{rel: 'stylesheet', type: 'text/css', href: "./dq10skill.css?ver=#{@version}"}/
 		%link{rel: 'stylesheet', type: 'text/css', href: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css'}/
-		
+
 		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js'}
 		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'}
 		%script{type: 'text/javascript', src: 'js/rawdeflate.min.js'}
@@ -133,7 +133,11 @@
 									- hint += "\n（#{skill['gold']}G）" if skill['gold']
 									%tr{class: [skill_line_name, i].join('_'), title: hint}<
 										%td.skill_pt>= skill['pt']
-										%td.skill_name= skill['name']
+										%td.skill_name<
+											- if skill['pt'] >= 160
+												%span.custom_skill_name= skill['name']
+											- else
+												= skill['name']
 			#pt_console{style: 'display: none'}
 				%input#pt_spinner
 				%button#pt_reset リセット
@@ -143,6 +147,8 @@
 				%select#training_pt_select.ui-widget-content.ui-corner-all
 			#mspmax_console{style: 'display: none'}
 				%button#max-with-msp{title: 'MSP込みの最大値にする'} MSP
+			#customskill_console{style: 'display: none'}
+				%button#show-customskill-dialog 編集
 			#footconsole
 				%p#setalllevel
 					レベル一括設定
@@ -214,6 +220,49 @@
 					%li ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。
 				%address<
 					%p.contact 連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a>
+		#dark-screen
+		#customskill-selector.modal-dialog
+			- def sub_rank_value(template, rank, value)
+				- template.gsub('%r', 'ⅠⅡⅢ'[rank]).
+				-          gsub('%i', value.to_i.to_s).
+				-          gsub('%f', sprintf('%.1f', value))
+			- def sub_hint_text(skill)
+				- hint = skill['desc'].gsub('%z', skill['val'][0].to_s.tr('0-9.', '０-９．'))
+				- hint += "\n（消費MP: #{skill['mp']}）" if skill['mp']
+				- hint += "\n（チャージ: #{skill['val'][0]}秒）" if skill['charge']
+				- return hint
+			#customskill-selector-header.modal-dialog-header
+				%h2.modal-dialog-caption
+					スキル編集 -&nbsp;
+					%span#customskill-selector-skillline 片手剣
+				%a.x-button#customskill-selector-close-button{title: '閉じる'} ×
+			#customskill-selector-body.modal-dialog-body
+				#customskill-selector-entrylists
+					- data['skillLineOrder'].each do |skill_line_name|
+						%table.customskill-entrylist{id: "customskill-selector-entrylist-#{skill_line_name}"}
+							%tr.customskill-entrylist-header
+								%th
+								- data['consts']['customSkill']['pts'].each do |pt|
+									%th= pt.to_s + 'P'
+							- data['skillLines'][skill_line_name]['customSkills'].each do |custom_skill|
+								%tr
+									%th.customskill-entry-name{title: sub_hint_text(custom_skill)}= custom_skill['name']
+									- data['consts']['customSkill']['count'].times do |i|
+										%td.customskill-entry-selector{id: "customskill-selector-#{skill_line_name}-#{custom_skill['id']}-#{i}"}<
+											%a{'data-skillline' => skill_line_name, 'data-customskill-id' => custom_skill['id'], 'data-rank' => i}<
+												= sub_rank_value(custom_skill['selectorName'], i, custom_skill['val'][i].to_s)
+				#customskill-selector-pallette
+					- data['consts']['customSkill']['pts'].each_with_index do |pt, i|
+						%dl
+							%dt.customskill-palette-pt= "#{pt}P"
+							%dd.customskill-palette-name{id: "customskill-selector-palette-#{i}"} （なし）
+							%a.customskill-palette-delete.x-button{'data-rank' => i} ×
+					%ul#customskill-selector-skillline-buttons.button-container
+						- data['skillLineOrder'].each do |skill_line_name|
+							%li.ui-corner-all<
+								%a{'data-skillline' => skill_line_name}<
+									= data['skillLines'][skill_line_name]['name']
+			#customskill-selector-footer.modal-dialog-footer
 		#ad_sidebar
 			%h2 サイト内リンク
 			%ul
