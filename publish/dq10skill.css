@@ -596,7 +596,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
 
 #customskill-selector {
   display: none;
-  width: 701px;
+  width: 741px;
   height: 432px;
   overflow: hidden; }
   #customskill-selector a.x-button {
@@ -675,13 +675,14 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
     #customskill-selector #customskill-selector-body #customskill-selector-pallette {
       position: absolute;
       height: 400px;
-      width: 200px;
+      width: 240px;
       top: 0;
       right: 0; }
       #customskill-selector #customskill-selector-body #customskill-selector-pallette dl {
         margin: 5px 10px;
         padding: 0;
-        position: relative; }
+        position: relative;
+        border-bottom: 1px solid #99a; }
         #customskill-selector #customskill-selector-body #customskill-selector-pallette dl dt.customskill-palette-pt {
           font-weight: bold;
           margin: 0;

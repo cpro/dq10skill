@@ -133,7 +133,11 @@
 									- hint += "\n（#{skill['gold']}G）" if skill['gold']
 									%tr{class: [skill_line_name, i].join('_'), title: hint}<
 										%td.skill_pt>= skill['pt']
-										%td.skill_name= skill['name']
+										%td.skill_name<
+											- if skill['pt'] >= 160
+												%span.custom_skill_name= skill['name']
+											- else
+												= skill['name']
 			#pt_console{style: 'display: none'}
 				%input#pt_spinner
 				%button#pt_reset リセット
@@ -222,6 +226,11 @@
 				- template.gsub('%r', 'ⅠⅡⅢ'[rank]).
 				-          gsub('%i', value.to_i.to_s).
 				-          gsub('%f', sprintf('%.1f', value))
+			- def sub_hint_text(skill)
+				- hint = skill['desc'].gsub('%z', skill['val'][0].to_s.tr('0-9.', '０-９．'))
+				- hint += "\n（消費MP: #{skill['mp']}）" if skill['mp']
+				- hint += "\n（チャージ: #{skill['val'][0]}秒）" if skill['charge']
+				- return hint
 			#customskill-selector-header.modal-dialog-header
 				%h2.modal-dialog-caption
 					スキル編集 -&nbsp;
@@ -237,7 +246,7 @@
 									%th= pt.to_s + 'P'
 							- data['skillLines'][skill_line_name]['customSkills'].each do |custom_skill|
 								%tr
-									%th.customskill-entry-name= custom_skill['name']
+									%th.customskill-entry-name{title: sub_hint_text(custom_skill)}= custom_skill['name']
 									- data['consts']['customSkill']['count'].times do |i|
 										%td.customskill-entry-selector{id: "customskill-selector-#{skill_line_name}-#{custom_skill['id']}-#{i}"}<
 											%a{'data-skillline' => skill_line_name, 'data-customskill-id' => custom_skill['id'], 'data-rank' => i}<
