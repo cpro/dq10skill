@@ -28,14 +28,14 @@
 				{"id":  1, "name": "不死鳥天舞", "viewName": "不死鳥天舞%r", "selectorName": "%r (CT%i)", "desc": "会心率を上げつつ\n敵１体に４回攻撃\nキズもいやす秘剣", "mp": 8, "charge": 0, "val": [150, 110, 75]},
 				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "片手剣装備時の\nこうげき力が\n%z増える", "val": [5, 8, 10]},
 				{"id":  3, "name": "かいしん率", "viewName": "装備時かいしん率+%f%", "selectorName": "+%f%", "desc": "片手剣装備時の\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.5]},
-				{"id":  4, "name": "武器ガード率", "viewName": "装備時武器ガード率+%f%", "selectorName": "+%f%", "desc": "", "val": [1, 1.5, 2]},
-				{"id":  5, "name": "かえん斬りの強化", "viewName": "かえん斬り+%i%", "selectorName": "+%i%", "desc": "", "val": [10, 15, 30]},
-				{"id":  6, "name": "ドラゴン斬りの強化", "viewName": "ドラゴン斬り+%i%", "selectorName": "+%i%", "desc": "", "val": [10, 15, 30]},
-				{"id":  7, "name": "ミラクルソードの強化", "viewName": "ミラクルソード+%i%", "selectorName": "+%i%", "desc": "", "val": [5, 8, 12]},
-				{"id":  8, "name": "はやぶさ斬りの強化", "viewName": "はやぶさ斬り+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 4, 8]},
-				{"id":  9, "name": "ギガスラッシュの強化", "viewName": "ギガスラッシュ+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 4, 8]},
-				{"id": 10, "name": "超はやぶさ斬りの強化", "viewName": "超はやぶさ斬り+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]},
-				{"id": 11, "name": "ギガブレイクの強化", "viewName": "ギガブレイク+%i%", "selectorName": "+%i%", "desc": "", "val": [8, 10, 12]}
+				{"id":  4, "name": "武器ガード率", "viewName": "装備時武器ガード率+%f%", "selectorName": "+%f%", "desc": "片手剣装備時の\n武器ガード率が\n%z％増える", "val": [1, 1.5, 2]},
+				{"id":  5, "name": "かえん斬りの強化", "viewName": "かえん斬り+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [10, 15, 30]},
+				{"id":  6, "name": "ドラゴン斬りの強化", "viewName": "ドラゴン斬り+%i%", "selectorPref": "対竜", "selectorName": "+%i%", "desc": "ドラゴン系への\nダメージが\n%z％増える", "val": [10, 15, 30]},
+				{"id":  7, "name": "ミラクルソードの強化", "viewName": "ミラクルソード+%i%", "selectorPref": "ダメ・回復", "selectorName": "+%i%", "desc": "ダメージと\n回復量が\n%z%増える", "val": [5, 8, 12]},
+				{"id":  8, "name": "はやぶさ斬りの強化", "viewName": "はやぶさ斬り+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [2, 4, 8]},
+				{"id":  9, "name": "ギガスラッシュの強化", "viewName": "ギガスラッシュ+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [2, 4, 8]},
+				{"id": 10, "name": "超はやぶさ斬りの強化", "viewName": "超はやぶさ斬り+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 8, 10]},
+				{"id": 11, "name": "ギガブレイクの強化", "viewName": "ギガブレイク+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [8, 10, 12]}
 			]
 		},
 
@@ -64,17 +64,17 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "プラズマブレード", "viewName": "プラズマブレード%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 8, "charge": null, "val": [120, 80, 60]},
+				{"id":  1, "name": "プラズマブレード", "viewName": "プラズマブレード%r", "selectorName": "%r (CT%i)", "desc": "敵の周辺に電撃を\n連続発生させて\n炎属性も下げる", "mp": 8, "charge": 0, "val": [120, 80, 60]},
 				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "両手剣装備時の\nこうげき力が\n%z増える", "val": [5, 8, 10]},
 				{"id":  3, "name": "かいしん率", "viewName": "装備時かいしん率+%f%", "selectorName": "+%f%", "desc": "両手剣装備時の\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.5]},
-				{"id":  4, "name": "武器ガード率", "viewName": "装備時武器ガード率+%f%", "selectorName": "+%f%", "desc": "", "val": [2, 3, 4]},
-				{"id":  5, "name": "ブレードガード効果時間", "viewName": "ブレードガード効果時間+%i秒", "selectorName": "+%i秒", "desc": "", "val": [2, 3, 6]},
-				{"id":  6, "name": "ドラゴンスラッシュの強化", "viewName": "ドラゴンスラッシュ+%i%", "selectorName": "+%i%", "desc": "", "val": [10, 15, 30]},
-				{"id":  7, "name": "ぶんまわしの強化", "viewName": "ぶんまわし+%i%", "selectorName": "+%i%", "desc": "", "val": [8, 12, 18]},
-				{"id":  8, "name": "フリーズブレードの強化", "viewName": "フリーズブレード+%i%", "selectorName": "+%i%", "desc": "", "val": [12, 16, 20]},
-				{"id":  9, "name": "渾身斬りの強化", "viewName": "渾身斬り+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 5, 8]},
-				{"id": 10, "name": "ビッグバンの強化", "viewName": "ビッグバン+%i%", "selectorName": "+%i%", "desc": "", "val": [8, 10, 12]},
-				{"id": 11, "name": "全身全霊斬りの強化", "viewName": "全身全霊斬り+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]}
+				{"id":  4, "name": "武器ガード率", "viewName": "装備時武器ガード率+%f%", "selectorName": "+%f%", "desc": "両手剣装備時の\n武器ガード率が\n%z％増える", "val": [2, 3, 4]},
+				{"id":  5, "name": "ブレードガード効果時間", "viewName": "ブレードガード効果時間+%i秒", "selectorName": "+%i秒", "desc": "両手剣装備時\n効果時間が\n%z秒増える", "val": [2, 3, 6]},
+				{"id":  6, "name": "ドラゴンスラッシュの強化", "viewName": "ドラゴンスラッシュ+%i%", "selectorPref": "対竜", "selectorName": "+%i%", "desc": "ドラゴン系への\nダメージが\n%z％増える", "val": [10, 15, 30]},
+				{"id":  7, "name": "ぶんまわしの強化", "viewName": "ぶんまわし+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [8, 12, 18]},
+				{"id":  8, "name": "フリーズブレードの強化", "viewName": "フリーズブレード+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [12, 16, 20]},
+				{"id":  9, "name": "渾身斬りの強化", "viewName": "渾身斬り+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [2, 5, 8]},
+				{"id": 10, "name": "ビッグバンの強化", "viewName": "ビッグバン+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [8, 10, 12]},
+				{"id": 11, "name": "全身全霊斬りの強化", "viewName": "全身全霊斬り+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 8, 10]}
 			]
 		},
 
@@ -103,16 +103,16 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "降魔紅蓮斬", "viewName": "降魔紅蓮斬%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 8, "charge": null, "val": [220, 180, 110]},
+				{"id":  1, "name": "降魔紅蓮斬", "viewName": "降魔紅蓮斬%r", "selectorName": "%r (CT%i)", "desc": "敵１体に全力で\n斬りつけて\n自分のＭＰも回復", "mp": 8, "charge": 0, "val": [220, 180, 110]},
 				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "オノ装備時の\nこうげき力が\n%z増える", "val": [5, 8, 10]},
 				{"id":  3, "name": "かいしん率", "viewName": "装備時かいしん率+%f%", "selectorName": "+%f%", "desc": "オノ装備時の\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.5]},
 				{"id":  4, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "selectorName": "+%i", "desc": "オノ装備時\nさいだいＭＰが\n%z増える", "val": [20, 30, 45]},
-				{"id":  5, "name": "たいぼく斬の強化", "viewName": "たいぼく斬+%i%", "selectorName": "+%i%", "desc": "", "val": [10, 15, 30]},
-				{"id":  6, "name": "かぶと割りの強化", "viewName": "かぶと割り+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]},
-				{"id":  7, "name": "蒼天魔斬の強化", "viewName": "蒼天魔斬+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 3, 5]},
-				{"id":  8, "name": "オノむそうの強化", "viewName": "オノむそう+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 3, 5]},
-				{"id":  9, "name": "鉄甲斬の強化", "viewName": "鉄甲斬+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]},
-				{"id": 10, "name": "真・オノむそうの強化", "viewName": "真・オノむそう+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 3, 5]}
+				{"id":  5, "name": "たいぼく斬の強化", "viewName": "たいぼく斬+%i%", "selectorPref": "対植物", "selectorName": "+%i%", "desc": "植物系への\nダメージが\n%z％増える", "val": [10, 15, 30]},
+				{"id":  6, "name": "かぶと割りの強化", "viewName": "かぶと割り+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 8, 10]},
+				{"id":  7, "name": "蒼天魔斬の強化", "viewName": "蒼天魔斬+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [2, 3, 5]},
+				{"id":  8, "name": "オノむそうの強化", "viewName": "オノむそう+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [2, 3, 5]},
+				{"id":  9, "name": "鉄甲斬の強化", "viewName": "鉄甲斬+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 8, 10]},
+				{"id": 10, "name": "真・オノむそうの強化", "viewName": "真・オノむそう+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [2, 3, 5]}
 			]
 		},
 
@@ -141,16 +141,16 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "アイギスの守り", "viewName": "アイギスの守り%r", "selectorName": "%r (CT%i)", "desc": "", "mp": null, "charge": null, "val": [220, 180, 110]},
-				{"id":  2, "name": "しゅび力", "viewName": "装備時しゅび力+%i", "selectorName": "+%i", "desc": "", "val": [10, 15, 20]},
-				{"id":  3, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "selectorName": "+%i", "desc": "", "val": [20, 30, 45]},
-				{"id":  4, "name": "会心完全ガード率", "viewName": "装備時会心完全ガード率+%f%", "selectorName": "+%f%", "desc": "", "val": [1, 1.5, 2]},
-				{"id":  5, "name": "盾ガード時ルカニ", "viewName": "盾ガード時ルカニ+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 3, 5]},
-				{"id":  6, "name": "盾ガード時ヘナトス", "viewName": "盾ガード時ヘナトス+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 3, 5]},
-				{"id":  7, "name": "ビッグシールド効果時間", "viewName": "ビッグシールド効果時間+%i秒", "selectorName": "+%i秒", "desc": "", "val": [2, 3, 6]},
-				{"id":  8, "name": "まもりのたて効果時間", "viewName": "まもりのたて効果時間+%i秒", "selectorName": "+%i秒", "desc": "", "val": [2, 3, 6]},
-				{"id":  9, "name": "会心ガード効果時間", "viewName": "会心ガード効果時間+%i秒", "selectorName": "+%i秒", "desc": "", "val": [2, 3, 6]},
-				{"id": 10, "name": "瀕死時（　）でみかわし率+30%", "viewName": "瀕死時+%i%でみかわし率+30%", "selectorName": "+%i%", "desc": "", "val": [2, 4, 6]}
+				{"id":  1, "name": "アイギスの守り", "viewName": "アイギスの守り%r", "selectorName": "%r (CT%i)", "desc": "ダメージを軽減し\nビッグシールドと\n会心ガードも付与", "mp": 8, "charge": 0, "val": [220, 180, 110]},
+				{"id":  2, "name": "しゅび力", "viewName": "装備時しゅび力+%i", "selectorName": "+%i", "desc": "盾装備時の\nしゅび力が\n%z増える", "val": [10, 15, 20]},
+				{"id":  3, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "selectorName": "+%i", "desc": "盾装備時\nさいだいＭＰが\n%z増える", "val": [20, 30, 45]},
+				{"id":  4, "name": "会心完全ガード率", "viewName": "装備時会心完全ガード率+%f%", "selectorName": "+%f%", "desc": "盾装備時\n%zの確率で\n会心完全ガード", "val": [1, 1.5, 2]},
+				{"id":  5, "name": "瀕死時身かわし率アップ", "viewName": "瀕死時%i%で身かわし率+30%", "selectorName": "%i%", "selectorSuff": "で躱+30%", "desc": "盾装備中\n瀕死時に%zで\n身かわし率アップ", "val": [2, 4, 6]},
+				{"id":  6, "name": "ガード時ルカニ", "viewName": "ガード時%i%でルカニ", "selectorName": "%i%", "desc": "盾装備中ガード時\n%zの確率で\nルカニがかかる", "val": [2, 3, 5]},
+				{"id":  7, "name": "ガード時ヘナトス", "viewName": "ガード時%i%でヘナトス", "selectorName": "%i%", "desc": "盾装備中ガード時\n%zの確率で\nヘナトスがかかる", "val": [2, 3, 5]},
+				{"id":  8, "name": "ビッグシールド効果時間", "viewName": "ビッグシールド+%i秒", "selectorName": "+%i秒", "desc": "盾装備時\n効果時間が\n%z秒増える", "val": [5, 7, 10]},
+				{"id":  9, "name": "まもりのたて効果時間", "viewName": "まもりのたて+%i秒", "selectorName": "+%i秒", "desc": "盾装備時\n効果時間が\n%z秒増える", "val": [5, 7, 10]},
+				{"id": 10, "name": "会心ガード効果時間", "viewName": "会心ガード+%i秒", "selectorName": "+%i秒", "desc": "盾装備時\n効果時間が\n%z秒増える", "val": [5, 7, 10]}
 			]
 		},
 
@@ -203,15 +203,15 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "武神の護法", "viewName": "武神の護法%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 6, "charge": null, "val": [180, 130, 90]},
+				{"id":  1, "name": "武神の護法", "viewName": "武神の護法%r", "selectorName": "%r (CT%i)", "desc": "相手のダメージを\n下げる一撃を放ち\n武器ガードも上昇", "mp": 6, "charge": 0, "val": [180, 130, 90]},
 				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "ヤリ装備時の\nこうげき力が\n%z増える", "val": [5, 8, 10]},
 				{"id":  3, "name": "かいしん率", "viewName": "装備時かいしん率+%f%", "selectorName": "+%f%", "desc": "ヤリ装備時の\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.5]},
-				{"id":  4, "name": "武器ガード率", "viewName": "装備時武器ガード率+%f%", "selectorName": "+%f%", "desc": "", "val": [1, 1.2, 1.5]},
-				{"id":  5, "name": "けもの突きの強化", "viewName": "けもの突き+%i%", "selectorName": "+%i%", "desc": "", "val": [10, 15, 30]},
-				{"id":  6, "name": "雷鳴突きの強化", "viewName": "雷鳴突き+%i%", "selectorName": "+%i%", "desc": "", "val": [10, 15, 30]},
-				{"id":  7, "name": "狼牙突きの強化", "viewName": "狼牙突き+%i%", "selectorName": "+%i%", "desc": "", "val": [3, 5, 9]},
-				{"id":  8, "name": "さみだれ突きの強化", "viewName": "さみだれ突き+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]},
-				{"id":  9, "name": "ジゴスパークの強化", "viewName": "ジゴスパーク+%i%", "selectorName": "+%i%", "desc": "", "val": [8, 10, 12]}
+				{"id":  4, "name": "武器ガード率", "viewName": "装備時武器ガード率+%f%", "selectorName": "+%f%", "desc": "ヤリ装備時の\n武器ガード率が\n%z％増える", "val": [1, 1.2, 1.5]},
+				{"id":  5, "name": "けもの突きの強化", "viewName": "けもの突き+%i%", "selectorPref": "対獣", "selectorName": "+%i%", "desc": "獣系への\nダメージが\n%z％増える", "val": [10, 15, 30]},
+				{"id":  6, "name": "雷鳴突きの強化", "viewName": "雷鳴突き+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [10, 15, 30]},
+				{"id":  7, "name": "狼牙突きの強化", "viewName": "狼牙突き+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [3, 5, 9]},
+				{"id":  8, "name": "さみだれ突きの強化", "viewName": "さみだれ突き+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 8, 10]},
+				{"id":  9, "name": "ジゴスパークの強化", "viewName": "ジゴスパーク+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [8, 10, 12]}
 			]
 		},
 
@@ -240,15 +240,15 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "ホップスティック", "viewName": "ホップスティック%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 5, "charge": null, "val": [140, 110, 90]},
+				{"id":  1, "name": "ホップスティック", "viewName": "ホップスティック%r", "selectorName": "%r (CT%i)", "desc": "不思議なチカラで\n足元の攻撃を\n１回だけふせぐ", "mp": 5, "charge": 0, "val": [140, 110, 90]},
 				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "スティック装備時\nこうげき力が\n%z増える", "val": [15, 20, 30]},
 				{"id":  3, "name": "こうげき魔力", "viewName": "装備時こうげき魔力+%i", "selectorName": "+%i", "desc": "スティック装備時\nこうげき魔力が\n%z増える", "val": [20, 30, 40]},
 				{"id":  4, "name": "かいふく魔力", "viewName": "装備時かいふく魔力+%i", "selectorName": "+%i", "desc": "スティック装備時\nかいふく魔力が\n%z増える", "val": [20, 30, 40]},
 				{"id":  5, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "selectorName": "+%i", "desc": "スティック装備時\nさいだいＭＰが\n%z増える", "val": [20, 30, 45]},
-				{"id":  6, "name": "メラ系とギラ系呪文", "viewName": "メラ系とギラ系呪文+%i%", "selectorName": "+%i%", "desc": "", "val": [1, 2, 3]},
-				{"id":  7, "name": "バギ系呪文", "viewName": "バギ系呪文+%i%", "selectorName": "+%i%", "desc": "", "val": [1, 2, 3]},
-				{"id":  8, "name": "ホイミの回復量", "viewName": "ホイミの回復量+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]},
-				{"id":  9, "name": "ベホイミの回復量", "viewName": "ベホイミの回復量+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]}
+				{"id":  6, "name": "メラ系とギラ系呪文の強化", "viewName": "メラ系とギラ系呪文+%i%", "selectorName": "+%i%", "desc": "スティック装備時\nダメージが\n%z％増える", "val": [1, 2, 3]},
+				{"id":  7, "name": "バギ系呪文の強化", "viewName": "バギ系呪文+%i%", "selectorName": "+%i%", "desc": "スティック装備時\nダメージが\n%z％増える", "val": [1, 2, 3]},
+				{"id":  8, "name": "ホイミの回復量の強化", "viewName": "ホイミの回復量+%i%", "selectorName": "+%i%", "desc": "スティック装備時\n回復量が\n%z％増える", "val": [6, 8, 10]},
+				{"id":  9, "name": "ベホイミの回復量の強化", "viewName": "ベホイミの回復量+%i%", "selectorName": "+%i%", "desc": "スティック装備時\n回復量が\n%z％増える", "val": [6, 8, 10]}
 			]
 		},
 
@@ -263,7 +263,7 @@
 				{"pt":  22, "name": "黄泉送り", "desc": "ゾンビ系の敵に\n威力を発揮する\n聖なる技", "mp": 1},
 				{"pt":  35, "name": "装備時こうげき力+15", "desc": "棍装備時の\nこうげき力が\n１５増える", "mp": null},
 				{"pt":  42, "name": "なぎはらい", "desc": "棍を振りまわし\n前方の敵を\nなぎはらう", "mp": 2},
-				{"pt":  58, "name": "装備時みかわし率+4%", "desc": "棍装備時\n敵の攻撃を\nかわしやすくなる", "mp": null},
+				{"pt":  58, "name": "装備時身かわし率+4%", "desc": "棍装備時\n敵の攻撃を\nかわしやすくなる", "mp": null},
 				{"pt":  76, "name": "氷結らんげき", "desc": "氷をまとった棍で\n敵１体を\n４回打ちつける", "mp": 5},
 				{"pt":  88, "name": "装備時こうげき力+20", "desc": "棍装備時の\nこうげき力が\n２０増える", "mp": null},
 				{"pt": 100, "name": "天地のかまえ", "desc": "相手の攻撃を\n受けながしつつ\nなぐりかかる大技", "mp": 8},
@@ -277,14 +277,14 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "断空なぎはらい", "viewName": "断空なぎはらい%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 8, "charge": null, "val": [150, 110, 70]},
+				{"id":  1, "name": "断空なぎはらい", "viewName": "断空なぎはらい%r", "selectorName": "%r (CT%i)", "desc": "広範囲の敵を\n２回なぎはらう", "mp": 8, "charge": 0, "val": [150, 110, 70]},
 				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "棍装備時の\nこうげき力が\n%z増える", "val": [5, 8, 10]},
 				{"id":  3, "name": "かいしん率", "viewName": "装備時かいしん率+%f%", "selectorName": "+%f%", "desc": "棍装備時の\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.5]},
-				{"id":  4, "name": "みかわし率", "viewName": "装備時みかわし率+%f%", "selectorName": "+%f%", "desc": "", "val": [1, 1.5, 2]},
-				{"id":  5, "name": "黄泉送りの強化", "viewName": "黄泉送り+%i%", "selectorName": "+%i%", "desc": "", "val": [10, 15, 30]},
-				{"id":  6, "name": "なぎはらいの強化", "viewName": "なぎはらい+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 4, 8]},
-				{"id":  7, "name": "氷結らんげきの強化", "viewName": "氷結らんげき+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 4, 8]},
-				{"id":  8, "name": "奥義・棍閃殺の強化", "viewName": "奥義・棍閃殺+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]}
+				{"id":  4, "name": "身かわし率", "viewName": "装備時身かわし率+%f%", "selectorName": "+%f%", "desc": "棍装備時\n身かわし率が\n%z％増える", "val": [1, 1.5, 2]},
+				{"id":  5, "name": "黄泉送りの強化", "viewName": "黄泉送り+%i%", "selectorPref": "対ゾンビ", "selectorName": "+%i%", "desc": "ゾンビ系への\nダメージが\n%z％増える", "val": [10, 15, 30]},
+				{"id":  6, "name": "なぎはらいの強化", "viewName": "なぎはらい+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [2, 4, 8]},
+				{"id":  7, "name": "氷結らんげきの強化", "viewName": "氷結らんげき+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [2, 4, 8]},
+				{"id":  8, "name": "奥義・棍閃殺の強化", "viewName": "奥義・棍閃殺+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 8, 10]}
 			]
 		},
 
@@ -337,18 +337,18 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "活命の杖", "viewName": "活命の杖%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 5, "charge": null, "val": [140, 110, 90]},
+				{"id":  1, "name": "活命の杖", "viewName": "活命の杖%r", "selectorName": "%r (CT%i)", "desc": "一時的に\n最大ＨＰをふやす\n杖の秘技", "mp": 5, "charge": 0, "val": [140, 110, 90]},
 				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "両手杖装備時の\nこうげき力が\n%z増える", "val": [15, 20, 30]},
 				{"id":  3, "name": "こうげき魔力", "viewName": "装備時こうげき魔力+%i", "selectorName": "+%i", "desc": "両手杖装備時の\nこうげき魔力が\n%z増える", "val": [20, 30, 40]},
-				{"id":  4, "name": "呪文ぼうそう率", "viewName": "呪文ぼうそう率+%f%", "selectorName": "+%f%", "desc": "", "val": [1, 1.2, 1.5]},
+				{"id":  4, "name": "呪文ぼうそう率", "viewName": "呪文ぼうそう率+%f%", "selectorName": "+%f%", "desc": "両手杖装備時の\n呪文ぼうそう率が\n%z％増える", "val": [1, 1.2, 1.5]},
 				{"id":  5, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "selectorName": "+%i", "desc": "両手杖装備時の\nさいだいＭＰが\n%z増える", "val": [20, 30, 45]},
-				{"id":  6, "name": "メラ系呪文", "viewName": "メラ系呪文+%i%", "selectorName": "+%i%", "desc": "", "val": [1, 2, 3]},
-				{"id":  7, "name": "ヒャド系呪文", "viewName": "ヒャド系呪文+%i%", "selectorName": "+%i%", "desc": "", "val": [1, 2, 3]},
-				{"id":  8, "name": "イオ系呪文", "viewName": "イオ系呪文+%i%", "selectorName": "+%i%", "desc": "", "val": [1, 2, 3]},
-				{"id":  9, "name": "ドルマ系呪文", "viewName": "ドルマ系呪文+%i%", "selectorName": "+%i%", "desc": "", "val": [1, 2, 3]},
-				{"id": 10, "name": "マダンテ", "viewName": "マダンテ+%i%", "selectorName": "+%i%", "desc": "", "val": [1, 2, 3]},
-				{"id": 11, "name": "ホイミの回復量", "viewName": "ホイミの回復量+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]},
-				{"id": 12, "name": "ベホイミの回復量", "viewName": "ベホイミの回復量+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]}
+				{"id":  6, "name": "メラ系呪文の強化", "viewName": "メラ系呪文+%i%", "selectorName": "+%i%", "desc": "両手杖装備時\nダメージが\n%z％増える", "val": [1, 2, 3]},
+				{"id":  7, "name": "ヒャド系呪文の強化", "viewName": "ヒャド系呪文+%i%", "selectorName": "+%i%", "desc": "両手杖装備時\nダメージが\n%z％増える", "val": [1, 2, 3]},
+				{"id":  8, "name": "イオ系呪文の強化", "viewName": "イオ系呪文+%i%", "selectorName": "+%i%", "desc": "両手杖装備時\nダメージが\n%z％増える", "val": [1, 2, 3]},
+				{"id":  9, "name": "ドルマ系呪文の強化", "viewName": "ドルマ系呪文+%i%", "selectorName": "+%i%", "desc": "両手杖装備時\nダメージが\n%z％増える", "val": [1, 2, 3]},
+				{"id": 10, "name": "マダンテの強化", "viewName": "マダンテ+%i%", "selectorName": "+%i%", "desc": "両手杖装備時\nダメージが\n%z％増える", "val": [1, 2, 3]},
+				{"id": 11, "name": "ホイミの回復量", "viewName": "ホイミの回復量+%i%", "selectorName": "+%i%", "desc": "両手杖装備時\n回復量が\n%z％増える", "val": [6, 8, 10]},
+				{"id": 12, "name": "ベホイミの回復量", "viewName": "ベホイミの回復量+%i%", "selectorName": "+%i%", "desc": "両手杖装備時\n回復量が\n%z％増える", "val": [6, 8, 10]}
 			]
 		},
 
@@ -377,17 +377,17 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "オネロスハント", "viewName": "オネロスハント%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 5, "charge": null, "val": [120, 80, 60]},
+				{"id":  1, "name": "オネロスハント", "viewName": "オネロスハント%r", "selectorName": "%r (CT%i)", "desc": "休み状態の敵に\n威力を発揮する\n追い打ちの技", "mp": 5, "charge": 0, "val": [120, 80, 60]},
 				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "短剣装備時の\nこうげき力が\n%z増える", "val": [5, 8, 10]},
 				{"id":  3, "name": "かいしん率", "viewName": "装備時かいしん率+%f%", "selectorName": "+%f%", "desc": "短剣装備時の\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.5]},
 				{"id":  4, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "selectorName": "+%i", "desc": "短剣装備時\nさいだいＭＰが\n%z増える", "val": [20, 30, 45]},
-				{"id":  5, "name": "キラーブーンの強化", "viewName": "キラーブーン+%i%", "selectorName": "+%i%", "desc": "", "val": [10, 15, 30]},
-				{"id":  6, "name": "スリープダガーの強化", "viewName": "スリープダガー+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 10, 15]},
-				{"id":  7, "name": "ヒュプノスハントの強化", "viewName": "ヒュプノスハント+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 4, 8]},
-				{"id":  8, "name": "ヴァイパーファングの強化", "viewName": "ヴァイパーファング+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 10, 15]},
-				{"id":  9, "name": "タナトスハントの強化", "viewName": "タナトスハント+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 4, 8]},
-				{"id": 10, "name": "カオスエッジの強化", "viewName": "カオスエッジ+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]},
-				{"id": 11, "name": "ナイトメアファングの強化", "viewName": "ナイトメアファング+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]}
+				{"id":  5, "name": "キラーブーンの強化", "viewName": "キラーブーン+%i%", "selectorPref": "対虫", "selectorName": "+%i%", "desc": "虫系への\nダメージが\n%z％増える", "val": [10, 15, 30]},
+				{"id":  6, "name": "スリープダガーの強化", "viewName": "スリープダガー+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 10, 15]},
+				{"id":  7, "name": "ヒュプノスハントの強化", "viewName": "ヒュプノスハント+%i%", "selectorName": "+%i%", "desc": "眠りや混乱中の\n敵へのダメージが\n%z％増える", "val": [2, 4, 8]},
+				{"id":  8, "name": "ヴァイパーファングの強化", "viewName": "ヴァイパーファング+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 10, 15]},
+				{"id":  9, "name": "タナトスハントの強化", "viewName": "タナトスハント+%i%", "selectorName": "+%i%", "desc": "毒やマヒ中の\n敵へのダメージが\n%z％増える", "val": [2, 4, 8]},
+				{"id": 10, "name": "カオスエッジの強化", "viewName": "カオスエッジ+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 8, 10]},
+				{"id": 11, "name": "ナイトメアファングの強化", "viewName": "ナイトメアファング+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 8, 10]}
 			]
 		},
 
@@ -416,18 +416,18 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "バイキルショット", "viewName": "バイキルショット%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 8, "charge": null, "val": [150, 110, 75]},
+				{"id":  1, "name": "バイキルショット", "viewName": "バイキルショット%r", "selectorName": "%r (CT%i)", "desc": "自身の攻撃力を\nあげつつ\n敵集団を打ち払う", "mp": 8, "charge": 0, "val": [150, 110, 75]},
 				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "ムチ装備時の\nこうげき力が\n%z増える", "val": [5, 8, 10]},
 				{"id":  3, "name": "かいしん率", "viewName": "装備時かいしん率+%f%", "selectorName": "+%f%", "desc": "ムチ装備時の\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.5]},
-				{"id":  4, "name": "状態異常成功率", "viewName": "状態異常成功率+%i", "selectorName": "+%i", "desc": "", "val": [25, 50, 100]},
-				{"id":  5, "name": "らせん打ちの強化", "viewName": "らせん打ち+%i%", "selectorName": "+%i%", "desc": "", "val": [8, 10, 18]},
-				{"id":  6, "name": "愛のムチの強化", "viewName": "愛のムチ+%i%", "selectorName": "+%i%", "desc": "", "val": [10, 15, 30]},
-				{"id":  7, "name": "スパークショットの強化", "viewName": "スパークショット+%i%", "selectorName": "+%i%", "desc": "", "val": [8, 10, 18]},
-				{"id":  8, "name": "しばり打ちの強化", "viewName": "しばり打ち+%i%", "selectorName": "+%i%", "desc": "", "val": [8, 10, 18]},
-				{"id":  9, "name": "地ばしり打ちの強化", "viewName": "地ばしり打ち+%i%", "selectorName": "+%i%", "desc": "", "val": [4, 6, 8]},
-				{"id": 10, "name": "双竜打ちの強化", "viewName": "双竜打ち+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 4, 6]},
-				{"id": 11, "name": "疾風迅雷の強化", "viewName": "疾風迅雷+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]},
-				{"id": 12, "name": "極竜打ちの強化", "viewName": "極竜打ち+%i%", "selectorName": "+%i%", "desc": "", "val": [4, 6, 8]}
+				{"id":  4, "name": "状態異常成功率", "viewName": "状態異常成功率+%i", "selectorName": "+%i%", "desc": "ムチ装備時の\n状態異常成功率が\n%z％増える", "val": [25, 50, 100]},
+				{"id":  5, "name": "らせん打ちの強化", "viewName": "らせん打ち+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [8, 10, 18]},
+				{"id":  6, "name": "愛のムチの強化", "viewName": "愛のムチ+%i%", "selectorPref": "対怪人", "selectorName": "+%i%", "desc": "怪人系への\nダメージが\n%z％増える", "val": [10, 15, 30]},
+				{"id":  7, "name": "スパークショットの強化", "viewName": "スパークショット+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [8, 10, 18]},
+				{"id":  8, "name": "しばり打ちの強化", "viewName": "しばり打ち+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [8, 10, 18]},
+				{"id":  9, "name": "地ばしり打ちの強化", "viewName": "地ばしり打ち+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [4, 6, 8]},
+				{"id": 10, "name": "双竜打ちの強化", "viewName": "双竜打ち+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [2, 4, 6]},
+				{"id": 11, "name": "疾風迅雷の強化", "viewName": "疾風迅雷+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 8, 10]},
+				{"id": 12, "name": "極竜打ちの強化", "viewName": "極竜打ち+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [4, 6, 8]}
 			]
 		},
 
@@ -480,17 +480,17 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "牙神昇誕", "viewName": "牙神昇誕%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 5, "charge": null, "val": [210, 170, 130]},
+				{"id":  1, "name": "牙神昇誕", "viewName": "牙神昇誕%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 5, "charge": 0, "val": [210, 170, 130]},
 				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "ツメ装備時の\nこうげき力が\n%z増える", "val": [5, 8, 10]},
 				{"id":  3, "name": "かいしん率", "viewName": "装備時かいしん率+%f%", "selectorName": "+%f%", "desc": "ツメ装備時の\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.5]},
-				{"id":  4, "name": "みかわし率", "viewName": "装備時みかわし率+%f%", "selectorName": "+%f%", "desc": "", "val": [1, 1.5, 2]},
-				{"id":  5, "name": "ウィングブロウの強化", "viewName": "ウィングブロウ+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]},
-				{"id":  6, "name": "裂鋼拳の強化", "viewName": "裂鋼拳+%i%", "selectorName": "+%i%", "desc": "", "val": [10, 15, 30]},
-				{"id":  7, "name": "必中拳の強化", "viewName": "必中拳+%i%", "selectorName": "+%i%", "desc": "", "val": [5, 10, 15]},
-				{"id":  8, "name": "タイガークローの強化", "viewName": "タイガークロー+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 3, 5]},
-				{"id":  9, "name": "ゴールドフィンガーの強化", "viewName": "ゴールドフィンガー+%i%", "selectorName": "+%i%", "desc": "", "val": [4, 6, 8]},
-				{"id": 10, "name": "サイクロンアッパーの強化", "viewName": "サイクロンアッパー+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]},
-				{"id": 11, "name": "ライガークラッシュの強化", "viewName": "ライガークラッシュ+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 3, 5]}
+				{"id":  4, "name": "身かわし率", "viewName": "装備時身かわし率+%f%", "selectorName": "+%f%", "desc": "ツメ装備時\n身かわし率が\n%z％増える", "val": [1, 1.5, 2]},
+				{"id":  5, "name": "ウィングブロウの強化", "viewName": "ウィングブロウ+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 8, 10]},
+				{"id":  6, "name": "裂鋼拳の強化", "viewName": "裂鋼拳+%i%", "selectorPref": "対マシン", "selectorName": "+%i%", "desc": "マシン系への\nダメージが\n%z％増える", "val": [10, 15, 30]},
+				{"id":  7, "name": "必中拳の強化", "viewName": "必中拳+%i%", "selectorName": "+%i%", "selectorSuff": "・会心1%", "desc": "ダメージが%z％\nかいしん率が１％\n増える", "val": [5, 10, 15]},
+				{"id":  8, "name": "タイガークローの強化", "viewName": "タイガークロー+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [2, 3, 5]},
+				{"id":  9, "name": "ゴールドフィンガーの強化", "viewName": "ゴールドフィンガー+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [4, 6, 8]},
+				{"id": 10, "name": "サイクロンアッパーの強化", "viewName": "サイクロンアッパー+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 8, 10]},
+				{"id": 11, "name": "ライガークラッシュの強化", "viewName": "ライガークラッシュ+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [2, 3, 5]}
 			]
 		},
 
@@ -519,16 +519,16 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "風斬りの舞", "viewName": "風斬りの舞%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 6, "charge": null, "val": [210, 170, 140]},
+				{"id":  1, "name": "風斬りの舞", "viewName": "風斬りの舞%r", "selectorName": "%r (CT%i)", "desc": "周囲の味方の\n呪文ダメージと\n攻撃力を上げる", "mp": 6, "charge": 0, "val": [210, 170, 140]},
 				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "扇装備時の\nこうげき力が\n%z増える", "val": [5, 8, 10]},
 				{"id":  3, "name": "かいしん率", "viewName": "装備時かいしん率+%f%", "selectorName": "+%f%", "desc": "扇装備時の\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.5]},
 				{"id":  4, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "selectorName": "+%i", "desc": "扇装備時\nさいだいＭＰが\n%z増える", "val": [20, 30, 45]},
-				{"id":  5, "name": "花ふぶきの成功率", "viewName": "花ふぶきの成功率+%i%", "selectorName": "+%i%", "desc": "", "val": [4, 8, 12]},
-				{"id":  6, "name": "波紋演舞の強化", "viewName": "波紋演舞+%i%", "selectorName": "+%i%", "desc": "", "val": [10, 15, 30]},
-				{"id":  7, "name": "おうぎのまいの強化", "viewName": "おうぎのまい+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 10, 15]},
-				{"id":  8, "name": "アゲハ乱舞の強化", "viewName": "アゲハ乱舞+%i%", "selectorName": "+%i%", "desc": "", "val": [3, 6, 9]},
-				{"id":  9, "name": "ピンクタイフーンの強化", "viewName": "ピンクタイフーン+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]},
-				{"id": 10, "name": "百花繚乱の強化", "viewName": "百花繚乱+%i%", "selectorName": "+%i%", "desc": "", "val": [8, 10, 12]}
+				{"id":  5, "name": "花ふぶきの成功率", "viewName": "花ふぶきの成功率+%i%", "selectorName": "+%i%", "desc": "成功率が\n%z％増える", "val": [4, 8, 12]},
+				{"id":  6, "name": "波紋演舞の強化", "viewName": "波紋演舞+%i%", "selectorPref": "対水", "selectorName": "+%i%", "desc": "水系への\nダメージが\n%z％増える", "val": [10, 15, 30]},
+				{"id":  7, "name": "おうぎのまいの強化", "viewName": "おうぎのまい+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 10, 15]},
+				{"id":  8, "name": "アゲハ乱舞の強化", "viewName": "アゲハ乱舞+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [3, 6, 9]},
+				{"id":  9, "name": "ピンクタイフーンの強化", "viewName": "ピンクタイフーン+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 8, 10]},
+				{"id": 10, "name": "百花繚乱の強化", "viewName": "百花繚乱+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [8, 10, 12]}
 			]
 		},
 
@@ -543,7 +543,7 @@
 				{"pt":  18, "name": "かまいたち", "desc": "エレメント系に\n威力を発揮する\n風切りのやいば", "mp": 1},
 				{"pt":  25, "name": "素手時こうげき力+20", "desc": "格闘の時の\nこうげき力が\n２０増える", "mp": null},
 				{"pt":  30, "name": "せいけん突き", "desc": "チカラを込めて\nまっすぐ敵１体を\nなぐりつける", "mp": 3},
-				{"pt":  42, "name": "素手時みかわし率+2%", "desc": "格闘の時\n敵の攻撃を\nかわしやすくなる", "mp": null},
+				{"pt":  42, "name": "素手時身かわし率+2%", "desc": "格闘の時\n敵の攻撃を\nかわしやすくなる", "mp": null},
 				{"pt":  60, "name": "ムーンサルト", "desc": "飛んでいる敵に\n威力を発揮する\n華麗な宙返り", "mp": 2},
 				{"pt":  77, "name": "素手時こうげき力+40", "desc": "格闘の時の\nこうげき力が\n４０増える", "mp": null},
 				{"pt": 100, "name": "ばくれつけん", "desc": "敵１体に\nしっぷうどとうの\n４回攻撃", "mp": 4},
@@ -557,17 +557,17 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "しんくうは", "viewName": "しんくうは%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 5, "charge": null, "val": [120, 80, 60]},
+				{"id":  1, "name": "しんくうは", "viewName": "しんくうは%r", "selectorName": "%r (CT%i)", "desc": "前方の敵集団を\n真空のやいばで\n斬りつける", "mp": 5, "charge": 0, "val": [120, 80, 60]},
 				{"id":  2, "name": "こうげき力", "viewName": "素手時こうげき力+%i", "selectorName": "+%i", "desc": "格闘の時の\nこうげき力が\n%z増える", "val": [10, 20, 30]},
-				{"id":  3, "name": "かいしん率", "viewName": "素手時かいしん率+%f%", "selectorName": "+%f%", "desc": "格闘の時の\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.5]},
-				{"id":  4, "name": "みかわし率", "viewName": "素手時みかわし率+%f%", "selectorName": "+%f%", "desc": "", "val": [1.0, 1.2, 1.5]},
-				{"id":  5, "name": "石つぶての強化", "viewName": "石つぶて+%i%", "selectorName": "+%i%", "desc": "", "val": [50, 100, 150]},
-				{"id":  6, "name": "かまいたちの強化", "viewName": "かまいたち+%i%", "selectorName": "+%i%", "desc": "", "val": [10, 15, 30]},
-				{"id":  7, "name": "せいけん突きの強化", "viewName": "せいけん突き+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 10, 15]},
-				{"id":  8, "name": "ムーンサルトの強化", "viewName": "ムーンサルト+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 10, 15]},
-				{"id":  9, "name": "ばくれつけんの強化", "viewName": "ばくれつけん+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]},
-				{"id": 10, "name": "岩石おとしの強化", "viewName": "岩石おとし+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]},
-				{"id": 11, "name": "せいけん爆撃の強化", "viewName": "せいけん爆撃+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]}
+				{"id":  3, "name": "かいしん率", "viewName": "素手時かいしん率+%f%", "selectorName": "+%f%", "desc": "格闘での攻撃時\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.5]},
+				{"id":  4, "name": "身かわし率", "viewName": "素手時身かわし率+%f%", "selectorName": "+%f%", "desc": "格闘の時\n身かわし率が\n%z％増える", "val": [1, 1.5, 2]},
+				{"id":  5, "name": "石つぶての強化", "viewName": "石つぶて+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [50, 100, 150]},
+				{"id":  6, "name": "かまいたちの強化", "viewName": "かまいたち+%i%", "selectorPref": "対エレ", "selectorName": "+%i%", "desc": "エレメント系への\nダメージが\n%z％増える", "val": [10, 15, 30]},
+				{"id":  7, "name": "せいけん突きの強化", "viewName": "せいけん突き+%i%", "selectorName": "+%i%", "selectorSuff": "・会心1%", "desc": "ダメージが%z％\nかいしん率が１％\n増える", "val": [6, 10, 15]},
+				{"id":  8, "name": "ムーンサルトの強化", "viewName": "ムーンサルト+%i%", "selectorPref": "対空", "selectorName": "+%i%", "desc": "飛んでいる敵への\nダメージが\n%z％増える", "val": [6, 10, 15]},
+				{"id":  9, "name": "ばくれつけんの強化", "viewName": "ばくれつけん+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 8, 10]},
+				{"id": 10, "name": "岩石おとしの強化", "viewName": "岩石おとし+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 8, 10]},
+				{"id": 11, "name": "せいけん爆撃の強化", "viewName": "せいけん爆撃+%i%", "selectorName": "+%i%", "selectorSuff": "・会心1%", "desc": "ダメージが%z％\nかいしん率が１％\n増える", "val": [6, 8, 10]}
 			]
 		},
 
@@ -668,15 +668,15 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "デビルクラッシュ", "viewName": "デビルクラッシュ%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 4, "charge": null, "val": [150, 110, 75]},
+				{"id":  1, "name": "デビルクラッシュ", "viewName": "デビルクラッシュ%r", "selectorName": "%r (CT%i)", "desc": "悪魔系と物質系に\n絶大な威力を\n発揮する一撃", "mp": 4, "charge": 0, "val": [150, 110, 75]},
 				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "ハンマー装備時の\nこうげき力が\n%z増える", "val": [5, 8, 10]},
 				{"id":  3, "name": "かいしん率", "viewName": "装備時かいしん率+%f%", "selectorName": "+%f%", "desc": "ハンマー装備時の\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.5]},
 				{"id":  4, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "selectorName": "+%i", "desc": "ハンマー装備時\nさいだいＭＰが\n%z増える", "val": [20, 30, 45]},
-				{"id":  5, "name": "ウェイトブレイクの強化", "viewName": "ウェイトブレイク+%i%", "selectorName": "+%i%", "desc": "", "val": [5, 10, 15]},
-				{"id":  6, "name": "ドラムクラッシュの強化", "viewName": "ドラムクラッシュ+%i%", "selectorName": "+%i%", "desc": "", "val": [10, 15, 30]},
-				{"id":  7, "name": "シールドブレイクの強化", "viewName": "シールドブレイク+%i%", "selectorName": "+%i%", "desc": "", "val": [5, 10, 15]},
-				{"id":  8, "name": "ランドインパクトの強化", "viewName": "ランドインパクト+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 4, 8]},
-				{"id":  9, "name": "プレートインパクトの強化", "viewName": "プレートインパクト+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]}
+				{"id":  5, "name": "ウェイトブレイクの強化", "viewName": "ウェイトブレイク+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [5, 10, 15]},
+				{"id":  6, "name": "ドラムクラッシュの強化", "viewName": "ドラムクラッシュ+%i%", "selectorPref": "対物質", "selectorName": "+%i%", "desc": "物質系への\nダメージが\n%z％増える", "val": [10, 15, 30]},
+				{"id":  7, "name": "シールドブレイクの強化", "viewName": "シールドブレイク+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [5, 10, 15]},
+				{"id":  8, "name": "ランドインパクトの強化", "viewName": "ランドインパクト+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [2, 4, 8]},
+				{"id":  9, "name": "プレートインパクトの強化", "viewName": "プレートインパクト+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 8, 10]}
 			]
 		},
 
@@ -729,18 +729,18 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "ロストスナイプ", "viewName": "ロストスナイプ%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 8, "charge": null, "val": [110, 70, 50]},
+				{"id":  1, "name": "ロストスナイプ", "viewName": "ロストスナイプ%r", "selectorName": "%r (CT%i)", "desc": "敵１体の怒りと\nテンションを全て\nしずめる一撃", "mp": 8, "charge": 0, "val": [110, 70, 50]},
 				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "弓装備時の\nこうげき力が\n%z増える", "val": [5, 8, 10]},
 				{"id":  3, "name": "かいしん率", "viewName": "装備時かいしん率+%f%", "selectorName": "+%f%", "desc": "弓装備時の\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.5]},
 				{"id":  4, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "selectorName": "+%i", "desc": "弓装備時\nさいだいＭＰが\n%z増える", "val": [20, 30, 45]},
-				{"id":  5, "name": "マジックアローの強化", "viewName": "マジックアロー+%i%", "selectorName": "+%i%", "desc": "", "val": [8, 12, 18]},
-				{"id":  6, "name": "バードシュートの強化", "viewName": "バードシュート+%i%", "selectorName": "+%i%", "desc": "", "val": [10, 15, 30]},
-				{"id":  7, "name": "サンダーボルトの強化", "viewName": "サンダーボルト+%i%", "selectorName": "+%i%", "desc": "", "val": [10, 15, 30]},
-				{"id":  8, "name": "さみだれうちの強化", "viewName": "さみだれうち+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 4, 6]},
-				{"id":  9, "name": "天使の矢の強化", "viewName": "天使の矢+%i%", "selectorName": "+%i%", "desc": "", "val": [8, 12, 16]},
-				{"id": 10, "name": "シャイニングボウの強化", "viewName": "シャイニングボウ+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 3, 5]},
-				{"id": 11, "name": "弓聖の守り星の範囲", "viewName": "弓聖の守り星の範囲+%fm", "selectorName": "+%fm", "desc": "", "val": [0.2, 0.3, 0.5]},
-				{"id": 12, "name": "ダークネスショットの強化", "viewName": "ダークネスショット+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]}
+				{"id":  5, "name": "マジックアローの強化", "viewName": "マジックアロー+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [8, 12, 18]},
+				{"id":  6, "name": "バードシュートの強化", "viewName": "バードシュート+%i%", "selectorPref": "対鳥", "selectorName": "+%i%", "desc": "鳥系への\nダメージが\n%z％増える", "val": [10, 15, 30]},
+				{"id":  7, "name": "サンダーボルトの強化", "viewName": "サンダーボルト+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [10, 15, 30]},
+				{"id":  8, "name": "さみだれうちの強化", "viewName": "さみだれうち+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [2, 4, 6]},
+				{"id":  9, "name": "天使の矢の強化", "viewName": "天使の矢+%i%", "selectorName": "+%i%", "selectorSuff": "・回復2%", "desc": "ダメージが%z％\n回復量が２％\n増える", "val": [8, 12, 16]},
+				{"id": 10, "name": "シャイニングボウの強化", "viewName": "シャイニングボウ+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [2, 3, 5]},
+				{"id": 11, "name": "弓聖の守り星の範囲", "viewName": "弓聖の守り星+%fm", "selectorName": "+%fm", "desc": "効果範囲が\n%zｍ増える", "val": [0.2, 0.3, 0.5]},
+				{"id": 12, "name": "ダークネスショットの強化", "viewName": "ダークネスショット+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 8, 10]}
 			]
 		},
 
@@ -769,17 +769,17 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "レボルスライサー", "viewName": "レボルスライサー%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 6, "charge": null, "val": [140, 110, 90]},
-				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "弓装備時の\nこうげき力が\n%z増える", "val": [5, 8, 10]},
-				{"id":  3, "name": "かいしん率", "viewName": "装備時かいしん率+%f%", "selectorName": "+%f%", "desc": "弓装備時の\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.5]},
-				{"id":  4, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "selectorName": "+%i", "desc": "弓装備時\nさいだいＭＰが\n%z増える", "val": [20, 30, 45]},
-				{"id":  5, "name": "スライムブロウの強化", "viewName": "スライムブロウ+%i%", "selectorName": "+%i%", "desc": "", "val": [10, 15, 30]},
-				{"id":  6, "name": "パワフルスローの強化", "viewName": "パワフルスロー+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 10, 15]},
-				{"id":  7, "name": "シャインスコールの強化", "viewName": "シャインスコール+%i%", "selectorName": "+%i%", "desc": "", "val": [40, 60, 80]},
-				{"id":  8, "name": "バーニングバードの強化", "viewName": "バーニングバード+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 4, 6]},
-				{"id":  9, "name": "デュアルカッターの強化", "viewName": "デュアルカッター+%i%", "selectorName": "+%i%", "desc": "", "val": [2, 3, 5]},
-				{"id": 10, "name": "フローズンバードの強化", "viewName": "フローズンバード+%i%", "selectorName": "+%i%", "desc": "", "val": [6, 8, 10]},
-				{"id": 12, "name": "デュアルブレイカーの強化", "viewName": "デュアルブレイカー+%i%", "selectorName": "+%i%", "desc": "", "val": [3, 5, 8]}
+				{"id":  1, "name": "レボルスライサー", "viewName": "レボルスライサー%r", "selectorName": "%r (CT%i)", "desc": "敵１体を切りさき\n与えるダメージも\n増加させる", "mp": 6, "charge": 0, "val": [140, 110, 90]},
+				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "ブーメラン装備時\nこうげき力が\n%z増える", "val": [5, 8, 10]},
+				{"id":  3, "name": "かいしん率", "viewName": "装備時かいしん率+%f%", "selectorName": "+%f%", "desc": "ブーメラン装備時\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.5]},
+				{"id":  4, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "selectorName": "+%i", "desc": "ブーメラン装備時\nさいだいＭＰが\n%z増える", "val": [20, 30, 45]},
+				{"id":  5, "name": "スライムブロウの強化", "viewName": "スライムブロウ+%i%", "selectorPref": "対スラ", "selectorName": "+%i%", "desc": "スライム系への\nダメージが\n%z％増える", "val": [10, 15, 30]},
+				{"id":  6, "name": "パワフルスローの強化", "viewName": "パワフルスロー+%i%", "selectorName": "+%i%", "selectorSuff": "・会心1%", "desc": "ダメージが%z％\nかいしん率が１％\n増える", "val": [6, 10, 15]},
+				{"id":  7, "name": "シャインスコールの強化", "viewName": "シャインスコール+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [40, 60, 80]},
+				{"id":  8, "name": "バーニングバードの強化", "viewName": "バーニングバード+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [2, 4, 6]},
+				{"id":  9, "name": "デュアルカッターの強化", "viewName": "デュアルカッター+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [2, 3, 5]},
+				{"id": 10, "name": "フローズンバードの強化", "viewName": "フローズンバード+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [6, 8, 10]},
+				{"id": 12, "name": "デュアルブレイカーの強化", "viewName": "デュアルブレイカー+%i%", "selectorName": "+%i%", "desc": "ダメージが\n%z％増える", "val": [3, 5, 8]}
 			]
 		},
 
