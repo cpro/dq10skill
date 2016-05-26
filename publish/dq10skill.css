@@ -596,7 +596,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
 
 #customskill-selector {
   display: none;
-  width: 741px;
+  width: 761px;
   height: 432px;
   overflow: hidden; }
   #customskill-selector a.x-button {
@@ -631,7 +631,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
     #customskill-selector #customskill-selector-body #customskill-selector-entrylists {
       position: absolute;
       height: 400px;
-      width: 500px;
+      width: 520px;
       top: 0;
       left: 0;
       border-right: 1px solid #99a;
@@ -640,7 +640,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
       #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist {
         display: none;
         position: absolute;
-        width: 482px;
+        width: 502px;
         top: 0;
         left: 0;
         border-collapse: collapse; }
@@ -650,17 +650,17 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
           height: 16px; }
         #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist .customskill-entry-name {
           text-align: right;
-          width: 182px; }
+          width: 172px; }
         #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist .customskill-entry-selector {
           height: 30px;
-          width: 100px;
+          width: 110px;
           font-size: 14px;
           text-align: center;
           vertical-align: middle; }
           #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist .customskill-entry-selector a {
             text-decoration: none;
             display: block;
-            width: 94px;
+            width: 104px;
             padding: 0;
             margin: auto;
             border-bottom: 4px solid transparent;
@@ -672,6 +672,8 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
               text-decoration: none;
               color: #b57;
               border-bottom-color: #e79; }
+          #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist .customskill-entry-selector .customskill-entry-selectoroption {
+            font-size: 10px; }
     #customskill-selector #customskill-selector-body #customskill-selector-pallette {
       position: absolute;
       height: 400px;
