@@ -69,7 +69,8 @@ var TRAINING_TABLE = [
 	{stamp: 6000, skillPt: 14},
 	{stamp: 6500, skillPt: 15},
 	{stamp: 7000, skillPt: 16},
-	{stamp: 8000, skillPt: 17}
+	{stamp: 8000, skillPt: 17},
+	{stamp: 9000, skillPt: 18}
 ];
 
 var HirobaStatus = (function($) {
@@ -86,7 +87,7 @@ var HirobaStatus = (function($) {
 			};
 		}
 	}
-	
+
 	function loadLvExp() {
 		var vocation = '';
 		$('#jobLvExp tr td[class^=col]').each(function() {
@@ -102,7 +103,7 @@ var HirobaStatus = (function($) {
 				case 'col4':
 					var trainingStamp = parseInt($(this).text().trim().replace(',', ''));
 					var trainingSkillPt = 0;
-					
+
 					for(var i = 0; i < TRAINING_TABLE.length; i++) {
 						if(trainingStamp < TRAINING_TABLE[i].stamp) break;
 						trainingSkillPt = TRAINING_TABLE[i].skillPt;
@@ -112,7 +113,7 @@ var HirobaStatus = (function($) {
 			}
 		});
 	}
-	
+
 	function loadSkillPt() {
 		for(var skillName in skillMap) {
 			for(var j = 0; j < skillMap[skillName].jobSkillPoints.length; j++) {
@@ -158,7 +159,7 @@ var HirobaStatus = (function($) {
 		}
 		return serial;
 	}
-	
+
 	//API
 	return {
 		serialize: serialize,
