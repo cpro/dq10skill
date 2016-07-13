@@ -999,8 +999,32 @@
 			]
 		},
 
- 		"unknown": {
- 			"id": 999,
+ 		"unknown1": {
+ 			"id": 98,
+			"unique": true,
+ 			"name": "（不明）",
+ 			"abbr": "",
+ 			"skills": [
+ 				{"pt":   2, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  12, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  26, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  40, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  48, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  56, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  70, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  80, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  90, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt": 100, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt": 110, "name": "（不明）", "desc": "", "mp": null},
+				{"pt": 120, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt": 130, "name": "（不明）", "desc": "", "mp": null},
+				{"pt": 140, "name": "（不明）", "desc": "", "mp": null},
+				{"pt": 150, "name": "（不明）", "desc": "", "mp": null}
+			]
+		},
+
+ 		"unknown2": {
+ 			"id": 99,
 			"unique": true,
  			"name": "（不明）",
  			"abbr": "",
@@ -1121,6 +1145,12 @@
  			"abbr": "踊り",
  			"skillLines": ["knife", "fan", "stick", "song", "dance"],
  			"expTable": 2
+		},
+		"fortuneteller": {
+ 			"name": "占い師",
+ 			"abbr": "占い",
+ 			"skillLines": ["sword", "wand", "boomerang", "unknown1", "unknown2"],
+ 			"expTable": 2
 		}
 	},
 	"_vocations_coming": {
@@ -1130,7 +1160,7 @@
 	"vocationOrder": [
 		"warrior", "priest", "mage", "martialartist", "thief", "minstrel",
 		"gladiator", "paladin", "armamentalist", "ranger", "sage", "luminary",
-		"monstermaster", "itemmaster", "dancer"
+		"monstermaster", "itemmaster", "dancer", "fortuneteller"
 	],
 
 	"skillPtsGiven": [null,
@@ -1213,7 +1243,7 @@
 		},
 		"msp": {
 			"min": 0,
-			"max": 22
+			"max": 25
 		},
 		"customSkill": {
 			"pts": [160, 170, 180],
