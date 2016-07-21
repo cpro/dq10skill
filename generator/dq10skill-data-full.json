@@ -999,10 +999,10 @@
 			]
 		},
 
- 		"unknown1": {
- 			"id": 98,
+ 		"fortunetelling": {
+ 			"id": 33,
 			"unique": true,
- 			"name": "（不明）",
+ 			"name": "うらない",
  			"abbr": "",
  			"skills": [
  				{"pt":   2, "name": "（不明）", "desc": "", "mp": null},
@@ -1023,7 +1023,7 @@
 			]
 		},
 
- 		"unknown2": {
+ 		"unknown": {
  			"id": 99,
 			"unique": true,
  			"name": "（不明）",
@@ -1149,7 +1149,7 @@
 		"fortuneteller": {
  			"name": "占い師",
  			"abbr": "占い",
- 			"skillLines": ["sword", "wand", "boomerang", "unknown1", "unknown2"],
+ 			"skillLines": ["sword", "staff", "whip", "bow", "fortunetelling"],
  			"expTable": 2
 		}
 	},
