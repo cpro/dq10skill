@@ -1,3 +1,4 @@
+- @version = '9.0'
 !!! 5
 %html
 	%head
@@ -10,15 +11,15 @@
 		- @title = 'DQ10 スキルシミュレータ（簡易表示版）'
 		%title= @title
 		
-		%link{rel: 'stylesheet', type: 'text/css', href: "./dq10skill-simple.css?ver=#{VERSION}"}/
-		%link{rel: 'stylesheet', type: 'text/css', href: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css'}/
+		%link{rel: 'stylesheet', type: 'text/css', href: "./dq10skill-simple.css?ver=#{@version}"}/
+		%link{rel: 'stylesheet', type: 'text/css', href: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css'}/
 		
-		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'}
-		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'}
+		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'}
+		%script{type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'}
 		%script{type: 'text/javascript', src: 'js/rawdeflate.min.js'}
 		%script{type: 'text/javascript', src: 'js/rawinflate.min.js'}
 		%script{type: 'text/javascript', src: 'js/jquery.socialbutton-1.9.1.min.js'}
-		%script{type: 'text/javascript', src: "./dq10skill.js?ver=#{VERSION}"}
+		%script{type: 'text/javascript', src: "./dq10skill.js?ver=#{@version}"}
 		:javascript
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

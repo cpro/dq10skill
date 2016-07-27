@@ -17,6 +17,11 @@ produce_table = [
 		data: '../publish/dq10skill-anlucea-data.json',
 		template: 'anlucea.haml',
 		output: '../publish/anlucea.html'
+	},
+	{
+		data: 'dq10skill-data-full.json',
+		template: 'simple.haml',
+		output: '../publish/simple.html'
 	}
 ]
 
