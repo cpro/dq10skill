@@ -1149,7 +1149,7 @@
 		"fortuneteller": {
  			"name": "占い師",
  			"abbr": "占い",
- 			"skillLines": ["sword", "staff", "whip", "bow", "fortunetelling"],
+ 			"skillLines": ["sword", "bow", "whip", "staff", "fortunetelling"],
  			"expTable": 2
 		}
 	},
