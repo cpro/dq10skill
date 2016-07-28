@@ -784,7 +784,8 @@ var Dq10;
                 'sage',
                 'monstermaster',
                 'itemmaster',
-                'dancer' //踊り子
+                'dancer',
+                'fortuneteller' //占い師
             ];
             var BITS_LEVEL = 8; //レベルは8ビット確保
             var BITS_SKILL = 7; //スキルは7ビット

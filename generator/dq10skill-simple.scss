@@ -39,12 +39,12 @@ a {
 		text-align: right;
 		white-space: nowrap;
 		font-size: 12px;
-		
+
 		#tw-saveurl {
 			font-size: 11px;
 			height: 18px;
 			overflow: hidden;
-			
+
 			.ui-button-text {
 				padding: .2em .5em;
 			}
@@ -85,7 +85,8 @@ table#main {
 
 	th {
 		font-size: 14px;
-		font-weight: thick;
+		font-weight: bold;
+		white-space: nowrap;
 
 		&.msp {
 			color: $msp-color;
@@ -182,12 +183,8 @@ table#main {
 
 	tr.vocation {
 		position: relative;
-		
-		&.vocation:before {
-		}
 	}
-	#header th {
-		vertical-align: bottom;
+	#header th, #footer-label th {
 		line-height: 1.1em;
 
 		.chou {
@@ -196,8 +193,16 @@ table#main {
 			-moz-transform: rotate(-90deg) scaleX(-1);
 			-ms-transform: rotate(-90deg) scaleX(-1);
 			-o-transform: rotate(-90deg) scaleX(-1);
+			transform: rotate(-90deg) scaleX(-1);
 		}
 	}
+	#header th {
+		vertical-align: bottom;
+	}
+	#footer-label th {
+		vertical-align: top;
+	}
+
 	tr.vocation th, tr#footer th, tr#msp th {
 		text-align: right;
 	}

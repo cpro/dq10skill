@@ -7,15 +7,15 @@
     <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
     <title>DQ10 スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=8.1' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=9.0' rel='stylesheet' type='text/css'>
     <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
-    <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js' type='text/javascript'></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js' type='text/javascript'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js' type='text/javascript'></script>
     <script src='js/rawdeflate.min.js' type='text/javascript'></script>
     <script src='js/rawinflate.min.js' type='text/javascript'></script>
     <script src='js/shortcut.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=8.1' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=9.0' type='text/javascript'></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -64,6 +64,7 @@
             <li class='button-each ui-corner-all'><a id='fold-monstermaster'>まも</a></li>
             <li class='button-each ui-corner-all'><a id='fold-itemmaster'>どう</a></li>
             <li class='button-each ui-corner-all'><a id='fold-dancer'>踊り</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-fortuneteller'>占い</a></li>
           </ul>
         </div>
         <table class='ui-corner-all' id='total'>
@@ -2487,6 +2488,165 @@
             <tr class='dance_14' title='自分の攻撃力を&#x000A;増加させる&#x000A;踊り子専用&#x000A;（消費MP: 4）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>150</td><td class='skill_name'>戦鬼の乱れ舞（専）</td></tr>
           </table></div>
       </div>
+      <div class='class_group' id='fortuneteller'>
+        <div class='ent_title'>
+          <h2 class='ui-handler'>占い師 Lv          <span class='lv_h2'>1</span></h2>
+          <dl class='skill_pt'>
+            <dt>残りSP:</dt>
+            <dd class='pts'>0 / 0</dd>
+            <dt>&nbsp;+&nbsp;</dt>
+          </dl>
+          <dl class='training_pt ui-handler'>
+            <dt>特訓</dt>
+            <dd id='training-fortuneteller'>
+              0
+            </dd>
+          </dl>
+          <dl class='expinfo'>
+            <dt>獲得経験値:</dt>
+            <dd class='exp'>0</dd>
+            <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
+            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
+            </dd>
+          </dl>
+          <div class='ent_title_console'>
+            <button class='toggle_ent'>たたむ/ひろげる</button>
+          </div>
+        </div>
+        <div class='skill_tables'><table class='sword skill_table'>
+            <caption class='ui-handler'>
+              <div class='console_wrapper'>
+                片手剣:
+                <span class='skill_current'>0</span>
+                /
+                <span class='skill_total'>0</span>
+              </div>
+            </caption>
+            <tr class='sword_0' title='炎のチカラを&#x000A;剣に宿して&#x000A;敵を斬りつける&#x000A;（消費MP: 2）'><td class='skill_pt'>3</td><td class='skill_name'>かえん斬り</td></tr>
+            <tr class='sword_1' title='片手剣装備時の&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='sword_2' title='ドラゴン系の敵に&#x000A;威力を発揮する&#x000A;竜殺しの剣技&#x000A;（消費MP: 1）'><td class='skill_pt'>13</td><td class='skill_name'>ドラゴン斬り</td></tr>
+            <tr class='sword_3' title='片手剣での攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>22</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='sword_4' title='敵を斬りつけ&#x000A;自らのキズも&#x000A;いやす　秘剣&#x000A;（消費MP: 3）'><td class='skill_pt'>35</td><td class='skill_name'>ミラクルソード</td></tr>
+            <tr class='sword_5' title='片手剣装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>42</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='sword_6' title='はやぶさのごとき&#x000A;高速の２回攻撃&#x000A;（消費MP: 2）'><td class='skill_pt'>58</td><td class='skill_name'>はやぶさ斬り</td></tr>
+            <tr class='sword_7' title='片手剣装備時に&#x000A;武器ガードが&#x000A;できるようになる'><td class='skill_pt'>76</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+            <tr class='sword_8' title='片手剣装備時の&#x000A;こうげき力が&#x000A;１５増える'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+            <tr class='sword_9' title='光の刃を剣にかえ&#x000A;周囲をなぎはらう&#x000A;剣の奥義&#x000A;（消費MP: 12）'><td class='skill_pt'>100</td><td class='skill_name'>ギガスラッシュ</td></tr>
+            <tr class='sword_10' title='片手剣での攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='sword_11' title='はやぶさをこえる&#x000A;神速の４回攻撃&#x000A;（消費MP: 2）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>120</td><td class='skill_name'>超はやぶさ斬り</td></tr>
+            <tr class='sword_12' title='片手剣装備時&#x000A;さらに武器ガード&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時武器ガード率+2%</td></tr>
+            <tr class='sword_13' title='光の刃で周囲の&#x000A;敵を撃ち滅ぼす&#x000A;究極の剣技&#x000A;（消費MP: 12）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>140</td><td class='skill_name'>ギガブレイク</td></tr>
+            <tr class='sword_14' title='片手剣装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>150</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='sword_15'><td class='skill_pt'>160</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='sword_16'><td class='skill_pt'>170</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='sword_17'><td class='skill_pt'>180</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+          </table><table class='bow skill_table'>
+            <caption class='ui-handler'>
+              <div class='console_wrapper'>
+                弓:
+                <span class='skill_current'>0</span>
+                /
+                <span class='skill_total'>0</span>
+              </div>
+            </caption>
+            <tr class='bow_0' title='弓装備時の&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='bow_1' title='攻撃呪文に&#x000A;弱くなる矢を&#x000A;敵１体に放つ&#x000A;（消費MP: 3）'><td class='skill_pt'>7</td><td class='skill_name'>マジックアロー</td></tr>
+            <tr class='bow_2' title='弓のこうげきが&#x000A;少し遠くから&#x000A;当たるようになる'><td class='skill_pt'>13</td><td class='skill_name'>装備時射程距離+3m</td></tr>
+            <tr class='bow_3' title='鳥系の敵に&#x000A;威力を発揮する&#x000A;あざやかな弓の技&#x000A;（消費MP: 1）'><td class='skill_pt'>22</td><td class='skill_name'>バードシュート</td></tr>
+            <tr class='bow_4' title='弓装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>35</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='bow_5' title='雷のチカラを&#x000A;弓矢に宿して&#x000A;敵１体を射る&#x000A;（消費MP: 3）'><td class='skill_pt'>42</td><td class='skill_name'>サンダーボルト</td></tr>
+            <tr class='bow_6' title='弓のこうげきが&#x000A;さらに遠くから&#x000A;当たるようになる'><td class='skill_pt'>58</td><td class='skill_name'>装備時射程距離+4m</td></tr>
+            <tr class='bow_7' title='敵１体めがけて&#x000A;うちだされる&#x000A;どとうの4連射&#x000A;（消費MP: 5）'><td class='skill_pt'>76</td><td class='skill_name'>さみだれうち</td></tr>
+            <tr class='bow_8' title='弓装備時の&#x000A;こうげき力が&#x000A;１５増える'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+            <tr class='bow_9' title='敵１体を&#x000A;攻撃しつつ&#x000A;自分のＭＰも回復&#x000A;（消費MP: 0）'><td class='skill_pt'>100</td><td class='skill_name'>天使の矢</td></tr>
+            <tr class='bow_10' title='弓装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='bow_11' title='敵を選ばず&#x000A;するどい光の矢が&#x000A;ふりそそぐ&#x000A;（消費MP: 4）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>シャイニングボウ</td></tr>
+            <tr class='bow_12' title='弓での攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+3%</td></tr>
+            <tr class='bow_13' title='範囲内の仲間を&#x000A;悪い効果から&#x000A;１度だけ守る&#x000A;（消費MP: 8）&#x000A;（チャージ: 30秒）'><td class='skill_pt'>140</td><td class='skill_name'>弓聖の守り星</td></tr>
+            <tr class='bow_14' title='闇のチカラで&#x000A;敵１体を攻撃し&#x000A;光耐性を下げる&#x000A;（消費MP: 3）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>150</td><td class='skill_name'>ダークネスショット</td></tr>
+            <tr class='bow_15'><td class='skill_pt'>160</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='bow_16'><td class='skill_pt'>170</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='bow_17'><td class='skill_pt'>180</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+          </table><table class='whip skill_table'>
+            <caption class='ui-handler'>
+              <div class='console_wrapper'>
+                ムチ:
+                <span class='skill_current'>0</span>
+                /
+                <span class='skill_total'>0</span>
+              </div>
+            </caption>
+            <tr class='whip_0' title='敵１体を&#x000A;たまに混乱させる&#x000A;ムチさばき&#x000A;（消費MP: 3）'><td class='skill_pt'>3</td><td class='skill_name'>らせん打ち</td></tr>
+            <tr class='whip_1' title='ムチ装備時の&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='whip_2' title='怪人系の敵に&#x000A;威力を発揮する&#x000A;はげしいムチ攻撃&#x000A;（消費MP: 1）'><td class='skill_pt'>13</td><td class='skill_name'>愛のムチ</td></tr>
+            <tr class='whip_3' title='ムチ装備時の&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>22</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='whip_4' title='まぶしい光で&#x000A;目をくらませる&#x000A;ムチの攻撃&#x000A;（消費MP: 4）'><td class='skill_pt'>35</td><td class='skill_name'>スパークショット</td></tr>
+            <tr class='whip_5' title='敵１体を&#x000A;たまにマヒさせる&#x000A;ムチさばき&#x000A;（消費MP: 3）'><td class='skill_pt'>42</td><td class='skill_name'>しばり打ち</td></tr>
+            <tr class='whip_6' title='ムチ装備時の&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>58</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='whip_7' title='振るったムチから&#x000A;雷が地面を走り&#x000A;前方の敵を攻撃&#x000A;（消費MP: 4）'><td class='skill_pt'>76</td><td class='skill_name'>地ばしり打ち</td></tr>
+            <tr class='whip_8' title='ムチのこうげきが&#x000A;すこし遠くの敵まで&#x000A;当たるようになる'><td class='skill_pt'>88</td><td class='skill_name'>装備時効果範囲+2m</td></tr>
+            <tr class='whip_9' title='敵１体を&#x000A;双竜のごとく&#x000A;２回攻撃&#x000A;（消費MP: 8）'><td class='skill_pt'>100</td><td class='skill_name'>双竜打ち</td></tr>
+            <tr class='whip_10' title='ムチ装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='whip_11' title='雷をまとった&#x000A;ムチの一閃が&#x000A;敵集団をなぎ払う&#x000A;（消費MP: 4）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>120</td><td class='skill_name'>疾風迅雷</td></tr>
+            <tr class='whip_12' title='ムチでの攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+4%</td></tr>
+            <tr class='whip_13' title='敵１体に３連撃の&#x000A;ダメージを与え&#x000A;よい効果も消す&#x000A;（消費MP: 8）&#x000A;（チャージ: 50秒）'><td class='skill_pt'>140</td><td class='skill_name'>極竜打ち</td></tr>
+            <tr class='whip_14' title='ムチ装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>150</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='whip_15'><td class='skill_pt'>160</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='whip_16'><td class='skill_pt'>170</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='whip_17'><td class='skill_pt'>180</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+          </table><table class='staff skill_table'>
+            <caption class='ui-handler'>
+              <div class='console_wrapper'>
+                棍:
+                <span class='skill_current'>0</span>
+                /
+                <span class='skill_total'>0</span>
+              </div>
+            </caption>
+            <tr class='staff_0' title='棍装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>3</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='staff_1' title='周囲の敵の&#x000A;足元をはらって&#x000A;すっころばす&#x000A;（消費MP: 2）'><td class='skill_pt'>7</td><td class='skill_name'>足ばらい</td></tr>
+            <tr class='staff_2' title='棍装備時&#x000A;武器ガードが&#x000A;できるようになる'><td class='skill_pt'>13</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+            <tr class='staff_3' title='ゾンビ系の敵に&#x000A;威力を発揮する&#x000A;聖なる技&#x000A;（消費MP: 1）'><td class='skill_pt'>22</td><td class='skill_name'>黄泉送り</td></tr>
+            <tr class='staff_4' title='棍装備時の&#x000A;こうげき力が&#x000A;１５増える'><td class='skill_pt'>35</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+            <tr class='staff_5' title='棍を振りまわし&#x000A;前方の敵を&#x000A;なぎはらう&#x000A;（消費MP: 2）'><td class='skill_pt'>42</td><td class='skill_name'>なぎはらい</td></tr>
+            <tr class='staff_6' title='棍装備時&#x000A;敵の攻撃を&#x000A;かわしやすくなる'><td class='skill_pt'>58</td><td class='skill_name'>装備時身かわし率+4%</td></tr>
+            <tr class='staff_7' title='氷をまとった棍で&#x000A;敵１体を&#x000A;４回打ちつける&#x000A;（消費MP: 5）'><td class='skill_pt'>76</td><td class='skill_name'>氷結らんげき</td></tr>
+            <tr class='staff_8' title='棍装備時の&#x000A;こうげき力が&#x000A;２０増える'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+20</td></tr>
+            <tr class='staff_9' title='相手の攻撃を&#x000A;受けながしつつ&#x000A;なぐりかかる大技&#x000A;（消費MP: 8）'><td class='skill_pt'>100</td><td class='skill_name'>天地のかまえ</td></tr>
+            <tr class='staff_10' title='棍で攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='staff_11' title='武器ガード率が&#x000A;大幅に上がる&#x000A;棍のかまえ&#x000A;（消費MP: 2）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>120</td><td class='skill_name'>水流のかまえ</td></tr>
+            <tr class='staff_12' title='棍装備時&#x000A;さらに武器ガード&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+            <tr class='staff_13' title='敵１体に強烈な&#x000A;ダメージを与える&#x000A;棍の奥義&#x000A;（消費MP: 5）&#x000A;（チャージ: 70秒）'><td class='skill_pt'>140</td><td class='skill_name'>奥義・棍閃殺</td></tr>
+            <tr class='staff_14' title='棍装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>150</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='staff_15'><td class='skill_pt'>160</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='staff_16'><td class='skill_pt'>170</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='staff_17'><td class='skill_pt'>180</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+          </table><table class='fortunetelling skill_table'>
+            <caption class='ui-handler'>
+              <div class='console_wrapper'>
+                うらない:
+                <span class='skill_current'>0</span>
+                /
+                <span class='skill_total'>0</span>
+              </div>
+            </caption>
+            <tr class='fortunetelling_0' title='タロットコインの&#x000A;破片がドロップ&#x000A;占い師専用特技&#x000A;（消費MP: 0）'><td class='skill_pt'>8</td><td class='skill_name'>アルカナ占い（専）</td></tr>
+            <tr class='fortunetelling_1' title='全職業で隠れて&#x000A;見えない敵が&#x000A;見えるようになる'><td class='skill_pt'>16</td><td class='skill_name'>全職業で隠れた敵が見える</td></tr>
+            <tr class='fortunetelling_2' title='全職業で&#x000A;さいだいＭＰが&#x000A;１０増える'><td class='skill_pt'>28</td><td class='skill_name'>全職業でさいだいＭＰ+10</td></tr>
+            <tr class='fortunetelling_3' title='手札の右側２枚の&#x000A;カードを投げる&#x000A;占い師専用特技&#x000A;（消費MP: 2）'><td class='skill_pt'>40</td><td class='skill_name'>ライトフリング（専）</td></tr>
+            <tr class='fortunetelling_4' title='タロットの&#x000A;ダメージ量と&#x000A;回復量アップ'><td class='skill_pt'>48</td><td class='skill_name'>タロットの威力アップ（専）</td></tr>
+            <tr class='fortunetelling_5' title='タロットの&#x000A;ひき直しで&#x000A;ターン消費しない'><td class='skill_pt'>56</td><td class='skill_name'>ひき直し時ターン不要（専）</td></tr>
+            <tr class='fortunetelling_6' title='手札の左側２枚の&#x000A;カードを投げる&#x000A;占い師専用特技&#x000A;（消費MP: 2）'><td class='skill_pt'>70</td><td class='skill_name'>レフトフリング（専）</td></tr>
+            <tr class='fortunetelling_7' title='タロットの&#x000A;ダメージ量と&#x000A;回復量アップ'><td class='skill_pt'>80</td><td class='skill_name'>タロットの威力アップ（専）</td></tr>
+            <tr class='fortunetelling_8' title='全職業で&#x000A;さいだいＨＰが&#x000A;１０増える'><td class='skill_pt'>90</td><td class='skill_name'>全職業でさいだいＨＰ+10</td></tr>
+            <tr class='fortunetelling_9' title='タロットの&#x000A;ダメージ量と&#x000A;回復量アップ'><td class='skill_pt'>100</td><td class='skill_name'>タロットの威力アップ（専）</td></tr>
+            <tr class='fortunetelling_10' title='全手札をひき直し&#x000A;身かわし率アップ&#x000A;占い師専用特技&#x000A;（消費MP: 6）&#x000A;（チャージ: 40秒）'><td class='skill_pt'>110</td><td class='skill_name'>リセットベール（専）</td></tr>
+            <tr class='fortunetelling_11' title='占い師時&#x000A;さいだいＭＰが&#x000A;２０増える'><td class='skill_pt'>120</td><td class='skill_name'>さいだいＭＰ+20（専）</td></tr>
+            <tr class='fortunetelling_12' title='エンゼルスライム&#x000A;を手札に移動する&#x000A;占い師専用特技&#x000A;（消費MP: 0）&#x000A;（チャージ: 40秒）'><td class='skill_pt'>130</td><td class='skill_name'>エンゼルのみちびき（専）</td></tr>
+            <tr class='fortunetelling_13' title='タロットでたまに&#x000A;テンションを&#x000A;消費しない'><td class='skill_pt'>140</td><td class='skill_name'>テンション消費軽減（専）</td></tr>
+            <tr class='fortunetelling_14' title='タロットの&#x000A;ダメージがあがる&#x000A;占い師専用特技&#x000A;（消費MP: 8）&#x000A;（チャージ: 120秒）'><td class='skill_pt'>150</td><td class='skill_name'>魅惑の水晶球（専）</td></tr>
+          </table></div>
+      </div>
       <div id='pt_console' style='display: none'>
         <input id='pt_spinner'>
         <button id='pt_reset'>リセット</button>
@@ -2554,6 +2714,21 @@
           <li>
             履歴:
             <ul>
+              <li>
+                2016/7/27 v9.0 ver3.3後期対応。
+                <ul>
+                  <li>占い師の職スキル「うらない」に対応。</li>
+                  <li>簡易表示板を占い師に対応。</li>
+                </ul>
+              </li>
+              <li>2016/7/21 v9.0beta2 Vジャンプ情報より、占い師の武器スキルを確定</li>
+              <li>
+                2016/7/13 v9.0beta ver3.3後期対応。
+                <ul>
+                  <li>占い師を追加。確定している片手剣以外のスキルは暫定です。</li>
+                  <li>MSP上限22→25</li>
+                </ul>
+              </li>
               <li>2016/5/26 v8.1 160-180追加スキルにゲーム内データを反映。</li>
               <li>
                 2016/5/19 v8.0 ver3.3前期対応。
