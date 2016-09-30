@@ -4,6 +4,7 @@
 	"files.exclude": {
 		"**/.git": true,
 		"**/.DS_Store": true,
-		"**/*.map": true
+		"**/*.map": true,
+		"**/.sass-cache": true
 	}
 }
