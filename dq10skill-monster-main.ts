@@ -82,7 +82,9 @@ namespace Dq10.SkillSimulator {
 			var serial = new MonsterSaveData.Serializer().exec(this.monsters);
 			var utf8encoded = Base64.utob(serial);
 			var zipped = RawDeflate.deflate(utf8encoded);
-			return Base64.encodeURI(zipped);
+			return Base64.btoa(zipped)
+				.replace(/[+\/]/g, (m0) => {return m0 == '+' ? '-' : '_';})
+				.replace(/=/g, ''); //URI safe
 		}
 
 		applyQueryString(queryString: string) {
@@ -91,7 +93,7 @@ namespace Dq10.SkillSimulator {
 				serial = queryString;
 			} else {
 				try {
-					var zipped = Base64.decode(queryString);
+					var zipped = Base64.atob(queryString.replace(/[-_]/g, (m0) => {return m0 == '-' ? '+' : '/';}));
 					var utf8encoded = RawDeflate.inflate(zipped);
 					serial = Base64.btou(utf8encoded);
 				} catch (e) {

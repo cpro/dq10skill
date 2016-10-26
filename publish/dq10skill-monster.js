@@ -816,7 +816,9 @@ var Dq10;
                 var serial = new SkillSimulator.MonsterSaveData.Serializer().exec(this.monsters);
                 var utf8encoded = Base64.utob(serial);
                 var zipped = RawDeflate.deflate(utf8encoded);
-                return Base64.encodeURI(zipped);
+                return Base64.btoa(zipped)
+                    .replace(/[+\/]/g, function (m0) { return m0 == '+' ? '-' : '_'; })
+                    .replace(/=/g, ''); //URI safe
             };
             SimulatorModel.prototype.applyQueryString = function (queryString) {
                 var _this = this;
@@ -826,7 +828,7 @@ var Dq10;
                 }
                 else {
                     try {
-                        var zipped = Base64.decode(queryString);
+                        var zipped = Base64.atob(queryString.replace(/[-_]/g, function (m0) { return m0 == '-' ? '+' : '/'; }));
                         var utf8encoded = RawDeflate.inflate(zipped);
                         serial = Base64.btou(utf8encoded);
                     }
