@@ -383,7 +383,7 @@ namespace Dq10.SkillSimulator {
 					var idnum = 0;
 					while(serials.length > 0) {
 						var newMonster = this.deserializeAsFirstVersion(serials.shift(), idnum++);
-						newMonster.updateIndividualName(Base64.decode(serials.shift()));
+						newMonster.updateIndividualName(UTF8.fromUTF8(Base64.atob(serials.shift())));
 						callback(newMonster, idnum);
 					}
 				}
@@ -473,7 +473,7 @@ namespace Dq10.SkillSimulator {
 				var DB = MonsterDB;
 				var monster: MonsterUnit;
 
-				serial = Base64.decode(serial);
+				serial = Base64.atob(serial);
 				var bitArray = [];
 				for(var i = 0; i < serial.length; i++)
 					bitArray = bitArray.concat(numToBitArray(serial.charCodeAt(i), 8));

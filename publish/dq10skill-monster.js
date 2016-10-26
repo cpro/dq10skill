@@ -372,7 +372,7 @@ var Dq10;
                         var idnum = 0;
                         while (serials.length > 0) {
                             var newMonster = this.deserializeAsFirstVersion(serials.shift(), idnum++);
-                            newMonster.updateIndividualName(Base64.decode(serials.shift()));
+                            newMonster.updateIndividualName(UTF8.fromUTF8(Base64.atob(serials.shift())));
                             callback(newMonster, idnum);
                         }
                     }
@@ -447,7 +447,7 @@ var Dq10;
                 Deserializer.prototype.deserializeAsFirstVersion = function (serial, idnum) {
                     var DB = SkillSimulator.MonsterDB;
                     var monster;
-                    serial = Base64.decode(serial);
+                    serial = Base64.atob(serial);
                     var bitArray = [];
                     for (var i = 0; i < serial.length; i++)
                         bitArray = bitArray.concat(numToBitArray(serial.charCodeAt(i), 8));
@@ -746,12 +746,60 @@ var Dq10;
         SkillSimulator.SimulatorCommandManager = SimulatorCommandManager;
     })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
 })(Dq10 || (Dq10 = {}));
+/**
+ * Base64 URI safe
+ * [^\x00-\xFF]な文字しか来ない前提
+ */
+var Base64 = (function () {
+    function Base64() {
+    }
+    /**
+     * btoa
+     */
+    Base64.btoa = function (b) {
+        return window.btoa(b)
+            .replace(/[+\/]/g, function (m0) { return m0 == '+' ? '-' : '_'; })
+            .replace(/=/g, '');
+    };
+    /**
+     * atob
+     */
+    Base64.atob = function (a) {
+        a = a.replace(/[-_]/g, function (m0) { return m0 == '-' ? '+' : '/'; });
+        if (a.length % 4 == 1)
+            a += 'A';
+        return window.atob(a);
+    };
+    /**
+     * isValid
+     */
+    Base64.isValid = function (a) {
+        return (/^[A-Za-z0-9-_]+$/).test(a);
+    };
+    return Base64;
+}());
+/**
+ * 通常のUnicode文字列とUTF-8バイト列の相互変換
+ * Base64とのデータ受渡に使用
+ */
+var UTF8 = (function () {
+    function UTF8() {
+    }
+    UTF8.toUTF8 = function (raw) {
+        return unescape(encodeURIComponent(raw));
+    };
+    UTF8.fromUTF8 = function (utf8) {
+        return decodeURIComponent(escape(utf8));
+    };
+    return UTF8;
+}());
 /// <reference path="typings/jquery/jquery.d.ts" />
 /// <reference path="typings/jqueryui/jqueryui.d.ts" />
 /// <reference path="typings/rawdeflate.d.ts" />
 /// <reference path="typings/dq10skill.d.ts" />
 /// <reference path="dq10skill-monster-monster.ts" />
 /// <reference path="dq10skill-monster-command.ts" />
+/// <reference path="base64.ts" />
 var Dq10;
 (function (Dq10) {
     var SkillSimulator;
@@ -814,11 +862,9 @@ var Dq10;
             };
             SimulatorModel.prototype.generateQueryString = function () {
                 var serial = new SkillSimulator.MonsterSaveData.Serializer().exec(this.monsters);
-                var utf8encoded = Base64.utob(serial);
+                var utf8encoded = UTF8.toUTF8(serial);
                 var zipped = RawDeflate.deflate(utf8encoded);
-                return Base64.btoa(zipped)
-                    .replace(/[+\/]/g, function (m0) { return m0 == '+' ? '-' : '_'; })
-                    .replace(/=/g, ''); //URI safe
+                return Base64.btoa(zipped);
             };
             SimulatorModel.prototype.applyQueryString = function (queryString) {
                 var _this = this;
@@ -828,9 +874,9 @@ var Dq10;
                 }
                 else {
                     try {
-                        var zipped = Base64.atob(queryString.replace(/[-_]/g, function (m0) { return m0 == '-' ? '+' : '/'; }));
+                        var zipped = Base64.atob(queryString);
                         var utf8encoded = RawDeflate.inflate(zipped);
-                        serial = Base64.btou(utf8encoded);
+                        serial = UTF8.fromUTF8(utf8encoded);
                     }
                     catch (e) {
                     }
