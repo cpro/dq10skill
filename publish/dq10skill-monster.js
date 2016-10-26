@@ -1,3 +1,8 @@
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 /// <reference path="dq10skill-monster-main.ts" />
 var Dq10;
 (function (Dq10) {
@@ -242,79 +247,176 @@ var Dq10;
                 }, 0);
             };
             ;
-            //データをビット列にシリアル化
-            MonsterUnit.prototype.serialize = function () {
-                var _this = this;
-                var numToBitArray = Base64forBit.numToBitArray;
-                var bitArray = [];
-                bitArray = bitArray.concat(numToBitArray(this.data.id, SkillSimulator.BITS_MONSTER_TYPE));
-                bitArray = bitArray.concat(numToBitArray(this.level, SkillSimulator.BITS_LEVEL));
-                bitArray = bitArray.concat(numToBitArray(this.restartCount, SkillSimulator.BITS_RESTART_COUNT));
-                //スキル
-                bitArray = Object.keys(this.skillPts).reduce(function (prev, skillLineId) {
-                    return prev.concat(numToBitArray(_this.skillPts[skillLineId], SkillSimulator.BITS_SKILL));
-                }, bitArray);
-                //転生追加スキル種類
-                for (var i = 0; i < SkillSimulator.ADDITIONAL_SKILL_MAX; i++) {
-                    var additionalSkillId = 0;
-                    SkillSimulator.MonsterDB.additionalSkillLines.some(function (additionalSkillLine) {
-                        if (_this.additionalSkills[i] == additionalSkillLine.name) {
-                            additionalSkillId = additionalSkillLine.id;
+            return MonsterUnit;
+        }());
+        SkillSimulator.MonsterUnit = MonsterUnit;
+        var MonsterSaveData;
+        (function (MonsterSaveData) {
+            //ビット数定義
+            var BITS_MONSTER_TYPE = 6;
+            var BITS_LEVEL = 8;
+            var BITS_RESTART_COUNT = 4;
+            var BITS_SKILL = 6;
+            var BITS_ADDITIONAL_SKILL = 6;
+            var BITS_BADGE = 10;
+            var BITS_NATSUKI = 4;
+            function bitDataLength() {
+                return BITS_MONSTER_TYPE +
+                    BITS_LEVEL +
+                    BITS_RESTART_COUNT +
+                    BITS_SKILL * (SkillSimulator.BASIC_SKILL_COUNT + SkillSimulator.ADDITIONAL_SKILL_MAX) +
+                    BITS_ADDITIONAL_SKILL * SkillSimulator.ADDITIONAL_SKILL_MAX;
+            }
+            MonsterSaveData.bitDataLength = bitDataLength;
+            MonsterSaveData.BITS_ENCODE = 6;
+            /** 最初期の独自ビット圧縮していたバージョン */
+            var VERSION_FIRST = 1;
+            /** 現在のSerializerのバージョン */
+            var VERSION_CURRENT_SERIALIZER = 3;
+            var Serializer = (function () {
+                function Serializer() {
+                }
+                Serializer.prototype.exec = function (monsters) {
+                    var _this = this;
+                    var serial = '';
+                    // バージョン番号
+                    serial += String.fromCharCode(this.createVersionByteData());
+                    serial = monsters.reduce(function (cur, monster) { return cur + _this.serialize(monster); }, serial);
+                    return serial;
+                };
+                /** 現在のバージョン番号の最上位ビットにバージョン管理フラグとして1を立てる */
+                Serializer.prototype.createVersionByteData = function () {
+                    return (VERSION_CURRENT_SERIALIZER | 0x80);
+                };
+                /**
+                 * モンスターデータ シリアライズ仕様 (ver. 3)
+                 *  1. 全体データ長
+                 *  2. モンスタータイプID
+                 *  3. レベル
+                 *  4. 転生回数
+                 *  5 -  9. 各スキルライン（転生時追加含む）のスキルポイント
+                 * 10 - 11. 転生追加スキルライン2種のID
+                 * 12 - 15. バッジID
+                 * 16. なつき度
+                 * 17. 個体名のデータ長
+                 * 18 - . 個体名
+                 *
+                 * 個体名以外は数値で、それぞれ String.fromCharCode() し
+                 * 連結した文字列+個体名をシリアルとして受け渡しする。
+                 * ASCII範囲外の文字を含む可能性があるため、zip/unzip時には
+                 * UTF-8エンコード等が必要。
+                 */
+                Serializer.prototype.serialize = function (monster) {
+                    var data = [];
+                    data.push(monster.data.id);
+                    data.push(monster.getLevel());
+                    data.push(monster.getRestartCount());
+                    // スキルライン
+                    Object.keys(monster.skillPts).forEach(function (skillLineId) {
+                        data.push(monster.getSkillPt(skillLineId));
+                    });
+                    // 転生追加スキルライン
+                    for (var i = 0; i < SkillSimulator.ADDITIONAL_SKILL_MAX; i++) {
+                        if (monster.getAdditionalSkill(i) === null) {
+                            data.push(0);
+                            continue;
+                        }
+                        SkillSimulator.MonsterDB.additionalSkillLines.some(function (additionalSkillLine) {
+                            if (monster.getAdditionalSkill(i) == additionalSkillLine.name) {
+                                data.push(additionalSkillLine.id);
+                                return true;
+                            }
+                            return false;
+                        });
+                    }
+                    // バッジ
+                    for (i = 0; i < SkillSimulator.BADGE_COUNT; i++) {
+                        var badgeIdNum = monster.badgeEquip[i] === null ? 0 : parseInt(monster.badgeEquip[i], 10);
+                        data.push(badgeIdNum);
+                    }
+                    data.push(monster.getNatsuki());
+                    var serial = data.map(function (d) { return String.fromCharCode(d); }).join('');
+                    // 個体名
+                    var indivName = monster.getIndividualName();
+                    serial += String.fromCharCode(indivName.length) + indivName;
+                    // 先頭にシリアル全体の長さを記録
+                    serial = String.fromCharCode(serial.length) + serial;
+                    return serial;
+                };
+                return Serializer;
+            }());
+            MonsterSaveData.Serializer = Serializer;
+            var Deserializer = (function () {
+                function Deserializer(wholeSerial) {
+                    this.wholeSerial = wholeSerial;
+                }
+                Deserializer.prototype.exec = function (callback) {
+                    var _this = this;
+                    var cur = 0;
+                    var getData = function () { return _this.wholeSerial.charCodeAt(cur++); };
+                    var version = this.judgeVersion();
+                    if (version > VERSION_FIRST) {
+                        cur++;
+                        var idnum = 0;
+                        while (cur < this.wholeSerial.length) {
+                            var len = getData();
+                            var serial = this.wholeSerial.substring(cur, cur + len);
+                            var newMonster = this.deserialize(serial, idnum++);
+                            callback(newMonster, idnum);
+                            cur += len;
+                        }
+                    }
+                    else {
+                        // 初期バージョンの場合: セミコロン区切りでステータスと個体名が交互に入ってくる
+                        var serials = this.wholeSerial.split(';');
+                        var idnum = 0;
+                        while (serials.length > 0) {
+                            var newMonster = this.deserializeAsFirstVersion(serials.shift(), idnum++);
+                            newMonster.updateIndividualName(Base64.decode(serials.shift()));
+                            callback(newMonster, idnum);
+                        }
+                    }
+                };
+                Deserializer.prototype.deserialize = function (serial, idnum) {
+                    var cur = 0;
+                    var getData = function () { return serial.charCodeAt(cur++); };
+                    var DB = SkillSimulator.MonsterDB;
+                    var monster;
+                    var monsterTypeId = getData();
+                    Object.keys(DB.monsters).some(function (monsterType) {
+                        if (monsterTypeId == DB.monsters[monsterType].id) {
+                            monster = new MonsterUnit(monsterType, idnum);
                             return true;
                         }
-                        else {
-                            return false;
-                        }
+                        return false;
                     });
-                    bitArray = bitArray.concat(numToBitArray(additionalSkillId, SkillSimulator.BITS_ADDITIONAL_SKILL));
-                }
-                //バッジ
-                for (i = 0; i < SkillSimulator.BADGE_COUNT; i++) {
-                    var badgeIdNum = this.badgeEquip[i] === null ? 0 : parseInt(this.badgeEquip[i], 10);
-                    bitArray = bitArray.concat(numToBitArray(badgeIdNum, SkillSimulator.BITS_BADGE));
-                }
-                //なつき度
-                bitArray = bitArray.concat(numToBitArray(this.natsuki, SkillSimulator.BITS_NATSUKI));
-                return bitArray;
-            };
-            ;
-            //ビット列からデータを復元
-            MonsterUnit.deserialize = function (bitArray, idnum) {
-                var bitArrayToNum = Base64forBit.bitArrayToNum;
-                var monster;
-                var monsterTypeId = bitArrayToNum(bitArray.splice(0, SkillSimulator.BITS_MONSTER_TYPE));
-                for (var monsterType in SkillSimulator.MonsterDB.monsters) {
-                    if (monsterTypeId == SkillSimulator.MonsterDB.monsters[monsterType].id) {
-                        monster = new MonsterUnit(monsterType, idnum);
-                        break;
-                    }
-                }
-                if (monster === undefined)
-                    return null;
-                monster.updateLevel(bitArrayToNum(bitArray.splice(0, SkillSimulator.BITS_LEVEL)));
-                monster.updateRestartCount(bitArrayToNum(bitArray.splice(0, SkillSimulator.BITS_RESTART_COUNT)));
-                //スキル
-                for (var skillLine in monster.skillPts)
-                    monster.updateSkillPt(skillLine, bitArrayToNum(bitArray.splice(0, SkillSimulator.BITS_SKILL)));
-                //転生追加スキル種類
-                for (var i = 0; i < SkillSimulator.ADDITIONAL_SKILL_MAX; i++) {
-                    var additionalSkillId = bitArrayToNum(bitArray.splice(0, SkillSimulator.BITS_ADDITIONAL_SKILL));
-                    if (additionalSkillId === 0) {
-                        monster.updateAdditionalSkill(i, null);
-                        continue;
-                    }
-                    for (var j = 0; j < SkillSimulator.MonsterDB.additionalSkillLines.length; j++) {
-                        if (additionalSkillId == SkillSimulator.MonsterDB.additionalSkillLines[j].id) {
-                            monster.updateAdditionalSkill(i, SkillSimulator.MonsterDB.additionalSkillLines[j].name);
-                            break;
+                    if (monster === undefined)
+                        return null;
+                    monster.updateLevel(getData());
+                    monster.updateRestartCount(getData());
+                    //スキル
+                    Object.keys(monster.skillPts).forEach(function (skillLineId) {
+                        monster.updateSkillPt(skillLineId, getData());
+                    });
+                    //転生追加スキル種類
+                    for (var i = 0; i < SkillSimulator.ADDITIONAL_SKILL_MAX; i++) {
+                        var additionalSkillId = getData();
+                        if (additionalSkillId === 0) {
+                            monster.updateAdditionalSkill(i, null);
+                            continue;
                         }
+                        DB.additionalSkillLines.some(function (skillLine) {
+                            if (additionalSkillId == skillLine.id) {
+                                monster.updateAdditionalSkill(i, skillLine.name);
+                                return true;
+                            }
+                            return false;
+                        });
                     }
-                }
-                //バッジ
-                if (bitArray.length >= SkillSimulator.BITS_BADGE * SkillSimulator.BADGE_COUNT) {
-                    var badgeIdStr;
+                    //バッジ
                     for (i = 0; i < SkillSimulator.BADGE_COUNT; i++) {
-                        var badgeId = bitArrayToNum(bitArray.splice(0, SkillSimulator.BITS_BADGE));
+                        var badgeIdStr;
+                        var badgeId = getData();
                         if (badgeId === 0) {
                             badgeIdStr = null;
                         }
@@ -325,59 +427,101 @@ var Dq10;
                         }
                         monster.badgeEquip[i] = badgeIdStr;
                     }
-                }
-                //なつき度
-                if (bitArray.length >= SkillSimulator.BITS_NATSUKI) {
-                    var natsuki = bitArrayToNum(bitArray.splice(0, SkillSimulator.BITS_NATSUKI));
+                    //なつき度
+                    var natsuki = getData();
                     monster.updateNatsuki(natsuki);
-                }
-                else {
-                    monster.updateNatsuki(0);
-                }
-                return monster;
-            };
-            ;
-            return MonsterUnit;
-        })();
-        SkillSimulator.MonsterUnit = MonsterUnit;
-        var Base64forBit = (function () {
-            function Base64forBit() {
-            }
-            Base64forBit.encode = function (bitArray) {
-                for (var i = (bitArray.length - 1) % this.BITS_ENCODE + 1; i < this.BITS_ENCODE; i++)
-                    bitArray.push(0); //末尾0補完
-                var base64str = '';
-                while (bitArray.length > 0) {
-                    base64str += this.EN_CHAR.charAt(this.bitArrayToNum(bitArray.splice(0, this.BITS_ENCODE)));
-                }
-                return base64str;
-            };
-            Base64forBit.decode = function (base64str) {
-                var bitArray = [];
-                for (var i = 0; i < base64str.length; i++) {
-                    bitArray = bitArray.concat(this.numToBitArray(this.EN_CHAR.indexOf(base64str.charAt(i)), this.BITS_ENCODE));
-                }
-                return bitArray;
-            };
-            Base64forBit.bitArrayToNum = function (bitArray) {
-                var num = 0;
-                for (var i = 0; i < bitArray.length; i++) {
-                    num = num << 1 | bitArray[i];
-                }
-                return num;
-            };
-            Base64forBit.numToBitArray = function (num, digits) {
-                var bitArray = [];
-                for (var i = digits - 1; i >= 0; i--) {
-                    bitArray.push(num >> i & 1);
-                }
-                return bitArray;
-            };
-            Base64forBit.EN_CHAR = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
-            Base64forBit.BITS_ENCODE = 6; //6ビットごとに区切ってエンコード
-            return Base64forBit;
-        })();
-        SkillSimulator.Base64forBit = Base64forBit;
+                    //個体名
+                    var len = getData();
+                    var indivName = serial.substring(cur, cur + len);
+                    monster.updateIndividualName(indivName);
+                    return monster;
+                };
+                Deserializer.prototype.judgeVersion = function () {
+                    var firstByte = this.wholeSerial.charCodeAt(0);
+                    // 先頭ビットが0の場合初期バージョンと判定（ID 1-28なので必ず0になる）
+                    if ((firstByte & 0x80) === 0)
+                        return VERSION_FIRST;
+                    // 先頭ビットを除去したものをバージョン番号とする
+                    return (firstByte & 0x7f);
+                };
+                Deserializer.prototype.deserializeAsFirstVersion = function (serial, idnum) {
+                    var DB = SkillSimulator.MonsterDB;
+                    var monster;
+                    serial = Base64.decode(serial);
+                    var bitArray = [];
+                    for (var i = 0; i < serial.length; i++)
+                        bitArray = bitArray.concat(numToBitArray(serial.charCodeAt(i), 8));
+                    var monsterTypeId = bitArrayToNum(bitArray.splice(0, BITS_MONSTER_TYPE));
+                    Object.keys(DB.monsters).some(function (monsterType) {
+                        if (monsterTypeId == DB.monsters[monsterType].id) {
+                            monster = new MonsterUnit(monsterType, idnum);
+                            return true;
+                        }
+                        return false;
+                    });
+                    if (monster === undefined)
+                        return null;
+                    monster.updateLevel(bitArrayToNum(bitArray.splice(0, BITS_LEVEL)));
+                    monster.updateRestartCount(bitArrayToNum(bitArray.splice(0, BITS_RESTART_COUNT)));
+                    //スキル
+                    Object.keys(monster.skillPts).forEach(function (skillLine) {
+                        monster.updateSkillPt(skillLine, bitArrayToNum(bitArray.splice(0, BITS_SKILL)));
+                    });
+                    //転生追加スキル種類
+                    for (var i = 0; i < SkillSimulator.ADDITIONAL_SKILL_MAX; i++) {
+                        var additionalSkillId = bitArrayToNum(bitArray.splice(0, BITS_ADDITIONAL_SKILL));
+                        if (additionalSkillId === 0) {
+                            monster.updateAdditionalSkill(i, null);
+                            continue;
+                        }
+                        DB.additionalSkillLines.some(function (skillLine) {
+                            if (additionalSkillId == skillLine.id) {
+                                monster.updateAdditionalSkill(i, skillLine.name);
+                                return true;
+                            }
+                            return false;
+                        });
+                    }
+                    //バッジ
+                    if (bitArray.length >= BITS_BADGE * SkillSimulator.BADGE_COUNT) {
+                        var badgeIdStr;
+                        for (i = 0; i < SkillSimulator.BADGE_COUNT; i++) {
+                            var badgeId = bitArrayToNum(bitArray.splice(0, BITS_BADGE));
+                            if (badgeId === 0) {
+                                badgeIdStr = null;
+                            }
+                            else {
+                                //0補間
+                                badgeIdStr = '00' + badgeId.toString();
+                                badgeIdStr = badgeIdStr.substring(badgeIdStr.length - 3);
+                            }
+                            monster.badgeEquip[i] = badgeIdStr;
+                        }
+                    }
+                    //なつき度
+                    if (bitArray.length >= BITS_NATSUKI) {
+                        var natsuki = bitArrayToNum(bitArray.splice(0, BITS_NATSUKI));
+                        monster.updateNatsuki(natsuki);
+                    }
+                    else {
+                        monster.updateNatsuki(0);
+                    }
+                    return monster;
+                    function bitArrayToNum(bitArray) {
+                        return bitArray.reduce(function (prev, bit) { return prev << 1 | bit; }, 0);
+                    }
+                    function numToBitArray(num, digits) {
+                        var bitArray = [];
+                        for (var i = digits - 1; i >= 0; i--) {
+                            bitArray.push(num >> i & 1);
+                        }
+                        return bitArray;
+                    }
+                };
+                return Deserializer;
+            }());
+            MonsterSaveData.Deserializer = Deserializer;
+        })(MonsterSaveData = SkillSimulator.MonsterSaveData || (SkillSimulator.MonsterSaveData = {}));
     })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
 })(Dq10 || (Dq10 = {}));
 var Dq10;
@@ -417,16 +561,11 @@ var Dq10;
                 }
             };
             return EventDispatcher;
-        })();
+        }());
         SkillSimulator.EventDispatcher = EventDispatcher;
     })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
 })(Dq10 || (Dq10 = {}));
 /// <reference path="eventdispatcher.ts" />
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 var Dq10;
 (function (Dq10) {
     var SkillSimulator;
@@ -498,7 +637,7 @@ var Dq10;
                 return (this.cursor < this.commandStack.length);
             };
             return CommandManager;
-        })(SkillSimulator.EventDispatcher);
+        }(SkillSimulator.EventDispatcher));
         SkillSimulator.CommandManager = CommandManager;
     })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
 })(Dq10 || (Dq10 = {}));
@@ -524,7 +663,7 @@ var Dq10;
                 this.newValue = newCommand.newValue;
             };
             return SingleValueCommand;
-        })();
+        }());
         //エントリ追加
         var AddMonster = (function () {
             function AddMonster(monsterType) {
@@ -557,7 +696,7 @@ var Dq10;
                 };
             };
             return AddMonster;
-        })();
+        }());
         //エントリ削除
         var DeleteMonster = (function () {
             function DeleteMonster(monsterId) {
@@ -590,7 +729,7 @@ var Dq10;
                 };
             };
             return DeleteMonster;
-        })();
+        }());
         var SimulatorCommandManager = (function (_super) {
             __extends(SimulatorCommandManager, _super);
             function SimulatorCommandManager() {
@@ -603,12 +742,13 @@ var Dq10;
                 return this.invoke(new DeleteMonster(monsterId));
             };
             return SimulatorCommandManager;
-        })(SkillSimulator.CommandManager);
+        }(SkillSimulator.CommandManager));
         SkillSimulator.SimulatorCommandManager = SimulatorCommandManager;
     })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
 })(Dq10 || (Dq10 = {}));
 /// <reference path="typings/jquery/jquery.d.ts" />
 /// <reference path="typings/jqueryui/jqueryui.d.ts" />
+/// <reference path="typings/rawdeflate.d.ts" />
 /// <reference path="typings/dq10skill.d.ts" />
 /// <reference path="dq10skill-monster-monster.ts" />
 /// <reference path="dq10skill-monster-command.ts" />
@@ -620,20 +760,6 @@ var Dq10;
         SkillSimulator.BASIC_SKILL_COUNT = 3;
         SkillSimulator.ADDITIONAL_SKILL_MAX = 2;
         SkillSimulator.BADGE_COUNT = 4;
-        //ビット数定義
-        SkillSimulator.BITS_MONSTER_TYPE = 6;
-        SkillSimulator.BITS_LEVEL = 8;
-        SkillSimulator.BITS_RESTART_COUNT = 4;
-        SkillSimulator.BITS_SKILL = 6;
-        SkillSimulator.BITS_ADDITIONAL_SKILL = 6;
-        SkillSimulator.BITS_BADGE = 10;
-        SkillSimulator.BITS_NATSUKI = 4;
-        SkillSimulator.bitDataLength = SkillSimulator.BITS_MONSTER_TYPE +
-            SkillSimulator.BITS_LEVEL +
-            SkillSimulator.BITS_RESTART_COUNT +
-            SkillSimulator.BITS_SKILL * (SkillSimulator.BASIC_SKILL_COUNT + SkillSimulator.ADDITIONAL_SKILL_MAX) +
-            SkillSimulator.BITS_ADDITIONAL_SKILL * SkillSimulator.ADDITIONAL_SKILL_MAX; // +
-        //BITS_BADGE * BADGE_COUNT;
         var SimulatorModel = (function () {
             function SimulatorModel() {
                 //パラメータ格納用
@@ -687,33 +813,50 @@ var Dq10;
                 return null;
             };
             SimulatorModel.prototype.generateQueryString = function () {
-                var query = [];
-                this.monsters.forEach(function (monster) {
-                    query.push(SkillSimulator.Base64forBit.encode(monster.serialize()));
-                    query.push(Base64.encode(monster.indivName, true));
-                });
-                return query.join(';');
+                var serial = new SkillSimulator.MonsterSaveData.Serializer().exec(this.monsters);
+                var utf8encoded = Base64.utob(serial);
+                var zipped = RawDeflate.deflate(utf8encoded);
+                return Base64.encodeURI(zipped);
             };
             SimulatorModel.prototype.applyQueryString = function (queryString) {
-                var query = queryString.split(';');
-                while (query.length > 0) {
-                    var newMonster = SkillSimulator.MonsterUnit.deserialize(SkillSimulator.Base64forBit.decode(query.shift()), this.lastId++);
-                    newMonster.updateIndividualName(Base64.decode(query.shift()));
-                    this.monsters.push(newMonster);
+                var _this = this;
+                var serial = '';
+                if (queryString.indexOf(';') >= 0) {
+                    serial = queryString;
                 }
+                else {
+                    try {
+                        var zipped = Base64.decode(queryString);
+                        var utf8encoded = RawDeflate.inflate(zipped);
+                        serial = Base64.btou(utf8encoded);
+                    }
+                    catch (e) {
+                    }
+                }
+                if (serial == '')
+                    return;
+                new SkillSimulator.MonsterSaveData.Deserializer(serial).exec(function (monster, idnum) {
+                    _this.lastId = idnum;
+                    _this.monsters.push(monster);
+                });
             };
             SimulatorModel.prototype.validateQueryString = function (queryString) {
                 if (!queryString.match(/^[A-Za-z0-9-_;]+$/))
                     return false;
-                var query = queryString.split(';');
-                if (query.length % 2 == 1)
-                    return false;
-                return query.every(function (q) {
-                    return (q.length * SkillSimulator.Base64forBit.BITS_ENCODE >= SkillSimulator.bitDataLength);
-                });
+                //Base64文字列をセミコロンで繋げていた旧形式の場合
+                if (queryString.indexOf(';') >= 0) {
+                    var query = queryString.split(';');
+                    // データと個体名がペアで連続するので2の倍数である
+                    if (query.length % 2 == 1)
+                        return false;
+                    return query.filter(function (q, i) { return (i % 2) === 0; }).every(function (q) {
+                        return (q.length * SkillSimulator.MonsterSaveData.BITS_ENCODE >= SkillSimulator.MonsterSaveData.bitDataLength());
+                    });
+                }
+                return true;
             };
             return SimulatorModel;
-        })();
+        }());
         SkillSimulator.SimulatorModel = SimulatorModel;
         /* UI */
         var SimulatorUI = (function () {
@@ -1321,7 +1464,7 @@ var Dq10;
                 this.refreshAll();
             };
             return SimulatorUI;
-        })();
+        }());
         //バッジ選択ダイアログ
         var BadgeSelector = (function () {
             function BadgeSelector() {
@@ -1578,7 +1721,7 @@ var Dq10;
                 this.$maskScreen.hide();
             };
             return BadgeSelector;
-        })();
+        }());
         ;
         //検索機能
         var BadgeSearch = (function () {
@@ -1651,7 +1794,7 @@ var Dq10;
                 this.search = [];
             };
             return BadgeSearch;
-        })();
+        }());
         //数値を3桁区切りに整形
         function numToFormedStr(num) {
             if (isNaN(num))

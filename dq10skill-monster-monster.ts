@@ -249,94 +249,193 @@ namespace Dq10.SkillSimulator {
 				return wholeTotal + cur;
 			}, 0);
 		};
+	}
 
+	export module MonsterSaveData {
+		//ビット数定義
+		const BITS_MONSTER_TYPE = 6;
+		const BITS_LEVEL = 8;
+		const BITS_RESTART_COUNT = 4;
+		const BITS_SKILL = 6;
+		const BITS_ADDITIONAL_SKILL = 6;
+		const BITS_BADGE = 10;
+		const BITS_NATSUKI = 4;
+		export function bitDataLength(): number {
+			return BITS_MONSTER_TYPE +
+				BITS_LEVEL +
+				BITS_RESTART_COUNT +
+				BITS_SKILL * (BASIC_SKILL_COUNT + ADDITIONAL_SKILL_MAX) +
+				BITS_ADDITIONAL_SKILL * ADDITIONAL_SKILL_MAX;
+		}
+		export const BITS_ENCODE = 6;
 
-		//データをビット列にシリアル化
-		serialize() {
-			var numToBitArray = Base64forBit.numToBitArray;
-			var bitArray: number[] = [];
+		/** 最初期の独自ビット圧縮していたバージョン */
+		const VERSION_FIRST = 1;
+		/** 現在のSerializerのバージョン */
+		const VERSION_CURRENT_SERIALIZER = 3;
 
-			bitArray = bitArray.concat(numToBitArray(this.data.id, BITS_MONSTER_TYPE));
-			bitArray = bitArray.concat(numToBitArray(this.level, BITS_LEVEL));
-			bitArray = bitArray.concat(numToBitArray(this.restartCount, BITS_RESTART_COUNT));
+		export class Serializer {
+			exec(monsters: MonsterUnit[]): string {
+				var serial = '';
 
-			//スキル
-			bitArray = Object.keys(this.skillPts).reduce((prev, skillLineId) =>
-				prev.concat(numToBitArray(this.skillPts[skillLineId], BITS_SKILL))
-			, bitArray)
+				// バージョン番号
+				serial += String.fromCharCode(this.createVersionByteData());
 
-			//転生追加スキル種類
-			for(var i = 0; i < ADDITIONAL_SKILL_MAX; i++) {
-				var additionalSkillId = 0;
+				serial = monsters.reduce((cur, monster) => cur + this.serialize(monster), serial);
 
-				MonsterDB.additionalSkillLines.some((additionalSkillLine) => {
-					if(this.additionalSkills[i] == additionalSkillLine.name) {
-						additionalSkillId = additionalSkillLine.id;
-						return true;
-					} else {
-						return false;
-					}
+				return serial;
+			}
+
+			/** 現在のバージョン番号の最上位ビットにバージョン管理フラグとして1を立てる */
+			private createVersionByteData() {
+				return (VERSION_CURRENT_SERIALIZER | 0x80);
+			}
+
+			/**
+			 * モンスターデータ シリアライズ仕様 (ver. 3)
+			 *  1. 全体データ長
+			 *  2. モンスタータイプID
+			 *  3. レベル
+			 *  4. 転生回数
+			 *  5 -  9. 各スキルライン（転生時追加含む）のスキルポイント
+			 * 10 - 11. 転生追加スキルライン2種のID
+			 * 12 - 15. バッジID
+			 * 16. なつき度
+			 * 17. 個体名のデータ長
+			 * 18 - . 個体名
+			 *
+			 * 個体名以外は数値で、それぞれ String.fromCharCode() し
+			 * 連結した文字列+個体名をシリアルとして受け渡しする。
+			 * ASCII範囲外の文字を含む可能性があるため、zip/unzip時には
+			 * UTF-8エンコード等が必要。
+			 */
+			private serialize(monster: MonsterUnit): string {
+				var data = [];
+				data.push(monster.data.id);
+				data.push(monster.getLevel());
+				data.push(monster.getRestartCount());
+
+				// スキルライン
+				Object.keys(monster.skillPts).forEach((skillLineId) => {
+					data.push(monster.getSkillPt(skillLineId));
 				});
-				bitArray = bitArray.concat(numToBitArray(additionalSkillId, BITS_ADDITIONAL_SKILL));
-			}
 
-			//バッジ
-			for(i = 0; i < BADGE_COUNT; i++) {
-				var badgeIdNum = this.badgeEquip[i] === null ? 0 : parseInt(this.badgeEquip[i], 10);
-				bitArray = bitArray.concat(numToBitArray(badgeIdNum, BITS_BADGE));
-			}
-
-			//なつき度
-			bitArray = bitArray.concat(numToBitArray(this.natsuki, BITS_NATSUKI));
-
-			return bitArray;
-		};
-
-		//ビット列からデータを復元
-		static deserialize(bitArray: number[], idnum: number) {
-			var bitArrayToNum = Base64forBit.bitArrayToNum;
-			var monster: MonsterUnit;
-
-			var monsterTypeId = bitArrayToNum(bitArray.splice(0, BITS_MONSTER_TYPE));
-			for(var monsterType in MonsterDB.monsters) {
-				if(monsterTypeId == MonsterDB.monsters[monsterType].id) {
-					monster = new MonsterUnit(monsterType, idnum);
-					break;
-				}
-			}
-
-			if(monster === undefined) return null;
-
-			monster.updateLevel(bitArrayToNum(bitArray.splice(0, BITS_LEVEL)));
-			monster.updateRestartCount(bitArrayToNum(bitArray.splice(0, BITS_RESTART_COUNT)));
-
-			//スキル
-			for(var skillLine in monster.skillPts)
-				monster.updateSkillPt(skillLine, bitArrayToNum(bitArray.splice(0, BITS_SKILL)));
-
-			//転生追加スキル種類
-			for(var i = 0; i < ADDITIONAL_SKILL_MAX; i++) {
-				var additionalSkillId = bitArrayToNum(bitArray.splice(0, BITS_ADDITIONAL_SKILL));
-
-				if(additionalSkillId === 0) {
-					monster.updateAdditionalSkill(i, null);
-					continue;
+				// 転生追加スキルライン
+				for(var i = 0; i < ADDITIONAL_SKILL_MAX; i++) {
+					if(monster.getAdditionalSkill(i) === null) {
+						data.push(0);
+						continue;
+					}
+					MonsterDB.additionalSkillLines.some((additionalSkillLine) => {
+						if(monster.getAdditionalSkill(i) == additionalSkillLine.name) {
+							data.push(additionalSkillLine.id);
+							return true;
+						}
+						return false;
+					});
 				}
 
-				for(var j = 0; j < MonsterDB.additionalSkillLines.length; j++) {
-					if(additionalSkillId == MonsterDB.additionalSkillLines[j].id) {
-						monster.updateAdditionalSkill(i, MonsterDB.additionalSkillLines[j].name);
-						break;
+				// バッジ
+				for(i = 0; i < BADGE_COUNT; i++) {
+					var badgeIdNum = monster.badgeEquip[i] === null ? 0 : parseInt(monster.badgeEquip[i], 10);
+					data.push(badgeIdNum);
+				}
+
+				data.push(monster.getNatsuki());
+
+				var serial = data.map((d) => String.fromCharCode(d)).join('');
+
+				// 個体名
+				var indivName = monster.getIndividualName();
+				serial += String.fromCharCode(indivName.length) + indivName;
+
+				// 先頭にシリアル全体の長さを記録
+				serial = String.fromCharCode(serial.length) + serial;
+
+				return serial;
+			}
+		}
+
+		export class Deserializer {
+			constructor(private wholeSerial: string) {
+			}
+
+			exec(callback: (monster: MonsterUnit, idnum: number) => void): void {
+				var cur = 0;
+				var getData = () => this.wholeSerial.charCodeAt(cur++);
+
+				var version = this.judgeVersion();
+
+				if(version > VERSION_FIRST) {
+					cur++;
+					var idnum = 0;
+
+					while(cur < this.wholeSerial.length) {
+						var len = getData();
+						var serial = this.wholeSerial.substring(cur, cur + len);
+						var newMonster = this.deserialize(serial, idnum++);
+						callback(newMonster, idnum);
+						cur+= len;
+					}
+				} else {
+					// 初期バージョンの場合: セミコロン区切りでステータスと個体名が交互に入ってくる
+					var serials = this.wholeSerial.split(';');
+					var idnum = 0;
+					while(serials.length > 0) {
+						var newMonster = this.deserializeAsFirstVersion(serials.shift(), idnum++);
+						newMonster.updateIndividualName(Base64.decode(serials.shift()));
+						callback(newMonster, idnum);
 					}
 				}
 			}
 
-			//バッジ
-			if(bitArray.length >= BITS_BADGE * BADGE_COUNT) {
-				var badgeIdStr: string;
+			private deserialize(serial: string, idnum: number): MonsterUnit {
+				var cur = 0;
+				var getData = () => serial.charCodeAt(cur++);
 
+				var DB = MonsterDB;
+				var monster: MonsterUnit;
+
+				var monsterTypeId = getData();
+				Object.keys(DB.monsters).some((monsterType) => {
+					if(monsterTypeId == DB.monsters[monsterType].id) {
+						monster = new MonsterUnit(monsterType, idnum);
+						return true;
+					}
+					return false;
+				});
+				if(monster === undefined) return null;
+
+				monster.updateLevel(getData());
+				monster.updateRestartCount(getData());
+
+				//スキル
+				Object.keys(monster.skillPts).forEach((skillLineId) => {
+					monster.updateSkillPt(skillLineId, getData());
+				});
+
+				//転生追加スキル種類
+				for(var i = 0; i < ADDITIONAL_SKILL_MAX; i++) {
+					var additionalSkillId = getData();
+
+					if(additionalSkillId === 0) {
+						monster.updateAdditionalSkill(i, null);
+						continue;
+					}
+
+					DB.additionalSkillLines.some((skillLine) => {
+						if(additionalSkillId == skillLine.id) {
+							monster.updateAdditionalSkill(i, skillLine.name);
+							return true;
+						}
+						return false;
+					});
+				}
+
+				//バッジ
 				for(i = 0; i < BADGE_COUNT; i++) {
-					var badgeId = bitArrayToNum(bitArray.splice(0, BITS_BADGE));
+					var badgeIdStr: string;
+					var badgeId = getData();
 					if(badgeId === 0) {
 						badgeIdStr = null;
 					} else {
@@ -346,131 +445,21 @@ namespace Dq10.SkillSimulator {
 					}
 					monster.badgeEquip[i] = badgeIdStr;
 				}
-			}
 
-			//なつき度
-			if(bitArray.length >= BITS_NATSUKI) {
-				var natsuki = bitArrayToNum(bitArray.splice(0, BITS_NATSUKI));
+				//なつき度
+				var natsuki = getData();
 				monster.updateNatsuki(natsuki);
-			} else {
-				monster.updateNatsuki(0);
-			}
 
-			return monster;
-		};
-	}
+				//個体名
+				var len = getData();
+				var indivName = serial.substring(cur, cur + len);
+				monster.updateIndividualName(indivName);
 
-	export class Base64forBit {
-		static EN_CHAR = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
-		static BITS_ENCODE = 6; //6ビットごとに区切ってエンコード
-
-		static encode(bitArray: number[]) {
-			for(var i = (bitArray.length - 1) % this.BITS_ENCODE + 1 ; i < this.BITS_ENCODE; i++) bitArray.push(0); //末尾0補完
-
-			var base64str = '';
-			while(bitArray.length > 0) {
-				base64str += this.EN_CHAR.charAt(this.bitArrayToNum(bitArray.splice(0, this.BITS_ENCODE)));
-			}
-
-			return base64str;
-		}
-
-		static decode(base64str: string) {
-			var bitArray: number[] = [];
-			for(var i = 0; i < base64str.length; i++) {
-				bitArray = bitArray.concat(this.numToBitArray(this.EN_CHAR.indexOf(base64str.charAt(i)), this.BITS_ENCODE));
-			}
-
-			return bitArray;
-		}
-
-		static bitArrayToNum(bitArray: number[]) {
-			var num = 0;
-			for(var i = 0; i < bitArray.length; i++) {
-				num = num << 1 | bitArray[i];
-			}
-			return num;
-		}
-		static numToBitArray(num: number, digits: number) {
-			var bitArray: number[] = [];
-			for(var i = digits - 1; i >= 0; i--) {
-				bitArray.push(num >> i & 1);
-			}
-			return bitArray;
-		}
-	}
-
-	module MonsterSaveData {
-		//ビット数定義
-		const BITS_MONSTER_TYPE = 6;
-		const BITS_LEVEL = 8;
-		const BITS_RESTART_COUNT = 4;
-		const BITS_SKILL = 6;
-		const BITS_ADDITIONAL_SKILL = 6;
-		const BITS_BADGE = 10;
-		const BITS_NATSUKI = 4;
-		const bitDataLength =
-			BITS_MONSTER_TYPE +
-			BITS_LEVEL +
-			BITS_RESTART_COUNT +
-			BITS_SKILL * (BASIC_SKILL_COUNT + ADDITIONAL_SKILL_MAX) +
-			BITS_ADDITIONAL_SKILL * ADDITIONAL_SKILL_MAX; // +
-
-		/** 最初期の独自ビット圧縮していたバージョン */
-		const VERSION_FIRST = 1;
-		/** 現在のSerializerのバージョン */
-		const VERSION_CURRENT_SERIALIZER = 3;
-
-		export class Serializer {
-			exec(monster: MonsterUnit): string {
-				var DB = MonsterDB;
-
-				var serial = '';
-				var toByte = String.fromCharCode;
-
-				// バージョン番号
-				serial += toByte(this.createVersionByteData());
-
-
-			}
-
-			/** 現在のバージョン番号の最上位ビットにバージョン管理フラグとして1を立てる */
-			private createVersionByteData() {
-				return (VERSION_CURRENT_SERIALIZER | 0x80);
-			}
-		}
-
-		export class Deserializer {
-			constructor(private serial: string) {
-			}
-
-			exec(callback: (monster: MonsterUnit) => void): void {
-				var cur = 0;
-				var getData = () => this.serial.charCodeAt(cur++);
-
-				var version = this.judgeVersion();
-
-				if(version > VERSION_FIRST) {
-					cur++;
-
-				} else {
-					// 初期バージョンの場合: セミコロン区切りでステータスと個体名が交互に入ってくる
-					var serials = this.serial.split(';');
-					var idnum = 0;
-					while(serials.length > 0) {
-						var newMonster = this.deserializeAsFirstVersion(serials.shift(), idnum++);
-						newMonster.updateIndividualName(Base64.decode(serials.shift()));
-						callback(newMonster);
-					}
-				}
-			}
-
-			private deserialize(serial: string, idnum: number): MonsterUnit {
-
+				return monster;
 			}
 
 			private judgeVersion(): number {
-				var firstByte = this.serial.charCodeAt(0);
+				var firstByte = this.wholeSerial.charCodeAt(0);
 
 				// 先頭ビットが0の場合初期バージョンと判定（ID 1-28なので必ず0になる）
 				if((firstByte & 0x80) === 0)
@@ -484,9 +473,10 @@ namespace Dq10.SkillSimulator {
 				var DB = MonsterDB;
 				var monster: MonsterUnit;
 
+				serial = Base64.decode(serial);
 				var bitArray = [];
-				for(var i = 0; i < this.serial.length; i++)
-					bitArray = bitArray.concat(numToBitArray(this.serial.charCodeAt(i), 8));
+				for(var i = 0; i < serial.length; i++)
+					bitArray = bitArray.concat(numToBitArray(serial.charCodeAt(i), 8));
 
 				var monsterTypeId = bitArrayToNum(bitArray.splice(0, BITS_MONSTER_TYPE));
 				Object.keys(DB.monsters).some((monsterType) => {

@@ -17,6 +17,13 @@
 			"file": "${workspaceRoot}/publish/index.html"
 		},
 		{
+			"name": "Launch local monster.html, with sourcemaps",
+			"type": "chrome",
+			"request": "launch",
+			"sourceMaps": true,
+			"file": "${workspaceRoot}/publish/monster.html"
+		},
+		{
 			"name": "Attach to Chrome, with sourcemaps",
 			"type": "chrome",
 			"request": "attach",
