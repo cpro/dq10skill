@@ -1,43 +1,27 @@
 /// <reference path="typings/jquery/jquery.d.ts" />
 /// <reference path="typings/jqueryui/jqueryui.d.ts" />
+/// <reference path="typings/rawdeflate.d.ts" />
 
 /// <reference path="typings/dq10skill.d.ts" />
 
 /// <reference path="dq10skill-monster-monster.ts" />
 /// <reference path="dq10skill-monster-command.ts" />
-
-declare var Base64: any;
+/// <reference path="base64.ts" />
 
 namespace Dq10.SkillSimulator {
 	export var Simulator: SimulatorModel;
 	export var MonsterDB: MonsterSimulatorDB;
 
 	export const MONSTER_MAX = 8;
-	
+
 	export const BASIC_SKILL_COUNT = 3;
 	export const ADDITIONAL_SKILL_MAX = 2;
 	export const BADGE_COUNT = 4;
 
-	//ビット数定義
-	export const BITS_MONSTER_TYPE = 6;
-	export const BITS_LEVEL = 8;
-	export const BITS_RESTART_COUNT = 4;
-	export const BITS_SKILL = 6;
-	export const BITS_ADDITIONAL_SKILL = 6;
-	export const BITS_BADGE = 10;
-	export const BITS_NATSUKI = 4;
-	export const bitDataLength =
-		BITS_MONSTER_TYPE +
-		BITS_LEVEL +
-		BITS_RESTART_COUNT +
-		BITS_SKILL * (BASIC_SKILL_COUNT + ADDITIONAL_SKILL_MAX) +
-		BITS_ADDITIONAL_SKILL * ADDITIONAL_SKILL_MAX; // +
-		//BITS_BADGE * BADGE_COUNT;
-
 	export class SimulatorModel {
 		//パラメータ格納用
 		monsters: MonsterUnit[] = [];
-		
+
 		//モンスターID管理
 		private lastId = 0;
 
@@ -82,7 +66,7 @@ namespace Dq10.SkillSimulator {
 		moveupMonster(monsterId: string) {
 			var i = this.indexOf(monsterId);
 			if(i < 0) return;
-			
+
 			this.monsters.splice(i - 1, 2, this.monsters[i], this.monsters[i - 1]);
 		}
 
@@ -94,35 +78,48 @@ namespace Dq10.SkillSimulator {
 		}
 
 		generateQueryString() {
-			var query = [];
-			this.monsters.forEach((monster) => {
-				query.push(Base64forBit.encode(monster.serialize()));
-				query.push(Base64.encode(monster.indivName, true));
-			});
-
-			return query.join(';');
+			var serial = new MonsterSaveData.Serializer().exec(this.monsters);
+			var utf8encoded = UTF8.toUTF8(serial);
+			var zipped = RawDeflate.deflate(utf8encoded);
+			return Base64.btoa(zipped);
 		}
 
 		applyQueryString(queryString: string) {
-			var query = queryString.split(';');
-			while(query.length > 0) {
-				var newMonster = MonsterUnit.deserialize(Base64forBit.decode(query.shift()), this.lastId++);
-				newMonster.updateIndividualName(Base64.decode(query.shift()));
-				this.monsters.push(newMonster);
+			var serial = '';
+			if(queryString.indexOf(';') >= 0) {
+				serial = queryString;
+			} else {
+				try {
+					var zipped = Base64.atob(queryString);
+					var utf8encoded = RawDeflate.inflate(zipped);
+					serial = UTF8.fromUTF8(utf8encoded);
+				} catch (e) {
+				}
 			}
+			if(serial == '') return;
+
+			new MonsterSaveData.Deserializer(serial).exec((monster, idnum) => {
+				this.lastId = idnum;
+				this.monsters.push(monster);
+			});
 		}
 
 		validateQueryString(queryString: string) {
 			if(!queryString.match(/^[A-Za-z0-9-_;]+$/))
 				return false;
 
-			var query = queryString.split(';');
-			if(query.length % 2 == 1)
-				return false;
+			//Base64文字列をセミコロンで繋げていた旧形式の場合
+			if(queryString.indexOf(';') >= 0) {
+				var query = queryString.split(';');
+				// データと個体名がペアで連続するので2の倍数である
+				if(query.length % 2 == 1)
+					return false;
 
-			return query.every((q) => {
-				return (q.length * Base64forBit.BITS_ENCODE >= bitDataLength);
-			});
+				return query.filter((q, i) => (i % 2) === 0).every((q) => {
+					return (q.length * MonsterSaveData.BITS_ENCODE >= MonsterSaveData.bitDataLength());
+				});
+			}
+			return true;
 		}
 	}
 
@@ -130,18 +127,18 @@ namespace Dq10.SkillSimulator {
 	class SimulatorUI {
 		private CLASSNAME_SKILL_ENABLED = 'enabled';
 		private CLASSNAME_ERROR = 'error';
-		
+
 		private sim = Simulator;
 		private com = new SimulatorCommandManager();
 		private DB: MonsterSimulatorDB;
-		
+
 		private badgeSelector: BadgeSelector;
-		
+
 		constructor(sim: SimulatorModel) {
 			this.sim = sim;
 			this.DB = MonsterDB;
 		}
-		
+
 		//モンスターのエントリ追加
 		private drawMonsterEntry (monster: MonsterUnit) {
 			var $ent = $('#monster_dummy').clone()
@@ -196,7 +193,7 @@ namespace Dq10.SkillSimulator {
 			this.refreshAdditionalSkillSelector(monsterId);
 			this.refreshAdditionalSkill(monsterId);
 			this.refreshMonsterInfo(monsterId);
-			Object.keys(this.DB.skillLines).forEach((skillLineId) => 
+			Object.keys(this.DB.skillLines).forEach((skillLineId) =>
 				this.refreshSkillList(monsterId, skillLineId)
 			);
 			this.refreshTotalStatus(monsterId);
@@ -213,14 +210,14 @@ namespace Dq10.SkillSimulator {
 			var monster = this.sim.getMonster(monsterId);
 			var currentLevel = monster.getLevel();
 			var requiredLevel = monster.requiredLevel();
-			
+
 			//見出し中のレベル数値
 			$(`#${monsterId} .lv_h2`).text(currentLevel);
 			if(monster.getRestartCount() > 0)
 				$(`#${monsterId} .lv_h2`).append('<small> + ' + monster.getRestartCount() + '</small>');
 
 			var $levelH2 = $(`#${monsterId} h2`);
-			
+
 			//必要経験値
 			$(`#${monsterId} .exp`).text(numToFormedStr(monster.requiredExp(currentLevel)));
 			var additionalExp = monster.additionalExp();
@@ -238,10 +235,10 @@ namespace Dq10.SkillSimulator {
 				$skillPtsText.append('<small> +' + restartSkillPts + '</small>');
 			if(natsukiSkillPts > 0)
 				$skillPtsText.append('<small> +' + natsukiSkillPts + '</small>');
-			
+
 			//Lv不足の処理
 			var isLevelError = (isNaN(requiredLevel) || currentLevel < requiredLevel);
-			
+
 			$levelH2.toggleClass(this.CLASSNAME_ERROR, isLevelError);
 			$skillPtsText.toggleClass(this.CLASSNAME_ERROR, isLevelError);
 			$(`#${monsterId} .error`).toggle(isLevelError);
@@ -250,7 +247,7 @@ namespace Dq10.SkillSimulator {
 				$(`#${monsterId} .exp_remain`).text(numToFormedStr(monster.requiredExpRemain()));
 			}
 		}
-		
+
 		private refreshSkillList(monsterId: string, skillLineId: string) {
 			$(`#${monsterId} tr[class^=${skillLineId}_]`).removeClass(this.CLASSNAME_SKILL_ENABLED); //クリア
 			var monster = this.sim.getMonster(monsterId);
@@ -260,26 +257,26 @@ namespace Dq10.SkillSimulator {
 			this.DB.skillLines[skillLineId].skills.some((skill, s) => {
 				if(skillPt < skill.pt)
 					return true;
-				
+
 				$(`#${monsterId} .${skillLineId}_${s}`).addClass(this.CLASSNAME_SKILL_ENABLED);
 				return false;
 			});
 			$(`#${monsterId} .${skillLineId} .skill_total`).text(skillPt);
 		}
-		
+
 		private refreshControls(monsterId: string) {
 			var monster = this.sim.getMonster(monsterId);
 
 			$(`#${monsterId} .lv_select>select`).val(monster.getLevel());
 			$(`#${monsterId} .restart_count`).val(monster.getRestartCount());
-			
+
 			Object.keys(monster.skillPts).forEach((skillLineId) => {
 				$(`#${monsterId} .${skillLineId} .ptspinner`).spinner('value', monster.getSkillPt(skillLineId));
 			});
-			
+
 			$(`#${monsterId} .natsuki-selector>select`).val(monster.getNatsuki());
 		}
-		
+
 		private refreshSaveUrl() {
 			var queryString = this.sim.generateQueryString();
 			if(queryString.length === 0) {
@@ -290,7 +287,7 @@ namespace Dq10.SkillSimulator {
 
 			var url = window.location.href.replace(window.location.search, "") + '?' + queryString;
 			$('#url_text').val(url);
-			
+
 			var params = {
 				text: 'DQ10 仲間モンスターのスキル構成:',
 				hashtags: 'DQ10, dq10_skillsim',
@@ -358,7 +355,7 @@ namespace Dq10.SkillSimulator {
 				$tr.children('.skill_name').text(skill.name);
 			});
 		}
-		
+
 		private refreshTotalStatus(monsterId: string) {
 			var monster = this.sim.getMonster(monsterId);
 			var statusArray = 'maxhp,maxmp,atk,pow,def,magic,heal,spd,dex,charm,weight'.split(',');
@@ -462,7 +459,7 @@ namespace Dq10.SkillSimulator {
 				change: (e, ui) => {
 					var monsterId = this.getCurrentMonsterId(e.currentTarget);
 					var monster = this.sim.getMonster(monsterId);
-					
+
 					if(isNaN($(e.currentTarget).val())) {
 						$(e.currentTarget).val(monster.getRestartCount());
 						return false;
@@ -491,7 +488,7 @@ namespace Dq10.SkillSimulator {
 				spin: (e, ui) => {
 					var monsterId = this.getCurrentMonsterId(e.currentTarget);
 					var skillLineId = this.getCurrentSkillLine(e.currentTarget);
-					
+
 					if(this.sim.getMonster(monsterId).updateSkillPt(skillLineId, ui.value)) {
 						this.refreshSkillList(monsterId, skillLineId);
 						this.refreshMonsterInfo(monsterId);
@@ -545,7 +542,7 @@ namespace Dq10.SkillSimulator {
 				var monsterId = this.getCurrentMonsterId(e.currentTarget);
 				var skillLineId = this.getCurrentSkillLine(e.currentTarget);
 				var monster = this.sim.getMonster(monsterId);
-				
+
 				monster.updateSkillPt(skillLineId, 0);
 				$(`#${monsterId} .${skillLineId} .ptspinner`).spinner('value', monster.getSkillPt(skillLineId));
 				this.refreshSkillList(monsterId, skillLineId);
@@ -553,7 +550,7 @@ namespace Dq10.SkillSimulator {
 				this.refreshTotalStatus(monsterId);
 				this.refreshSaveUrl();
 			});
-			
+
 			//スキルテーブル項目クリック時
 			$ent.find('.skill_table tr[class]').click((e) => {
 				var monsterId = this.getCurrentMonsterId(e.currentTarget);
@@ -562,10 +559,10 @@ namespace Dq10.SkillSimulator {
 				var monster = this.sim.getMonster(monsterId);
 
 				var requiredPt = this.DB.skillLines[skillLineId].skills[skillIndex].pt;
-				
+
 				monster.updateSkillPt(skillLineId, requiredPt);
 				$(`#${monsterId} .${skillLineId} .ptspinner`).spinner('value', monster.getSkillPt(skillLineId));
-				
+
 				this.refreshSkillList(monsterId, skillLineId);
 				this.refreshMonsterInfo(monsterId);
 				this.refreshTotalStatus(monsterId);
@@ -754,7 +751,7 @@ namespace Dq10.SkillSimulator {
 				};
 				var windowParam = $.map(windowParams, (val, key) => key + '=' + val).join(',');
 				window.open((<HTMLAnchorElement>e.currentTarget).href, null, windowParam);
-				
+
 				return false;
 			});
 
@@ -776,7 +773,7 @@ namespace Dq10.SkillSimulator {
 				$select.append($("<option />").val(i).text(i.toString()));
 			}
 			$select.val(this.DB.consts.level.max);
-			
+
 			$('#setalllevel>button').button().click((e) => {
 				this.sim.monsters.forEach((monster) => monster.updateLevel($select.val()));
 				this.refreshAll();
@@ -849,12 +846,12 @@ namespace Dq10.SkillSimulator {
 
 		private DB: MonsterSimulatorDB;
 		private badgeSearch: BadgeSearch;
-		
+
 		constructor() {
 			this.DB = MonsterDB;
 			this.badgeSearch = new BadgeSearch();
 		}
-		
+
 		setup() {
 			this.$dialog = $('#badge-selector');
 			this.$maskScreen = $('#dark-screen');
@@ -1071,10 +1068,10 @@ namespace Dq10.SkillSimulator {
 				$('#badge-selector-list li').toArray().sort((a, b) => {
 					var key_a = func(a);
 					var key_b = func(b);
-					
+
 					var ascend = key_a < key_b;
 					if(desc) ascend = !ascend;
-					
+
 					if(key_a == key_b) {
 						key_a = this.getBadgeId(a);
 						key_b = this.getBadgeId(b);
@@ -1130,27 +1127,27 @@ namespace Dq10.SkillSimulator {
 			this.$maskScreen.hide();
 		}
 	}
-	
+
 	//検索フィルター状態保持変数
 	interface SearchFilter {
 		filterType: string;
 		searchKey: string;
 	};
-	
+
 	//検索機能
 	class BadgeSearch {
 		private univIds: string[] = []; //全集合
 		private search: SearchFilter[] = [];
-		
+
 		//検索キャッシュ
 		private searchCache = {};
-		
+
 		private DB: MonsterSimulatorDB;
-		
+
 		constructor() {
 			this.DB = MonsterDB;
 		}
-		
+
 		toggleSearch(filterType: string, searchKey: string) {
 			var isTurningOn = true;
 
@@ -1165,7 +1162,7 @@ namespace Dq10.SkillSimulator {
 					return true;
 				}
 			});
-			
+
 			if(isTurningOn)
 				this.search.push({
 					filterType: filterType,
