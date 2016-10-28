@@ -19,13 +19,13 @@
 	"tasks": [
 		{
 			"taskName": "build dq10skill",
-			"args": ["tsc --out publish/dq10skill.js dq10skill-main.ts", "-sourcemap"],
+			"args": ["tsc --project ./skillsim.tsconfig.json"],
 			"isBuildCommand": true,
 			"suppressTaskName": true
 		},
 		{
 			"taskName": "build dq10skill-monster",
-			"args": ["tsc --out publish/dq10skill-monster.js dq10skill-monster-main.ts", "-sourcemap"],
+			"args": ["tsc --project ./monster.tsconfig.json"],
 			"isBuildCommand": true,
 			"suppressTaskName": true
 		},
