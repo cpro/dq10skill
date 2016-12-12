@@ -1004,14 +1004,14 @@ $dialog-outer-border-width: 3px;
 			}
 
 			#customskill-selector-skillline-buttons {
-				$skillline-button-width: 80px;
+				$skillline-button-width: 70px;
 
 				position: absolute;
 				left: 0;
 				right: 0;
 				bottom: 16px;
-				height: ($button-height + 4px) * 8;
-				width: ($skillline-button-width + 4px) * 2;
+				height: ($button-height + 4px) * 11;
+				width: ($skillline-button-width + 4px) * 3;
 				margin: auto;
 
 				li {

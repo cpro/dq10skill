@@ -250,7 +250,7 @@
 				%a.x-button#customskill-selector-close-button{title: '閉じる'} ×
 			#customskill-selector-body.modal-dialog-body
 				#customskill-selector-entrylists
-					- data['skillLineOrder'].each do |skill_line_name|
+					- (data['skillLineOrder'] + data['uniqueSkillLineOrder']).each do |skill_line_name|
 						%table.customskill-entrylist{id: "customskill-selector-entrylist-#{skill_line_name}"}
 							%tr.customskill-entrylist-header
 								%th
@@ -274,7 +274,7 @@
 							%dd.customskill-palette-name{id: "customskill-selector-palette-#{i}"} （なし）
 							%a.customskill-palette-delete.x-button{'data-rank' => i} ×
 					%ul#customskill-selector-skillline-buttons.button-container
-						- data['skillLineOrder'].each do |skill_line_name|
+						- (data['skillLineOrder'] + data['uniqueSkillLineOrder']).each do |skill_line_name|
 							%li.ui-corner-all<
 								%a{'data-skillline' => skill_line_name}<
 									= data['skillLines'][skill_line_name]['name']
