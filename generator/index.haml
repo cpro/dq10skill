@@ -1,4 +1,4 @@
-- @version = '10.0beta1'
+- @version = '10.0'
 !!! 5
 %html
 	%head
@@ -195,9 +195,10 @@
 						履歴:
 						%ul
 							%li
-								2016/12/12 v10.0beta1 ver3.4後期仮対応。
+								2016/12/19 v10.0 ver3.4後期対応。
 								%ul
 									%li 職業スキル160-180Pに対応。
+									%li 「テンション消費軽減（専）」→「テンション維持（専）」の名称変更に対応。
 							%li
 								2016/10/6 v9.1 ver3.4前期対応。
 								%ul
@@ -223,11 +224,6 @@
 									%li 武器スキル160-180Pに対応。
 									%li 武器スキル160以降のスキル編集機能を追加。160以降のスキルにマウスカーソルを当てると「編集」ボタンが表示され、クリックで編集画面を開きます。
 							%li 2016/3/2 v7.1 ver3.2後期のレベル上限解放(90→93)に対応。
-							%li
-								2016/1/28 v7.0
-								%ul
-									%li スキルポイントを150より多く振れるように変更。複数職でポイントをやりとりしやすくしました。
-									%li 「MSP込みの最大値にする」ボタン（一発で128ポイントにする）追加。職固有の150スキルホバー時に表示されます。
 							%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
 					%li
 						ToDo:
@@ -278,8 +274,12 @@
 							%dd.customskill-palette-name{id: "customskill-selector-palette-#{i}"} （なし）
 							%a.customskill-palette-delete.x-button{'data-rank' => i} ×
 					%ul#customskill-selector-skillline-buttons.button-container
-						- (data['skillLineOrder'] + data['uniqueSkillLineOrder']).each do |skill_line_name|
+						- (data['skillLineOrder']).each do |skill_line_name|
 							%li.ui-corner-all<
+								%a{'data-skillline' => skill_line_name}<
+									= data['skillLines'][skill_line_name]['name']
+						- (data['uniqueSkillLineOrder']).each do |skill_line_name|
+							%li.ui-corner-all.unique-skillline<
 								%a{'data-skillline' => skill_line_name}<
 									= data['skillLines'][skill_line_name]['name']
 			#customskill-selector-footer.modal-dialog-footer

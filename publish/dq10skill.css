@@ -712,6 +712,8 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
         #customskill-selector #customskill-selector-body #customskill-selector-pallette #customskill-selector-skillline-buttons li {
           width: 70px;
           margin: 1px; }
+        #customskill-selector #customskill-selector-body #customskill-selector-pallette #customskill-selector-skillline-buttons li.unique-skillline {
+          background-color: #f7f4f0; }
 
 #customskill_console {
   position: absolute;
