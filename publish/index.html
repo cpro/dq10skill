@@ -7,7 +7,7 @@
     <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
     <title>DQ10 スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=10.0' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=10.1' rel='stylesheet' type='text/css'>
     <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js' type='text/javascript'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js' type='text/javascript'></script>
@@ -15,7 +15,7 @@
     <script src='js/rawinflate.min.js' type='text/javascript'></script>
     <script src='js/shortcut.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=10.0' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=10.1' type='text/javascript'></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -2768,7 +2768,7 @@
               <li>
                 2016/12/19 v10.0 ver3.4後期対応。
                 <ul>
-                  <li>職業スキル160-180Pに対応。</li>
+                  <li>職業スキル160-180Pに対応。（2016/12/20 v10.1 スキル説明・消費MP補完）</li>
                   <li>「テンション消費軽減（専）」→「テンション維持（専）」の名称変更に対応。</li>
                 </ul>
               </li>
@@ -2936,25 +2936,25 @@
               <td class='customskill-entry-selector' id='customskill-selector-shield-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='shield'>+45</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='盾装備時&#x000A;１の確率で&#x000A;会心完全ガード'>会心完全ガード率</th>
+              <th class='customskill-entry-name' title='盾装備時&#x000A;１％の確率で&#x000A;会心完全ガード'>会心完全ガード率</th>
               <td class='customskill-entry-selector' id='customskill-selector-shield-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='shield'>+1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-shield-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='shield'>+1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-shield-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='shield'>+2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='盾装備中&#x000A;瀕死時に２で&#x000A;身かわし率アップ'>瀕死時身かわし率アップ</th>
+              <th class='customskill-entry-name' title='盾装備中&#x000A;瀕死時に２％で&#x000A;身かわし率アップ'>瀕死時身かわし率アップ</th>
               <td class='customskill-entry-selector' id='customskill-selector-shield-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='shield'>2%<span class='customskill-entry-selectoroption'>で躱+30%</span></a></td>
               <td class='customskill-entry-selector' id='customskill-selector-shield-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='shield'>4%<span class='customskill-entry-selectoroption'>で躱+30%</span></a></td>
               <td class='customskill-entry-selector' id='customskill-selector-shield-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='shield'>6%<span class='customskill-entry-selectoroption'>で躱+30%</span></a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='盾装備中ガード時&#x000A;２の確率で&#x000A;ルカニがかかる'>ガード時ルカニ</th>
+              <th class='customskill-entry-name' title='盾装備中ガード時&#x000A;２％の確率で&#x000A;ルカニがかかる'>ガード時ルカニ</th>
               <td class='customskill-entry-selector' id='customskill-selector-shield-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='shield'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-shield-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='shield'>3%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-shield-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='shield'>5%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='盾装備中ガード時&#x000A;２の確率で&#x000A;ヘナトスがかかる'>ガード時ヘナトス</th>
+              <th class='customskill-entry-name' title='盾装備中ガード時&#x000A;２％の確率で&#x000A;ヘナトスがかかる'>ガード時ヘナトス</th>
               <td class='customskill-entry-selector' id='customskill-selector-shield-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='shield'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-shield-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='shield'>3%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-shield-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='shield'>5%</a></td>
@@ -4058,43 +4058,43 @@
               <th>180P</th>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='敵１体の激怒を&#x000A;解除して&#x000A;テンションダウン&#x000A;（消費MP: 8）&#x000A;（チャージ: 150秒）'>ロストブレイク</th>
+              <th class='customskill-entry-name' title='敵１体の激怒を&#x000A;解除する&#x000A;戦士専用特技&#x000A;（消費MP: 8）&#x000A;（チャージ: 150秒）'>ロストブレイク</th>
               <td class='customskill-entry-selector' id='customskill-selector-courage-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='courage'>Ⅰ (CT150)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-courage-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='courage'>Ⅱ (CT110)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-courage-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='courage'>Ⅲ (CT75)</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技のダメージ強化</th>
+              <th class='customskill-entry-name' title='戦士時&#x000A;特技の威力が&#x000A;５増える'>特技のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-courage-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='courage'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-courage-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='courage'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-courage-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='courage'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技の会心率</th>
+              <th class='customskill-entry-name' title='戦士時&#x000A;特技の会心率が&#x000A;０．５％増える'>特技の会心率</th>
               <td class='customskill-entry-selector' id='customskill-selector-courage-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='courage'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-courage-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='courage'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-courage-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='courage'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>被ダメージ軽減</th>
+              <th class='customskill-entry-name' title='戦士時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
               <td class='customskill-entry-selector' id='customskill-selector-courage-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='courage'>3軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-courage-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='courage'>5軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-courage-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='courage'>10軽減</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>身かわし率</th>
+              <th class='customskill-entry-name' title='戦士時&#x000A;身かわし率が&#x000A;０．５％増える'>身かわし率</th>
               <td class='customskill-entry-selector' id='customskill-selector-courage-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='courage'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-courage-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='courage'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-courage-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='courage'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>ターン消費しない</th>
+              <th class='customskill-entry-name' title='戦士時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-courage-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='courage'>1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-courage-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='courage'>1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-courage-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='courage'>2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>テンション消費しない</th>
+              <th class='customskill-entry-name' title='戦士時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-courage-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='courage'>1%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-courage-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='courage'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-courage-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='courage'>3%</a></td>
@@ -4108,43 +4108,43 @@
               <th>180P</th>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='&#x000A;（消費MP: 0）&#x000A;（チャージ: 180秒）'>ベホマ</th>
+              <th class='customskill-entry-name' title='仲間ひとりの&#x000A;ＨＰを&#x000A;大幅に回復する&#x000A;（消費MP: 16）&#x000A;（チャージ: 180秒）'>ベホマ</th>
               <td class='customskill-entry-selector' id='customskill-selector-faith-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='faith'>Ⅰ (CT180)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-faith-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='faith'>Ⅱ (CT130)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-faith-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='faith'>Ⅲ (CT90)</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>呪文の回復量強化</th>
+              <th class='customskill-entry-name' title='僧侶時&#x000A;呪文の回復量が&#x000A;５増える'>呪文の回復量強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-faith-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='faith'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-faith-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='faith'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-faith-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='faith'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>呪文のぼうそう率</th>
+              <th class='customskill-entry-name' title='僧侶時&#x000A;呪文暴走率が&#x000A;０．５％増える'>呪文のぼうそう率</th>
               <td class='customskill-entry-selector' id='customskill-selector-faith-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='faith'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-faith-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='faith'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-faith-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='faith'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>被ダメージ軽減</th>
+              <th class='customskill-entry-name' title='僧侶時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
               <td class='customskill-entry-selector' id='customskill-selector-faith-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='faith'>3軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-faith-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='faith'>5軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-faith-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='faith'>10軽減</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>身かわし率</th>
+              <th class='customskill-entry-name' title='僧侶時&#x000A;身かわし率が&#x000A;０．５％増える'>身かわし率</th>
               <td class='customskill-entry-selector' id='customskill-selector-faith-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='faith'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-faith-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='faith'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-faith-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='faith'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>ターン消費しない</th>
+              <th class='customskill-entry-name' title='僧侶時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-faith-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='faith'>1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-faith-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='faith'>1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-faith-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='faith'>2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>テンション消費しない</th>
+              <th class='customskill-entry-name' title='僧侶時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-faith-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='faith'>1%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-faith-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='faith'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-faith-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='faith'>3%</a></td>
@@ -4158,43 +4158,43 @@
               <th>180P</th>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='&#x000A;（消費MP: 0）&#x000A;（チャージ: 180秒）'>ぶきみな閃光</th>
+              <th class='customskill-entry-name' title='攻撃呪文耐性を&#x000A;下げる攻撃&#x000A;魔法使い専用特技&#x000A;（消費MP: 16）&#x000A;（チャージ: 180秒）'>ぶきみな閃光</th>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='spellcraft'>Ⅰ (CT180)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='spellcraft'>Ⅱ (CT130)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='spellcraft'>Ⅲ (CT90)</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>呪文のダメージ強化</th>
+              <th class='customskill-entry-name' title='魔法使い時&#x000A;攻撃呪文の威力が&#x000A;５増える'>呪文のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='spellcraft'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='spellcraft'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='spellcraft'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>呪文のぼうそう率</th>
+              <th class='customskill-entry-name' title='魔法使い時&#x000A;呪文暴走率が&#x000A;０．５％増える'>呪文のぼうそう率</th>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='spellcraft'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='spellcraft'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='spellcraft'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>被ダメージ軽減</th>
+              <th class='customskill-entry-name' title='魔法使い時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='spellcraft'>3軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='spellcraft'>5軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='spellcraft'>10軽減</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>身かわし率</th>
+              <th class='customskill-entry-name' title='魔法使い時&#x000A;身かわし率が&#x000A;０．５％増える'>身かわし率</th>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='spellcraft'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='spellcraft'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='spellcraft'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>ターン消費しない</th>
+              <th class='customskill-entry-name' title='魔法使い時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='spellcraft'>1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='spellcraft'>1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='spellcraft'>2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>テンション消費しない</th>
+              <th class='customskill-entry-name' title='魔法使い時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='spellcraft'>1%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='spellcraft'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-spellcraft-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='spellcraft'>3%</a></td>
@@ -4208,43 +4208,43 @@
               <th>180P</th>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='&#x000A;（消費MP: 0）&#x000A;（チャージ: 220秒）'>行雲流水</th>
+              <th class='customskill-entry-name' title='テンションを&#x000A;一定時間維持する&#x000A;武闘家専用特技&#x000A;（消費MP: 6）&#x000A;（チャージ: 220秒）'>行雲流水</th>
               <td class='customskill-entry-selector' id='customskill-selector-focus-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='focus'>Ⅰ (CT220)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-focus-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='focus'>Ⅱ (CT180)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-focus-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='focus'>Ⅲ (CT110)</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技のダメージ強化</th>
+              <th class='customskill-entry-name' title='武闘家時&#x000A;特技の威力が&#x000A;５増える'>特技のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-focus-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='focus'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-focus-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='focus'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-focus-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='focus'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技の会心率</th>
+              <th class='customskill-entry-name' title='武闘家時&#x000A;特技の会心率が&#x000A;０．５％増える'>特技の会心率</th>
               <td class='customskill-entry-selector' id='customskill-selector-focus-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='focus'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-focus-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='focus'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-focus-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='focus'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>被ダメージ軽減</th>
+              <th class='customskill-entry-name' title='武闘家時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
               <td class='customskill-entry-selector' id='customskill-selector-focus-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='focus'>3軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-focus-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='focus'>5軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-focus-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='focus'>10軽減</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>身かわし率</th>
+              <th class='customskill-entry-name' title='武闘家時&#x000A;身かわし率が&#x000A;０．５％増える'>身かわし率</th>
               <td class='customskill-entry-selector' id='customskill-selector-focus-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='focus'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-focus-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='focus'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-focus-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='focus'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>ターン消費しない</th>
+              <th class='customskill-entry-name' title='武闘家時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-focus-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='focus'>1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-focus-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='focus'>1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-focus-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='focus'>2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>テンション消費しない</th>
+              <th class='customskill-entry-name' title='武闘家時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-focus-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='focus'>1%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-focus-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='focus'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-focus-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='focus'>3%</a></td>
@@ -4258,43 +4258,43 @@
               <th>180P</th>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='&#x000A;（消費MP: 0）&#x000A;（チャージ: 120秒）'>テンション轟奪拳</th>
+              <th class='customskill-entry-name' title='テンションを&#x000A;敵１体から奪う&#x000A;盗賊専用特技&#x000A;（消費MP: 6）&#x000A;（チャージ: 120秒）'>テンション轟奪拳</th>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='acquisitiveness'>Ⅰ (CT120)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='acquisitiveness'>Ⅱ (CT80)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='acquisitiveness'>Ⅲ (CT60)</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技のダメージ強化</th>
+              <th class='customskill-entry-name' title='盗賊時&#x000A;特技の威力が&#x000A;５増える'>特技のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='acquisitiveness'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='acquisitiveness'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='acquisitiveness'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技の会心率</th>
+              <th class='customskill-entry-name' title='盗賊時&#x000A;特技の会心率が&#x000A;０．５％増える'>特技の会心率</th>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='acquisitiveness'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='acquisitiveness'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='acquisitiveness'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>被ダメージ軽減</th>
+              <th class='customskill-entry-name' title='盗賊時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='acquisitiveness'>3軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='acquisitiveness'>5軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='acquisitiveness'>10軽減</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>身かわし率</th>
+              <th class='customskill-entry-name' title='盗賊時&#x000A;身かわし率が&#x000A;０．５％増える'>身かわし率</th>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='acquisitiveness'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='acquisitiveness'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='acquisitiveness'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>ターン消費しない</th>
+              <th class='customskill-entry-name' title='盗賊時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='acquisitiveness'>1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='acquisitiveness'>1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='acquisitiveness'>2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>テンション消費しない</th>
+              <th class='customskill-entry-name' title='盗賊時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='acquisitiveness'>1%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='acquisitiveness'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-acquisitiveness-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='acquisitiveness'>3%</a></td>
@@ -4308,43 +4308,43 @@
               <th>180P</th>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='&#x000A;（消費MP: 0）&#x000A;（チャージ: 120秒）'>超ハッスルダンス</th>
+              <th class='customskill-entry-name' title='周囲のＨＰを&#x000A;２００～回復する&#x000A;旅芸人専用特技&#x000A;（消費MP: 10）&#x000A;（チャージ: 120秒）'>超ハッスルダンス</th>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='litheness'>Ⅰ (CT120)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='litheness'>Ⅱ (CT80)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='litheness'>Ⅲ (CT60)</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技のダメージ強化</th>
+              <th class='customskill-entry-name' title='旅芸人時&#x000A;特技の威力が&#x000A;５増える'>特技のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='litheness'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='litheness'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='litheness'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技の回復量強化</th>
+              <th class='customskill-entry-name' title='旅芸人時&#x000A;特技の回復量が&#x000A;５増える'>特技の回復量強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='litheness'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='litheness'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='litheness'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>呪文の威力と回復強化</th>
+              <th class='customskill-entry-name' title='旅芸人時&#x000A;呪文の威力と&#x000A;回復が５増える'>呪文の威力と回復強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='litheness'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='litheness'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='litheness'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>被ダメージ軽減</th>
+              <th class='customskill-entry-name' title='旅芸人時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='litheness'>3軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='litheness'>5軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='litheness'>10軽減</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>ターン消費しない</th>
+              <th class='customskill-entry-name' title='旅芸人時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='litheness'>1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='litheness'>1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='litheness'>2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>テンション消費しない</th>
+              <th class='customskill-entry-name' title='旅芸人時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='litheness'>1%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='litheness'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-litheness-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='litheness'>3%</a></td>
@@ -4358,43 +4358,43 @@
               <th>180P</th>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='&#x000A;（消費MP: 0）&#x000A;（チャージ: 150秒）'>灼熱とうこん討ち</th>
+              <th class='customskill-entry-name' title='チカラを一気に&#x000A;２回ためる攻撃&#x000A;バトマス専用特技&#x000A;（消費MP: 6）&#x000A;（チャージ: 150秒）'>灼熱とうこん討ち</th>
               <td class='customskill-entry-selector' id='customskill-selector-guts-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='guts'>Ⅰ (CT150)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-guts-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='guts'>Ⅱ (CT110)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-guts-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='guts'>Ⅲ (CT75)</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技のダメージ強化</th>
+              <th class='customskill-entry-name' title='バトマス時&#x000A;特技の威力が&#x000A;５増える'>特技のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-guts-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='guts'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-guts-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='guts'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-guts-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='guts'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技の会心率</th>
+              <th class='customskill-entry-name' title='バトマス時&#x000A;特技の会心率が&#x000A;０．５％増える'>特技の会心率</th>
               <td class='customskill-entry-selector' id='customskill-selector-guts-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='guts'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-guts-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='guts'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-guts-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='guts'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>被ダメージ軽減</th>
+              <th class='customskill-entry-name' title='バトマス時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
               <td class='customskill-entry-selector' id='customskill-selector-guts-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='guts'>3軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-guts-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='guts'>5軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-guts-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='guts'>10軽減</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>身かわし率</th>
+              <th class='customskill-entry-name' title='バトマス時&#x000A;身かわし率が&#x000A;０．５％増える'>身かわし率</th>
               <td class='customskill-entry-selector' id='customskill-selector-guts-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='guts'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-guts-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='guts'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-guts-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='guts'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>ターン消費しない</th>
+              <th class='customskill-entry-name' title='バトマス時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-guts-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='guts'>1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-guts-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='guts'>1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-guts-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='guts'>2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>テンション消費しない</th>
+              <th class='customskill-entry-name' title='バトマス時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-guts-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='guts'>1%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-guts-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='guts'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-guts-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='guts'>3%</a></td>
@@ -4408,43 +4408,43 @@
               <th>180P</th>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='&#x000A;（消費MP: 0）&#x000A;（チャージ: 140秒）'>不動のかまえ</th>
+              <th class='customskill-entry-name' title='自分を強化して&#x000A;ふっとびに耐える&#x000A;パラディン専用&#x000A;（消費MP: 8）&#x000A;（チャージ: 140秒）'>不動のかまえ</th>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='virtue'>Ⅰ (CT140)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='virtue'>Ⅱ (CT110)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='virtue'>Ⅲ (CT90)</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技のダメージ強化</th>
+              <th class='customskill-entry-name' title='パラディン時&#x000A;特技の威力が&#x000A;５増える'>特技のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='virtue'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='virtue'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='virtue'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技の会心率</th>
+              <th class='customskill-entry-name' title='パラディン時&#x000A;特技の会心率が&#x000A;０．５％増える'>特技の会心率</th>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='virtue'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='virtue'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='virtue'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>呪文の回復量強化</th>
+              <th class='customskill-entry-name' title='パラディン時&#x000A;呪文の回復量が&#x000A;５増える'>呪文の回復量強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='virtue'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='virtue'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='virtue'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>被ダメージ軽減</th>
+              <th class='customskill-entry-name' title='パラディン時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='virtue'>3軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='virtue'>5軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='virtue'>10軽減</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>ターン消費しない</th>
+              <th class='customskill-entry-name' title='パラディン時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='virtue'>1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='virtue'>1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='virtue'>2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>テンション消費しない</th>
+              <th class='customskill-entry-name' title='パラディン時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='virtue'>1%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='virtue'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-virtue-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='virtue'>3%</a></td>
@@ -4458,43 +4458,43 @@
               <th>180P</th>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='&#x000A;（消費MP: 0）&#x000A;（チャージ: 180秒）'>クロックチャージ</th>
+              <th class='customskill-entry-name' title='周囲のチャージを&#x000A;１０秒短縮する&#x000A;魔法戦士専用特技&#x000A;（消費MP: 6）&#x000A;（チャージ: 180秒）'>クロックチャージ</th>
               <td class='customskill-entry-selector' id='customskill-selector-fource-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='fource'>Ⅰ (CT180)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fource-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='fource'>Ⅱ (CT130)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fource-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='fource'>Ⅲ (CT90)</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技のダメージ強化</th>
+              <th class='customskill-entry-name' title='魔法戦士時&#x000A;特技の威力が&#x000A;５増える'>特技のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-fource-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='fource'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fource-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='fource'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fource-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='fource'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>呪文のダメージ強化</th>
+              <th class='customskill-entry-name' title='魔法戦士時&#x000A;攻撃呪文の威力が&#x000A;５増える'>呪文のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-fource-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='fource'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fource-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='fource'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fource-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='fource'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>被ダメージ軽減</th>
+              <th class='customskill-entry-name' title='魔法戦士時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
               <td class='customskill-entry-selector' id='customskill-selector-fource-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='fource'>3軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fource-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='fource'>5軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fource-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='fource'>10軽減</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>身かわし率</th>
+              <th class='customskill-entry-name' title='魔法戦士時&#x000A;身かわし率が&#x000A;０．５％増える'>身かわし率</th>
               <td class='customskill-entry-selector' id='customskill-selector-fource-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='fource'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fource-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='fource'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fource-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='fource'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>ターン消費しない</th>
+              <th class='customskill-entry-name' title='魔法戦士時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-fource-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='fource'>1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fource-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='fource'>1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fource-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='fource'>2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>テンション消費しない</th>
+              <th class='customskill-entry-name' title='魔法戦士時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-fource-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='fource'>1%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fource-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='fource'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fource-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='fource'>3%</a></td>
@@ -4508,43 +4508,43 @@
               <th>180P</th>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='&#x000A;（消費MP: 0）&#x000A;（チャージ: 220秒）'>ケルベロスロンド</th>
+              <th class='customskill-entry-name' title='黒い魔獣が攻撃し&#x000A;ダメージも増加&#x000A;レンジャー専用&#x000A;（消費MP: 10）&#x000A;（チャージ: 220秒）'>ケルベロスロンド</th>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='ruggedness'>Ⅰ (CT220)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='ruggedness'>Ⅱ (CT180)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='ruggedness'>Ⅲ (CT110)</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技のダメージ強化</th>
+              <th class='customskill-entry-name' title='レンジャー時&#x000A;特技の威力が&#x000A;５増える'>特技のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='ruggedness'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='ruggedness'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='ruggedness'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技の会心率</th>
+              <th class='customskill-entry-name' title='レンジャー時&#x000A;特技の会心率が&#x000A;０．５％増える'>特技の会心率</th>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='ruggedness'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='ruggedness'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='ruggedness'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>呪文の回復量強化</th>
+              <th class='customskill-entry-name' title='レンジャー時&#x000A;呪文の回復量が&#x000A;５増える'>呪文の回復量強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='ruggedness'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='ruggedness'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='ruggedness'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>被ダメージ軽減</th>
+              <th class='customskill-entry-name' title='レンジャー時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='ruggedness'>3軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='ruggedness'>5軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='ruggedness'>10軽減</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>ターン消費しない</th>
+              <th class='customskill-entry-name' title='レンジャー時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='ruggedness'>1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='ruggedness'>1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='ruggedness'>2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>テンション消費しない</th>
+              <th class='customskill-entry-name' title='レンジャー時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='ruggedness'>1%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='ruggedness'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-ruggedness-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='ruggedness'>3%</a></td>
@@ -4558,43 +4558,43 @@
               <th>180P</th>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='&#x000A;（消費MP: 0）&#x000A;（チャージ: 150秒）'>きせきの雨</th>
+              <th class='customskill-entry-name' title='仲間のダメージを&#x000A;大きくいやす雨&#x000A;賢者専用特技&#x000A;（消費MP: 8）&#x000A;（チャージ: 150秒）'>きせきの雨</th>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='enlightenment'>Ⅰ (CT150)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='enlightenment'>Ⅱ (CT110)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='enlightenment'>Ⅲ (CT75)</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>呪文の威力と回復強化</th>
+              <th class='customskill-entry-name' title='賢者時&#x000A;呪文の威力と&#x000A;回復が５増える'>呪文の威力と回復強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='enlightenment'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='enlightenment'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='enlightenment'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>呪文のぼうそう率</th>
+              <th class='customskill-entry-name' title='賢者時&#x000A;呪文暴走率が&#x000A;０．５％増える'>呪文のぼうそう率</th>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='enlightenment'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='enlightenment'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='enlightenment'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>被ダメージ軽減</th>
+              <th class='customskill-entry-name' title='賢者時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='enlightenment'>3軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='enlightenment'>5軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='enlightenment'>10軽減</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>身かわし率</th>
+              <th class='customskill-entry-name' title='賢者時&#x000A;身かわし率が&#x000A;０．５％増える'>身かわし率</th>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='enlightenment'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='enlightenment'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='enlightenment'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>ターン消費しない</th>
+              <th class='customskill-entry-name' title='賢者時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='enlightenment'>1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='enlightenment'>1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='enlightenment'>2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>テンション消費しない</th>
+              <th class='customskill-entry-name' title='賢者時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='enlightenment'>1%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='enlightenment'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-enlightenment-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='enlightenment'>3%</a></td>
@@ -4608,43 +4608,43 @@
               <th>180P</th>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='&#x000A;（消費MP: 0）&#x000A;（チャージ: 210秒）'>ラグジュアルリム</th>
+              <th class='customskill-entry-name' title='敵周囲を攻撃し&#x000A;消費Ｇを０にする&#x000A;スパスタ専用特技&#x000A;（消費MP: 10）&#x000A;（チャージ: 210秒）'>ラグジュアルリム</th>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='jenesaisquoi'>Ⅰ (CT210)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='jenesaisquoi'>Ⅱ (CT170)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='jenesaisquoi'>Ⅲ (CT140)</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技のダメージ強化</th>
+              <th class='customskill-entry-name' title='スパスタ時&#x000A;特技の威力が&#x000A;５増える'>特技のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='jenesaisquoi'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='jenesaisquoi'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='jenesaisquoi'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技の会心率</th>
+              <th class='customskill-entry-name' title='スパスタ時&#x000A;特技の会心率が&#x000A;０．５％増える'>特技の会心率</th>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='jenesaisquoi'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='jenesaisquoi'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='jenesaisquoi'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>呪文の威力と回復強化</th>
+              <th class='customskill-entry-name' title='スパスタ時&#x000A;呪文の威力と&#x000A;回復が５増える'>呪文の威力と回復強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='jenesaisquoi'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='jenesaisquoi'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='jenesaisquoi'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>被ダメージ軽減</th>
+              <th class='customskill-entry-name' title='スパスタ時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='jenesaisquoi'>3軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='jenesaisquoi'>5軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='jenesaisquoi'>10軽減</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>ターン消費しない</th>
+              <th class='customskill-entry-name' title='スパスタ時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='jenesaisquoi'>1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='jenesaisquoi'>1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='jenesaisquoi'>2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>テンション消費しない</th>
+              <th class='customskill-entry-name' title='スパスタ時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='jenesaisquoi'>1%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='jenesaisquoi'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-jenesaisquoi-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='jenesaisquoi'>3%</a></td>
@@ -4658,43 +4658,43 @@
               <th>180P</th>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='&#x000A;（消費MP: 0）&#x000A;（チャージ: 90秒）'>エモノ呼びの咆哮</th>
+              <th class='customskill-entry-name' title='敵モンスターを&#x000A;２体呼び寄せる&#x000A;まもの使い専用&#x000A;（消費MP: 10）&#x000A;（チャージ: 90秒）'>エモノ呼びの咆哮</th>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='monstermaster'>Ⅰ (CT90)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='monstermaster'>Ⅱ (CT55)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='monstermaster'>Ⅲ (CT35)</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技のダメージ強化</th>
+              <th class='customskill-entry-name' title='まもの使い時&#x000A;特技の威力が&#x000A;５増える'>特技のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='monstermaster'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='monstermaster'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='monstermaster'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技の会心率</th>
+              <th class='customskill-entry-name' title='まもの使い時&#x000A;特技の会心率が&#x000A;０．５％増える'>特技の会心率</th>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='monstermaster'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='monstermaster'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='monstermaster'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>被ダメージ軽減</th>
+              <th class='customskill-entry-name' title='まもの使い時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='monstermaster'>3軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='monstermaster'>5軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='monstermaster'>10軽減</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>身かわし率</th>
+              <th class='customskill-entry-name' title='まもの使い時&#x000A;身かわし率が&#x000A;０．５％増える'>身かわし率</th>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='monstermaster'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='monstermaster'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='monstermaster'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>ターン消費しない</th>
+              <th class='customskill-entry-name' title='まもの使い時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='monstermaster'>1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='monstermaster'>1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='monstermaster'>2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>テンション消費しない</th>
+              <th class='customskill-entry-name' title='まもの使い時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='monstermaster'>1%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='monstermaster'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-monstermaster-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='monstermaster'>3%</a></td>
@@ -4714,37 +4714,37 @@
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='itemmaster'>Ⅲ (CT90)</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技のダメージ強化</th>
+              <th class='customskill-entry-name' title='どうぐ使い時&#x000A;特技の威力が&#x000A;５増える'>特技のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='itemmaster'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='itemmaster'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='itemmaster'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技の会心率</th>
+              <th class='customskill-entry-name' title='どうぐ使い時&#x000A;特技の会心率が&#x000A;０．５％増える'>特技の会心率</th>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='itemmaster'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='itemmaster'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='itemmaster'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>被ダメージ軽減</th>
+              <th class='customskill-entry-name' title='どうぐ使い時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='itemmaster'>3軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='itemmaster'>5軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='itemmaster'>10軽減</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>身かわし率</th>
+              <th class='customskill-entry-name' title='どうぐ使い時&#x000A;身かわし率が&#x000A;０．５％増える'>身かわし率</th>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='itemmaster'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='itemmaster'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='itemmaster'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>ターン消費しない</th>
+              <th class='customskill-entry-name' title='どうぐ使い時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='itemmaster'>1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='itemmaster'>1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='itemmaster'>2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>テンション消費しない</th>
+              <th class='customskill-entry-name' title='どうぐ使い時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='itemmaster'>1%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='itemmaster'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-itemmaster-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='itemmaster'>3%</a></td>
@@ -4758,43 +4758,43 @@
               <th>180P</th>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='&#x000A;（消費MP: 0）&#x000A;（チャージ: 220秒）'>神速シャンソン</th>
+              <th class='customskill-entry-name' title='呪文特技の発動と&#x000A;行動時間を短縮&#x000A;踊り子専用&#x000A;（消費MP: 10）&#x000A;（チャージ: 220秒）'>神速シャンソン</th>
               <td class='customskill-entry-selector' id='customskill-selector-song-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='song'>Ⅰ (CT220)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-song-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='song'>Ⅱ (CT180)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-song-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='song'>Ⅲ (CT110)</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技のダメージ強化</th>
+              <th class='customskill-entry-name' title='踊り子時&#x000A;特技の威力が&#x000A;５増える'>特技のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-song-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='song'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-song-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='song'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-song-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='song'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>呪文のダメージ強化</th>
+              <th class='customskill-entry-name' title='踊り子時&#x000A;攻撃呪文の威力が&#x000A;５増える'>呪文のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-song-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='song'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-song-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='song'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-song-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='song'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>被ダメージ軽減</th>
+              <th class='customskill-entry-name' title='踊り子時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
               <td class='customskill-entry-selector' id='customskill-selector-song-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='song'>3軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-song-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='song'>5軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-song-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='song'>10軽減</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>身かわし率</th>
+              <th class='customskill-entry-name' title='踊り子時&#x000A;身かわし率が&#x000A;０．５％増える'>身かわし率</th>
               <td class='customskill-entry-selector' id='customskill-selector-song-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='song'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-song-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='song'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-song-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='song'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>ターン消費しない</th>
+              <th class='customskill-entry-name' title='踊り子時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-song-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='song'>1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-song-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='song'>1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-song-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='song'>2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>テンション消費しない</th>
+              <th class='customskill-entry-name' title='踊り子時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-song-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='song'>1%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-song-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='song'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-song-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='song'>3%</a></td>
@@ -4808,43 +4808,43 @@
               <th>180P</th>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title='&#x000A;（消費MP: 0）&#x000A;（チャージ: 120秒）'>ギラグレイド</th>
+              <th class='customskill-entry-name' title='地をゆるがす炎で&#x000A;直線上にいる敵を&#x000A;焼きつくす&#x000A;（消費MP: 24）&#x000A;（チャージ: 120秒）'>ギラグレイド</th>
               <td class='customskill-entry-selector' id='customskill-selector-dance-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='dance'>Ⅰ (CT120)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-dance-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='dance'>Ⅱ (CT80)</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-dance-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='dance'>Ⅲ (CT60)</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技のダメージ強化</th>
+              <th class='customskill-entry-name' title='踊り子時&#x000A;特技の威力が&#x000A;５増える'>特技のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-dance-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='dance'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-dance-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='dance'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-dance-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='dance'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>呪文のダメージ強化</th>
+              <th class='customskill-entry-name' title='踊り子時&#x000A;攻撃呪文の威力が&#x000A;５増える'>呪文のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-dance-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='dance'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-dance-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='dance'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-dance-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='dance'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>被ダメージ軽減</th>
+              <th class='customskill-entry-name' title='踊り子時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
               <td class='customskill-entry-selector' id='customskill-selector-dance-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='dance'>3軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-dance-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='dance'>5軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-dance-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='dance'>10軽減</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>身かわし率</th>
+              <th class='customskill-entry-name' title='踊り子時&#x000A;身かわし率が&#x000A;０．５％増える'>身かわし率</th>
               <td class='customskill-entry-selector' id='customskill-selector-dance-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='dance'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-dance-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='dance'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-dance-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='dance'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>ターン消費しない</th>
+              <th class='customskill-entry-name' title='踊り子時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-dance-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='dance'>1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-dance-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='dance'>1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-dance-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='dance'>2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>テンション消費しない</th>
+              <th class='customskill-entry-name' title='踊り子時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-dance-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='dance'>1%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-dance-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='dance'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-dance-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='dance'>3%</a></td>
@@ -4864,37 +4864,37 @@
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='fortunetelling'>Ⅲ (CT60)</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技のダメージ強化</th>
+              <th class='customskill-entry-name' title='占い師時&#x000A;特技の威力が&#x000A;５増える'>特技のダメージ強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='fortunetelling'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='fortunetelling'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='fortunetelling'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>特技の回復量強化</th>
+              <th class='customskill-entry-name' title='占い師時&#x000A;特技の回復量が&#x000A;５増える'>特技の回復量強化</th>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='fortunetelling'>+5</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='fortunetelling'>+10</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='fortunetelling'>+20</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>被ダメージ軽減</th>
+              <th class='customskill-entry-name' title='占い師時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='fortunetelling'>3軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='fortunetelling'>5軽減</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='fortunetelling'>10軽減</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>身かわし率</th>
+              <th class='customskill-entry-name' title='占い師時&#x000A;身かわし率が&#x000A;０．５％増える'>身かわし率</th>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='fortunetelling'>+0.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='fortunetelling'>+0.8%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='fortunetelling'>+1.2%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>ターン消費しない</th>
+              <th class='customskill-entry-name' title='占い師時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='fortunetelling'>1.0%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='fortunetelling'>1.5%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='fortunetelling'>2.0%</a></td>
             </tr>
             <tr>
-              <th class='customskill-entry-name' title=''>テンション消費しない</th>
+              <th class='customskill-entry-name' title='占い師時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='fortunetelling'>1%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='fortunetelling'>2%</a></td>
               <td class='customskill-entry-selector' id='customskill-selector-fortunetelling-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='fortunetelling'>3%</a></td>

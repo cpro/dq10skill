@@ -147,10 +147,10 @@
 				{"id":  1, "name": "アイギスの守り", "viewName": "アイギスの守り%r", "selectorName": "%r (CT%i)", "desc": "ダメージを軽減し\nビッグシールドと\n会心ガードも付与", "mp": 8, "charge": 0, "val": [220, 180, 110]},
 				{"id":  2, "name": "しゅび力", "viewName": "装備時しゅび力+%i", "selectorName": "+%i", "desc": "盾装備時の\nしゅび力が\n%z増える", "val": [10, 15, 20]},
 				{"id":  3, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "selectorName": "+%i", "desc": "盾装備時\nさいだいＭＰが\n%z増える", "val": [20, 30, 45]},
-				{"id":  4, "name": "会心完全ガード率", "viewName": "装備時会心完全ガード率+%f%", "selectorName": "+%f%", "desc": "盾装備時\n%zの確率で\n会心完全ガード", "val": [1, 1.5, 2]},
-				{"id":  5, "name": "瀕死時身かわし率アップ", "viewName": "瀕死時%i%で身かわし率+30%", "selectorName": "%i%", "selectorSuff": "で躱+30%", "desc": "盾装備中\n瀕死時に%zで\n身かわし率アップ", "val": [2, 4, 6]},
-				{"id":  6, "name": "ガード時ルカニ", "viewName": "ガード時%i%でルカニ", "selectorName": "%i%", "desc": "盾装備中ガード時\n%zの確率で\nルカニがかかる", "val": [2, 3, 5]},
-				{"id":  7, "name": "ガード時ヘナトス", "viewName": "ガード時%i%でヘナトス", "selectorName": "%i%", "desc": "盾装備中ガード時\n%zの確率で\nヘナトスがかかる", "val": [2, 3, 5]},
+				{"id":  4, "name": "会心完全ガード率", "viewName": "装備時会心完全ガード率+%f%", "selectorName": "+%f%", "desc": "盾装備時\n%z％の確率で\n会心完全ガード", "val": [1, 1.5, 2]},
+				{"id":  5, "name": "瀕死時身かわし率アップ", "viewName": "瀕死時%i%で身かわし率+30%", "selectorName": "%i%", "selectorSuff": "で躱+30%", "desc": "盾装備中\n瀕死時に%z％で\n身かわし率アップ", "val": [2, 4, 6]},
+				{"id":  6, "name": "ガード時ルカニ", "viewName": "ガード時%i%でルカニ", "selectorName": "%i%", "desc": "盾装備中ガード時\n%z％の確率で\nルカニがかかる", "val": [2, 3, 5]},
+				{"id":  7, "name": "ガード時ヘナトス", "viewName": "ガード時%i%でヘナトス", "selectorName": "%i%", "desc": "盾装備中ガード時\n%z％の確率で\nヘナトスがかかる", "val": [2, 3, 5]},
 				{"id":  8, "name": "ビッグシールド効果時間", "viewName": "ビッグシールド+%i秒", "selectorName": "+%i秒", "desc": "盾装備時\n効果時間が\n%z秒増える", "val": [5, 7, 10]},
 				{"id":  9, "name": "まもりのたて効果時間", "viewName": "まもりのたて+%i秒", "selectorName": "+%i秒", "desc": "盾装備時\n効果時間が\n%z秒増える", "val": [5, 7, 10]},
 				{"id": 10, "name": "会心ガード効果時間", "viewName": "会心ガード+%i秒", "selectorName": "+%i秒", "desc": "盾装備時\n効果時間が\n%z秒増える", "val": [5, 7, 10]}
@@ -183,13 +183,13 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "ロストブレイク", "viewName": "ロストブレイク%r（専）", "selectorName": "%r (CT%i)", "desc": "敵１体の激怒を\n解除して\nテンションダウン", "mp": 8, "charge": 0, "val": [150, 110, 75]},
-				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "", "val": [3, 5, 10]},
-				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "", "val": [1.0, 1.5, 2.0]},
-				{"id":  7, "name": "テンション消費しない", "viewName": "テンション維持%i%（専）", "selectorName": "%i%", "desc": "", "val": [1, 2, 3]}
+				{"id":  1, "name": "ロストブレイク", "viewName": "ロストブレイク%r（専）", "selectorName": "%r (CT%i)", "desc": "敵１体の激怒を\n解除する\n戦士専用特技", "mp": 8, "charge": 0, "val": [150, 110, 75]},
+				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "戦士時\n特技の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "戦士時\n特技の会心率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "戦士時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "戦士時\n身かわし率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "戦士時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "戦士時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]}
 			]
 		},
 
@@ -332,13 +332,13 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "ベホマ", "viewName": "ベホマ%r（専）", "selectorName": "%r (CT%i)", "desc": "", "mp": 0, "charge": 0, "val": [180, 130, 90]},
-				{"id":  2, "name": "呪文の回復量強化", "viewName": "呪文の回復量+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  3, "name": "呪文のぼうそう率", "viewName": "呪文のぼうそう率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "", "val": [3, 5, 10]},
-				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "", "val": [1.0, 1.5, 2.0]},
-				{"id":  7, "name": "テンション消費しない", "viewName": "テンション維持%i%（専）", "selectorName": "%i%", "desc": "", "val": [1, 2, 3]}
+				{"id":  1, "name": "ベホマ", "viewName": "ベホマ%r（専）", "selectorName": "%r (CT%i)", "desc": "仲間ひとりの\nＨＰを\n大幅に回復する", "mp": 16, "charge": 0, "val": [180, 130, 90]},
+				{"id":  2, "name": "呪文の回復量強化", "viewName": "呪文の回復量+%i（専）", "selectorName": "+%i", "desc": "僧侶時\n呪文の回復量が\n%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "呪文のぼうそう率", "viewName": "呪文のぼうそう率+%f%（専）", "selectorName": "+%f%", "desc": "僧侶時\n呪文暴走率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "僧侶時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "僧侶時\n身かわし率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "僧侶時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "僧侶時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]}
 			]
 		},
 
@@ -490,13 +490,13 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "ぶきみな閃光", "viewName": "ぶきみな閃光%r（専）", "selectorName": "%r (CT%i)", "desc": "", "mp": 0, "charge": 0, "val": [180, 130, 90]},
-				{"id":  2, "name": "呪文のダメージ強化", "viewName": "呪文のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  3, "name": "呪文のぼうそう率", "viewName": "呪文のぼうそう率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "", "val": [3, 5, 10]},
-				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "", "val": [1.0, 1.5, 2.0]},
-				{"id":  7, "name": "テンション消費しない", "viewName": "テンション維持%i%（専）", "selectorName": "%i%", "desc": "", "val": [1, 2, 3]}
+				{"id":  1, "name": "ぶきみな閃光", "viewName": "ぶきみな閃光%r（専）", "selectorName": "%r (CT%i)", "desc": "攻撃呪文耐性を\n下げる攻撃\n魔法使い専用特技", "mp": 16, "charge": 0, "val": [180, 130, 90]},
+				{"id":  2, "name": "呪文のダメージ強化", "viewName": "呪文のダメージ+%i（専）", "selectorName": "+%i", "desc": "魔法使い時\n攻撃呪文の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "呪文のぼうそう率", "viewName": "呪文のぼうそう率+%f%（専）", "selectorName": "+%f%", "desc": "魔法使い時\n呪文暴走率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "魔法使い時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "魔法使い時\n身かわし率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "魔法使い時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "魔法使い時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]}
 			]
 		},
 
@@ -645,13 +645,13 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "行雲流水", "viewName": "行雲流水%r（専）", "selectorName": "%r (CT%i)", "desc": "", "mp": 0, "charge": 0, "val": [220, 180, 110]},
-				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "", "val": [3, 5, 10]},
-				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "", "val": [1.0, 1.5, 2.0]},
-				{"id":  7, "name": "テンション消費しない", "viewName": "テンション維持%i%（専）", "selectorName": "%i%", "desc": "", "val": [1, 2, 3]}
+				{"id":  1, "name": "行雲流水", "viewName": "行雲流水%r（専）", "selectorName": "%r (CT%i)", "desc": "テンションを\n一定時間維持する\n武闘家専用特技", "mp": 6, "charge": 0, "val": [220, 180, 110]},
+				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "武闘家時\n特技の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "武闘家時\n特技の会心率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "武闘家時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "武闘家時\n身かわし率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "武闘家時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "武闘家時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]}
 			]
 		},
 
@@ -681,13 +681,13 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "テンション轟奪拳", "viewName": "テンション轟奪拳%r（専）", "selectorName": "%r (CT%i)", "desc": "", "mp": 0, "charge": 0, "val": [120, 80, 60]},
-				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "", "val": [3, 5, 10]},
-				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "", "val": [1.0, 1.5, 2.0]},
-				{"id":  7, "name": "テンション消費しない", "viewName": "テンション維持%i%（専）", "selectorName": "%i%", "desc": "", "val": [1, 2, 3]}
+				{"id":  1, "name": "テンション轟奪拳", "viewName": "テンション轟奪拳%r（専）", "selectorName": "%r (CT%i)", "desc": "テンションを\n敵１体から奪う\n盗賊専用特技", "mp": 6, "charge": 0, "val": [120, 80, 60]},
+				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "盗賊時\n特技の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "盗賊時\n特技の会心率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "盗賊時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "盗賊時\n身かわし率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "盗賊時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "盗賊時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]}
 			]
 		},
 
@@ -717,13 +717,13 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "超ハッスルダンス", "viewName": "超ハッスルダンス%r（専）", "selectorName": "%r (CT%i)", "desc": "", "mp": 0, "charge": 0, "val": [120, 80, 60]},
-				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  3, "name": "特技の回復量強化", "viewName": "特技の回復量+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  4, "name": "呪文の威力と回復強化", "viewName": "呪文の威力と回復+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  5, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "", "val": [3, 5, 10]},
-				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "", "val": [1.0, 1.5, 2.0]},
-				{"id":  7, "name": "テンション消費しない", "viewName": "テンション維持%i%（専）", "selectorName": "%i%", "desc": "", "val": [1, 2, 3]}
+				{"id":  1, "name": "超ハッスルダンス", "viewName": "超ハッスルダンス%r（専）", "selectorName": "%r (CT%i)", "desc": "周囲のＨＰを\n２００～回復する\n旅芸人専用特技", "mp": 10, "charge": 0, "val": [120, 80, 60]},
+				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "旅芸人時\n特技の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "特技の回復量強化", "viewName": "特技の回復量+%i（専）", "selectorName": "+%i", "desc": "旅芸人時\n特技の回復量が\n%z増える", "val": [5, 10, 20]},
+				{"id":  4, "name": "呪文の威力と回復強化", "viewName": "呪文の威力と回復+%i（専）", "selectorName": "+%i", "desc": "旅芸人時\n呪文の威力と\n回復が%z増える", "val": [5, 10, 20]},
+				{"id":  5, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "旅芸人時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "旅芸人時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "旅芸人時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]}
 			]
 		},
 
@@ -791,13 +791,13 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "不動のかまえ", "viewName": "不動のかまえ%r（専）", "selectorName": "%r (CT%i)", "desc": "", "mp": 0, "charge": 0, "val": [140, 110, 90]},
-				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  4, "name": "呪文の回復量強化", "viewName": "呪文の回復量+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  5, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "", "val": [3, 5, 10]},
-				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "", "val": [1.0, 1.5, 2.0]},
-				{"id":  7, "name": "テンション消費しない", "viewName": "テンション維持%i%（専）", "selectorName": "%i%", "desc": "", "val": [1, 2, 3]}
+				{"id":  1, "name": "不動のかまえ", "viewName": "不動のかまえ%r（専）", "selectorName": "%r (CT%i)", "desc": "自分を強化して\nふっとびに耐える\nパラディン専用", "mp": 8, "charge": 0, "val": [140, 110, 90]},
+				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "パラディン時\n特技の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "パラディン時\n特技の会心率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  4, "name": "呪文の回復量強化", "viewName": "呪文の回復量+%i（専）", "selectorName": "+%i", "desc": "パラディン時\n呪文の回復量が\n%z増える", "val": [5, 10, 20]},
+				{"id":  5, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "パラディン時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "パラディン時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "パラディン時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]}
 			]
 		},
 
@@ -908,13 +908,13 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "ケルベロスロンド", "viewName": "ケルベロスロンド%r（専）", "selectorName": "%r (CT%i)", "desc": "", "mp": 0, "charge": 0, "val": [220, 180, 110]},
-				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  4, "name": "呪文の回復量強化", "viewName": "呪文の回復量+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  5, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "", "val": [3, 5, 10]},
-				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "", "val": [1.0, 1.5, 2.0]},
-				{"id":  7, "name": "テンション消費しない", "viewName": "テンション維持%i%（専）", "selectorName": "%i%", "desc": "", "val": [1, 2, 3]}
+				{"id":  1, "name": "ケルベロスロンド", "viewName": "ケルベロスロンド%r（専）", "selectorName": "%r (CT%i)", "desc": "黒い魔獣が攻撃し\nダメージも増加\nレンジャー専用", "mp": 10, "charge": 0, "val": [220, 180, 110]},
+				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "レンジャー時\n特技の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "レンジャー時\n特技の会心率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  4, "name": "呪文の回復量強化", "viewName": "呪文の回復量+%i（専）", "selectorName": "+%i", "desc": "レンジャー時\n呪文の回復量が\n%z増える", "val": [5, 10, 20]},
+				{"id":  5, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "レンジャー時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "レンジャー時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "レンジャー時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]}
 			]
 		},
 
@@ -944,13 +944,13 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "クロックチャージ", "viewName": "クロックチャージ%r（専）", "selectorName": "%r (CT%i)", "desc": "", "mp": 0, "charge": 0, "val": [180, 130, 90]},
-				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  3, "name": "呪文のダメージ強化", "viewName": "呪文のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "", "val": [3, 5, 10]},
-				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "", "val": [1.0, 1.5, 2.0]},
-				{"id":  7, "name": "テンション消費しない", "viewName": "テンション維持%i%（専）", "selectorName": "%i%", "desc": "", "val": [1, 2, 3]}
+				{"id":  1, "name": "クロックチャージ", "viewName": "クロックチャージ%r（専）", "selectorName": "%r (CT%i)", "desc": "周囲のチャージを\n１０秒短縮する\n魔法戦士専用特技", "mp": 6, "charge": 0, "val": [180, 130, 90]},
+				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "魔法戦士時\n特技の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "呪文のダメージ強化", "viewName": "呪文のダメージ+%i（専）", "selectorName": "+%i", "desc": "魔法戦士時\n攻撃呪文の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "魔法戦士時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "魔法戦士時\n身かわし率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "魔法戦士時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "魔法戦士時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]}
 			]
 		},
 
@@ -980,13 +980,13 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "ラグジュアルリム", "viewName": "ラグジュアルリム%r（専）", "selectorName": "%r (CT%i)", "desc": "", "mp": 0, "charge": 0, "val": [210, 170, 140]},
-				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  4, "name": "呪文の威力と回復強化", "viewName": "呪文の威力と回復+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  5, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "", "val": [3, 5, 10]},
-				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "", "val": [1.0, 1.5, 2.0]},
-				{"id":  7, "name": "テンション消費しない", "viewName": "テンション維持%i%（専）", "selectorName": "%i%", "desc": "", "val": [1, 2, 3]}
+				{"id":  1, "name": "ラグジュアルリム", "viewName": "ラグジュアルリム%r（専）", "selectorName": "%r (CT%i)", "desc": "敵周囲を攻撃し\n消費Ｇを０にする\nスパスタ専用特技", "mp": 10, "charge": 0, "val": [210, 170, 140]},
+				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "スパスタ時\n特技の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "スパスタ時\n特技の会心率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  4, "name": "呪文の威力と回復強化", "viewName": "呪文の威力と回復+%i（専）", "selectorName": "+%i", "desc": "スパスタ時\n呪文の威力と\n回復が%z増える", "val": [5, 10, 20]},
+				{"id":  5, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "スパスタ時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "スパスタ時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "スパスタ時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]}
 			]
 		},
 
@@ -1016,13 +1016,13 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "灼熱とうこん討ち", "viewName": "灼熱とうこん討ち%r（専）", "selectorName": "%r (CT%i)", "desc": "", "mp": 0, "charge": 0, "val": [150, 110, 75]},
-				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "", "val": [3, 5, 10]},
-				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "", "val": [1.0, 1.5, 2.0]},
-				{"id":  7, "name": "テンション消費しない", "viewName": "テンション維持%i%（専）", "selectorName": "%i%", "desc": "", "val": [1, 2, 3]}
+				{"id":  1, "name": "灼熱とうこん討ち", "viewName": "灼熱とうこん討ち%r（専）", "selectorName": "%r (CT%i)", "desc": "チカラを一気に\n２回ためる攻撃\nバトマス専用特技", "mp": 6, "charge": 0, "val": [150, 110, 75]},
+				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "バトマス時\n特技の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "バトマス時\n特技の会心率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "バトマス時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "バトマス時\n身かわし率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "バトマス時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "バトマス時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]}
 			]
 		},
 
@@ -1052,13 +1052,13 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "きせきの雨", "viewName": "きせきの雨%r（専）", "selectorName": "%r (CT%i)", "desc": "", "mp": 0, "charge": 0, "val": [150, 110, 75]},
-				{"id":  2, "name": "呪文の威力と回復強化", "viewName": "呪文の威力と回復+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  3, "name": "呪文のぼうそう率", "viewName": "呪文のぼうそう率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "", "val": [3, 5, 10]},
-				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "", "val": [1.0, 1.5, 2.0]},
-				{"id":  7, "name": "テンション消費しない", "viewName": "テンション維持%i%（専）", "selectorName": "%i%", "desc": "", "val": [1, 2, 3]}
+				{"id":  1, "name": "きせきの雨", "viewName": "きせきの雨%r（専）", "selectorName": "%r (CT%i)", "desc": "仲間のダメージを\n大きくいやす雨\n賢者専用特技", "mp": 8, "charge": 0, "val": [150, 110, 75]},
+				{"id":  2, "name": "呪文の威力と回復強化", "viewName": "呪文の威力と回復+%i（専）", "selectorName": "+%i", "desc": "賢者時\n呪文の威力と\n回復が%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "呪文のぼうそう率", "viewName": "呪文のぼうそう率+%f%（専）", "selectorName": "+%f%", "desc": "賢者時\n呪文暴走率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "賢者時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "賢者時\n身かわし率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "賢者時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "賢者時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]}
 			]
 		},
 
@@ -1088,13 +1088,13 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "エモノ呼びの咆哮", "viewName": "エモノ呼びの咆哮%r（専）", "selectorName": "%r (CT%i)", "desc": "", "mp": 0, "charge": 0, "val": [90, 55, 35]},
-				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "", "val": [3, 5, 10]},
-				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "", "val": [1.0, 1.5, 2.0]},
-				{"id":  7, "name": "テンション消費しない", "viewName": "テンション維持%i%（専）", "selectorName": "%i%", "desc": "", "val": [1, 2, 3]}
+				{"id":  1, "name": "エモノ呼びの咆哮", "viewName": "エモノ呼びの咆哮%r（専）", "selectorName": "%r (CT%i)", "desc": "敵モンスターを\n２体呼び寄せる\nまもの使い専用", "mp": 10, "charge": 0, "val": [90, 55, 35]},
+				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "まもの使い時\n特技の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "まもの使い時\n特技の会心率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "まもの使い時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "まもの使い時\n身かわし率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "まもの使い時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "まもの使い時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]}
 			]
 		},
 
@@ -1125,12 +1125,12 @@
 			],
 			"customSkills": [
 				{"id":  1, "name": "どうぐ最適術", "viewName": "どうぐ最適術%r（専）", "selectorName": "%r (CT%i)", "desc": "どうぐの効果が\n倍加と範囲化する\nどうぐ使い専用", "mp": 10, "charge": 0, "val": [180, 130, 90]},
-				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "", "val": [3, 5, 10]},
-				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "", "val": [1.0, 1.5, 2.0]},
-				{"id":  7, "name": "テンション消費しない", "viewName": "テンション維持%i%（専）", "selectorName": "%i%", "desc": "", "val": [1, 2, 3]}
+				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "どうぐ使い時\n特技の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "どうぐ使い時\n特技の会心率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "どうぐ使い時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "どうぐ使い時\n身かわし率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "どうぐ使い時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "どうぐ使い時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]}
 			]
 		},
 
@@ -1160,13 +1160,13 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "神速シャンソン", "viewName": "神速シャンソン%r（専）", "selectorName": "%r (CT%i)", "desc": "", "mp": 0, "charge": 0, "val": [220, 180, 110]},
-				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  3, "name": "呪文のダメージ強化", "viewName": "呪文のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "", "val": [3, 5, 10]},
-				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "", "val": [1.0, 1.5, 2.0]},
-				{"id":  7, "name": "テンション消費しない", "viewName": "テンション維持%i%（専）", "selectorName": "%i%", "desc": "", "val": [1, 2, 3]}
+				{"id":  1, "name": "神速シャンソン", "viewName": "神速シャンソン%r（専）", "selectorName": "%r (CT%i)", "desc": "呪文特技の発動と\n行動時間を短縮\n踊り子専用", "mp": 10, "charge": 0, "val": [220, 180, 110]},
+				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "踊り子時\n特技の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "呪文のダメージ強化", "viewName": "呪文のダメージ+%i（専）", "selectorName": "+%i", "desc": "踊り子時\n攻撃呪文の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "踊り子時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "踊り子時\n身かわし率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "踊り子時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "踊り子時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]}
 			]
 		},
 
@@ -1196,13 +1196,13 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "ギラグレイド", "viewName": "ギラグレイド%r（専）", "selectorName": "%r (CT%i)", "desc": "", "mp": 0, "charge": 0, "val": [120, 80, 60]},
-				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  3, "name": "呪文のダメージ強化", "viewName": "呪文のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "", "val": [3, 5, 10]},
-				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "", "val": [1.0, 1.5, 2.0]},
-				{"id":  7, "name": "テンション消費しない", "viewName": "テンション維持%i%（専）", "selectorName": "%i%", "desc": "", "val": [1, 2, 3]}
+				{"id":  1, "name": "ギラグレイド", "viewName": "ギラグレイド%r（専）", "selectorName": "%r (CT%i)", "desc": "地をゆるがす炎で\n直線上にいる敵を\n焼きつくす", "mp": 24, "charge": 0, "val": [120, 80, 60]},
+				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "踊り子時\n特技の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "呪文のダメージ強化", "viewName": "呪文のダメージ+%i（専）", "selectorName": "+%i", "desc": "踊り子時\n攻撃呪文の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "踊り子時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "踊り子時\n身かわし率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "踊り子時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "踊り子時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]}
 			]
 		},
 
@@ -1233,12 +1233,12 @@
 			],
 			"customSkills": [
 				{"id":  1, "name": "魔王のいざない", "viewName": "魔王のいざない%r（専）", "selectorName": "%r (CT%i)", "desc": "ＳＳＳのタロット\nを手札に移動する\n占い師専用特技", "mp": 0, "charge": 0, "val": [120, 80, 60]},
-				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  3, "name": "特技の回復量強化", "viewName": "特技の回復量+%i（専）", "selectorName": "+%i", "desc": "", "val": [5, 10, 20]},
-				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "", "val": [3, 5, 10]},
-				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "", "val": [0.5, 0.8, 1.2]},
-				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "", "val": [1.0, 1.5, 2.0]},
-				{"id":  7, "name": "テンション消費しない", "viewName": "テンション維持%i%（専）", "selectorName": "%i%", "desc": "", "val": [1, 2, 3]}
+				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "占い師時\n特技の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "特技の回復量強化", "viewName": "特技の回復量+%i（専）", "selectorName": "+%i", "desc": "占い師時\n特技の回復量が\n%z増える", "val": [5, 10, 20]},
+				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "占い師時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "占い師時\n身かわし率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "占い師時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "占い師時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]}
 			]
 		},
 
