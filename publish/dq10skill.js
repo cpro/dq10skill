@@ -477,6 +477,21 @@ var Base64 = (function () {
     };
     return Base64;
 }());
+/**
+ * 通常のUnicode文字列とUTF-8バイト列の相互変換
+ * Base64とのデータ受渡に使用
+ */
+var UTF8 = (function () {
+    function UTF8() {
+    }
+    UTF8.toUTF8 = function (raw) {
+        return unescape(encodeURIComponent(raw));
+    };
+    UTF8.fromUTF8 = function (utf8) {
+        return decodeURIComponent(escape(utf8));
+    };
+    return UTF8;
+}());
 /// <reference path="typings/jquery/jquery.d.ts" />
 /// <reference path="typings/jqueryui/jqueryui.d.ts" />
 /// <reference path="typings/dq10skill.d.ts" />
@@ -1224,7 +1239,7 @@ var Dq10;
                     function () {
                         _this.$customSkillConsole = $('#customskill_console');
                         $('.skill_table tr[class$="_15"],.skill_table tr[class$="_16"],.skill_table tr[class$="_17"]').mouseenter(function (e) {
-                            $(e.currentTarget).parent().children().last().find('.skill_name').append(_this.$customSkillConsole);
+                            $(e.currentTarget).parent().children('[class$="_15"]').find('.skill_name').append(_this.$customSkillConsole);
                             _this.$customSkillConsole.show();
                             e.stopPropagation();
                         }).mouseleave(function (e) {

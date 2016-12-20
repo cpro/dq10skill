@@ -1085,7 +1085,7 @@ namespace Dq10.SkillSimulator {
 				this.$customSkillConsole = $('#customskill_console');
 
 				$('.skill_table tr[class$="_15"],.skill_table tr[class$="_16"],.skill_table tr[class$="_17"]').mouseenter((e) => {
-					$(e.currentTarget).parent().children().last().find('.skill_name').append(this.$customSkillConsole);
+					$(e.currentTarget).parent().children('[class$="_15"]').find('.skill_name').append(this.$customSkillConsole);
 					this.$customSkillConsole.show();
 					e.stopPropagation();
 				}).mouseleave((e) => {

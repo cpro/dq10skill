@@ -706,12 +706,14 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
         left: 0;
         right: 0;
         bottom: 16px;
-        height: 160px;
-        width: 168px;
+        height: 220px;
+        width: 222px;
         margin: auto; }
         #customskill-selector #customskill-selector-body #customskill-selector-pallette #customskill-selector-skillline-buttons li {
-          width: 80px;
+          width: 70px;
           margin: 1px; }
+        #customskill-selector #customskill-selector-body #customskill-selector-pallette #customskill-selector-skillline-buttons li.unique-skillline {
+          background-color: #f7f4f0; }
 
 #customskill_console {
   position: absolute;

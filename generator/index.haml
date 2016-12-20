@@ -1,4 +1,4 @@
-- @version = '9.1'
+- @version = '10.1'
 !!! 5
 %html
 	%head
@@ -178,8 +178,8 @@
 								%ul
 									%li ダブルクリックすると複数の職で振ったそのスキルのポイントをすべて0にします。
 									%li 職業欄下部の「全スキルをリセット」で、全職業で振ったスキルのポイントをすべて0にします。レベルと特訓は変化しません。
-							%li 「ゆうかん」など職業固有スキルラインの最後のスキル(150)にマウスカーソルを当てると、「MSP込みの最大値にする」ボタンが表示され、クリックすると最大値から現在取得可能なマスタースキルポイントを引いた数値に設定されます。
-							%li 武器スキルの160以降にマウスカーソルを当てると「編集」ボタンが表示され、クリックするとスキル編集画面が開きます。
+							%li 「ゆうかん」など職業固有スキルラインの最後のスキル(180)にマウスカーソルを当てると、「MSP込みの最大値にする」ボタンが表示され、クリックすると最大値から現在取得可能なマスタースキルポイントを引いた数値に設定されます。
+							%li 各スキルの160以降にマウスカーソルを当てると「編集」ボタンが表示され、クリックするとスキル編集画面が開きます。
 							%li ページ上部の「マスタースキル」をチェックすると、マスタースキルポイントを編集するモードに切り替わります。
 							%li ページ上部の「元に戻す」ボタンまたはキーボードのCtrl+Zで、直前の変更を元に戻せます。元に戻した変更は「やり直し」ボタンまたはCtrl+Yでもう一度適用できます。
 							%li 「保存用URL」欄に表示されるURLは、アクセスすることで現在の状態を再現できます。メモ用・掲示板に貼る用などにどうぞ。
@@ -195,10 +195,15 @@
 						履歴:
 						%ul
 							%li
+								2016/12/19 v10.0 ver3.4後期対応。
+								%ul
+									%li 職業スキル160-180Pに対応。（2016/12/20 v10.1 スキル説明・消費MP補完）
+									%li 「テンション消費軽減（専）」→「テンション維持（専）」の名称変更に対応。
+							%li
 								2016/10/6 v9.1 ver3.4前期対応。
 								%ul
 									%li レベル上限解放(93→96)に対応。
-									%li 160-180スキルの追加に対応。
+									%li 160-180スキルの追加に対応（不死鳥天舞+n%等）。
 									%li 2016/10/9 v9.1.1 MSP上限25→26
 							%li
 								2016/7/27 v9.0 ver3.3後期対応。
@@ -219,11 +224,6 @@
 									%li 武器スキル160-180Pに対応。
 									%li 武器スキル160以降のスキル編集機能を追加。160以降のスキルにマウスカーソルを当てると「編集」ボタンが表示され、クリックで編集画面を開きます。
 							%li 2016/3/2 v7.1 ver3.2後期のレベル上限解放(90→93)に対応。
-							%li
-								2016/1/28 v7.0
-								%ul
-									%li スキルポイントを150より多く振れるように変更。複数職でポイントをやりとりしやすくしました。
-									%li 「MSP込みの最大値にする」ボタン（一発で128ポイントにする）追加。職固有の150スキルホバー時に表示されます。
 							%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
 					%li
 						ToDo:
@@ -250,7 +250,7 @@
 				%a.x-button#customskill-selector-close-button{title: '閉じる'} ×
 			#customskill-selector-body.modal-dialog-body
 				#customskill-selector-entrylists
-					- data['skillLineOrder'].each do |skill_line_name|
+					- (data['skillLineOrder'] + data['uniqueSkillLineOrder']).each do |skill_line_name|
 						%table.customskill-entrylist{id: "customskill-selector-entrylist-#{skill_line_name}"}
 							%tr.customskill-entrylist-header
 								%th
@@ -274,8 +274,12 @@
 							%dd.customskill-palette-name{id: "customskill-selector-palette-#{i}"} （なし）
 							%a.customskill-palette-delete.x-button{'data-rank' => i} ×
 					%ul#customskill-selector-skillline-buttons.button-container
-						- data['skillLineOrder'].each do |skill_line_name|
+						- (data['skillLineOrder']).each do |skill_line_name|
 							%li.ui-corner-all<
+								%a{'data-skillline' => skill_line_name}<
+									= data['skillLines'][skill_line_name]['name']
+						- (data['uniqueSkillLineOrder']).each do |skill_line_name|
+							%li.ui-corner-all.unique-skillline<
 								%a{'data-skillline' => skill_line_name}<
 									= data['skillLines'][skill_line_name]['name']
 			#customskill-selector-footer.modal-dialog-footer

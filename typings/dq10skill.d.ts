@@ -5,6 +5,7 @@
 		[vocationName: string]: Vocation;
 	};
 	vocationOrder: string[];
+	uniqueSkillLineOrder: string[];
 	skillPtsGiven: number[];
 	expRequired: {
 		[index: number]: number[];
