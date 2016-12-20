@@ -53,9 +53,10 @@ var Dq10;
         var CommandManager = (function (_super) {
             __extends(CommandManager, _super);
             function CommandManager() {
-                _super.apply(this, arguments);
-                this.commandStack = [];
-                this.cursor = 0;
+                var _this = _super.apply(this, arguments) || this;
+                _this.commandStack = [];
+                _this.cursor = 0;
+                return _this;
             }
             CommandManager.prototype.invoke = function (command) {
                 var succeeded = command.execute();
@@ -154,10 +155,11 @@ var Dq10;
         var UpdateSkillPt = (function (_super) {
             __extends(UpdateSkillPt, _super);
             function UpdateSkillPt(vocationId, skillLineId, newValue) {
-                _super.call(this, newValue);
-                this.name = 'UpdateSkillPt';
-                this.vocationId = vocationId;
-                this.skillLineId = skillLineId;
+                var _this = _super.call(this, newValue) || this;
+                _this.name = 'UpdateSkillPt';
+                _this.vocationId = vocationId;
+                _this.skillLineId = skillLineId;
+                return _this;
             }
             UpdateSkillPt.prototype.execute = function () {
                 if (this.prevValue === undefined)
@@ -179,9 +181,10 @@ var Dq10;
         var UpdateLevel = (function (_super) {
             __extends(UpdateLevel, _super);
             function UpdateLevel(vocationId, newValue) {
-                _super.call(this, newValue);
-                this.name = 'UpdateLevel';
-                this.vocationId = vocationId;
+                var _this = _super.call(this, newValue) || this;
+                _this.name = 'UpdateLevel';
+                _this.vocationId = vocationId;
+                return _this;
             }
             UpdateLevel.prototype.execute = function () {
                 if (this.prevValue === undefined)
@@ -203,9 +206,10 @@ var Dq10;
         var UpdateTrainingSkillPt = (function (_super) {
             __extends(UpdateTrainingSkillPt, _super);
             function UpdateTrainingSkillPt(vocationId, newValue) {
-                _super.call(this, newValue);
-                this.name = 'UpdateTrainingSkillPt';
-                this.vocationId = vocationId;
+                var _this = _super.call(this, newValue) || this;
+                _this.name = 'UpdateTrainingSkillPt';
+                _this.vocationId = vocationId;
+                return _this;
             }
             UpdateTrainingSkillPt.prototype.execute = function () {
                 if (this.prevValue === undefined)
@@ -227,9 +231,10 @@ var Dq10;
         var UpdateMSP = (function (_super) {
             __extends(UpdateMSP, _super);
             function UpdateMSP(skillLineId, newValue) {
-                _super.call(this, newValue);
-                this.name = 'UpdateMSP';
-                this.skillLineId = skillLineId;
+                var _this = _super.call(this, newValue) || this;
+                _this.name = 'UpdateMSP';
+                _this.skillLineId = skillLineId;
+                return _this;
             }
             UpdateMSP.prototype.execute = function () {
                 if (this.prevValue === undefined)
@@ -251,15 +256,16 @@ var Dq10;
         var UpdateCustomSkill = (function (_super) {
             __extends(UpdateCustomSkill, _super);
             function UpdateCustomSkill(skillLineId, newValue, rank) {
-                _super.call(this, newValue);
-                this.prevArray = [];
-                this.newArray = [];
-                this.name = 'UpdateCustomSkill';
-                this.skillLineId = skillLineId;
-                this.rank = rank;
-                this.prevArray = SkillSimulator.Simulator.getCustomSkills(this.skillLineId).slice();
-                this.newArray = this.prevArray.slice();
-                this.newArray[rank] = newValue;
+                var _this = _super.call(this, newValue) || this;
+                _this.prevArray = [];
+                _this.newArray = [];
+                _this.name = 'UpdateCustomSkill';
+                _this.skillLineId = skillLineId;
+                _this.rank = rank;
+                _this.prevArray = SkillSimulator.Simulator.getCustomSkills(_this.skillLineId).slice();
+                _this.newArray = _this.prevArray.slice();
+                _this.newArray[rank] = newValue;
+                return _this;
             }
             UpdateCustomSkill.prototype.execute = function () {
                 var ret = SkillSimulator.Simulator.setCustomSkills(this.skillLineId, this.newArray, this.rank);
@@ -317,8 +323,9 @@ var Dq10;
         var SetAllLevel = (function (_super) {
             __extends(SetAllLevel, _super);
             function SetAllLevel(newValue) {
-                _super.call(this);
-                this.newValue = newValue;
+                var _this = _super.call(this) || this;
+                _this.newValue = newValue;
+                return _this;
             }
             SetAllLevel.prototype._impl = function () {
                 var _this = this;
@@ -331,8 +338,9 @@ var Dq10;
         var SetAllTrainingSkillPt = (function (_super) {
             __extends(SetAllTrainingSkillPt, _super);
             function SetAllTrainingSkillPt(newValue) {
-                _super.call(this);
-                this.newValue = newValue;
+                var _this = _super.call(this) || this;
+                _this.newValue = newValue;
+                return _this;
             }
             SetAllTrainingSkillPt.prototype._impl = function () {
                 var _this = this;
@@ -345,8 +353,9 @@ var Dq10;
         var ClearPtsOfSameSkills = (function (_super) {
             __extends(ClearPtsOfSameSkills, _super);
             function ClearPtsOfSameSkills(skillLineId) {
-                _super.call(this);
-                this.skillLineId = skillLineId;
+                var _this = _super.call(this) || this;
+                _this.skillLineId = skillLineId;
+                return _this;
             }
             ClearPtsOfSameSkills.prototype._impl = function () {
                 SkillSimulator.Simulator.clearPtsOfSameSkills(this.skillLineId);
@@ -357,7 +366,7 @@ var Dq10;
         var ClearMSP = (function (_super) {
             __extends(ClearMSP, _super);
             function ClearMSP() {
-                _super.apply(this, arguments);
+                return _super.apply(this, arguments) || this;
             }
             ClearMSP.prototype._impl = function () {
                 SkillSimulator.Simulator.clearMSP();
@@ -368,7 +377,7 @@ var Dq10;
         var ClearAllSkills = (function (_super) {
             __extends(ClearAllSkills, _super);
             function ClearAllSkills() {
-                _super.apply(this, arguments);
+                return _super.apply(this, arguments) || this;
             }
             ClearAllSkills.prototype._impl = function () {
                 SkillSimulator.Simulator.clearAllSkills();
@@ -379,8 +388,9 @@ var Dq10;
         var PresetStatus = (function (_super) {
             __extends(PresetStatus, _super);
             function PresetStatus(status) {
-                _super.call(this);
-                this.status = status;
+                var _this = _super.call(this) || this;
+                _this.status = status;
+                return _this;
             }
             PresetStatus.prototype._impl = function () {
                 var sarray = this.status.split(';');
@@ -391,7 +401,7 @@ var Dq10;
         var BringUpLevelToRequired = (function (_super) {
             __extends(BringUpLevelToRequired, _super);
             function BringUpLevelToRequired() {
-                _super.apply(this, arguments);
+                return _super.apply(this, arguments) || this;
             }
             BringUpLevelToRequired.prototype._impl = function () {
                 SkillSimulator.Simulator.bringUpLevelToRequired();
@@ -402,7 +412,7 @@ var Dq10;
         var SimulatorCommandManager = (function (_super) {
             __extends(SimulatorCommandManager, _super);
             function SimulatorCommandManager() {
-                _super.apply(this, arguments);
+                return _super.apply(this, arguments) || this;
             }
             SimulatorCommandManager.prototype.updateSkillPt = function (vocationId, skillLineId, newValue) {
                 return this.invoke(new UpdateSkillPt(vocationId, skillLineId, newValue));
@@ -1008,19 +1018,19 @@ var Dq10;
                     hint += "\n\uFF08\u30C1\u30E3\u30FC\u30B8: " + rankValue + "\u79D2\uFF09";
                 return hint;
             };
-            SimulatorCustomSkill.emptySkillData = {
-                id: 0,
-                name: '（なし）',
-                viewName: '（なし）',
-                selectorName: '',
-                desc: '',
-                mp: null,
-                charge: null,
-                atk: null,
-                val: [0, 0, 0]
-            };
             return SimulatorCustomSkill;
         }());
+        SimulatorCustomSkill.emptySkillData = {
+            id: 0,
+            name: '（なし）',
+            viewName: '（なし）',
+            selectorName: '',
+            desc: '',
+            mp: null,
+            charge: null,
+            atk: null,
+            val: [0, 0, 0]
+        };
         var SimulatorUI = (function () {
             function SimulatorUI(sim) {
                 var _this = this;
@@ -1239,7 +1249,8 @@ var Dq10;
                     function () {
                         _this.$customSkillConsole = $('#customskill_console');
                         $('.skill_table tr[class$="_15"],.skill_table tr[class$="_16"],.skill_table tr[class$="_17"]').mouseenter(function (e) {
-                            $(e.currentTarget).parent().children('[class$="_15"]').find('.skill_name').append(_this.$customSkillConsole);
+                            var skillLineId = _this.getCurrentSkillLine(e.currentTarget);
+                            $(e.currentTarget).parent().children("." + skillLineId + "_15").find('.skill_name').append(_this.$customSkillConsole);
                             _this.$customSkillConsole.show();
                             e.stopPropagation();
                         }).mouseleave(function (e) {

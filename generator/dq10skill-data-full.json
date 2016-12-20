@@ -147,7 +147,7 @@
 				{"id":  1, "name": "アイギスの守り", "viewName": "アイギスの守り%r", "selectorName": "%r (CT%i)", "desc": "ダメージを軽減し\nビッグシールドと\n会心ガードも付与", "mp": 8, "charge": 0, "val": [220, 180, 110]},
 				{"id":  2, "name": "しゅび力", "viewName": "装備時しゅび力+%i", "selectorName": "+%i", "desc": "盾装備時の\nしゅび力が\n%z増える", "val": [10, 15, 20]},
 				{"id":  3, "name": "さいだいＭＰ", "viewName": "装備時さいだいＭＰ+%i", "selectorName": "+%i", "desc": "盾装備時\nさいだいＭＰが\n%z増える", "val": [20, 30, 45]},
-				{"id":  4, "name": "会心完全ガード率", "viewName": "装備時会心完全ガード率+%f%", "selectorName": "+%f%", "desc": "盾装備時\n%z％の確率で\n会心完全ガード", "val": [1, 1.5, 2]},
+				{"id":  4, "name": "会心完全ガード率", "viewName": "会心完全ガード+%f%", "selectorName": "+%f%", "desc": "盾装備時\n%z％の確率で\n会心完全ガード", "val": [1, 1.5, 2]},
 				{"id":  5, "name": "瀕死時身かわし率アップ", "viewName": "瀕死時%i%で身かわし率+30%", "selectorName": "%i%", "selectorSuff": "で躱+30%", "desc": "盾装備中\n瀕死時に%z％で\n身かわし率アップ", "val": [2, 4, 6]},
 				{"id":  6, "name": "ガード時ルカニ", "viewName": "ガード時%i%でルカニ", "selectorName": "%i%", "desc": "盾装備中ガード時\n%z％の確率で\nルカニがかかる", "val": [2, 3, 5]},
 				{"id":  7, "name": "ガード時ヘナトス", "viewName": "ガード時%i%でヘナトス", "selectorName": "%i%", "desc": "盾装備中ガード時\n%z％の確率で\nヘナトスがかかる", "val": [2, 3, 5]},
