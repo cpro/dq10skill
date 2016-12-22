@@ -723,14 +723,14 @@ $badge-button-container-width: (
 	) * $badge-button-count-per-row;
 
 /* ボタンコンテナ一般 */
-ul.button-container {
+.button-container {
 	list-style-type: none;
 	font-size: 11px;
 
 	margin: 0;
 	padding: 0;
 
-	li {
+	li, .button-like {
 		float: left;
 		height: $button-height;
 		overflow: hidden;
@@ -1137,7 +1137,7 @@ $dialog-outer-border-width: 3px;
 	/* バッジ検索ボタン */
 	$badge-search-button-width: 36px;
 
-	ul.badge-search-button-container {
+	ul.badge-search-button-container, #badge-search-console-word {
 		float: left;
 		margin-top: $badge-selector-body-padding;
 		height: ($button-height + 4px) * 4;
@@ -1155,7 +1155,7 @@ $dialog-outer-border-width: 3px;
 			padding-right: 0;
 		}
 
-		li {
+		li, .button-like {
 			width: $badge-search-button-width;
 			margin: 1px;
 
@@ -1186,6 +1186,23 @@ $dialog-outer-border-width: 3px;
 
 		li {
 			width: $badge-sort-button-width;
+		}
+	}
+	#badge-search-console-word {
+		width: 160px;
+
+		label {
+			font-size: 11px;
+			display: block;
+			float: left;
+		}
+		#badge-search-word-input {
+			font-size: 13px;
+			width: 105px;
+			border-radius: 1px;
+			border: 1px solid #aaa;
+			display: block;
+			float: left;
 		}
 	}
 

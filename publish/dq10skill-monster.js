@@ -574,9 +574,10 @@ var Dq10;
         var CommandManager = (function (_super) {
             __extends(CommandManager, _super);
             function CommandManager() {
-                _super.apply(this, arguments);
-                this.commandStack = [];
-                this.cursor = 0;
+                var _this = _super.apply(this, arguments) || this;
+                _this.commandStack = [];
+                _this.cursor = 0;
+                return _this;
             }
             CommandManager.prototype.invoke = function (command) {
                 var succeeded = command.execute();
@@ -733,7 +734,7 @@ var Dq10;
         var SimulatorCommandManager = (function (_super) {
             __extends(SimulatorCommandManager, _super);
             function SimulatorCommandManager() {
-                _super.apply(this, arguments);
+                return _super.apply(this, arguments) || this;
             }
             SimulatorCommandManager.prototype.addMonster = function (monsterType) {
                 return this.invoke(new AddMonster(monsterType));
@@ -1572,6 +1573,18 @@ var Dq10;
                         _this.sortBadgeByFeatureValue(searchKey, true);
                     }
                 });
+                //バッジ機能検索
+                $('#badge-search-word-gosearch').find('a').click(function (e) {
+                    var searchKey = $('#badge-search-word-input').val();
+                    if (searchKey === '')
+                        return;
+                    _this.badgeSearch.setWordSearch(searchKey);
+                    _this.filterButtons(_this.badgeSearch.getIds());
+                });
+                $('#badge-search-word-input').keyup(function (e) {
+                    if (e.keyCode == 13)
+                        $('#badge-search-word-gosearch').find('a').click();
+                });
                 //バッジソートボタン
                 $('#badge-sort-badgeid').click(function (e) {
                     _this.sortBadgeById(_this.sortByIdDesc);
@@ -1621,43 +1634,11 @@ var Dq10;
                 features.forEach(function (feature) { return $('<li>').text(feature).appendTo($featureList); });
             };
             BadgeSelector.prototype.getFeatureCache = function (badgeId) {
-                var _this = this;
                 if (this.featureCache[badgeId])
                     return this.featureCache[badgeId];
                 var badge = this.DB.badges[badgeId];
-                var features = [];
-                Object.keys(this.DB.badgefeature).forEach(function (f) {
-                    var feature = _this.DB.badgefeature[f];
-                    var val = badge[f];
-                    if (val) {
-                        switch (feature.type) {
-                            case 'int':
-                            case 'string':
-                                if (feature.format)
-                                    features.push(feature.format.replace('@v', val));
-                                else
-                                    features.push(feature.name + ' +' + val.toString());
-                                break;
-                            case 'array':
-                                features = features.concat(getFeatureArrayFromArray(feature.format, val));
-                                break;
-                            case 'hash':
-                                features = features.concat(getFeatureArrayFromHash(feature.format, val));
-                                break;
-                        }
-                    }
-                });
-                this.featureCache[badgeId] = features;
+                this.featureCache[badgeId] = (new BadgeFeature(badge)).getFeatures();
                 return this.featureCache[badgeId];
-                function getFeatureArrayFromArray(format, fromArray) {
-                    return fromArray.map(function (ent) { return format.replace('@v', ent); });
-                }
-                function getFeatureArrayFromHash(format, fromHash) {
-                    return Object.keys(fromHash).map(function (key) {
-                        var value = fromHash[key];
-                        return format.replace('@k', key).replace('@v', value);
-                    });
-                }
             };
             BadgeSelector.prototype.setCurrentMonster = function (monster, badgeIndex) {
                 var _this = this;
@@ -1747,6 +1728,7 @@ var Dq10;
                 $('#badge-search-buttons-race li,' +
                     '#badge-search-buttons-rarity li,' +
                     '#badge-search-buttons-feature li').removeClass('selected');
+                $('#badge-search-word-input').val('');
                 this.sortByIdDesc = false;
                 $('#badge-sort-badgeid').click();
             };
@@ -1769,6 +1751,48 @@ var Dq10;
                 this.$maskScreen.hide();
             };
             return BadgeSelector;
+        }());
+        var BadgeFeature = (function () {
+            function BadgeFeature(badge) {
+                this.badge = badge;
+                this.DB = SkillSimulator.MonsterDB;
+            }
+            BadgeFeature.prototype.getFeatures = function () {
+                var _this = this;
+                var features = [];
+                Object.keys(this.DB.badgefeature).forEach(function (f) {
+                    var feature = _this.DB.badgefeature[f];
+                    var val = _this.badge[f];
+                    if (!val)
+                        return;
+                    switch (feature.type) {
+                        case 'int':
+                        case 'string':
+                            if (feature.format)
+                                features.push(feature.format.replace('@v', val));
+                            else
+                                features.push(feature.name + ' +' + val.toString());
+                            break;
+                        case 'array':
+                            features = features.concat(_this.getFeatureArrayFromArray(feature.format, val));
+                            break;
+                        case 'hash':
+                            features = features.concat(_this.getFeatureArrayFromHash(feature.format, val));
+                            break;
+                    }
+                });
+                return features;
+            };
+            BadgeFeature.prototype.getFeatureArrayFromArray = function (format, fromArray) {
+                return fromArray.map(function (ent) { return format.replace('@v', ent); });
+            };
+            BadgeFeature.prototype.getFeatureArrayFromHash = function (format, fromHash) {
+                return Object.keys(fromHash).map(function (key) {
+                    var value = fromHash[key];
+                    return format.replace('@k', key).replace('@v', value);
+                });
+            };
+            return BadgeFeature;
         }());
         ;
         //検索機能
@@ -1801,6 +1825,21 @@ var Dq10;
                     });
                 return isTurningOn;
             };
+            BadgeSearch.prototype.setWordSearch = function (searchKey) {
+                var _this = this;
+                var filterType = 'word';
+                this.search.some(function (filter, i) {
+                    if (filter.filterType == filterType) {
+                        _this.search.splice(i, 1);
+                        return true;
+                    }
+                });
+                if (searchKey !== '')
+                    this.search.push({
+                        filterType: filterType,
+                        searchKey: searchKey
+                    });
+            };
             BadgeSearch.prototype.getIds = function () {
                 var _this = this;
                 return this.search.reduce(function (ids, filter) {
@@ -1826,6 +1865,12 @@ var Dq10;
                         break;
                     case 'feature':
                         filterFunc = function (badge) { return badge[searchKey] !== undefined; };
+                        break;
+                    case 'word':
+                        filterFunc = function (badge) {
+                            var features = (new BadgeFeature(badge)).getFeatures();
+                            return features.some(function (f) { return f.indexOf(searchKey) >= 0; });
+                        };
                         break;
                     default:
                         throw 'UnknownFilterType';
