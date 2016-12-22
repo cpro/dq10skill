@@ -900,6 +900,18 @@ namespace Dq10.SkillSimulator {
 					this.sortBadgeByFeatureValue(searchKey, true);
 				}
 			});
+			//バッジ機能検索
+			$('#badge-search-word-gosearch').find('a').click((e) => {
+				var searchKey = $('#badge-search-word-input').val();
+				if(searchKey === '') return;
+
+				this.badgeSearch.setWordSearch(searchKey);
+				this.filterButtons(this.badgeSearch.getIds());
+			});
+			$('#badge-search-word-input').keyup((e) => {
+				if(e.keyCode == 13) //Enter
+					$('#badge-search-word-gosearch').find('a').click();
+			});
 
 			//バッジソートボタン
 			$('#badge-sort-badgeid').click((e) => {
@@ -1069,6 +1081,7 @@ namespace Dq10.SkillSimulator {
 			$('#badge-search-buttons-race li,' +
 				'#badge-search-buttons-rarity li,' +
 				'#badge-search-buttons-feature li').removeClass('selected');
+			$('#badge-search-word-input').val('');
 
 			this.sortByIdDesc = false;
 			$('#badge-sort-badgeid').click();
@@ -1184,6 +1197,21 @@ namespace Dq10.SkillSimulator {
 				});
 
 			return isTurningOn;
+		}
+		setWordSearch(searchKey: string): void {
+			var filterType = 'word';
+			this.search.some((filter, i) => {
+				if(filter.filterType == filterType) {
+					this.search.splice(i, 1);
+					return true;
+				}
+			});
+
+			if(searchKey !== '')
+				this.search.push({
+					filterType: filterType,
+					searchKey: searchKey
+				});
 		}
 
 		getIds() {

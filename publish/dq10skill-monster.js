@@ -1573,6 +1573,18 @@ var Dq10;
                         _this.sortBadgeByFeatureValue(searchKey, true);
                     }
                 });
+                //バッジ機能検索
+                $('#badge-search-word-gosearch').find('a').click(function (e) {
+                    var searchKey = $('#badge-search-word-input').val();
+                    if (searchKey === '')
+                        return;
+                    _this.badgeSearch.setWordSearch(searchKey);
+                    _this.filterButtons(_this.badgeSearch.getIds());
+                });
+                $('#badge-search-word-input').keyup(function (e) {
+                    if (e.keyCode == 13)
+                        $('#badge-search-word-gosearch').find('a').click();
+                });
                 //バッジソートボタン
                 $('#badge-sort-badgeid').click(function (e) {
                     _this.sortBadgeById(_this.sortByIdDesc);
@@ -1716,6 +1728,7 @@ var Dq10;
                 $('#badge-search-buttons-race li,' +
                     '#badge-search-buttons-rarity li,' +
                     '#badge-search-buttons-feature li').removeClass('selected');
+                $('#badge-search-word-input').val('');
                 this.sortByIdDesc = false;
                 $('#badge-sort-badgeid').click();
             };
@@ -1811,6 +1824,21 @@ var Dq10;
                         searchKey: searchKey
                     });
                 return isTurningOn;
+            };
+            BadgeSearch.prototype.setWordSearch = function (searchKey) {
+                var _this = this;
+                var filterType = 'word';
+                this.search.some(function (filter, i) {
+                    if (filter.filterType == filterType) {
+                        _this.search.splice(i, 1);
+                        return true;
+                    }
+                });
+                if (searchKey !== '')
+                    this.search.push({
+                        filterType: filterType,
+                        searchKey: searchKey
+                    });
             };
             BadgeSearch.prototype.getIds = function () {
                 var _this = this;

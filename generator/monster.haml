@@ -211,6 +211,11 @@
 					- data['badgefeature'].each do |k, v|
 						%li.ui-corner-all<
 							%a{'data-search-key' => k, 'data-filter-type' => 'feature', title: v['name']} #{v['abbr']}
+				#badge-search-console-word.badge-search-button-container.button-container
+					%label{for: 'badge-search-word-text'} バッジ効果検索
+					%input#badge-search-word-input{type: 'text'}
+					%span#badge-search-word-gosearch.button-like.ui-corner-all
+						%a 検索
 				%ul#badge-search-buttons-sort.badge-search-button-container.button-container
 					%li.ui-corner-all<
 						%a#badge-search-clear すべて表示

@@ -511,23 +511,23 @@ body.msp .class_group .skill_table.selected {
 /* バッジ関連定義 */
 /* 1行あたりのボタン数 */
 /* ボタンコンテナ一般 */
-ul.button-container {
+.button-container {
   list-style-type: none;
   font-size: 11px;
   margin: 0;
   padding: 0; }
-  ul.button-container li {
+  .button-container li, .button-container .button-like {
     float: left;
     height: 16px;
     overflow: hidden;
     white-space: nowrap;
     border: 1px solid #aab;
     background-color: #f0f0f7; }
-    ul.button-container li:hover {
+    .button-container li:hover, .button-container .button-like:hover {
       cursor: pointer;
       border-color: #445;
       color: black; }
-    ul.button-container li a {
+    .button-container li a, .button-container .button-like a {
       display: block;
       /* padding: 0 $button-anchor-padding-x; */
       height: 16px;
@@ -783,26 +783,26 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
       #badge-selector #badge-selector-body ul#badge-selector-list li a {
         text-align: left;
         margin-left: 5px; }
-  #badge-selector ul.badge-search-button-container {
+  #badge-selector ul.badge-search-button-container, #badge-selector #badge-search-console-word {
     float: left;
     margin-top: 15px;
     height: 80px;
     margin-right: 6px;
     border-right: 1px solid #99a;
     padding-right: 6px; }
-    #badge-selector ul.badge-search-button-container:first-child {
+    #badge-selector ul.badge-search-button-container:first-child, #badge-selector #badge-search-console-word:first-child {
       margin-left: 15px; }
-    #badge-selector ul.badge-search-button-container:last-child {
+    #badge-selector ul.badge-search-button-container:last-child, #badge-selector #badge-search-console-word:last-child {
       margin-right: 33px;
       border-right: none;
       padding-right: 0; }
-    #badge-selector ul.badge-search-button-container li {
+    #badge-selector ul.badge-search-button-container li, #badge-selector ul.badge-search-button-container .button-like, #badge-selector #badge-search-console-word li, #badge-selector #badge-search-console-word .button-like {
       width: 36px;
       margin: 1px; }
-      #badge-selector ul.badge-search-button-container li.selected {
+      #badge-selector ul.badge-search-button-container li.selected, #badge-selector ul.badge-search-button-container .button-like.selected, #badge-selector #badge-search-console-word li.selected, #badge-selector #badge-search-console-word .button-like.selected {
         border-color: white;
         box-shadow: rgba(96, 160, 240, 0.7) 0 0 3px 1px; }
-        #badge-selector ul.badge-search-button-container li.selected a {
+        #badge-selector ul.badge-search-button-container li.selected a, #badge-selector ul.badge-search-button-container .button-like.selected a, #badge-selector #badge-search-console-word li.selected a, #badge-selector #badge-search-console-word .button-like.selected a {
           color: #0ae; }
   #badge-selector ul#badge-search-buttons-race {
     width: 160px; }
@@ -815,6 +815,19 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
     width: 84px; }
     #badge-selector ul#badge-search-buttons-sort li {
       width: 80px; }
+  #badge-selector #badge-search-console-word {
+    width: 160px; }
+    #badge-selector #badge-search-console-word label {
+      font-size: 11px;
+      display: block;
+      float: left; }
+    #badge-selector #badge-search-console-word #badge-search-word-input {
+      font-size: 13px;
+      width: 105px;
+      border-radius: 1px;
+      border: 1px solid #aaa;
+      display: block;
+      float: left; }
   #badge-selector #badge-selector-footer > div, #badge-selector #badge-selector-footer > ul, #badge-selector #badge-selector-footer > table {
     margin-top: 5px;
     /* height: $badge-selector-footer-height - 5px; */ }
