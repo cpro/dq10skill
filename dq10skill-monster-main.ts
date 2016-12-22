@@ -963,43 +963,9 @@ namespace Dq10.SkillSimulator {
 				return this.featureCache[badgeId];
 
 			var badge = this.DB.badges[badgeId];
+			this.featureCache[badgeId] = (new BadgeFeature(badge)).getFeatures();
 
-			var features: string[] = [];
-			Object.keys(this.DB.badgefeature).forEach((f) => {
-				var feature = this.DB.badgefeature[f];
-				var val = badge[f];
-
-				if(val) {
-					switch(feature.type) {
-						case 'int':
-						case 'string':
-							if(feature.format)
-								features.push(feature.format.replace('@v', val));
-							else
-								features.push(feature.name + ' +' + val.toString());
-							break;
-						case 'array':
-							features = features.concat(getFeatureArrayFromArray(feature.format, val));
-							break;
-						case 'hash':
-							features = features.concat(getFeatureArrayFromHash(feature.format, val));
-							break;
-					}
-				}
-			});
-
-			this.featureCache[badgeId] = features;
 			return this.featureCache[badgeId];
-
-			function getFeatureArrayFromArray(format: string, fromArray: string[]) {
-				return fromArray.map((ent) => format.replace('@v', ent));
-			}
-			function getFeatureArrayFromHash(format: string, fromHash: {[key: string]: any}) {
-				return Object.keys(fromHash).map((key) => {
-					var value = fromHash[key];
-					return format.replace('@k', key).replace('@v', value);
-				});
-			}
 		}
 
 		private STATUS_ARRAY = 'atk,def,maxhp,maxmp,magic,heal,spd,dex,stylish,weight'.split(',');
@@ -1128,6 +1094,54 @@ namespace Dq10.SkillSimulator {
 		}
 	}
 
+	class BadgeFeature {
+		private badge: Badge;
+		private DB: MonsterSimulatorDB;
+
+		constructor(badge: Badge) {
+			this.badge = badge;
+			this.DB = MonsterDB;
+		}
+
+		getFeatures(): string[] {
+			var features: string[] = [];
+
+			Object.keys(this.DB.badgefeature).forEach((f) => {
+				var feature = this.DB.badgefeature[f];
+				var val = this.badge[f];
+				if(!val) return;
+
+				switch (feature.type) {
+					case 'int':
+					case 'string':
+						if(feature.format)
+							features.push(feature.format.replace('@v', val));
+						else
+							features.push(feature.name + ' +' + val.toString());
+						break;
+					case 'array':
+						features = features.concat(this.getFeatureArrayFromArray(feature.format, val));
+						break;
+					case 'hash':
+						features = features.concat(this.getFeatureArrayFromHash(feature.format, val));
+						break;
+				}
+			});
+
+			return features;
+		}
+
+		private getFeatureArrayFromArray(format: string, fromArray: string[]) {
+			return fromArray.map((ent) => format.replace('@v', ent));
+		}
+		private getFeatureArrayFromHash(format: string, fromHash: {[key: string]: any}) {
+			return Object.keys(fromHash).map((key) => {
+				var value = fromHash[key];
+				return format.replace('@k', key).replace('@v', value);
+			});
+		}
+	}
+
 	//検索フィルター状態保持変数
 	interface SearchFilter {
 		filterType: string;
@@ -1201,6 +1215,12 @@ namespace Dq10.SkillSimulator {
 					break;
 				case 'feature':
 					filterFunc = (badge) => badge[searchKey] !== undefined;
+					break;
+				case 'word':
+					filterFunc = (badge) => {
+						var features = (new BadgeFeature(badge)).getFeatures();
+						return features.some((f) => f.indexOf(searchKey) >= 0);
+					}
 					break;
 				default:
 					throw 'UnknownFilterType';
