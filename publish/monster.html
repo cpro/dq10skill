@@ -7,14 +7,14 @@
     <link href='http://cpro.jp/dq10/skillsimulator/monster.html' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。まもの使い・どうぐ使いで仲間にしたモンスター用。' name='description'>
     <title>DQ10 仲間モンスター用スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=m2.1' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=m2.1.1' rel='stylesheet' type='text/css'>
     <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js' type='text/javascript'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
     <script src='js/rawdeflate.min.js' type='text/javascript'></script>
     <script src='js/rawinflate.min.js' type='text/javascript'></script>
-    <script src='./dq10skill-monster.js?ver=m2.1' type='text/javascript'></script>
+    <script src='./dq10skill-monster.js?ver=m2.1.1' type='text/javascript'></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -77,7 +77,7 @@
     <div id='body_content'>
       <div class='monster_ent' id='initial-instruction'>
         <p>上のモンスター名のボタンをクリックして仲間モンスターを追加してください。</p>
-        <p class='whatsnew'>（New: バッジ選択画面にバッジ機能のフリーワード検索を追加しました）</p>
+        <p class='whatsnew'>（New: ver3.5前期の転生回数9回に仮対応しました）</p>
       </div>
       <div id='monsters'></div>
       <div class='monster_ent' id='monster_dummy' style='display:none'>
@@ -189,6 +189,7 @@
             <li>
               履歴:
               <ul>
+                <li>2017/2/26 v2.1.1 ver3.5前期仮対応：転生回数の上限を8→9に変更。追加SPは5と仮定。</li>
                 <li>2016/12/22 v2.1 バッジ選択画面にバッジ機能のフリーワード検索を追加。</li>
                 <li>2016/10/26 v2.0 保存用URLの仕様変更。一部の追加スキルラインを設定すると正しく保存されない問題への対応。</li>
                 <li>2016/3/2 v1.6.1 ver3.2後期対応：モンスター8種の新スキルラインを追加。</li>
