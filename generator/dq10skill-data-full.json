@@ -525,7 +525,7 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "牙神昇誕", "viewName": "牙神昇誕%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 5, "charge": 0, "val": [210, 170, 130]},
+				{"id":  1, "name": "牙神昇誕", "viewName": "牙神昇誕%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 5, "charge": 0, "val": [180, 140, 100]},
 				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "ツメ装備時の\nこうげき力が\n%z増える", "val": [5, 8, 10]},
 				{"id":  3, "name": "かいしん率", "viewName": "装備時かいしん率+%f%", "selectorName": "+%f%", "desc": "ツメ装備時の\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.5]},
 				{"id":  4, "name": "身かわし率", "viewName": "装備時身かわし率+%f%", "selectorName": "+%f%", "desc": "ツメ装備時\n身かわし率が\n%z％増える", "val": [1, 1.5, 2]},
@@ -1428,25 +1428,26 @@
 	},
 
 	"trainingPts": [
-		{ "stamps":    0, "pt":  0 },
-		{ "stamps":  100, "pt":  1 },
-		{ "stamps":  300, "pt":  2 },
-		{ "stamps":  600, "pt":  3 },
-		{ "stamps": 1000, "pt":  4 },
-		{ "stamps": 1500, "pt":  5 },
-		{ "stamps": 2000, "pt":  6 },
-		{ "stamps": 2500, "pt":  7 },
-		{ "stamps": 3000, "pt":  8 },
-		{ "stamps": 3500, "pt":  9 },
-		{ "stamps": 4000, "pt": 10 },
-		{ "stamps": 4500, "pt": 11 },
-		{ "stamps": 5000, "pt": 12 },
-		{ "stamps": 5500, "pt": 13 },
-		{ "stamps": 6000, "pt": 14 },
-		{ "stamps": 6500, "pt": 15 },
-		{ "stamps": 7000, "pt": 16 },
-		{ "stamps": 8000, "pt": 17 },
-		{ "stamps": 9000, "pt": 18 }
+		{ "stamps":     0, "pt":  0 },
+		{ "stamps":   100, "pt":  1 },
+		{ "stamps":   300, "pt":  2 },
+		{ "stamps":   600, "pt":  3 },
+		{ "stamps":  1000, "pt":  4 },
+		{ "stamps":  1500, "pt":  5 },
+		{ "stamps":  2000, "pt":  6 },
+		{ "stamps":  2500, "pt":  7 },
+		{ "stamps":  3000, "pt":  8 },
+		{ "stamps":  3500, "pt":  9 },
+		{ "stamps":  4000, "pt": 10 },
+		{ "stamps":  4500, "pt": 11 },
+		{ "stamps":  5000, "pt": 12 },
+		{ "stamps":  5500, "pt": 13 },
+		{ "stamps":  6000, "pt": 14 },
+		{ "stamps":  6500, "pt": 15 },
+		{ "stamps":  7000, "pt": 16 },
+		{ "stamps":  8000, "pt": 17 },
+		{ "stamps":  9000, "pt": 18 },
+		{ "stamps": 10000, "pt": 19 }
 	],
 
 	"consts": {
@@ -1463,11 +1464,11 @@
 		},
 		"trainingSkillPts": {
 			"min": 0,
-			"max": 18
+			"max": 19
 		},
 		"msp": {
 			"min": 0,
-			"max": 27
+			"max": 29
 		},
 		"customSkill": {
 			"pts": [160, 170, 180],
