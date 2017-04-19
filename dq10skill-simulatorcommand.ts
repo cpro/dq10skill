@@ -8,11 +8,11 @@ namespace Dq10.SkillSimulator {
 	class SingleValueCommand implements Command {
 		protected prevValue: number = undefined;
 		newValue: number;
-		
+
 		name = 'SingleValueCommand';
 		vocationId: string;
 		skillLineId: string;
-		
+
 		constructor(newValue: number) {
 			this.newValue = newValue;
 		}
@@ -31,16 +31,16 @@ namespace Dq10.SkillSimulator {
 			this.newValue = newCommand.newValue;
 		}
 	}
-		
+
 	class UpdateSkillPt extends SingleValueCommand {
 		name = 'UpdateSkillPt';
-		
+
 		constructor(vocationId: string, skillLineId: string, newValue: number) {
 			super(newValue);
 			this.vocationId = vocationId;
 			this.skillLineId = skillLineId;
 		}
-		
+
 		execute(): boolean {
 			if(this.prevValue === undefined)
 				this.prevValue = Simulator.getSkillPt(this.vocationId, this.skillLineId);
@@ -57,7 +57,7 @@ namespace Dq10.SkillSimulator {
 			};
 		}
 	}
-	
+
 	class UpdateLevel extends SingleValueCommand {
 		name = 'UpdateLevel';
 
@@ -65,7 +65,7 @@ namespace Dq10.SkillSimulator {
 			super(newValue);
 			this.vocationId = vocationId;
 		}
-		
+
 		execute(): boolean {
 			if(this.prevValue === undefined)
 				this.prevValue = Simulator.getLevel(this.vocationId);
@@ -85,7 +85,7 @@ namespace Dq10.SkillSimulator {
 
 	class UpdateTrainingSkillPt extends SingleValueCommand {
 		name = 'UpdateTrainingSkillPt';
-		
+
 		constructor(vocationId: string, newValue: number) {
 			super(newValue);
 			this.vocationId = vocationId;
@@ -106,43 +106,44 @@ namespace Dq10.SkillSimulator {
 			};
 		}
 	}
-	
+
 	class UpdateMSP extends SingleValueCommand {
 		name = 'UpdateMSP';
-		
-		constructor(skillLineId: string, newValue: number) {
+
+		constructor(vocationId: string, skillLineId: string, newValue: number) {
 			super(newValue);
+			this.vocationId = vocationId;
 			this.skillLineId = skillLineId;
 		}
 		execute(): boolean {
 			if(this.prevValue === undefined)
-				this.prevValue = Simulator.getMSP(this.skillLineId);
-			var ret = Simulator.updateMSP(this.skillLineId, this.newValue);
+				this.prevValue = Simulator.getMSP(this.vocationId, this.skillLineId);
+			var ret = Simulator.updateMSP(this.vocationId, this.skillLineId, this.newValue);
 			return ret;
 		}
 		undo(): void {
-			Simulator.updateMSP(this.skillLineId, this.prevValue);
+			Simulator.updateMSP(this.vocationId, this.skillLineId, this.prevValue);
 		}
 		event(): Event {
 			return {
 				name: 'MSPChanged',
-				args: [this.skillLineId]
+				args: [this.vocationId, this.skillLineId]
 			};
 		}
 	}
-	
+
 	class UpdateCustomSkill extends SingleValueCommand {
 		private prevArray: number[] = [];
 		newArray: number[] = [];
 		private rank: number;
-		
+
 		name = 'UpdateCustomSkill';
-		
+
 		constructor(skillLineId: string, newValue: number, rank: number) {
 			super(newValue);
 			this.skillLineId = skillLineId;
 			this.rank = rank;
-			
+
 			this.prevArray = [...Simulator.getCustomSkills(this.skillLineId)];
 			this.newArray = [...this.prevArray];
 			this.newArray[rank] = newValue;
@@ -165,15 +166,15 @@ namespace Dq10.SkillSimulator {
 			}
 		}
 	}
-	
+
 	class PackageCommand implements Command {
 		protected prevSerial: string;
 		newValue: number;
-		
+
 		name = '';
 		vocationId: string;
 		skillLineId: string;
-		
+
 		execute(): boolean {
 			if(this.prevSerial === undefined)
 				this.prevSerial = Simulator.serialize();
@@ -204,7 +205,7 @@ namespace Dq10.SkillSimulator {
 			};
 		}
 	}
-	
+
 	class SetAllLevel extends PackageCommand {
 		constructor(newValue: number) {
 			super();
@@ -228,7 +229,7 @@ namespace Dq10.SkillSimulator {
 			});
 		}
 	}
-	
+
 	class ClearPtsOfSameSkills extends PackageCommand {
 		constructor(skillLineId: string) {
 			super();
@@ -239,21 +240,21 @@ namespace Dq10.SkillSimulator {
 			return true;
 		}
 	}
-	
+
 	class ClearMSP extends PackageCommand {
 		_impl(): boolean {
 			Simulator.clearMSP();
 			return true;
 		}
 	}
-	
+
 	class ClearAllSkills extends PackageCommand {
 		_impl(): boolean {
 			Simulator.clearAllSkills();
 			return true;
 		}
 	}
-	
+
 	class PresetStatus extends PackageCommand {
 		private status: string;
 		constructor(status: string) {
@@ -265,14 +266,14 @@ namespace Dq10.SkillSimulator {
 			return sarray.reduce((succeeded, s) => Simulator.presetStatus(s) || succeeded, false);
 		}
 	}
-	
+
 	class BringUpLevelToRequired extends PackageCommand {
 		_impl(): boolean {
 			Simulator.bringUpLevelToRequired();
 			return true;
 		}
 	}
-	
+
 	export class SimulatorCommandManager extends CommandManager {
 		updateSkillPt(vocationId: string, skillLineId: string, newValue: number): boolean {
 			return this.invoke(new UpdateSkillPt(vocationId, skillLineId, newValue));
@@ -289,8 +290,8 @@ namespace Dq10.SkillSimulator {
 		setAllTrainingSkillPt(newValue: number): boolean {
 			return this.invoke(new SetAllTrainingSkillPt(newValue));
 		}
-		updateMSP(skillLineId: string, newValue: number): boolean {
-			return this.invoke(new UpdateMSP(skillLineId, newValue));
+		updateMSP(vocationId: string, skillLineId: string, newValue: number): boolean {
+			return this.invoke(new UpdateMSP(vocationId, skillLineId, newValue));
 		}
 		updateCustomSkill(skillLineId: string, newValue: number, rank: number) {
 			return this.invoke(new UpdateCustomSkill(skillLineId, newValue, rank));
