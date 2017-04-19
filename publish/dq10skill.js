@@ -616,10 +616,6 @@ var Dq10;
                 var oldValue = this.skillPtDic[vocationId][skillLineId].msp;
                 if (newValue < this.DB.consts.msp.min || newValue > this.DB.consts.msp.max)
                     return false;
-                if (this.totalMSP(vocationId) - oldValue + newValue > this.DB.consts.msp.max)
-                    return false;
-                if (this.totalOfSameSkills(skillLineId) - oldValue + newValue > this.DB.consts.skillPts.max)
-                    return false;
                 this.skillPtDic[vocationId][skillLineId].msp = newValue;
                 return true;
             };
@@ -1082,6 +1078,7 @@ var Dq10;
                         });
                         _this.com.on('MSPChanged', function (vocationId, skillLineId) {
                             _this.refreshSkillList(skillLineId);
+                            _this.refreshVocationInfo(vocationId);
                             _this.refreshTotalPassive();
                             _this.refreshUrlBar();
                         });
@@ -1570,7 +1567,7 @@ var Dq10;
                 var maxSkillPts = this.sim.maxSkillPts(vocationId);
                 var additionalSkillPts = this.sim.getTrainingSkillPt(vocationId);
                 var remainingSkillPts = maxSkillPts + additionalSkillPts - this.sim.totalSkillPts(vocationId);
-                var $skillPtsText = $("#" + vocationId + " .pts");
+                var $skillPtsText = $("#" + vocationId + " .skill_pt .pts");
                 $skillPtsText.text(remainingSkillPts + ' / ' + maxSkillPts);
                 $('#training-' + vocationId).text(additionalSkillPts);
                 //Lv不足の処理
@@ -1582,6 +1579,13 @@ var Dq10;
                     $("#" + vocationId + " .req_lv").text(numToFormedStr(requiredLevel));
                     $("#" + vocationId + " .exp_remain").text(numToFormedStr(this.sim.requiredExpRemain(vocationId)));
                 }
+                //MSP 残り / 最大値
+                var maxMSP = this.DB.consts.msp.max;
+                var remainingMSP = maxMSP - this.sim.totalMSP(vocationId);
+                var $mspText = $("#" + vocationId + " .mspinfo .pts");
+                $mspText.text(remainingMSP + ' / ' + maxMSP);
+                var isMspError = (remainingMSP < 0);
+                $mspText.toggleClass(this.CLASSNAME_ERROR, isMspError);
             };
             SimulatorUI.prototype.refreshAllVocationInfo = function () {
                 var _this = this;
@@ -1599,7 +1603,6 @@ var Dq10;
                 var _this = this;
                 var status = 'maxhp,maxmp,pow,def,dex,spd,magic,heal,charm'.split(',');
                 status.forEach(function (s) { return $('#total_' + s).text(_this.sim.totalStatus(s)); });
-                //$('#msp_remain').text((this.DB.consts.msp.max - this.sim.totalMSP()).toString() + 'P');
             };
             SimulatorUI.prototype.refreshSkillList = function (skillLineId) {
                 var _this = this;

@@ -245,11 +245,11 @@ a {
     margin: 0; }
   .ent_title dt, .ent_title dd {
     font-size: 12px; }
+  .ent_title dd.pts {
+    font-weight: bold;
+    font-size: 16px; }
   .ent_title dl.skill_pt {
     margin-left: 30px; }
-    .ent_title dl.skill_pt dd.pts {
-      font-weight: bold;
-      font-size: 16px; }
   .ent_title dl.training_pt dd {
     font-weight: bold;
     font-size: 15px;
@@ -263,6 +263,10 @@ a {
       padding: 0; }
   .ent_title dl.expinfo dt {
     margin-left: 10px; }
+  .ent_title dl.mspinfo {
+    margin-left: 5px; }
+    .ent_title dl.mspinfo dd.pts:not(.error) {
+      color: #58e; }
   .ent_title .ent_title_console {
     position: absolute;
     top: 0;

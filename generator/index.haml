@@ -82,8 +82,8 @@
 						%td.total_pts#total_spd 0
 						%th 回魔:
 						%td.total_pts#total_heal 0
-						%th 残MSP:
-						%td.total_pts#msp_remain.ui-corner-br
+						%th
+						%td.total_pts.ui-corner-br
 				#navlink
 					%a#simpleui{href: 'simple.html'} 簡易表示版に切り替え
 					%br
@@ -103,6 +103,9 @@
 							%dt 特訓
 							%dd{id: "training-#{vocation}"}
 								0
+						%dl.mspinfo
+							%dt 残りMSP:
+							%dd.pts 0 / 0
 						%dl.expinfo
 							%dt 獲得経験値:
 							%dd.exp 0

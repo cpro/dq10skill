@@ -356,13 +356,13 @@ a {
 		font-size: 12px;
 	}
 
+	dd.pts {
+		font-weight: bold;
+		font-size: 16px;
+	}
+
 	dl.skill_pt {
 		margin-left: 30px;
-
-		dd.pts {
-			font-weight: bold;
-			font-size: 16px;
-		}
 	}
 
 	dl.training_pt {
@@ -387,6 +387,13 @@ a {
 	dl.expinfo {
 		dt {
 			margin-left: 10px;
+		}
+	}
+
+	dl.mspinfo {
+		margin-left: 5px;
+		dd.pts:not(.error) {
+			color: $msp-color;
 		}
 	}
 

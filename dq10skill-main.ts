@@ -147,10 +147,6 @@ namespace Dq10.SkillSimulator {
 			var oldValue = this.skillPtDic[vocationId][skillLineId].msp;
 			if(newValue < this.DB.consts.msp.min || newValue > this.DB.consts.msp.max)
 				return false;
-			if(this.totalMSP(vocationId) - oldValue + newValue > this.DB.consts.msp.max)
-				return false;
-			if(this.totalOfSameSkills(skillLineId) - oldValue + newValue > this.DB.consts.skillPts.max)
-				return false;
 
 			this.skillPtDic[vocationId][skillLineId].msp = newValue;
 			return true;
@@ -704,7 +700,7 @@ namespace Dq10.SkillSimulator {
 			var maxSkillPts = this.sim.maxSkillPts(vocationId);
 			var additionalSkillPts = this.sim.getTrainingSkillPt(vocationId);
 			var remainingSkillPts = maxSkillPts + additionalSkillPts - this.sim.totalSkillPts(vocationId);
-			var $skillPtsText = $(`#${vocationId} .pts`);
+			var $skillPtsText = $(`#${vocationId} .skill_pt .pts`);
 			$skillPtsText.text(remainingSkillPts + ' / ' + maxSkillPts);
 			$('#training-' + vocationId).text(additionalSkillPts);
 
@@ -718,6 +714,15 @@ namespace Dq10.SkillSimulator {
 				$(`#${vocationId} .req_lv`).text(numToFormedStr(requiredLevel));
 				$(`#${vocationId} .exp_remain`).text(numToFormedStr(this.sim.requiredExpRemain(vocationId)));
 			}
+
+			//MSP 残り / 最大値
+			var maxMSP = this.DB.consts.msp.max;
+			var remainingMSP = maxMSP - this.sim.totalMSP(vocationId);
+			var $mspText = $(`#${vocationId} .mspinfo .pts`);
+			$mspText.text(remainingMSP + ' / ' + maxMSP);
+
+			var isMspError = (remainingMSP < 0);
+			$mspText.toggleClass(this.CLASSNAME_ERROR, isMspError);
 		}
 
 		private refreshAllVocationInfo() {
@@ -737,7 +742,6 @@ namespace Dq10.SkillSimulator {
 		private refreshTotalPassive() {
 			var status = 'maxhp,maxmp,pow,def,dex,spd,magic,heal,charm'.split(',');
 			status.forEach((s) => $('#total_' + s).text(this.sim.totalStatus(s)));
-			//$('#msp_remain').text((this.DB.consts.msp.max - this.sim.totalMSP()).toString() + 'P');
 		}
 
 		private refreshSkillList(skillLineId: string) {
@@ -883,6 +887,7 @@ namespace Dq10.SkillSimulator {
 				});
 				this.com.on('MSPChanged', (vocationId: string, skillLineId: string) => {
 					this.refreshSkillList(skillLineId);
+					this.refreshVocationInfo(vocationId);
 					this.refreshTotalPassive();
 					this.refreshUrlBar();
 				});
