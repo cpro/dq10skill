@@ -1202,6 +1202,11 @@ namespace Dq10.SkillSimulator {
 				$('#msp_selector input').change((e) => {
 					this.toggleMspMode($(e.currentTarget).val() == 'msp');
 				});
+				shortcut.add('Ctrl+M', () => {
+					var newValue = this.mspMode ? 'normal' : 'msp';
+					$('#msp_selector input').prop('checked', false);
+					$(`#msp_selector input[value='${newValue}']`).prop('checked', true).change();
+				});
 			},
 
 			//URLテキストボックスクリック・フォーカス時

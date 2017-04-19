@@ -1349,6 +1349,11 @@ var Dq10;
                         $('#msp_selector input').change(function (e) {
                             _this.toggleMspMode($(e.currentTarget).val() == 'msp');
                         });
+                        shortcut.add('Ctrl+M', function () {
+                            var newValue = _this.mspMode ? 'normal' : 'msp';
+                            $('#msp_selector input').prop('checked', false);
+                            $("#msp_selector input[value='" + newValue + "']").prop('checked', true).change();
+                        });
                     },
                     //URLテキストボックスクリック・フォーカス時
                     function () {
