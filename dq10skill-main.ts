@@ -1067,6 +1067,7 @@ namespace Dq10.SkillSimulator {
 					var vocationId = this.getCurrentVocation(<Element>e.currentTarget);
 					var skillLineId = this.getCurrentSkillLine(<Element>e.currentTarget);
 					this.com.updateSkillPt(vocationId, skillLineId, this.DB.skillLines[skillLineId].unique ? maxPtWithMspUnique : maxPtWithMsp);
+					this.com.updateMSP(vocationId, skillLineId, this.DB.consts.msp.max);
 					e.stopPropagation();
 				});
 			},

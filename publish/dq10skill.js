@@ -1230,6 +1230,7 @@ var Dq10;
                             var vocationId = _this.getCurrentVocation(e.currentTarget);
                             var skillLineId = _this.getCurrentSkillLine(e.currentTarget);
                             _this.com.updateSkillPt(vocationId, skillLineId, _this.DB.skillLines[skillLineId].unique ? maxPtWithMspUnique : maxPtWithMsp);
+                            _this.com.updateMSP(vocationId, skillLineId, _this.DB.consts.msp.max);
                             e.stopPropagation();
                         });
                     },
