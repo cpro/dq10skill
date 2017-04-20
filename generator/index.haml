@@ -103,7 +103,7 @@
 							%dt 特訓
 							%dd{id: "training-#{vocation}"}
 								0
-						%dl.mspinfo
+						%dl.mspinfo.ui-handler
 							%dt 残りMSP:
 							%dd.pts 0 / 0
 						%dl.expinfo
@@ -141,17 +141,19 @@
 												%span.custom_skill_name= skill['name']
 											- else
 												= skill['name']
-			#pt_console{style: 'display: none'}
+			#pt_console.hover-console
 				%input#pt_spinner
 				%button#pt_reset リセット
-			#lv_console{style: 'display: none'}
+			#lv_console.hover-console
 				%select#lv-select.ui-widget-content.ui-corner-all{size: 1}
-			#training_pt_console{style: 'display: none'}
+			#training_pt_console.hover-console
 				%select#training_pt_select.ui-widget-content.ui-corner-all
-			#mspmax_console{style: 'display: none'}
+			#mspmax_console.hover-console
 				%button#max-with-msp{title: 'MSP込みの最大値にする'} MSP
-			#customskill_console{style: 'display: none'}
+			#customskill_console.hover-console
 				%button#show-customskill-dialog 編集
+			#mspavailable_console.hover-console
+				%input#mspavailable-spinner
 			#footconsole
 				%p#setalllevel
 					レベル一括設定

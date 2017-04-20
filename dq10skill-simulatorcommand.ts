@@ -132,6 +132,26 @@ namespace Dq10.SkillSimulator {
 		}
 	}
 
+	class UpdateMSPAvailable extends SingleValueCommand {
+		name = 'UpdateMSPAvailable';
+
+		execute(): boolean {
+			if(this.prevValue === undefined)
+				this.prevValue = Simulator.getMSPAvailable();
+			var ret = Simulator.updateMSPAvailable(this.newValue);
+			return ret;
+		}
+		undo(): void {
+			Simulator.updateMSPAvailable(this.prevValue);
+		}
+		event(): Event {
+			return {
+				name: 'MSPAvailableChanged',
+				args: []
+			};
+		}
+	}
+
 	class UpdateCustomSkill extends SingleValueCommand {
 		private prevArray: number[] = [];
 		newArray: number[] = [];
@@ -292,6 +312,9 @@ namespace Dq10.SkillSimulator {
 		}
 		updateMSP(vocationId: string, skillLineId: string, newValue: number): boolean {
 			return this.invoke(new UpdateMSP(vocationId, skillLineId, newValue));
+		}
+		updateMSPAvailable(newValue: number): boolean {
+			return this.invoke(new UpdateMSPAvailable(newValue));
 		}
 		updateCustomSkill(skillLineId: string, newValue: number, rank: number) {
 			return this.invoke(new UpdateCustomSkill(skillLineId, newValue, rank));

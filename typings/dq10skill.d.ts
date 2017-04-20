@@ -27,7 +27,12 @@
 			forTrainingMode: number;
 		};
 		trainingSkillPts: MinMax;
-		msp: MinMax;
+		msp: {
+			min: number;
+			max: number;
+			/** 現在ゲーム中で取得可能なMSPの最大数 */
+			possible: number;
+		};
 		customSkill: {
 			pts: number[];
 			count: number;

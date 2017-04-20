@@ -46,6 +46,8 @@ namespace Dq10.SkillSimulator {
 			}
 		} = {};
 
+		private _mspAvailable: number;
+
 		constructor() {
 		}
 
@@ -86,6 +88,8 @@ namespace Dq10.SkillSimulator {
 				this.skillLineDic[skillLineId] = skillLine;
 				return skillLine;
 			});
+
+			this._mspAvailable = this.DB.consts.msp.possible;
 		}
 
 		//スキルポイント取得
@@ -149,6 +153,19 @@ namespace Dq10.SkillSimulator {
 				return false;
 
 			this.skillPtDic[vocationId][skillLineId].msp = newValue;
+			return true;
+		}
+
+		//使用可能MSP取得
+		getMSPAvailable(): number {
+			return this._mspAvailable;
+		}
+		//使用可能MSP更新
+		updateMSPAvailable(newValue: number): boolean {
+			if(newValue < this.DB.consts.msp.min || newValue > this.DB.consts.msp.max)
+				return false;
+
+			this._mspAvailable = newValue;
 			return true;
 		}
 
@@ -408,6 +425,9 @@ namespace Dq10.SkillSimulator {
 					});
 				});
 
+				//使用可能MSP
+				serial += toByte(sim.getMSPAvailable());
+
 				// カスタムスキルデータ長を格納
 				serial += toByte(DB.consts.customSkill.count);
 
@@ -471,6 +491,11 @@ namespace Dq10.SkillSimulator {
 						if(version >= VERSION_VOCATIONAL_MSP)
 							sim.updateMSP(vocationId, vSkillLines[s], getData());
 					}
+				}
+
+				//使用可能MSPを取得
+				if(version >= VERSION_VOCATIONAL_MSP) {
+					sim.updateMSPAvailable(getData());
 				}
 
 				// スキルラインのid番号からID文字列を得るための配列作成
@@ -659,6 +684,7 @@ namespace Dq10.SkillSimulator {
 		private $lvConsole: JQuery;
 		private $trainingPtConsole: JQuery;
 		private $mspMaxConsole: JQuery;
+		private $mspAvailableConsole: JQuery;
 		private $customSkillConsole: JQuery;
 
 		private mspMode = false; //MSP編集モードフラグ
@@ -716,7 +742,7 @@ namespace Dq10.SkillSimulator {
 			}
 
 			//MSP 残り / 最大値
-			var maxMSP = this.DB.consts.msp.max;
+			var maxMSP = this.sim.getMSPAvailable();
 			var remainingMSP = maxMSP - this.sim.totalMSP(vocationId);
 			var $mspText = $(`#${vocationId} .mspinfo .pts`);
 			$mspText.text(remainingMSP + ' / ' + maxMSP);
@@ -859,6 +885,7 @@ namespace Dq10.SkillSimulator {
 			this.$trainingPtConsole.hide();
 			this.$mspMaxConsole.hide();
 			this.$customSkillConsole.hide();
+			this.$mspAvailableConsole.hide();
 		}
 
 		setup() {
@@ -891,6 +918,10 @@ namespace Dq10.SkillSimulator {
 					this.refreshTotalPassive();
 					this.refreshUrlBar();
 				});
+				this.com.on('MSPAvailableChanged', () => {
+					this.refreshAllVocationInfo();
+					this.refreshUrlBar();
+				})
 				this.com.on('WholeChanged', () => {
 					this.refreshAll();
 				});
@@ -1015,6 +1046,55 @@ namespace Dq10.SkillSimulator {
 				});
 			},
 
+			//残りMSP欄クリック時に使用可能MSP調整UI表示
+			() => {
+				this.$mspAvailableConsole = $('#mspavailable_console');
+				$('.mspinfo').click((e) => {
+					this.hideConsoles();
+
+					this.$mspAvailableConsole.appendTo($(e.currentTarget));
+					$('#mspavailable-spinner').val(this.sim.getMSPAvailable());
+
+					this.$mspAvailableConsole.show();
+					e.stopPropagation();
+				});
+
+				var $spinner = $('#mspavailable-spinner');
+				$spinner.spinner({
+					min: this.DB.consts.msp.min,
+					max: this.DB.consts.msp.max,
+					spin: (e, ui) => {
+						var succeeded = this.com.updateMSPAvailable(ui.value);
+
+						if(succeeded) {
+							e.stopPropagation();
+						} else {
+							return false;
+						}
+					},
+					change: (e, ui) => {
+						var newValue = $(e.currentTarget).val();
+						var oldValue = this.sim.getMSPAvailable();
+
+						if(isNaN(newValue)) {
+							$(e.currentTarget).val(oldValue);
+							return false;
+						}
+
+						newValue = parseInt(newValue, 10);
+						if(newValue == oldValue)
+							return false;
+
+						var succeeded = this.com.updateMSPAvailable(newValue);
+
+						if(!succeeded) {
+							$(e.currentTarget).val(oldValue);
+							return false;
+						}
+					}
+				});
+			},
+
 			//スピンコントロール共通
 			() => {
 				$('input.ui-spinner-input').click((e) => {
@@ -1057,17 +1137,18 @@ namespace Dq10.SkillSimulator {
 
 			//MSP込み最大値設定ボタン
 			() => {
-				var maxPtWithMsp: number = this.DB.consts.skillPts.valid - this.DB.consts.msp.max;
-				var maxPtWithMspUnique: number = this.DB.consts.skillPts.validUnique - this.DB.consts.msp.max;
-
 				$('#max-with-msp').button({
 					icons: { primary: 'ui-icon-circle-arrow-s' },
 					text: true
 				}).click((e) => {
+					var mspAvailable = this.sim.getMSPAvailable();
+					var maxPtWithMsp: number = this.DB.consts.skillPts.valid - mspAvailable;
+					var maxPtWithMspUnique: number = this.DB.consts.skillPts.validUnique - mspAvailable;
+
 					var vocationId = this.getCurrentVocation(<Element>e.currentTarget);
 					var skillLineId = this.getCurrentSkillLine(<Element>e.currentTarget);
 					this.com.updateSkillPt(vocationId, skillLineId, this.DB.skillLines[skillLineId].unique ? maxPtWithMspUnique : maxPtWithMsp);
-					this.com.updateMSP(vocationId, skillLineId, this.DB.consts.msp.max);
+					this.com.updateMSP(vocationId, skillLineId, mspAvailable);
 					e.stopPropagation();
 				});
 			},

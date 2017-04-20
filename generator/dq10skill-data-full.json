@@ -1468,7 +1468,8 @@
 		},
 		"msp": {
 			"min": 0,
-			"max": 29
+			"possible": 29,
+			"max": 255
 		},
 		"customSkill": {
 			"pts": [160, 170, 180],

@@ -235,7 +235,6 @@ a {
     padding: 0;
     position: relative; }
     .ent_title h2 #lv_console {
-      position: absolute;
       top: 0;
       left: 0; }
       .ent_title h2 #lv_console #lv-select {
@@ -255,7 +254,6 @@ a {
     font-size: 15px;
     position: relative; }
   .ent_title dl.training_pt #training_pt_console {
-    position: absolute;
     top: 0;
     left: 0; }
     .ent_title dl.training_pt #training_pt_console #training_pt-select {
@@ -264,9 +262,18 @@ a {
   .ent_title dl.expinfo dt {
     margin-left: 10px; }
   .ent_title dl.mspinfo {
-    margin-left: 5px; }
+    /* margin-left: 5px; */
+    position: relative; }
     .ent_title dl.mspinfo dd.pts:not(.error) {
       color: #58e; }
+    .ent_title dl.mspinfo #mspavailable_console {
+      top: -2px;
+      right: -30px; }
+      .ent_title dl.mspinfo #mspavailable_console input {
+        /* spinner */
+        width: 24px;
+        text-align: right;
+        font-size: 12px; }
   .ent_title .ent_title_console {
     position: absolute;
     top: 0;
@@ -292,6 +299,11 @@ a {
 
 #anlucea-data .ent_title {
   height: 22px; }
+
+.hover-console {
+  display: none;
+  position: absolute;
+  z-index: 101; }
 
 /* 職業情報欄 */
 .class_info {
@@ -490,8 +502,7 @@ a {
 .ui-handler:hover {
   border: 2px solid rgba(255, 0, 0, 0.3);
   border-radius: 4px;
-  padding: 2px;
-  margin: -4px; }
+  margin: -2px; }
 
 /* MSPモード時 */
 body.msp #pt_console .ui-widget-content {

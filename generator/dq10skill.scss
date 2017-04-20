@@ -338,7 +338,6 @@ a {
 		position: relative;
 
 		#lv_console {
-			position: absolute;
 			top: 0;
 			left: 0;
 
@@ -373,7 +372,6 @@ a {
 		}
 
 		#training_pt_console {
-			position: absolute;
 			top: 0;
 			left: 0;
 
@@ -391,9 +389,21 @@ a {
 	}
 
 	dl.mspinfo {
-		margin-left: 5px;
+		/* margin-left: 5px; */
+		position: relative;
 		dd.pts:not(.error) {
 			color: $msp-color;
+		}
+
+		#mspavailable_console {
+			top: -2px;
+			right: -30px;
+
+			input { /* spinner */
+				width: 24px;
+				text-align: right;
+				font-size: 12px;
+			}
 		}
 	}
 
@@ -430,6 +440,12 @@ a {
 }
 #anlucea-data .ent_title {
 	height: 22px;
+}
+
+.hover-console {
+	display: none;
+	position: absolute;
+	z-index: 101;
 }
 
 /* 職業情報欄 */
@@ -685,8 +701,8 @@ a {
 .ui-handler:hover {
 	border: 2px solid rgba(255, 0, 0, 0.3);
 	border-radius: 4px;
-	padding: 2px;
-	margin: -4px;
+	//padding: 2px;
+	margin: -2px;
 }
 
 /* MSPモード時 */

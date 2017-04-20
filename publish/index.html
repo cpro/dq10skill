@@ -120,7 +120,7 @@
               0
             </dd>
           </dl>
-          <dl class='mspinfo'>
+          <dl class='mspinfo ui-handler'>
             <dt>残りMSP:</dt>
             <dd class='pts'>0 / 0</dd>
           </dl>
@@ -286,7 +286,7 @@
               0
             </dd>
           </dl>
-          <dl class='mspinfo'>
+          <dl class='mspinfo ui-handler'>
             <dt>残りMSP:</dt>
             <dd class='pts'>0 / 0</dd>
           </dl>
@@ -452,7 +452,7 @@
               0
             </dd>
           </dl>
-          <dl class='mspinfo'>
+          <dl class='mspinfo ui-handler'>
             <dt>残りMSP:</dt>
             <dd class='pts'>0 / 0</dd>
           </dl>
@@ -618,7 +618,7 @@
               0
             </dd>
           </dl>
-          <dl class='mspinfo'>
+          <dl class='mspinfo ui-handler'>
             <dt>残りMSP:</dt>
             <dd class='pts'>0 / 0</dd>
           </dl>
@@ -784,7 +784,7 @@
               0
             </dd>
           </dl>
-          <dl class='mspinfo'>
+          <dl class='mspinfo ui-handler'>
             <dt>残りMSP:</dt>
             <dd class='pts'>0 / 0</dd>
           </dl>
@@ -950,7 +950,7 @@
               0
             </dd>
           </dl>
-          <dl class='mspinfo'>
+          <dl class='mspinfo ui-handler'>
             <dt>残りMSP:</dt>
             <dd class='pts'>0 / 0</dd>
           </dl>
@@ -1116,7 +1116,7 @@
               0
             </dd>
           </dl>
-          <dl class='mspinfo'>
+          <dl class='mspinfo ui-handler'>
             <dt>残りMSP:</dt>
             <dd class='pts'>0 / 0</dd>
           </dl>
@@ -1282,7 +1282,7 @@
               0
             </dd>
           </dl>
-          <dl class='mspinfo'>
+          <dl class='mspinfo ui-handler'>
             <dt>残りMSP:</dt>
             <dd class='pts'>0 / 0</dd>
           </dl>
@@ -1448,7 +1448,7 @@
               0
             </dd>
           </dl>
-          <dl class='mspinfo'>
+          <dl class='mspinfo ui-handler'>
             <dt>残りMSP:</dt>
             <dd class='pts'>0 / 0</dd>
           </dl>
@@ -1614,7 +1614,7 @@
               0
             </dd>
           </dl>
-          <dl class='mspinfo'>
+          <dl class='mspinfo ui-handler'>
             <dt>残りMSP:</dt>
             <dd class='pts'>0 / 0</dd>
           </dl>
@@ -1780,7 +1780,7 @@
               0
             </dd>
           </dl>
-          <dl class='mspinfo'>
+          <dl class='mspinfo ui-handler'>
             <dt>残りMSP:</dt>
             <dd class='pts'>0 / 0</dd>
           </dl>
@@ -1946,7 +1946,7 @@
               0
             </dd>
           </dl>
-          <dl class='mspinfo'>
+          <dl class='mspinfo ui-handler'>
             <dt>残りMSP:</dt>
             <dd class='pts'>0 / 0</dd>
           </dl>
@@ -2112,7 +2112,7 @@
               0
             </dd>
           </dl>
-          <dl class='mspinfo'>
+          <dl class='mspinfo ui-handler'>
             <dt>残りMSP:</dt>
             <dd class='pts'>0 / 0</dd>
           </dl>
@@ -2278,7 +2278,7 @@
               0
             </dd>
           </dl>
-          <dl class='mspinfo'>
+          <dl class='mspinfo ui-handler'>
             <dt>残りMSP:</dt>
             <dd class='pts'>0 / 0</dd>
           </dl>
@@ -2444,7 +2444,7 @@
               0
             </dd>
           </dl>
-          <dl class='mspinfo'>
+          <dl class='mspinfo ui-handler'>
             <dt>残りMSP:</dt>
             <dd class='pts'>0 / 0</dd>
           </dl>
@@ -2610,7 +2610,7 @@
               0
             </dd>
           </dl>
-          <dl class='mspinfo'>
+          <dl class='mspinfo ui-handler'>
             <dt>残りMSP:</dt>
             <dd class='pts'>0 / 0</dd>
           </dl>
@@ -2762,21 +2762,24 @@
             <tr class='fortunetelling_17'><td class='skill_pt'>180</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
           </table></div>
       </div>
-      <div id='pt_console' style='display: none'>
+      <div class='hover-console' id='pt_console'>
         <input id='pt_spinner'>
         <button id='pt_reset'>リセット</button>
       </div>
-      <div id='lv_console' style='display: none'>
+      <div class='hover-console' id='lv_console'>
         <select class='ui-widget-content ui-corner-all' id='lv-select' size='1'></select>
       </div>
-      <div id='training_pt_console' style='display: none'>
+      <div class='hover-console' id='training_pt_console'>
         <select class='ui-widget-content ui-corner-all' id='training_pt_select'></select>
       </div>
-      <div id='mspmax_console' style='display: none'>
+      <div class='hover-console' id='mspmax_console'>
         <button id='max-with-msp' title='MSP込みの最大値にする'>MSP</button>
       </div>
-      <div id='customskill_console' style='display: none'>
+      <div class='hover-console' id='customskill_console'>
         <button id='show-customskill-dialog'>編集</button>
+      </div>
+      <div class='hover-console' id='mspavailable_console'>
+        <input id='mspavailable-spinner'>
       </div>
       <div id='footconsole'>
         <p id='setalllevel'>
