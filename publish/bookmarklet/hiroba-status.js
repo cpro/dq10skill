@@ -76,9 +76,13 @@ var TRAINING_TABLE = [
 	{stamp: 10000, skillPt: 19}
 ];
 
+var VERSION_CURRENT_SERIALIZER = 4;
+var CUSTOMSKILL_COUNT = 3;
+
 var HirobaStatus = (function($) {
 	var status = {};
 	var msp = {};
+	var mspAvailable = 0;
 
 	function initStatus() {
 		for(var i = 0; i < VOCATIONS.length; i++) {
@@ -127,6 +131,12 @@ var HirobaStatus = (function($) {
 					msp[skillName] = jobObj.value;
 			}
 		}
+		//MSP合計
+		$('#skillBook .point').each(function() {
+			var pt = parseInt($(this).text());
+			if(!isNaN(pt))
+				mspAvailable += pt;
+		});
 	}
 
 	function load() {
@@ -140,6 +150,10 @@ var HirobaStatus = (function($) {
 		var toByte = String.fromCharCode;
 
 		var vocationCount = VOCATIONS.length;
+
+		//バージョン番号
+		serial += (VERSION_CURRENT_SERIALIZER | 0x80);
+
 		//先頭に職業の数を含める
 		serial += toByte(vocationCount);
 
@@ -153,13 +167,18 @@ var HirobaStatus = (function($) {
 			for(var s = 0; s < SKILLS[vocation].length; s++) {
 				skillLine = SKILLS[vocation][s];
 				serial += toByte(stat.skill[skillLine]);
+				serial += toByte(msp[skillLine] || 0);
 			}
 		}
-		for(i = 0; i < MSP_SKILLLINE_ORDER.length; i++) {
-			skillLine = MSP_SKILLLINE_ORDER[i];
-			if((msp[skillLine] || 0) > 0)
-				serial += toByte(i + 1) + toByte(msp[skillLine]);
-		}
+
+		//使用可能MSP
+		serial += toByte(mspAvailable);
+
+		// カスタムスキルデータ長を格納
+		serial += toByte(CUSTOMSKILL_COUNT);
+
+		//ToDo: カスタムスキルの保存
+
 		return serial;
 	}
 
