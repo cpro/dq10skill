@@ -115,6 +115,7 @@ interface MonsterSimulatorDB {
 		skillPts: {
 			min: number;
 			max: number;
+			enhanced: number;
 		};
 		level: MinMax;
 		restart: {
@@ -123,7 +124,11 @@ interface MonsterSimulatorDB {
 			skillPts: number[];
 			skillPtsOver5: number;
 			expRatio: number;
-		}
+		};
+		skillenhance: {
+			restart: number;
+			released: string[];
+		};
 	};
 	natsukiPts: {
 		natsukido: number;
