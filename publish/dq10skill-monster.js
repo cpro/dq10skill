@@ -1,8 +1,3 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 /// <reference path="dq10skill-monster-main.ts" />
 var Dq10;
 (function (Dq10) {
@@ -11,7 +6,8 @@ var Dq10;
         var MonsterUnit = (function () {
             function MonsterUnit(monsterType, idnum) {
                 var _this = this;
-                this.skillPts = {};
+                this.skillLines = [];
+                this.skillLineDic = {};
                 this.data = SkillSimulator.MonsterDB.monsters[monsterType];
                 this.monsterType = monsterType;
                 this.level = SkillSimulator.MonsterDB.consts.level.max;
@@ -19,33 +15,24 @@ var Dq10;
                 this.restartCount = SkillSimulator.MonsterDB.consts.restart.max;
                 this.id = monsterType + '_' + idnum.toString();
                 this.data.skillLines.forEach(function (skillLineId) {
-                    _this.skillPts[skillLineId] = 0;
+                    var skillLine = new MonsterSkillLine(skillLineId, 0);
+                    _this.skillLines.push(skillLine);
+                    _this.skillLineDic[skillLine.interfaceId] = skillLine;
                 });
                 //転生追加スキル
-                this.additionalSkills = [];
                 for (var s = 0; s < SkillSimulator.ADDITIONAL_SKILL_MAX; s++) {
-                    this.additionalSkills[s] = null;
-                    this.skillPts['additional' + s.toString()] = 0;
+                    var skillLine = new MonsterSkillLine('', s + 1);
+                    this.skillLines.push(skillLine);
+                    this.skillLineDic[skillLine.interfaceId] = skillLine;
                 }
                 //バッジ
                 this.badgeEquip = [null, null, null, null];
                 //なつき度
                 this.natsuki = SkillSimulator.MonsterDB.natsukiPts.length - 1;
             }
-            //スキルポイント取得
-            MonsterUnit.prototype.getSkillPt = function (skillLineId) {
-                return this.skillPts[skillLineId];
+            MonsterUnit.prototype.getSkillLine = function (interfaceId) {
+                return this.skillLineDic[interfaceId];
             };
-            //スキルポイント更新：不正値の場合falseを返す
-            MonsterUnit.prototype.updateSkillPt = function (skillLineId, newValue) {
-                if (newValue < SkillSimulator.MonsterDB.consts.skillPts.min ||
-                    newValue > SkillSimulator.MonsterDB.consts.skillPts.max) {
-                    return false;
-                }
-                this.skillPts[skillLineId] = newValue;
-                return true;
-            };
-            ;
             //レベル値取得
             MonsterUnit.prototype.getLevel = function () {
                 return this.level;
@@ -65,12 +52,10 @@ var Dq10;
             //スキルポイント合計
             MonsterUnit.prototype.totalSkillPts = function () {
                 var _this = this;
-                return Object.keys(this.skillPts).reduce(function (prev, skillLineId) {
-                    var m = skillLineId.match(/^additional(\d+)/);
-                    if (m && (_this.restartCount < parseInt(m[1], 10) + 1 ||
-                        _this.getAdditionalSkill(parseInt(m[1], 10)) === null))
+                return this.skillLines.reduce(function (prev, skillLine) {
+                    if (skillLine.skillLineId === '' || _this.restartCount < skillLine.requiredRestarts)
                         return prev;
-                    return prev + _this.skillPts[skillLineId];
+                    return prev + skillLine.skillPt;
                 }, 0);
             };
             ;
@@ -149,22 +134,26 @@ var Dq10;
             ;
             //転生追加スキルの取得
             MonsterUnit.prototype.getAdditionalSkill = function (skillIndex) {
-                return this.additionalSkills[skillIndex];
+                return this.getSkillLine('additional' + skillIndex.toString()).skillLineId;
             };
             ;
             //転生追加スキルの更新
             MonsterUnit.prototype.updateAdditionalSkill = function (skillIndex, newValue) {
                 if (skillIndex < 0 || skillIndex > SkillSimulator.ADDITIONAL_SKILL_MAX)
                     return false;
-                if (newValue !== null) {
-                    for (var i = 0; i < this.additionalSkills.length; i++) {
-                        if (i == skillIndex)
-                            continue;
-                        if (newValue == this.additionalSkills[i])
-                            return false;
-                    }
+                var skillLine = this.getSkillLine('additional' + skillIndex.toString());
+                if (newValue === null) {
+                    newValue = '';
                 }
-                this.additionalSkills[skillIndex] = newValue;
+                else {
+                    if (this.skillLines.some(function (sl) {
+                        if (sl == skillLine)
+                            return false;
+                        return sl.isAdditional && sl.skillLineId == newValue;
+                    }))
+                        return false;
+                }
+                skillLine.skillLineId = newValue;
                 return true;
             };
             ;
@@ -224,22 +213,13 @@ var Dq10;
             ;
             //パッシブスキルのステータス加算合計値取得
             MonsterUnit.prototype.getTotalPassive = function (status) {
-                var _this = this;
-                return Object.keys(this.skillPts).reduce(function (wholeTotal, skillLineId) {
-                    var m = skillLineId.match(/^additional(\d+)/);
+                return this.skillLines.reduce(function (wholeTotal, skillLine) {
+                    if (skillLine.skillLineId == '')
+                        return wholeTotal;
                     var skills;
-                    if (m) {
-                        var index = parseInt(m[1], 10);
-                        if (_this.restartCount < index + 1 || _this.getAdditionalSkill(index) === null)
-                            return wholeTotal;
-                        else
-                            skills = SkillSimulator.MonsterDB.skillLines[_this.getAdditionalSkill(index)].skills;
-                    }
-                    else {
-                        skills = SkillSimulator.MonsterDB.skillLines[skillLineId].skills;
-                    }
+                    skills = SkillSimulator.MonsterDB.skillLines[skillLine.skillLineId].skills;
                     var cur = skills.filter(function (skill) {
-                        return skill.pt <= _this.skillPts[skillLineId];
+                        return skill.pt <= skillLine.skillPt;
                     }).reduce(function (skillLineTotal, skill) {
                         return skillLineTotal + (skill[status] || 0);
                     }, 0);
@@ -312,12 +292,12 @@ var Dq10;
                     data.push(monster.getLevel());
                     data.push(monster.getRestartCount());
                     // スキルライン
-                    Object.keys(monster.skillPts).forEach(function (skillLineId) {
-                        data.push(monster.getSkillPt(skillLineId));
+                    monster.skillLines.forEach(function (skillLine) {
+                        data.push(skillLine.skillLineId == '' ? 0 : skillLine.skillPt);
                     });
                     // 転生追加スキルライン
                     for (var i = 0; i < SkillSimulator.ADDITIONAL_SKILL_MAX; i++) {
-                        if (monster.getAdditionalSkill(i) === null) {
+                        if (monster.getAdditionalSkill(i) === '') {
                             data.push(0);
                             continue;
                         }
@@ -395,8 +375,8 @@ var Dq10;
                     monster.updateLevel(getData());
                     monster.updateRestartCount(getData());
                     //スキル
-                    Object.keys(monster.skillPts).forEach(function (skillLineId) {
-                        monster.updateSkillPt(skillLineId, getData());
+                    monster.skillLines.forEach(function (skillLine) {
+                        skillLine.skillPt = getData();
                     });
                     //転生追加スキル種類
                     for (var i = 0; i < SkillSimulator.ADDITIONAL_SKILL_MAX; i++) {
@@ -464,8 +444,8 @@ var Dq10;
                     monster.updateLevel(bitArrayToNum(bitArray.splice(0, BITS_LEVEL)));
                     monster.updateRestartCount(bitArrayToNum(bitArray.splice(0, BITS_RESTART_COUNT)));
                     //スキル
-                    Object.keys(monster.skillPts).forEach(function (skillLine) {
-                        monster.updateSkillPt(skillLine, bitArrayToNum(bitArray.splice(0, BITS_SKILL)));
+                    monster.skillLines.forEach(function (skillLine) {
+                        skillLine.skillPt = bitArrayToNum(bitArray.splice(0, BITS_SKILL));
                     });
                     //転生追加スキル種類
                     for (var i = 0; i < SkillSimulator.ADDITIONAL_SKILL_MAX; i++) {
@@ -522,6 +502,68 @@ var Dq10;
             }());
             MonsterSaveData.Deserializer = Deserializer;
         })(MonsterSaveData = SkillSimulator.MonsterSaveData || (SkillSimulator.MonsterSaveData = {}));
+        var MonsterSkillLine = (function () {
+            /**
+             *
+             */
+            function MonsterSkillLine(id, requiredRestarts) {
+                this._skillPt = 0;
+                this._isAdditional = false;
+                this.skillLineId = id;
+                this._requiredRestarts = requiredRestarts;
+                if (requiredRestarts == 0) {
+                    this._interfaceId = id;
+                }
+                else {
+                    this._interfaceId = 'additional' + (requiredRestarts - 1).toString();
+                    this._isAdditional = true;
+                }
+            }
+            Object.defineProperty(MonsterSkillLine.prototype, "name", {
+                get: function () {
+                    if (this.skillLineId === '')
+                        return '';
+                    return SkillSimulator.MonsterDB.skillLines[this.skillLineId].name;
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(MonsterSkillLine.prototype, "requiredRestarts", {
+                get: function () {
+                    return this._requiredRestarts;
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(MonsterSkillLine.prototype, "skillPt", {
+                get: function () {
+                    return this._skillPt;
+                },
+                set: function (val) {
+                    if (val < SkillSimulator.MonsterDB.consts.skillPts.min || val > SkillSimulator.MonsterDB.consts.skillPts.max)
+                        return;
+                    this._skillPt = val;
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(MonsterSkillLine.prototype, "interfaceId", {
+                get: function () {
+                    return this._interfaceId;
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(MonsterSkillLine.prototype, "isAdditional", {
+                get: function () {
+                    return this._isAdditional;
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return MonsterSkillLine;
+        }());
+        SkillSimulator.MonsterSkillLine = MonsterSkillLine;
     })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
 })(Dq10 || (Dq10 = {}));
 var Dq10;
@@ -566,6 +608,16 @@ var Dq10;
     })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
 })(Dq10 || (Dq10 = {}));
 /// <reference path="eventdispatcher.ts" />
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var Dq10;
 (function (Dq10) {
     var SkillSimulator;
@@ -574,7 +626,7 @@ var Dq10;
         var CommandManager = (function (_super) {
             __extends(CommandManager, _super);
             function CommandManager() {
-                var _this = _super.apply(this, arguments) || this;
+                var _this = _super !== null && _super.apply(this, arguments) || this;
                 _this.commandStack = [];
                 _this.cursor = 0;
                 return _this;
@@ -734,7 +786,7 @@ var Dq10;
         var SimulatorCommandManager = (function (_super) {
             __extends(SimulatorCommandManager, _super);
             function SimulatorCommandManager() {
-                return _super.apply(this, arguments) || this;
+                return _super !== null && _super.apply(this, arguments) || this;
             }
             SimulatorCommandManager.prototype.addMonster = function (monsterType) {
                 return this.invoke(new AddMonster(monsterType));
@@ -964,8 +1016,8 @@ var Dq10;
                 this.refreshAdditionalSkillSelector(monsterId);
                 this.refreshAdditionalSkill(monsterId);
                 this.refreshMonsterInfo(monsterId);
-                Object.keys(this.DB.skillLines).forEach(function (skillLineId) {
-                    return _this.refreshSkillList(monsterId, skillLineId);
+                this.sim.getMonster(monsterId).skillLines.forEach(function (skillLine) {
+                    _this.refreshSkillList(monsterId, skillLine.interfaceId);
                 });
                 this.refreshTotalStatus(monsterId);
                 this.refreshControls(monsterId);
@@ -1015,7 +1067,7 @@ var Dq10;
                 var _this = this;
                 $("#" + monsterId + " tr[class^=" + skillLineId + "_]").removeClass(this.CLASSNAME_SKILL_ENABLED); //クリア
                 var monster = this.sim.getMonster(monsterId);
-                var skillPt = monster.getSkillPt(skillLineId);
+                var skillPt = monster.getSkillLine(skillLineId).skillPt;
                 var skills = this.DB.skillLines[skillLineId].skills;
                 this.DB.skillLines[skillLineId].skills.some(function (skill, s) {
                     if (skillPt < skill.pt)
@@ -1029,8 +1081,8 @@ var Dq10;
                 var monster = this.sim.getMonster(monsterId);
                 $("#" + monsterId + " .lv_select>select").val(monster.getLevel());
                 $("#" + monsterId + " .restart_count").val(monster.getRestartCount());
-                Object.keys(monster.skillPts).forEach(function (skillLineId) {
-                    $("#" + monsterId + " ." + skillLineId + " .ptspinner").spinner('value', monster.getSkillPt(skillLineId));
+                monster.skillLines.forEach(function (skillLine) {
+                    $("#" + monsterId + " ." + skillLine.interfaceId + " .ptspinner").spinner('value', skillLine.skillPt);
                 });
                 $("#" + monsterId + " .natsuki-selector>select").val(monster.getNatsuki());
             };
@@ -1074,18 +1126,19 @@ var Dq10;
                 }
             };
             SimulatorUI.prototype.refreshAdditionalSkill = function (monsterId) {
+                var _this = this;
                 var monster = this.sim.getMonster(monsterId);
                 var $table;
-                for (var s = 0; s < SkillSimulator.ADDITIONAL_SKILL_MAX; s++) {
-                    $table = $("#" + monsterId + " .additional" + s);
-                    if (monster.restartCount >= s + 1 && monster.getAdditionalSkill(s) !== null) {
-                        this.refreshAdditionalSkillTable($table, monster.getAdditionalSkill(s));
+                monster.skillLines.filter(function (skillLine) { return skillLine.isAdditional; }).forEach(function (skillLine) {
+                    $table = $("#" + monsterId + " ." + skillLine.interfaceId);
+                    if (monster.restartCount >= skillLine.requiredRestarts && skillLine.skillLineId != '') {
+                        _this.refreshAdditionalSkillTable($table, skillLine.skillLineId);
                         $table.show();
                     }
                     else {
                         $table.hide();
                     }
-                }
+                });
             };
             SimulatorUI.prototype.refreshAdditionalSkillTable = function ($table, newSkillLine) {
                 var _this = this;
@@ -1217,7 +1270,10 @@ var Dq10;
                     spin: function (e, ui) {
                         var monsterId = _this.getCurrentMonsterId(e.currentTarget);
                         var skillLineId = _this.getCurrentSkillLine(e.currentTarget);
-                        if (_this.sim.getMonster(monsterId).updateSkillPt(skillLineId, ui.value)) {
+                        var skillLine = _this.sim.getMonster(monsterId).getSkillLine(skillLineId);
+                        var oldVal = skillLine.skillPt;
+                        skillLine.skillPt = ui.value;
+                        if (skillLine.skillPt != oldVal) {
                             _this.refreshSkillList(monsterId, skillLineId);
                             _this.refreshMonsterInfo(monsterId);
                             _this.refreshTotalStatus(monsterId);
@@ -1231,19 +1287,21 @@ var Dq10;
                         var target = e.currentTarget || e.target;
                         var monsterId = _this.getCurrentMonsterId(target);
                         var skillLineId = _this.getCurrentSkillLine(target);
-                        var monster = _this.sim.getMonster(monsterId);
+                        var skillLine = _this.sim.getMonster(monsterId).getSkillLine(skillLineId);
                         if (isNaN($(target).val())) {
-                            $(target).val(monster.getSkillPt(skillLineId));
+                            $(target).val(skillLine.skillPt);
                             return false;
                         }
-                        if (monster.updateSkillPt(skillLineId, parseInt($(target).val(), 10))) {
+                        var oldVal = skillLine.skillPt;
+                        skillLine.skillPt = parseInt($(target).val(), 10);
+                        if (skillLine.skillPt != oldVal) {
                             _this.refreshSkillList(monsterId, skillLineId);
                             _this.refreshMonsterInfo(monsterId);
                             _this.refreshTotalStatus(monsterId);
                             _this.refreshSaveUrl();
                         }
                         else {
-                            $(target).val(monster.getSkillPt(skillLineId));
+                            $(target).val(skillLine.skillPt);
                             return false;
                         }
                     },
@@ -1269,9 +1327,9 @@ var Dq10;
                 }).click(function (e) {
                     var monsterId = _this.getCurrentMonsterId(e.currentTarget);
                     var skillLineId = _this.getCurrentSkillLine(e.currentTarget);
-                    var monster = _this.sim.getMonster(monsterId);
-                    monster.updateSkillPt(skillLineId, 0);
-                    $("#" + monsterId + " ." + skillLineId + " .ptspinner").spinner('value', monster.getSkillPt(skillLineId));
+                    var skillLine = _this.sim.getMonster(monsterId).getSkillLine(skillLineId);
+                    skillLine.skillPt = 0;
+                    $("#" + monsterId + " ." + skillLineId + " .ptspinner").spinner('value', skillLine.skillPt);
                     _this.refreshSkillList(monsterId, skillLineId);
                     _this.refreshMonsterInfo(monsterId);
                     _this.refreshTotalStatus(monsterId);
@@ -1281,11 +1339,11 @@ var Dq10;
                 $ent.find('.skill_table tr[class]').click(function (e) {
                     var monsterId = _this.getCurrentMonsterId(e.currentTarget);
                     var skillLineId = _this.getCurrentSkillLine(e.currentTarget);
+                    var skillLine = _this.sim.getMonster(monsterId).getSkillLine(skillLineId);
                     var skillIndex = parseInt($(e.currentTarget).attr('class').replace(skillLineId + '_', ''), 10);
-                    var monster = _this.sim.getMonster(monsterId);
                     var requiredPt = _this.DB.skillLines[skillLineId].skills[skillIndex].pt;
-                    monster.updateSkillPt(skillLineId, requiredPt);
-                    $("#" + monsterId + " ." + skillLineId + " .ptspinner").spinner('value', monster.getSkillPt(skillLineId));
+                    skillLine.skillPt = requiredPt;
+                    $("#" + monsterId + " ." + skillLineId + " .ptspinner").spinner('value', skillLine.skillPt);
                     _this.refreshSkillList(monsterId, skillLineId);
                     _this.refreshMonsterInfo(monsterId);
                     _this.refreshTotalStatus(monsterId);
