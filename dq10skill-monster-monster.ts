@@ -234,6 +234,11 @@ namespace Dq10.SkillSimulator {
 				return wholeTotal + cur;
 			}, 0);
 		};
+
+		get isEnhanced(): boolean {
+			return MonsterDB.consts.skillenhance.released.indexOf(this.monsterType) >= 0 &&
+				this.restartCount >= MonsterDB.consts.skillenhance.restart;
+		}
 	}
 
 	export module MonsterSaveData {
@@ -568,6 +573,12 @@ namespace Dq10.SkillSimulator {
 			return MonsterDB.skillLines[this.skillLineId].name;
 		}
 
+		get enhancedName(): string {
+			if(this.isAdditional || this.skillLineId === '')
+				return '';
+			return MonsterDB.skillLines[this.skillLineId].enhancedName || '';
+		}
+
 		get requiredRestarts(): number {
 			return this._requiredRestarts;
 		}
@@ -576,7 +587,8 @@ namespace Dq10.SkillSimulator {
 			return this._skillPt;
 		}
 		set skillPt(val: number) {
-			if(val < MonsterDB.consts.skillPts.min || val > MonsterDB.consts.skillPts.max)
+			var max = (this.enhancedName == '' ? MonsterDB.consts.skillPts.max : MonsterDB.consts.skillPts.enhanced);
+			if(val < MonsterDB.consts.skillPts.min || val > max)
 				return;
 			this._skillPt = val;
 		}

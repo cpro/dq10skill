@@ -56,6 +56,7 @@ interface SkillLine {
 	id: number;
 	unique?: boolean;
 	name: string;
+	enhancedName?: string;
 	abbr?: string;
 	skills: Skill[];
 	customSkills?: CustomSkill[];

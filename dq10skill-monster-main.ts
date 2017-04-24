@@ -154,36 +154,34 @@ namespace Dq10.SkillSimulator {
 			});
 			$ent.find('.indiv_name input').val(monster.indivName);
 
-			var skillLine, $table, $skillContainer = $ent.find('.skill_tables');
+			var $skillContainer = $ent.find('.skill_tables');
 
-			monster.data.skillLines.forEach((skillLine) => {
-				$table = this.drawSkillTable(skillLine);
-				$skillContainer.append($table);
-			});
-			for(var s = 0; s < ADDITIONAL_SKILL_MAX; s++) {
-				skillLine = 'additional' + s.toString();
-				$table = this.drawSkillTable(skillLine);
-
-				if(monster.restartCount < s + 1 || monster.getAdditionalSkill(s) === null)
+			monster.skillLines.forEach((skillLine) => {
+				var $table = this.drawSkillTable(skillLine.interfaceId);
+				if(skillLine.isAdditional && monster.restartCount < skillLine.requiredRestarts)
 					$table.hide();
 
 				$skillContainer.append($table);
-			}
+			})
 
 			return $ent;
 		}
 		private drawSkillTable(skillLineId: string) {
 			var $table = $('<table />').addClass(skillLineId).addClass('skill_table');
+			var dbSkillLine = this.DB.skillLines[skillLineId];
 			$table.append('<caption><span class="skill_line_name">' +
-				this.DB.skillLines[skillLineId].name +
+				dbSkillLine.name +
 				'</span>: <span class="skill_total">0</span></caption>')
 				.append('<tr><th class="console" colspan="2"><input class="ptspinner" /> <button class="reset">リセット</button></th></tr>');
 
-			this.DB.skillLines[skillLineId].skills.forEach((skill, s) => {
-				$('<tr />').addClass([skillLineId, s].join('_'))
+			dbSkillLine.skills.forEach((skill, s) => {
+				var enhanced = skill.pt > this.DB.consts.skillPts.max;
+				var $skillRow = $('<tr />').addClass([skillLineId, s].join('_'))
 					.append('<td class="skill_pt">' + skill.pt + '</td>')
-					.append('<td class="skill_name">' + skill.name + '</td>')
-					.appendTo($table);
+					.append('<td class="skill_name">' + skill.name + '</td>');
+				if(skill.pt > this.DB.consts.skillPts.max)
+					$skillRow.addClass('enhanced');
+				$table.append($skillRow)
 			});
 
 			return $table;
@@ -192,6 +190,7 @@ namespace Dq10.SkillSimulator {
 		private refreshEntry(monsterId: string) {
 			this.refreshAdditionalSkillSelector(monsterId);
 			this.refreshAdditionalSkill(monsterId);
+			this.refreshSkillEnhance(monsterId);
 			this.refreshMonsterInfo(monsterId);
 			this.sim.getMonster(monsterId).skillLines.forEach((skillLine) => {
 				this.refreshSkillList(monsterId, skillLine.interfaceId);
@@ -356,6 +355,27 @@ namespace Dq10.SkillSimulator {
 			});
 		}
 
+		private refreshSkillEnhance(monsterId: string) {
+			var monster = this.sim.getMonster(monsterId);
+			monster.skillLines.forEach(skillLine => {
+				var isEnhanced = monster.isEnhanced && skillLine.enhancedName != '';
+				var $table = $(`#${monsterId} .${skillLine.interfaceId}`);
+
+				$table.find('caption .skill_line_name').text(isEnhanced ? skillLine.enhancedName : skillLine.name);
+				$table.find('.enhanced').toggle(isEnhanced);
+
+				$table.find('.ptspinner').spinner('option', 'max', isEnhanced ?
+					this.DB.consts.skillPts.enhanced :
+					this.DB.consts.skillPts.max);
+
+				if(!isEnhanced && skillLine.skillPt > this.DB.consts.skillPts.max) {
+					skillLine.skillPt = this.DB.consts.skillPts.max;
+					$table.find('.ptspinner').spinner('value', skillLine.skillPt);
+					this.refreshSkillList(monsterId, skillLine.interfaceId);
+				}
+			});
+		}
+
 		private refreshTotalStatus(monsterId: string) {
 			var monster = this.sim.getMonster(monsterId);
 			var statusArray = 'maxhp,maxmp,atk,pow,def,magic,heal,spd,dex,charm,weight'.split(',');
@@ -450,6 +470,7 @@ namespace Dq10.SkillSimulator {
 					if(monster.updateRestartCount(ui.value)) {
 						this.refreshAdditionalSkillSelector(monsterId);
 						this.refreshAdditionalSkill(monsterId);
+						this.refreshSkillEnhance(monsterId);
 						this.refreshMonsterInfo(monsterId);
 						this.refreshTotalStatus(monsterId);
 					} else {
@@ -467,6 +488,7 @@ namespace Dq10.SkillSimulator {
 					if(monster.updateRestartCount(parseInt($(e.currentTarget).val(), 10))) {
 						this.refreshAdditionalSkillSelector(monsterId);
 						this.refreshAdditionalSkill(monsterId);
+						this.refreshSkillEnhance(monsterId);
 						this.refreshMonsterInfo(monsterId);
 						this.refreshTotalStatus(monsterId);
 						this.refreshSaveUrl();

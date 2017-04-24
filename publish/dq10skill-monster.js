@@ -227,6 +227,14 @@ var Dq10;
                 }, 0);
             };
             ;
+            Object.defineProperty(MonsterUnit.prototype, "isEnhanced", {
+                get: function () {
+                    return SkillSimulator.MonsterDB.consts.skillenhance.released.indexOf(this.monsterType) >= 0 &&
+                        this.restartCount >= SkillSimulator.MonsterDB.consts.skillenhance.restart;
+                },
+                enumerable: true,
+                configurable: true
+            });
             return MonsterUnit;
         }());
         SkillSimulator.MonsterUnit = MonsterUnit;
@@ -528,6 +536,15 @@ var Dq10;
                 enumerable: true,
                 configurable: true
             });
+            Object.defineProperty(MonsterSkillLine.prototype, "enhancedName", {
+                get: function () {
+                    if (this.isAdditional || this.skillLineId === '')
+                        return '';
+                    return SkillSimulator.MonsterDB.skillLines[this.skillLineId].enhancedName || '';
+                },
+                enumerable: true,
+                configurable: true
+            });
             Object.defineProperty(MonsterSkillLine.prototype, "requiredRestarts", {
                 get: function () {
                     return this._requiredRestarts;
@@ -540,7 +557,8 @@ var Dq10;
                     return this._skillPt;
                 },
                 set: function (val) {
-                    if (val < SkillSimulator.MonsterDB.consts.skillPts.min || val > SkillSimulator.MonsterDB.consts.skillPts.max)
+                    var max = (this.enhancedName == '' ? SkillSimulator.MonsterDB.consts.skillPts.max : SkillSimulator.MonsterDB.consts.skillPts.enhanced);
+                    if (val < SkillSimulator.MonsterDB.consts.skillPts.min || val > max)
                         return;
                     this._skillPt = val;
                 },
@@ -983,31 +1001,31 @@ var Dq10;
                     $ent.find('label[for=' + dummyId + ']').attr('for', newId);
                 });
                 $ent.find('.indiv_name input').val(monster.indivName);
-                var skillLine, $table, $skillContainer = $ent.find('.skill_tables');
-                monster.data.skillLines.forEach(function (skillLine) {
-                    $table = _this.drawSkillTable(skillLine);
-                    $skillContainer.append($table);
-                });
-                for (var s = 0; s < SkillSimulator.ADDITIONAL_SKILL_MAX; s++) {
-                    skillLine = 'additional' + s.toString();
-                    $table = this.drawSkillTable(skillLine);
-                    if (monster.restartCount < s + 1 || monster.getAdditionalSkill(s) === null)
+                var $skillContainer = $ent.find('.skill_tables');
+                monster.skillLines.forEach(function (skillLine) {
+                    var $table = _this.drawSkillTable(skillLine.interfaceId);
+                    if (skillLine.isAdditional && monster.restartCount < skillLine.requiredRestarts)
                         $table.hide();
                     $skillContainer.append($table);
-                }
+                });
                 return $ent;
             };
             SimulatorUI.prototype.drawSkillTable = function (skillLineId) {
+                var _this = this;
                 var $table = $('<table />').addClass(skillLineId).addClass('skill_table');
+                var dbSkillLine = this.DB.skillLines[skillLineId];
                 $table.append('<caption><span class="skill_line_name">' +
-                    this.DB.skillLines[skillLineId].name +
+                    dbSkillLine.name +
                     '</span>: <span class="skill_total">0</span></caption>')
                     .append('<tr><th class="console" colspan="2"><input class="ptspinner" /> <button class="reset">リセット</button></th></tr>');
-                this.DB.skillLines[skillLineId].skills.forEach(function (skill, s) {
-                    $('<tr />').addClass([skillLineId, s].join('_'))
+                dbSkillLine.skills.forEach(function (skill, s) {
+                    var enhanced = skill.pt > _this.DB.consts.skillPts.max;
+                    var $skillRow = $('<tr />').addClass([skillLineId, s].join('_'))
                         .append('<td class="skill_pt">' + skill.pt + '</td>')
-                        .append('<td class="skill_name">' + skill.name + '</td>')
-                        .appendTo($table);
+                        .append('<td class="skill_name">' + skill.name + '</td>');
+                    if (skill.pt > _this.DB.consts.skillPts.max)
+                        $skillRow.addClass('enhanced');
+                    $table.append($skillRow);
                 });
                 return $table;
             };
@@ -1015,6 +1033,7 @@ var Dq10;
                 var _this = this;
                 this.refreshAdditionalSkillSelector(monsterId);
                 this.refreshAdditionalSkill(monsterId);
+                this.refreshSkillEnhance(monsterId);
                 this.refreshMonsterInfo(monsterId);
                 this.sim.getMonster(monsterId).skillLines.forEach(function (skillLine) {
                     _this.refreshSkillList(monsterId, skillLine.interfaceId);
@@ -1153,6 +1172,24 @@ var Dq10;
                     $tr.children('.skill_name').text(skill.name);
                 });
             };
+            SimulatorUI.prototype.refreshSkillEnhance = function (monsterId) {
+                var _this = this;
+                var monster = this.sim.getMonster(monsterId);
+                monster.skillLines.forEach(function (skillLine) {
+                    var isEnhanced = monster.isEnhanced && skillLine.enhancedName != '';
+                    var $table = $("#" + monsterId + " ." + skillLine.interfaceId);
+                    $table.find('caption .skill_line_name').text(isEnhanced ? skillLine.enhancedName : skillLine.name);
+                    $table.find('.enhanced').toggle(isEnhanced);
+                    $table.find('.ptspinner').spinner('option', 'max', isEnhanced ?
+                        _this.DB.consts.skillPts.enhanced :
+                        _this.DB.consts.skillPts.max);
+                    if (!isEnhanced && skillLine.skillPt > _this.DB.consts.skillPts.max) {
+                        skillLine.skillPt = _this.DB.consts.skillPts.max;
+                        $table.find('.ptspinner').spinner('value', skillLine.skillPt);
+                        _this.refreshSkillList(monsterId, skillLine.interfaceId);
+                    }
+                });
+            };
             SimulatorUI.prototype.refreshTotalStatus = function (monsterId) {
                 var monster = this.sim.getMonster(monsterId);
                 var statusArray = 'maxhp,maxmp,atk,pow,def,magic,heal,spd,dex,charm,weight'.split(',');
@@ -1232,6 +1269,7 @@ var Dq10;
                         if (monster.updateRestartCount(ui.value)) {
                             _this.refreshAdditionalSkillSelector(monsterId);
                             _this.refreshAdditionalSkill(monsterId);
+                            _this.refreshSkillEnhance(monsterId);
                             _this.refreshMonsterInfo(monsterId);
                             _this.refreshTotalStatus(monsterId);
                         }
@@ -1249,6 +1287,7 @@ var Dq10;
                         if (monster.updateRestartCount(parseInt($(e.currentTarget).val(), 10))) {
                             _this.refreshAdditionalSkillSelector(monsterId);
                             _this.refreshAdditionalSkill(monsterId);
+                            _this.refreshSkillEnhance(monsterId);
                             _this.refreshMonsterInfo(monsterId);
                             _this.refreshTotalStatus(monsterId);
                             _this.refreshSaveUrl();
