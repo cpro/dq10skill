@@ -333,7 +333,7 @@ a {
     text-align: right; }
 
 .monster_ent .class_info {
-  height: 210px; }
+  height: 260px; }
 
 .skill_tables {
   padding: 0 10px;
@@ -470,8 +470,10 @@ a {
 
 .monster_ent .status_info {
   clear: none;
-  margin-left: 146px;
-  width: 900px; }
+  position: absolute;
+  width: 900px;
+  left: 146px;
+  bottom: 3px; }
 
 /* フッタコンソール */
 #footconsole {
