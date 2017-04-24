@@ -154,36 +154,34 @@ namespace Dq10.SkillSimulator {
 			});
 			$ent.find('.indiv_name input').val(monster.indivName);
 
-			var skillLine, $table, $skillContainer = $ent.find('.skill_tables');
+			var $skillContainer = $ent.find('.skill_tables');
 
-			monster.data.skillLines.forEach((skillLine) => {
-				$table = this.drawSkillTable(skillLine);
-				$skillContainer.append($table);
-			});
-			for(var s = 0; s < ADDITIONAL_SKILL_MAX; s++) {
-				skillLine = 'additional' + s.toString();
-				$table = this.drawSkillTable(skillLine);
-
-				if(monster.restartCount < s + 1 || monster.getAdditionalSkill(s) === null)
+			monster.skillLines.forEach((skillLine) => {
+				var $table = this.drawSkillTable(skillLine.interfaceId);
+				if(skillLine.isAdditional && monster.restartCount < skillLine.requiredRestarts)
 					$table.hide();
 
 				$skillContainer.append($table);
-			}
+			})
 
 			return $ent;
 		}
 		private drawSkillTable(skillLineId: string) {
 			var $table = $('<table />').addClass(skillLineId).addClass('skill_table');
+			var dbSkillLine = this.DB.skillLines[skillLineId];
 			$table.append('<caption><span class="skill_line_name">' +
-				this.DB.skillLines[skillLineId].name +
+				dbSkillLine.name +
 				'</span>: <span class="skill_total">0</span></caption>')
 				.append('<tr><th class="console" colspan="2"><input class="ptspinner" /> <button class="reset">リセット</button></th></tr>');
 
-			this.DB.skillLines[skillLineId].skills.forEach((skill, s) => {
-				$('<tr />').addClass([skillLineId, s].join('_'))
+			dbSkillLine.skills.forEach((skill, s) => {
+				var enhanced = skill.pt > this.DB.consts.skillPts.max;
+				var $skillRow = $('<tr />').addClass([skillLineId, s].join('_'))
 					.append('<td class="skill_pt">' + skill.pt + '</td>')
-					.append('<td class="skill_name">' + skill.name + '</td>')
-					.appendTo($table);
+					.append('<td class="skill_name">' + skill.name + '</td>');
+				if(skill.pt > this.DB.consts.skillPts.max)
+					$skillRow.addClass('enhanced');
+				$table.append($skillRow)
 			});
 
 			return $table;
@@ -192,10 +190,11 @@ namespace Dq10.SkillSimulator {
 		private refreshEntry(monsterId: string) {
 			this.refreshAdditionalSkillSelector(monsterId);
 			this.refreshAdditionalSkill(monsterId);
+			this.refreshSkillEnhance(monsterId);
 			this.refreshMonsterInfo(monsterId);
-			Object.keys(this.DB.skillLines).forEach((skillLineId) =>
-				this.refreshSkillList(monsterId, skillLineId)
-			);
+			this.sim.getMonster(monsterId).skillLines.forEach((skillLine) => {
+				this.refreshSkillList(monsterId, skillLine.interfaceId);
+			})
 			this.refreshTotalStatus(monsterId);
 			this.refreshControls(monsterId);
 			this.refreshBadgeButtons(monsterId);
@@ -252,7 +251,7 @@ namespace Dq10.SkillSimulator {
 			$(`#${monsterId} tr[class^=${skillLineId}_]`).removeClass(this.CLASSNAME_SKILL_ENABLED); //クリア
 			var monster = this.sim.getMonster(monsterId);
 
-			var skillPt = monster.getSkillPt(skillLineId);
+			var skillPt = monster.getSkillLine(skillLineId).skillPt;
 			var skills = this.DB.skillLines[skillLineId].skills;
 			this.DB.skillLines[skillLineId].skills.some((skill, s) => {
 				if(skillPt < skill.pt)
@@ -270,9 +269,9 @@ namespace Dq10.SkillSimulator {
 			$(`#${monsterId} .lv_select>select`).val(monster.getLevel());
 			$(`#${monsterId} .restart_count`).val(monster.getRestartCount());
 
-			Object.keys(monster.skillPts).forEach((skillLineId) => {
-				$(`#${monsterId} .${skillLineId} .ptspinner`).spinner('value', monster.getSkillPt(skillLineId));
-			});
+			monster.skillLines.forEach((skillLine) => {
+				$(`#${monsterId} .${skillLine.interfaceId} .ptspinner`).spinner('value', skillLine.skillPt);
+			})
 
 			$(`#${monsterId} .natsuki-selector>select`).val(monster.getNatsuki());
 		}
@@ -328,15 +327,15 @@ namespace Dq10.SkillSimulator {
 			var monster = this.sim.getMonster(monsterId);
 			var $table;
 
-			for(var s = 0; s < ADDITIONAL_SKILL_MAX; s++) {
-				$table = $(`#${monsterId} .additional${s}`);
-				if(monster.restartCount >= s + 1 && monster.getAdditionalSkill(s) !== null) {
-					this.refreshAdditionalSkillTable($table, monster.getAdditionalSkill(s));
+			monster.skillLines.filter(skillLine => skillLine.isAdditional).forEach((skillLine) => {
+				$table = $(`#${monsterId} .${skillLine.interfaceId}`);
+				if(monster.restartCount >= skillLine.requiredRestarts && skillLine.skillLineId != '') {
+					this.refreshAdditionalSkillTable($table, skillLine.skillLineId);
 					$table.show();
 				} else {
 					$table.hide();
 				}
-			}
+			})
 		}
 
 		private refreshAdditionalSkillTable($table: JQuery, newSkillLine: string) {
@@ -353,6 +352,27 @@ namespace Dq10.SkillSimulator {
 
 				$tr.children('.skill_pt').text(skill.pt);
 				$tr.children('.skill_name').text(skill.name);
+			});
+		}
+
+		private refreshSkillEnhance(monsterId: string) {
+			var monster = this.sim.getMonster(monsterId);
+			monster.skillLines.forEach(skillLine => {
+				var isEnhanced = monster.isEnhanced && skillLine.enhancedName != '';
+				var $table = $(`#${monsterId} .${skillLine.interfaceId}`);
+
+				$table.find('caption .skill_line_name').text(isEnhanced ? skillLine.enhancedName : skillLine.name);
+				$table.find('.enhanced').toggle(isEnhanced);
+
+				$table.find('.ptspinner').spinner('option', 'max', isEnhanced ?
+					this.DB.consts.skillPts.enhanced :
+					this.DB.consts.skillPts.max);
+
+				if(!isEnhanced && skillLine.skillPt > this.DB.consts.skillPts.max) {
+					skillLine.skillPt = this.DB.consts.skillPts.max;
+					$table.find('.ptspinner').spinner('value', skillLine.skillPt);
+					this.refreshSkillList(monsterId, skillLine.interfaceId);
+				}
 			});
 		}
 
@@ -450,6 +470,7 @@ namespace Dq10.SkillSimulator {
 					if(monster.updateRestartCount(ui.value)) {
 						this.refreshAdditionalSkillSelector(monsterId);
 						this.refreshAdditionalSkill(monsterId);
+						this.refreshSkillEnhance(monsterId);
 						this.refreshMonsterInfo(monsterId);
 						this.refreshTotalStatus(monsterId);
 					} else {
@@ -467,6 +488,7 @@ namespace Dq10.SkillSimulator {
 					if(monster.updateRestartCount(parseInt($(e.currentTarget).val(), 10))) {
 						this.refreshAdditionalSkillSelector(monsterId);
 						this.refreshAdditionalSkill(monsterId);
+						this.refreshSkillEnhance(monsterId);
 						this.refreshMonsterInfo(monsterId);
 						this.refreshTotalStatus(monsterId);
 						this.refreshSaveUrl();
@@ -488,8 +510,11 @@ namespace Dq10.SkillSimulator {
 				spin: (e, ui) => {
 					var monsterId = this.getCurrentMonsterId(e.currentTarget);
 					var skillLineId = this.getCurrentSkillLine(e.currentTarget);
+					var skillLine = this.sim.getMonster(monsterId).getSkillLine(skillLineId);
 
-					if(this.sim.getMonster(monsterId).updateSkillPt(skillLineId, ui.value)) {
+					var oldVal = skillLine.skillPt;
+					skillLine.skillPt = ui.value;
+					if(skillLine.skillPt != oldVal) {
 						this.refreshSkillList(monsterId, skillLineId);
 						this.refreshMonsterInfo(monsterId);
 						this.refreshTotalStatus(monsterId);
@@ -502,19 +527,21 @@ namespace Dq10.SkillSimulator {
 					var target = e.currentTarget || e.target;
 					var monsterId = this.getCurrentMonsterId(target);
 					var skillLineId = this.getCurrentSkillLine(target);
-					var monster = this.sim.getMonster(monsterId);
+					var skillLine = this.sim.getMonster(monsterId).getSkillLine(skillLineId);
 
 					if(isNaN($(target).val())) {
-						$(target).val(monster.getSkillPt(skillLineId));
+						$(target).val(skillLine.skillPt);
 						return false;
 					}
-					if(monster.updateSkillPt(skillLineId, parseInt($(target).val(), 10))) {
+					var oldVal = skillLine.skillPt;
+					skillLine.skillPt = parseInt($(target).val(), 10);
+					if(skillLine.skillPt != oldVal) {
 						this.refreshSkillList(monsterId, skillLineId);
 						this.refreshMonsterInfo(monsterId);
 						this.refreshTotalStatus(monsterId);
 						this.refreshSaveUrl();
 					} else {
-						$(target).val(monster.getSkillPt(skillLineId));
+						$(target).val(skillLine.skillPt);
 						return false;
 					}
 				},
@@ -541,10 +568,10 @@ namespace Dq10.SkillSimulator {
 			}).click((e) => {
 				var monsterId = this.getCurrentMonsterId(e.currentTarget);
 				var skillLineId = this.getCurrentSkillLine(e.currentTarget);
-				var monster = this.sim.getMonster(monsterId);
+				var skillLine = this.sim.getMonster(monsterId).getSkillLine(skillLineId);
 
-				monster.updateSkillPt(skillLineId, 0);
-				$(`#${monsterId} .${skillLineId} .ptspinner`).spinner('value', monster.getSkillPt(skillLineId));
+				skillLine.skillPt = 0;
+				$(`#${monsterId} .${skillLineId} .ptspinner`).spinner('value', skillLine.skillPt);
 				this.refreshSkillList(monsterId, skillLineId);
 				this.refreshMonsterInfo(monsterId);
 				this.refreshTotalStatus(monsterId);
@@ -555,13 +582,13 @@ namespace Dq10.SkillSimulator {
 			$ent.find('.skill_table tr[class]').click((e) => {
 				var monsterId = this.getCurrentMonsterId(e.currentTarget);
 				var skillLineId = this.getCurrentSkillLine(e.currentTarget);
+				var skillLine = this.sim.getMonster(monsterId).getSkillLine(skillLineId);
 				var skillIndex = parseInt($(e.currentTarget).attr('class').replace(skillLineId + '_', ''), 10);
-				var monster = this.sim.getMonster(monsterId);
 
 				var requiredPt = this.DB.skillLines[skillLineId].skills[skillIndex].pt;
 
-				monster.updateSkillPt(skillLineId, requiredPt);
-				$(`#${monsterId} .${skillLineId} .ptspinner`).spinner('value', monster.getSkillPt(skillLineId));
+				skillLine.skillPt = requiredPt;
+				$(`#${monsterId} .${skillLineId} .ptspinner`).spinner('value', skillLine.skillPt);
 
 				this.refreshSkillList(monsterId, skillLineId);
 				this.refreshMonsterInfo(monsterId);

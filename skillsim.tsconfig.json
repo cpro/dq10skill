@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "none",
+        "sourceMap": true,
+		"outFile": "publish/dq10skill.js"
+    },
+	"files": [
+		"dq10skill-main.ts"
+	]
+}

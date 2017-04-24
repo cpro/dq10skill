@@ -484,7 +484,7 @@ a {
 	}
 }
 .monster_ent .class_info {
-	height: 210px;
+	height: 260px;
 }
 
 .skill_tables {
@@ -659,8 +659,10 @@ a {
 
 .monster_ent .status_info {
 	clear: none;
-	margin-left: 146px;
+	position: absolute;
 	width: 900px;
+	left: 146px;
+	bottom: 3px;
 }
 
 /* フッタコンソール */
