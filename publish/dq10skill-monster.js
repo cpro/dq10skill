@@ -8,6 +8,7 @@ var Dq10;
                 var _this = this;
                 this.skillLines = [];
                 this.skillLineDic = {};
+                this.badgeEquip = [];
                 this.data = SkillSimulator.MonsterDB.monsters[monsterType];
                 this.monsterType = monsterType;
                 this.level = SkillSimulator.MonsterDB.consts.level.max;
@@ -26,7 +27,8 @@ var Dq10;
                     this.skillLineDic[skillLine.interfaceId] = skillLine;
                 }
                 //バッジ
-                this.badgeEquip = [null, null, null, null];
+                for (var i = 0; i < SkillSimulator.BADGE_COUNT; i++)
+                    this.badgeEquip.push(null);
                 //なつき度
                 this.natsuki = SkillSimulator.MonsterDB.natsukiPts.length - 1;
             }
@@ -259,8 +261,10 @@ var Dq10;
             MonsterSaveData.BITS_ENCODE = 6;
             /** 最初期の独自ビット圧縮していたバージョン */
             var VERSION_FIRST = 1;
+            /** レジェンドバッジ実装でバッジ保存数が1つ増えたバージョン */
+            var VERSION_LEGEND_BADGE = 4;
             /** 現在のSerializerのバージョン */
-            var VERSION_CURRENT_SERIALIZER = 3;
+            var VERSION_CURRENT_SERIALIZER = 4;
             var Serializer = (function () {
                 function Serializer() {
                 }
@@ -277,17 +281,17 @@ var Dq10;
                     return (VERSION_CURRENT_SERIALIZER | 0x80);
                 };
                 /**
-                 * モンスターデータ シリアライズ仕様 (ver. 3)
+                 * モンスターデータ シリアライズ仕様 (ver. 4)
                  *  1. 全体データ長
                  *  2. モンスタータイプID
                  *  3. レベル
                  *  4. 転生回数
                  *  5 -  9. 各スキルライン（転生時追加含む）のスキルポイント
                  * 10 - 11. 転生追加スキルライン2種のID
-                 * 12 - 15. バッジID
-                 * 16. なつき度
-                 * 17. 個体名のデータ長
-                 * 18 - . 個体名
+                 * 12 - 16. バッジID
+                 * 17. なつき度
+                 * 18. 個体名のデータ長
+                 * 19 - . 個体名
                  *
                  * 個体名以外は数値で、それぞれ String.fromCharCode() し
                  * 連結した文字列+個体名をシリアルとして受け渡しする。
@@ -337,13 +341,14 @@ var Dq10;
             var Deserializer = (function () {
                 function Deserializer(wholeSerial) {
                     this.wholeSerial = wholeSerial;
+                    this.version = VERSION_CURRENT_SERIALIZER;
                 }
                 Deserializer.prototype.exec = function (callback) {
                     var _this = this;
                     var cur = 0;
                     var getData = function () { return _this.wholeSerial.charCodeAt(cur++); };
-                    var version = this.judgeVersion();
-                    if (version > VERSION_FIRST) {
+                    this.version = this.judgeVersion();
+                    if (this.version > VERSION_FIRST) {
                         cur++;
                         var idnum = 0;
                         while (cur < this.wholeSerial.length) {
@@ -402,7 +407,10 @@ var Dq10;
                         });
                     }
                     //バッジ
-                    for (i = 0; i < SkillSimulator.BADGE_COUNT; i++) {
+                    var badgeCount = SkillSimulator.BADGE_COUNT;
+                    if (this.version < VERSION_LEGEND_BADGE)
+                        badgeCount = 4;
+                    for (i = 0; i < badgeCount; i++) {
                         var badgeIdStr;
                         var badgeId = getData();
                         if (badgeId === 0) {
@@ -878,7 +886,7 @@ var Dq10;
         SkillSimulator.MONSTER_MAX = 8;
         SkillSimulator.BASIC_SKILL_COUNT = 3;
         SkillSimulator.ADDITIONAL_SKILL_MAX = 2;
-        SkillSimulator.BADGE_COUNT = 4;
+        SkillSimulator.BADGE_COUNT = 5;
         var SimulatorModel = (function () {
             function SimulatorModel() {
                 //パラメータ格納用
@@ -1212,6 +1220,8 @@ var Dq10;
                 }
                 else {
                     if (badgeIndex == monster.badgeEquip.length - 1)
+                        buttonText = 'レジェンドバッジ';
+                    else if (badgeIndex == monster.badgeEquip.length - 2)
                         buttonText = 'スペシャルバッジ';
                     else
                         buttonText = 'バッジ' + (badgeIndex + 1).toString();

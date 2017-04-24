@@ -16,7 +16,7 @@ namespace Dq10.SkillSimulator {
 
 	export const BASIC_SKILL_COUNT = 3;
 	export const ADDITIONAL_SKILL_MAX = 2;
-	export const BADGE_COUNT = 4;
+	export const BADGE_COUNT = 5;
 
 	export class SimulatorModel {
 		//パラメータ格納用
@@ -403,6 +403,8 @@ namespace Dq10.SkillSimulator {
 				buttonHintText = this.badgeSelector.getFeatureCache(badgeId).join("\n");
 			} else {
 				if(badgeIndex == monster.badgeEquip.length - 1)
+					buttonText = 'レジェンドバッジ';
+				else if(badgeIndex == monster.badgeEquip.length - 2)
 					buttonText = 'スペシャルバッジ';
 				else
 					buttonText = 'バッジ' + (badgeIndex + 1).toString();
