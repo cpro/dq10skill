@@ -567,6 +567,9 @@ ul.badge-button-container li.gold, ul#badge-search-buttons-rarity li.gold {
 ul.badge-button-container li.luminous, ul#badge-search-buttons-rarity li.luminous {
   background-color: white;
   color: #444; }
+ul.badge-button-container li.rainbow, ul#badge-search-buttons-rarity li.rainbow {
+  background: linear-gradient(135deg, #fee7e7, #fcf7e0, #f0fee7);
+  color: #444; }
 ul.badge-button-container li:hover, ul#badge-search-buttons-rarity li:hover {
   cursor: pointer;
   border-color: #445;
@@ -760,14 +763,14 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
   margin: auto;
   padding: 0;
   width: 878px;
-  height: 527px;
+  height: 547px;
   border: 3px solid #99a;
   border-radius: 6px;
   background-color: #fcfcfd;
   /* バッジ検索ボタン */ }
   #badge-selector #badge-selector-header {
     position: relative;
-    height: 105px;
+    height: 125px;
     border-bottom: 1px solid #99a; }
   #badge-selector #badge-selector-footer {
     position: relative;
@@ -803,7 +806,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
   #badge-selector ul.badge-search-button-container, #badge-selector #badge-search-console-word {
     float: left;
     margin-top: 15px;
-    height: 80px;
+    height: 100px;
     margin-right: 6px;
     border-right: 1px solid #99a;
     padding-right: 6px; }

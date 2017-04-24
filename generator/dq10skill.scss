@@ -801,6 +801,10 @@ ul.badge-button-container, ul#badge-search-buttons-rarity {
 			background-color: white;
 			color: #444;
 		}
+		&.rainbow {
+			background: linear-gradient(135deg, #fee7e7, #fcf7e0, #f0fee7);
+			color: #444;
+		}
 
 		&:hover {
 			cursor: pointer;
@@ -1089,7 +1093,7 @@ $dialog-outer-border-width: 3px;
 	$badge-selector-body-padding: 15px;
 	$badge-selector-body-scrollbar-margin: 18px;
 	$badge-selector-header-height:
-		($button-height + 1px * 2 /* margin */ + 1px * 2 /* border */) * 4 +
+		($button-height + 1px * 2 /* margin */ + 1px * 2 /* border */) * 5 +
 		$badge-selector-body-padding /* top */ +
 		10px /* bottom */;
 	$badge-selector-footer-height: 120px;
@@ -1165,7 +1169,7 @@ $dialog-outer-border-width: 3px;
 	ul.badge-search-button-container, #badge-search-console-word {
 		float: left;
 		margin-top: $badge-selector-body-padding;
-		height: ($button-height + 4px) * 4;
+		height: ($button-height + 4px) * 5;
 
 		margin-right: 6px;
 		border-right: 1px solid $border-color-general;
