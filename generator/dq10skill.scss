@@ -1096,7 +1096,7 @@ $dialog-outer-border-width: 3px;
 		($button-height + 1px * 2 /* margin */ + 1px * 2 /* border */) * 5 +
 		$badge-selector-body-padding /* top */ +
 		10px /* bottom */;
-	$badge-selector-footer-height: 120px;
+	$badge-selector-footer-height: 150px;
 	$badge-selector-inner-border-width: 1px;
 	$badge-selector-outer-border-width: 3px;
 
@@ -1265,7 +1265,7 @@ $dialog-outer-border-width: 3px;
 	}
 	#badge-selector-feature-list {
 		float: left;
-		width: 180px;
+		width: 240px;
 		font-size: 12px;
 	}
 	#badge-selector-trade-list {

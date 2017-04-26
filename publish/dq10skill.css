@@ -763,7 +763,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
   margin: auto;
   padding: 0;
   width: 878px;
-  height: 547px;
+  height: 577px;
   border: 3px solid #99a;
   border-radius: 6px;
   background-color: #fcfcfd;
@@ -774,7 +774,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
     border-bottom: 1px solid #99a; }
   #badge-selector #badge-selector-footer {
     position: relative;
-    height: 120px;
+    height: 150px;
     border-top: 1px solid #99a; }
   #badge-selector #badge-selector-body {
     position: relative;
@@ -868,7 +868,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
       padding: 0; }
   #badge-selector #badge-selector-feature-list {
     float: left;
-    width: 180px;
+    width: 240px;
     font-size: 12px; }
   #badge-selector #badge-selector-trade-list {
     float: left;
