@@ -1,4 +1,4 @@
-- @version = 'm3.0'
+- @version = 'm3.1'
 !!! 5
 %html
 	%head
@@ -60,7 +60,7 @@
 		#body_content
 			.monster_ent#initial-instruction
 				%p 上のモンスター名のボタンをクリックして仲間モンスターを追加してください。
-				%p.whatsnew （New: ver3.5中期の転生回数10回・モンスター6種のスキル強化に対応しました）<br>（ホイミスライム / ドラゴンキッズ / ドラキー / ニードルマン / エンタシスマン / やみしばり）
+				%p.whatsnew （New: ver3.5中期のレジェンドバッジが入力・検索可能になりました）<br>（New: ver3.5中期の転生回数10回・モンスター6種のスキル強化に対応しました：<br>ホイミスライム / ドラゴンキッズ / ドラキー / ニードルマン / エンタシスマン / やみしばり）
 			#monsters
 			.monster_ent#monster_dummy{style: 'display:none'}
 				.ent_title
@@ -115,6 +115,8 @@
 									%a{id: "append-badge2-dummy"} バッジ3
 								%li.blank.ui-corner-all<
 									%a{id: "append-badge3-dummy"} スペシャルバッジ
+								%li.blank.ui-corner-all<
+									%a{id: "append-badge4-dummy"} レジェンドバッジ
 				.skill_tables
 				.status_info
 					%h3 Lv50時つよさ:
@@ -178,6 +180,7 @@
 									%ul
 										%li 転生回数の上限を9→10に変更。
 										%li モンスター6種について、転生10回以降でのスキル強化に対応（例：ホイミン流格闘術→ホイミン流格闘術Ⅱ、43P～50Pスキル追加）。
+										%li 2017/4/27 v3.1 レジェンドバッジ入力可能に、虹バッジのデータ追加。
 								%li 2017/2/26 v2.1.1 ver3.5前期対応：転生回数の上限を8→9に変更。
 								%li 2016/12/22 v2.1 バッジ選択画面にバッジ機能のフリーワード検索を追加。
 								%li 2016/10/26 v2.0 保存用URLの仕様変更。一部の追加スキルラインを設定すると正しく保存されない問題への対応。

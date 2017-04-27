@@ -7,14 +7,14 @@
     <link href='http://cpro.jp/dq10/skillsimulator/monster.html' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。まもの使い・どうぐ使いで仲間にしたモンスター用。' name='description'>
     <title>DQ10 仲間モンスター用スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=m3.0' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=m3.1' rel='stylesheet' type='text/css'>
     <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js' type='text/javascript'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
     <script src='js/rawdeflate.min.js' type='text/javascript'></script>
     <script src='js/rawinflate.min.js' type='text/javascript'></script>
-    <script src='./dq10skill-monster.js?ver=m3.0' type='text/javascript'></script>
+    <script src='./dq10skill-monster.js?ver=m3.1' type='text/javascript'></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -77,7 +77,7 @@
     <div id='body_content'>
       <div class='monster_ent' id='initial-instruction'>
         <p>上のモンスター名のボタンをクリックして仲間モンスターを追加してください。</p>
-        <p class='whatsnew'>（New: ver3.5中期の転生回数10回・モンスター6種のスキル強化に対応しました）<br>（ホイミスライム / ドラゴンキッズ / ドラキー / ニードルマン / エンタシスマン / やみしばり）</p>
+        <p class='whatsnew'>（New: ver3.5中期のレジェンドバッジが入力・検索可能になりました）<br>（New: ver3.5中期の転生回数10回・モンスター6種のスキル強化に対応しました：<br>ホイミスライム / ドラゴンキッズ / ドラキー / ニードルマン / エンタシスマン / やみしばり）</p>
       </div>
       <div id='monsters'></div>
       <div class='monster_ent' id='monster_dummy' style='display:none'>
@@ -125,6 +125,7 @@
                 <li class='blank ui-corner-all'><a id='append-badge1-dummy'>バッジ2</a></li>
                 <li class='blank ui-corner-all'><a id='append-badge2-dummy'>バッジ3</a></li>
                 <li class='blank ui-corner-all'><a id='append-badge3-dummy'>スペシャルバッジ</a></li>
+                <li class='blank ui-corner-all'><a id='append-badge4-dummy'>レジェンドバッジ</a></li>
               </ul>
             </dd>
           </dl>
@@ -194,6 +195,7 @@
                   <ul>
                     <li>転生回数の上限を9→10に変更。</li>
                     <li>モンスター6種について、転生10回以降でのスキル強化に対応（例：ホイミン流格闘術→ホイミン流格闘術Ⅱ、43P～50Pスキル追加）。</li>
+                    <li>2017/4/27 v3.1 レジェンドバッジ入力可能に、虹バッジのデータ追加。</li>
                   </ul>
                 </li>
                 <li>2017/2/26 v2.1.1 ver3.5前期対応：転生回数の上限を8→9に変更。</li>
@@ -234,12 +236,14 @@
           <li class='ui-corner-all'><a data-filter-type='race' data-search-key='mystery'>怪人</a></li>
           <li class='ui-corner-all'><a data-filter-type='race' data-search-key='water'>水</a></li>
           <li class='ui-corner-all'><a data-filter-type='race' data-search-key='special'>SP</a></li>
+          <li class='ui-corner-all'><a data-filter-type='race' data-search-key='legend'>伝説</a></li>
         </ul>
         <ul class='badge-search-button-container button-container' id='badge-search-buttons-rarity'>
           <li class='ui-corner-all bronze'><a data-filter-type='rarity' data-search-key='bronze'>銅</a></li>
           <li class='ui-corner-all silver'><a data-filter-type='rarity' data-search-key='silver'>銀</a></li>
           <li class='ui-corner-all gold'><a data-filter-type='rarity' data-search-key='gold'>金</a></li>
           <li class='ui-corner-all luminous'><a data-filter-type='rarity' data-search-key='luminous'>光</a></li>
+          <li class='ui-corner-all rainbow'><a data-filter-type='rarity' data-search-key='rainbow'>虹</a></li>
         </ul>
         <ul class='badge-search-button-container button-container' id='badge-search-buttons-feature'>
           <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='maxhp' title='さいだいＨＰ'>HP</a></li>
@@ -267,12 +271,18 @@
           <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='resist' title='状態異常ガード'>異常G</a></li>
           <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='raceup' title='種族へのダメージ増'>種UP</a></li>
           <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='attrup' title='属性特技ダメージ増'>特UP</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='attrallup' title='属性攻撃ダメージ増'>属UP</a></li>
           <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='spellup' title='攻撃系統効果増'>系UP</a></li>
           <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='attrib' title='属性攻撃'>属性</a></li>
           <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='reduce' title='ダメージ耐性'>ダ耐</a></li>
           <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='reflect' title='盾ガード時追加効果'>盾G時</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='guard' title='ガード時追加効果'>G時</a></li>
           <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='spcharge' title='必殺チャージ'>必C</a></li>
           <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='special' title='ひっさつ使用'>必殺</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='enhance' title='とくぎ強化'>強化</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='turnkeep' title='ターン消費しない'>T消費</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='killed' title='味方死亡時に発動'>死亡</a></li>
+          <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='deathkeepon' title='死亡時に効果残り'>死残</a></li>
           <li class='ui-corner-all'><a data-filter-type='feature' data-search-key='misc' title='その他の効果'>他</a></li>
         </ul>
         <div class='badge-search-button-container button-container' id='badge-search-console-word'>
@@ -605,6 +615,106 @@
           <li class='ui-corner-all luminous' data-kana-sort-key='たすとん'><a data-badge-id='310'>310 ダストン・光</a></li>
           <li class='ui-corner-all luminous' data-kana-sort-key='くろうす'><a data-badge-id='311'>311 クロウズ・光</a></li>
           <li class='ui-corner-all luminous' data-kana-sort-key='すうほお'><a data-badge-id='312'>312 ズーボー・光</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='まとうきへとらあ'><a data-badge-id='313'>313 魔導鬼ベドラー・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='きようきしいかんふ'><a data-badge-id='314'>314 狂鬼ジーガンフ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='やみわらし'><a data-badge-id='315'>315 やみわらし・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='わかはのせいれい'><a data-badge-id='316'>316 若葉の精霊・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='たいおんりようまあもん'><a data-badge-id='317'>317 大怨霊マアモン・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='くろきはなむこ'><a data-badge-id='318'>318 黒き花婿・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='ようましゆりあんて'><a data-badge-id='319'>319 妖魔ジュリアンテ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='しゆしゆつしまりいん'><a data-badge-id='320'>320 呪術師マリーン・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='まくんしいつと'><a data-badge-id='321'>321 魔軍師イッド・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='かいちゆうあらくね'><a data-badge-id='322'>322 怪蟲アラグネ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='てんまくあはるな'><a data-badge-id='323'>323 天魔クァバルナ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='ほうくんはさくらんて'><a data-badge-id='324'>324 暴君バサグランデ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='ようけんしおおれん'><a data-badge-id='325'>325 妖剣士オーレン・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='すいりゆうきるきつしゆ'><a data-badge-id='326'>326 水竜ギルギッシュ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='あくまさいかす'><a data-badge-id='327'>327 悪魔ザイガス・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='あくまちようしうきす'><a data-badge-id='328'>328 悪魔長ジウギス・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='かくせいふすこん'><a data-badge-id='329'>329 覚醒プスゴン・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='うるへあましんへい'><a data-badge-id='330'>330 ウルベア魔神兵・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='きやつとりへりお'><a data-badge-id='331'>331 キャットリベリオ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='きやつとまんまあ'><a data-badge-id='332'>332 キャットマンマー・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='しゆこしやらすはあん'><a data-badge-id='333'>333 守護者ラズバーン・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='めいおうねるける'><a data-badge-id='334'>334 冥王ネルゲル・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='めいしゆうおうねるける'><a data-badge-id='335'>335 冥獣王ネルゲル・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='あくむのみきて'><a data-badge-id='336'>336 悪夢の右手・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='ましんえんらあしや'><a data-badge-id='337'>337 魔人エンラージャ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='はかいおうへるむと'><a data-badge-id='338'>338 破戒王ベルムド・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='せつほうのきよそう'><a data-badge-id='339'>339 絶望の巨像・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='まゆうしや'><a data-badge-id='340'>340 魔勇者・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='いたすらしまい'><a data-badge-id='341'>341 いたずら姉妹・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='はあとほいると'><a data-badge-id='342'>342 ハートボイルド・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='すいいつとろる'><a data-badge-id='343'>343 スイーツトロル・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='へるはとらあ'><a data-badge-id='344'>344 ヘルバトラー・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='まけんすいせるとらと'><a data-badge-id='345'>345 魔元帥ゼルドラド・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='あとらす'><a data-badge-id='346'>346 アトラス・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='はすす'><a data-badge-id='347'>347 バズズ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='へりある'><a data-badge-id='348'>348 ベリアル・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='とらこんかいあ'><a data-badge-id='349'>349 ドラゴンガイア・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='はらもす'><a data-badge-id='350'>350 バラモス・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='きんくひとら'><a data-badge-id='351'>351 キングヒドラ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='くらこす'><a data-badge-id='352'>352 グラコス・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='はらもすふろす'><a data-badge-id='353'>353 バラモスブロス・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='はらもすそんひ'><a data-badge-id='354'>354 バラモスゾンビ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='きらあましんか'><a data-badge-id='355'>355 キラーマジンガ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='てゆらん'><a data-badge-id='356'>356 デュラン・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='とんもくうら'><a data-badge-id='357'>357 ドン・モグーラ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='あんこくのましん'><a data-badge-id='358'>358 暗黒の魔人・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='えすきらあましん'><a data-badge-id='359'>359 Ｓキラーマシン・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='すらいむしえねらる'><a data-badge-id='360'>360 スライムジェネラル・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='かおうこおすねる'><a data-badge-id='361'>361 牙王ゴースネル・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='りんおうさるとら'><a data-badge-id='362'>362 輪王ザルトラ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='けんおうかるとりおん'><a data-badge-id='363'>363 剣王ガルドリオン・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='しんおうしゆのおか'><a data-badge-id='364'>364 震王ジュノーガ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='こくりゆうまる'><a data-badge-id='365'>365 黒竜丸・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='はとるしえいかー'><a data-badge-id='366'>366 バトルシェイカー・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='はぬまあん'><a data-badge-id='367'>367 ハヌマーン・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='はりくなしや'><a data-badge-id='368'>368 バリクナジャ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='きんくれお'><a data-badge-id='369'>369 キングレオ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='しやみらす'><a data-badge-id='370'>370 ジャミラス・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='とろるはつこす'><a data-badge-id='371'>371 トロルバッコス・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='きいくはんまあ'><a data-badge-id='372'>372 ギーグハンマー・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='れんこくてんま'><a data-badge-id='373'>373 れんごく天馬・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='てえもんきんく'><a data-badge-id='374'>374 デーモンキング・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='とらこんうう'><a data-badge-id='375'>375 ドラゴン・ウー・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='あくまのきし'><a data-badge-id='376'>376 あくまのきし・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='りいね'><a data-badge-id='377'>377 リーネ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='かんたた'><a data-badge-id='378'>378 カンダタ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='やまたのおろち'><a data-badge-id='379'>379 やまたのおろち・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='たあくねひゆらす'><a data-badge-id='380'>380 ダークネビュラス・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='きらあくりむそん'><a data-badge-id='381'>381 キラークリムゾン・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='さいやくのおう'><a data-badge-id='382'>382 災厄の王・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='しんさいやくのおう'><a data-badge-id='383'>383 真・災厄の王・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='たあくとれあむ'><a data-badge-id='384'>384 ダークドレアム・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='しゆうしきゆりとす'><a data-badge-id='385'>385 銃士キュリトス・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='しゆうしなすひす'><a data-badge-id='386'>386 銃士ナスビス・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='しゆうしとまとす'><a data-badge-id='387'>387 銃士トマトス・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='くろすなあおう'><a data-badge-id='388'>388 グロスナー王・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='らくあすおうし'><a data-badge-id='389'>389 ラグアス王子・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='あるうえおうひ'><a data-badge-id='390'>390 アルウェ王妃・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='みこひめあ'><a data-badge-id='391'>391 巫女ヒメア・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='るなな'><a data-badge-id='392'>392 ルナナ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='かいとうほいつくりん'><a data-badge-id='393'>393 怪盗ポイックリン・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='せえりあ'><a data-badge-id='394'>394 セーリア・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='おおていすおうし'><a data-badge-id='395'>395 オーディス王子・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='けんしやほおろお'><a data-badge-id='396'>396 賢者ホーロー・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='ましよくれいつえる'><a data-badge-id='397'>397 魔女グレイツェル・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='るこりあ'><a data-badge-id='398'>398 ルコリア・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='ふいいろ'><a data-badge-id='399'>399 フィーロ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='へるむとおう'><a data-badge-id='400'>400 ベルムド王・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='むうにすおう'><a data-badge-id='401'>401 ムーニス王・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='けんしやるしえんた'><a data-badge-id='402'>402 賢者ルシェンダ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='まゆうしやあんるしあ'><a data-badge-id='403'>403 魔勇者アンルシア・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='とおまおうし'><a data-badge-id='404'>404 トーマ王子・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='すきるますたあ'><a data-badge-id='405'>405 スキルマスター・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='ようせいへら'><a data-badge-id='406'>406 妖精ベラ・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='しよおうほあん'><a data-badge-id='407'>407 女王ポワン・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='らうる'><a data-badge-id='408'>408 ラウル・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='りいん'><a data-badge-id='409'>409 リィン・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='みしゆあ'><a data-badge-id='410'>410 ミシュア・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='あんるしあひめ'><a data-badge-id='411'>411 アンルシア姫・虹</a></li>
+          <li class='ui-corner-all rainbow' data-kana-sort-key='ゆうしやひめあんるしあ'><a data-badge-id='412'>412 勇者姫アンルシア・虹</a></li>
         </ul>
       </div>
       <div id='badge-selector-footer'>

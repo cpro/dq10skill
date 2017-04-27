@@ -10,7 +10,7 @@ namespace Dq10.SkillSimulator {
 		indivName: string;
 		restartCount: number;
 		id: string;
-		badgeEquip: string[];
+		badgeEquip: string[] = [];
 		private natsuki: number;
 
 		constructor(monsterType: string, idnum: number) {
@@ -35,7 +35,8 @@ namespace Dq10.SkillSimulator {
 			}
 
 			//バッジ
-			this.badgeEquip = [null, null, null, null];
+			for(var i = 0; i < BADGE_COUNT; i++)
+				this.badgeEquip.push(null);
 
 			//なつき度
 			this.natsuki = MonsterDB.natsukiPts.length - 1;
@@ -261,8 +262,10 @@ namespace Dq10.SkillSimulator {
 
 		/** 最初期の独自ビット圧縮していたバージョン */
 		const VERSION_FIRST = 1;
+		/** レジェンドバッジ実装でバッジ保存数が1つ増えたバージョン */
+		const VERSION_LEGEND_BADGE = 4;
 		/** 現在のSerializerのバージョン */
-		const VERSION_CURRENT_SERIALIZER = 3;
+		const VERSION_CURRENT_SERIALIZER = 4;
 
 		export class Serializer {
 			exec(monsters: MonsterUnit[]): string {
@@ -282,17 +285,17 @@ namespace Dq10.SkillSimulator {
 			}
 
 			/**
-			 * モンスターデータ シリアライズ仕様 (ver. 3)
+			 * モンスターデータ シリアライズ仕様 (ver. 4)
 			 *  1. 全体データ長
 			 *  2. モンスタータイプID
 			 *  3. レベル
 			 *  4. 転生回数
 			 *  5 -  9. 各スキルライン（転生時追加含む）のスキルポイント
 			 * 10 - 11. 転生追加スキルライン2種のID
-			 * 12 - 15. バッジID
-			 * 16. なつき度
-			 * 17. 個体名のデータ長
-			 * 18 - . 個体名
+			 * 12 - 16. バッジID
+			 * 17. なつき度
+			 * 18. 個体名のデータ長
+			 * 19 - . 個体名
 			 *
 			 * 個体名以外は数値で、それぞれ String.fromCharCode() し
 			 * 連結した文字列+個体名をシリアルとして受け渡しする。
@@ -347,6 +350,8 @@ namespace Dq10.SkillSimulator {
 		}
 
 		export class Deserializer {
+			private version: number = VERSION_CURRENT_SERIALIZER;
+
 			constructor(private wholeSerial: string) {
 			}
 
@@ -354,9 +359,9 @@ namespace Dq10.SkillSimulator {
 				var cur = 0;
 				var getData = () => this.wholeSerial.charCodeAt(cur++);
 
-				var version = this.judgeVersion();
+				this.version = this.judgeVersion();
 
-				if(version > VERSION_FIRST) {
+				if(this.version > VERSION_FIRST) {
 					cur++;
 					var idnum = 0;
 
@@ -423,7 +428,11 @@ namespace Dq10.SkillSimulator {
 				}
 
 				//バッジ
-				for(i = 0; i < BADGE_COUNT; i++) {
+				var badgeCount = BADGE_COUNT;
+				if(this.version < VERSION_LEGEND_BADGE)
+					badgeCount = 4;
+
+				for(i = 0; i < badgeCount; i++) {
 					var badgeIdStr: string;
 					var badgeId = getData();
 					if(badgeId === 0) {
