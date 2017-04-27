@@ -1,8 +1,13 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var Dq10;
 (function (Dq10) {
     var SkillSimulator;
@@ -53,7 +58,7 @@ var Dq10;
         var CommandManager = (function (_super) {
             __extends(CommandManager, _super);
             function CommandManager() {
-                var _this = _super.apply(this, arguments) || this;
+                var _this = _super !== null && _super.apply(this, arguments) || this;
                 _this.commandStack = [];
                 _this.cursor = 0;
                 return _this;
@@ -230,28 +235,53 @@ var Dq10;
         }(SingleValueCommand));
         var UpdateMSP = (function (_super) {
             __extends(UpdateMSP, _super);
-            function UpdateMSP(skillLineId, newValue) {
+            function UpdateMSP(vocationId, skillLineId, newValue) {
                 var _this = _super.call(this, newValue) || this;
                 _this.name = 'UpdateMSP';
+                _this.vocationId = vocationId;
                 _this.skillLineId = skillLineId;
                 return _this;
             }
             UpdateMSP.prototype.execute = function () {
                 if (this.prevValue === undefined)
-                    this.prevValue = SkillSimulator.Simulator.getMSP(this.skillLineId);
-                var ret = SkillSimulator.Simulator.updateMSP(this.skillLineId, this.newValue);
+                    this.prevValue = SkillSimulator.Simulator.getMSP(this.vocationId, this.skillLineId);
+                var ret = SkillSimulator.Simulator.updateMSP(this.vocationId, this.skillLineId, this.newValue);
                 return ret;
             };
             UpdateMSP.prototype.undo = function () {
-                SkillSimulator.Simulator.updateMSP(this.skillLineId, this.prevValue);
+                SkillSimulator.Simulator.updateMSP(this.vocationId, this.skillLineId, this.prevValue);
             };
             UpdateMSP.prototype.event = function () {
                 return {
                     name: 'MSPChanged',
-                    args: [this.skillLineId]
+                    args: [this.vocationId, this.skillLineId]
                 };
             };
             return UpdateMSP;
+        }(SingleValueCommand));
+        var UpdateMSPAvailable = (function (_super) {
+            __extends(UpdateMSPAvailable, _super);
+            function UpdateMSPAvailable() {
+                var _this = _super !== null && _super.apply(this, arguments) || this;
+                _this.name = 'UpdateMSPAvailable';
+                return _this;
+            }
+            UpdateMSPAvailable.prototype.execute = function () {
+                if (this.prevValue === undefined)
+                    this.prevValue = SkillSimulator.Simulator.getMSPAvailable();
+                var ret = SkillSimulator.Simulator.updateMSPAvailable(this.newValue);
+                return ret;
+            };
+            UpdateMSPAvailable.prototype.undo = function () {
+                SkillSimulator.Simulator.updateMSPAvailable(this.prevValue);
+            };
+            UpdateMSPAvailable.prototype.event = function () {
+                return {
+                    name: 'MSPAvailableChanged',
+                    args: []
+                };
+            };
+            return UpdateMSPAvailable;
         }(SingleValueCommand));
         var UpdateCustomSkill = (function (_super) {
             __extends(UpdateCustomSkill, _super);
@@ -366,7 +396,7 @@ var Dq10;
         var ClearMSP = (function (_super) {
             __extends(ClearMSP, _super);
             function ClearMSP() {
-                return _super.apply(this, arguments) || this;
+                return _super !== null && _super.apply(this, arguments) || this;
             }
             ClearMSP.prototype._impl = function () {
                 SkillSimulator.Simulator.clearMSP();
@@ -377,7 +407,7 @@ var Dq10;
         var ClearAllSkills = (function (_super) {
             __extends(ClearAllSkills, _super);
             function ClearAllSkills() {
-                return _super.apply(this, arguments) || this;
+                return _super !== null && _super.apply(this, arguments) || this;
             }
             ClearAllSkills.prototype._impl = function () {
                 SkillSimulator.Simulator.clearAllSkills();
@@ -401,7 +431,7 @@ var Dq10;
         var BringUpLevelToRequired = (function (_super) {
             __extends(BringUpLevelToRequired, _super);
             function BringUpLevelToRequired() {
-                return _super.apply(this, arguments) || this;
+                return _super !== null && _super.apply(this, arguments) || this;
             }
             BringUpLevelToRequired.prototype._impl = function () {
                 SkillSimulator.Simulator.bringUpLevelToRequired();
@@ -412,7 +442,7 @@ var Dq10;
         var SimulatorCommandManager = (function (_super) {
             __extends(SimulatorCommandManager, _super);
             function SimulatorCommandManager() {
-                return _super.apply(this, arguments) || this;
+                return _super !== null && _super.apply(this, arguments) || this;
             }
             SimulatorCommandManager.prototype.updateSkillPt = function (vocationId, skillLineId, newValue) {
                 return this.invoke(new UpdateSkillPt(vocationId, skillLineId, newValue));
@@ -429,8 +459,11 @@ var Dq10;
             SimulatorCommandManager.prototype.setAllTrainingSkillPt = function (newValue) {
                 return this.invoke(new SetAllTrainingSkillPt(newValue));
             };
-            SimulatorCommandManager.prototype.updateMSP = function (skillLineId, newValue) {
-                return this.invoke(new UpdateMSP(skillLineId, newValue));
+            SimulatorCommandManager.prototype.updateMSP = function (vocationId, skillLineId, newValue) {
+                return this.invoke(new UpdateMSP(vocationId, skillLineId, newValue));
+            };
+            SimulatorCommandManager.prototype.updateMSPAvailable = function (newValue) {
+                return this.invoke(new UpdateMSPAvailable(newValue));
             };
             SimulatorCommandManager.prototype.updateCustomSkill = function (skillLineId, newValue, rank) {
                 return this.invoke(new UpdateCustomSkill(skillLineId, newValue, rank));
@@ -541,7 +574,8 @@ var Dq10;
                         var pt = {
                             vocationId: vocationId,
                             skillLineId: skillLineId,
-                            pt: 0
+                            pt: 0,
+                            msp: _this.DB.consts.msp.min
                         };
                         _this.skillPtDic[vocationId][skillLineId] = pt;
                         return pt;
@@ -554,12 +588,12 @@ var Dq10;
                     var skillLine = {
                         id: skillLineId,
                         skillPts: _this.wholePts.filter(function (skillPt) { return skillPt.skillLineId == skillLineId; }),
-                        msp: _this.DB.consts.msp.min,
                         custom: [0, 0, 0]
                     };
                     _this.skillLineDic[skillLineId] = skillLine;
                     return skillLine;
                 });
+                this._mspAvailable = this.DB.consts.msp.possible;
             };
             //スキルポイント取得
             SimulatorModel.prototype.getSkillPt = function (vocationId, skillLineId) {
@@ -602,24 +636,33 @@ var Dq10;
                 return true;
             };
             //マスタースキルポイント取得
-            SimulatorModel.prototype.getMSP = function (skillLineId) {
-                return this.skillLineDic[skillLineId].msp;
+            SimulatorModel.prototype.getMSP = function (vocationId, skillLineId) {
+                return this.skillPtDic[vocationId][skillLineId].msp;
             };
             //マスタースキルポイント更新
-            SimulatorModel.prototype.updateMSP = function (skillLineId, newValue) {
-                var oldValue = this.skillLineDic[skillLineId].msp || 0;
+            SimulatorModel.prototype.updateMSP = function (vocationId, skillLineId, newValue) {
+                var oldValue = this.skillPtDic[vocationId][skillLineId].msp;
                 if (newValue < this.DB.consts.msp.min || newValue > this.DB.consts.msp.max)
                     return false;
-                if (this.totalMSP() - oldValue + newValue > this.DB.consts.msp.max)
+                this.skillPtDic[vocationId][skillLineId].msp = newValue;
+                return true;
+            };
+            //使用可能MSP取得
+            SimulatorModel.prototype.getMSPAvailable = function () {
+                return this._mspAvailable;
+            };
+            //使用可能MSP更新
+            SimulatorModel.prototype.updateMSPAvailable = function (newValue) {
+                if (newValue < this.DB.consts.msp.min || newValue > this.DB.consts.msp.max)
                     return false;
-                if (this.totalOfSameSkills(skillLineId) - oldValue + newValue > this.DB.consts.skillPts.max)
-                    return false;
-                this.skillLineDic[skillLineId].msp = newValue;
+                this._mspAvailable = newValue;
                 return true;
             };
             //使用中のマスタースキルポイント合計
-            SimulatorModel.prototype.totalMSP = function () {
-                return this.skillLines.reduce(function (prev, skillLine) { return prev + skillLine.msp; }, 0);
+            SimulatorModel.prototype.totalMSP = function (vocationId) {
+                return this.vocationDic[vocationId].skillPts.reduce(function (prev, skillPt) {
+                    return prev + skillPt.msp;
+                }, 0);
             };
             //職業のスキルポイント合計
             SimulatorModel.prototype.totalSkillPts = function (vocationId) {
@@ -627,22 +670,28 @@ var Dq10;
                     return prev + skillPt.pt;
                 }, 0);
             };
-            //同スキルのポイント合計
+            //同スキルのポイント合計 MSPは含まない
             SimulatorModel.prototype.totalOfSameSkills = function (skillLineId) {
                 var skillLine = this.skillLineDic[skillLineId];
-                return skillLine.skillPts.reduce(function (prev, skillPt) { return prev + skillPt.pt; }, 0) +
-                    skillLine.msp;
+                return skillLine.skillPts.reduce(function (prev, skillPt) { return prev + skillPt.pt; }, 0);
             };
             //特定スキルすべてを振り直し（0にセット）
             SimulatorModel.prototype.clearPtsOfSameSkills = function (skillLineId) {
+                var _this = this;
                 var skillLine = this.skillLineDic[skillLineId];
-                skillLine.skillPts.forEach(function (skillPt) { return skillPt.pt = 0; });
-                skillLine.msp = 0;
+                skillLine.skillPts.forEach(function (skillPt) {
+                    skillPt.pt = 0;
+                    skillPt.msp = _this.DB.consts.msp.min;
+                });
                 return true;
             };
             //MSPを初期化
             SimulatorModel.prototype.clearMSP = function () {
-                this.skillLines.forEach(function (skillLine) { return skillLine.msp = 0; });
+                this.wholePts.forEach(function (skillPt) { return skillPt.msp = 0; });
+                return true;
+            };
+            SimulatorModel.prototype.clearVocationMSP = function (vocationId) {
+                this.vocationDic[vocationId].skillPts.forEach(function (skillPt) { return skillPt.msp = 0; });
                 return true;
             };
             //すべてのスキルを振り直し（0にセット）
@@ -819,8 +868,10 @@ var Dq10;
             var VERSION_FIRST = 1;
             /** バージョン番号管理開始以前のバージョン */
             var VERSION_UNMANAGED = 2;
+            /** MSPが職業ごとの管理になったバージョン */
+            var VERSION_VOCATIONAL_MSP = 4;
             /** 現在のSerializerのバージョン */
-            var VERSION_CURRENT_SERIALIZER = 3;
+            var VERSION_CURRENT_SERIALIZER = 4;
             var Serializer = (function () {
                 function Serializer() {
                 }
@@ -837,18 +888,19 @@ var Dq10;
                         serial += toByte(sim.getTrainingSkillPt(vocationId));
                         DB.vocations[vocationId].skillLines.forEach(function (skillLineId) {
                             serial += toByte(sim.getSkillPt(vocationId, skillLineId));
+                            serial += toByte(sim.getMSP(vocationId, skillLineId));
                         });
                     });
+                    //使用可能MSP
+                    serial += toByte(sim.getMSPAvailable());
                     // カスタムスキルデータ長を格納
                     serial += toByte(DB.consts.customSkill.count);
                     //末尾にスキルライン別データ（MSP、カスタムスキル）をIDとペアで格納
                     Object.keys(DB.skillLines).forEach(function (skillLineId) {
-                        var msp = sim.getMSP(skillLineId);
                         var customSkills = sim.getCustomSkills(skillLineId);
                         // MSP・カスタムスキルいずれかに0でない値が入っている場合のみ格納
-                        if (msp > 0 || customSkills.some(function (val) { return val > 0; })) {
+                        if (customSkills.some(function (val) { return val > 0; })) {
                             serial += toByte(DB.skillLines[skillLineId].id);
-                            serial += toByte(msp);
                             serial += customSkills.map(function (val) { return toByte(val); }).join('');
                         }
                     });
@@ -894,7 +946,13 @@ var Dq10;
                         sim.updateTrainingSkillPt(vocationId, getData());
                         for (var s = 0; s < vSkillLines.length; s++) {
                             sim.updateSkillPt(vocationId, vSkillLines[s], getData());
+                            if (version >= VERSION_VOCATIONAL_MSP)
+                                sim.updateMSP(vocationId, vSkillLines[s], getData());
                         }
+                    }
+                    //使用可能MSPを取得
+                    if (version >= VERSION_VOCATIONAL_MSP) {
+                        sim.updateMSPAvailable(getData());
                     }
                     // スキルラインのid番号からID文字列を得るための配列作成
                     var skillLineIds = [];
@@ -912,9 +970,16 @@ var Dq10;
                     // スキルライン別データ取得（MSP、カスタムスキル）
                     while (this.serial.length - cur >= skillLineDataLength) {
                         var skillLineId = skillLineIds[getData()];
-                        var skillPt = getData();
-                        if (skillLineId !== undefined)
-                            sim.updateMSP(skillLineId, skillPt);
+                        if (version < VERSION_VOCATIONAL_MSP) {
+                            var skillPt = getData();
+                            if (skillLineId !== undefined) {
+                                Object.keys(DB.vocations).filter(function (vocationId) {
+                                    return DB.vocations[vocationId].skillLines.indexOf(skillLineId) >= 0;
+                                }).forEach(function (vocationId) {
+                                    sim.updateMSP(vocationId, skillLineId, skillPt);
+                                });
+                            }
+                        }
                         var customIds = [];
                         for (var i = 0; i < customSkillLength; i++) {
                             customIds.push(getData());
@@ -1056,9 +1121,14 @@ var Dq10;
                             _this.refreshTotalPassive();
                             _this.refreshUrlBar();
                         });
-                        _this.com.on('MSPChanged', function (skillLineId) {
+                        _this.com.on('MSPChanged', function (vocationId, skillLineId) {
                             _this.refreshSkillList(skillLineId);
+                            _this.refreshVocationInfo(vocationId);
                             _this.refreshTotalPassive();
+                            _this.refreshUrlBar();
+                        });
+                        _this.com.on('MSPAvailableChanged', function () {
+                            _this.refreshAllVocationInfo();
                             _this.refreshUrlBar();
                         });
                         _this.com.on('WholeChanged', function () {
@@ -1128,7 +1198,7 @@ var Dq10;
                                 var vocationId = _this.getCurrentVocation(e.currentTarget);
                                 var skillLineId = _this.getCurrentSkillLine(e.currentTarget);
                                 var succeeded = _this.mspMode ?
-                                    _this.com.updateMSP(skillLineId, ui.value) :
+                                    _this.com.updateMSP(vocationId, skillLineId, ui.value) :
                                     _this.com.updateSkillPt(vocationId, skillLineId, ui.value);
                                 if (succeeded) {
                                     e.stopPropagation();
@@ -1142,7 +1212,7 @@ var Dq10;
                                 var skillLineId = _this.getCurrentSkillLine(e.currentTarget);
                                 var newValue = $(e.currentTarget).val();
                                 var oldValue = _this.mspMode ?
-                                    _this.sim.getMSP(skillLineId) :
+                                    _this.sim.getMSP(vocationId, skillLineId) :
                                     _this.sim.getSkillPt(vocationId, skillLineId);
                                 if (isNaN(newValue)) {
                                     $(e.currentTarget).val(oldValue);
@@ -1152,7 +1222,7 @@ var Dq10;
                                 if (newValue == oldValue)
                                     return false;
                                 var succeeded = _this.mspMode ?
-                                    _this.com.updateMSP(skillLineId, newValue) :
+                                    _this.com.updateMSP(vocationId, skillLineId, newValue) :
                                     _this.com.updateSkillPt(vocationId, skillLineId, newValue);
                                 if (!succeeded) {
                                     $(e.currentTarget).val(oldValue);
@@ -1162,6 +1232,47 @@ var Dq10;
                             stop: function (e, ui) {
                                 var skillLineId = _this.getCurrentSkillLine(e.currentTarget || e.target);
                                 _this.selectSkillLine(skillLineId);
+                            }
+                        });
+                    },
+                    //残りMSP欄クリック時に使用可能MSP調整UI表示
+                    function () {
+                        _this.$mspAvailableConsole = $('#mspavailable_console');
+                        $('.mspinfo').click(function (e) {
+                            _this.hideConsoles();
+                            _this.$mspAvailableConsole.appendTo($(e.currentTarget));
+                            $('#mspavailable-spinner').val(_this.sim.getMSPAvailable());
+                            _this.$mspAvailableConsole.show();
+                            e.stopPropagation();
+                        });
+                        var $spinner = $('#mspavailable-spinner');
+                        $spinner.spinner({
+                            min: _this.DB.consts.msp.min,
+                            max: _this.DB.consts.msp.max,
+                            spin: function (e, ui) {
+                                var succeeded = _this.com.updateMSPAvailable(ui.value);
+                                if (succeeded) {
+                                    e.stopPropagation();
+                                }
+                                else {
+                                    return false;
+                                }
+                            },
+                            change: function (e, ui) {
+                                var newValue = $(e.currentTarget).val();
+                                var oldValue = _this.sim.getMSPAvailable();
+                                if (isNaN(newValue)) {
+                                    $(e.currentTarget).val(oldValue);
+                                    return false;
+                                }
+                                newValue = parseInt(newValue, 10);
+                                if (newValue == oldValue)
+                                    return false;
+                                var succeeded = _this.com.updateMSPAvailable(newValue);
+                                if (!succeeded) {
+                                    $(e.currentTarget).val(oldValue);
+                                    return false;
+                                }
                             }
                         });
                     },
@@ -1189,7 +1300,7 @@ var Dq10;
                             var consoleLeft = $baseSpan.position().left + $baseSpan.width() - 50;
                             $('#pt_reset').css({ 'margin-left': $(e.currentTarget).find('.skill_total').width() + 10 });
                             _this.$ptConsole.appendTo($(e.currentTarget).find('.console_wrapper')).css({ left: consoleLeft });
-                            $('#pt_spinner').val(_this.mspMode ? _this.sim.getMSP(skillLineId) : _this.sim.getSkillPt(vocationId, skillLineId));
+                            $('#pt_spinner').val(_this.mspMode ? _this.sim.getMSP(vocationId, skillLineId) : _this.sim.getSkillPt(vocationId, skillLineId));
                             //selectSkillLine(skillLineId);
                             _this.$ptConsole.show();
                             e.stopPropagation();
@@ -1200,15 +1311,17 @@ var Dq10;
                     },
                     //MSP込み最大値設定ボタン
                     function () {
-                        var maxPtWithMsp = _this.DB.consts.skillPts.valid - _this.DB.consts.msp.max;
-                        var maxPtWithMspUnique = _this.DB.consts.skillPts.validUnique - _this.DB.consts.msp.max;
                         $('#max-with-msp').button({
                             icons: { primary: 'ui-icon-circle-arrow-s' },
                             text: true
                         }).click(function (e) {
+                            var mspAvailable = _this.sim.getMSPAvailable();
+                            var maxPtWithMsp = _this.DB.consts.skillPts.valid - mspAvailable;
+                            var maxPtWithMspUnique = _this.DB.consts.skillPts.validUnique - mspAvailable;
                             var vocationId = _this.getCurrentVocation(e.currentTarget);
                             var skillLineId = _this.getCurrentSkillLine(e.currentTarget);
                             _this.com.updateSkillPt(vocationId, skillLineId, _this.DB.skillLines[skillLineId].unique ? maxPtWithMspUnique : maxPtWithMsp);
+                            _this.com.updateMSP(vocationId, skillLineId, mspAvailable);
                             e.stopPropagation();
                         });
                     },
@@ -1277,7 +1390,7 @@ var Dq10;
                             var skillLineId = _this.getCurrentSkillLine(e.currentTarget);
                             _this.selectSkillLine(skillLineId);
                             if (_this.mspMode)
-                                _this.com.updateMSP(skillLineId, 0);
+                                _this.com.updateMSP(vocationId, skillLineId, 0);
                             else
                                 _this.com.updateSkillPt(vocationId, skillLineId, 0);
                             $('#pt_spinner').val(0);
@@ -1310,13 +1423,13 @@ var Dq10;
                             var requiredPt = _this.DB.skillLines[skillLineId].skills[skillIndex].pt;
                             var totalPtsOfOthers;
                             if (_this.mspMode) {
-                                totalPtsOfOthers = _this.sim.totalOfSameSkills(skillLineId) - _this.sim.getMSP(skillLineId);
+                                totalPtsOfOthers = _this.sim.totalOfSameSkills(skillLineId);
                                 if (requiredPt < totalPtsOfOthers)
                                     return;
-                                _this.com.updateMSP(skillLineId, requiredPt - totalPtsOfOthers);
+                                _this.com.updateMSP(vocationId, skillLineId, requiredPt - totalPtsOfOthers);
                             }
                             else {
-                                totalPtsOfOthers = _this.sim.totalOfSameSkills(skillLineId) - _this.sim.getSkillPt(vocationId, skillLineId);
+                                totalPtsOfOthers = _this.sim.totalOfSameSkills(skillLineId) + _this.sim.getMSP(vocationId, skillLineId) - _this.sim.getSkillPt(vocationId, skillLineId);
                                 if (requiredPt < totalPtsOfOthers)
                                     return;
                                 _this.com.updateSkillPt(vocationId, skillLineId, requiredPt - totalPtsOfOthers);
@@ -1327,6 +1440,11 @@ var Dq10;
                     function () {
                         $('#msp_selector input').change(function (e) {
                             _this.toggleMspMode($(e.currentTarget).val() == 'msp');
+                        });
+                        shortcut.add('Ctrl+M', function () {
+                            var newValue = _this.mspMode ? 'normal' : 'msp';
+                            $('#msp_selector input').prop('checked', false);
+                            $("#msp_selector input[value='" + newValue + "']").prop('checked', true).change();
                         });
                     },
                     //URLテキストボックスクリック・フォーカス時
@@ -1546,7 +1664,7 @@ var Dq10;
                 var maxSkillPts = this.sim.maxSkillPts(vocationId);
                 var additionalSkillPts = this.sim.getTrainingSkillPt(vocationId);
                 var remainingSkillPts = maxSkillPts + additionalSkillPts - this.sim.totalSkillPts(vocationId);
-                var $skillPtsText = $("#" + vocationId + " .pts");
+                var $skillPtsText = $("#" + vocationId + " .skill_pt .pts");
                 $skillPtsText.text(remainingSkillPts + ' / ' + maxSkillPts);
                 $('#training-' + vocationId).text(additionalSkillPts);
                 //Lv不足の処理
@@ -1558,6 +1676,13 @@ var Dq10;
                     $("#" + vocationId + " .req_lv").text(numToFormedStr(requiredLevel));
                     $("#" + vocationId + " .exp_remain").text(numToFormedStr(this.sim.requiredExpRemain(vocationId)));
                 }
+                //MSP 残り / 最大値
+                var maxMSP = this.sim.getMSPAvailable();
+                var remainingMSP = maxMSP - this.sim.totalMSP(vocationId);
+                var $mspText = $("#" + vocationId + " .mspinfo .pts");
+                $mspText.text(remainingMSP + ' / ' + maxMSP);
+                var isMspError = (remainingMSP < 0);
+                $mspText.toggleClass(this.CLASSNAME_ERROR, isMspError);
             };
             SimulatorUI.prototype.refreshAllVocationInfo = function () {
                 var _this = this;
@@ -1575,29 +1700,32 @@ var Dq10;
                 var _this = this;
                 var status = 'maxhp,maxmp,pow,def,dex,spd,magic,heal,charm'.split(',');
                 status.forEach(function (s) { return $('#total_' + s).text(_this.sim.totalStatus(s)); });
-                $('#msp_remain').text((this.DB.consts.msp.max - this.sim.totalMSP()).toString() + 'P');
             };
             SimulatorUI.prototype.refreshSkillList = function (skillLineId) {
                 var _this = this;
                 $("tr[class^=" + skillLineId + "_]").removeClass(this.CLASSNAME_SKILL_ENABLED); //クリア
                 var totalOfSkill = this.sim.totalOfSameSkills(skillLineId);
-                this.DB.skillLines[skillLineId].skills.some(function (skill, i) {
-                    if (totalOfSkill < skill.pt)
-                        return true;
-                    $("." + skillLineId + "_" + i).addClass(_this.CLASSNAME_SKILL_ENABLED);
-                    return false;
+                Object.keys(this.DB.vocations).filter(function (vocationId) {
+                    return _this.DB.vocations[vocationId].skillLines.indexOf(skillLineId) >= 0;
+                }).forEach(function (vocationId) {
+                    var msp = _this.sim.getMSP(vocationId, skillLineId);
+                    _this.DB.skillLines[skillLineId].skills.some(function (skill, i) {
+                        if (totalOfSkill + msp < skill.pt)
+                            return true;
+                        $("#" + vocationId + " ." + skillLineId + "_" + i).addClass(_this.CLASSNAME_SKILL_ENABLED);
+                        return false;
+                    });
+                    var isError = totalOfSkill + msp > (_this.DB.skillLines[skillLineId].unique ?
+                        _this.DB.consts.skillPts.validUnique :
+                        _this.DB.consts.skillPts.valid);
+                    $("#" + vocationId + " ." + skillLineId + " .skill_total")
+                        .text(totalOfSkill + msp)
+                        .toggleClass(_this.CLASSNAME_ERROR, isError);
+                    if (msp > 0)
+                        $("<span>(" + msp + ")</span>")
+                            .addClass('msp')
+                            .appendTo("#" + vocationId + " ." + skillLineId + " .skill_total");
                 });
-                var isError = totalOfSkill > (this.DB.skillLines[skillLineId].unique ?
-                    this.DB.consts.skillPts.validUnique :
-                    this.DB.consts.skillPts.valid);
-                $("." + skillLineId + " .skill_total")
-                    .text(totalOfSkill)
-                    .toggleClass(this.CLASSNAME_ERROR, isError);
-                var msp = this.sim.getMSP(skillLineId);
-                if (msp > 0)
-                    $("<span>(" + msp + ")</span>")
-                        .addClass('msp')
-                        .appendTo("." + skillLineId + " .skill_total");
             };
             SimulatorUI.prototype.refreshControls = function () {
                 var _this = this;
@@ -1671,6 +1799,7 @@ var Dq10;
                 this.$trainingPtConsole.hide();
                 this.$mspMaxConsole.hide();
                 this.$customSkillConsole.hide();
+                this.$mspAvailableConsole.hide();
             };
             SimulatorUI.prototype.setup = function () {
                 this.setupFunctions.forEach(function (func) { return func(); });
@@ -1849,8 +1978,8 @@ var Dq10;
                 Object.keys(this.DB.vocations).forEach(function (vocationId) {
                     _this.refreshVocationInfo(vocationId);
                 });
-                $('#msp .remain .container').text(this.DB.consts.msp.max - this.sim.totalMSP());
-                $('#msp .total .container').text(this.DB.consts.msp.max);
+                // $('#msp .remain .container').text(this.DB.consts.msp.max - this.sim.totalMSP());
+                // $('#msp .total .container').text(this.DB.consts.msp.max);
             };
             SimpleUI.prototype.refreshTotalRequiredExp = function () {
                 $('#total_exp').text(numToFormedStr(this.sim.totalRequiredExp()));
@@ -1879,8 +2008,8 @@ var Dq10;
                         return false;
                     });
                 }
-                var msp = this.sim.getMSP(skillLineId);
-                $(containerName + ' .container').text(msp > 0 ? msp : '');
+                // var msp = this.sim.getMSP(skillLineId);
+                // $(containerName + ' .container').text(msp > 0 ? msp : '');
             };
             SimpleUI.prototype.refreshControls = function () {
                 var _this = this;

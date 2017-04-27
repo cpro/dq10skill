@@ -7,7 +7,7 @@
     <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
     <title>DQ10 スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=10.2.2' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=11.0' rel='stylesheet' type='text/css'>
     <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js' type='text/javascript'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js' type='text/javascript'></script>
@@ -15,7 +15,7 @@
     <script src='js/rawinflate.min.js' type='text/javascript'></script>
     <script src='js/shortcut.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=10.2.2' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=11.0' type='text/javascript'></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -33,8 +33,8 @@
         <div id='save_url'>
           <a id='undo' title='変更を元に戻す&#x000A;(Ctrl + Z)'>元に戻す</a>
           <a id='redo' title='取り消した変更をやり直す&#x000A;(Ctrl + Y)'>やり直し</a>
-          <div id='msp_selector'>
-            <input checked='checked' id='msp_normal' name='mspMode' type='radio' value='nomal'>
+          <div id='msp_selector' title='MSPモード切り替え&#x000A;(Ctrl + M)'>
+            <input checked='checked' id='msp_normal' name='mspMode' type='radio' value='normal'>
             <label for='msp_normal'>通常</label>
             <input id='msp_msp' name='mspMode' type='radio' value='msp'>
             <label for='msp_msp'>マスタースキル</label>
@@ -94,8 +94,8 @@
             <td class='total_pts' id='total_spd'>0</td>
             <th>回魔:</th>
             <td class='total_pts' id='total_heal'>0</td>
-            <th>残MSP:</th>
-            <td class='total_pts ui-corner-br' id='msp_remain'></td>
+            <th></th>
+            <td class='total_pts ui-corner-br'></td>
           </tr>
         </table>
         <div id='navlink'>
@@ -119,6 +119,10 @@
             <dd id='training-warrior'>
               0
             </dd>
+          </dl>
+          <dl class='mspinfo ui-handler'>
+            <dt>残りMSP:</dt>
+            <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
             <dt>獲得経験値:</dt>
@@ -282,6 +286,10 @@
               0
             </dd>
           </dl>
+          <dl class='mspinfo ui-handler'>
+            <dt>残りMSP:</dt>
+            <dd class='pts'>0 / 0</dd>
+          </dl>
           <dl class='expinfo'>
             <dt>獲得経験値:</dt>
             <dd class='exp'>0</dd>
@@ -443,6 +451,10 @@
             <dd id='training-mage'>
               0
             </dd>
+          </dl>
+          <dl class='mspinfo ui-handler'>
+            <dt>残りMSP:</dt>
+            <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
             <dt>獲得経験値:</dt>
@@ -606,6 +618,10 @@
               0
             </dd>
           </dl>
+          <dl class='mspinfo ui-handler'>
+            <dt>残りMSP:</dt>
+            <dd class='pts'>0 / 0</dd>
+          </dl>
           <dl class='expinfo'>
             <dt>獲得経験値:</dt>
             <dd class='exp'>0</dd>
@@ -767,6 +783,10 @@
             <dd id='training-thief'>
               0
             </dd>
+          </dl>
+          <dl class='mspinfo ui-handler'>
+            <dt>残りMSP:</dt>
+            <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
             <dt>獲得経験値:</dt>
@@ -930,6 +950,10 @@
               0
             </dd>
           </dl>
+          <dl class='mspinfo ui-handler'>
+            <dt>残りMSP:</dt>
+            <dd class='pts'>0 / 0</dd>
+          </dl>
           <dl class='expinfo'>
             <dt>獲得経験値:</dt>
             <dd class='exp'>0</dd>
@@ -1091,6 +1115,10 @@
             <dd id='training-gladiator'>
               0
             </dd>
+          </dl>
+          <dl class='mspinfo ui-handler'>
+            <dt>残りMSP:</dt>
+            <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
             <dt>獲得経験値:</dt>
@@ -1254,6 +1282,10 @@
               0
             </dd>
           </dl>
+          <dl class='mspinfo ui-handler'>
+            <dt>残りMSP:</dt>
+            <dd class='pts'>0 / 0</dd>
+          </dl>
           <dl class='expinfo'>
             <dt>獲得経験値:</dt>
             <dd class='exp'>0</dd>
@@ -1415,6 +1447,10 @@
             <dd id='training-armamentalist'>
               0
             </dd>
+          </dl>
+          <dl class='mspinfo ui-handler'>
+            <dt>残りMSP:</dt>
+            <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
             <dt>獲得経験値:</dt>
@@ -1578,6 +1614,10 @@
               0
             </dd>
           </dl>
+          <dl class='mspinfo ui-handler'>
+            <dt>残りMSP:</dt>
+            <dd class='pts'>0 / 0</dd>
+          </dl>
           <dl class='expinfo'>
             <dt>獲得経験値:</dt>
             <dd class='exp'>0</dd>
@@ -1739,6 +1779,10 @@
             <dd id='training-sage'>
               0
             </dd>
+          </dl>
+          <dl class='mspinfo ui-handler'>
+            <dt>残りMSP:</dt>
+            <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
             <dt>獲得経験値:</dt>
@@ -1902,6 +1946,10 @@
               0
             </dd>
           </dl>
+          <dl class='mspinfo ui-handler'>
+            <dt>残りMSP:</dt>
+            <dd class='pts'>0 / 0</dd>
+          </dl>
           <dl class='expinfo'>
             <dt>獲得経験値:</dt>
             <dd class='exp'>0</dd>
@@ -2063,6 +2111,10 @@
             <dd id='training-monstermaster'>
               0
             </dd>
+          </dl>
+          <dl class='mspinfo ui-handler'>
+            <dt>残りMSP:</dt>
+            <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
             <dt>獲得経験値:</dt>
@@ -2226,6 +2278,10 @@
               0
             </dd>
           </dl>
+          <dl class='mspinfo ui-handler'>
+            <dt>残りMSP:</dt>
+            <dd class='pts'>0 / 0</dd>
+          </dl>
           <dl class='expinfo'>
             <dt>獲得経験値:</dt>
             <dd class='exp'>0</dd>
@@ -2387,6 +2443,10 @@
             <dd id='training-dancer'>
               0
             </dd>
+          </dl>
+          <dl class='mspinfo ui-handler'>
+            <dt>残りMSP:</dt>
+            <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
             <dt>獲得経験値:</dt>
@@ -2550,6 +2610,10 @@
               0
             </dd>
           </dl>
+          <dl class='mspinfo ui-handler'>
+            <dt>残りMSP:</dt>
+            <dd class='pts'>0 / 0</dd>
+          </dl>
           <dl class='expinfo'>
             <dt>獲得経験値:</dt>
             <dd class='exp'>0</dd>
@@ -2698,21 +2762,24 @@
             <tr class='fortunetelling_17'><td class='skill_pt'>180</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
           </table></div>
       </div>
-      <div id='pt_console' style='display: none'>
+      <div class='hover-console' id='pt_console'>
         <input id='pt_spinner'>
         <button id='pt_reset'>リセット</button>
       </div>
-      <div id='lv_console' style='display: none'>
+      <div class='hover-console' id='lv_console'>
         <select class='ui-widget-content ui-corner-all' id='lv-select' size='1'></select>
       </div>
-      <div id='training_pt_console' style='display: none'>
+      <div class='hover-console' id='training_pt_console'>
         <select class='ui-widget-content ui-corner-all' id='training_pt_select'></select>
       </div>
-      <div id='mspmax_console' style='display: none'>
+      <div class='hover-console' id='mspmax_console'>
         <button id='max-with-msp' title='MSP込みの最大値にする'>MSP</button>
       </div>
-      <div id='customskill_console' style='display: none'>
+      <div class='hover-console' id='customskill_console'>
         <button id='show-customskill-dialog'>編集</button>
+      </div>
+      <div class='hover-console' id='mspavailable_console'>
+        <input id='mspavailable-spinner'>
       </div>
       <div id='footconsole'>
         <p id='setalllevel'>
@@ -2739,7 +2806,7 @@
           <li>
             使い方:
             <ul>
-              <li>レベル、特訓ポイント、スキルポイントの辺りをクリックすると入力欄が表示されます。</li>
+              <li>レベル、特訓ポイント、残りMSP、スキルポイントの辺りをクリックすると入力欄が表示されます。</li>
               <li>スキルポイントはスキル一覧の項目をクリックすると必要なポイントが自動入力されます。上下ボタン・キーボードの上下キーで1ずつ調整、PageUp/PageDownキーで10ずつ上下します。数値の直接入力も可能。</li>
               <li>
                 スキルポイント欄右のリセットボタンをクリックするとポイントを0にします。
@@ -2748,7 +2815,7 @@
                   <li>職業欄下部の「全スキルをリセット」で、全職業で振ったスキルのポイントをすべて0にします。レベルと特訓は変化しません。</li>
                 </ul>
               </li>
-              <li>「ゆうかん」など職業固有スキルラインの最後のスキル(180)にマウスカーソルを当てると、「MSP込みの最大値にする」ボタンが表示され、クリックすると最大値から現在取得可能なマスタースキルポイントを引いた数値に設定されます。</li>
+              <li>「ゆうかん」など職業固有スキルラインの最後のスキル(180)にマウスカーソルを当てると、「MSP込みの最大値にする」ボタンが表示され、クリックすると通常のスキルポイントとMSPを組み合わせた最大値に設定されます。</li>
               <li>各スキルの160以降にマウスカーソルを当てると「編集」ボタンが表示され、クリックするとスキル編集画面が開きます。</li>
               <li>ページ上部の「マスタースキル」をチェックすると、マスタースキルポイントを編集するモードに切り替わります。</li>
               <li>ページ上部の「元に戻す」ボタンまたはキーボードのCtrl+Zで、直前の変更を元に戻せます。元に戻した変更は「やり直し」ボタンまたはCtrl+Yでもう一度適用できます。</li>
@@ -2765,6 +2832,15 @@
           <li>
             履歴:
             <ul>
+              <li>
+                2017/4/21 v11.0 ver3.5中期の職業ごとMSP状態保存にともなう変更
+                <ul>
+                  <li>MSPを各職業内で割り振り可能にし、職業ごとに「残りMSP」の欄を追加。</li>
+                  <li>使用可能なMSPを変更する機能追加。デフォルトではゲーム内で可能な最大値（現在29）で、「残りMSP」欄をクリックすると入力欄が表示されます。</li>
+                  <li>「MSP込みの最大値にする」ボタンでMSPも同時に振るよう変更。</li>
+                  <li>MSPモードのON/OFFをキーボードの Ctrl+M で切り替え可能にしました。</li>
+                </ul>
+              </li>
               <li>
                 2017/2/26 v10.2.2 ver3.5前期対応。
                 <ul>
@@ -2795,15 +2871,6 @@
                   <li>簡易表示板を占い師に対応。</li>
                 </ul>
               </li>
-              <li>2016/7/21 v9.0beta2 Vジャンプ情報より、占い師の武器スキルを確定</li>
-              <li>
-                2016/7/13 v9.0beta ver3.3後期対応。
-                <ul>
-                  <li>占い師を追加。確定している片手剣以外のスキルは暫定です。</li>
-                  <li>MSP上限22→25</li>
-                </ul>
-              </li>
-              <li>2016/5/26 v8.1 160-180追加スキルにゲーム内データを反映。</li>
               <li>過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。</li>
             </ul>
           </li>

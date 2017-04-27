@@ -1,4 +1,4 @@
-- @version = '10.2.2'
+- @version = '11.0'
 !!! 5
 %html
 	%head
@@ -38,8 +38,8 @@
 				#save_url
 					%a#undo{title: "変更を元に戻す\n(Ctrl + Z)"} 元に戻す
 					%a#redo{title: "取り消した変更をやり直す\n(Ctrl + Y)"} やり直し
-					#msp_selector
-						%input#msp_normal{type: 'radio', name: 'mspMode', value: 'nomal', checked: 'checked'}
+					#msp_selector{title: "MSPモード切り替え\n(Ctrl + M)"}
+						%input#msp_normal{type: 'radio', name: 'mspMode', value: 'normal', checked: 'checked'}
 						%label{for: 'msp_normal'} 通常
 						%input#msp_msp{type: 'radio', name: 'mspMode', value: 'msp'}
 						%label{for: 'msp_msp'} マスタースキル
@@ -82,8 +82,8 @@
 						%td.total_pts#total_spd 0
 						%th 回魔:
 						%td.total_pts#total_heal 0
-						%th 残MSP:
-						%td.total_pts#msp_remain.ui-corner-br
+						%th
+						%td.total_pts.ui-corner-br
 				#navlink
 					%a#simpleui{href: 'simple.html'} 簡易表示版に切り替え
 					%br
@@ -103,6 +103,9 @@
 							%dt 特訓
 							%dd{id: "training-#{vocation}"}
 								0
+						%dl.mspinfo.ui-handler
+							%dt 残りMSP:
+							%dd.pts 0 / 0
 						%dl.expinfo
 							%dt 獲得経験値:
 							%dd.exp 0
@@ -138,17 +141,19 @@
 												%span.custom_skill_name= skill['name']
 											- else
 												= skill['name']
-			#pt_console{style: 'display: none'}
+			#pt_console.hover-console
 				%input#pt_spinner
 				%button#pt_reset リセット
-			#lv_console{style: 'display: none'}
+			#lv_console.hover-console
 				%select#lv-select.ui-widget-content.ui-corner-all{size: 1}
-			#training_pt_console{style: 'display: none'}
+			#training_pt_console.hover-console
 				%select#training_pt_select.ui-widget-content.ui-corner-all
-			#mspmax_console{style: 'display: none'}
+			#mspmax_console.hover-console
 				%button#max-with-msp{title: 'MSP込みの最大値にする'} MSP
-			#customskill_console{style: 'display: none'}
+			#customskill_console.hover-console
 				%button#show-customskill-dialog 編集
+			#mspavailable_console.hover-console
+				%input#mspavailable-spinner
 			#footconsole
 				%p#setalllevel
 					レベル一括設定
@@ -171,14 +176,14 @@
 					%li
 						使い方:
 						%ul
-							%li レベル、特訓ポイント、スキルポイントの辺りをクリックすると入力欄が表示されます。
+							%li レベル、特訓ポイント、残りMSP、スキルポイントの辺りをクリックすると入力欄が表示されます。
 							%li スキルポイントはスキル一覧の項目をクリックすると必要なポイントが自動入力されます。上下ボタン・キーボードの上下キーで1ずつ調整、PageUp/PageDownキーで10ずつ上下します。数値の直接入力も可能。
 							%li
 								スキルポイント欄右のリセットボタンをクリックするとポイントを0にします。
 								%ul
 									%li ダブルクリックすると複数の職で振ったそのスキルのポイントをすべて0にします。
 									%li 職業欄下部の「全スキルをリセット」で、全職業で振ったスキルのポイントをすべて0にします。レベルと特訓は変化しません。
-							%li 「ゆうかん」など職業固有スキルラインの最後のスキル(180)にマウスカーソルを当てると、「MSP込みの最大値にする」ボタンが表示され、クリックすると最大値から現在取得可能なマスタースキルポイントを引いた数値に設定されます。
+							%li 「ゆうかん」など職業固有スキルラインの最後のスキル(180)にマウスカーソルを当てると、「MSP込みの最大値にする」ボタンが表示され、クリックすると通常のスキルポイントとMSPを組み合わせた最大値に設定されます。
 							%li 各スキルの160以降にマウスカーソルを当てると「編集」ボタンが表示され、クリックするとスキル編集画面が開きます。
 							%li ページ上部の「マスタースキル」をチェックすると、マスタースキルポイントを編集するモードに切り替わります。
 							%li ページ上部の「元に戻す」ボタンまたはキーボードのCtrl+Zで、直前の変更を元に戻せます。元に戻した変更は「やり直し」ボタンまたはCtrl+Yでもう一度適用できます。
@@ -194,6 +199,13 @@
 					%li
 						履歴:
 						%ul
+							%li
+								2017/4/21 v11.0 ver3.5中期の職業ごとMSP状態保存にともなう変更
+								%ul
+									%li MSPを各職業内で割り振り可能にし、職業ごとに「残りMSP」の欄を追加。
+									%li 使用可能なMSPを変更する機能追加。デフォルトではゲーム内で可能な最大値（現在29）で、「残りMSP」欄をクリックすると入力欄が表示されます。
+									%li 「MSP込みの最大値にする」ボタンでMSPも同時に振るよう変更。
+									%li MSPモードのON/OFFをキーボードの Ctrl+M で切り替え可能にしました。
 							%li
 								2017/2/26 v10.2.2 ver3.5前期対応。
 								%ul
@@ -216,13 +228,6 @@
 								%ul
 									%li 占い師の職スキル「うらない」に対応。
 									%li 簡易表示板を占い師に対応。
-							%li 2016/7/21 v9.0beta2 Vジャンプ情報より、占い師の武器スキルを確定
-							%li
-								2016/7/13 v9.0beta ver3.3後期対応。
-								%ul
-									%li 占い師を追加。確定している片手剣以外のスキルは暫定です。
-									%li MSP上限22→25
-							%li 2016/5/26 v8.1 160-180追加スキルにゲーム内データを反映。
 							%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
 					%li
 						ToDo:

@@ -27,7 +27,12 @@
 			forTrainingMode: number;
 		};
 		trainingSkillPts: MinMax;
-		msp: MinMax;
+		msp: {
+			min: number;
+			max: number;
+			/** 現在ゲーム中で取得可能なMSPの最大数 */
+			possible: number;
+		};
 		customSkill: {
 			pts: number[];
 			count: number;
@@ -51,6 +56,7 @@ interface SkillLine {
 	id: number;
 	unique?: boolean;
 	name: string;
+	enhancedName?: string;
 	abbr?: string;
 	skills: Skill[];
 	customSkills?: CustomSkill[];
@@ -110,6 +116,7 @@ interface MonsterSimulatorDB {
 		skillPts: {
 			min: number;
 			max: number;
+			enhanced: number;
 		};
 		level: MinMax;
 		restart: {
@@ -118,7 +125,11 @@ interface MonsterSimulatorDB {
 			skillPts: number[];
 			skillPtsOver5: number;
 			expRatio: number;
-		}
+		};
+		skillenhance: {
+			restart: number;
+			released: string[];
+		};
 	};
 	natsukiPts: {
 		natsukido: number;

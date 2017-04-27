@@ -235,7 +235,6 @@ a {
     padding: 0;
     position: relative; }
     .ent_title h2 #lv_console {
-      position: absolute;
       top: 0;
       left: 0; }
       .ent_title h2 #lv_console #lv-select {
@@ -245,17 +244,16 @@ a {
     margin: 0; }
   .ent_title dt, .ent_title dd {
     font-size: 12px; }
+  .ent_title dd.pts {
+    font-weight: bold;
+    font-size: 16px; }
   .ent_title dl.skill_pt {
     margin-left: 30px; }
-    .ent_title dl.skill_pt dd.pts {
-      font-weight: bold;
-      font-size: 16px; }
   .ent_title dl.training_pt dd {
     font-weight: bold;
     font-size: 15px;
     position: relative; }
   .ent_title dl.training_pt #training_pt_console {
-    position: absolute;
     top: 0;
     left: 0; }
     .ent_title dl.training_pt #training_pt_console #training_pt-select {
@@ -263,6 +261,19 @@ a {
       padding: 0; }
   .ent_title dl.expinfo dt {
     margin-left: 10px; }
+  .ent_title dl.mspinfo {
+    /* margin-left: 5px; */
+    position: relative; }
+    .ent_title dl.mspinfo dd.pts:not(.error) {
+      color: #58e; }
+    .ent_title dl.mspinfo #mspavailable_console {
+      top: -2px;
+      right: -30px; }
+      .ent_title dl.mspinfo #mspavailable_console input {
+        /* spinner */
+        width: 24px;
+        text-align: right;
+        font-size: 12px; }
   .ent_title .ent_title_console {
     position: absolute;
     top: 0;
@@ -288,6 +299,11 @@ a {
 
 #anlucea-data .ent_title {
   height: 22px; }
+
+.hover-console {
+  display: none;
+  position: absolute;
+  z-index: 101; }
 
 /* 職業情報欄 */
 .class_info {
@@ -317,7 +333,7 @@ a {
     text-align: right; }
 
 .monster_ent .class_info {
-  height: 210px; }
+  height: 260px; }
 
 .skill_tables {
   padding: 0 10px;
@@ -454,8 +470,10 @@ a {
 
 .monster_ent .status_info {
   clear: none;
-  margin-left: 146px;
-  width: 900px; }
+  position: absolute;
+  width: 900px;
+  left: 146px;
+  bottom: 3px; }
 
 /* フッタコンソール */
 #footconsole {
@@ -486,8 +504,7 @@ a {
 .ui-handler:hover {
   border: 2px solid rgba(255, 0, 0, 0.3);
   border-radius: 4px;
-  padding: 2px;
-  margin: -4px; }
+  margin: -2px; }
 
 /* MSPモード時 */
 body.msp #pt_console .ui-widget-content {
@@ -549,6 +566,9 @@ ul.badge-button-container li.gold, ul#badge-search-buttons-rarity li.gold {
   color: #551; }
 ul.badge-button-container li.luminous, ul#badge-search-buttons-rarity li.luminous {
   background-color: white;
+  color: #444; }
+ul.badge-button-container li.rainbow, ul#badge-search-buttons-rarity li.rainbow {
+  background: linear-gradient(135deg, #fee7e7, #fcf7e0, #f0fee7);
   color: #444; }
 ul.badge-button-container li:hover, ul#badge-search-buttons-rarity li:hover {
   cursor: pointer;
@@ -743,18 +763,18 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
   margin: auto;
   padding: 0;
   width: 878px;
-  height: 527px;
+  height: 577px;
   border: 3px solid #99a;
   border-radius: 6px;
   background-color: #fcfcfd;
   /* バッジ検索ボタン */ }
   #badge-selector #badge-selector-header {
     position: relative;
-    height: 105px;
+    height: 125px;
     border-bottom: 1px solid #99a; }
   #badge-selector #badge-selector-footer {
     position: relative;
-    height: 120px;
+    height: 150px;
     border-top: 1px solid #99a; }
   #badge-selector #badge-selector-body {
     position: relative;
@@ -786,7 +806,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
   #badge-selector ul.badge-search-button-container, #badge-selector #badge-search-console-word {
     float: left;
     margin-top: 15px;
-    height: 80px;
+    height: 100px;
     margin-right: 6px;
     border-right: 1px solid #99a;
     padding-right: 6px; }
@@ -848,7 +868,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
       padding: 0; }
   #badge-selector #badge-selector-feature-list {
     float: left;
-    width: 180px;
+    width: 240px;
     font-size: 12px; }
   #badge-selector #badge-selector-trade-list {
     float: left;

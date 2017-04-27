@@ -338,7 +338,6 @@ a {
 		position: relative;
 
 		#lv_console {
-			position: absolute;
 			top: 0;
 			left: 0;
 
@@ -356,13 +355,13 @@ a {
 		font-size: 12px;
 	}
 
+	dd.pts {
+		font-weight: bold;
+		font-size: 16px;
+	}
+
 	dl.skill_pt {
 		margin-left: 30px;
-
-		dd.pts {
-			font-weight: bold;
-			font-size: 16px;
-		}
 	}
 
 	dl.training_pt {
@@ -373,7 +372,6 @@ a {
 		}
 
 		#training_pt_console {
-			position: absolute;
 			top: 0;
 			left: 0;
 
@@ -387,6 +385,25 @@ a {
 	dl.expinfo {
 		dt {
 			margin-left: 10px;
+		}
+	}
+
+	dl.mspinfo {
+		/* margin-left: 5px; */
+		position: relative;
+		dd.pts:not(.error) {
+			color: $msp-color;
+		}
+
+		#mspavailable_console {
+			top: -2px;
+			right: -30px;
+
+			input { /* spinner */
+				width: 24px;
+				text-align: right;
+				font-size: 12px;
+			}
 		}
 	}
 
@@ -425,6 +442,12 @@ a {
 	height: 22px;
 }
 
+.hover-console {
+	display: none;
+	position: absolute;
+	z-index: 101;
+}
+
 /* 職業情報欄 */
 .class_info {
 	font-size: 70%;
@@ -461,7 +484,7 @@ a {
 	}
 }
 .monster_ent .class_info {
-	height: 210px;
+	height: 260px;
 }
 
 .skill_tables {
@@ -636,8 +659,10 @@ a {
 
 .monster_ent .status_info {
 	clear: none;
-	margin-left: 146px;
+	position: absolute;
 	width: 900px;
+	left: 146px;
+	bottom: 3px;
 }
 
 /* フッタコンソール */
@@ -678,8 +703,8 @@ a {
 .ui-handler:hover {
 	border: 2px solid rgba(255, 0, 0, 0.3);
 	border-radius: 4px;
-	padding: 2px;
-	margin: -4px;
+	//padding: 2px;
+	margin: -2px;
 }
 
 /* MSPモード時 */
@@ -774,6 +799,10 @@ ul.badge-button-container, ul#badge-search-buttons-rarity {
 		}
 		&.luminous {
 			background-color: white;
+			color: #444;
+		}
+		&.rainbow {
+			background: linear-gradient(135deg, #fee7e7, #fcf7e0, #f0fee7);
 			color: #444;
 		}
 
@@ -1064,10 +1093,10 @@ $dialog-outer-border-width: 3px;
 	$badge-selector-body-padding: 15px;
 	$badge-selector-body-scrollbar-margin: 18px;
 	$badge-selector-header-height:
-		($button-height + 1px * 2 /* margin */ + 1px * 2 /* border */) * 4 +
+		($button-height + 1px * 2 /* margin */ + 1px * 2 /* border */) * 5 +
 		$badge-selector-body-padding /* top */ +
 		10px /* bottom */;
-	$badge-selector-footer-height: 120px;
+	$badge-selector-footer-height: 150px;
 	$badge-selector-inner-border-width: 1px;
 	$badge-selector-outer-border-width: 3px;
 
@@ -1140,7 +1169,7 @@ $dialog-outer-border-width: 3px;
 	ul.badge-search-button-container, #badge-search-console-word {
 		float: left;
 		margin-top: $badge-selector-body-padding;
-		height: ($button-height + 4px) * 4;
+		height: ($button-height + 4px) * 5;
 
 		margin-right: 6px;
 		border-right: 1px solid $border-color-general;
@@ -1236,7 +1265,7 @@ $dialog-outer-border-width: 3px;
 	}
 	#badge-selector-feature-list {
 		float: left;
-		width: 180px;
+		width: 240px;
 		font-size: 12px;
 	}
 	#badge-selector-trade-list {

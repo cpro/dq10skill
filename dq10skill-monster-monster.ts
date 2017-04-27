@@ -5,12 +5,12 @@ namespace Dq10.SkillSimulator {
 		data: Monster;
 		monsterType: string;
 		private level: number;
-		skillPts: {[skillLineId: string]: number} = {};
+		skillLines: MonsterSkillLine[] = [];
+		private skillLineDic: {[interfaceId: string]: MonsterSkillLine} = {};
 		indivName: string;
 		restartCount: number;
 		id: string;
-		private additionalSkills: string[];
-		badgeEquip: string[];
+		badgeEquip: string[] = [];
 		private natsuki: number;
 
 		constructor(monsterType: string, idnum: number) {
@@ -23,37 +23,28 @@ namespace Dq10.SkillSimulator {
 			this.id = monsterType + '_' + idnum.toString();
 
 			this.data.skillLines.forEach((skillLineId) => {
-				this.skillPts[skillLineId] = 0;
+				let skillLine = new MonsterSkillLine(skillLineId, 0);
+				this.skillLines.push(skillLine);
+				this.skillLineDic[skillLine.interfaceId] = skillLine;
 			});
 			//転生追加スキル
-			this.additionalSkills = [];
 			for(var s = 0; s < ADDITIONAL_SKILL_MAX; s++) {
-				this.additionalSkills[s] = null;
-				this.skillPts['additional' + s.toString()] = 0;
+				let skillLine = new MonsterSkillLine('', s + 1);
+				this.skillLines.push(skillLine);
+				this.skillLineDic[skillLine.interfaceId] = skillLine;
 			}
 
 			//バッジ
-			this.badgeEquip = [null, null, null, null];
+			for(var i = 0; i < BADGE_COUNT; i++)
+				this.badgeEquip.push(null);
 
 			//なつき度
 			this.natsuki = MonsterDB.natsukiPts.length - 1;
 		}
 
-		//スキルポイント取得
-		getSkillPt(skillLineId: string) {
-			return this.skillPts[skillLineId];
+		getSkillLine(interfaceId: string): MonsterSkillLine {
+			return this.skillLineDic[interfaceId];
 		}
-
-		//スキルポイント更新：不正値の場合falseを返す
-		updateSkillPt(skillLineId: string, newValue: number) {
-			if(newValue < MonsterDB.consts.skillPts.min ||
-			   newValue > MonsterDB.consts.skillPts.max) {
-				return false;
-			}
-
-			this.skillPts[skillLineId] = newValue;
-			return true;
-		};
 
 		//レベル値取得
 		getLevel() {
@@ -74,13 +65,11 @@ namespace Dq10.SkillSimulator {
 
 		//スキルポイント合計
 		totalSkillPts() {
-			return Object.keys(this.skillPts).reduce((prev, skillLineId) => {
-				var m = skillLineId.match(/^additional(\d+)/);
-				if(m && (this.restartCount < parseInt(m[1], 10) + 1 ||
-				   this.getAdditionalSkill(parseInt(m[1], 10)) === null))
+			return this.skillLines.reduce((prev, skillLine) => {
+				if(skillLine.skillLineId === '' || this.restartCount < skillLine.requiredRestarts)
 					return prev;
 
-				return prev + this.skillPts[skillLineId];
+				return prev + skillLine.skillPt;
 			}, 0);
 		};
 
@@ -158,20 +147,23 @@ namespace Dq10.SkillSimulator {
 
 		//転生追加スキルの取得
 		getAdditionalSkill(skillIndex: number) {
-			return this.additionalSkills[skillIndex];
+			return this.getSkillLine('additional' + skillIndex.toString()).skillLineId;
 		};
 		//転生追加スキルの更新
 		updateAdditionalSkill(skillIndex: number, newValue: string) {
 			if(skillIndex < 0 || skillIndex > ADDITIONAL_SKILL_MAX) return false;
+			var skillLine = this.getSkillLine('additional' + skillIndex.toString());
 
-			if(newValue !== null) {
-				for(var i = 0; i < this.additionalSkills.length; i++) {
-					if(i == skillIndex) continue;
-					if(newValue == this.additionalSkills[i]) return false;
-				}
+			if(newValue === null) {
+				newValue = '';
+			} else {
+				if(this.skillLines.some((sl) => {
+					if(sl == skillLine) return false;
+					return sl.isAdditional && sl.skillLineId == newValue;
+				}))
+					return false;
 			}
-
-			this.additionalSkills[skillIndex] = newValue;
+			skillLine.skillLineId = newValue;
 			return true;
 		};
 
@@ -229,26 +221,25 @@ namespace Dq10.SkillSimulator {
 		};
 		//パッシブスキルのステータス加算合計値取得
 		getTotalPassive(status: string) {
-			return Object.keys(this.skillPts).reduce((wholeTotal, skillLineId) => {
-				var m = skillLineId.match(/^additional(\d+)/);
+			return this.skillLines.reduce((wholeTotal, skillLine) => {
+				if(skillLine.skillLineId == '')
+					return wholeTotal;
+
 				var skills: Skill[];
-				if(m) {
-					var index = parseInt(m[1], 10);
-					if(this.restartCount < index + 1 || this.getAdditionalSkill(index) === null)
-						return wholeTotal;
-					else
-						skills = MonsterDB.skillLines[this.getAdditionalSkill(index)].skills;
-				} else {
-					skills = MonsterDB.skillLines[skillLineId].skills;
-				}
+				skills = MonsterDB.skillLines[skillLine.skillLineId].skills;
 				var cur = skills.filter((skill) => {
-					return skill.pt <= this.skillPts[skillLineId];
+					return skill.pt <= skillLine.skillPt;
 				}).reduce((skillLineTotal, skill) => {
 					return skillLineTotal + (skill[status] || 0);
 				}, 0);
 				return wholeTotal + cur;
 			}, 0);
 		};
+
+		get isEnhanced(): boolean {
+			return MonsterDB.consts.skillenhance.released.indexOf(this.monsterType) >= 0 &&
+				this.restartCount >= MonsterDB.consts.skillenhance.restart;
+		}
 	}
 
 	export module MonsterSaveData {
@@ -271,8 +262,10 @@ namespace Dq10.SkillSimulator {
 
 		/** 最初期の独自ビット圧縮していたバージョン */
 		const VERSION_FIRST = 1;
+		/** レジェンドバッジ実装でバッジ保存数が1つ増えたバージョン */
+		const VERSION_LEGEND_BADGE = 4;
 		/** 現在のSerializerのバージョン */
-		const VERSION_CURRENT_SERIALIZER = 3;
+		const VERSION_CURRENT_SERIALIZER = 4;
 
 		export class Serializer {
 			exec(monsters: MonsterUnit[]): string {
@@ -292,17 +285,17 @@ namespace Dq10.SkillSimulator {
 			}
 
 			/**
-			 * モンスターデータ シリアライズ仕様 (ver. 3)
+			 * モンスターデータ シリアライズ仕様 (ver. 4)
 			 *  1. 全体データ長
 			 *  2. モンスタータイプID
 			 *  3. レベル
 			 *  4. 転生回数
 			 *  5 -  9. 各スキルライン（転生時追加含む）のスキルポイント
 			 * 10 - 11. 転生追加スキルライン2種のID
-			 * 12 - 15. バッジID
-			 * 16. なつき度
-			 * 17. 個体名のデータ長
-			 * 18 - . 個体名
+			 * 12 - 16. バッジID
+			 * 17. なつき度
+			 * 18. 個体名のデータ長
+			 * 19 - . 個体名
 			 *
 			 * 個体名以外は数値で、それぞれ String.fromCharCode() し
 			 * 連結した文字列+個体名をシリアルとして受け渡しする。
@@ -316,13 +309,13 @@ namespace Dq10.SkillSimulator {
 				data.push(monster.getRestartCount());
 
 				// スキルライン
-				Object.keys(monster.skillPts).forEach((skillLineId) => {
-					data.push(monster.getSkillPt(skillLineId));
+				monster.skillLines.forEach((skillLine) => {
+					data.push(skillLine.skillLineId == '' ? 0 : skillLine.skillPt);
 				});
 
 				// 転生追加スキルライン
 				for(var i = 0; i < ADDITIONAL_SKILL_MAX; i++) {
-					if(monster.getAdditionalSkill(i) === null) {
+					if(monster.getAdditionalSkill(i) === '') {
 						data.push(0);
 						continue;
 					}
@@ -357,6 +350,8 @@ namespace Dq10.SkillSimulator {
 		}
 
 		export class Deserializer {
+			private version: number = VERSION_CURRENT_SERIALIZER;
+
 			constructor(private wholeSerial: string) {
 			}
 
@@ -364,9 +359,9 @@ namespace Dq10.SkillSimulator {
 				var cur = 0;
 				var getData = () => this.wholeSerial.charCodeAt(cur++);
 
-				var version = this.judgeVersion();
+				this.version = this.judgeVersion();
 
-				if(version > VERSION_FIRST) {
+				if(this.version > VERSION_FIRST) {
 					cur++;
 					var idnum = 0;
 
@@ -410,8 +405,8 @@ namespace Dq10.SkillSimulator {
 				monster.updateRestartCount(getData());
 
 				//スキル
-				Object.keys(monster.skillPts).forEach((skillLineId) => {
-					monster.updateSkillPt(skillLineId, getData());
+				monster.skillLines.forEach((skillLine) => {
+					skillLine.skillPt = getData();
 				});
 
 				//転生追加スキル種類
@@ -433,7 +428,11 @@ namespace Dq10.SkillSimulator {
 				}
 
 				//バッジ
-				for(i = 0; i < BADGE_COUNT; i++) {
+				var badgeCount = BADGE_COUNT;
+				if(this.version < VERSION_LEGEND_BADGE)
+					badgeCount = 4;
+
+				for(i = 0; i < badgeCount; i++) {
 					var badgeIdStr: string;
 					var badgeId = getData();
 					if(badgeId === 0) {
@@ -493,8 +492,8 @@ namespace Dq10.SkillSimulator {
 				monster.updateRestartCount(bitArrayToNum(bitArray.splice(0, BITS_RESTART_COUNT)));
 
 				//スキル
-				Object.keys(monster.skillPts).forEach((skillLine) => {
-					monster.updateSkillPt(skillLine, bitArrayToNum(bitArray.splice(0, BITS_SKILL)));
+				monster.skillLines.forEach((skillLine) => {
+					skillLine.skillPt = bitArrayToNum(bitArray.splice(0, BITS_SKILL));
 				});
 
 				//転生追加スキル種類
@@ -553,6 +552,62 @@ namespace Dq10.SkillSimulator {
 					return bitArray;
 				}
 			}
+		}
+	}
+
+	export class MonsterSkillLine {
+		public skillLineId: string;
+		private _skillPt: number = 0;
+		private _requiredRestarts: number;
+		private _interfaceId: string;
+		private _isAdditional: boolean = false;
+
+		/**
+		 *
+		 */
+		constructor(id: string, requiredRestarts: number) {
+			this.skillLineId = id;
+			this._requiredRestarts = requiredRestarts;
+			if(requiredRestarts == 0) {
+				this._interfaceId = id;
+			} else {
+				this._interfaceId = 'additional' + (requiredRestarts - 1).toString();
+				this._isAdditional = true;
+			}
+		}
+
+		get name(): string {
+			if(this.skillLineId === '')
+				return '';
+			return MonsterDB.skillLines[this.skillLineId].name;
+		}
+
+		get enhancedName(): string {
+			if(this.isAdditional || this.skillLineId === '')
+				return '';
+			return MonsterDB.skillLines[this.skillLineId].enhancedName || '';
+		}
+
+		get requiredRestarts(): number {
+			return this._requiredRestarts;
+		}
+
+		get skillPt(): number {
+			return this._skillPt;
+		}
+		set skillPt(val: number) {
+			var max = (this.enhancedName == '' ? MonsterDB.consts.skillPts.max : MonsterDB.consts.skillPts.enhanced);
+			if(val < MonsterDB.consts.skillPts.min || val > max)
+				return;
+			this._skillPt = val;
+		}
+
+		get interfaceId(): string {
+			return this._interfaceId;
+		}
+
+		get isAdditional(): boolean {
+			return this._isAdditional;
 		}
 	}
 }

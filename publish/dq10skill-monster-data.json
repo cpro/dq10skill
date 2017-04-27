@@ -80,6 +80,7 @@
 
 		"firebreath": {
 			"name": "火炎ブレスの心得",
+			"enhancedName": "火炎ブレスの心得Ⅱ",
 			"skills": [
 				{"pt":   3, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
 				{"pt":   7, "name": "はげしいほのお", "desc": "もえさかる\n高熱の火炎で\n周りの敵に攻撃", "mp": 6},
@@ -87,7 +88,10 @@
 				{"pt":  18, "name": "ブレス系効果+10%", "desc": "ブレス系の特技の\n威力が少しあがる", "mp": null},
 				{"pt":  25, "name": "常時さいだいＭＰ+80", "desc": "常時\nさいだいＭＰが\n８０増える", "mp": null, "maxmp": 80},
 				{"pt":  32, "name": "しゃくねつのほのお", "desc": "全てをやきつくす\nしゃくねつの炎で\n周りの敵に攻撃", "mp": 12},
-				{"pt":  40, "name": "ブレス系効果+20%", "desc": "ブレス系の特技の\n威力があがる", "mp": null}
+				{"pt":  40, "name": "ブレス系効果+20%", "desc": "ブレス系の特技の\n威力があがる", "mp": null},
+				{"pt":  43, "name": "炎属性特技威力+20%", "desc": "", "mp": null},
+				{"pt":  48, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
+				{"pt":  50, "name": "ブレス系効果+50%", "desc": "ブレス系の特技の\n威力があがる", "mp": null}
 			]
 		},
 
@@ -210,6 +214,7 @@
 
 		"hoimingrapple": {
 			"name": "ホイミン流格闘術",
+			"enhancedName": "ホイミン流格闘術Ⅱ",
 			"skills": [
 				{"pt":   3, "name": "スピンアタック", "desc": "身体を回転させ\n周りの敵に攻撃", "mp": 1},
 				{"pt":   7, "name": "常時みかわし率+10%", "desc": "常時\n敵の攻撃を\nかわしやすくなる", "mp": null},
@@ -217,12 +222,16 @@
 				{"pt":  18, "name": "ばくれつけん", "desc": "敵１体に\nしっぷうどとうの\n４回攻撃", "mp": 4},
 				{"pt":  25, "name": "常時さいだいＨＰ+50", "desc": "常時\nさいだいＨＰが\n５０増える", "mp": null, "maxhp": 50},
 				{"pt":  32, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
-				{"pt":  40, "name": "ミラクルスピン", "desc": "周りの敵に攻撃し\n自らのキズも\nいやす　秘技", "mp": 6}
+				{"pt":  40, "name": "ミラクルスピン", "desc": "周りの敵に攻撃し\n自らのキズも\nいやす　秘技", "mp": 6},
+				{"pt":  43, "name": "ばくれつけん+10", "desc": "", "mp": null},
+				{"pt":  48, "name": "ふわふわボディ", "desc": "", "mp": null},
+				{"pt":  50, "name": "ミラクルスピン+10", "desc": "", "mp": null}
 			]
 		},
 
 		"hoiminheal": {
 			"name": "ホイミン流回復術",
+			"enhancedName": "ホイミン流回復術Ⅱ",
 			"skills": [
 				{"pt":   3, "name": "ホイミ", "desc": "仲間ひとりの\nＨＰを\n２５～回復する", "mp": 2},
 				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
@@ -230,7 +239,10 @@
 				{"pt":  18, "name": "ベホイム", "desc": "仲間ひとりの\nＨＰを\n１６４～回復する", "mp": 8},
 				{"pt":  25, "name": "常時かいふく魔力+100", "desc": "常時\nかいふく魔力が\n１００増える", "mp": null, "heal": 100},
 				{"pt":  32, "name": "ベホマラー", "desc": "範囲内にいる\n仲間のＨＰを\n８０～回復する", "mp": 16},
-				{"pt":  40, "name": "天使の守り", "desc": "死んでしまっても\n確実に生き返る", "mp": 10}
+				{"pt":  40, "name": "天使の守り", "desc": "死んでしまっても\n確実に生き返る", "mp": 10},
+				{"pt":  43, "name": "ホイミンリバイブ", "desc": "", "mp": null},
+				{"pt":  48, "name": "呪文範囲+2m", "desc": "", "mp": null},
+				{"pt":  50, "name": "ホイミ系効果+10%", "desc": "", "mp": null}
 			]
 		},
 
@@ -332,7 +344,7 @@
 				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
 				{"pt":  12, "name": "バードスラッシュ", "desc": "無数の羽根で\n周囲の敵に\n４回攻撃", "mp": 4},
 				{"pt":  18, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
-				{"pt":  25, "name": "魔導砲", "desc": "破壊力バツグンの\n特大ビーム攻撃", "mp": 15},
+				{"pt":  25, "name": "魔道砲", "desc": "破壊力バツグンの\n特大ビーム攻撃", "mp": 15},
 				{"pt":  32, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
 				{"pt":  40, "name": "クイックチャージ", "desc": "自家発電で\n自分のＭＰを\n２０～回復", "mp": 0}
 			]
@@ -392,6 +404,7 @@
 
 		"dirtyharry": {
 			"name": "ダーティーハリー",
+			"enhancedName": "ダーティーハリーⅡ",
 			"skills": [
 				{"pt":   3, "name": "ためる", "desc": "チカラをためて\nテンションアップ", "mp": 0},
 				{"pt":   7, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
@@ -399,12 +412,16 @@
 				{"pt":  18, "name": "常時すばやさ+60", "desc": "常時\nすばやさが\n６０増える", "mp": null, "spd": 60},
 				{"pt":  25, "name": "ニードルレイン", "desc": "あたまの針で\n周囲の敵を攻撃\nたまにマヒさせる", "mp": 8},
 				{"pt":  32, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
-				{"pt":  40, "name": "アサシンアタック", "desc": "敵１体を攻撃し\nまれに即死させる", "mp": 6}
+				{"pt":  40, "name": "アサシンアタック", "desc": "敵１体を攻撃し\nまれに即死させる", "mp": 6},
+				{"pt":  43, "name": "ニードルレイン+100", "desc": "", "mp": null},
+				{"pt":  48, "name": "クッションボディ", "desc": "", "mp": null},
+				{"pt":  50, "name": "アサシンアタック+50", "desc": "", "mp": null}
 			]
 		},
 
 		"cutyharry": {
 			"name": "キューティーハリー",
+			"enhancedName": "キューティーハリーⅡ",
 			"skills": [
 				{"pt":   3, "name": "ピオリム", "desc": "周囲の仲間の\n行動間隔を\n少し短くする", "mp": 4},
 				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
@@ -412,7 +429,10 @@
 				{"pt":  18, "name": "アップリケ", "desc": "補強布をぬいつけ\nＨＰ回復と同時に\n守備力も上げる", "mp": 4},
 				{"pt":  25, "name": "常時みかわし率+5%", "desc": "常時\n敵の攻撃を\nかわしやすくなる", "mp": null},
 				{"pt":  32, "name": "常時さいだいＭＰ+80", "desc": "常時\nさいだいＭＰが\n８０増える", "mp": null, "maxmp": 80},
-				{"pt":  40, "name": "みがわりドール", "desc": "みがわりの人形で\n次の攻撃をガード", "mp": 5}
+				{"pt":  40, "name": "みがわりドール", "desc": "みがわりの人形で\n次の攻撃をガード", "mp": 5},
+				{"pt":  43, "name": "アップリケ+50", "desc": "", "mp": null},
+				{"pt":  48, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n３０増える", "mp": null, "maxhp": 30},
+				{"pt":  50, "name": "状態異常成功率アップ", "desc": "状態異常成功率が\nあがる", "mp": null}
 			]
 		},
 
@@ -444,6 +464,7 @@
 
 		"entanohanamichi": {
 			"name": "エンタの花道",
+			"enhancedName": "エンタの花道Ⅱ",
 			"skills": [
 				{"pt":   3, "name": "ツッコミ", "desc": "ツッコんで\n仲間ひとりを\nわれに返す", "mp": 4},
 				{"pt":   7, "name": "常時すばやさ+40", "desc": "常時\nすばやさが\n４０増える", "mp": null, "spd": 40},
@@ -451,12 +472,16 @@
 				{"pt":  18, "name": "火ふき芸", "desc": "敵１体に\n３連続で火球を\nふきまくる", "mp": 10},
 				{"pt":  25, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
 				{"pt":  32, "name": "常時みのまもり+80", "desc": "常時\nみのまもりが\n８０増える", "mp": null, "def": 80},
-				{"pt":  40, "name": "いてつく一発芸", "desc": "敵にかかっている\nよい効果を消す芸\nこおりつくことも", "mp": 8}
+				{"pt":  40, "name": "いてつく一発芸", "desc": "敵にかかっている\nよい効果を消す芸\nこおりつくことも", "mp": 8},
+				{"pt":  43, "name": "火ふき芸+30", "desc": "", "mp": null},
+				{"pt":  48, "name": "芸人魂", "desc": "", "mp": null},
+				{"pt":  50, "name": "呪文と特技の回復強化", "desc": "", "mp": null}
 			]
 		},
 
 		"entasistep": {
 			"name": "エンタシステップ",
+			"enhancedName": "エンタシステップⅡ",
 			"skills": [
 				{"pt":   3, "name": "マホトラ踊り", "desc": "ふしぎな踊りで\n相手からＭＰを\n奪って回復する", "mp": 0},
 				{"pt":   7, "name": "常時みのまもり+30", "desc": "常時\nみのまもりが\n３０増える", "mp": null, "def": 30},
@@ -464,7 +489,10 @@
 				{"pt":  18, "name": "常時みかわし率+5%", "desc": "常時\n敵の攻撃を\nかわしやすくなる", "mp": null},
 				{"pt":  25, "name": "スピニングピラー", "desc": "からだを回転させ\n周りの敵を攻撃し\nすっころばす", "mp": 6},
 				{"pt":  32, "name": "常時さいだいＨＰ+50", "desc": "常時\nさいだいＨＰが\n５０増える", "mp": null, "maxhp": 50},
-				{"pt":  40, "name": "ハッスルダンス", "desc": "周囲の仲間の\nＨＰを７０～回復", "mp": 8}
+				{"pt":  40, "name": "ハッスルダンス", "desc": "周囲の仲間の\nＨＰを７０～回復", "mp": 8},
+				{"pt":  43, "name": "スピニングピラー+50", "desc": "", "mp": null},
+				{"pt":  48, "name": "常時みかわし率+5%", "desc": "常時\n敵の攻撃を\nかわしやすくなる", "mp": null},
+				{"pt":  50, "name": "ハッスルダンス+20", "desc": "", "mp": null}
 			]
 		},
 
@@ -652,6 +680,7 @@
 
 		"dragonguts": {
 			"name": "ドラゴンガッツ",
+			"enhancedName": "ドラゴンガッツⅡ",
 			"skills": [
 				{"pt":   3, "name": "ちょとつもうしん", "desc": "やみくもに突撃し\n敵1体に攻撃する", "mp": 1},
 				{"pt":   7, "name": "常時みのまもり+30", "desc": "常時\nみのまもりが\n３０増える", "mp": null, "def": 30},
@@ -659,7 +688,10 @@
 				{"pt":  18, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
 				{"pt":  25, "name": "おいかぜ", "desc": "1回だけ\nブレス系の攻撃を\nはねかえす", "mp": 6},
 				{"pt":  32, "name": "常時さいだいＨＰ+50", "desc": "常時\nさいだいＨＰが\n５０増える", "mp": null, "maxhp": 50},
-				{"pt":  40, "name": "コドラゴラム", "desc": "憧れの巨大な竜に\n変身して攻撃力と\n重さが大幅アップ", "mp": 7}
+				{"pt":  40, "name": "コドラゴラム", "desc": "憧れの巨大な竜に\n変身して攻撃力と\n重さが大幅アップ", "mp": 7},
+				{"pt":  43, "name": "常時かいしん率+3%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  48, "name": "竜のウロコ", "desc": "", "mp": null},
+				{"pt":  50, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n３０増える", "mp": null, "maxhp": 30}
 			]
 		},
 
@@ -717,6 +749,7 @@
 
 		"mahodrakee": {
 			"name": "マホドラキー",
+			"enhancedName": "マホドラキーⅡ",
 			"skills": [
 				{"pt":   3, "name": "マホトラ", "desc": "敵１体から\nＭＰを吸いとる", "mp": null},
 				{"pt":   7, "name": "常時みかわし率+5%", "desc": "常時\n敵の攻撃を\nかわしやすくなる", "mp": null},
@@ -724,12 +757,16 @@
 				{"pt":  18, "name": "常時こうげき魔力+60", "desc": "常時\nこうげき魔力が\n６０増える", "mp": null, "magic": 60},
 				{"pt":  25, "name": "りゅうせいよび", "desc": "周囲を巻き込む\nりゅうせいが\n敵に降りそそぐ", "mp": 10},
 				{"pt":  32, "name": "常時さいだいＭＰ+80", "desc": "常時\nさいだいＭＰが\n８０増える", "mp": null, "maxmp": 80},
-				{"pt":  40, "name": "まりょくのうた", "desc": "周囲の仲間の\n呪文のダメージを\n大幅に上げる", "mp": 12}
+				{"pt":  40, "name": "まりょくのうた", "desc": "周囲の仲間の\n呪文のダメージを\n大幅に上げる", "mp": 12},
+				{"pt":  43, "name": "攻撃呪文耐性+5%", "desc": "", "mp": null},
+				{"pt":  48, "name": "ぱたぱたバット", "desc": "", "mp": null},
+				{"pt":  50, "name": "りゅうせいよび+50", "desc": "", "mp": null}
 			]
 		},
 
 		"meifunojahou": {
 			"name": "冥府の邪法",
+			"enhancedName": "冥府の邪法Ⅱ",
 			"skills": [
 				{"pt":   3, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
 				{"pt":   7, "name": "カウンター", "desc": "反撃のスキを狙い\n攻撃を避けて\nたまに反撃をする", "mp": null},
@@ -737,12 +774,16 @@
 				{"pt":  18, "name": "ライフスティール", "desc": "攻撃を行った時\nＨＰを少しだけ\n回復する", "mp": null},
 				{"pt":  25, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
 				{"pt":  32, "name": "ソウルイーター", "desc": "攻撃を行った時\nＨＰをさらに\n回復する", "mp": null},
-				{"pt":  40, "name": "冥府のひかり", "desc": "敵に不浄の効果が\n多くついていると\n威力が上がる攻撃", "mp": 16}
+				{"pt":  40, "name": "冥府のひかり", "desc": "敵に不浄の効果が\n多くついていると\n威力が上がる攻撃", "mp": 16},
+				{"pt":  43, "name": "カウンターブースト", "desc": "", "mp": null},
+				{"pt":  48, "name": "浮遊術", "desc": "", "mp": null},
+				{"pt":  50, "name": "冥府のひかり+50", "desc": "", "mp": null}
 			]
 		},
 
 		"moujanojubaku": {
 			"name": "亡者の呪縛",
+			"enhancedName": "亡者の呪縛Ⅱ",
 			"skills": [
 				{"pt":   3, "name": "あやしいひかり", "desc": "あやしいひかりで\n敵１体を\n眠りにさそう", "mp": 5},
 				{"pt":   7, "name": "常時さいだいＭＰ+30", "desc": "常時\nさいだいＭＰが\n３０増える", "mp": null, "maxmp": 30},
@@ -750,7 +791,10 @@
 				{"pt":  18, "name": "呪縛", "desc": "はいよる柵が\n周囲の敵を攻撃し\n同時にマヒさせる", "mp": 3},
 				{"pt":  25, "name": "常時ちから+25", "desc": "常時\nちからが\n２５増える", "mp": null, "pow": 25},
 				{"pt":  32, "name": "常時さいだいＨＰ+50", "desc": "常時\nさいだいＨＰが\n５０増える", "mp": null, "maxhp": 50},
-				{"pt":  40, "name": "嘆きの霧", "desc": "あらゆる負の力で\n周囲の敵を攻撃し\n同時に弱らせる", "mp": 10}
+				{"pt":  40, "name": "嘆きの霧", "desc": "あらゆる負の力で\n周囲の敵を攻撃し\n同時に弱らせる", "mp": 10},
+				{"pt":  43, "name": "特技範囲+2m", "desc": "", "mp": null},
+				{"pt":  48, "name": "暗夜の灯", "desc": "", "mp": null},
+				{"pt":  50, "name": "嘆きの霧+50", "desc": "", "mp": null}
 			]
 		},
 
@@ -1081,6 +1125,7 @@
 
 		"doruma": {
 			"name": "ドルマの心得",
+			"enhancedName": "ドルマの心得Ⅱ",
 			"skills": [
 				{"pt":   3, "name": "ドルマ", "desc": "闇のチカラで\n敵１体を攻撃", "mp": 4},
 				{"pt":   7, "name": "常時こうげき魔力+40", "desc": "常時\nこうげき魔力が\n４０増える", "mp": null, "magic": 40},
@@ -1088,7 +1133,10 @@
 				{"pt":  18, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
 				{"pt":  25, "name": "常時こうげき魔力+100", "desc": "常時\nこうげき魔力が\n１００増える", "mp": null, "magic": 100},
 				{"pt":  32, "name": "ドルモーア", "desc": "破滅的な\n闇のチカラが\n敵１体をおそう", "mp": 14},
-				{"pt":  40, "name": "ドルマ系効果+20%", "desc": "ドルマ系の呪文の\n威力があがる", "mp": null}
+				{"pt":  40, "name": "ドルマ系効果+20%", "desc": "ドルマ系の呪文の\n威力があがる", "mp": null},
+				{"pt":  43, "name": "常時呪文暴走率+1%", "desc": "", "mp": null},
+				{"pt":  48, "name": "闇耐性+5%", "desc": "", "mp": null},
+				{"pt":  50, "name": "ドルマ系効果+5%", "desc": "ドルマ系の呪文の\n威力があがる", "mp": null}
 			]
 		},
 
@@ -1348,7 +1396,7 @@
 				{"pt":  18, "name": "常時みのまもり+45", "desc": "常時\nみのまもりが\n４５増える", "mp": null, "def": 45},
 				{"pt":  25, "name": "常時ちから+15", "desc": "常時\nちからが\n１５増える", "mp": null, "pow": 15},
 				{"pt":  32, "name": "常時みかわし率+5%", "desc": "敵の攻撃を\nかわしやすくなる", "mp": null},
-				{"pt":  40, "name": "魔導集束砲", "desc": "魔力を集めて放つ\n強力な\n特大ビーム攻撃", "mp": 18, "charge": 60}
+				{"pt":  40, "name": "魔道集束砲", "desc": "魔力を集めて放つ\n強力な\n特大ビーム攻撃", "mp": 18, "charge": 60}
 			]
 		},
 
@@ -2180,17 +2228,25 @@
 	"consts": {
 		"skillPts": {
 			"min": 0,
-			"max": 40
+			"max": 40,
+			"enhanced": 50
 		},
 		"level": {
 			"min": 1,
 			"max": 50
 		},
 		"restart": {
-			"min": 0,
-			"max": 9,
-			"skillPts": [0, 10, 20, 30, 40, 50, 55, 60, 65, 70],
+			"min":  0,
+			"max": 10,
+			"skillPts": [0, 10, 20, 30, 40, 50, 55, 60, 65, 70, 75],
 			"expRatio": 0.03
+		},
+		"skillenhance": {
+			"restart": 10,
+			"released": [
+				"hoimislime", "dragonkids", "drakee",
+				"needleman", "entasisman", "yamishibari"
+			]
 		}
 	},
 
@@ -2512,7 +2568,107 @@
 		"309": {"name": "フォステイル", "sort": "ふおすている", "rarity": "luminous", "race": "special", "magic": 120, "reduce": {"光": 20}, "special": "英雄王の領域", "skill": ["マホトラのころも"]},
 		"310": {"name": "ダストン", "sort": "たすとん", "rarity": "luminous", "race": "special", "maxhp": 100, "debuff": {"魔導の書": 20}, "special": "ガラクタボックス", "skill": ["スキャンダル"]},
 		"311": {"name": "クロウズ", "sort": "くろうす", "rarity": "luminous", "race": "special", "magic": 120, "reduce": {"闇": 20}, "startup": {"しんぴのさとり": 100}, "special": "幻惑のひとみ"},
-		"312": {"name": "ズーボー", "sort": "すうほお", "rarity": "luminous", "race": "special", "def": 120, "startup": {"キラキラポーン": 50, "盾ガード率上昇": 60}, "special": "鉄壁の守り"}
+		"312": {"name": "ズーボー", "sort": "すうほお", "rarity": "luminous", "race": "special", "def": 120, "startup": {"キラキラポーン": 50, "盾ガード率上昇": 60}, "special": "鉄壁の守り"},
+		"313": {"name": "魔導鬼ベドラー", "sort": "まとうきへとらあ", "rarity": "rainbow", "race": "legend", "atk": 25, "maxmp": 30, "spd": 50, "dex": 40, "enhance": ["パペットシャワー", "スピンブレイク", "ショータイム"]},
+		"314": {"name": "狂鬼ジーガンフ", "sort": "きようきしいかんふ", "rarity": "rainbow", "race": "legend", "atk": 30, "def": 70, "weight": 50, "enhance": ["メガトンパンチ", "ファイナルブロー", "ためる"]},
+		"315": {"name": "やみわらし", "sort": "やみわらし", "rarity": "rainbow", "race": "legend", "maxhp": 30, "maxmp": 40, "spd": 60, "dex": 20, "resist": {"毒": 100, "しばり": 100}},
+		"316": {"name": "若葉の精霊", "sort": "わかはのせいれい", "rarity": "rainbow", "race": "legend", "def": 40, "magic": 55, "heal": 55, "enhance": ["マホトラハット", "ハットイルージョン"]},
+		"317": {"name": "大怨霊マアモン", "sort": "たいおんりようまあもん", "rarity": "rainbow", "race": "legend", "maxmp": 40, "magic": 40, "heal": 60, "shield": 5, "enhance": ["フワフワダンス", "ポワポワダンス"]},
+		"318": {"name": "黒き花婿", "sort": "くろきはなむこ", "rarity": "rainbow", "race": "legend", "def": 65, "maxmp": 45, "magic": 50, "enhance": ["冥府のひかり", "怨念の霧"]},
+		"319": {"name": "妖魔ジュリアンテ", "sort": "ようましゆりあんて", "rarity": "rainbow", "race": "legend", "maxhp": 30, "maxmp": 60, "magic": 60, "resist": {"魅了": 90}, "startup": {"ラリホー": 50}},
+		"320": {"name": "呪術師マリーン", "sort": "しゆしゆつしまりいん", "rarity": "rainbow", "race": "legend", "def": 35, "maxhp": 40, "weight": 75, "startup": {"ヘヴィーチャージ": 90, "移動速度アップ": 100}},
+		"321": {"name": "魔軍師イッド", "sort": "まくんしいつと", "rarity": "rainbow", "race": "legend", "maxmp": 60, "magic": 45, "heal": 45, "enhance": ["チーズキャノン", "もぐもぐタイム", "復活の杖"]},
+		"322": {"name": "怪蟲アラグネ", "sort": "かいちゆうあらくね", "rarity": "rainbow", "race": "legend", "atk": 30, "spd": 60, "dex": 50, "shield": 3, "enhance": ["かげぬい", "ニードルレイン", "アサシンアタック"]},
+		"323": {"name": "天魔クァバルナ", "sort": "てんまくあはるな", "rarity": "rainbow", "race": "legend", "def": 40, "spd": 50, "heal": 55, "shield": 3, "enhance": ["スピンアタック", "ばくれつけん", "ミラクルスピン"]},
+		"324": {"name": "暴君バサグランデ", "sort": "ほうくんはさくらんて", "rarity": "rainbow", "race": "legend", "def": 60, "spd": 30, "magic": 50, "enhance": ["毛づくろい", "にくきゅうパンチ", "ニャルプンテ"], "overload": 4},
+		"325": {"name": "妖剣士オーレン", "sort": "ようけんしおおれん", "rarity": "rainbow", "race": "legend", "atk": 35, "spd": 45, "dex": 60, "enhance": ["しんくう斬り", "いなずま斬り", "らいめい斬り"], "shield": 4},
+		"326": {"name": "水竜ギルギッシュ", "sort": "すいりゆうきるきつしゆ", "rarity": "rainbow", "race": "legend", "maxhp": 25, "maxmp": 20, "spd": 50, "heal": 55, "killed": {"聖なる祈り": 50}},
+		"327": {"name": "悪魔ザイガス", "sort": "あくまさいかす", "rarity": "rainbow", "race": "legend", "atk": 30, "maxmp": 55, "magic": 55, "enhance": ["おとなのじゅもん", "ベビーマダンテ"], "parry": 5},
+		"328": {"name": "悪魔長ジウギス", "sort": "あくまちようしうきす", "rarity": "rainbow", "race": "legend", "atk": 35, "def": 55, "spd": 60, "enhance": ["スタンアロー", "ブラストビーム", "マイクロブラスター"]},
+		"329": {"name": "覚醒プスゴン", "sort": "かくせいふすこん", "rarity": "rainbow", "race": "legend", "atk": 40, "dex": 50, "charm": 60, "enhance": ["たんすマグナム", "チェストー", "へそくりパワー"]},
+		"330": {"name": "ウルベア魔神兵", "sort": "うるへあましんへい", "rarity": "rainbow", "race": "legend", "def": 30, "maxhp": 50, "heal": 40, "weight": 30, "enhance": ["おうえん", "さみだれ突き", "破竹の一撃"]},
+		"331": {"name": "キャットリベリオ", "sort": "きやつとりへりお", "rarity": "rainbow", "race": "legend", "atk": 40, "def": 60, "magic": 40, "enhance": ["ぽかぽかニャー", "タマげたニャー"], "critical": 3},
+		"332": {"name": "キャットマンマー", "sort": "きやつとまんまあ", "rarity": "rainbow", "race": "legend", "maxhp": 30, "spd": 70, "dex": 40, "enhance": ["ライガークラッシュ"], "critical": 3, "evd": 3},
+		"333": {"name": "守護者ラズバーン", "sort": "しゆこしやらすはあん", "rarity": "rainbow", "race": "legend", "def": 65, "maxhp": 35, "weight": 50, "resist": {"呪い": 100}, "killed": {"スカラ": 50}},
+		"334": {"name": "冥王ネルゲル", "sort": "めいおうねるける", "rarity": "rainbow", "race": "legend", "atk": 45, "maxhp": 30, "spd": 30, "magic": 45, "killed": {"テンションアップ": 50}},
+		"335": {"name": "冥獣王ネルゲル", "sort": "めいしゆうおうねるける", "rarity": "rainbow", "race": "legend", "atk": 30, "def": 30, "maxhp": 50, "magic": 40, "deathkeepon": {"テンション": 75}},
+		"336": {"name": "悪夢の右手", "sort": "あくむのみきて", "rarity": "rainbow", "race": "legend", "def": 60, "maxmp": 45, "magic": 45, "enhance": ["呪縛", "嘆きの霧", "あやしいひかり"]},
+		"337": {"name": "魔人エンラージャ", "sort": "ましんえんらあしや", "rarity": "rainbow", "race": "legend", "def": 40, "magic": 55, "heal": 55, "enhance": ["火ふき芸", "いてつく一発芸"]},
+		"338": {"name": "破戒王ベルムド", "sort": "はかいおうへるむと", "rarity": "rainbow", "race": "legend", "atk": 30, "spd": 60, "dex": 50, "shield": 3, "enhance": ["かげしばり", "ダークレイン"]},
+		"339": {"name": "絶望の巨像", "sort": "せつほうのきよそう", "rarity": "rainbow", "race": "legend", "def": 55, "maxmp": 35, "weight": 50, "shield": 5, "enhance": ["スーパーアーマー", "シールドカウンター", "真・やいばくだき"]},
+		"340": {"name": "魔勇者", "sort": "まゆうしや", "rarity": "rainbow", "race": "legend", "def": 50, "maxhp": 40, "maxmp": 30, "heal": 30, "skill": ["活性の邪法"]},
+		"341": {"name": "いたずら姉妹", "sort": "いたすらしまい", "rarity": "rainbow", "race": "legend", "atk": 35, "magic": 50, "charm": 65, "enhance": ["たいあたり", "ビックリたんす", "へそくりシャワー"]},
+		"342": {"name": "ハートボイルド", "sort": "はあとほいると", "rarity": "rainbow", "race": "legend", "maxhp": 40, "maxmp": 35, "spd": 35, "heal": 40, "enhance": ["フローズンバード", "デュアルブレイカー"]},
+		"343": {"name": "スイーツトロル", "sort": "すいいつとろる", "rarity": "rainbow", "race": "legend", "maxmp": 40, "magic": 45, "heal": 55, "shield": 5, "enhance": ["ラブリーフェイス", "ホラーフェイス"]},
+		"344": {"name": "ヘルバトラー", "sort": "へるはとらあ", "rarity": "rainbow", "race": "legend", "atk": 35, "def": 55, "spd": 60, "enhance": ["真マヒャド斬り", "ボミオスラッシュ", "ぼうぎょバリア"]},
+		"345": {"name": "魔元帥ゼルドラド", "sort": "まけんすいせるとらと", "rarity": "rainbow", "race": "legend", "atk": 40, "def": 65, "weight": 45, "enhance": ["ビッグシールド", "真・かぶと割り"], "guard": {"マヒ": 15}},
+		"346": {"name": "アトラス", "sort": "あとらす", "rarity": "rainbow", "race": "legend", "atk": 30, "maxhp": 40, "maxmp": 20, "weight": 50, "resist": {"転び": 100}, "critical": 4},
+		"347": {"name": "バズズ", "sort": "はすす", "rarity": "rainbow", "race": "legend", "maxhp": 35, "spd": 60, "magic": 45, "resist": {"即死": 100}, "evd": 5},
+		"348": {"name": "ベリアル", "sort": "へりある", "rarity": "rainbow", "race": "legend", "def": 55, "maxhp": 35, "heal": 50, "resist": {"マヒ": 100}, "parry": 5},
+		"349": {"name": "ドラゴンガイア", "sort": "とらこんかいあ", "rarity": "rainbow", "race": "legend", "atk": 40, "def": 70, "maxmp": 40, "enhance": ["テールアタック", "竜のおたけび", "はやぶさ斬り"]},
+		"350": {"name": "バラモス", "sort": "はらもす", "rarity": "rainbow", "race": "legend", "maxhp": 35, "maxmp": 50, "magic": 65, "resist": {"封印": 100}, "startup": {"ぶきみなひかり": 25}},
+		"351": {"name": "キングヒドラ", "sort": "きんくひとら", "rarity": "rainbow", "race": "legend", "maxhp": 40, "dex": 50, "weight": 50, "resist": {"踊らされ": 100}, "reduce": {"ブレス": 10}},
+		"352": {"name": "グラコス", "sort": "くらこす", "rarity": "rainbow", "race": "legend", "def": 40, "magic": 55, "heal": 55, "enhance": ["スピニングピラー", "ハッスルダンス"]},
+		"353": {"name": "バラモスブロス", "sort": "はらもすふろす", "rarity": "rainbow", "race": "legend", "atk": 40, "spd": 60, "heal": 50, "enhance": ["魔力ダンス", "回復ダンス"]},
+		"354": {"name": "バラモスゾンビ", "sort": "はらもすそんひ", "rarity": "rainbow", "race": "legend", "atk": 45, "maxhp": 35, "dex": 70, "resist": {"幻惑": 100}, "misc": ["会心完全ガード +10%"]},
+		"355": {"name": "キラーマジンガ", "sort": "きらあましんか", "rarity": "rainbow", "race": "legend", "def": 60, "maxhp": 30, "heal": 60, "enhance": ["オーバーヒート", "雷光さみだれ突き"]},
+		"356": {"name": "デュラン", "sort": "てゆらん", "rarity": "rainbow", "race": "legend", "def": 50, "maxhp": 35, "maxmp": 30, "spd": 35, "reduce": {"雷": 20, "風": 20}, "startup": {"会心率上昇": 100}},
+		"357": {"name": "ドン・モグーラ", "sort": "とんもくうら", "rarity": "rainbow", "race": "legend", "maxmp": 45, "spd": 45, "dex": 50, "enhance": ["もぐらタタキ", "いたずラッシュ"], "parry": 3},
+		"358": {"name": "暗黒の魔人", "sort": "あんこくのましん", "rarity": "rainbow", "race": "legend", "atk": 30, "def": 70, "weight": 50, "enhance": ["スタンブロー", "フィニッシュブロー"], "startup": {"ヘヴィーチャージ": 50}},
+		"359": {"name": "Ｓキラーマシン", "sort": "えすきらあましん", "rarity": "rainbow", "race": "legend", "atk": 25, "def": 40, "spd": 50, "magic": 35, "enhance": ["クイックリペア", "魔道集束砲"]},
+		"360": {"name": "スライムジェネラル", "sort": "すらいむしえねらる", "rarity": "rainbow", "race": "legend", "atk": 35, "maxmp": 55, "heal": 60, "enhance": ["スラ・ストライク", "スラ・フラッシュ", "ミラクルストライク", "キングスタンプ"]},
+		"361": {"name": "牙王ゴースネル", "sort": "かおうこおすねる", "rarity": "rainbow", "race": "legend", "atk": 40, "maxhp": 25, "dex": 45, "magic": 40, "misc": ["会心＆暴走時 追加ダメージ +100"]},
+		"362": {"name": "輪王ザルトラ", "sort": "りんおうさるとら", "rarity": "rainbow", "race": "legend", "maxhp": 30, "maxmp": 50, "spd": 60, "mpdrain": 10, "resist": {"おびえ": 100, "ＭＰ吸収": 100}},
+		"363": {"name": "剣王ガルドリオン", "sort": "けんおうかるとりおん", "rarity": "rainbow", "race": "legend", "atk": 40, "spd": 50, "dex": 45, "shield": 5, "enhance": ["裂空斬", "真・らいめい斬り"], "critical": 3},
+		"364": {"name": "震王ジュノーガ", "sort": "しんおうしゆのおか", "rarity": "rainbow", "race": "legend", "atk": 35, "def": 65, "weight": 50, "enhance": ["マホトラ斬り", "かぶと割り", "ロストスラッシュ", "マジックブレイク"]},
+		"365": {"name": "黒竜丸", "sort": "こくりゆうまる", "rarity": "rainbow", "race": "legend", "def": 60, "maxmp": 40, "magic": 40, "shield": 3, "enhance": ["スラ・スラッシュ", "スラ・ブレイク", "スラ・スパーク"]},
+		"366": {"name": "バトルシェイカー", "sort": "はとるしえいかー", "rarity": "rainbow", "race": "legend", "atk": 25, "def": 40, "spd": 50, "magic": 35, "enhance": ["バードカッター", "バードスラッシュ", "魔道砲"]},
+		"367": {"name": "ハヌマーン", "sort": "はぬまあん", "rarity": "rainbow", "race": "legend", "maxmp": 30, "magic": 55, "heal": 55, "enhance": ["りゅうせいよび"], "evd": 3, "quick": 5},
+		"368": {"name": "バリクナジャ", "sort": "はりくなしや", "rarity": "rainbow", "race": "legend", "def": 40, "maxmp": 35, "dex": 40, "weight": 35, "enhance": ["ためる", "超ちからため"], "misc": ["たまにテンションを消費しない"]},
+		"369": {"name": "キングレオ", "sort": "きんくれお", "rarity": "rainbow", "race": "legend", "atk": 40, "maxhp": 35, "dex": 75, "enhance": ["宝石ジャグリング", "鉄球ジャグリング"]},
+		"370": {"name": "ジャミラス", "sort": "しやみらす", "rarity": "rainbow", "race": "legend", "maxmp": 35, "spd": 60, "heal": 45, "enhance": ["フェザーストーム"], "quick": 10},
+		"371": {"name": "トロルバッコス", "sort": "とろるはつこす", "rarity": "rainbow", "race": "legend", "atk": 35, "def": 60, "weight": 55, "enhance": ["回転たたき", "パワースタンプ", "ウルトラスタンプ"]},
+		"372": {"name": "ギーグハンマー", "sort": "きいくはんまあ", "rarity": "rainbow", "race": "legend", "atk": 35, "def": 60, "weight": 55, "enhance": ["ウルトラパワー", "グレートスタンプ", "プレートインパクト"]},
+		"373": {"name": "れんごく天馬", "sort": "れんこくてんま", "rarity": "rainbow", "race": "legend", "def": 60, "maxmp": 40, "magic": 40, "shield": 3, "enhance": ["スラ・シャイニング", "スラ・ギガブレイク"]},
+		"374": {"name": "デーモンキング", "sort": "てえもんきんく", "rarity": "rainbow", "race": "legend", "maxhp": 30, "spd": 65, "magic": 55, "resist": {"混乱": 100}, "startup": {"ルカニ": 50}},
+		"375": {"name": "ドラゴン・ウー", "sort": "とらこんうう", "rarity": "rainbow", "race": "legend", "atk": 45, "def": 55, "maxmp": 50, "enhance": ["鉄甲斬", "真・オノむそう"], "misc": ["攻撃時 25%でためる"]},
+		"376": {"name": "あくまのきし", "sort": "あくまのきし", "rarity": "rainbow", "race": "legend", "def": 55, "maxmp": 35, "weight": 50, "shield": 5, "enhance": ["マジックソード", "いかずち", "やいばくだき", "キングダムソード"]},
+		"377": {"name": "リーネ", "sort": "りいね", "rarity": "rainbow", "race": "legend", "maxhp": 30, "maxmp": 25, "dex": 70, "charm": 25, "spcharge": 1, "startup": {"必殺チャージ": 20}},
+		"378": {"name": "カンダタ", "sort": "かんたた", "rarity": "rainbow", "race": "legend", "maxhp": 60, "dex": 15, "weight": 75, "resist": {"ふっとび": 100}, "misc": ["攻撃ダメージの 5%回復"]},
+		"379": {"name": "やまたのおろち", "sort": "やまたのおろち", "rarity": "rainbow", "race": "legend", "def": 55, "maxhp": 45, "weight": 50, "reduce": {"ブレス": 20}, "misc": ["ブレス系効果 +100%"]},
+		"380": {"name": "ダークネビュラス", "sort": "たあくねひゆらす", "rarity": "rainbow", "race": "legend", "atk": 45, "def": 70, "maxhp": 35, "misc": ["受けるダメージを 25 軽減する"]},
+		"381": {"name": "キラークリムゾン", "sort": "きらあくりむそん", "rarity": "rainbow", "race": "legend", "atk": 55, "spd": 60, "dex": 35, "deathkeepon": {"攻撃力アップ": 90}, "misc": ["攻撃力アップの効果時間 +15秒"]},
+		"382": {"name": "災厄の王", "sort": "さいやくのおう", "rarity": "rainbow", "race": "legend", "atk": 40, "maxhp": 35, "dex": 25, "magic": 50, "reduce": {"闇": 20, "氷": 20}, "misc": ["受けたダメージの 20%ＨＰを回復"]},
+		"383": {"name": "真・災厄の王", "sort": "しんさいやくのおう", "rarity": "rainbow", "race": "legend", "maxhp": 40, "maxmp": 45, "spd": 25, "weight": 40, "skill": ["魔蝕"]},
+		"384": {"name": "ダークドレアム", "sort": "たあくとれあむ", "rarity": "rainbow", "race": "legend", "atk": 50, "maxhp": 40, "magic": 60, "misc": ["行動間隔0.5秒短縮"], "turnkeep": 10, "parry": 5},
+		"385": {"name": "銃士キュリトス", "sort": "しゆうしきゆりとす", "rarity": "rainbow", "race": "legend", "def": 40, "magic": 55, "heal": 55, "enhance": ["マジカルブレイク", "マジカルヒール"]},
+		"386": {"name": "銃士ナスビス", "sort": "しゆうしなすひす", "rarity": "rainbow", "race": "legend", "atk": 40, "def": 50, "charm": 60, "enhance": ["ピンクタイフーン", "百花繚乱", "花ふぶき"], "attrallup": {"水": 15}},
+		"387": {"name": "銃士トマトス", "sort": "しゆうしとまとす", "rarity": "rainbow", "race": "legend", "maxhp": 30, "maxmp": 50, "dex": 70, "resist": {"眠り": 100}, "startup": {"ヘナトス": 50}},
+		"388": {"name": "グロスナー王", "sort": "くろすなあおう", "rarity": "rainbow", "race": "legend", "atk": 30, "def": 35, "maxhp": 50, "weight": 35, "skill": ["突撃命令", "マジックバリア"]},
+		"389": {"name": "ラグアス王子", "sort": "らくあすおうし", "rarity": "rainbow", "race": "legend", "atk": 25, "maxhp": 30, "spd": 60, "dex": 35, "startup": {"キラキラポーン": 90, "天使の守り": 60}},
+		"390": {"name": "アルウェ王妃", "sort": "あるうえおうひ", "rarity": "rainbow", "race": "legend", "maxhp": 30, "maxmp": 25, "heal": 40, "charm": 55, "misc": ["蘇生呪文の射程距離 +8m"], "evd": 5},
+		"391": {"name": "巫女ヒメア", "sort": "みこひめあ", "rarity": "rainbow", "race": "legend", "def": 25, "maxmp": 25, "magic": 50, "heal": 50, "deathkeepon": {"呪文威力アップ": 100, "回復量アップ": 100}},
+		"392": {"name": "ルナナ", "sort": "るなな", "rarity": "rainbow", "race": "legend", "atk": 30, "maxhp": 20, "magic": 50, "charm": 50, "attrallup": {"土": 15}, "reduce": {"土": 30}, "misc": ["状態異常成功率アップ +25%"]},
+		"393": {"name": "怪盗ポイックリン", "sort": "かいとうほいつくりん", "rarity": "rainbow", "race": "legend", "atk": 35, "maxhp": 30, "spd": 55, "magic": 30, "misc": ["行動時 25%でバイシオン", "行動時 25%で早詠みの杖"]},
+		"394": {"name": "セーリア", "sort": "せえりあ", "rarity": "rainbow", "race": "legend", "def": 30, "maxmp": 50, "heal": 70, "startup": {"聖女の守り": 90}, "killed": {"聖女の守り": 25}},
+		"395": {"name": "オーディス王子", "sort": "おおていすおうし", "rarity": "rainbow", "race": "legend", "def": 55, "maxhp": 35, "weight": 45, "shield": 5, "guard": {"ルカニ": 50, "ヘナトス": 50}, "parry": 5},
+		"396": {"name": "賢者ホーロー", "sort": "けんしやほおろお", "rarity": "rainbow", "race": "legend", "maxmp": 60, "magic": 45, "heal": 45, "skill": ["神速メラガイアー"]},
+		"397": {"name": "魔女グレイツェル", "sort": "ましよくれいつえる", "rarity": "rainbow", "race": "legend", "maxhp": 25, "maxmp": 25, "magic": 60, "charm": 40, "skill": ["魔力かくせい"], "killed": {"早詠みの杖": 25}},
+		"398": {"name": "ルコリア", "sort": "るこりあ", "rarity": "rainbow", "race": "legend", "def": 55, "maxhp": 35, "charm": 60, "misc": ["50%でテンションリンク"]},
+		"399": {"name": "フィーロ", "sort": "ふいいろ", "rarity": "rainbow", "race": "legend", "def": 25, "maxhp": 25, "maxmp": 25, "heal": 65, "shield": 3, "misc": ["致死ダメージ時 10%で生存"]},
+		"400": {"name": "ベルムド王", "sort": "へるむとおう", "rarity": "rainbow", "race": "legend", "atk": 40, "def": 50, "spd": 60, "killed": {"バイシオン": 90, "スカラ": 90}},
+		"401": {"name": "ムーニス王", "sort": "むうにすおう", "rarity": "rainbow", "race": "legend", "atk": 35, "maxmp": 55, "spd": 60, "misc": ["75%で被ダメージの5%ＭＰ回復"]},
+		"402": {"name": "賢者ルシェンダ", "sort": "けんしやるしえんた", "rarity": "rainbow", "race": "legend", "maxmp": 50, "magic": 50, "heal": 50, "skill": ["連続ドルマドン"]},
+		"403": {"name": "魔勇者アンルシア", "sort": "まゆうしやあんるしあ", "rarity": "rainbow", "race": "legend", "atk": 40, "maxhp": 35, "dex": 30, "magic": 45, "attrallup": {"闇": 15, "氷": 15}, "misc": ["攻撃時 10%でためる"]},
+		"404": {"name": "トーマ王子", "sort": "とおまおうし", "rarity": "rainbow", "race": "legend", "def": 60, "maxhp": 40, "magic": 40, "shield": 5, "reduce": {"光": 20, "炎": 20}, "skill": ["ザオラル"]},
+		"405": {"name": "スキルマスター", "sort": "すきるますたあ", "rarity": "rainbow", "race": "legend", "def": 40, "maxhp": 30, "magic": 40, "heal": 40, "reduce": {"攻撃呪文": 15}, "startup": {"早詠みの杖": 90}},
+		"406": {"name": "妖精ベラ", "sort": "ようせいへら", "rarity": "rainbow", "race": "legend", "atk": 30, "maxmp": 30, "spd": 50, "magic": 40, "misc": ["20%の確率で2回行動する"], "turnkeep": 5},
+		"407": {"name": "女王ポワン", "sort": "しよおうほあん", "rarity": "rainbow", "race": "legend", "maxhp": 35, "maxmp": 35, "heal": 80, "misc": ["呪文と特技の回復1.3倍", "回復呪文威力アップ +60秒"]},
+		"408": {"name": "ラウル", "sort": "らうる", "rarity": "rainbow", "race": "legend", "def": 60, "maxhp": 55, "maxmp": 35, "misc": ["会心完全ガード +50%"], "skill": ["バイキルト"]},
+		"409": {"name": "リィン", "sort": "りいん", "rarity": "rainbow", "race": "legend", "atk": 40, "maxhp": 35, "spd": 75, "attrallup": {"風": 25, "雷": 15}, "startup": {"チャージ短縮 -10秒": 100}},
+		"410": {"name": "ミシュア", "sort": "みしゆあ", "rarity": "rainbow", "race": "legend", "atk": 25, "def": 45, "maxmp": 30, "heal": 50, "misc": ["蘇生時のＨＰ回復量アップ"]},
+		"411": {"name": "アンルシア姫", "sort": "あんるしあひめ", "rarity": "rainbow", "race": "legend", "maxhp": 30, "spd": 60, "charm": 60, "resist": {"いてつくはどう": 100}, "misc": ["状態異常耐性アップ"]},
+		"412": {"name": "勇者姫アンルシア", "sort": "ゆうしやひめあんるしあ", "rarity": "rainbow", "race": "legend", "atk": 50, "maxhp": 50, "magic": 50, "attrallup": {"光": 15, "炎": 15}, "misc": ["瀕死時 100%で身かわし率+30%", "瀕死時 100%でリベホイム"]}
 	},
 	"specialbadges": [
 	],
@@ -2530,13 +2686,15 @@
 		"element": {"name": "エレメント",  "abbr": "エレ"},
 		"mystery": {"name": "怪人",  "abbr": "怪人"},
 		"water": {"name": "水", "abbr": "水"},
-		"special": {"name": "スペシャルバッジ", "abbr": "SP"}
+		"special": {"name": "スペシャルバッジ", "abbr": "SP"},
+		"legend": {"name": "レジェンドバッジ", "abbr": "伝説"}
 	},
 	"badgerarity": {
 		"bronze": "銅",
 		"silver": "銀",
 		"gold": "金",
-		"luminous": "光"
+		"luminous": "光",
+		"rainbow": "虹"
 	},
 	"badgefeature": {
 		"maxhp": {"name": "さいだいＨＰ", "abbr": "HP", "type": "int"},
@@ -2564,12 +2722,18 @@
 		"resist": {"name": "状態異常ガード", "abbr": "異常G", "format": "@kガード +@v%", "type": "hash"},
 		"raceup": {"name": "種族へのダメージ増", "abbr": "種UP", "format": "@k系ダメージ +@v%", "type": "hash"},
 		"attrup": {"name": "属性特技ダメージ増", "abbr": "特UP", "format": "@k特技の攻撃ダメージ +@v%", "type": "hash"},
+		"attrallup": {"name": "属性攻撃ダメージ増", "abbr": "属UP", "format": "@k攻撃ダメージ +@v%", "type": "hash"},
 		"spellup": {"name": "攻撃系統効果増", "abbr": "系UP", "format": "@k系効果 +@v%", "type": "hash"},
 		"attrib": {"name": "属性攻撃", "abbr": "属性", "format": "@v属性攻撃", "type": "string"},
 		"reduce": {"name": "ダメージ耐性", "abbr": "ダ耐", "format": "@k耐性 +@v%", "type": "hash"},
 		"reflect": {"name": "盾ガード時追加効果", "abbr": "盾G時", "format": "盾ガード時 @v%で@k", "type": "hash"},
+		"guard": {"name": "ガード時追加効果", "abbr": "G時", "format": "ガード時 @v%で@k", "type": "hash"},
 		"spcharge": {"name": "必殺チャージ", "abbr": "必C", "format": "必殺チャージ率 @v%アップ", "type": "int"},
 		"special": {"name": "ひっさつ使用", "abbr": "必殺", "format": "ひっさつ「@v」", "type": "string"},
+		"enhance": {"name": "とくぎ強化", "abbr": "強化", "format": "とくぎ @v の強化", "type": "array"},
+		"turnkeep": {"name": "ターン消費しない", "abbr": "T消費", "format": "@v%で 行動ターンを消費しない", "type": "int"},
+		"killed": {"name": "味方死亡時に発動", "abbr": "死亡", "format": "味方死亡時 @v%で@k", "type": "hash"},
+		"deathkeepon": {"name": "死亡時に効果残り", "abbr": "死残", "format": "死亡時 @v%で@k残り", "type": "hash"},
 		"misc": {"name": "その他の効果", "abbr": "他", "format": "@v", "type": "array"}
 	}
 }
