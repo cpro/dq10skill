@@ -2648,7 +2648,7 @@
 		"389": {"name": "ラグアス王子", "sort": "らくあすおうし", "rarity": "rainbow", "race": "legend", "atk": 25, "maxhp": 30, "spd": 60, "dex": 35, "startup": {"キラキラポーン": 90, "天使の守り": 60}},
 		"390": {"name": "アルウェ王妃", "sort": "あるうえおうひ", "rarity": "rainbow", "race": "legend", "maxhp": 30, "maxmp": 25, "heal": 40, "charm": 55, "misc": ["蘇生呪文の射程距離 +8m"], "evd": 5},
 		"391": {"name": "巫女ヒメア", "sort": "みこひめあ", "rarity": "rainbow", "race": "legend", "def": 25, "maxmp": 25, "magic": 50, "heal": 50, "deathkeepon": {"呪文威力アップ": 100, "回復量アップ": 100}},
-		"392": {"name": "ルナナ", "sort": "", "rarity": "rainbow", "race": "legend", "atk": 30, "maxhp": 20, "magic": 50, "charm": 50, "attrallup": {"土": 15}, "reduce": {"土": 30}, "misc": ["状態異常成功率アップ +25%"]},
+		"392": {"name": "ルナナ", "sort": "るなな", "rarity": "rainbow", "race": "legend", "atk": 30, "maxhp": 20, "magic": 50, "charm": 50, "attrallup": {"土": 15}, "reduce": {"土": 30}, "misc": ["状態異常成功率アップ +25%"]},
 		"393": {"name": "怪盗ポイックリン", "sort": "かいとうほいつくりん", "rarity": "rainbow", "race": "legend", "atk": 35, "maxhp": 30, "spd": 55, "magic": 30, "misc": ["行動時 25%でバイシオン", "行動時 25%で早詠みの杖"]},
 		"394": {"name": "セーリア", "sort": "せえりあ", "rarity": "rainbow", "race": "legend", "def": 30, "maxmp": 50, "heal": 70, "startup": {"聖女の守り": 90}, "killed": {"聖女の守り": 25}},
 		"395": {"name": "オーディス王子", "sort": "おおていすおうし", "rarity": "rainbow", "race": "legend", "def": 55, "maxhp": 35, "weight": 45, "shield": 5, "guard": {"ルカニ": 50, "ヘナトス": 50}, "parry": 5},
@@ -2666,7 +2666,7 @@
 		"407": {"name": "女王ポワン", "sort": "しよおうほあん", "rarity": "rainbow", "race": "legend", "maxhp": 35, "maxmp": 35, "heal": 80, "misc": ["呪文と特技の回復1.3倍", "回復呪文威力アップ +60秒"]},
 		"408": {"name": "ラウル", "sort": "らうる", "rarity": "rainbow", "race": "legend", "def": 60, "maxhp": 55, "maxmp": 35, "misc": ["会心完全ガード +50%"], "skill": ["バイキルト"]},
 		"409": {"name": "リィン", "sort": "りいん", "rarity": "rainbow", "race": "legend", "atk": 40, "maxhp": 35, "spd": 75, "attrallup": {"風": 25, "雷": 15}, "startup": {"チャージ短縮 -10秒": 100}},
-		"410": {"name": "ミシュア", "sort": "", "rarity": "rainbow", "race": "legend", "atk": 25, "def": 45, "maxmp": 30, "heal": 50, "misc": ["蘇生時のＨＰ回復量アップ"]},
+		"410": {"name": "ミシュア", "sort": "みしゆあ", "rarity": "rainbow", "race": "legend", "atk": 25, "def": 45, "maxmp": 30, "heal": 50, "misc": ["蘇生時のＨＰ回復量アップ"]},
 		"411": {"name": "アンルシア姫", "sort": "あんるしあひめ", "rarity": "rainbow", "race": "legend", "maxhp": 30, "spd": 60, "charm": 60, "resist": {"いてつくはどう": 100}, "misc": ["状態異常耐性アップ"]},
 		"412": {"name": "勇者姫アンルシア", "sort": "ゆうしやひめあんるしあ", "rarity": "rainbow", "race": "legend", "atk": 50, "maxhp": 50, "magic": 50, "attrallup": {"光": 15, "炎": 15}, "misc": ["瀕死時 100%で身かわし率+30%", "瀕死時 100%でリベホイム"]}
 	},
