@@ -1,18 +1,8 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var Dq10;
 (function (Dq10) {
     var SkillSimulator;
     (function (SkillSimulator) {
-        var EventDispatcher = (function () {
+        var EventDispatcher = /** @class */ (function () {
             function EventDispatcher() {
                 this.events = {};
             }
@@ -50,12 +40,22 @@ var Dq10;
     })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
 })(Dq10 || (Dq10 = {}));
 /// <reference path="eventdispatcher.ts" />
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var Dq10;
 (function (Dq10) {
     var SkillSimulator;
     (function (SkillSimulator) {
         var UNDO_MAX = 20;
-        var CommandManager = (function (_super) {
+        var CommandManager = /** @class */ (function (_super) {
             __extends(CommandManager, _super);
             function CommandManager() {
                 var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -135,7 +135,7 @@ var Dq10;
 (function (Dq10) {
     var SkillSimulator;
     (function (SkillSimulator) {
-        var SingleValueCommand = (function () {
+        var SingleValueCommand = /** @class */ (function () {
             function SingleValueCommand(newValue) {
                 this.prevValue = undefined;
                 this.name = 'SingleValueCommand';
@@ -157,7 +157,7 @@ var Dq10;
             };
             return SingleValueCommand;
         }());
-        var UpdateSkillPt = (function (_super) {
+        var UpdateSkillPt = /** @class */ (function (_super) {
             __extends(UpdateSkillPt, _super);
             function UpdateSkillPt(vocationId, skillLineId, newValue) {
                 var _this = _super.call(this, newValue) || this;
@@ -183,7 +183,7 @@ var Dq10;
             };
             return UpdateSkillPt;
         }(SingleValueCommand));
-        var UpdateLevel = (function (_super) {
+        var UpdateLevel = /** @class */ (function (_super) {
             __extends(UpdateLevel, _super);
             function UpdateLevel(vocationId, newValue) {
                 var _this = _super.call(this, newValue) || this;
@@ -208,7 +208,7 @@ var Dq10;
             };
             return UpdateLevel;
         }(SingleValueCommand));
-        var UpdateTrainingSkillPt = (function (_super) {
+        var UpdateTrainingSkillPt = /** @class */ (function (_super) {
             __extends(UpdateTrainingSkillPt, _super);
             function UpdateTrainingSkillPt(vocationId, newValue) {
                 var _this = _super.call(this, newValue) || this;
@@ -233,7 +233,7 @@ var Dq10;
             };
             return UpdateTrainingSkillPt;
         }(SingleValueCommand));
-        var UpdateMSP = (function (_super) {
+        var UpdateMSP = /** @class */ (function (_super) {
             __extends(UpdateMSP, _super);
             function UpdateMSP(vocationId, skillLineId, newValue) {
                 var _this = _super.call(this, newValue) || this;
@@ -259,7 +259,7 @@ var Dq10;
             };
             return UpdateMSP;
         }(SingleValueCommand));
-        var UpdateMSPAvailable = (function (_super) {
+        var UpdateMSPAvailable = /** @class */ (function (_super) {
             __extends(UpdateMSPAvailable, _super);
             function UpdateMSPAvailable() {
                 var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -283,7 +283,7 @@ var Dq10;
             };
             return UpdateMSPAvailable;
         }(SingleValueCommand));
-        var UpdateCustomSkill = (function (_super) {
+        var UpdateCustomSkill = /** @class */ (function (_super) {
             __extends(UpdateCustomSkill, _super);
             function UpdateCustomSkill(skillLineId, newValue, rank) {
                 var _this = _super.call(this, newValue) || this;
@@ -316,7 +316,7 @@ var Dq10;
             };
             return UpdateCustomSkill;
         }(SingleValueCommand));
-        var PackageCommand = (function () {
+        var PackageCommand = /** @class */ (function () {
             function PackageCommand() {
                 this.name = '';
             }
@@ -350,7 +350,7 @@ var Dq10;
             };
             return PackageCommand;
         }());
-        var SetAllLevel = (function (_super) {
+        var SetAllLevel = /** @class */ (function (_super) {
             __extends(SetAllLevel, _super);
             function SetAllLevel(newValue) {
                 var _this = _super.call(this) || this;
@@ -365,7 +365,7 @@ var Dq10;
             };
             return SetAllLevel;
         }(PackageCommand));
-        var SetAllTrainingSkillPt = (function (_super) {
+        var SetAllTrainingSkillPt = /** @class */ (function (_super) {
             __extends(SetAllTrainingSkillPt, _super);
             function SetAllTrainingSkillPt(newValue) {
                 var _this = _super.call(this) || this;
@@ -380,7 +380,7 @@ var Dq10;
             };
             return SetAllTrainingSkillPt;
         }(PackageCommand));
-        var ClearPtsOfSameSkills = (function (_super) {
+        var ClearPtsOfSameSkills = /** @class */ (function (_super) {
             __extends(ClearPtsOfSameSkills, _super);
             function ClearPtsOfSameSkills(skillLineId) {
                 var _this = _super.call(this) || this;
@@ -393,7 +393,7 @@ var Dq10;
             };
             return ClearPtsOfSameSkills;
         }(PackageCommand));
-        var ClearMSP = (function (_super) {
+        var ClearMSP = /** @class */ (function (_super) {
             __extends(ClearMSP, _super);
             function ClearMSP() {
                 return _super !== null && _super.apply(this, arguments) || this;
@@ -404,7 +404,7 @@ var Dq10;
             };
             return ClearMSP;
         }(PackageCommand));
-        var ClearAllSkills = (function (_super) {
+        var ClearAllSkills = /** @class */ (function (_super) {
             __extends(ClearAllSkills, _super);
             function ClearAllSkills() {
                 return _super !== null && _super.apply(this, arguments) || this;
@@ -415,7 +415,7 @@ var Dq10;
             };
             return ClearAllSkills;
         }(PackageCommand));
-        var PresetStatus = (function (_super) {
+        var PresetStatus = /** @class */ (function (_super) {
             __extends(PresetStatus, _super);
             function PresetStatus(status) {
                 var _this = _super.call(this) || this;
@@ -428,7 +428,7 @@ var Dq10;
             };
             return PresetStatus;
         }(PackageCommand));
-        var BringUpLevelToRequired = (function (_super) {
+        var BringUpLevelToRequired = /** @class */ (function (_super) {
             __extends(BringUpLevelToRequired, _super);
             function BringUpLevelToRequired() {
                 return _super !== null && _super.apply(this, arguments) || this;
@@ -439,7 +439,7 @@ var Dq10;
             };
             return BringUpLevelToRequired;
         }(PackageCommand));
-        var SimulatorCommandManager = (function (_super) {
+        var SimulatorCommandManager = /** @class */ (function (_super) {
             __extends(SimulatorCommandManager, _super);
             function SimulatorCommandManager() {
                 return _super !== null && _super.apply(this, arguments) || this;
@@ -492,7 +492,7 @@ var Dq10;
  * Base64 URI safe
  * [^\x00-\xFF]な文字しか来ない前提
  */
-var Base64 = (function () {
+var Base64 = /** @class */ (function () {
     function Base64() {
     }
     /**
@@ -524,7 +524,7 @@ var Base64 = (function () {
  * 通常のUnicode文字列とUTF-8バイト列の相互変換
  * Base64とのデータ受渡に使用
  */
-var UTF8 = (function () {
+var UTF8 = /** @class */ (function () {
     function UTF8() {
     }
     UTF8.toUTF8 = function (raw) {
@@ -546,7 +546,7 @@ var Dq10;
 (function (Dq10) {
     var SkillSimulator;
     (function (SkillSimulator) {
-        var SimulatorModel = (function () {
+        var SimulatorModel = /** @class */ (function () {
             function SimulatorModel() {
                 //パラメータ格納用
                 this.vocations = [];
@@ -872,7 +872,7 @@ var Dq10;
             var VERSION_VOCATIONAL_MSP = 4;
             /** 現在のSerializerのバージョン */
             var VERSION_CURRENT_SERIALIZER = 4;
-            var Serializer = (function () {
+            var Serializer = /** @class */ (function () {
                 function Serializer() {
                 }
                 Serializer.prototype.exec = function (sim) {
@@ -895,10 +895,10 @@ var Dq10;
                     serial += toByte(sim.getMSPAvailable());
                     // カスタムスキルデータ長を格納
                     serial += toByte(DB.consts.customSkill.count);
-                    //末尾にスキルライン別データ（MSP、カスタムスキル）をIDとペアで格納
+                    //末尾にカスタムスキルをスキルラインIDとペアで格納
                     Object.keys(DB.skillLines).forEach(function (skillLineId) {
                         var customSkills = sim.getCustomSkills(skillLineId);
-                        // MSP・カスタムスキルいずれかに0でない値が入っている場合のみ格納
+                        // カスタムスキルのいずれかにスキルがセットされている場合のみ格納
                         if (customSkills.some(function (val) { return val > 0; })) {
                             serial += toByte(DB.skillLines[skillLineId].id);
                             serial += customSkills.map(function (val) { return toByte(val); }).join('');
@@ -913,7 +913,7 @@ var Dq10;
                 return Serializer;
             }());
             SimulatorSaveData.Serializer = Serializer;
-            var Deserializer = (function () {
+            var Deserializer = /** @class */ (function () {
                 function Deserializer(serial, isFirstVersion) {
                     if (isFirstVersion === void 0) { isFirstVersion = false; }
                     this.serial = serial;
@@ -966,7 +966,11 @@ var Dq10;
                         customSkillLength = 0;
                     else
                         customSkillLength = getData();
-                    skillLineDataLength = customSkillLength + 2; //スキルライン番号1byte+MSP1byte+カスタムスキルデータ長
+                    // スキルライン別データのデータ長: カスタムスキルデータ長 + スキルライン番号1byte
+                    skillLineDataLength = customSkillLength + 1;
+                    // MSPがスキルライン別管理の場合はもう1byte増やす
+                    if (version < VERSION_VOCATIONAL_MSP)
+                        skillLineDataLength += 1;
                     // スキルライン別データ取得（MSP、カスタムスキル）
                     while (this.serial.length - cur >= skillLineDataLength) {
                         var skillLineId = skillLineIds[getData()];
@@ -1034,7 +1038,7 @@ var Dq10;
             }());
             SimulatorSaveData.Deserializer = Deserializer;
         })(SimulatorSaveData || (SimulatorSaveData = {}));
-        var SimulatorCustomSkill = (function () {
+        var SimulatorCustomSkill = /** @class */ (function () {
             function SimulatorCustomSkill(skillLineId, customSkillId) {
                 if (skillLineId === undefined ||
                     skillLineId === null ||
@@ -1083,20 +1087,20 @@ var Dq10;
                     hint += "\n\uFF08\u30C1\u30E3\u30FC\u30B8: " + rankValue + "\u79D2\uFF09";
                 return hint;
             };
+            SimulatorCustomSkill.emptySkillData = {
+                id: 0,
+                name: '（なし）',
+                viewName: '（なし）',
+                selectorName: '',
+                desc: '',
+                mp: null,
+                charge: null,
+                atk: null,
+                val: [0, 0, 0]
+            };
             return SimulatorCustomSkill;
         }());
-        SimulatorCustomSkill.emptySkillData = {
-            id: 0,
-            name: '（なし）',
-            viewName: '（なし）',
-            selectorName: '',
-            desc: '',
-            mp: null,
-            charge: null,
-            atk: null,
-            val: [0, 0, 0]
-        };
-        var SimulatorUI = (function () {
+        var SimulatorUI = /** @class */ (function () {
             function SimulatorUI(sim) {
                 var _this = this;
                 this.CLASSNAME_SKILL_ENABLED = 'enabled';
@@ -1136,6 +1140,7 @@ var Dq10;
                         });
                         _this.com.on('CustomSkillChanged', function (skillLineId) {
                             _this.refreshCustomSkill(skillLineId);
+                            _this.refreshUrlBar();
                         });
                     },
                     //レベル選択セレクトボックス項目設定
@@ -1538,7 +1543,7 @@ var Dq10;
                     //特訓スキルポイント一括設定（最大値固定）
                     function () {
                         $('#setalltrainingsp>button').button({
-                            icons: { primary: 'ui-icon-star' }
+                            icons: { primary: 'ui-icon-star' },
                         }).click(function (e) {
                             _this.com.setAllTrainingSkillPt(_this.DB.consts.trainingSkillPts.max);
                         });
@@ -1546,7 +1551,7 @@ var Dq10;
                     //全スキルをリセット
                     function () {
                         $('#clearallskills>button').button({
-                            icons: { primary: 'ui-icon-refresh' }
+                            icons: { primary: 'ui-icon-refresh' },
                         }).click(function (e) {
                             if (!window.confirm('全職業のすべてのスキルを振りなおします。\n（レベル・特訓のポイントは変わりません）'))
                                 return;
@@ -1601,7 +1606,7 @@ var Dq10;
                     //全職業のレベルを取得スキルに応じて引き上げ
                     function () {
                         $('#bringUpLevel>button').button({
-                            icons: { primary: 'ui-icon-arrowthickstop-1-n' }
+                            icons: { primary: 'ui-icon-arrowthickstop-1-n' },
                         }).click(function (e) {
                             if (!window.confirm('全職業のレベルを現在の取得スキルに必要なところまで引き上げます。'))
                                 return;
@@ -1807,7 +1812,7 @@ var Dq10;
             };
             return SimulatorUI;
         }());
-        var CustomSkillSelector = (function () {
+        var CustomSkillSelector = /** @class */ (function () {
             function CustomSkillSelector(sim, com) {
                 this.sim = sim;
                 this.com = com;
@@ -1896,7 +1901,7 @@ var Dq10;
             };
             return CustomSkillSelector;
         }());
-        var SimpleUI = (function () {
+        var SimpleUI = /** @class */ (function () {
             function SimpleUI(sim) {
                 var _this = this;
                 this.CLASSNAME_SKILL_ENABLED = 'enabled';

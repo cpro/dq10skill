@@ -431,11 +431,11 @@ namespace Dq10.SkillSimulator {
 				// カスタムスキルデータ長を格納
 				serial += toByte(DB.consts.customSkill.count);
 
-				//末尾にスキルライン別データ（MSP、カスタムスキル）をIDとペアで格納
+				//末尾にカスタムスキルをスキルラインIDとペアで格納
 				Object.keys(DB.skillLines).forEach((skillLineId) => {
 					var customSkills = sim.getCustomSkills(skillLineId);
 
-					// MSP・カスタムスキルいずれかに0でない値が入っている場合のみ格納
+					// カスタムスキルのいずれかにスキルがセットされている場合のみ格納
 					if(customSkills.some((val) => val > 0)) {
 						serial += toByte(DB.skillLines[skillLineId].id);
 						serial += customSkills.map((val) => toByte(val)).join('');
@@ -513,7 +513,11 @@ namespace Dq10.SkillSimulator {
 				else
 					customSkillLength = getData();
 
-				skillLineDataLength = customSkillLength + 2; //スキルライン番号1byte+MSP1byte+カスタムスキルデータ長
+				// スキルライン別データのデータ長: カスタムスキルデータ長 + スキルライン番号1byte
+				skillLineDataLength = customSkillLength + 1;
+				// MSPがスキルライン別管理の場合はもう1byte増やす
+				if(version < VERSION_VOCATIONAL_MSP)
+					skillLineDataLength += 1;
 
 				// スキルライン別データ取得（MSP、カスタムスキル）
 				while(this.serial.length - cur >= skillLineDataLength) {
@@ -927,6 +931,7 @@ namespace Dq10.SkillSimulator {
 				});
 				this.com.on('CustomSkillChanged', (skillLineId: string) => {
 					this.refreshCustomSkill(skillLineId);
+					this.refreshUrlBar();
 				});
 			},
 
