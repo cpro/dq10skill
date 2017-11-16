@@ -859,7 +859,8 @@ var Dq10;
                 'monstermaster',
                 'itemmaster',
                 'dancer',
-                'fortuneteller' //占い師
+                'fortuneteller',
+                'druid' //天地雷鳴士
             ];
             var BITS_LEVEL = 8; //レベルは8ビット確保
             var BITS_SKILL = 7; //スキルは7ビット

@@ -384,7 +384,8 @@ namespace Dq10.SkillSimulator {
 			'monstermaster', //まもの使い
 			'itemmaster',    //どうぐ使い
 			'dancer',        //踊り子
-			'fortuneteller'  //占い師
+			'fortuneteller', //占い師
+			'druid'          //天地雷鳴士
 		];
 		const BITS_LEVEL = 8; //レベルは8ビット確保
 		const BITS_SKILL = 7; //スキルは7ビット
