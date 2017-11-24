@@ -1,4 +1,4 @@
-- @version = '11.2'
+- @version = '12.0.2'
 !!! 5
 %html
 	%head
@@ -200,6 +200,15 @@
 						履歴:
 						%ul
 							%li
+								2017/11/16 v12.0 ver4.0対応。
+								%ul
+									%li レベル上限解放(99→100)に対応。
+									%li
+										新職業「天地雷鳴士」を追加。
+										%ul
+											%li 2017/11/24 v12.0.2 「しょうかん」スキルラインの説明文・消費MP等補完。
+									%li v12.0.1 「真・オノむそう」「エンゼルのみちびき」「魔王のいざない」のチャージタイム更新。
+							%li
 								2017/9/19 v11.2 保存用URL読み込み時、160-180スキルを正しく読み込めない不具合を修正。
 							%li
 								2017/7/7 v11.1 ver3.5後期対応。
@@ -224,12 +233,6 @@
 								%ul
 									%li 職業スキル160-180Pに対応。（2016/12/20 v10.1 スキル説明・消費MP補完）
 									%li 「テンション消費軽減（専）」→「テンション維持（専）」の名称変更に対応。
-							%li
-								2016/10/6 v9.1 ver3.4前期対応。
-								%ul
-									%li レベル上限解放(93→96)に対応。
-									%li 160-180スキルの追加に対応（不死鳥天舞+n%等）。
-									%li 2016/10/9 v9.1.1 MSP上限25→26
 							%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
 					%li
 						ToDo:
@@ -280,12 +283,12 @@
 							%dd.customskill-palette-name{id: "customskill-selector-palette-#{i}"} （なし）
 							%a.customskill-palette-delete.x-button{'data-rank' => i} ×
 					%ul#customskill-selector-skillline-buttons.button-container
-						- (data['skillLineOrder']).each do |skill_line_name|
-							%li.ui-corner-all<
-								%a{'data-skillline' => skill_line_name}<
-									= data['skillLines'][skill_line_name]['name']
 						- (data['uniqueSkillLineOrder']).each do |skill_line_name|
 							%li.ui-corner-all.unique-skillline<
+								%a{'data-skillline' => skill_line_name}<
+									= data['skillLines'][skill_line_name]['name']
+						- (data['skillLineOrder']).each do |skill_line_name|
+							%li.ui-corner-all<
 								%a{'data-skillline' => skill_line_name}<
 									= data['skillLines'][skill_line_name]['name']
 			#customskill-selector-footer.modal-dialog-footer

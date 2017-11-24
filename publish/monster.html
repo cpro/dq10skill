@@ -7,14 +7,14 @@
     <link href='http://cpro.jp/dq10/skillsimulator/monster.html' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。まもの使い・どうぐ使いで仲間にしたモンスター用。' name='description'>
     <title>DQ10 仲間モンスター用スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=m3.2' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=m3.3' rel='stylesheet' type='text/css'>
     <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js' type='text/javascript'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
     <script src='js/rawdeflate.min.js' type='text/javascript'></script>
     <script src='js/rawinflate.min.js' type='text/javascript'></script>
-    <script src='./dq10skill-monster.js?ver=m3.2' type='text/javascript'></script>
+    <script src='./dq10skill-monster.js?ver=m3.3' type='text/javascript'></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -78,9 +78,11 @@
       <div class='monster_ent' id='initial-instruction'>
         <p>上のモンスター名のボタンをクリックして仲間モンスターを追加してください。</p>
         <p class='whatsnew'>
-          （New: ver3.5後期のモンスター6種のスキル強化に対応しました：
+          （New: ver4.0のモンスター12種のスキル強化に対応しました：
           <br>
-          キメラ / ねこまどう / いたずらもぐら / デビルアーマー / キラーマシン / たんすミミック）
+          スライム / スライムナイト / モーモン / プリズニャン / リザードマン / バトルレックス /
+          <br>
+          メタッピー / ゴーレム / マジカルハット / おどるほうせき / パペットマン / さまようよろい）
         </p>
       </div>
       <div id='monsters'></div>
@@ -194,6 +196,7 @@
             <li>
               履歴:
               <ul>
+                <li>2017/11/17 v3.3 ver4.0対応: モンスター12種の転生10回以降でのスキル強化に対応。</li>
                 <li>2017/6/22 v3.2 ver3.5後期対応：モンスター6種の転生10回以降でのスキル強化に対応。</li>
                 <li>
                   2017/4/24 v3.0 ver3.5中期対応
@@ -205,7 +208,6 @@
                 </li>
                 <li>2017/2/26 v2.1.1 ver3.5前期対応：転生回数の上限を8→9に変更。</li>
                 <li>2016/12/22 v2.1 バッジ選択画面にバッジ機能のフリーワード検索を追加。</li>
-                <li>2016/10/26 v2.0 保存用URLの仕様変更。一部の追加スキルラインを設定すると正しく保存されない問題への対応。</li>
                 <li>過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。</li>
               </ul>
             </li>
