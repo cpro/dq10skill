@@ -154,7 +154,7 @@ var HirobaStatus = (function($) {
 		var vocationCount = VOCATIONS.length;
 
 		//バージョン番号
-		serial += (VERSION_CURRENT_SERIALIZER | 0x80);
+		serial += toByte(VERSION_CURRENT_SERIALIZER | 0x80);
 
 		//先頭に職業の数を含める
 		serial += toByte(vocationCount);
