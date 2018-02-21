@@ -1025,6 +1025,32 @@
 			]
 		},
 
+		"killerofhell": {
+			"name": "地獄の殺し屋",
+			"skills": [
+				{"pt":   3, "name": "おたけび", "desc": "周囲の敵を\n大声でおどかし\n動けなくする", "mp": 3},
+				{"pt":   7, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  12, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
+				{"pt":  18, "name": "いなずま", "desc": "周囲を落雷で攻撃\nたまにマヒさせる", "mp": 18},
+				{"pt":  25, "name": "常時ちから+15", "desc": "常時\nちからが\n１５増える", "mp": null, "pow": 15},
+				{"pt":  32, "name": "会心時+50", "desc": "", "mp": null},
+				{"pt":  40, "name": "地獄の咆吼", "desc": "会心率を高め\n与えるダメージも\nアップする", "mp": 8, "charge": 150}
+			]
+		},
+
+		"swift": {
+			"name": "しゅんそく",
+			"skills": [
+				{"pt":   3, "name": "常時すばやさ+80", "desc": "常時\nすばやさが\n８０増える", "mp": null, "spd": 80},
+				{"pt":   7, "name": "しっぷう攻撃", "desc": "", "mp": null},
+				{"pt":  12, "name": "常時身かわし率+5%", "desc": "常時\n敵の攻撃を\nかわしやすくなる", "mp": null},
+				{"pt":  18, "name": "常時さいだいＭＰ+20", "desc": "常時\nさいだいＭＰが\n２０増える", "mp": null, "maxmp": 20},
+				{"pt":  25, "name": "零の洗礼", "desc": "敵にかかっている\nよい効果を解除", "mp": 10},
+				{"pt":  32, "name": "5.0%ターン消費なし", "desc": "たまにターンを\n消費しなくなる", "mp": null},
+				{"pt":  40, "name": "ひっかきのあらし", "desc": "前方の敵集団を\n４回攻撃し\n守備力も下げる", "mp": 9, "charge": 75}
+			]
+		},
+
 		"unknown1": {
 			"name": "不明",
 			"skills": [
@@ -2279,13 +2305,23 @@
 			"status": {"maxhp": 320, "maxmp": 80, "pow": 140, "def": 120, "magic": 55, "heal": 63, "spd": 70, "dex": 82, "charm": 90, "weight": 120},
 			"increment": {"maxhp": 5, "maxmp": 6, "pow": 3, "def": 6, "magic": 4, "heal": 3, "spd": 2, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
+		},
+
+		"killerpanther": {
+			"id": 29,
+			"name": "キラーパンサー",
+			"defaultName": "キラーパンサ",
+			"skillLines": ["killerofhell", "swift", "claw"],
+			"status": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
+			"expTable": 1
 		}
 	},
 
 	"monstermaster": [
 		"slime", "mormon", "prisonyan", "hoimislime", "slimeknight",
 		"chimera", "catmage", "lizardman", "battlerex", "itazuramogura",
-		"babysatan", "dragonkids", "drakee", "brownie"
+		"babysatan", "dragonkids", "drakee", "brownie", "killerpanther"
 	],
 	"itemmaster": [
 		"metappy", "takeyarihei", "needleman", "fondue", "entasisman",
