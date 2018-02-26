@@ -1055,19 +1055,24 @@
 
 		"killerofhell": {
 			"name": "地獄の殺し屋",
+			"enhancedName": "地獄の殺し屋Ⅱ",
 			"skills": [
 				{"pt":   3, "name": "おたけび", "desc": "周囲の敵を\n大声でおどかし\n動けなくする", "mp": 3},
 				{"pt":   7, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
 				{"pt":  12, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
-				{"pt":  18, "name": "いなずま", "desc": "周囲を落雷で攻撃\nたまにマヒさせる", "mp": 18},
+				{"pt":  18, "name": "いなずま", "desc": "", "mp": 6},
 				{"pt":  25, "name": "常時ちから+15", "desc": "常時\nちからが\n１５増える", "mp": null, "pow": 15},
-				{"pt":  32, "name": "会心時+50", "desc": "", "mp": null},
-				{"pt":  40, "name": "地獄の咆吼", "desc": "会心率を高め\n与えるダメージも\nアップする", "mp": 8, "charge": 150}
+				{"pt":  32, "name": "会心時+50", "desc": "会心時ダメージが\n５０増える", "mp": null},
+				{"pt":  40, "name": "地獄の咆吼", "desc": "会心率を高め\n与えるダメージも\nアップする", "mp": 8, "charge": 150},
+				{"pt":  43, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
+				{"pt":  48, "name": "いなずま+200", "desc": "ダメージが\n２００増える", "mp": null},
+				{"pt":  50, "name": "会心時+50", "desc": "会心時ダメージが\n５０増える", "mp": null}
 			]
 		},
 
 		"swift": {
 			"name": "しゅんそく",
+			"enhancedName": "しゅんそくⅡ",
 			"skills": [
 				{"pt":   3, "name": "常時すばやさ+80", "desc": "常時\nすばやさが\n８０増える", "mp": null, "spd": 80},
 				{"pt":   7, "name": "しっぷう攻撃", "desc": "", "mp": null},
@@ -1075,7 +1080,10 @@
 				{"pt":  18, "name": "常時さいだいＭＰ+20", "desc": "常時\nさいだいＭＰが\n２０増える", "mp": null, "maxmp": 20},
 				{"pt":  25, "name": "零の洗礼", "desc": "敵にかかっている\nよい効果を解除", "mp": 10},
 				{"pt":  32, "name": "5.0%ターン消費なし", "desc": "たまにターンを\n消費しなくなる", "mp": null},
-				{"pt":  40, "name": "ひっかきのあらし", "desc": "前方の敵集団を\n４回攻撃し\n守備力も下げる", "mp": 9, "charge": 75}
+				{"pt":  40, "name": "ひっかきのあらし", "desc": "前方の敵集団を\n４回攻撃し\n守備力も下げる", "mp": 9, "charge": 75},
+				{"pt":  43, "name": "しっぷう攻撃+100", "desc": "ダメージが\n１００増える", "mp": null},
+				{"pt":  48, "name": "常時すばやさ+60", "desc": "常時\nすばやさが\n６０増える", "mp": null, "spd": 60},
+				{"pt":  50, "name": "ひっかきのあらし+30", "desc": "ダメージが\n３０増える", "mp": null}
 			]
 		},
 
@@ -2031,6 +2039,32 @@
 			]
 		},
 
+		"claw-ex-killerpanther": {
+			"name": "ツメの極意",
+			"skills": [
+				{"pt":   3, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
+				{"pt":   7, "name": "マシン系威力+5%", "desc": "ツメ装備で\nマシン系攻撃時\n威力があがる", "mp": null},
+				{"pt":  12, "name": "ライガークラッシュ", "desc": "獣神のごとく\n敵１体を\n５連続で斬り刻む", "mp": 8, "charge": 65},
+				{"pt":  18, "name": "装備時かいしん率+3%", "desc": "ツメでの攻撃時\n会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  25, "name": "マシン系威力+5%", "desc": "ツメ装備で\nマシン系攻撃時\n威力があがる", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+30", "desc": "ツメ装備時の\nこうげき力が\n３０増える", "mp": null, "atk": 30},
+				{"pt":  40, "name": "牙神昇誕", "desc": "", "mp": 5, "charge": 100}
+			]
+		},
+
+		"felidae": {
+			"name": "ネコ科",
+			"skills": [
+				{"pt":   3, "name": "常時すばやさ+100", "desc": "常時\nすばやさが\n１００増える", "mp": null, "spd": 100},
+				{"pt":   7, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  12, "name": "ネコパンチ", "desc": "", "mp": 5, "charge": 120},
+				{"pt":  18, "name": "会心時+50", "desc": "会心時ダメージが\n５０増える", "mp": null},
+				{"pt":  25, "name": "常時ちから+20", "desc": "常時\nちからが\n３０増える", "mp": null, "pow": 20},
+				{"pt":  32, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 30},
+				{"pt":  40, "name": "グルーミング", "desc": "", "mp": 5}
+			]
+		},
+
 		"additional0": {
 			"name": "追加スキル0ダミー",
 			"skills": [
@@ -2344,8 +2378,8 @@
 			"name": "キラーパンサー",
 			"defaultName": "キラーパンサ",
 			"skillLines": ["killerofhell", "swift", "claw"],
-			"status": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
-			"increment": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
+			"status": {"maxhp": 308, "maxmp": 110, "pow": 140, "def": 120, "magic": 50, "heal": 30, "spd": 180, "dex": 210, "charm": 120, "weight": 100},
+			"increment": {"maxhp": 4, "maxmp": 7, "pow": 3, "def": 3, "magic": 6, "heal": 5, "spd": 15, "dex": 12, "charm": 0, "weight": 0},
 			"expTable": 1
 		}
 	},
@@ -2430,7 +2464,9 @@
 		{"name": "axe-ex-yamishibari",  "restartCount": 7, "id": 66, "occupied": ["yamishibari"]},
 		{"name": "yaminoonnen",         "restartCount": 8, "id": 67, "occupied": ["yamishibari"]},
 		{"name": "bow-ex",              "restartCount": 7, "id": 68, "occupied": ["tansumimic"]},
-		{"name": "tansunoshizou",       "restartCount": 8, "id": 69, "occupied": ["tansumimic"]}
+		{"name": "tansunoshizou",       "restartCount": 8, "id": 69, "occupied": ["tansumimic"]},
+		{"name": "claw-ex-killerpanther", "restartCount": 7, "id": 70, "occupied": ["killerpanther"]},
+		{"name": "felidae",             "restartCount": 8, "id": 71, "occupied": ["killerpanther"]}
 	],
 
 	"skillPtsGiven": [null,
@@ -2475,7 +2511,7 @@
 				"devilarmor", "killermachine", "tansumimic",
 				"slime", "mormon", "prisonyan", "slimeknight", "lizardman", "battlerex",
 				"metappy", "samayouyoroi", "golem", "odoruhouseki", "magicalhat", "puppetman",
-				"brownie", "babysatan", "takeyarihei", "fondue"
+				"brownie", "babysatan", "takeyarihei", "fondue", "killerpanther"
 			]
 		}
 	},
