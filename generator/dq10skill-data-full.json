@@ -525,7 +525,7 @@
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
-				{"id":  1, "name": "牙神昇誕", "viewName": "牙神昇誕%r", "selectorName": "%r (CT%i)", "desc": "", "mp": 5, "charge": 0, "val": [180, 140, 100]},
+				{"id":  1, "name": "牙神昇誕", "viewName": "牙神昇誕%r", "selectorName": "%r (CT%i)", "desc": "ツメを研ぎすまし\n攻撃力を一定時間\nかなり増やす", "mp": 5, "charge": 0, "val": [180, 140, 100]},
 				{"id":  2, "name": "こうげき力", "viewName": "装備時こうげき力+%i", "selectorName": "+%i", "desc": "ツメ装備時の\nこうげき力が\n%z増える", "val": [5, 8, 10]},
 				{"id":  3, "name": "かいしん率", "viewName": "装備時かいしん率+%f%", "selectorName": "+%f%", "desc": "ツメ装備時の\nかいしん率が\n%z％増える", "val": [1.0, 1.2, 1.5]},
 				{"id":  4, "name": "身かわし率", "viewName": "装備時身かわし率+%f%", "selectorName": "+%f%", "desc": "ツメ装備時\n身かわし率が\n%z％増える", "val": [1, 1.5, 2]},
