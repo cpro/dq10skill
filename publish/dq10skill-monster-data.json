@@ -152,7 +152,7 @@
 				{"pt":  25, "name": "ドルクマ", "desc": "巨大な\n闇のチカラが\n敵１体をおそう", "mp": 7},
 				{"pt":  32, "name": "常時こうげき魔力+100", "desc": "常時\nこうげき魔力が\n１００増える", "mp": null, "magic": 100},
 				{"pt":  40, "name": "ホラーフェイス", "desc": "悪魔のカオで\n周りの敵を攻撃し\nショックを与える", "mp": 8},
-				{"pt":  43, "name": "呪文と特技の攻撃強化", "desc": "呪文や特技の\n威力がが増える", "mp": null},
+				{"pt":  43, "name": "呪文と特技の攻撃強化", "desc": "呪文や特技の\n威力があがる", "mp": null},
 				{"pt":  48, "name": "ふわふわボディ", "desc": "常時\n足元の攻撃を\nかわすようになる", "mp": null},
 				{"pt":  50, "name": "ホラーフェイス+200", "desc": "ダメージが\n２００増える", "mp": null}
 			]
@@ -183,7 +183,7 @@
 				{"pt":  32, "name": "ニャルプンテ", "desc": "敵全体に悪い効果\nニャにが起こるか\nわからニャい", "mp": 10},
 				{"pt":  40, "name": "魔力かくせい", "desc": "呪文のダメージを\n大幅に上げる", "mp": 10},
 				{"pt":  43, "name": "攻撃呪文耐性+5%", "desc": "攻撃呪文で受ける\nダメージを軽減", "mp": null},
-				{"pt":  48, "name": "行動時10%呪文アップ", "desc": "", "mp": null},
+				{"pt":  48, "name": "行動時10%呪文アップ", "desc": "行動時たまに\n攻撃呪文の\n威力がアップ", "mp": null},
 				{"pt":  50, "name": "状態異常成功率アップ", "desc": "常時\n状態異常成功率が\nあがる", "mp": null}
 			]
 		},
@@ -433,6 +433,7 @@
 
 		"takeyarihyouhou": {
 			"name": "たけやり兵法",
+			"enhancedName": "たけやり兵法Ⅱ",
 			"skills": [
 				{"pt":   3, "name": "おうえん", "desc": "味方１人を\nおうえんして\nテンションアップ", "mp": 0},
 				{"pt":   7, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
@@ -440,12 +441,16 @@
 				{"pt":  18, "name": "さみだれ突き", "desc": "敵を選ばず\n突きまくる\nどとうの４回攻撃", "mp": 6},
 				{"pt":  25, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
 				{"pt":  32, "name": "常時さいだいＨＰ+50", "desc": "常時\nさいだいＨＰが\n５０増える", "mp": null, "maxhp": 50},
-				{"pt":  40, "name": "破竹の一撃", "desc": "己のエネルギーを\nすべて放出する技\nしばらく行動不能", "mp": 8}
+				{"pt":  40, "name": "破竹の一撃", "desc": "己のエネルギーを\nすべて放出する技\nしばらく行動不能", "mp": 8},
+				{"pt":  43, "name": "さみだれ突き+40", "desc": "ダメージが\n４０増える", "mp": null},
+				{"pt":  48, "name": "常時ちから+30", "desc": "常時\nちからが\n３０増える", "mp": null, "pow": 30},
+				{"pt":  50, "name": "破竹の一撃+300", "desc": "ダメージが\n３００増える", "mp": null}
 			]
 		},
 
 		"takeyarikaihou": {
 			"name": "たけやり介抱",
+			"enhancedName": "たけやり介抱Ⅱ",
 			"skills": [
 				{"pt":   3, "name": "スクルト", "desc": "周囲の仲間の\n守備力を\n少し上げる", "mp": 4},
 				{"pt":   7, "name": "常時みのまもり+30", "desc": "常時\nみのまもりが\n３０増える", "mp": null, "def": 30},
@@ -453,7 +458,10 @@
 				{"pt":  18, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
 				{"pt":  25, "name": "ザオラル", "desc": "仲間ひとりを\n生き返らせるが\n失敗する時もある", "mp": 8},
 				{"pt":  32, "name": "常時かいふく魔力+100", "desc": "常時\nかいふく魔力が\n１００増える", "mp": null, "heal": 100},
-				{"pt":  40, "name": "オートメンテナンス", "desc": "戦闘開始時たまに\n一度死んでも蘇る\n効果が発動する", "mp": null}
+				{"pt":  40, "name": "オートメンテナンス", "desc": "戦闘開始時たまに\n一度死んでも蘇る\n効果が発動する", "mp": null},
+				{"pt":  43, "name": "行動時15%回復アップ", "desc": "行動時たまに\n回復呪文の\n回復量がアップ", "mp": null},
+				{"pt":  48, "name": "ベホマラー", "desc": "範囲内にいる\n仲間のＨＰを\n８０～回復する", "mp": 16},
+				{"pt":  50, "name": "ホイミ系効果+50%", "desc": "ホイミ系の呪文の\n回復量が増える", "mp": null}
 			]
 		},
 
@@ -519,6 +527,7 @@
 
 		"gourmage": {
 			"name": "グルメイジ",
+			"enhancedName": "グルメイジⅡ",
 			"skills": [
 				{"pt":   3, "name": "なめまわし", "desc": "敵１体を\nなめまわして\n動けなくする", "mp": 0},
 				{"pt":   7, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
@@ -526,7 +535,10 @@
 				{"pt":  18, "name": "チーズキャノン", "desc": "チーズをはいて\n敵１体を攻撃し\n呪文耐性を下げる", "mp": 2},
 				{"pt":  25, "name": "常時みかわし率+5%", "desc": "常時\n敵の攻撃を\nかわしやすくなる", "mp": null},
 				{"pt":  32, "name": "常時さいだいＭＰ+80", "desc": "常時\nさいだいＭＰが\n８０増える", "mp": null, "maxmp": 80},
-				{"pt":  40, "name": "もぐもぐタイム", "desc": "食欲を満たし\n呪文の発動速度と\n威力を大幅アップ", "mp": 12}
+				{"pt":  40, "name": "もぐもぐタイム", "desc": "食欲を満たし\n呪文の発動速度と\n威力を大幅アップ", "mp": 12},
+				{"pt":  43, "name": "ラクレットキャノン", "desc": "とろとろチーズを\nはいて敵１体を\nかなり弱らせる", "mp": 10, "charge": 30},
+				{"pt":  48, "name": "呪文範囲+2m", "desc": "呪文の効果範囲が\n２ｍ増える", "mp": null},
+				{"pt":  50, "name": "行動時15%もぐもぐ", "desc": "行動時たまに\n呪文発動速度と\n攻撃呪文がアップ", "mp": null}
 			]
 		},
 
@@ -762,6 +774,7 @@
 
 		"koakumagic": {
 			"name": "こあくマジック",
+			"enhancedName": "こあくマジックⅡ",
 			"skills": [
 				{"pt":   3, "name": "ヒップアタック", "desc": "敵1体に\nたいあたりして\nたまに魅了する", "mp": 2},
 				{"pt":   7, "name": "イオラ", "desc": "大きな爆発で\n自分の周りの\n敵を攻撃", "mp": 10},
@@ -769,12 +782,16 @@
 				{"pt":  18, "name": "プチっとかくせい", "desc": "わずかな時間だけ\n呪文のダメージが\n大幅アップ", "mp": 6},
 				{"pt":  25, "name": "イオナズン", "desc": "すさまじい爆発で\n自分の周りの\n敵を攻撃", "mp": 23},
 				{"pt":  32, "name": "常時こうげき魔力+100", "desc": "常時\nこうげき魔力が\n１００増える", "mp": null, "magic": 100},
-				{"pt":  40, "name": "おとなのじゅもん", "desc": "おとなの悪魔が\n使う呪文書で\n究極呪文に挑戦！", "mp": 20}
+				{"pt":  40, "name": "おとなのじゅもん", "desc": "おとなの悪魔が\n使う呪文書で\n究極呪文に挑戦！", "mp": 20},
+				{"pt":  43, "name": "イオ系効果+30%", "desc": "イオ系の呪文の\n威力があがる", "mp": null},
+				{"pt":  48, "name": "呪文と特技の攻撃強化", "desc": "呪文や特技の\n威力があがる", "mp": null},
+				{"pt":  50, "name": "おとなのじゅもん+300", "desc": "ダメージが\n３００増える", "mp": null}
 			]
 		},
 
 		"icebreath": {
 			"name": "吹雪ブレスの心得",
+			"enhancedName": "吹雪ブレスの心得Ⅱ",
 			"skills": [
 				{"pt":   3, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
 				{"pt":   7, "name": "こごえるふぶき", "desc": "こごえるほどの\nおそろしい吹雪で\n周りの敵に攻撃", "mp": 7},
@@ -782,7 +799,10 @@
 				{"pt":  18, "name": "ブレス系効果+10%", "desc": "ブレス系の特技の\n威力が少しあがる", "mp": null},
 				{"pt":  25, "name": "常時さいだいＭＰ+80", "desc": "常時\nさいだいＭＰが\n８０増える", "mp": null, "maxmp": 80},
 				{"pt":  32, "name": "かがやくいき", "desc": "全てを凍結させる\n絶対零度の息で\n周りの敵に攻撃", "mp": 14},
-				{"pt":  40, "name": "ブレス系効果+20%", "desc": "ブレス系の特技の\n威力があがる", "mp": null}
+				{"pt":  40, "name": "ブレス系効果+20%", "desc": "ブレス系の特技の\n威力があがる", "mp": null},
+				{"pt":  43, "name": "氷属性特技威力+30%", "desc": "氷属性の特技の\n威力があがる", "mp": null},
+				{"pt":  48, "name": "常時ちから+30", "desc": "常時\nちからが\n３０増える", "mp": null, "pow": 30},
+				{"pt":  50, "name": "ブレス系効果+50%", "desc": "ブレス系の特技の\n威力があがる", "mp": null}
 			]
 		},
 
@@ -941,6 +961,7 @@
 
 		"tensionou": {
 			"name": "テンション王",
+			"enhancedName": "テンション王Ⅱ",
 			"skills": [
 				{"pt":   3, "name": "ためる", "desc": "チカラをためて\nテンションアップ", "mp": 0},
 				{"pt":   7, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
@@ -948,12 +969,16 @@
 				{"pt":  18, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
 				{"pt":  25, "name": "テンションバーン", "desc": "なぐられると\nテンションアップ", "mp": 4},
 				{"pt":  32, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n３０増える", "mp": null, "maxhp": 30},
-				{"pt":  40, "name": "超ちからため", "desc": "チカラを集中して\nテンションを\n一気に高める", "mp": 5}
+				{"pt":  40, "name": "超ちからため", "desc": "チカラを集中して\nテンションを\n一気に高める", "mp": 5},
+				{"pt":  43, "name": "テンションバーン+30秒", "desc": "テンションバーン\nの効果時間が\n３０秒増える", "mp": null},
+				{"pt":  48, "name": "常時ちから+30", "desc": "常時\nちからが\n３０増える", "mp": null, "pow": 30},
+				{"pt":  50, "name": "行動時10%テンション", "desc": "行動時たまに\nテンションが\nアップする", "mp": null}
 			]
 		},
 
 		"ippatsuya": {
 			"name": "いっぱつ屋",
+			"enhancedName": "いっぱつ屋Ⅱ",
 			"skills": [
 				{"pt":   3, "name": "回転たたき", "desc": "身体を回転させ\n周りの敵に攻撃", "mp": 4},
 				{"pt":   7, "name": "常時きようさ+60", "desc": "常時\nきようさが\n６０増える", "mp": null, "dex": 60},
@@ -961,7 +986,10 @@
 				{"pt":  18, "name": "常時きようさ+100", "desc": "常時\nきようさが\n１００増える", "mp": null, "dex": 100},
 				{"pt":  25, "name": "会心完全ガード", "desc": "守りをかためて\n痛恨のいちげきを\n受けつけない", "mp": 10},
 				{"pt":  32, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
-				{"pt":  40, "name": "ウルトラスタンプ", "desc": "渾身の一撃で\n周りの敵を攻撃し\n攻撃力も下げる", "mp": 8}
+				{"pt":  40, "name": "ウルトラスタンプ", "desc": "渾身の一撃で\n周りの敵を攻撃し\n攻撃力も下げる", "mp": 8},
+				{"pt":  43, "name": "回転たたき+100", "desc": "ダメージが\n１００増える", "mp": null},
+				{"pt":  48, "name": "会心時+200", "desc": "会心時ダメージが\n２００増える", "mp": null},
+				{"pt":  50, "name": "ウルトラスタンプ+300", "desc": "ダメージが\n３００増える", "mp": null}
 			]
 		},
 
@@ -1007,7 +1035,7 @@
 				{"pt":  32, "name": "常時みのまもり+50", "desc": "常時\nみのまもりが\n５０増える", "mp": null, "def": 50},
 				{"pt":  40, "name": "へそくりシャワー", "desc": "ひそかに集めた\nゴールドで放つ\nケチなダメージ", "mp": 10},
 				{"pt":  43, "name": "ビックリたんす+100", "desc": "ダメージが\n１００増える", "mp": null},
-				{"pt":  48, "name": "ウッドボディ", "desc": "", "mp": null},
+				{"pt":  48, "name": "ウッドボディ", "desc": "常時\n受けるダメージを\n少し減らす", "mp": null},
 				{"pt":  50, "name": "へそくりシャワー+200", "desc": "ダメージが\n２００増える", "mp": null}
 			]
 		},
@@ -1022,6 +1050,40 @@
 				{"pt":  25, "name": "装備時射程距離+3m", "desc": "弓のこうげきが\n少し遠くから\n当たるようになる", "mp": null},
 				{"pt":  32, "name": "装備時こうげき力+25", "desc": "弓装備時の\nこうげき力が\n２５増える", "mp": null, "atk": 25},
 				{"pt":  40, "name": "さみだれうち", "desc": "敵１体めがけて\nうちだされる\nどとうの4連射", "mp": 5}
+			]
+		},
+
+		"killerofhell": {
+			"name": "地獄の殺し屋",
+			"enhancedName": "地獄の殺し屋Ⅱ",
+			"skills": [
+				{"pt":   3, "name": "おたけび", "desc": "周囲の敵を\n大声でおどかし\n動けなくする", "mp": 3},
+				{"pt":   7, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  12, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
+				{"pt":  18, "name": "いなずま", "desc": "周囲を巻き込む\nいなずまを呼び\n攻撃する", "mp": 6},
+				{"pt":  25, "name": "常時ちから+15", "desc": "常時\nちからが\n１５増える", "mp": null, "pow": 15},
+				{"pt":  32, "name": "会心時+50", "desc": "会心時ダメージが\n５０増える", "mp": null},
+				{"pt":  40, "name": "地獄の咆吼", "desc": "会心率を高め\n与えるダメージも\nアップする", "mp": 8, "charge": 150},
+				{"pt":  43, "name": "常時ちから+10", "desc": "常時\nちからが\n１０増える", "mp": null, "pow": 10},
+				{"pt":  48, "name": "いなずま+200", "desc": "ダメージが\n２００増える", "mp": null},
+				{"pt":  50, "name": "会心時+50", "desc": "会心時ダメージが\n５０増える", "mp": null}
+			]
+		},
+
+		"swift": {
+			"name": "しゅんそく",
+			"enhancedName": "しゅんそくⅡ",
+			"skills": [
+				{"pt":   3, "name": "常時すばやさ+80", "desc": "常時\nすばやさが\n８０増える", "mp": null, "spd": 80},
+				{"pt":   7, "name": "しっぷう攻撃", "desc": "風のやいばで\n敵１体を\n２回攻撃する", "mp": 5},
+				{"pt":  12, "name": "常時身かわし率+5%", "desc": "常時\n敵の攻撃を\nかわしやすくなる", "mp": null},
+				{"pt":  18, "name": "常時さいだいＭＰ+20", "desc": "常時\nさいだいＭＰが\n２０増える", "mp": null, "maxmp": 20},
+				{"pt":  25, "name": "零の洗礼", "desc": "敵にかかっている\nよい効果を解除", "mp": 10},
+				{"pt":  32, "name": "5.0%ターン消費なし", "desc": "５．０％の確率で\nターン消費しない", "mp": null},
+				{"pt":  40, "name": "ひっかきのあらし", "desc": "前方の敵集団を\n４回攻撃し\n守備力も下げる", "mp": 9, "charge": 75},
+				{"pt":  43, "name": "しっぷう攻撃+100", "desc": "ダメージが\n１００増える", "mp": null},
+				{"pt":  48, "name": "常時すばやさ+60", "desc": "常時\nすばやさが\n６０増える", "mp": null, "spd": 60},
+				{"pt":  50, "name": "ひっかきのあらし+30", "desc": "ダメージが\n３０増える", "mp": null}
 			]
 		},
 
@@ -1269,6 +1331,7 @@
 
 		"io": {
 			"name": "イオの心得",
+			"enhancedName": "イオの心得Ⅱ",
 			"skills": [
 				{"pt":   3, "name": "イオ", "desc": "小さな爆発で\n自分の周りの\n敵を攻撃", "mp": 4},
 				{"pt":   7, "name": "常時こうげき魔力+40", "desc": "常時\nこうげき魔力が\n４０増える", "mp": null, "magic": 40},
@@ -1276,7 +1339,10 @@
 				{"pt":  18, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
 				{"pt":  25, "name": "常時こうげき魔力+100", "desc": "常時\nこうげき魔力が\n１００増える", "mp": null, "magic": 100},
 				{"pt":  32, "name": "イオナズン", "desc": "すさまじい爆発で\n自分の周りの\n敵を攻撃", "mp": 23},
-				{"pt":  40, "name": "イオ系効果+20%", "desc": "イオ系の呪文の\n威力があがる", "mp": null}
+				{"pt":  40, "name": "イオ系効果+20%", "desc": "イオ系の呪文の\n威力があがる", "mp": null},
+				{"pt":  43, "name": "常時呪文暴走率+5%", "desc": "呪文を唱えた時\n魔力が\n暴走しやすくなる", "mp": null},
+				{"pt":  48, "name": "光耐性+5%", "desc": "光属性攻撃の\n威力が軽減される", "mp": null},
+				{"pt":  50, "name": "イオ系効果+30%", "desc": "イオ系の呪文の\n威力があがる", "mp": null}
 			]
 		},
 
@@ -1973,6 +2039,32 @@
 			]
 		},
 
+		"claw-ex-killerpanther": {
+			"name": "ツメの極意",
+			"skills": [
+				{"pt":   3, "name": "常時さいだいＨＰ+20", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 20},
+				{"pt":   7, "name": "マシン系威力+5%", "desc": "ツメ装備で\nマシン系攻撃時\n威力があがる", "mp": null},
+				{"pt":  12, "name": "ライガークラッシュ", "desc": "獣神のごとく\n敵１体を\n５連続で斬り刻む", "mp": 8, "charge": 65},
+				{"pt":  18, "name": "装備時かいしん率+3%", "desc": "ツメでの攻撃時\n会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  25, "name": "マシン系威力+5%", "desc": "ツメ装備で\nマシン系攻撃時\n威力があがる", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+30", "desc": "ツメ装備時の\nこうげき力が\n３０増える", "mp": null, "atk": 30},
+				{"pt":  40, "name": "牙神昇誕", "desc": "ツメを研ぎすまし\n攻撃力を一定時間\nかなり増やす", "mp": 5, "charge": 100}
+			]
+		},
+
+		"felidae": {
+			"name": "ネコ科",
+			"skills": [
+				{"pt":   3, "name": "常時すばやさ+100", "desc": "常時\nすばやさが\n１００増える", "mp": null, "spd": 100},
+				{"pt":   7, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
+				{"pt":  12, "name": "ネコパンチ", "desc": "強くひっかいて\n相手をひるませる\n強烈な一撃", "mp": 5, "charge": 120},
+				{"pt":  18, "name": "会心時+50", "desc": "会心時ダメージが\n５０増える", "mp": null},
+				{"pt":  25, "name": "常時ちから+20", "desc": "常時\nちからが\n３０増える", "mp": null, "pow": 20},
+				{"pt":  32, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 30},
+				{"pt":  40, "name": "グルーミング", "desc": "毛づくろいをして\n自分の攻撃力と\nすばやさがあがる", "mp": 5}
+			]
+		},
+
 		"additional0": {
 			"name": "追加スキル0ダミー",
 			"skills": [
@@ -2279,13 +2371,23 @@
 			"status": {"maxhp": 320, "maxmp": 80, "pow": 140, "def": 120, "magic": 55, "heal": 63, "spd": 70, "dex": 82, "charm": 90, "weight": 120},
 			"increment": {"maxhp": 5, "maxmp": 6, "pow": 3, "def": 6, "magic": 4, "heal": 3, "spd": 2, "dex": 5, "charm": 0, "weight": 0},
 			"expTable": 1
+		},
+
+		"killerpanther": {
+			"id": 29,
+			"name": "キラーパンサー",
+			"defaultName": "キラーパンサ",
+			"skillLines": ["killerofhell", "swift", "claw"],
+			"status": {"maxhp": 308, "maxmp": 110, "pow": 140, "def": 120, "magic": 50, "heal": 30, "spd": 180, "dex": 210, "charm": 120, "weight": 100},
+			"increment": {"maxhp": 4, "maxmp": 7, "pow": 3, "def": 3, "magic": 6, "heal": 5, "spd": 15, "dex": 12, "charm": 0, "weight": 0},
+			"expTable": 1
 		}
 	},
 
 	"monstermaster": [
 		"slime", "mormon", "prisonyan", "hoimislime", "slimeknight",
 		"chimera", "catmage", "lizardman", "battlerex", "itazuramogura",
-		"babysatan", "dragonkids", "drakee", "brownie"
+		"babysatan", "dragonkids", "drakee", "brownie", "killerpanther"
 	],
 	"itemmaster": [
 		"metappy", "takeyarihei", "needleman", "fondue", "entasisman",
@@ -2362,7 +2464,9 @@
 		{"name": "axe-ex-yamishibari",  "restartCount": 7, "id": 66, "occupied": ["yamishibari"]},
 		{"name": "yaminoonnen",         "restartCount": 8, "id": 67, "occupied": ["yamishibari"]},
 		{"name": "bow-ex",              "restartCount": 7, "id": 68, "occupied": ["tansumimic"]},
-		{"name": "tansunoshizou",       "restartCount": 8, "id": 69, "occupied": ["tansumimic"]}
+		{"name": "tansunoshizou",       "restartCount": 8, "id": 69, "occupied": ["tansumimic"]},
+		{"name": "claw-ex-killerpanther", "restartCount": 7, "id": 70, "occupied": ["killerpanther"]},
+		{"name": "felidae",             "restartCount": 8, "id": 71, "occupied": ["killerpanther"]}
 	],
 
 	"skillPtsGiven": [null,
@@ -2406,7 +2510,8 @@
 				"chimera", "catmage", "itazuramogura",
 				"devilarmor", "killermachine", "tansumimic",
 				"slime", "mormon", "prisonyan", "slimeknight", "lizardman", "battlerex",
-				"metappy", "samayouyoroi", "golem", "odoruhouseki", "magicalhat", "puppetman"
+				"metappy", "samayouyoroi", "golem", "odoruhouseki", "magicalhat", "puppetman",
+				"brownie", "babysatan", "takeyarihei", "fondue", "killerpanther"
 			]
 		}
 	},
