@@ -217,7 +217,7 @@ namespace Dq10.SkillSimulator {
 
 		//職業レベルに対するスキルポイント最大値
 		maxSkillPts(vocationId: string): number {
-			return this.DB.skillPtsGiven[this.vocationDic[vocationId].level];
+			return this.DB.skillPtsGiven[this.DB.vocations[vocationId].skillPtsTable][this.vocationDic[vocationId].level];
 		}
 
 		//スキルポイント合計に対する必要レベル取得
@@ -226,7 +226,7 @@ namespace Dq10.SkillSimulator {
 			var total = this.totalSkillPts(vocationId) - trainingSkillPt;
 
 			for(var l = this.DB.consts.level.min; l <= this.DB.consts.level.max; l++) {
-				if(this.DB.skillPtsGiven[l] >= total) {
+				if(this.DB.skillPtsGiven[this.DB.vocations[vocationId].skillPtsTable][l] >= total) {
 					//特訓スキルポイントが1以上の場合、最低レベル50必要
 					if(trainingSkillPt > this.DB.consts.trainingSkillPts.min && l < this.DB.consts.level.forTrainingMode)
 						return this.DB.consts.level.forTrainingMode;
@@ -941,7 +941,7 @@ namespace Dq10.SkillSimulator {
 				this.$lvConsole = $('#lv_console');
 				var $select = $('#lv-select');
 				for(var i = this.DB.consts.level.min; i <= this.DB.consts.level.max; i++) {
-					$select.append($("<option />").val(i).text(`${i} (${this.DB.skillPtsGiven[i]})`));
+					$select.append($("<option />").val(i).text(`${i} (${this.DB.skillPtsGiven[1][i]})`));
 				}
 
 				$select.change((e) => {

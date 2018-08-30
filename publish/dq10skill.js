@@ -701,14 +701,14 @@ var Dq10;
             };
             //職業レベルに対するスキルポイント最大値
             SimulatorModel.prototype.maxSkillPts = function (vocationId) {
-                return this.DB.skillPtsGiven[this.vocationDic[vocationId].level];
+                return this.DB.skillPtsGiven[this.DB.vocations[vocationId].skillPtsTable][this.vocationDic[vocationId].level];
             };
             //スキルポイント合計に対する必要レベル取得
             SimulatorModel.prototype.requiredLevel = function (vocationId) {
                 var trainingSkillPt = this.getTrainingSkillPt(vocationId);
                 var total = this.totalSkillPts(vocationId) - trainingSkillPt;
                 for (var l = this.DB.consts.level.min; l <= this.DB.consts.level.max; l++) {
-                    if (this.DB.skillPtsGiven[l] >= total) {
+                    if (this.DB.skillPtsGiven[this.DB.vocations[vocationId].skillPtsTable][l] >= total) {
                         //特訓スキルポイントが1以上の場合、最低レベル50必要
                         if (trainingSkillPt > this.DB.consts.trainingSkillPts.min && l < this.DB.consts.level.forTrainingMode)
                             return this.DB.consts.level.forTrainingMode;
@@ -1149,7 +1149,7 @@ var Dq10;
                         _this.$lvConsole = $('#lv_console');
                         var $select = $('#lv-select');
                         for (var i = _this.DB.consts.level.min; i <= _this.DB.consts.level.max; i++) {
-                            $select.append($("<option />").val(i).text(i + " (" + _this.DB.skillPtsGiven[i] + ")"));
+                            $select.append($("<option />").val(i).text(i + " (" + _this.DB.skillPtsGiven[1][i] + ")"));
                         }
                         $select.change(function (e) {
                             var vocationId = _this.getCurrentVocation(e.currentTarget);

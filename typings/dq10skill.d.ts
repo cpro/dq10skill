@@ -6,7 +6,9 @@
 	};
 	vocationOrder: string[];
 	uniqueSkillLineOrder: string[];
-	skillPtsGiven: number[];
+	skillPtsGiven: {
+		[index: number]: number[];
+	};
 	expRequired: {
 		[index: number]: number[];
 	};
@@ -50,6 +52,7 @@ interface Vocation {
 	skillLines: string[];
 	skillLineOrder?: string[];
 	expTable: number;
+	skillPtsTable: number;
 }
 
 interface SkillLine {

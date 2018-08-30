@@ -1318,105 +1318,122 @@
 			"name": "戦士",
 			"abbr": "戦士",
 			"skillLines": ["sword", "twohandedsword", "axe", "shield", "courage"],
-			"expTable": 1
+			"expTable": 1,
+			"skillPtsTable": 1
 		},
 		"priest": {
 			"name": "僧侶",
 			"abbr": "僧侶",
 			"skillLines": ["spear", "stick", "staff", "shield", "faith"],
-			"expTable": 1
+			"expTable": 1,
+			"skillPtsTable": 1
 		},
 		"mage": {
 			"name": "魔法使い",
 			"abbr": "魔使",
 			"skillLines": ["wand", "knife", "whip", "shield", "spellcraft"],
-			"expTable": 1
+			"expTable": 1,
+			"skillPtsTable": 1
 		},
 		"martialartist": {
 			"name": "武闘家",
 			"abbr": "武闘",
 			"skillLines": ["claw", "staff", "fan", "fisticuffs", "focus"],
-			"expTable": 1
+			"expTable": 1,
+			"skillPtsTable": 1
 		},
 		"thief": {
 			"name": "盗賊",
 			"abbr": "盗賊",
 			"skillLines": ["knife", "whip", "claw", "fisticuffs", "acquisitiveness"],
-			"expTable": 1
+			"expTable": 1,
+			"skillPtsTable": 1
 		},
 		"minstrel": {
 			"name": "旅芸人",
 			"abbr": "旅芸",
 			"skillLines": ["fan", "staff", "knife", "shield", "litheness"],
-			"expTable": 1
+			"expTable": 1,
+			"skillPtsTable": 1
 		},
 		"ranger": {
 			"name": "レンジャー",
 			"abbr": "レン",
 			"skillLines": ["bow", "boomerang", "axe", "fisticuffs", "ruggedness"],
-			"expTable": 2
+			"expTable": 2,
+			"skillPtsTable": 1
 		},
 		"paladin": {
 			"name": "パラディン",
 			"abbr": "パラ",
 			"skillLines": ["hammer", "spear", "stick", "shield", "virtue"],
-			"expTable": 2
+			"expTable": 2,
+			"skillPtsTable": 1
 		},
 		"armamentalist": {
 			"name": "魔法戦士",
 			"abbr": "魔戦",
 			"skillLines": ["sword", "wand", "bow", "shield", "fource"],
 			"skillLineOrder": ["sword", "bow", "wand", "shield", "fource"],
-			"expTable": 2
+			"expTable": 2,
+			"skillPtsTable": 1
 		},
 		"luminary": {
 			"name": "スーパースター",
 			"abbr": "スパ",
 			"skillLines": ["whip", "fan", "stick", "fisticuffs", "jenesaisquoi"],
 			"skillLineOrder": ["whip", "stick", "fan", "fisticuffs", "jenesaisquoi"],
-			"expTable": 2
+			"expTable": 2,
+			"skillPtsTable": 1
 		},
 		"gladiator": {
 			"name": "バトルマスター",
 			"abbr": "バト",
 			"skillLines": ["twohandedsword", "sword", "hammer", "fisticuffs", "guts"],
-			"expTable": 2
+			"expTable": 2,
+			"skillPtsTable": 1
 		},
 		"sage": {
 			"name": "賢者",
 			"abbr": "賢者",
 			"skillLines": ["boomerang", "wand", "bow", "shield", "enlightenment"],
-			"expTable": 2
+			"expTable": 2,
+			"skillPtsTable": 1
 		},
 		"monstermaster": {
 			"name": "まもの使い",
 			"abbr": "まも",
 			"skillLines": ["whip", "claw", "twohandedsword", "axe", "monstermaster"],
-			"expTable": 2
+			"expTable": 2,
+			"skillPtsTable": 1
  		},
  		"itemmaster": {
  			"name": "どうぐ使い",
  			"abbr": "どう",
  			"skillLines": ["boomerang", "hammer", "spear", "bow", "itemmaster"],
- 			"expTable": 2
+ 			"expTable": 2,
+			"skillPtsTable": 1
 		},
 		"dancer": {
  			"name": "踊り子",
  			"abbr": "踊り",
  			"skillLines": ["knife", "fan", "stick", "song", "dance"],
- 			"expTable": 2
+ 			"expTable": 2,
+			"skillPtsTable": 1
 		},
 		"fortuneteller": {
  			"name": "占い師",
  			"abbr": "占い",
  			"skillLines": ["sword", "bow", "whip", "staff", "fortunetelling"],
- 			"expTable": 2
+ 			"expTable": 2,
+			"skillPtsTable": 1
 		},
 		"druid": {
 			"name": "天地雷鳴士",
 			"abbr": "天地",
 			"skillLines": ["fan", "stick", "wand", "shield", "summon"],
-			"expTable": 2
+			"expTable": 2,
+			"skillPtsTable": 1
 		}
 	},
 	"_vocations_coming": {
@@ -1429,19 +1446,34 @@
 		"monstermaster", "itemmaster", "dancer", "fortuneteller", "druid"
 	],
 
-	"skillPtsGiven": [null,
-		  0,   0,   0,   0,   0,   0,   0,   0,   0,   3,
-		  6,   6,   9,  13,  13,  17,  21,  21,  25,  29,
-		 29,  32,  36,  36,  40,  44,  44,  49,  54,  54,
-		 58,  63,  63,  68,  72,  72,  76,  79,  79,  83,
-		 87,  87,  90,  93,  93,  97, 100, 100, 103, 107,
-		107, 110, 113, 113, 116, 118, 119, 122, 124, 126,
-		129, 131, 132, 134, 136, 138, 141, 144, 146, 148,
-		151, 152, 154, 156, 158, 161, 163, 165, 167, 170,
-		171, 173, 175, 177, 179, 180, 182, 183, 184, 186,
-		187, 188, 190, 192, 194, 195, 197, 199, 200, 203,
-		204, 205, 207, 208, 210
-	],
+	"skillPtsGiven": {
+		"1": [null,
+			  0,   0,   0,   0,   0,   0,   0,   0,   0,   3,
+			  6,   6,   9,  13,  13,  17,  21,  21,  25,  29,
+			 29,  32,  36,  36,  40,  44,  44,  49,  54,  54,
+			 58,  63,  63,  68,  72,  72,  76,  79,  79,  83,
+			 87,  87,  90,  93,  93,  97, 100, 100, 103, 107,
+			107, 110, 113, 113, 116, 118, 119, 122, 124, 126,
+			129, 131, 132, 134, 136, 138, 141, 144, 146, 148,
+			151, 152, 154, 156, 158, 161, 163, 165, 167, 170,
+			171, 173, 175, 177, 179, 180, 182, 183, 184, 186,
+			187, 188, 190, 192, 194, 195, 197, 199, 200, 203,
+			204, 205, 207, 208, 210
+		],
+		"2": [null,
+			0,   0,   0,   0,   0,   0,   0,   0,   0,   3,
+			6,   6,   9,  13,  13,  17,  21,  21,  25,  29,
+		   29,  32,  36,  36,  40,  44,  44,  49,  54,  54,
+		   58,  63,  63,  68,  72,  72,  76,  79,  79,  83,
+		   87,  87,  90,  93,  93,  97, 100, 100, 103, 107,
+		  107, 110, 113, 113, 116, 118, 119, 122, 124, 126,
+		  129, 131, 132, 134, 136, 138, 141, 144, 146, 148,
+		  151, 152, 154, 156, 158, 161, 163, 165, 167, 170,
+		  171, 173, 175, 177, 179, 180, 182, 183, 184, 186,
+		  187, 188, 190, 192, 194, 195, 197, 199, 200, 203,
+		  204, 205, 207, 208, 210
+		]
+	},
 
 	"expRequired": {
 		"1": [null,
