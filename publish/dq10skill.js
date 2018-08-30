@@ -860,7 +860,8 @@ var Dq10;
                 'itemmaster',
                 'dancer',
                 'fortuneteller',
-                'druid' //天地雷鳴士
+                'druid',
+                'gadabout' //遊び人
             ];
             var BITS_LEVEL = 8; //レベルは8ビット確保
             var BITS_SKILL = 7; //スキルは7ビット

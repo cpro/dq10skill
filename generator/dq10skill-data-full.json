@@ -1278,6 +1278,35 @@
 			]
 		},
 
+ 		"gadabout-uniq": {
+ 			"id": 35,
+			"unique": true,
+ 			"name": "（不明）",
+ 			"abbr": "",
+ 			"skills": [
+ 				{"pt":   2, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  12, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  26, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  40, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  48, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  56, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  70, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  80, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":  90, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt": 100, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt": 110, "name": "（不明）", "desc": "", "mp": null},
+				{"pt": 120, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt": 130, "name": "（不明）", "desc": "", "mp": null},
+				{"pt": 140, "name": "（不明）", "desc": "", "mp": null},
+				{"pt": 150, "name": "（不明）", "desc": "", "mp": null},
+				{"pt": 160, "name": "（なし）"},
+				{"pt": 170, "name": "（なし）"},
+				{"pt": 180, "name": "（なし）"}
+			],
+			"customSkills": [
+			]
+		},
+
  		"unknown": {
  			"id": 99,
 			"unique": true,
@@ -1310,7 +1339,7 @@
 	"uniqueSkillLineOrder": [
 		"courage", "faith", "spellcraft", "focus", "acquisitiveness", "litheness",
 		"guts", "virtue", "fource", "ruggedness", "enlightenment", "jenesaisquoi",
-		"monstermaster", "itemmaster", "song", "dance", "fortunetelling", "summon"
+		"monstermaster", "itemmaster", "song", "dance", "fortunetelling", "summon", "gadabout-uniq"
 	],
 
 	"vocations": {
@@ -1435,6 +1464,14 @@
 			"expTable": 2,
 			"skillPtsTable": 1,
 			"initialLevel": 50
+		},
+		"gadabout": {
+			"name": "遊び人",
+			"abbr": "遊び",
+			"skillLines": ["sword", "knife", "hammer", "boomerang", "gadabout-uniq"],
+			"expTable": 3,
+			"skillPtsTable": 2,
+			"initialLevel": 50
 		}
 	},
 	"_vocations_coming": {
@@ -1444,7 +1481,7 @@
 	"vocationOrder": [
 		"warrior", "priest", "mage", "martialartist", "thief", "minstrel",
 		"gladiator", "paladin", "armamentalist", "ranger", "sage", "luminary",
-		"monstermaster", "itemmaster", "dancer", "fortuneteller", "druid"
+		"monstermaster", "itemmaster", "dancer", "fortuneteller", "druid", "gadabout"
 	],
 
 	"skillPtsGiven": {
@@ -1462,17 +1499,17 @@
 			204, 205, 207, 208, 210
 		],
 		"2": [null,
-			0,   0,   0,   0,   0,   0,   0,   0,   0,   3,
-			6,   6,   9,  13,  13,  17,  21,  21,  25,  29,
-		   29,  32,  36,  36,  40,  44,  44,  49,  54,  54,
-		   58,  63,  63,  68,  72,  72,  76,  79,  79,  83,
-		   87,  87,  90,  93,  93,  97, 100, 100, 103, 107,
-		  107, 110, 113, 113, 116, 118, 119, 122, 124, 126,
-		  129, 131, 132, 134, 136, 138, 141, 144, 146, 148,
-		  151, 152, 154, 156, 158, 161, 163, 165, 167, 170,
-		  171, 173, 175, 177, 179, 180, 182, 183, 184, 186,
-		  187, 188, 190, 192, 194, 195, 197, 199, 200, 203,
-		  204, 205, 207, 208, 210
+			  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
+			  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
+			  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
+			  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
+			  0,   0,   0,   0,   0,   0,   0,   0,   0, 107,
+			107, 110, 113, 113, 116, 118, 119, 122, 124, 126,
+			129, 131, 132, 134, 136, 138, 141, 144, 146, 148,
+			151, 152, 154, 156, 158, 161, 163, 165, 167, 170,
+			171, 173, 175, 177, 179, 180, 182, 183, 184, 186,
+			187, 188, 190, 192, 194, 195, 197, 199, 200, 203,
+			204, 205, 207, 208, 210
 		]
 	},
 
@@ -1502,6 +1539,19 @@
 			 6028988,  6228334,  6427680,  6627026,  6826372,  7075718,  7375064,  7724410,  8123756,  8573102,
 			 9172448,  9921794, 10881140, 11840486, 12799832, 13759178, 14718524, 15677870, 16637216, 17596562,
 			18555908, 19515254, 20474600, 21433946, 22393292
+		],
+		"3": [null,
+			       0,        0,        0,        0,        0,        0,        0,        0,        0,        0,
+			       0,        0,        0,        0,        0,        0,        0,        0,        0,        0,
+			       0,        0,        0,        0,        0,        0,        0,        0,        0,        0,
+			       0,        0,        0,        0,        0,        0,        0,        0,        0,        0,
+			       0,        0,        0,        0,        0,        0,        0,        0,        0,        0,
+			   "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",
+			   "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",
+			   "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",
+			   "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",
+			   "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",    "NaN",
+			   "NaN",    "NaN",    "NaN",    "NaN",    "NaN"
 		]
 	},
 
