@@ -7,14 +7,14 @@
     <link href='http://cpro.jp/dq10/skillsimulator/monster.html' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。まもの使い・どうぐ使いで仲間にしたモンスター用。' name='description'>
     <title>DQ10 仲間モンスター用スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=m3.3' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=m3.5' rel='stylesheet' type='text/css'>
     <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js' type='text/javascript'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
     <script src='js/rawdeflate.min.js' type='text/javascript'></script>
     <script src='js/rawinflate.min.js' type='text/javascript'></script>
-    <script src='./dq10skill-monster.js?ver=m3.3' type='text/javascript'></script>
+    <script src='./dq10skill-monster.js?ver=m3.5' type='text/javascript'></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -71,6 +71,7 @@
             <li class='button-monster-append ui-corner-all'><a id='append-killermachine'>キラーマシン</a></li>
             <li class='button-monster-append ui-corner-all'><a id='append-yamishibari'>やみしばり</a></li>
             <li class='button-monster-append ui-corner-all'><a id='append-tansumimic'>たんすミミック</a></li>
+            <li class='button-monster-append ui-corner-all'><a id='append-mysterydoll'>ミステリドール</a></li>
           </ul>
         </div>
       </div>
@@ -79,11 +80,7 @@
       <div class='monster_ent' id='initial-instruction'>
         <p>上のモンスター名のボタンをクリックして仲間モンスターを追加してください。</p>
         <p class='whatsnew'>
-          （New: ver4.1の新仲間モンスター・キラーパンサーを追加しました）
-          <br>
-          （New: ver4.1のモンスター4種のスキル強化に対応しました：
-          <br>
-          ブラウニー / ベビーサタン / たけやりへい / フォンデュ）
+          （New: ver4.1の新仲間モンスター・ミステリドールを追加しました）
         </p>
       </div>
       <div id='monsters'></div>
@@ -198,6 +195,12 @@
               履歴:
               <ul>
                 <li>
+                  2018/5/30 v3.5 ver4.2対応
+                  <ul>
+                    <li>ミステリドール追加に対応。</li>
+                  </ul>
+                </li>
+                <li>
                   2018/2/26 v3.4 ver4.1対応
                   <ul>
                     <li>キラーパンサー追加に対応。</li>
@@ -214,7 +217,6 @@
                     <li>2017/4/27 v3.1 レジェンドバッジ入力可能に、虹バッジのデータ追加。</li>
                   </ul>
                 </li>
-                <li>2017/2/26 v2.1.1 ver3.5前期対応：転生回数の上限を8→9に変更。</li>
                 <li>過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。</li>
               </ul>
             </li>

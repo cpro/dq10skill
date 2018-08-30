@@ -1087,6 +1087,53 @@
 			]
 		},
 
+		"plaster": {
+			"name": "石膏",
+			"enhancedName": "石膏Ⅱ",
+			"skills": [
+				{"pt":   3, "name": "石壁の護り", "desc": "周囲の仲間の\n守備力と重さを\n上げる", "mp": 12},
+				{"pt":   7, "name": "常時みのまもり+80", "desc": "常時\nみのまもりが\n８０増える", "mp": null, "def": 80},
+				{"pt":  12, "name": "常時おもさ+10", "desc": "常時\nおもさが\n１０増える", "mp": null, "weight": 10},
+				{"pt":  18, "name": "石膏ガード", "desc": "", "mp": null},
+				{"pt":  25, "name": "岩肌", "desc": "", "mp": null},
+				{"pt":  32, "name": "常時さいだいＨＰ+50", "desc": "常時\nさいだいＨＰが\n５０増える", "mp": null, "maxhp": 50},
+				{"pt":  40, "name": "結界の護り", "desc": "", "mp": null},
+				{"pt":  43, "name": "特技範囲+2m", "desc": "特技の効果範囲が\n２ｍ増える", "mp": null},
+				{"pt":  48, "name": "常時みのまもり+60", "desc": "常時\nみのまもりが\n６０増える", "mp": null, "def": 60},
+				{"pt":  50, "name": "固まり魂", "desc": "", "mp": null}
+			]
+		},
+
+		"haniwa": {
+			"name": "ハニワ",
+			"enhancedName": "ハニワⅡ",
+			"skills": [
+				{"pt":   3, "name": "夢幻のひとみ", "desc": "周囲の敵の\n目をくらませ\nたまにマヒさせる", "mp": 4, "charge": 70},
+				{"pt":   7, "name": "常時さいだいＭＰ+50", "desc": "常時\nさいだいＭＰが\n５０増える", "mp": null, "maxmp": 50},
+				{"pt":  12, "name": "マホトラ踊り", "desc": "ふしぎな踊りで\n相手からＭＰを\n奪って回復する", "mp": 0},
+				{"pt":  18, "name": "常時すばやさ+60", "desc": "常時\nすばやさが\n６０増える", "mp": null, "spd": 60},
+				{"pt":  25, "name": "ハッスルダンス", "desc": "周囲の仲間の\nＨＰを７０～回復", "mp": 8},
+				{"pt":  32, "name": "常時かいふく魔力+80", "desc": "常時\nかいふく魔力が\n８０増える", "mp": null, "heal": 80},
+				{"pt":  40, "name": "グランドインパクト", "desc": "", "mp": null},
+				{"pt":  43, "name": "ハッスルダンス+30", "desc": "回復量が\n３０増える", "mp": null},
+				{"pt":  48, "name": "浮遊術", "desc": "常時\n足元の攻撃を\nかわすようになる", "mp": null},
+				{"pt":  50, "name": "グランドインパクト+80", "desc": "ダメージが\n８０増える", "mp": null}
+			]
+		},
+
+		"boomerang-mysterydoll": {
+			"name": "ブーメラン",
+			"skills": [
+				{"pt":   3, "name": "装備時こうげき力+10", "desc": "ブーメラン装備時\nこうげき力が\n１０増える", "mp": null, "atk": 10},
+				{"pt":   7, "name": "スライムブロウ", "desc": "スライム系の敵に\n威力を発揮する\nブーメランの妙技", "mp": 1},
+				{"pt":  12, "name": "装備時こうげき力+15", "desc": "ブーメラン装備時\nこうげき力が\n１５増える", "mp": null, "atk": 15},
+				{"pt":  18, "name": "バーニングバード", "desc": "炎に包まれた\nブーメランが\n敵をめった切り", "mp": 6},
+				{"pt":  25, "name": "装備時命中+20%", "desc": "ブーメランでの\nこうげきが\n当たりやすくなる", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+25", "desc": "ブーメラン装備時\nこうげき力が\n２５増える", "mp": null, "atk": 25},
+				{"pt":  40, "name": "デュアルカッター", "desc": "範囲内の敵に\n２回連続の\n全体攻撃", "mp": 8}
+			]
+		},
+
 		"unknown1": {
 			"name": "不明",
 			"skills": [
@@ -2059,9 +2106,35 @@
 				{"pt":   7, "name": "常時かいしん率+5%", "desc": "常時\n会心のいちげきが\n出やすくなる", "mp": null},
 				{"pt":  12, "name": "ネコパンチ", "desc": "強くひっかいて\n相手をひるませる\n強烈な一撃", "mp": 5, "charge": 120},
 				{"pt":  18, "name": "会心時+50", "desc": "会心時ダメージが\n５０増える", "mp": null},
-				{"pt":  25, "name": "常時ちから+20", "desc": "常時\nちからが\n３０増える", "mp": null, "pow": 20},
-				{"pt":  32, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n２０増える", "mp": null, "maxhp": 30},
+				{"pt":  25, "name": "常時ちから+20", "desc": "常時\nちからが\n２０増える", "mp": null, "pow": 20},
+				{"pt":  32, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n３０増える", "mp": null, "maxhp": 30},
 				{"pt":  40, "name": "グルーミング", "desc": "毛づくろいをして\n自分の攻撃力と\nすばやさがあがる", "mp": 5}
+			]
+		},
+
+		"boomerang-ex-mysterydoll": {
+			"name": "ブーメランの極意",
+			"skills": [
+				{"pt":   3, "name": "常時すばやさ+80", "desc": "常時\nすばやさが\n８０増える", "mp": null, "spd": 80},
+				{"pt":   7, "name": "スライム系威力+5%", "desc": "ブーメラン装備で\nスライム系攻撃時\n威力があがる", "mp": null},
+				{"pt":  12, "name": "デュアルブレイカー", "desc": "状態異常の耐性を\n下げる２回連続の\nブーメラン攻撃", "mp": 8, "charge": 75},
+				{"pt":  18, "name": "装備時命中+20%", "desc": "ブーメランでの\n攻撃が　さらに\n当たりやすくなる", "mp": null},
+				{"pt":  25, "name": "スライム系威力+5%", "desc": "ブーメラン装備で\nスライム系攻撃時\n威力があがる", "mp": null},
+				{"pt":  32, "name": "装備時こうげき力+30", "desc": "ブーメラン装備時\nこうげき力が\n３０増える", "mp": null, "atk": 30},
+				{"pt":  40, "name": "レボルスライサー", "desc": "敵１体を切りさき\n与えるダメージも\n増加させる", "mp": 6, "charge": 90}
+			]
+		},
+
+		"dokidokisenshi": {
+			"name": "ドキドキ戦士",
+			"skills": [
+				{"pt":   3, "name": "常時みのまもり+45", "desc": "常時\nみのまもりが\n４５増える", "mp": null, "def": 45},
+				{"pt":   7, "name": "常時ちから+30", "desc": "常時\nちからが\n３０増える", "mp": null, "pow": 30},
+				{"pt":  12, "name": "プラズマリムーバー", "desc": "悪い効果を\nすべて解除する", "mp": 3, "charge": 15},
+				{"pt":  18, "name": "常時かいふく魔力+60", "desc": "常時\nかいふく魔力が\n６０増える", "mp": null, "heal": 60},
+				{"pt":  25, "name": "ストーンボディ", "desc": "", "mp": null},
+				{"pt":  32, "name": "常時さいだいＨＰ+30", "desc": "常時\nさいだいＨＰが\n３０増える", "mp": null, "maxhp": 30},
+				{"pt":  40, "name": "超ハッスルダンス", "desc": "周囲のＨＰを\n２００～回復する\n旅芸人専用特技", "mp": 10, "charge": 60}
 			]
 		},
 
@@ -2381,6 +2454,16 @@
 			"status": {"maxhp": 308, "maxmp": 110, "pow": 140, "def": 120, "magic": 50, "heal": 30, "spd": 180, "dex": 210, "charm": 120, "weight": 100},
 			"increment": {"maxhp": 4, "maxmp": 7, "pow": 3, "def": 3, "magic": 6, "heal": 5, "spd": 15, "dex": 12, "charm": 0, "weight": 0},
 			"expTable": 1
+		},
+
+		"mysterydoll": {
+			"id": 30,
+			"name": "ミステリドール",
+			"defaultName": "ミステリドー",
+			"skillLines": ["plaster", "haniwa", "boomerang-mysterydoll"],
+			"status": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
+			"increment": {"maxhp": 0, "maxmp": 0, "pow": 0, "def": 0, "magic": 0, "heal": 0, "spd": 0, "dex": 0, "charm": 0, "weight": 0},
+			"expTable": 1
 		}
 	},
 
@@ -2392,7 +2475,7 @@
 	"itemmaster": [
 		"metappy", "takeyarihei", "needleman", "fondue", "entasisman",
 		"samayouyoroi", "golem", "devilarmor", "odoruhouseki", "magicalhat",
-		"puppetman", "killermachine", "yamishibari", "tansumimic"
+		"puppetman", "killermachine", "yamishibari", "tansumimic", "mysterydoll"
 	],
 
 	"additionalSkillLines": [
@@ -2466,7 +2549,9 @@
 		{"name": "bow-ex",              "restartCount": 7, "id": 68, "occupied": ["tansumimic"]},
 		{"name": "tansunoshizou",       "restartCount": 8, "id": 69, "occupied": ["tansumimic"]},
 		{"name": "claw-ex-killerpanther", "restartCount": 7, "id": 70, "occupied": ["killerpanther"]},
-		{"name": "felidae",             "restartCount": 8, "id": 71, "occupied": ["killerpanther"]}
+		{"name": "felidae",             "restartCount": 8, "id": 71, "occupied": ["killerpanther"]},
+		{"name": "boomerang-ex-mysterydoll", "restartCount": 7, "id": 72, "occupied": ["mysterydoll"]},
+		{"name": "dokidokisenshi",      "restartCount": 8, "id": 72, "occupied": ["mysterydoll"]}
 	],
 
 	"skillPtsGiven": [null,
@@ -2511,7 +2596,7 @@
 				"devilarmor", "killermachine", "tansumimic",
 				"slime", "mormon", "prisonyan", "slimeknight", "lizardman", "battlerex",
 				"metappy", "samayouyoroi", "golem", "odoruhouseki", "magicalhat", "puppetman",
-				"brownie", "babysatan", "takeyarihei", "fondue", "killerpanther"
+				"brownie", "babysatan", "takeyarihei", "fondue", "killerpanther", "mysterydoll"
 			]
 		}
 	},
