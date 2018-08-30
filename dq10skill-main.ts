@@ -250,36 +250,6 @@ namespace Dq10.SkillSimulator {
 			return this.wholePts.reduce((prev, skillPt) => prev + skillPt.pt, 0);
 		}
 
-		//職業・レベルによる必要経験値
-		requiredExp(vocationId: string, level: number): number {
-			return this.DB.expRequired[this.DB.vocations[vocationId].expTable][level];
-		}
-
-		//不足経験値
-		requiredExpRemain(vocationId: string): number {
-			var required = this.requiredLevel(vocationId);
-			var current = this.vocationDic[vocationId].level;
-			if(required <= current) return 0;
-			var remain = this.requiredExp(vocationId, required) - this.requiredExp(vocationId, current);
-			return remain;
-		}
-
-		//全職業の必要経験値合計
-		totalRequiredExp(): number {
-			return this.vocations.reduce((prev, vocation) => {
-				var cur = this.requiredExp(vocation.id, vocation.level);
-				return prev + cur;
-			}, 0);
-		}
-
-		//全職業の不足経験値合計
-		totalExpRemain(): number {
-			return this.vocations.reduce((prev, vocation) => {
-				var cur = this.requiredExpRemain(vocation.id);
-				return prev + cur;
-			}, 0);
-		}
-
 		//各種パッシブスキルのステータス加算合計
 		//ちから      : pow
 		//みのまもり  : def
@@ -725,9 +695,6 @@ namespace Dq10.SkillSimulator {
 			$(`#${vocationId} .lv_h2`).text(currentLevel);
 			var $levelH2 = $(`#${vocationId} h2`);
 
-			//必要経験値
-			$(`#${vocationId} .exp`).text(numToFormedStr(this.sim.requiredExp(vocationId, currentLevel)));
-
 			//スキルポイント 残り / 最大値
 			var maxSkillPts = this.sim.maxSkillPts(vocationId);
 			var additionalSkillPts = this.sim.getTrainingSkillPt(vocationId);
@@ -744,7 +711,6 @@ namespace Dq10.SkillSimulator {
 			$(`#${vocationId} .expinfo .error`).toggle(isLevelError);
 			if(isLevelError) {
 				$(`#${vocationId} .req_lv`).text(numToFormedStr(requiredLevel));
-				$(`#${vocationId} .exp_remain`).text(numToFormedStr(this.sim.requiredExpRemain(vocationId)));
 			}
 
 			//MSP 残り / 最大値
@@ -759,16 +725,6 @@ namespace Dq10.SkillSimulator {
 
 		private refreshAllVocationInfo() {
 			Object.keys(this.DB.vocations).forEach((vocationId) => this.refreshVocationInfo(vocationId));
-		}
-
-		private refreshTotalRequiredExp() {
-			$('#total_exp').text(numToFormedStr(this.sim.totalRequiredExp()));
-		}
-
-		private refreshTotalExpRemain() {
-			var totalExpRemain = this.sim.totalExpRemain();
-			$('#total_exp_remain, #total_exp_remain_label').toggleClass(this.CLASSNAME_ERROR, totalExpRemain > 0);
-			$('#total_exp_remain').text(numToFormedStr(totalExpRemain));
 		}
 
 		private refreshTotalPassive() {
@@ -1665,16 +1621,6 @@ namespace Dq10.SkillSimulator {
 			});
 			// $('#msp .remain .container').text(this.DB.consts.msp.max - this.sim.totalMSP());
 			// $('#msp .total .container').text(this.DB.consts.msp.max);
-		}
-
-		private refreshTotalRequiredExp() {
-			$('#total_exp').text(numToFormedStr(this.sim.totalRequiredExp()));
-		}
-
-		private refreshTotalExpRemain() {
-			var totalExpRemain = this.sim.totalExpRemain();
-			$('#total_exp_remain, #total_exp_remain_label').toggleClass(this.CLASSNAME_ERROR, totalExpRemain > 0);
-			$('#total_exp_remain').text(numToFormedStr(totalExpRemain));
 		}
 
 		private refreshTotalPassive() {

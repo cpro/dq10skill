@@ -730,35 +730,6 @@ var Dq10;
             SimulatorModel.prototype.wholeSkillPtsUsed = function () {
                 return this.wholePts.reduce(function (prev, skillPt) { return prev + skillPt.pt; }, 0);
             };
-            //職業・レベルによる必要経験値
-            SimulatorModel.prototype.requiredExp = function (vocationId, level) {
-                return this.DB.expRequired[this.DB.vocations[vocationId].expTable][level];
-            };
-            //不足経験値
-            SimulatorModel.prototype.requiredExpRemain = function (vocationId) {
-                var required = this.requiredLevel(vocationId);
-                var current = this.vocationDic[vocationId].level;
-                if (required <= current)
-                    return 0;
-                var remain = this.requiredExp(vocationId, required) - this.requiredExp(vocationId, current);
-                return remain;
-            };
-            //全職業の必要経験値合計
-            SimulatorModel.prototype.totalRequiredExp = function () {
-                var _this = this;
-                return this.vocations.reduce(function (prev, vocation) {
-                    var cur = _this.requiredExp(vocation.id, vocation.level);
-                    return prev + cur;
-                }, 0);
-            };
-            //全職業の不足経験値合計
-            SimulatorModel.prototype.totalExpRemain = function () {
-                var _this = this;
-                return this.vocations.reduce(function (prev, vocation) {
-                    var cur = _this.requiredExpRemain(vocation.id);
-                    return prev + cur;
-                }, 0);
-            };
             //各種パッシブスキルのステータス加算合計
             //ちから      : pow
             //みのまもり  : def
@@ -1665,8 +1636,6 @@ var Dq10;
                 //見出し中のレベル数値
                 $("#" + vocationId + " .lv_h2").text(currentLevel);
                 var $levelH2 = $("#" + vocationId + " h2");
-                //必要経験値
-                $("#" + vocationId + " .exp").text(numToFormedStr(this.sim.requiredExp(vocationId, currentLevel)));
                 //スキルポイント 残り / 最大値
                 var maxSkillPts = this.sim.maxSkillPts(vocationId);
                 var additionalSkillPts = this.sim.getTrainingSkillPt(vocationId);
@@ -1681,7 +1650,6 @@ var Dq10;
                 $("#" + vocationId + " .expinfo .error").toggle(isLevelError);
                 if (isLevelError) {
                     $("#" + vocationId + " .req_lv").text(numToFormedStr(requiredLevel));
-                    $("#" + vocationId + " .exp_remain").text(numToFormedStr(this.sim.requiredExpRemain(vocationId)));
                 }
                 //MSP 残り / 最大値
                 var maxMSP = this.sim.getMSPAvailable();
@@ -1694,14 +1662,6 @@ var Dq10;
             SimulatorUI.prototype.refreshAllVocationInfo = function () {
                 var _this = this;
                 Object.keys(this.DB.vocations).forEach(function (vocationId) { return _this.refreshVocationInfo(vocationId); });
-            };
-            SimulatorUI.prototype.refreshTotalRequiredExp = function () {
-                $('#total_exp').text(numToFormedStr(this.sim.totalRequiredExp()));
-            };
-            SimulatorUI.prototype.refreshTotalExpRemain = function () {
-                var totalExpRemain = this.sim.totalExpRemain();
-                $('#total_exp_remain, #total_exp_remain_label').toggleClass(this.CLASSNAME_ERROR, totalExpRemain > 0);
-                $('#total_exp_remain').text(numToFormedStr(totalExpRemain));
             };
             SimulatorUI.prototype.refreshTotalPassive = function () {
                 var _this = this;
@@ -1987,14 +1947,6 @@ var Dq10;
                 });
                 // $('#msp .remain .container').text(this.DB.consts.msp.max - this.sim.totalMSP());
                 // $('#msp .total .container').text(this.DB.consts.msp.max);
-            };
-            SimpleUI.prototype.refreshTotalRequiredExp = function () {
-                $('#total_exp').text(numToFormedStr(this.sim.totalRequiredExp()));
-            };
-            SimpleUI.prototype.refreshTotalExpRemain = function () {
-                var totalExpRemain = this.sim.totalExpRemain();
-                $('#total_exp_remain, #total_exp_remain_label').toggleClass(this.CLASSNAME_ERROR, totalExpRemain > 0);
-                $('#total_exp_remain').text(numToFormedStr(totalExpRemain));
             };
             SimpleUI.prototype.refreshTotalPassive = function () {
                 var _this = this;

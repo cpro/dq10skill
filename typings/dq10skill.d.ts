@@ -9,9 +9,6 @@
 	skillPtsGiven: {
 		[index: number]: number[];
 	};
-	expRequired: {
-		[index: number]: number[];
-	};
 	trainingPts: {
 		stamps: number;
 		pt: number;
@@ -51,7 +48,6 @@ interface Vocation {
 	abbr?: string;
 	skillLines: string[];
 	skillLineOrder?: string[];
-	expTable: number;
 	skillPtsTable: number;
 	initialLevel?: number;
 }
