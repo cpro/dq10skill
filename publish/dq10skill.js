@@ -630,6 +630,8 @@ var Dq10;
             };
             //特訓スキルポイント更新
             SimulatorModel.prototype.updateTrainingSkillPt = function (vocationId, newValue) {
+                if (this.DB.vocations[vocationId].disableTraining)
+                    return true;
                 if (newValue < this.DB.consts.trainingSkillPts.min || newValue > this.DB.consts.trainingSkillPts.max)
                     return false;
                 this.vocationDic[vocationId].trainingSkillPt = newValue;
@@ -1120,13 +1122,17 @@ var Dq10;
                     function () {
                         _this.$lvConsole = $('#lv_console');
                         var $select = $('#lv-select');
+                        var $select2 = $('#lv-select2');
                         for (var i = _this.DB.consts.level.min; i <= _this.DB.consts.level.max; i++) {
                             $select.append($("<option />").val(i).text(i + " (" + _this.DB.skillPtsGiven[1][i] + ")"));
+                            $select2.append($("<option />").val(i).text(i + " (" + _this.DB.skillPtsGiven[2][i] + ")"));
                         }
-                        $select.change(function (e) {
+                        var selectChangeHandler = function (e) {
                             var vocationId = _this.getCurrentVocation(e.currentTarget);
                             _this.com.updateLevel(vocationId, $(e.currentTarget).val());
-                        });
+                        };
+                        $select.change(selectChangeHandler);
+                        $select2.change(selectChangeHandler);
                     },
                     //レベル欄クリック時にUI表示
                     function () {
@@ -1135,7 +1141,11 @@ var Dq10;
                             var vocationId = _this.getCurrentVocation(e.currentTarget);
                             var consoleLeft = $(e.currentTarget).find('.lv_h2').position().left - 3;
                             _this.$lvConsole.appendTo($(e.currentTarget)).css({ left: consoleLeft });
-                            $('#lv-select').val(_this.sim.getLevel(vocationId));
+                            var skillPtsTable = _this.DB.vocations[vocationId].skillPtsTable;
+                            var $select = $([null, '#lv-select', '#lv-select2'][skillPtsTable]);
+                            _this.$lvConsole.find('select').hide();
+                            $select.show();
+                            $select.val(_this.sim.getLevel(vocationId));
                             _this.$lvConsole.show();
                             e.stopPropagation();
                         });

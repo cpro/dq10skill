@@ -50,6 +50,7 @@ interface Vocation {
 	skillLineOrder?: string[];
 	skillPtsTable: number;
 	initialLevel?: number;
+	disableTraining?: boolean;
 }
 
 interface SkillLine {

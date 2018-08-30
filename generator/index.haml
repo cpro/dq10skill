@@ -98,11 +98,11 @@
 						%dl.skill_pt
 							%dt 残りSP:
 							%dd.pts 0 / 0
-							%dt &nbsp;+&nbsp;
-						%dl.training_pt.ui-handler
-							%dt 特訓
-							%dd{id: "training-#{vocation}"}
-								0
+						- if !data['vocations'][vocation]['disableTraining']
+							%dl.training_pt.ui-handler
+								%dt &nbsp;+ 特訓
+								%dd{id: "training-#{vocation}"}
+									0
 						%dl.mspinfo.ui-handler
 							%dt 残りMSP:
 							%dd.pts 0 / 0

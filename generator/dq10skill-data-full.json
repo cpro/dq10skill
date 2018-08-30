@@ -1453,7 +1453,8 @@
 			"abbr": "遊び",
 			"skillLines": ["sword", "knife", "hammer", "boomerang", "gadabout-uniq"],
 			"skillPtsTable": 2,
-			"initialLevel": 50
+			"initialLevel": 50,
+			"disableTraining": true
 		}
 	},
 	"_vocations_coming": {

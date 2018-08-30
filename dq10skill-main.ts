@@ -134,6 +134,9 @@ namespace Dq10.SkillSimulator {
 
 		//特訓スキルポイント更新
 		updateTrainingSkillPt(vocationId: string, newValue: number): boolean {
+			if(this.DB.vocations[vocationId].disableTraining)
+				return true;
+
 			if(newValue < this.DB.consts.trainingSkillPts.min || newValue > this.DB.consts.trainingSkillPts.max)
 				return false;
 
