@@ -53,6 +53,7 @@ interface Vocation {
 	skillLineOrder?: string[];
 	expTable: number;
 	skillPtsTable: number;
+	initialLevel?: number;
 }
 
 interface SkillLine {

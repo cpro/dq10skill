@@ -59,7 +59,7 @@ namespace Dq10.SkillSimulator {
 			this.vocations = Object.keys(this.DB.vocations).map((vocationId) => {
 				var vocation: VocationData = {
 					id: vocationId,
-					level: this.DB.consts.level.min,
+					level: this.DB.vocations[vocationId].initialLevel || this.DB.consts.level.min,
 					trainingSkillPt: this.DB.consts.trainingSkillPts.min,
 					skillPts: []
 				};

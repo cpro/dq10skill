@@ -565,7 +565,7 @@ var Dq10;
                 this.vocations = Object.keys(this.DB.vocations).map(function (vocationId) {
                     var vocation = {
                         id: vocationId,
-                        level: _this.DB.consts.level.min,
+                        level: _this.DB.vocations[vocationId].initialLevel || _this.DB.consts.level.min,
                         trainingSkillPt: _this.DB.consts.trainingSkillPts.min,
                         skillPts: []
                     };

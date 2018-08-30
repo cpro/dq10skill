@@ -1433,7 +1433,8 @@
 			"abbr": "天地",
 			"skillLines": ["fan", "stick", "wand", "shield", "summon"],
 			"expTable": 2,
-			"skillPtsTable": 1
+			"skillPtsTable": 1,
+			"initialLevel": 50
 		}
 	},
 	"_vocations_coming": {
