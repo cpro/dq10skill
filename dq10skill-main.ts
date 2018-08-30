@@ -896,15 +896,20 @@ namespace Dq10.SkillSimulator {
 			//レベル選択セレクトボックス項目設定
 			() => {
 				this.$lvConsole = $('#lv_console');
-				var $select = $('#lv-select');
+
+				const $select = $('#lv-select');
+				const $select2 = $('#lv-select2');
 				for(var i = this.DB.consts.level.min; i <= this.DB.consts.level.max; i++) {
 					$select.append($("<option />").val(i).text(`${i} (${this.DB.skillPtsGiven[1][i]})`));
+					$select2.append($("<option />").val(i).text(`${i} (${this.DB.skillPtsGiven[2][i]})`));
 				}
 
-				$select.change((e) => {
+				const selectChangeHandler = (e: JQueryEventObject) => {
 					var vocationId = this.getCurrentVocation(<Element>e.currentTarget);
 					this.com.updateLevel(vocationId, $(e.currentTarget).val());
-				});
+				}
+				$select.change(selectChangeHandler);
+				$select2.change(selectChangeHandler);
 			},
 
 			//レベル欄クリック時にUI表示
@@ -916,7 +921,13 @@ namespace Dq10.SkillSimulator {
 					var consoleLeft = $(e.currentTarget).find('.lv_h2').position().left - 3;
 
 					this.$lvConsole.appendTo($(e.currentTarget)).css({left: consoleLeft});
-					$('#lv-select').val(this.sim.getLevel(vocationId));
+
+					const skillPtsTable = this.DB.vocations[vocationId].skillPtsTable;
+					const $select = $([null, '#lv-select', '#lv-select2'][skillPtsTable]);
+
+					this.$lvConsole.find('select').hide();
+					$select.show();
+					$select.val(this.sim.getLevel(vocationId));
 
 					this.$lvConsole.show();
 					e.stopPropagation();
