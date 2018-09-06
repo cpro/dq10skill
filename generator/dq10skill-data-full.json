@@ -1278,32 +1278,44 @@
 			]
 		},
 
- 		"gadabout-uniq": {
+ 		"asobi": {
  			"id": 35,
 			"unique": true,
- 			"name": "（不明）",
+ 			"name": "あそび",
  			"abbr": "",
  			"skills": [
- 				{"pt":   2, "name": "（不明）", "desc": "", "mp": null},
- 				{"pt":  12, "name": "（不明）", "desc": "", "mp": null},
- 				{"pt":  26, "name": "（不明）", "desc": "", "mp": null},
- 				{"pt":  40, "name": "（不明）", "desc": "", "mp": null},
- 				{"pt":  48, "name": "（不明）", "desc": "", "mp": null},
- 				{"pt":  56, "name": "（不明）", "desc": "", "mp": null},
- 				{"pt":  70, "name": "（不明）", "desc": "", "mp": null},
- 				{"pt":  80, "name": "（不明）", "desc": "", "mp": null},
- 				{"pt":  90, "name": "（不明）", "desc": "", "mp": null},
- 				{"pt": 100, "name": "（不明）", "desc": "", "mp": null},
- 				{"pt": 110, "name": "（不明）", "desc": "", "mp": null},
-				{"pt": 120, "name": "（不明）", "desc": "", "mp": null},
- 				{"pt": 130, "name": "（不明）", "desc": "", "mp": null},
-				{"pt": 140, "name": "（不明）", "desc": "", "mp": null},
-				{"pt": 150, "name": "（不明）", "desc": "", "mp": null},
+ 				{"pt":   8, "name": "全職業できようさ+10", "desc": "全職業で\nきようさが\n１０増える", "mp": null, "dex": 10},
+ 				{"pt":  16, "name": "あそぶ（専）", "desc": "", "mp": 3},
+ 				{"pt":  28, "name": "全職業でみりょく+10", "desc": "全職業で\nみりょくが\n１０増える", "mp": null, "charm": 10},
+ 				{"pt":  40, "name": "きまぐれな行動+5%（専）", "desc": "", "mp": null},
+ 				{"pt":  48, "name": "くちぶえ（専）", "desc": "", "mp": 3},
+ 				{"pt":  56, "name": "全職業ですばやさ+10", "desc": "全職業で\nすばやさが\n１０増える", "mp": null, "spd": 10},
+ 				{"pt":  70, "name": "きまぐれな行動+5%（専）", "desc": "", "mp": null},
+ 				{"pt":  80, "name": "なめまわし（専）", "desc": "", "mp": 4},
+ 				{"pt":  90, "name": "全職業でさいだいＨＰ+10", "desc": "全職業で\nさいだいＨＰが\n１０増える", "mp": null, "maxhp": 10},
+ 				{"pt": 100, "name": "ぱふぱふ（専）", "desc": "", "mp": 6, "charge": 100},
+ 				{"pt": 110, "name": "みりょく+30（専）", "desc": "遊び人時\nみりょくが\n３０増える", "mp": null},
+ 				{"pt": 120, "name": "きまぐれな行動+5%（専）", "desc": "", "mp": null},
+ 				{"pt": 130, "name": "ほんきであそぶ（専）", "desc": "", "mp": 8, "charge": 90},
+				{"pt": 140, "name": "さいだいＨＰ+20（専）", "desc": "遊び人時\nさいだいＨＰが\n２０増える", "mp": null},
+				{"pt": 150, "name": "ひゃくれつなめ（専）", "desc": "", "mp": 10, "charge": 120},
 				{"pt": 160, "name": "（なし）"},
 				{"pt": 170, "name": "（なし）"},
 				{"pt": 180, "name": "（なし）"}
 			],
 			"customSkills": [
+				{"id":  1, "name": "まねまね", "viewName": "まねまね%r（専）", "selectorName": "%r (CT%i)", "desc": "受けたダメージを\n跳ね返す\n遊び人専用特技", "mp": 12, "charge": 0, "val": [180, 150, 120]},
+				{"id":  2, "name": "特技のダメージ強化", "viewName": "特技のダメージ+%i（専）", "selectorName": "+%i", "desc": "遊び人時\n特技の威力が\n%z増える", "val": [5, 10, 20]},
+				{"id":  3, "name": "特技の会心率", "viewName": "特技の会心率+%f%（専）", "selectorName": "+%f%", "desc": "遊び人時\n特技の会心率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  4, "name": "被ダメージ軽減", "viewName": "被ダメージ%i軽減（専）", "selectorName": "%i軽減", "desc": "遊び人時\n受けるダメージを\n%z減らす", "val": [3, 5, 10]},
+				{"id":  5, "name": "身かわし率", "viewName": "身かわし率+%f%（専）", "selectorName": "+%f%", "desc": "遊び人時\n身かわし率が\n%z％増える", "val": [0.5, 0.8, 1.2]},
+				{"id":  6, "name": "ターン消費しない", "viewName": "%f%ターン消費なし（専）", "selectorName": "%f%", "desc": "遊び人時\n%z％の確率で\nターン消費しない", "val": [1.0, 1.5, 2.0]},
+				{"id":  7, "name": "テンション消費しない", "viewName": "%i%テンション維持（専）", "selectorName": "%i%", "desc": "遊び人時\nテンションを\n%z％の確率で維持", "val": [1, 2, 3]},
+				{"id":  8, "name": "さいだいＨＰ", "viewName": "さいだいＨＰ+%i（専）", "selectorName": "+%i", "desc": "遊び人時\nさいだいＨＰが\n%z増える", "val": [5, 15, 30]},
+				{"id":  9, "name": "さいだいＭＰ", "viewName": "さいだいＭＰ+%i（専）", "selectorName": "+%i", "desc": "遊び人時\nさいだいＭＰが\n%z増える", "val": [50, 80, 100]},
+				{"id": 10, "name": "ちから", "viewName": "ちから+%i（専）", "selectorName": "+%i", "desc": "遊び人時\nちからが\n%z増える", "val": [15, 30, 50]},
+				{"id": 11, "name": "みのまもり", "viewName": "みのまもり+%i（専）", "selectorName": "+%i", "desc": "遊び人時\nみのまもりが\n%z増える", "val": [30, 45, 60]},
+				{"id": 12, "name": "状態異常成功率", "viewName": "状態異常成功率+%i%（専）", "selectorName": "+%i%", "desc": "遊び人の\n状態異常成功率が\n%z％増える", "val": [10, 25, 50]}
 			]
 		},
 
@@ -1339,7 +1351,7 @@
 	"uniqueSkillLineOrder": [
 		"courage", "faith", "spellcraft", "focus", "acquisitiveness", "litheness",
 		"guts", "virtue", "fource", "ruggedness", "enlightenment", "jenesaisquoi",
-		"monstermaster", "itemmaster", "song", "dance", "fortunetelling", "summon", "gadabout-uniq"
+		"monstermaster", "itemmaster", "song", "dance", "fortunetelling", "summon", "asobi"
 	],
 
 	"vocations": {
@@ -1451,7 +1463,7 @@
 		"gadabout": {
 			"name": "遊び人",
 			"abbr": "遊び",
-			"skillLines": ["sword", "knife", "hammer", "boomerang", "gadabout-uniq"],
+			"skillLines": ["sword", "knife", "hammer", "boomerang", "asobi"],
 			"skillPtsTable": 2,
 			"initialLevel": 50,
 			"disableTraining": true
@@ -1492,7 +1504,7 @@
 			151, 152, 154, 156, 158, 161, 163, 165, 167, 170,
 			171, 173, 175, 177, 179, 180, 182, 183, 184, 186,
 			187, 188, 190, 192, 194, 195, 197, 199, 200, 203,
-			204, 205, 207, 208, 210
+			204, 205, 207, 208, 218
 		]
 	},
 
