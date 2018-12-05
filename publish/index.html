@@ -7,7 +7,7 @@
     <link href='http://cpro.jp/dq10/skillsimulator/' rel='canonical'>
     <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
     <title>DQ10 スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=12.1' rel='stylesheet' type='text/css'>
+    <link href='./dq10skill.css?ver=13.0' rel='stylesheet' type='text/css'>
     <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js' type='text/javascript'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js' type='text/javascript'></script>
@@ -15,7 +15,7 @@
     <script src='js/rawinflate.min.js' type='text/javascript'></script>
     <script src='js/shortcut.min.js' type='text/javascript'></script>
     <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
-    <script src='./dq10skill.js?ver=12.1' type='text/javascript'></script>
+    <script src='./dq10skill.js?ver=13.0' type='text/javascript'></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -66,6 +66,7 @@
             <li class='button-each ui-corner-all'><a id='fold-dancer'>踊り</a></li>
             <li class='button-each ui-corner-all'><a id='fold-fortuneteller'>占い</a></li>
             <li class='button-each ui-corner-all'><a id='fold-druid'>天地</a></li>
+            <li class='button-each ui-corner-all'><a id='fold-gadabout'>遊び</a></li>
           </ul>
         </div>
         <table class='ui-corner-all' id='total'>
@@ -113,10 +114,9 @@
           <dl class='skill_pt'>
             <dt>残りSP:</dt>
             <dd class='pts'>0 / 0</dd>
-            <dt>&nbsp;+&nbsp;</dt>
           </dl>
           <dl class='training_pt ui-handler'>
-            <dt>特訓</dt>
+            <dt>&nbsp;+ 特訓</dt>
             <dd id='training-warrior'>
               0
             </dd>
@@ -126,11 +126,7 @@
             <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
           </dl>
           <div class='ent_title_console'>
             <button class='toggle_ent'>たたむ/ひろげる</button>
@@ -279,10 +275,9 @@
           <dl class='skill_pt'>
             <dt>残りSP:</dt>
             <dd class='pts'>0 / 0</dd>
-            <dt>&nbsp;+&nbsp;</dt>
           </dl>
           <dl class='training_pt ui-handler'>
-            <dt>特訓</dt>
+            <dt>&nbsp;+ 特訓</dt>
             <dd id='training-priest'>
               0
             </dd>
@@ -292,11 +287,7 @@
             <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
           </dl>
           <div class='ent_title_console'>
             <button class='toggle_ent'>たたむ/ひろげる</button>
@@ -445,10 +436,9 @@
           <dl class='skill_pt'>
             <dt>残りSP:</dt>
             <dd class='pts'>0 / 0</dd>
-            <dt>&nbsp;+&nbsp;</dt>
           </dl>
           <dl class='training_pt ui-handler'>
-            <dt>特訓</dt>
+            <dt>&nbsp;+ 特訓</dt>
             <dd id='training-mage'>
               0
             </dd>
@@ -458,11 +448,7 @@
             <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
           </dl>
           <div class='ent_title_console'>
             <button class='toggle_ent'>たたむ/ひろげる</button>
@@ -611,10 +597,9 @@
           <dl class='skill_pt'>
             <dt>残りSP:</dt>
             <dd class='pts'>0 / 0</dd>
-            <dt>&nbsp;+&nbsp;</dt>
           </dl>
           <dl class='training_pt ui-handler'>
-            <dt>特訓</dt>
+            <dt>&nbsp;+ 特訓</dt>
             <dd id='training-martialartist'>
               0
             </dd>
@@ -624,11 +609,7 @@
             <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
           </dl>
           <div class='ent_title_console'>
             <button class='toggle_ent'>たたむ/ひろげる</button>
@@ -777,10 +758,9 @@
           <dl class='skill_pt'>
             <dt>残りSP:</dt>
             <dd class='pts'>0 / 0</dd>
-            <dt>&nbsp;+&nbsp;</dt>
           </dl>
           <dl class='training_pt ui-handler'>
-            <dt>特訓</dt>
+            <dt>&nbsp;+ 特訓</dt>
             <dd id='training-thief'>
               0
             </dd>
@@ -790,11 +770,7 @@
             <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
           </dl>
           <div class='ent_title_console'>
             <button class='toggle_ent'>たたむ/ひろげる</button>
@@ -943,10 +919,9 @@
           <dl class='skill_pt'>
             <dt>残りSP:</dt>
             <dd class='pts'>0 / 0</dd>
-            <dt>&nbsp;+&nbsp;</dt>
           </dl>
           <dl class='training_pt ui-handler'>
-            <dt>特訓</dt>
+            <dt>&nbsp;+ 特訓</dt>
             <dd id='training-minstrel'>
               0
             </dd>
@@ -956,11 +931,7 @@
             <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
           </dl>
           <div class='ent_title_console'>
             <button class='toggle_ent'>たたむ/ひろげる</button>
@@ -1109,10 +1080,9 @@
           <dl class='skill_pt'>
             <dt>残りSP:</dt>
             <dd class='pts'>0 / 0</dd>
-            <dt>&nbsp;+&nbsp;</dt>
           </dl>
           <dl class='training_pt ui-handler'>
-            <dt>特訓</dt>
+            <dt>&nbsp;+ 特訓</dt>
             <dd id='training-gladiator'>
               0
             </dd>
@@ -1122,11 +1092,7 @@
             <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
           </dl>
           <div class='ent_title_console'>
             <button class='toggle_ent'>たたむ/ひろげる</button>
@@ -1275,10 +1241,9 @@
           <dl class='skill_pt'>
             <dt>残りSP:</dt>
             <dd class='pts'>0 / 0</dd>
-            <dt>&nbsp;+&nbsp;</dt>
           </dl>
           <dl class='training_pt ui-handler'>
-            <dt>特訓</dt>
+            <dt>&nbsp;+ 特訓</dt>
             <dd id='training-paladin'>
               0
             </dd>
@@ -1288,11 +1253,7 @@
             <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
           </dl>
           <div class='ent_title_console'>
             <button class='toggle_ent'>たたむ/ひろげる</button>
@@ -1441,10 +1402,9 @@
           <dl class='skill_pt'>
             <dt>残りSP:</dt>
             <dd class='pts'>0 / 0</dd>
-            <dt>&nbsp;+&nbsp;</dt>
           </dl>
           <dl class='training_pt ui-handler'>
-            <dt>特訓</dt>
+            <dt>&nbsp;+ 特訓</dt>
             <dd id='training-armamentalist'>
               0
             </dd>
@@ -1454,11 +1414,7 @@
             <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
           </dl>
           <div class='ent_title_console'>
             <button class='toggle_ent'>たたむ/ひろげる</button>
@@ -1607,10 +1563,9 @@
           <dl class='skill_pt'>
             <dt>残りSP:</dt>
             <dd class='pts'>0 / 0</dd>
-            <dt>&nbsp;+&nbsp;</dt>
           </dl>
           <dl class='training_pt ui-handler'>
-            <dt>特訓</dt>
+            <dt>&nbsp;+ 特訓</dt>
             <dd id='training-ranger'>
               0
             </dd>
@@ -1620,11 +1575,7 @@
             <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
           </dl>
           <div class='ent_title_console'>
             <button class='toggle_ent'>たたむ/ひろげる</button>
@@ -1773,10 +1724,9 @@
           <dl class='skill_pt'>
             <dt>残りSP:</dt>
             <dd class='pts'>0 / 0</dd>
-            <dt>&nbsp;+&nbsp;</dt>
           </dl>
           <dl class='training_pt ui-handler'>
-            <dt>特訓</dt>
+            <dt>&nbsp;+ 特訓</dt>
             <dd id='training-sage'>
               0
             </dd>
@@ -1786,11 +1736,7 @@
             <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
           </dl>
           <div class='ent_title_console'>
             <button class='toggle_ent'>たたむ/ひろげる</button>
@@ -1939,10 +1885,9 @@
           <dl class='skill_pt'>
             <dt>残りSP:</dt>
             <dd class='pts'>0 / 0</dd>
-            <dt>&nbsp;+&nbsp;</dt>
           </dl>
           <dl class='training_pt ui-handler'>
-            <dt>特訓</dt>
+            <dt>&nbsp;+ 特訓</dt>
             <dd id='training-luminary'>
               0
             </dd>
@@ -1952,11 +1897,7 @@
             <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
           </dl>
           <div class='ent_title_console'>
             <button class='toggle_ent'>たたむ/ひろげる</button>
@@ -2105,10 +2046,9 @@
           <dl class='skill_pt'>
             <dt>残りSP:</dt>
             <dd class='pts'>0 / 0</dd>
-            <dt>&nbsp;+&nbsp;</dt>
           </dl>
           <dl class='training_pt ui-handler'>
-            <dt>特訓</dt>
+            <dt>&nbsp;+ 特訓</dt>
             <dd id='training-monstermaster'>
               0
             </dd>
@@ -2118,11 +2058,7 @@
             <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
           </dl>
           <div class='ent_title_console'>
             <button class='toggle_ent'>たたむ/ひろげる</button>
@@ -2271,10 +2207,9 @@
           <dl class='skill_pt'>
             <dt>残りSP:</dt>
             <dd class='pts'>0 / 0</dd>
-            <dt>&nbsp;+&nbsp;</dt>
           </dl>
           <dl class='training_pt ui-handler'>
-            <dt>特訓</dt>
+            <dt>&nbsp;+ 特訓</dt>
             <dd id='training-itemmaster'>
               0
             </dd>
@@ -2284,11 +2219,7 @@
             <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
           </dl>
           <div class='ent_title_console'>
             <button class='toggle_ent'>たたむ/ひろげる</button>
@@ -2437,10 +2368,9 @@
           <dl class='skill_pt'>
             <dt>残りSP:</dt>
             <dd class='pts'>0 / 0</dd>
-            <dt>&nbsp;+&nbsp;</dt>
           </dl>
           <dl class='training_pt ui-handler'>
-            <dt>特訓</dt>
+            <dt>&nbsp;+ 特訓</dt>
             <dd id='training-dancer'>
               0
             </dd>
@@ -2450,11 +2380,7 @@
             <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
           </dl>
           <div class='ent_title_console'>
             <button class='toggle_ent'>たたむ/ひろげる</button>
@@ -2603,10 +2529,9 @@
           <dl class='skill_pt'>
             <dt>残りSP:</dt>
             <dd class='pts'>0 / 0</dd>
-            <dt>&nbsp;+&nbsp;</dt>
           </dl>
           <dl class='training_pt ui-handler'>
-            <dt>特訓</dt>
+            <dt>&nbsp;+ 特訓</dt>
             <dd id='training-fortuneteller'>
               0
             </dd>
@@ -2616,11 +2541,7 @@
             <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
           </dl>
           <div class='ent_title_console'>
             <button class='toggle_ent'>たたむ/ひろげる</button>
@@ -2769,10 +2690,9 @@
           <dl class='skill_pt'>
             <dt>残りSP:</dt>
             <dd class='pts'>0 / 0</dd>
-            <dt>&nbsp;+&nbsp;</dt>
           </dl>
           <dl class='training_pt ui-handler'>
-            <dt>特訓</dt>
+            <dt>&nbsp;+ 特訓</dt>
             <dd id='training-druid'>
               0
             </dd>
@@ -2782,11 +2702,7 @@
             <dd class='pts'>0 / 0</dd>
           </dl>
           <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
             <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
           </dl>
           <div class='ent_title_console'>
             <button class='toggle_ent'>たたむ/ひろげる</button>
@@ -2929,12 +2845,168 @@
             <tr class='summon_17'><td class='skill_pt'>180</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
           </table></div>
       </div>
+      <div class='class_group' id='gadabout'>
+        <div class='ent_title'>
+          <h2 class='ui-handler'>遊び人 Lv          <span class='lv_h2'>1</span></h2>
+          <dl class='skill_pt'>
+            <dt>残りSP:</dt>
+            <dd class='pts'>0 / 0</dd>
+          </dl>
+          <dl class='mspinfo ui-handler'>
+            <dt>残りMSP:</dt>
+            <dd class='pts'>0 / 0</dd>
+          </dl>
+          <dl class='expinfo'>
+            <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
+          </dl>
+          <div class='ent_title_console'>
+            <button class='toggle_ent'>たたむ/ひろげる</button>
+          </div>
+        </div>
+        <div class='skill_tables'><table class='sword skill_table'>
+            <caption class='ui-handler'>
+              <div class='console_wrapper'>
+                片手剣:
+                <span class='skill_current'>0</span>
+                /
+                <span class='skill_total'>0</span>
+              </div>
+            </caption>
+            <tr class='sword_0' title='炎のチカラを&#x000A;剣に宿して&#x000A;敵を斬りつける&#x000A;（消費MP: 2）'><td class='skill_pt'>3</td><td class='skill_name'>かえん斬り</td></tr>
+            <tr class='sword_1' title='片手剣装備時の&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='sword_2' title='ドラゴン系の敵に&#x000A;威力を発揮する&#x000A;竜殺しの剣技&#x000A;（消費MP: 1）'><td class='skill_pt'>13</td><td class='skill_name'>ドラゴン斬り</td></tr>
+            <tr class='sword_3' title='片手剣での攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>22</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='sword_4' title='敵を斬りつけ&#x000A;自らのキズも&#x000A;いやす　秘剣&#x000A;（消費MP: 3）'><td class='skill_pt'>35</td><td class='skill_name'>ミラクルソード</td></tr>
+            <tr class='sword_5' title='片手剣装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>42</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='sword_6' title='はやぶさのごとき&#x000A;高速の２回攻撃&#x000A;（消費MP: 2）'><td class='skill_pt'>58</td><td class='skill_name'>はやぶさ斬り</td></tr>
+            <tr class='sword_7' title='片手剣装備時に&#x000A;武器ガードが&#x000A;できるようになる'><td class='skill_pt'>76</td><td class='skill_name'>装備時武器ガード率+4%</td></tr>
+            <tr class='sword_8' title='片手剣装備時の&#x000A;こうげき力が&#x000A;１５増える'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+            <tr class='sword_9' title='光の刃を剣にかえ&#x000A;周囲をなぎはらう&#x000A;剣の奥義&#x000A;（消費MP: 12）'><td class='skill_pt'>100</td><td class='skill_name'>ギガスラッシュ</td></tr>
+            <tr class='sword_10' title='片手剣での攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='sword_11' title='はやぶさをこえる&#x000A;神速の４回攻撃&#x000A;（消費MP: 2）&#x000A;（チャージ: 45秒）'><td class='skill_pt'>120</td><td class='skill_name'>超はやぶさ斬り</td></tr>
+            <tr class='sword_12' title='片手剣装備時&#x000A;さらに武器ガード&#x000A;しやすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時武器ガード率+2%</td></tr>
+            <tr class='sword_13' title='光の刃で周囲の&#x000A;敵を撃ち滅ぼす&#x000A;究極の剣技&#x000A;（消費MP: 12）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>140</td><td class='skill_name'>ギガブレイク</td></tr>
+            <tr class='sword_14' title='片手剣装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>150</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='sword_15'><td class='skill_pt'>160</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='sword_16'><td class='skill_pt'>170</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='sword_17'><td class='skill_pt'>180</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+          </table><table class='knife skill_table'>
+            <caption class='ui-handler'>
+              <div class='console_wrapper'>
+                短剣:
+                <span class='skill_current'>0</span>
+                /
+                <span class='skill_total'>0</span>
+              </div>
+            </caption>
+            <tr class='knife_0' title='虫系の敵に&#x000A;威力を発揮する&#x000A;すばやい剣技&#x000A;（消費MP: 1）'><td class='skill_pt'>3</td><td class='skill_name'>キラーブーン</td></tr>
+            <tr class='knife_1' title='短剣装備時の&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='knife_2' title='敵１体を&#x000A;斬りつけて&#x000A;たまに眠らせる&#x000A;（消費MP: 1）'><td class='skill_pt'>13</td><td class='skill_name'>スリープダガー</td></tr>
+            <tr class='knife_3' title='短剣での攻撃時&#x000A;たまにＭＰを&#x000A;回復する'><td class='skill_pt'>22</td><td class='skill_name'>攻撃時たまにＭＰ回復</td></tr>
+            <tr class='knife_4' title='眠りや混乱の敵に&#x000A;威力を発揮する&#x000A;追い打ちの技&#x000A;（消費MP: 3）'><td class='skill_pt'>35</td><td class='skill_name'>ヒュプノスハント</td></tr>
+            <tr class='knife_5' title='短剣装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>42</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='knife_6' title='敵１体を&#x000A;斬りつけて&#x000A;たまに猛毒にする&#x000A;（消費MP: 1）'><td class='skill_pt'>58</td><td class='skill_name'>ヴァイパーファング</td></tr>
+            <tr class='knife_7' title='短剣での攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>76</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='knife_8' title='短剣装備時の&#x000A;こうげき力が&#x000A;１５増える'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+            <tr class='knife_9' title='毒やマヒの敵に&#x000A;威力を発揮する&#x000A;追い打ちの技&#x000A;（消費MP: 3）'><td class='skill_pt'>100</td><td class='skill_name'>タナトスハント</td></tr>
+            <tr class='knife_10' title='短剣での攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>110</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='knife_11' title='敵１体を斬りつけ&#x000A;混乱やマヒを&#x000A;起こさせる&#x000A;（消費MP: 1）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>カオスエッジ</td></tr>
+            <tr class='knife_12' title='短剣装備時の&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>130</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='knife_13' title='敵１体を斬りつけ&#x000A;猛毒や眠りを&#x000A;起こさせる&#x000A;（消費MP: 1）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>140</td><td class='skill_name'>ナイトメアファング</td></tr>
+            <tr class='knife_14' title='短剣装備時の&#x000A;状態異常成功率が&#x000A;あがる'><td class='skill_pt'>150</td><td class='skill_name'>状態異常成功率アップ</td></tr>
+            <tr class='knife_15'><td class='skill_pt'>160</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='knife_16'><td class='skill_pt'>170</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='knife_17'><td class='skill_pt'>180</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+          </table><table class='hammer skill_table'>
+            <caption class='ui-handler'>
+              <div class='console_wrapper'>
+                ハンマー:
+                <span class='skill_current'>0</span>
+                /
+                <span class='skill_total'>0</span>
+              </div>
+            </caption>
+            <tr class='hammer_0' title='敵１体の&#x000A;重さを減らす&#x000A;不思議ないちげき&#x000A;（消費MP: 2）'><td class='skill_pt'>3</td><td class='skill_name'>ウェイトブレイク</td></tr>
+            <tr class='hammer_1' title='物質系の敵に&#x000A;威力を発揮する&#x000A;チカラ強い打撃技&#x000A;（消費MP: 1）'><td class='skill_pt'>7</td><td class='skill_name'>ドラムクラッシュ</td></tr>
+            <tr class='hammer_2' title='ハンマー装備時の&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>13</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='hammer_3' title='敵１体を&#x000A;攻撃しつつ&#x000A;守備力も下げる&#x000A;（消費MP: 2）'><td class='skill_pt'>22</td><td class='skill_name'>シールドブレイク</td></tr>
+            <tr class='hammer_4' title='ハンマーで攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>35</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='hammer_5' title='なぐった相手の&#x000A;ＭＰを減らす&#x000A;ハンマーの妙技&#x000A;（消費MP: 0）'><td class='skill_pt'>42</td><td class='skill_name'>ＭＰブレイク</td></tr>
+            <tr class='hammer_6' title='ハンマー装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>58</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='hammer_7' title='相手の攻撃を&#x000A;キャンセルする&#x000A;あざやかな一撃&#x000A;（消費MP: 3）'><td class='skill_pt'>76</td><td class='skill_name'>キャンセルショット</td></tr>
+            <tr class='hammer_8' title='ハンマー装備時の&#x000A;こうげき力が&#x000A;１５増える'><td class='skill_pt'>88</td><td class='skill_name'>装備時こうげき力+15</td></tr>
+            <tr class='hammer_9' title='大地の衝撃波で&#x000A;自分の周りの敵を&#x000A;ふっとばして攻撃&#x000A;（消費MP: 8）'><td class='skill_pt'>100</td><td class='skill_name'>ランドインパクト</td></tr>
+            <tr class='hammer_10' title='ハンマー装備時の&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='hammer_11' title='なぐった相手を&#x000A;ひるませる&#x000A;強烈な一撃&#x000A;（消費MP: 5）&#x000A;（チャージ: 120秒）'><td class='skill_pt'>120</td><td class='skill_name'>スタンショット</td></tr>
+            <tr class='hammer_12' title='ハンマーで攻撃時&#x000A;会心のいちげきが&#x000A;より出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='hammer_13' title='自分の周りの敵に&#x000A;ダメージを与え&#x000A;守備と重さダウン&#x000A;（消費MP: 8）&#x000A;（チャージ: 75秒）'><td class='skill_pt'>140</td><td class='skill_name'>プレートインパクト</td></tr>
+            <tr class='hammer_14' title='ハンマー装備時の&#x000A;さいだいＨＰが&#x000A;１０増える'><td class='skill_pt'>150</td><td class='skill_name'>装備時さいだいＨＰ+10</td></tr>
+            <tr class='hammer_15'><td class='skill_pt'>160</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='hammer_16'><td class='skill_pt'>170</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='hammer_17'><td class='skill_pt'>180</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+          </table><table class='boomerang skill_table'>
+            <caption class='ui-handler'>
+              <div class='console_wrapper'>
+                ブーメラン:
+                <span class='skill_current'>0</span>
+                /
+                <span class='skill_total'>0</span>
+              </div>
+            </caption>
+            <tr class='boomerang_0' title='スライム系の敵に&#x000A;威力を発揮する&#x000A;ブーメランの妙技&#x000A;（消費MP: 1）'><td class='skill_pt'>3</td><td class='skill_name'>スライムブロウ</td></tr>
+            <tr class='boomerang_1' title='ブーメラン装備時&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>7</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='boomerang_2' title='メタルボディを&#x000A;切り裂く&#x000A;するどいつばさ&#x000A;（消費MP: 4）'><td class='skill_pt'>13</td><td class='skill_name'>メタルウィング</td></tr>
+            <tr class='boomerang_3' title='ブーメラン装備時&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>22</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='boomerang_4' title='全力で投げつけ&#x000A;範囲内の敵に&#x000A;等しくダメージ&#x000A;（消費MP: 3）'><td class='skill_pt'>35</td><td class='skill_name'>パワフルスロー</td></tr>
+            <tr class='boomerang_5' title='ブーメランでの&#x000A;攻撃が　さらに&#x000A;当たりやすくなる'><td class='skill_pt'>42</td><td class='skill_name'>装備時命中+20%</td></tr>
+            <tr class='boomerang_6' title='光のシャワーが&#x000A;降りそそぎ&#x000A;広範囲の敵を攻撃&#x000A;（消費MP: 6）'><td class='skill_pt'>58</td><td class='skill_name'>シャインスコール</td></tr>
+            <tr class='boomerang_7' title='ブーメラン装備時&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>76</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='boomerang_8' title='炎に包まれた&#x000A;ブーメランが&#x000A;敵をめった切り&#x000A;（消費MP: 6）'><td class='skill_pt'>88</td><td class='skill_name'>バーニングバード</td></tr>
+            <tr class='boomerang_9' title='範囲内の敵に&#x000A;２回連続の&#x000A;全体攻撃&#x000A;（消費MP: 8）'><td class='skill_pt'>100</td><td class='skill_name'>デュアルカッター</td></tr>
+            <tr class='boomerang_10' title='ブーメラン装備時&#x000A;こうげき力が&#x000A;５増える'><td class='skill_pt'>110</td><td class='skill_name'>装備時こうげき力+5</td></tr>
+            <tr class='boomerang_11' title='氷の刃となった&#x000A;ブーメランが&#x000A;敵をメッタ切り&#x000A;（消費MP: 6）&#x000A;（チャージ: 60秒）'><td class='skill_pt'>120</td><td class='skill_name'>フローズンバード</td></tr>
+            <tr class='boomerang_12' title='ブーメラン攻撃時&#x000A;会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>130</td><td class='skill_name'>装備時かいしん率+2%</td></tr>
+            <tr class='boomerang_13' title='状態異常の耐性を&#x000A;下げる２回連続の&#x000A;ブーメラン攻撃&#x000A;（消費MP: 8）&#x000A;（チャージ: 75秒）'><td class='skill_pt'>140</td><td class='skill_name'>デュアルブレイカー</td></tr>
+            <tr class='boomerang_14' title='ブーメラン装備時&#x000A;こうげき力が&#x000A;１０増える'><td class='skill_pt'>150</td><td class='skill_name'>装備時こうげき力+10</td></tr>
+            <tr class='boomerang_15'><td class='skill_pt'>160</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='boomerang_16'><td class='skill_pt'>170</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='boomerang_17'><td class='skill_pt'>180</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+          </table><table class='asobi skill_table'>
+            <caption class='ui-handler'>
+              <div class='console_wrapper'>
+                あそび:
+                <span class='skill_current'>0</span>
+                /
+                <span class='skill_total'>0</span>
+              </div>
+            </caption>
+            <tr class='asobi_0' title='全職業で&#x000A;きようさが&#x000A;１０増える'><td class='skill_pt'>8</td><td class='skill_name'>全職業できようさ+10</td></tr>
+            <tr class='asobi_1' title='&#x000A;（消費MP: 3）'><td class='skill_pt'>16</td><td class='skill_name'>あそぶ（専）</td></tr>
+            <tr class='asobi_2' title='全職業で&#x000A;みりょくが&#x000A;１０増える'><td class='skill_pt'>28</td><td class='skill_name'>全職業でみりょく+10</td></tr>
+            <tr class='asobi_3' title=''><td class='skill_pt'>40</td><td class='skill_name'>きまぐれな行動+5%（専）</td></tr>
+            <tr class='asobi_4' title='&#x000A;（消費MP: 3）'><td class='skill_pt'>48</td><td class='skill_name'>くちぶえ（専）</td></tr>
+            <tr class='asobi_5' title='全職業で&#x000A;すばやさが&#x000A;１０増える'><td class='skill_pt'>56</td><td class='skill_name'>全職業ですばやさ+10</td></tr>
+            <tr class='asobi_6' title=''><td class='skill_pt'>70</td><td class='skill_name'>きまぐれな行動+5%（専）</td></tr>
+            <tr class='asobi_7' title='&#x000A;（消費MP: 4）'><td class='skill_pt'>80</td><td class='skill_name'>なめまわし（専）</td></tr>
+            <tr class='asobi_8' title='全職業で&#x000A;さいだいＨＰが&#x000A;１０増える'><td class='skill_pt'>90</td><td class='skill_name'>全職業でさいだいＨＰ+10</td></tr>
+            <tr class='asobi_9' title='&#x000A;（消費MP: 6）&#x000A;（チャージ: 100秒）'><td class='skill_pt'>100</td><td class='skill_name'>ぱふぱふ（専）</td></tr>
+            <tr class='asobi_10' title='遊び人時&#x000A;みりょくが&#x000A;３０増える'><td class='skill_pt'>110</td><td class='skill_name'>みりょく+30（専）</td></tr>
+            <tr class='asobi_11' title=''><td class='skill_pt'>120</td><td class='skill_name'>きまぐれな行動+5%（専）</td></tr>
+            <tr class='asobi_12' title='&#x000A;（消費MP: 8）&#x000A;（チャージ: 90秒）'><td class='skill_pt'>130</td><td class='skill_name'>ほんきであそぶ（専）</td></tr>
+            <tr class='asobi_13' title='遊び人時&#x000A;さいだいＨＰが&#x000A;２０増える'><td class='skill_pt'>140</td><td class='skill_name'>さいだいＨＰ+20（専）</td></tr>
+            <tr class='asobi_14' title='&#x000A;（消費MP: 10）&#x000A;（チャージ: 120秒）'><td class='skill_pt'>150</td><td class='skill_name'>ひゃくれつなめ（専）</td></tr>
+            <tr class='asobi_15'><td class='skill_pt'>160</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='asobi_16'><td class='skill_pt'>170</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+            <tr class='asobi_17'><td class='skill_pt'>180</td><td class='skill_name'><span class='custom_skill_name'>（なし）</span></td></tr>
+          </table></div>
+      </div>
       <div class='hover-console' id='pt_console'>
         <input id='pt_spinner'>
         <button id='pt_reset'>リセット</button>
       </div>
       <div class='hover-console' id='lv_console'>
         <select class='ui-widget-content ui-corner-all' id='lv-select' size='1'></select>
+        <select class='ui-widget-content ui-corner-all' id='lv-select2' size='1'></select>
       </div>
       <div class='hover-console' id='training_pt_console'>
         <select class='ui-widget-content ui-corner-all' id='training_pt_select'></select>
@@ -3000,6 +3072,18 @@
             履歴:
             <ul>
               <li>
+                2018/9/6 v13.0 ver4.3対応。
+                <ul>
+                  <li>
+                    新職業「遊び人」を追加。
+                    <ul>
+                      <li>スキルポイントはLv105時の218のみ反映、途中のポイントは追って調査します。</li>
+                    </ul>
+                  </li>
+                  <li>経験値表示を廃止。</li>
+                </ul>
+              </li>
+              <li>
                 2018/5/30 v12.1 ver4.2対応。
                 <ul>
                   <li>レベル上限解放(100→105)に対応。</li>
@@ -3037,14 +3121,6 @@
                   <li>MSPモードのON/OFFをキーボードの Ctrl+M で切り替え可能にしました。</li>
                 </ul>
               </li>
-              <li>
-                2017/2/26 v10.2.2 ver3.5前期対応。
-                <ul>
-                  <li>特訓スタンプ上限解放（9,000→10,000、SP18→19）に対応。</li>
-                  <li>MSP上限27→29（バトル・ルネッサンス報酬追加、嵐の領界討伐報酬を仮定）</li>
-                </ul>
-              </li>
-              <li>2017/1/20 v10.2.1 MSP上限26→27</li>
               <li>過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。</li>
             </ul>
           </li>
@@ -5190,6 +5266,86 @@
               <td class='customskill-entry-selector' id='customskill-selector-summon-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='summon'>3%</a></td>
             </tr>
           </table>
+          <table class='customskill-entrylist' id='customskill-selector-entrylist-asobi'>
+            <tr class='customskill-entrylist-header'>
+              <th></th>
+              <th>160P</th>
+              <th>170P</th>
+              <th>180P</th>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name' title='受けたダメージを&#x000A;跳ね返す&#x000A;遊び人専用特技&#x000A;（消費MP: 12）&#x000A;（チャージ: 180秒）'>まねまね</th>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-1-0'><a data-customskill-id='1' data-rank='0' data-skillline='asobi'>Ⅰ (CT180)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-1-1'><a data-customskill-id='1' data-rank='1' data-skillline='asobi'>Ⅱ (CT150)</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='asobi'>Ⅲ (CT120)</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name' title='遊び人時&#x000A;特技の威力が&#x000A;５増える'>特技のダメージ強化</th>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-2-0'><a data-customskill-id='2' data-rank='0' data-skillline='asobi'>+5</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-2-1'><a data-customskill-id='2' data-rank='1' data-skillline='asobi'>+10</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-2-2'><a data-customskill-id='2' data-rank='2' data-skillline='asobi'>+20</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name' title='遊び人時&#x000A;特技の会心率が&#x000A;０．５％増える'>特技の会心率</th>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-3-0'><a data-customskill-id='3' data-rank='0' data-skillline='asobi'>+0.5%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-3-1'><a data-customskill-id='3' data-rank='1' data-skillline='asobi'>+0.8%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-3-2'><a data-customskill-id='3' data-rank='2' data-skillline='asobi'>+1.2%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name' title='遊び人時&#x000A;受けるダメージを&#x000A;３減らす'>被ダメージ軽減</th>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-4-0'><a data-customskill-id='4' data-rank='0' data-skillline='asobi'>3軽減</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-4-1'><a data-customskill-id='4' data-rank='1' data-skillline='asobi'>5軽減</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-4-2'><a data-customskill-id='4' data-rank='2' data-skillline='asobi'>10軽減</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name' title='遊び人時&#x000A;身かわし率が&#x000A;０．５％増える'>身かわし率</th>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-5-0'><a data-customskill-id='5' data-rank='0' data-skillline='asobi'>+0.5%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-5-1'><a data-customskill-id='5' data-rank='1' data-skillline='asobi'>+0.8%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-5-2'><a data-customskill-id='5' data-rank='2' data-skillline='asobi'>+1.2%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name' title='遊び人時&#x000A;１．０％の確率で&#x000A;ターン消費しない'>ターン消費しない</th>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-6-0'><a data-customskill-id='6' data-rank='0' data-skillline='asobi'>1.0%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-6-1'><a data-customskill-id='6' data-rank='1' data-skillline='asobi'>1.5%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-6-2'><a data-customskill-id='6' data-rank='2' data-skillline='asobi'>2.0%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name' title='遊び人時&#x000A;テンションを&#x000A;１％の確率で維持'>テンション消費しない</th>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-7-0'><a data-customskill-id='7' data-rank='0' data-skillline='asobi'>1%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-7-1'><a data-customskill-id='7' data-rank='1' data-skillline='asobi'>2%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-7-2'><a data-customskill-id='7' data-rank='2' data-skillline='asobi'>3%</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name' title='遊び人時&#x000A;さいだいＨＰが&#x000A;５増える'>さいだいＨＰ</th>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-8-0'><a data-customskill-id='8' data-rank='0' data-skillline='asobi'>+5</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-8-1'><a data-customskill-id='8' data-rank='1' data-skillline='asobi'>+15</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-8-2'><a data-customskill-id='8' data-rank='2' data-skillline='asobi'>+30</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name' title='遊び人時&#x000A;さいだいＭＰが&#x000A;５０増える'>さいだいＭＰ</th>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-9-0'><a data-customskill-id='9' data-rank='0' data-skillline='asobi'>+50</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-9-1'><a data-customskill-id='9' data-rank='1' data-skillline='asobi'>+80</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-9-2'><a data-customskill-id='9' data-rank='2' data-skillline='asobi'>+100</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name' title='遊び人時&#x000A;ちからが&#x000A;１５増える'>ちから</th>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-10-0'><a data-customskill-id='10' data-rank='0' data-skillline='asobi'>+15</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-10-1'><a data-customskill-id='10' data-rank='1' data-skillline='asobi'>+30</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-10-2'><a data-customskill-id='10' data-rank='2' data-skillline='asobi'>+50</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name' title='遊び人時&#x000A;みのまもりが&#x000A;３０増える'>みのまもり</th>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-11-0'><a data-customskill-id='11' data-rank='0' data-skillline='asobi'>+30</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-11-1'><a data-customskill-id='11' data-rank='1' data-skillline='asobi'>+45</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-11-2'><a data-customskill-id='11' data-rank='2' data-skillline='asobi'>+60</a></td>
+            </tr>
+            <tr>
+              <th class='customskill-entry-name' title='遊び人の&#x000A;状態異常成功率が&#x000A;１０％増える'>状態異常成功率</th>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-12-0'><a data-customskill-id='12' data-rank='0' data-skillline='asobi'>+10%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-12-1'><a data-customskill-id='12' data-rank='1' data-skillline='asobi'>+25%</a></td>
+              <td class='customskill-entry-selector' id='customskill-selector-asobi-12-2'><a data-customskill-id='12' data-rank='2' data-skillline='asobi'>+50%</a></td>
+            </tr>
+          </table>
         </div>
         <div id='customskill-selector-pallette'>
           <dl>
@@ -5226,6 +5382,7 @@
             <li class='ui-corner-all unique-skillline'><a data-skillline='dance'>おどり</a></li>
             <li class='ui-corner-all unique-skillline'><a data-skillline='fortunetelling'>うらない</a></li>
             <li class='ui-corner-all unique-skillline'><a data-skillline='summon'>しょうかん</a></li>
+            <li class='ui-corner-all unique-skillline'><a data-skillline='asobi'>あそび</a></li>
             <li class='ui-corner-all'><a data-skillline='fisticuffs'>格闘</a></li>
             <li class='ui-corner-all'><a data-skillline='shield'>盾</a></li>
             <li class='ui-corner-all'><a data-skillline='sword'>片手剣</a></li>
@@ -5270,27 +5427,27 @@
       <div id='ad-items'></div>
     </div>
     <script>
-  jQuery(function($) {
-  	$('#ad-items').load('./amazon_item_cache.html');
-  
-  	var sharedUrl = "http://cpro.jp/dq10/skillsimulator/";
-  	$('#tw-share').socialbutton('twitter', {
-  		button: 'horizontal',
-  		url: sharedUrl,
-  		lang: 'ja',
-  		hashtags: 'DQ10, dq10_skillsim'
-  	});
-  	$('#fb-like').socialbutton('facebook_like', {
-  		button: 'button_count',
-  		url: sharedUrl,
-  		locale: 'ja_JP'
-  	});
-  	$('#g-plusone').socialbutton('google_plusone', {
-  		lang: 'ja',
-  		size: 'medium',
-  		url: sharedUrl
-  	});
-  });
-</script>
+      jQuery(function($) {
+      	$('#ad-items').load('./amazon_item_cache.html');
+      
+      	var sharedUrl = "http://cpro.jp/dq10/skillsimulator/";
+      	$('#tw-share').socialbutton('twitter', {
+      		button: 'horizontal',
+      		url: sharedUrl,
+      		lang: 'ja',
+      		hashtags: 'DQ10, dq10_skillsim'
+      	});
+      	$('#fb-like').socialbutton('facebook_like', {
+      		button: 'button_count',
+      		url: sharedUrl,
+      		locale: 'ja_JP'
+      	});
+      	$('#g-plusone').socialbutton('google_plusone', {
+      		lang: 'ja',
+      		size: 'medium',
+      		url: sharedUrl
+      	});
+      });
+    </script>
   </body>
 </html>

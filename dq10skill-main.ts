@@ -59,7 +59,7 @@ namespace Dq10.SkillSimulator {
 			this.vocations = Object.keys(this.DB.vocations).map((vocationId) => {
 				var vocation: VocationData = {
 					id: vocationId,
-					level: this.DB.consts.level.min,
+					level: this.DB.vocations[vocationId].initialLevel || this.DB.consts.level.min,
 					trainingSkillPt: this.DB.consts.trainingSkillPts.min,
 					skillPts: []
 				};
@@ -134,6 +134,9 @@ namespace Dq10.SkillSimulator {
 
 		//特訓スキルポイント更新
 		updateTrainingSkillPt(vocationId: string, newValue: number): boolean {
+			if(this.DB.vocations[vocationId].disableTraining)
+				return true;
+
 			if(newValue < this.DB.consts.trainingSkillPts.min || newValue > this.DB.consts.trainingSkillPts.max)
 				return false;
 
@@ -217,7 +220,7 @@ namespace Dq10.SkillSimulator {
 
 		//職業レベルに対するスキルポイント最大値
 		maxSkillPts(vocationId: string): number {
-			return this.DB.skillPtsGiven[this.vocationDic[vocationId].level];
+			return this.DB.skillPtsGiven[this.DB.vocations[vocationId].skillPtsTable][this.vocationDic[vocationId].level];
 		}
 
 		//スキルポイント合計に対する必要レベル取得
@@ -226,7 +229,7 @@ namespace Dq10.SkillSimulator {
 			var total = this.totalSkillPts(vocationId) - trainingSkillPt;
 
 			for(var l = this.DB.consts.level.min; l <= this.DB.consts.level.max; l++) {
-				if(this.DB.skillPtsGiven[l] >= total) {
+				if(this.DB.skillPtsGiven[this.DB.vocations[vocationId].skillPtsTable][l] >= total) {
 					//特訓スキルポイントが1以上の場合、最低レベル50必要
 					if(trainingSkillPt > this.DB.consts.trainingSkillPts.min && l < this.DB.consts.level.forTrainingMode)
 						return this.DB.consts.level.forTrainingMode;
@@ -248,36 +251,6 @@ namespace Dq10.SkillSimulator {
 		//全職業の使用済スキルポイント
 		wholeSkillPtsUsed(): number {
 			return this.wholePts.reduce((prev, skillPt) => prev + skillPt.pt, 0);
-		}
-
-		//職業・レベルによる必要経験値
-		requiredExp(vocationId: string, level: number): number {
-			return this.DB.expRequired[this.DB.vocations[vocationId].expTable][level];
-		}
-
-		//不足経験値
-		requiredExpRemain(vocationId: string): number {
-			var required = this.requiredLevel(vocationId);
-			var current = this.vocationDic[vocationId].level;
-			if(required <= current) return 0;
-			var remain = this.requiredExp(vocationId, required) - this.requiredExp(vocationId, current);
-			return remain;
-		}
-
-		//全職業の必要経験値合計
-		totalRequiredExp(): number {
-			return this.vocations.reduce((prev, vocation) => {
-				var cur = this.requiredExp(vocation.id, vocation.level);
-				return prev + cur;
-			}, 0);
-		}
-
-		//全職業の不足経験値合計
-		totalExpRemain(): number {
-			return this.vocations.reduce((prev, vocation) => {
-				var cur = this.requiredExpRemain(vocation.id);
-				return prev + cur;
-			}, 0);
 		}
 
 		//各種パッシブスキルのステータス加算合計
@@ -385,7 +358,8 @@ namespace Dq10.SkillSimulator {
 			'itemmaster',    //どうぐ使い
 			'dancer',        //踊り子
 			'fortuneteller', //占い師
-			'druid'          //天地雷鳴士
+			'druid',         //天地雷鳴士
+			'gadabout'       //遊び人
 		];
 		const BITS_LEVEL = 8; //レベルは8ビット確保
 		const BITS_SKILL = 7; //スキルは7ビット
@@ -724,9 +698,6 @@ namespace Dq10.SkillSimulator {
 			$(`#${vocationId} .lv_h2`).text(currentLevel);
 			var $levelH2 = $(`#${vocationId} h2`);
 
-			//必要経験値
-			$(`#${vocationId} .exp`).text(numToFormedStr(this.sim.requiredExp(vocationId, currentLevel)));
-
 			//スキルポイント 残り / 最大値
 			var maxSkillPts = this.sim.maxSkillPts(vocationId);
 			var additionalSkillPts = this.sim.getTrainingSkillPt(vocationId);
@@ -743,7 +714,6 @@ namespace Dq10.SkillSimulator {
 			$(`#${vocationId} .expinfo .error`).toggle(isLevelError);
 			if(isLevelError) {
 				$(`#${vocationId} .req_lv`).text(numToFormedStr(requiredLevel));
-				$(`#${vocationId} .exp_remain`).text(numToFormedStr(this.sim.requiredExpRemain(vocationId)));
 			}
 
 			//MSP 残り / 最大値
@@ -758,16 +728,6 @@ namespace Dq10.SkillSimulator {
 
 		private refreshAllVocationInfo() {
 			Object.keys(this.DB.vocations).forEach((vocationId) => this.refreshVocationInfo(vocationId));
-		}
-
-		private refreshTotalRequiredExp() {
-			$('#total_exp').text(numToFormedStr(this.sim.totalRequiredExp()));
-		}
-
-		private refreshTotalExpRemain() {
-			var totalExpRemain = this.sim.totalExpRemain();
-			$('#total_exp_remain, #total_exp_remain_label').toggleClass(this.CLASSNAME_ERROR, totalExpRemain > 0);
-			$('#total_exp_remain').text(numToFormedStr(totalExpRemain));
 		}
 
 		private refreshTotalPassive() {
@@ -939,15 +899,20 @@ namespace Dq10.SkillSimulator {
 			//レベル選択セレクトボックス項目設定
 			() => {
 				this.$lvConsole = $('#lv_console');
-				var $select = $('#lv-select');
+
+				const $select = $('#lv-select');
+				const $select2 = $('#lv-select2');
 				for(var i = this.DB.consts.level.min; i <= this.DB.consts.level.max; i++) {
-					$select.append($("<option />").val(i).text(`${i} (${this.DB.skillPtsGiven[i]})`));
+					$select.append($("<option />").val(i).text(`${i} (${this.DB.skillPtsGiven[1][i]})`));
+					$select2.append($("<option />").val(i).text(`${i} (${this.DB.skillPtsGiven[2][i]})`));
 				}
 
-				$select.change((e) => {
+				const selectChangeHandler = (e: JQueryEventObject) => {
 					var vocationId = this.getCurrentVocation(<Element>e.currentTarget);
 					this.com.updateLevel(vocationId, $(e.currentTarget).val());
-				});
+				}
+				$select.change(selectChangeHandler);
+				$select2.change(selectChangeHandler);
 			},
 
 			//レベル欄クリック時にUI表示
@@ -959,7 +924,13 @@ namespace Dq10.SkillSimulator {
 					var consoleLeft = $(e.currentTarget).find('.lv_h2').position().left - 3;
 
 					this.$lvConsole.appendTo($(e.currentTarget)).css({left: consoleLeft});
-					$('#lv-select').val(this.sim.getLevel(vocationId));
+
+					const skillPtsTable = this.DB.vocations[vocationId].skillPtsTable;
+					const $select = $([null, '#lv-select', '#lv-select2'][skillPtsTable]);
+
+					this.$lvConsole.find('select').hide();
+					$select.show();
+					$select.val(this.sim.getLevel(vocationId));
 
 					this.$lvConsole.show();
 					e.stopPropagation();
@@ -1664,16 +1635,6 @@ namespace Dq10.SkillSimulator {
 			});
 			// $('#msp .remain .container').text(this.DB.consts.msp.max - this.sim.totalMSP());
 			// $('#msp .total .container').text(this.DB.consts.msp.max);
-		}
-
-		private refreshTotalRequiredExp() {
-			$('#total_exp').text(numToFormedStr(this.sim.totalRequiredExp()));
-		}
-
-		private refreshTotalExpRemain() {
-			var totalExpRemain = this.sim.totalExpRemain();
-			$('#total_exp_remain, #total_exp_remain_label').toggleClass(this.CLASSNAME_ERROR, totalExpRemain > 0);
-			$('#total_exp_remain').text(numToFormedStr(totalExpRemain));
 		}
 
 		private refreshTotalPassive() {

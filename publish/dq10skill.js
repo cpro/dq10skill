@@ -565,7 +565,7 @@ var Dq10;
                 this.vocations = Object.keys(this.DB.vocations).map(function (vocationId) {
                     var vocation = {
                         id: vocationId,
-                        level: _this.DB.consts.level.min,
+                        level: _this.DB.vocations[vocationId].initialLevel || _this.DB.consts.level.min,
                         trainingSkillPt: _this.DB.consts.trainingSkillPts.min,
                         skillPts: []
                     };
@@ -630,6 +630,8 @@ var Dq10;
             };
             //特訓スキルポイント更新
             SimulatorModel.prototype.updateTrainingSkillPt = function (vocationId, newValue) {
+                if (this.DB.vocations[vocationId].disableTraining)
+                    return true;
                 if (newValue < this.DB.consts.trainingSkillPts.min || newValue > this.DB.consts.trainingSkillPts.max)
                     return false;
                 this.vocationDic[vocationId].trainingSkillPt = newValue;
@@ -701,14 +703,14 @@ var Dq10;
             };
             //職業レベルに対するスキルポイント最大値
             SimulatorModel.prototype.maxSkillPts = function (vocationId) {
-                return this.DB.skillPtsGiven[this.vocationDic[vocationId].level];
+                return this.DB.skillPtsGiven[this.DB.vocations[vocationId].skillPtsTable][this.vocationDic[vocationId].level];
             };
             //スキルポイント合計に対する必要レベル取得
             SimulatorModel.prototype.requiredLevel = function (vocationId) {
                 var trainingSkillPt = this.getTrainingSkillPt(vocationId);
                 var total = this.totalSkillPts(vocationId) - trainingSkillPt;
                 for (var l = this.DB.consts.level.min; l <= this.DB.consts.level.max; l++) {
-                    if (this.DB.skillPtsGiven[l] >= total) {
+                    if (this.DB.skillPtsGiven[this.DB.vocations[vocationId].skillPtsTable][l] >= total) {
                         //特訓スキルポイントが1以上の場合、最低レベル50必要
                         if (trainingSkillPt > this.DB.consts.trainingSkillPts.min && l < this.DB.consts.level.forTrainingMode)
                             return this.DB.consts.level.forTrainingMode;
@@ -729,35 +731,6 @@ var Dq10;
             //全職業の使用済スキルポイント
             SimulatorModel.prototype.wholeSkillPtsUsed = function () {
                 return this.wholePts.reduce(function (prev, skillPt) { return prev + skillPt.pt; }, 0);
-            };
-            //職業・レベルによる必要経験値
-            SimulatorModel.prototype.requiredExp = function (vocationId, level) {
-                return this.DB.expRequired[this.DB.vocations[vocationId].expTable][level];
-            };
-            //不足経験値
-            SimulatorModel.prototype.requiredExpRemain = function (vocationId) {
-                var required = this.requiredLevel(vocationId);
-                var current = this.vocationDic[vocationId].level;
-                if (required <= current)
-                    return 0;
-                var remain = this.requiredExp(vocationId, required) - this.requiredExp(vocationId, current);
-                return remain;
-            };
-            //全職業の必要経験値合計
-            SimulatorModel.prototype.totalRequiredExp = function () {
-                var _this = this;
-                return this.vocations.reduce(function (prev, vocation) {
-                    var cur = _this.requiredExp(vocation.id, vocation.level);
-                    return prev + cur;
-                }, 0);
-            };
-            //全職業の不足経験値合計
-            SimulatorModel.prototype.totalExpRemain = function () {
-                var _this = this;
-                return this.vocations.reduce(function (prev, vocation) {
-                    var cur = _this.requiredExpRemain(vocation.id);
-                    return prev + cur;
-                }, 0);
             };
             //各種パッシブスキルのステータス加算合計
             //ちから      : pow
@@ -860,7 +833,8 @@ var Dq10;
                 'itemmaster',
                 'dancer',
                 'fortuneteller',
-                'druid' //天地雷鳴士
+                'druid',
+                'gadabout' //遊び人
             ];
             var BITS_LEVEL = 8; //レベルは8ビット確保
             var BITS_SKILL = 7; //スキルは7ビット
@@ -1148,13 +1122,17 @@ var Dq10;
                     function () {
                         _this.$lvConsole = $('#lv_console');
                         var $select = $('#lv-select');
+                        var $select2 = $('#lv-select2');
                         for (var i = _this.DB.consts.level.min; i <= _this.DB.consts.level.max; i++) {
-                            $select.append($("<option />").val(i).text(i + " (" + _this.DB.skillPtsGiven[i] + ")"));
+                            $select.append($("<option />").val(i).text(i + " (" + _this.DB.skillPtsGiven[1][i] + ")"));
+                            $select2.append($("<option />").val(i).text(i + " (" + _this.DB.skillPtsGiven[2][i] + ")"));
                         }
-                        $select.change(function (e) {
+                        var selectChangeHandler = function (e) {
                             var vocationId = _this.getCurrentVocation(e.currentTarget);
                             _this.com.updateLevel(vocationId, $(e.currentTarget).val());
-                        });
+                        };
+                        $select.change(selectChangeHandler);
+                        $select2.change(selectChangeHandler);
                     },
                     //レベル欄クリック時にUI表示
                     function () {
@@ -1163,7 +1141,11 @@ var Dq10;
                             var vocationId = _this.getCurrentVocation(e.currentTarget);
                             var consoleLeft = $(e.currentTarget).find('.lv_h2').position().left - 3;
                             _this.$lvConsole.appendTo($(e.currentTarget)).css({ left: consoleLeft });
-                            $('#lv-select').val(_this.sim.getLevel(vocationId));
+                            var skillPtsTable = _this.DB.vocations[vocationId].skillPtsTable;
+                            var $select = $([null, '#lv-select', '#lv-select2'][skillPtsTable]);
+                            _this.$lvConsole.find('select').hide();
+                            $select.show();
+                            $select.val(_this.sim.getLevel(vocationId));
                             _this.$lvConsole.show();
                             e.stopPropagation();
                         });
@@ -1664,8 +1646,6 @@ var Dq10;
                 //見出し中のレベル数値
                 $("#" + vocationId + " .lv_h2").text(currentLevel);
                 var $levelH2 = $("#" + vocationId + " h2");
-                //必要経験値
-                $("#" + vocationId + " .exp").text(numToFormedStr(this.sim.requiredExp(vocationId, currentLevel)));
                 //スキルポイント 残り / 最大値
                 var maxSkillPts = this.sim.maxSkillPts(vocationId);
                 var additionalSkillPts = this.sim.getTrainingSkillPt(vocationId);
@@ -1680,7 +1660,6 @@ var Dq10;
                 $("#" + vocationId + " .expinfo .error").toggle(isLevelError);
                 if (isLevelError) {
                     $("#" + vocationId + " .req_lv").text(numToFormedStr(requiredLevel));
-                    $("#" + vocationId + " .exp_remain").text(numToFormedStr(this.sim.requiredExpRemain(vocationId)));
                 }
                 //MSP 残り / 最大値
                 var maxMSP = this.sim.getMSPAvailable();
@@ -1693,14 +1672,6 @@ var Dq10;
             SimulatorUI.prototype.refreshAllVocationInfo = function () {
                 var _this = this;
                 Object.keys(this.DB.vocations).forEach(function (vocationId) { return _this.refreshVocationInfo(vocationId); });
-            };
-            SimulatorUI.prototype.refreshTotalRequiredExp = function () {
-                $('#total_exp').text(numToFormedStr(this.sim.totalRequiredExp()));
-            };
-            SimulatorUI.prototype.refreshTotalExpRemain = function () {
-                var totalExpRemain = this.sim.totalExpRemain();
-                $('#total_exp_remain, #total_exp_remain_label').toggleClass(this.CLASSNAME_ERROR, totalExpRemain > 0);
-                $('#total_exp_remain').text(numToFormedStr(totalExpRemain));
             };
             SimulatorUI.prototype.refreshTotalPassive = function () {
                 var _this = this;
@@ -1986,14 +1957,6 @@ var Dq10;
                 });
                 // $('#msp .remain .container').text(this.DB.consts.msp.max - this.sim.totalMSP());
                 // $('#msp .total .container').text(this.DB.consts.msp.max);
-            };
-            SimpleUI.prototype.refreshTotalRequiredExp = function () {
-                $('#total_exp').text(numToFormedStr(this.sim.totalRequiredExp()));
-            };
-            SimpleUI.prototype.refreshTotalExpRemain = function () {
-                var totalExpRemain = this.sim.totalExpRemain();
-                $('#total_exp_remain, #total_exp_remain_label').toggleClass(this.CLASSNAME_ERROR, totalExpRemain > 0);
-                $('#total_exp_remain').text(numToFormedStr(totalExpRemain));
             };
             SimpleUI.prototype.refreshTotalPassive = function () {
                 var _this = this;
