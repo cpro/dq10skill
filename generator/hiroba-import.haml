@@ -5,12 +5,12 @@
 		%meta{'http-equiv' => 'Content-Style-Type', content: 'text/css'}/
 		%meta{'http-equiv' => 'Content-Script-Type', content: 'text/javascript'}/
 		%title 広場からデータを取り込む - DQ10 スキルシミュレータ
-		
+
 		%link{rel: 'stylesheet', type: 'text/css', href: "./dq10skill.css"}/
-		%link{rel: 'stylesheet', type: 'text/css', href: 'http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css'}/
-		
-		%script{type: 'text/javascript', src: 'http://code.jquery.com/jquery-1.10.2.min.js'}
-		%script{type: 'text/javascript', src: 'http://code.jquery.com/ui/1.10.3/jquery-ui.min.js'}
+		%link{rel: 'stylesheet', type: 'text/css', href: '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css'}/
+
+		%script{type: 'text/javascript', src: '//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'}
+		%script{type: 'text/javascript', src: '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'}
 		%script{type: 'text/javascript', src: 'js/jquery.socialbutton-1.9.1.min.js'}
 		:javascript
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -23,22 +23,22 @@
 		:javascript
 			jQuery(function($) {
 				$('#bookmarklet').button();
-				
+
 				$('#tw-share').socialbutton('twitter', {
 					button: 'horizontal',
-					url: 'http://cpro.jp/dq10/skillsimulator/hiroba-import.html',
+					url: 'https://dq10.cpro.jp/hiroba-import.html',
 					lang: 'ja',
 					hashtags: 'DQ10, dq10_skillsim'
 				});
 				$('#fb-like').socialbutton('facebook_like', {
 					button: 'button_count',
-					url: 'http://cpro.jp/dq10/skillsimulator/hiroba-import.html',
+					url: 'https://dq10.cpro.jp/hiroba-import.html',
 					locale: 'ja_JP'
 				});
 				$('#g-plusone').socialbutton('google_plusone', {
 					lang: 'ja',
 					size: 'medium',
-					url: 'http://cpro.jp/dq10/skillsimulator/hiroba-import.html'
+					url: 'https://dq10.cpro.jp/hiroba-import.html'
 				});
 			});
 	%body
@@ -56,17 +56,17 @@
 				%h2 使い方
 				%p
 					%big<
-						%a#bookmarklet{href: "javascript:(function(){var d=document;var s=d.createElement('script');s.src='http://cpro.jp/dq10/skillsimulator/bookmarklet/hiroba-status.js';d.getElementsByTagName('head')[0].appendChild(s);})();"} 広場からスキルシミュレータに取り込む
+						%a#bookmarklet{href: "javascript:(function(){var d=document;var s=d.createElement('script');s.src='https://dq10.cpro.jp/bookmarklet/hiroba-status.js';d.getElementsByTagName('head')[0].appendChild(s);})();"} 広場からスキルシミュレータに取り込む
 				%p 上記のリンクをブックマークレットとして登録します。リンクを右クリックして「お気に入りに追加」「このリンクをブックマーク」等を選択してください。ブラウザによってはリンクをブックマークバーへドラッグ・ドロップするだけで登録できます。
 				%p <a href="http://hiroba.dqx.jp/sc/home/status/detail/" target="_blank">冒険者の広場のスキルポイント詳細ページ</a>をログインした状態で開き、上記のブックマークレットを実行すると、広場のステータスを再現した状態でスキルシミュレータを開きます。
 				%h2 解説
 				%ul
-					%li このブックマークレットは <a href="http://cpro.jp/dq10/skillsimulator/bookmarklet/hiroba-status.js" target="_blank">http://cpro.jp/dq10/skillsimulator/bookmarklet/hiroba-status.js</a> にあるスクリプトが本体で、これを外部スクリプトとして読み込み・実行しています。各職業のレベル・特訓スタンプ数・スキルポイントの振り分け状態以外は送信していません（というか、保存用URLを生成してアクセスしているだけです）が、ご利用は自己責任でお願いします。
+					%li このブックマークレットは <a href="https://dq10.cpro.jp/bookmarklet/hiroba-status.js" target="_blank">https://dq10.cpro.jp/bookmarklet/hiroba-status.js</a> にあるスクリプトが本体で、これを外部スクリプトとして読み込み・実行しています。各職業のレベル・特訓スタンプ数・スキルポイントの振り分け状態以外は送信していません（というか、保存用URLを生成してアクセスしているだけです）が、ご利用は自己責任でお願いします。
 					%li 本体スクリプトの動作は予告なく変更されることがあります。
 					%li 広場の仕様変更によって動作しなくなることがあります。なるべく早く対応したいと思いますが保証はできません。
 					%li ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。
 				%address<
 					%p.contact 連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a>
 				%p
-					%a{href: "http://cpro.jp/dq10/skillsimulator/"} スキルシミュレータに戻る
+					%a{href: "https://dq10.cpro.jp/"} スキルシミュレータに戻る
 
