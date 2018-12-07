@@ -1,8 +1,8 @@
 /* global skillMap */
 (function() {
 
-var SIMULATOR_URL = 'http://cpro.jp/dq10/skillsimulator/';
-var HIROBA_STATUS_URL = 'http://hiroba.dqx.jp/sc/home/status/detail/';
+var SIMULATOR_URL = 'https://dq10.cpro.jp/';
+var HIROBA_STATUS_URL = 'https://hiroba.dqx.jp/sc/home/status/detail/';
 if(window.location.href != HIROBA_STATUS_URL) {
 	alert('このブックマークレットは\n\n' + HIROBA_STATUS_URL + '\n\nでのみ有効です。');
 	return;
@@ -25,7 +25,8 @@ var VOCATIONS = [
 	'どうぐ使い',
 	'踊り子',
 	'占い師',
-	'天地雷鳴士'
+	'天地雷鳴士',
+	'遊び人'
 ];
 var SKILLS = {
 	'戦士': ['片手剣', '両手剣', 'オノ', '盾', 'ゆうかん'],
@@ -44,7 +45,8 @@ var SKILLS = {
 	'どうぐ使い': ['ブーメラン', 'ハンマー', 'ヤリ', '弓', 'アイテムマスター'],
 	'踊り子': ['短剣', '扇', 'スティック', 'うた', 'おどり'],
 	'占い師': ['片手剣', '弓', 'ムチ', '棍', 'うらない'],
-	'天地雷鳴士': ['扇', 'スティック', '両手杖', '盾', 'しょうかん']
+	'天地雷鳴士': ['扇', 'スティック', '両手杖', '盾', 'しょうかん'],
+	'遊び人': ['片手剣', '短剣', 'ハンマー', 'ブーメラン', 'あそび']
 };
 var MSP_SKILLLINE_ORDER = [
 	'片手剣', '両手剣', 'オノ', '盾', 'ゆうかん', 'ヤリ',
@@ -52,7 +54,7 @@ var MSP_SKILLLINE_ORDER = [
 	'まほう', 'ツメ', '扇', '格闘', 'きあい', 'おたから',
 	'きょくげい', 'ハンマー', 'はくあい', '弓', 'ブーメラン', 'サバイバル',
 	'フォース', 'オーラ', 'とうこん', 'さとり', 'まものマスター', 'アイテムマスター',
-	'うた', 'おどり', 'うらない', 'しょうかん'
+	'うた', 'おどり', 'うらない', 'しょうかん', 'あそび'
 ];
 
 var TRAINING_TABLE = [
