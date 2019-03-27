@@ -1,274 +1,350 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='UTF-8'>
-    <meta content='text/css' http-equiv='Content-Style-Type'>
-    <meta content='text/javascript' http-equiv='Content-Script-Type'>
-    <link href='https://dq10.cpro.jp/anlucea.html' rel='canonical'>
-    <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。勇者姫アンルシア用。' name='description'>
-    <title>DQ10 アンルシア用スキルシミュレータ</title>
-    <link href='./dq10skill.css?ver=0.4' rel='stylesheet' type='text/css'>
-    <link href='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
-    <script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js' type='text/javascript'></script>
-    <script src='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js' type='text/javascript'></script>
-    <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
-    <script src='./dq10skill-anlucea.js?ver=0.4' type='text/javascript'></script>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      
-      ga('create', 'UA-5127088-4', 'cpro.jp');
-      ga('send', 'pageview');
-    </script>
-  </head>
-  <body id='body-for-anlucea'>
-    <div id='header'>
-      <div id='titleblock'>
-        <h1><a href='https://dq10.cpro.jp/anlucea.html'>DQ10 アンルシア用スキルシミュレータ</a></h1>
-        <div id='save_url'>
-          <label for='url_text'>保存用URL:</label><input class='ui-widget-content ui-corner-all' id='url_text' size='45' type='text'><a id='tw-saveurl'>保存用URLをツイート</a>
-        </div>
-      </div>
-    </div>
-    <div id='body_content'>
-      <div class='class_group' id='anlucea-data'>
-        <div class='ent_title'>
-          <h2>アンルシア Lv
-          <span class='lv_h2'>20</span></h2>
-          <dl>
-            <dd class='lv_select'>
-              <select size='1'></select>
-            </dd>
-          </dl>
-          <dl class='skill_pt'>
-            <dt>残りSP:</dt>
-            <dd class='pts'>0 / 0</dd>
-          </dl>
-          <dl class='expinfo'>
-            <dt>獲得経験値:</dt>
-            <dd class='exp'>0</dd>
-            <dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
-            <dd class='error' style='display:none'>（あと<span class='exp_remain'>0</span> exp）
-            </dd>
-          </dl>
-        </div>
-        <div class='skill_tables'><table class='bravery skill_table'>
-            <caption>
-              勇気:
-              <span class='skill_total'>0</span>
-            </caption>
-            <th class='console' colspan='2'>
-              <input class='ptspinner'>
-              <button class='reset'>リセット</button>
-            </th>
-            <tr class='bravery_0' title='戦闘開始時&#x000A;たまにピオラ&#x000A;が発動する'><td class='skill_pt'>2</td><td class='skill_name'>開戦時50%ピオラ</td></tr>
-            <tr class='bravery_1' title='戦闘開始時&#x000A;たまに&#x000A;テンションアップ'><td class='skill_pt'>6</td><td class='skill_name'>開戦時10%テンション</td></tr>
-            <tr class='bravery_2' title='戦闘開始時&#x000A;たまにバイシオン&#x000A;が発動する'><td class='skill_pt'>10</td><td class='skill_name'>開戦時20%バイシオン</td></tr>
-            <tr class='bravery_3' title='さらに戦闘開始時&#x000A;たまに&#x000A;テンションアップ'><td class='skill_pt'>14</td><td class='skill_name'>開戦時20%テンション</td></tr>
-            <tr class='bravery_4' title='戦闘開始時必ず&#x000A;ピオラ&#x000A;が発動する'><td class='skill_pt'>18</td><td class='skill_name'>開戦時100%ピオラ</td></tr>
-            <tr class='bravery_5' title='さらに戦闘開始時&#x000A;たまに&#x000A;テンションアップ'><td class='skill_pt'>22</td><td class='skill_name'>開戦時30%テンション</td></tr>
-            <tr class='bravery_6' title='さらに戦闘開始時&#x000A;たまにバイシオン&#x000A;が発動する'><td class='skill_pt'>28</td><td class='skill_name'>開戦時50%バイシオン</td></tr>
-            <tr class='bravery_7' title='戦闘開始時必ず&#x000A;テンションバーン&#x000A;が発動する'><td class='skill_pt'>35</td><td class='skill_name'>開戦時テンションバーン</td></tr>
-            <tr class='bravery_8' title='さらに戦闘開始時&#x000A;たまに&#x000A;テンションアップ'><td class='skill_pt'>40</td><td class='skill_name'>開戦時50%テンション</td></tr>
-          </table><table class='truth skill_table'>
-            <caption>
-              真理:
-              <span class='skill_total'>0</span>
-            </caption>
-            <th class='console' colspan='2'>
-              <input class='ptspinner'>
-              <button class='reset'>リセット</button>
-            </th>
-            <tr class='truth_0' title='たまにＭＰを&#x000A;消費しない'><td class='skill_pt'>3</td><td class='skill_name'>たまにＭＰ消費しない</td></tr>
-            <tr class='truth_1' title='周囲を巻き込む&#x000A;はげしい雷が&#x000A;敵に降りそそぐ&#x000A;（消費MP: 12）'><td class='skill_pt'>7</td><td class='skill_name'>ライデイン</td></tr>
-            <tr class='truth_2' title='デイン系の呪文の&#x000A;威力があがる'><td class='skill_pt'>12</td><td class='skill_name'>デインの心得+25%</td></tr>
-            <tr class='truth_3' title='常時&#x000A;こうげき魔力が&#x000A;６０増える'><td class='skill_pt'>18</td><td class='skill_name'>こうげき魔力+60</td></tr>
-            <tr class='truth_4' title='常時&#x000A;さいだいＭＰが&#x000A;５０増える'><td class='skill_pt'>24</td><td class='skill_name'>さいだいＭＰ+50</td></tr>
-            <tr class='truth_5' title='周囲を巻き込む&#x000A;すさまじい雷が&#x000A;敵に降りそそぐ&#x000A;（消費MP: 32）'><td class='skill_pt'>28</td><td class='skill_name'>ギガデイン</td></tr>
-            <tr class='truth_6' title='呪文を唱えた時&#x000A;魔力が&#x000A;暴走しやすくなる'><td class='skill_pt'>30</td><td class='skill_name'>呪文ぼうそう率アップ</td></tr>
-            <tr class='truth_7' title='デイン系の呪文の&#x000A;威力が&#x000A;かなりあがる'><td class='skill_pt'>35</td><td class='skill_name'>デインの心得+50%</td></tr>
-            <tr class='truth_8' title='常時&#x000A;こうげき魔力が&#x000A;１００増える'><td class='skill_pt'>40</td><td class='skill_name'>こうげき魔力+100</td></tr>
-          </table><table class='justice skill_table'>
-            <caption>
-              正義:
-              <span class='skill_total'>0</span>
-            </caption>
-            <th class='console' colspan='2'>
-              <input class='ptspinner'>
-              <button class='reset'>リセット</button>
-            </th>
-            <tr class='justice_0' title='行動間隔が&#x000A;０．５秒&#x000A;短くなる'><td class='skill_pt'>2</td><td class='skill_name'>行動間隔0.5秒短縮</td></tr>
-            <tr class='justice_1' title='戦闘開始時必ず&#x000A;早詠みの杖&#x000A;が発動する'><td class='skill_pt'>6</td><td class='skill_name'>開戦時早詠みの杖</td></tr>
-            <tr class='justice_2' title='敵の攻撃を&#x000A;かわしやすくなる'><td class='skill_pt'>12</td><td class='skill_name'>身かわし率+5%</td></tr>
-            <tr class='justice_3' title='呪文の発動速度が&#x000A;早くなる'><td class='skill_pt'>18</td><td class='skill_name'>呪文発動速度+10%</td></tr>
-            <tr class='justice_4' title='会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>22</td><td class='skill_name'>かいしん率+5%</td></tr>
-            <tr class='justice_5' title='行動間隔が&#x000A;さらに０．５秒&#x000A;短くなる'><td class='skill_pt'>27</td><td class='skill_name'>行動間隔0.5秒短縮</td></tr>
-            <tr class='justice_6' title='敵の攻撃をさらに&#x000A;かわしやすくなる'><td class='skill_pt'>30</td><td class='skill_name'>身かわし率+10%</td></tr>
-            <tr class='justice_7' title='呪文の発動速度が&#x000A;さらに早くなる'><td class='skill_pt'>33</td><td class='skill_name'>呪文発動速度+20%</td></tr>
-            <tr class='justice_8' title='行動間隔が&#x000A;さらに１秒&#x000A;短くなる'><td class='skill_pt'>40</td><td class='skill_name'>行動間隔1秒短縮</td></tr>
-          </table><table class='fight skill_table'>
-            <caption>
-              闘志:
-              <span class='skill_total'>0</span>
-            </caption>
-            <th class='console' colspan='2'>
-              <input class='ptspinner'>
-              <button class='reset'>リセット</button>
-            </th>
-            <tr class='fight_0' title='会心のいちげきが&#x000A;出やすくなる'><td class='skill_pt'>5</td><td class='skill_name'>かいしん率+5%</td></tr>
-            <tr class='fight_1' title='ちからが&#x000A;１０増える'><td class='skill_pt'>10</td><td class='skill_name'>ちから+10</td></tr>
-            <tr class='fight_2' title='攻撃時たまに&#x000A;相手のこうげき力&#x000A;を下げる'><td class='skill_pt'>18</td><td class='skill_name'>攻撃時25%でヘナトス</td></tr>
-            <tr class='fight_3' title='ちからが&#x000A;２０増える'><td class='skill_pt'>20</td><td class='skill_name'>ちから+20</td></tr>
-            <tr class='fight_4' title='攻撃時たまに&#x000A;相手のしゅび力を&#x000A;下げる'><td class='skill_pt'>23</td><td class='skill_name'>攻撃時25%でルカニ</td></tr>
-            <tr class='fight_5' title='ちからが&#x000A;３０増える'><td class='skill_pt'>30</td><td class='skill_name'>ちから+30</td></tr>
-            <tr class='fight_6' title='攻撃時たまに&#x000A;相手の属性耐性を&#x000A;下げる'><td class='skill_pt'>33</td><td class='skill_name'>攻撃時25%で耐性ダウン</td></tr>
-            <tr class='fight_7' title='ときどき&#x000A;２回連続で&#x000A;行動をする'><td class='skill_pt'>38</td><td class='skill_name'>ときどき２回行動</td></tr>
-            <tr class='fight_8' title='ちからが&#x000A;４０増える'><td class='skill_pt'>40</td><td class='skill_name'>ちから+40</td></tr>
-          </table><table class='patience skill_table'>
-            <caption>
-              忍耐:
-              <span class='skill_total'>0</span>
-            </caption>
-            <th class='console' colspan='2'>
-              <input class='ptspinner'>
-              <button class='reset'>リセット</button>
-            </th>
-            <tr class='patience_0' title='みのまもりが&#x000A;５０増える'><td class='skill_pt'>2</td><td class='skill_name'>みのまもり+50</td></tr>
-            <tr class='patience_1' title='さいだいＨＰが&#x000A;２０増える'><td class='skill_pt'>7</td><td class='skill_name'>さいだいＨＰ+20</td></tr>
-            <tr class='patience_2' title='ＨＰ１で生き残る&#x000A;確率が増えた！'><td class='skill_pt'>18</td><td class='skill_name'>たまにＨＰ１生き残り</td></tr>
-            <tr class='patience_3' title='さいだいＨＰが&#x000A;３０増える'><td class='skill_pt'>22</td><td class='skill_name'>さいだいＨＰ+30</td></tr>
-            <tr class='patience_4' title='戦闘開始時&#x000A;必ずスカラ&#x000A;が発動する'><td class='skill_pt'>24</td><td class='skill_name'>開戦時スカラ</td></tr>
-            <tr class='patience_5' title='攻撃呪文で受ける&#x000A;ダメージを軽減'><td class='skill_pt'>27</td><td class='skill_name'>攻撃呪文耐性 +10%</td></tr>
-            <tr class='patience_6' title='範囲内にいる&#x000A;仲間のＨＰを&#x000A;８０～回復する&#x000A;（消費MP: 16）'><td class='skill_pt'>31</td><td class='skill_name'>ベホマラー</td></tr>
-            <tr class='patience_7' title='常時&#x000A;さいだいＨＰが&#x000A;１００増える'><td class='skill_pt'>36</td><td class='skill_name'>常時さいだいＨＰ+100</td></tr>
-            <tr class='patience_8' title='戦闘開始時必ず&#x000A;聖なる祈り&#x000A;が発動する'><td class='skill_pt'>40</td><td class='skill_name'>開戦時聖なる祈り</td></tr>
-          </table></div>
-        <div class='status_info'>
-          <h3>ステータス:</h3>
-          <dl>
-            <dt>最大HP</dt>
-            <dd class='maxhp'>0</dd>
-            <dt>最大MP</dt>
-            <dd class='maxmp'>0</dd>
-            <dt>力</dt>
-            <dd class='pow'>0</dd>
-            <dt>身守</dt>
-            <dd class='def'>0</dd>
-            <dt>攻魔</dt>
-            <dd class='magic'>0</dd>
-            <dt>回魔</dt>
-            <dd class='heal'>0</dd>
-            <dt>素早</dt>
-            <dd class='spd'>0</dd>
-            <dt>器用</dt>
-            <dd class='dex'>0</dd>
-            <dt>魅力</dt>
-            <dd class='charm'>0</dd>
-            <dt>重さ</dt>
-            <dd class='weight'>0</dd>
-          </dl>
-        </div>
-      </div>
-      <div id='footconsole'>
-        <p id='bringUpLevel'>
-          <button>必要レベルまで上げる</button>
-        </p>
-        <p id='clearallskills'>
-          <button>全スキルをリセット</button>
-        </p>
-      </div>
-      <div id='footer'>
-        <ul>
-          <li>スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』の勇者姫アンルシアのスキルポイント割り振りを検討するためのシミュレータです。</li>
-          <li>要JavaScript。Firefox, Google Chrome, IE11で動作確認。IE10以前には対応していません。</li>
-          <li>
-            使い方:
-            <ul>
-              <li>プルダウンでレベルを選択。括弧内はそのレベルの累計スキルポイント。</li>
-              <li>スキルポイントはスキル一覧の項目をクリックすると必要なポイントが自動入力されます。上下ボタン・キーボードの上下キーで1ずつ調整、PageUp/PageDownキーで10ずつ上下します。数値の直接入力も可能。</li>
-              <li>スキルポイント欄右のリセットボタンをクリックするとポイントを0にします。</li>
-              <li>「保存用URL」欄に表示されるURLは、アクセスすることで現在の状態を再現できます。メモ用・掲示板に貼る用などにどうぞ。</li>
-              <li>「必要レベルまで上げる」ボタンをクリックすると、現在のレベルを取得済みのスキルに応じた必要レベルまで引き上げます。</li>
-            </ul>
-          </li>
-          <li>
-            履歴:
-            <ul>
-              <li>2015/4/3 v0.4 Lv56-60のデータ埋め完了。Lv58時SP修正、93→94</li>
-              <li>2015/3/4 v0.3.2 Lv56-60のデータ埋めほぼ完了。追加SPは合計9で確定。</li>
-              <li>2015/2/27 v0.3.1 ver2.4後期のレベル上限解放(55→60)に仮対応。追加SPは暫定で2ずつ合計+10としてあります。</li>
-              <li>2015/2/13 v0.3 IE10以下への対応を終了。</li>
-              <li>2014/12/8 v0.2.1 データロードの最適化等微調整。</li>
-              <li>
-                2014/11/12 v0.2 ver2.3後期のレベル上限解放(50→55)に対応。データ埋めほぼ完了。
-              </li>
-              <li>
-                2014/7/29 v0.1 公開。
-                <ul>
-                  <li>v0.1.5 ステータス表示を追加。</li>
-                  <li>v0.1.6 Lv50カンストまでのデータ埋め（ほぼ）完了。</li>
-                </ul>
-              </li>
-              <li>過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。</li>
-            </ul>
-          </li>
-          <li>
-            ToDo:
-            <ul>
-              <li><del>取得スキルポイント、ステータス等のデータ埋め</del> (v0.1.6)</li>
-            </ul>
-          </li>
-          <li>ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。</li>
-        </ul>
-        <address><p class='contact'>連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a></p></address>
-      </div>
-    </div>
-    <div id='ad_sidebar'>
-      <h2>サイト内リンク</h2>
-      <ul>
-        <li><a href='./'>スキルシミュレータ</a></li>
-        <li><a href='monster.html'>仲間モンスター用シミュレータ</a></li>
-        <li><a href='http://cpro.jp/dq10/roulette/'>ルーレットシミュレータ</a></li>
-      </ul>
-      <h2>DQ10外部サイトリンク</h2>
-      <ul>
-        <li><a href='http://www.d-quest-10.com/' target='_blank'>ドラクエ10・モンスター完全図鑑</a></li>
-        <li><a href='http://dq100buster.wiki.fc2.com/' target='_blank'>DQ10 モンスター100匹討伐隊攻略wiki</a></li>
-        <li><a href='https://tool.kyokugen.info/ParaWt/' target='_blank'>DQX - 重さチェッカー</a></li>
-        <li><a href='http://dq10battle.wiki.fc2.com/' target='_blank'>ドラクエ１０私的攻略法的な何か</a></li>
-        <li><a href='https://dqx.rizria.com/dqx/search' target='_blank'>DQ10 モーモンバザー サーチ</a></li>
-      </ul>
-      <div id='snsbuttons'>
-        <div class='snsbutton' id='tw-share'></div>
-        <div class='snsbutton' id='fb-like'></div>
-        <div class='snsbutton' id='g-plusone'></div>
-      </div>
-      <div id='ad-items'></div>
-    </div>
-    <script>
-    jQuery(function($) {
-    	$('#ad-items').load('./amazon_item_cache.html');
-    
-    	var sharedUrl = "https://dq10.cpro.jp/anlucea.html";
-    	$('#tw-share').socialbutton('twitter', {
-    		button: 'horizontal',
-    		url: sharedUrl,
-    		lang: 'ja',
-    		hashtags: 'DQ10, dq10_skillsim'
-    	});
-    	$('#fb-like').socialbutton('facebook_like', {
-    		button: 'button_count',
-    		url: sharedUrl,
-    		locale: 'ja_JP'
-    	});
-    	$('#g-plusone').socialbutton('google_plusone', {
-    		lang: 'ja',
-    		size: 'medium',
-    		url: sharedUrl
-    	});
-    });
-  </script>
-  </body>
+<head>
+<meta charset='UTF-8'>
+<meta content='text/css' http-equiv='Content-Style-Type'>
+<meta content='text/javascript' http-equiv='Content-Script-Type'>
+<link href='https://dq10.cpro.jp/anlucea.html' rel='canonical'>
+<meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。勇者姫アンルシア用。' name='description'>
+<title>DQ10 アンルシア用スキルシミュレータ</title>
+<link href='./dq10skill.css?ver=0.4' rel='stylesheet' type='text/css'>
+<link href='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
+<script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js' type='text/javascript'></script>
+<script src='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js' type='text/javascript'></script>
+<script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
+<script src='./dq10skill-anlucea.js?ver=0.4' type='text/javascript'></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  ga('create', 'UA-5127088-4', 'cpro.jp');
+  ga('send', 'pageview');
+</script>
+</head>
+<body id='body-for-anlucea'>
+<div id='header'>
+<div id='titleblock'>
+<h1><a href='https://dq10.cpro.jp/anlucea.html'>DQ10 アンルシア用スキルシミュレータ</a></h1>
+<div id='save_url'>
+<label for='url_text'>保存用URL:</label><input class='ui-widget-content ui-corner-all' id='url_text' size='45' type='text'><a id='tw-saveurl'>保存用URLをツイート</a>
+</div>
+</div>
+</div>
+<div id='body_content'>
+<div class='class_group' id='anlucea-data'>
+<div class='ent_title'>
+<h2>アンルシア Lv
+<span class='lv_h2'>20</span></h2>
+<dl>
+<dd class='lv_select'>
+<select size='1'></select>
+</dd>
+</dl>
+<dl class='skill_pt'>
+<dt>残りSP:</dt>
+<dd class='pts'>0 / 0</dd>
+</dl>
+<dl class='expinfo'>
+<dt>獲得経験値:</dt>
+<dd class='exp'>0</dd>
+<dt class='error' style='display:none'>必要レベル:<span class='req_lv'>1</span></dt>
+<dd class='error' style='display:none'>（あと <span class='exp_remain'>0</span> exp）
+</dd>
+</dl>
+</div>
+<div class='skill_tables'><table class='bravery skill_table'>
+<caption>
+勇気: 
+<span class='skill_total'>0</span>
+</caption>
+<th class='console' colspan='2'>
+<input class='ptspinner'>
+<button class='reset'>リセット</button>
+</th>
+<tr class='bravery_0' title='戦闘開始時
+たまにピオラ
+が発動する'><td class='skill_pt'>2</td><td class='skill_name'>開戦時50%ピオラ</td></tr>
+<tr class='bravery_1' title='戦闘開始時
+たまに
+テンションアップ'><td class='skill_pt'>6</td><td class='skill_name'>開戦時10%テンション</td></tr>
+<tr class='bravery_2' title='戦闘開始時
+たまにバイシオン
+が発動する'><td class='skill_pt'>10</td><td class='skill_name'>開戦時20%バイシオン</td></tr>
+<tr class='bravery_3' title='さらに戦闘開始時
+たまに
+テンションアップ'><td class='skill_pt'>14</td><td class='skill_name'>開戦時20%テンション</td></tr>
+<tr class='bravery_4' title='戦闘開始時必ず
+ピオラ
+が発動する'><td class='skill_pt'>18</td><td class='skill_name'>開戦時100%ピオラ</td></tr>
+<tr class='bravery_5' title='さらに戦闘開始時
+たまに
+テンションアップ'><td class='skill_pt'>22</td><td class='skill_name'>開戦時30%テンション</td></tr>
+<tr class='bravery_6' title='さらに戦闘開始時
+たまにバイシオン
+が発動する'><td class='skill_pt'>28</td><td class='skill_name'>開戦時50%バイシオン</td></tr>
+<tr class='bravery_7' title='戦闘開始時必ず
+テンションバーン
+が発動する'><td class='skill_pt'>35</td><td class='skill_name'>開戦時テンションバーン</td></tr>
+<tr class='bravery_8' title='さらに戦闘開始時
+たまに
+テンションアップ'><td class='skill_pt'>40</td><td class='skill_name'>開戦時50%テンション</td></tr>
+</table><table class='truth skill_table'>
+<caption>
+真理: 
+<span class='skill_total'>0</span>
+</caption>
+<th class='console' colspan='2'>
+<input class='ptspinner'>
+<button class='reset'>リセット</button>
+</th>
+<tr class='truth_0' title='たまにＭＰを
+消費しない'><td class='skill_pt'>3</td><td class='skill_name'>たまにＭＰ消費しない</td></tr>
+<tr class='truth_1' title='周囲を巻き込む
+はげしい雷が
+敵に降りそそぐ
+（消費MP: 12）'><td class='skill_pt'>7</td><td class='skill_name'>ライデイン</td></tr>
+<tr class='truth_2' title='デイン系の呪文の
+威力があがる'><td class='skill_pt'>12</td><td class='skill_name'>デインの心得+25%</td></tr>
+<tr class='truth_3' title='常時
+こうげき魔力が
+６０増える'><td class='skill_pt'>18</td><td class='skill_name'>こうげき魔力+60</td></tr>
+<tr class='truth_4' title='常時
+さいだいＭＰが
+５０増える'><td class='skill_pt'>24</td><td class='skill_name'>さいだいＭＰ+50</td></tr>
+<tr class='truth_5' title='周囲を巻き込む
+すさまじい雷が
+敵に降りそそぐ
+（消費MP: 32）'><td class='skill_pt'>28</td><td class='skill_name'>ギガデイン</td></tr>
+<tr class='truth_6' title='呪文を唱えた時
+魔力が
+暴走しやすくなる'><td class='skill_pt'>30</td><td class='skill_name'>呪文ぼうそう率アップ</td></tr>
+<tr class='truth_7' title='デイン系の呪文の
+威力が
+かなりあがる'><td class='skill_pt'>35</td><td class='skill_name'>デインの心得+50%</td></tr>
+<tr class='truth_8' title='常時
+こうげき魔力が
+１００増える'><td class='skill_pt'>40</td><td class='skill_name'>こうげき魔力+100</td></tr>
+</table><table class='justice skill_table'>
+<caption>
+正義: 
+<span class='skill_total'>0</span>
+</caption>
+<th class='console' colspan='2'>
+<input class='ptspinner'>
+<button class='reset'>リセット</button>
+</th>
+<tr class='justice_0' title='行動間隔が
+０．５秒
+短くなる'><td class='skill_pt'>2</td><td class='skill_name'>行動間隔0.5秒短縮</td></tr>
+<tr class='justice_1' title='戦闘開始時必ず
+早詠みの杖
+が発動する'><td class='skill_pt'>6</td><td class='skill_name'>開戦時早詠みの杖</td></tr>
+<tr class='justice_2' title='敵の攻撃を
+かわしやすくなる'><td class='skill_pt'>12</td><td class='skill_name'>身かわし率+5%</td></tr>
+<tr class='justice_3' title='呪文の発動速度が
+早くなる'><td class='skill_pt'>18</td><td class='skill_name'>呪文発動速度+10%</td></tr>
+<tr class='justice_4' title='会心のいちげきが
+出やすくなる'><td class='skill_pt'>22</td><td class='skill_name'>かいしん率+5%</td></tr>
+<tr class='justice_5' title='行動間隔が
+さらに０．５秒
+短くなる'><td class='skill_pt'>27</td><td class='skill_name'>行動間隔0.5秒短縮</td></tr>
+<tr class='justice_6' title='敵の攻撃をさらに
+かわしやすくなる'><td class='skill_pt'>30</td><td class='skill_name'>身かわし率+10%</td></tr>
+<tr class='justice_7' title='呪文の発動速度が
+さらに早くなる'><td class='skill_pt'>33</td><td class='skill_name'>呪文発動速度+20%</td></tr>
+<tr class='justice_8' title='行動間隔が
+さらに１秒
+短くなる'><td class='skill_pt'>40</td><td class='skill_name'>行動間隔1秒短縮</td></tr>
+</table><table class='fight skill_table'>
+<caption>
+闘志: 
+<span class='skill_total'>0</span>
+</caption>
+<th class='console' colspan='2'>
+<input class='ptspinner'>
+<button class='reset'>リセット</button>
+</th>
+<tr class='fight_0' title='会心のいちげきが
+出やすくなる'><td class='skill_pt'>5</td><td class='skill_name'>かいしん率+5%</td></tr>
+<tr class='fight_1' title='ちからが
+１０増える'><td class='skill_pt'>10</td><td class='skill_name'>ちから+10</td></tr>
+<tr class='fight_2' title='攻撃時たまに
+相手のこうげき力
+を下げる'><td class='skill_pt'>18</td><td class='skill_name'>攻撃時25%でヘナトス</td></tr>
+<tr class='fight_3' title='ちからが
+２０増える'><td class='skill_pt'>20</td><td class='skill_name'>ちから+20</td></tr>
+<tr class='fight_4' title='攻撃時たまに
+相手のしゅび力を
+下げる'><td class='skill_pt'>23</td><td class='skill_name'>攻撃時25%でルカニ</td></tr>
+<tr class='fight_5' title='ちからが
+３０増える'><td class='skill_pt'>30</td><td class='skill_name'>ちから+30</td></tr>
+<tr class='fight_6' title='攻撃時たまに
+相手の属性耐性を
+下げる'><td class='skill_pt'>33</td><td class='skill_name'>攻撃時25%で耐性ダウン</td></tr>
+<tr class='fight_7' title='ときどき
+２回連続で
+行動をする'><td class='skill_pt'>38</td><td class='skill_name'>ときどき２回行動</td></tr>
+<tr class='fight_8' title='ちからが
+４０増える'><td class='skill_pt'>40</td><td class='skill_name'>ちから+40</td></tr>
+</table><table class='patience skill_table'>
+<caption>
+忍耐: 
+<span class='skill_total'>0</span>
+</caption>
+<th class='console' colspan='2'>
+<input class='ptspinner'>
+<button class='reset'>リセット</button>
+</th>
+<tr class='patience_0' title='みのまもりが
+５０増える'><td class='skill_pt'>2</td><td class='skill_name'>みのまもり+50</td></tr>
+<tr class='patience_1' title='さいだいＨＰが
+２０増える'><td class='skill_pt'>7</td><td class='skill_name'>さいだいＨＰ+20</td></tr>
+<tr class='patience_2' title='ＨＰ１で生き残る
+確率が増えた！'><td class='skill_pt'>18</td><td class='skill_name'>たまにＨＰ１生き残り</td></tr>
+<tr class='patience_3' title='さいだいＨＰが
+３０増える'><td class='skill_pt'>22</td><td class='skill_name'>さいだいＨＰ+30</td></tr>
+<tr class='patience_4' title='戦闘開始時
+必ずスカラ
+が発動する'><td class='skill_pt'>24</td><td class='skill_name'>開戦時スカラ</td></tr>
+<tr class='patience_5' title='攻撃呪文で受ける
+ダメージを軽減'><td class='skill_pt'>27</td><td class='skill_name'>攻撃呪文耐性 +10%</td></tr>
+<tr class='patience_6' title='範囲内にいる
+仲間のＨＰを
+８０～回復する
+（消費MP: 16）'><td class='skill_pt'>31</td><td class='skill_name'>ベホマラー</td></tr>
+<tr class='patience_7' title='常時
+さいだいＨＰが
+１００増える'><td class='skill_pt'>36</td><td class='skill_name'>常時さいだいＨＰ+100</td></tr>
+<tr class='patience_8' title='戦闘開始時必ず
+聖なる祈り
+が発動する'><td class='skill_pt'>40</td><td class='skill_name'>開戦時聖なる祈り</td></tr>
+</table></div>
+<div class='status_info'>
+<h3>ステータス:</h3>
+<dl>
+<dt>最大HP</dt>
+<dd class='maxhp'>0</dd>
+<dt>最大MP</dt>
+<dd class='maxmp'>0</dd>
+<dt>力</dt>
+<dd class='pow'>0</dd>
+<dt>身守</dt>
+<dd class='def'>0</dd>
+<dt>攻魔</dt>
+<dd class='magic'>0</dd>
+<dt>回魔</dt>
+<dd class='heal'>0</dd>
+<dt>素早</dt>
+<dd class='spd'>0</dd>
+<dt>器用</dt>
+<dd class='dex'>0</dd>
+<dt>魅力</dt>
+<dd class='charm'>0</dd>
+<dt>重さ</dt>
+<dd class='weight'>0</dd>
+</dl>
+</div>
+</div>
+<div id='footconsole'>
+<p id='bringUpLevel'>
+<button>必要レベルまで上げる</button>
+</p>
+<p id='clearallskills'>
+<button>全スキルをリセット</button>
+</p>
+</div>
+<div id='footer'>
+<ul>
+<li>スクウェア・エニックス『<a href="http://www.dqx.jp/" target="_blank">ドラゴンクエストX 目覚めし五つの種族 オンライン</a>』の勇者姫アンルシアのスキルポイント割り振りを検討するためのシミュレータです。</li>
+<li>要JavaScript。Firefox, Google Chrome, IE11で動作確認。IE10以前には対応していません。</li>
+<li>
+使い方:
+<ul>
+<li>プルダウンでレベルを選択。括弧内はそのレベルの累計スキルポイント。</li>
+<li>スキルポイントはスキル一覧の項目をクリックすると必要なポイントが自動入力されます。上下ボタン・キーボードの上下キーで1ずつ調整、PageUp/PageDownキーで10ずつ上下します。数値の直接入力も可能。</li>
+<li>スキルポイント欄右のリセットボタンをクリックするとポイントを0にします。</li>
+<li>「保存用URL」欄に表示されるURLは、アクセスすることで現在の状態を再現できます。メモ用・掲示板に貼る用などにどうぞ。</li>
+<li>「必要レベルまで上げる」ボタンをクリックすると、現在のレベルを取得済みのスキルに応じた必要レベルまで引き上げます。</li>
+</ul>
+</li>
+<li>
+履歴:
+<ul>
+<li>2015/4/3 v0.4 Lv56-60のデータ埋め完了。Lv58時SP修正、93→94</li>
+<li>2015/3/4 v0.3.2 Lv56-60のデータ埋めほぼ完了。追加SPは合計9で確定。</li>
+<li>2015/2/27 v0.3.1 ver2.4後期のレベル上限解放(55→60)に仮対応。追加SPは暫定で2ずつ合計+10としてあります。</li>
+<li>2015/2/13 v0.3 IE10以下への対応を終了。</li>
+<li>2014/12/8 v0.2.1 データロードの最適化等微調整。</li>
+<li>
+2014/11/12 v0.2 ver2.3後期のレベル上限解放(50→55)に対応。データ埋めほぼ完了。
+</li>
+<li>
+2014/7/29 v0.1 公開。
+<ul>
+<li>v0.1.5 ステータス表示を追加。</li>
+<li>v0.1.6 Lv50カンストまでのデータ埋め（ほぼ）完了。</li>
+</ul>
+</li>
+<li>過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。</li>
+</ul>
+</li>
+<li>
+ToDo:
+<ul>
+<li><del>取得スキルポイント、ステータス等のデータ埋め</del> (v0.1.6)</li>
+</ul>
+</li>
+<li>ご意見・ご要望・不具合報告はツイッターの <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a> アカウントまでお願いします。<a href="https://github.com/cpro/dq10skill/issues" target="_blank">GitHubのIssues</a>で管理しているので、こちらに直接投稿していただいてもかまいません。</li>
+</ul>
+<address><p class='contact'>連絡先: <a href="https://twitter.com/cpro29" target="_blank">@cpro29</a></p></address>
+</div>
+</div>
+<div id='ad_sidebar'>
+<h2>サイト内リンク</h2>
+<ul>
+<li><a href='./'>スキルシミュレータ</a></li>
+<li><a href='monster.html'>仲間モンスター用シミュレータ</a></li>
+<li><a href='http://cpro.jp/dq10/roulette/'>ルーレットシミュレータ</a></li>
+</ul>
+<h2>DQ10外部サイトリンク</h2>
+<ul>
+<li><a href='http://www.d-quest-10.com/' target='_blank'>ドラクエ10・モンスター完全図鑑</a></li>
+<li><a href='http://dq100buster.wiki.fc2.com/' target='_blank'>DQ10 モンスター100匹討伐隊攻略wiki</a></li>
+<li><a href='https://tool.kyokugen.info/ParaWt/' target='_blank'>DQX - 重さチェッカー</a></li>
+<li><a href='http://dq10battle.wiki.fc2.com/' target='_blank'>ドラクエ１０私的攻略法的な何か</a></li>
+<li><a href='https://dqx.rizria.com/dqx/search' target='_blank'>DQ10 モーモンバザー サーチ</a></li>
+</ul>
+<div id='snsbuttons'>
+<div class='snsbutton' id='tw-share'></div>
+<div class='snsbutton' id='fb-like'></div>
+<div class='snsbutton' id='g-plusone'></div>
+</div>
+<div id='ad-items'></div>
+</div>
+<script>
+  jQuery(function($) {
+  	$('#ad-items').load('./amazon_item_cache.html');
+  
+  	var sharedUrl = "https://dq10.cpro.jp/anlucea.html";
+  	$('#tw-share').socialbutton('twitter', {
+  		button: 'horizontal',
+  		url: sharedUrl,
+  		lang: 'ja',
+  		hashtags: 'DQ10, dq10_skillsim'
+  	});
+  	$('#fb-like').socialbutton('facebook_like', {
+  		button: 'button_count',
+  		url: sharedUrl,
+  		locale: 'ja_JP'
+  	});
+  	$('#g-plusone').socialbutton('google_plusone', {
+  		lang: 'ja',
+  		size: 'medium',
+  		url: sharedUrl
+  	});
+  });
+</script>
+</body>
 </html>
