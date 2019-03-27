@@ -1,4 +1,4 @@
-- @version = '13.1'
+- @version = '13.1.1'
 !!! 5
 %html
 	%head
@@ -195,6 +195,11 @@
 						履歴:
 						%ul
 							%li
+								2019/3/27 v13.1.1 ver4.5前期対応。
+								%ul
+									%li スキルブック追加(MSP 29→30)に対応。
+									%li 「奥義・棍閃殺」のチャージタイム表示更新。
+							%li
 								2018/12/5 v13.1 ver4.4対応。
 								%ul
 									%li レベル上限解放(105→108)に対応。
@@ -221,11 +226,6 @@
 									%li v12.0.1 「真・オノむそう」「エンゼルのみちびき」「魔王のいざない」のチャージタイム更新。
 							%li
 								2017/9/19 v11.2 保存用URL読み込み時、160-180スキルを正しく読み込めない不具合を修正。
-							%li
-								2017/7/7 v11.1 ver3.5後期対応。
-								%ul
-									%li レベル上限解放(96→99)に対応。
-									%li 蒼天魔斬のMP10→5、降魔紅蓮斬のCT短縮に対応。
 							%li 過去の履歴は<a href="https://github.com/cpro/dq10skill/releases" target="_blank">リリースノートを参照</a>。
 					%li
 						ToDo:
@@ -237,9 +237,7 @@
 		#dark-screen
 		#customskill-selector.modal-dialog
 			- def sub_rank_value(template, rank, value)
-				- template.gsub('%r', 'ⅠⅡⅢ'[rank]).
-				-          gsub('%i', value.to_i.to_s).
-				-          gsub('%f', sprintf('%.1f', value))
+				- template.gsub('%r', 'ⅠⅡⅢ'[rank]).gsub('%i', value.to_i.to_s).gsub('%f', sprintf('%.1f', value))
 			- def sub_hint_text(skill)
 				- hint = skill['desc'].gsub('%z', skill['val'][0].to_s.tr('0-9.', '０-９．'))
 				- hint += "\n（消費MP: #{skill['mp']}）" if skill['mp']
