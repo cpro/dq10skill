@@ -83,8 +83,10 @@ namespace Dq10.SkillSimulator {
 				var skillLine: SkillLineData = {
 					id: skillLineId,
 					skillPts: this.wholePts.filter((skillPt) => skillPt.skillLineId == skillLineId),
-					custom: Array(this.DB.consts.customSkill.count).fill(0)
+					custom: []
 				}
+				for(var i = 0; i < this.DB.consts.customSkill.count; i++)
+					skillLine.custom.push(0)
 				this.skillLineDic[skillLineId] = skillLine;
 				return skillLine;
 			});
@@ -511,6 +513,9 @@ namespace Dq10.SkillSimulator {
 					var customIds = [];
 					for(var i = 0; i < customSkillLength; i++) {
 						customIds.push(getData());
+					}
+					for(var i = customSkillLength; i < DB.consts.customSkill.count; i++) {
+						customIds.push(0)
 					}
 					sim.setCustomSkills(skillLineId, customIds, 0);
 				}

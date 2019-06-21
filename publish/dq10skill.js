@@ -591,8 +591,10 @@ var Dq10;
                     var skillLine = {
                         id: skillLineId,
                         skillPts: _this.wholePts.filter(function (skillPt) { return skillPt.skillLineId == skillLineId; }),
-                        custom: Array(_this.DB.consts.customSkill.count).fill(0)
+                        custom: []
                     };
+                    for (var i = 0; i < _this.DB.consts.customSkill.count; i++)
+                        skillLine.custom.push(0);
                     _this.skillLineDic[skillLineId] = skillLine;
                     return skillLine;
                 });
@@ -965,6 +967,9 @@ var Dq10;
                         var customIds = [];
                         for (var i = 0; i < customSkillLength; i++) {
                             customIds.push(getData());
+                        }
+                        for (var i = customSkillLength; i < DB.consts.customSkill.count; i++) {
+                            customIds.push(0);
                         }
                         sim.setCustomSkills(skillLineId, customIds, 0);
                     }
