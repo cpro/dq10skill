@@ -13,10 +13,10 @@
 		%title= @title
 
 		%link{rel: 'stylesheet', type: 'text/css', href: "./dq10skill.css?ver=#{@version}"}/
-		%link{rel: 'stylesheet', type: 'text/css', href: '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css'}/
+		%link{rel: 'stylesheet', type: 'text/css', href: 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css'}/
 
-		%script{type: 'text/javascript', src: '//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'}
-		%script{type: 'text/javascript', src: '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'}
+		%script{type: 'text/javascript', src: 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'}
+		%script{type: 'text/javascript', src: 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'}
 		%script{type: 'text/javascript', src: 'js/rawdeflate.min.js'}
 		%script{type: 'text/javascript', src: 'js/rawinflate.min.js'}
 		%script{type: 'text/javascript', src: 'js/shortcut.min.js'}
@@ -26,7 +26,7 @@
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
 			ga('create', 'UA-5127088-4', 'cpro.jp');
 			ga('send', 'pageview');
@@ -243,6 +243,11 @@
 				- hint += "\n（消費MP: #{skill['mp']}）" if skill['mp']
 				- hint += "\n（チャージ: #{skill['val'][0]}秒）" if skill['charge']
 				- return hint
+			- def get_rank(skill, index)
+				- if skill['skill200']
+					- index >= 4 ? 1 : 0
+				- else
+					- index >= 3 ? 2 : index
 			#customskill-selector-header.modal-dialog-header
 				%h2.modal-dialog-caption
 					スキル編集 -&nbsp;
@@ -261,10 +266,11 @@
 									%th.customskill-entry-name{title: sub_hint_text(custom_skill)}= custom_skill['name']
 									- data['consts']['customSkill']['count'].times do |i|
 										%td.customskill-entry-selector{id: "customskill-selector-#{skill_line_name}-#{custom_skill['id']}-#{i}"}<
-											%a{'data-skillline' => skill_line_name, 'data-customskill-id' => custom_skill['id'], 'data-rank' => i}<
+											- rank = get_rank(custom_skill, i)
+											%a{'data-skillline' => skill_line_name, 'data-customskill-id' => custom_skill['id'], 'data-rank' => rank}<
 												- if custom_skill['selectorPref']
 													%span.customskill-entry-selectoroption>= custom_skill['selectorPref']
-												= sub_rank_value(custom_skill['selectorName'], i, custom_skill['val'][i].to_s)
+												= sub_rank_value(custom_skill['selectorName'], rank, custom_skill['val'][rank].to_s)
 												- if custom_skill['selectorSuff']
 													%span.customskill-entry-selectoroption>= custom_skill['selectorSuff']
 				#customskill-selector-pallette
