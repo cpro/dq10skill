@@ -92,6 +92,7 @@ interface CustomSkill {
 	mp?: number;
 	charge?: number;
 	atk?: number;
+	skill200?: boolean;
 }
 
 interface MonsterSimulatorDB {

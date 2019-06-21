@@ -83,7 +83,7 @@ namespace Dq10.SkillSimulator {
 				var skillLine: SkillLineData = {
 					id: skillLineId,
 					skillPts: this.wholePts.filter((skillPt) => skillPt.skillLineId == skillLineId),
-					custom: [0, 0, 0]
+					custom: Array(this.DB.consts.customSkill.count).fill(0)
 				}
 				this.skillLineDic[skillLineId] = skillLine;
 				return skillLine;
@@ -585,7 +585,8 @@ namespace Dq10.SkillSimulator {
 			mp: null,
 			charge: null,
 			atk: null,
-			val: [0, 0, 0]
+			val: [0, 0, 0],
+			skill200: false,
 		}
 
 		private skillLineId: string;
@@ -623,10 +624,11 @@ namespace Dq10.SkillSimulator {
 		private replaceRankValue(template: string, rank: number){
 			var ret = template;
 
-			var rankName = 'ⅠⅡⅢ'.charAt(rank);
+			var grade = this.getGrade(rank)
+			var rankName = 'ⅠⅡⅢ'.charAt(grade);
 			ret = ret.replace('%r', rankName);
 
-			var rankValue = this.data.val[rank];
+			var rankValue = this.data.val[grade];
 			ret = ret.replace('%i', rankValue.toFixed(0)) //整数値
 			         .replace('%f', rankValue.toFixed(1)); //小数値
 
@@ -636,7 +638,8 @@ namespace Dq10.SkillSimulator {
 		getHintText(rank: number): string {
 			const FULLWIDTH_ADJUSTER = 0xFEE0;
 			var hint = this.data.desc;
-			var rankValue = this.data.val[rank];
+			var grade = this.getGrade(rank)
+			var rankValue = this.data.val[grade];
 
 			var rankValFullWidth = rankValue.toString().replace(/[0-9.]/g, (m) =>
 				String.fromCharCode(m.charCodeAt(0) + 0xFEE0)
@@ -649,6 +652,14 @@ namespace Dq10.SkillSimulator {
 				hint += `\n（チャージ: ${rankValue}秒）`;
 
 			return hint;
+		}
+
+		private getGrade(rank: number): number {
+			if (this.data.skill200) {
+				return rank >= 4 ? 1 : 0
+			} else {
+				return rank >= 3 ? 2 : rank
+			}
 		}
 	}
 

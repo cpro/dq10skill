@@ -267,7 +267,7 @@
 									- data['consts']['customSkill']['count'].times do |i|
 										%td.customskill-entry-selector{id: "customskill-selector-#{skill_line_name}-#{custom_skill['id']}-#{i}"}<
 											- rank = get_rank(custom_skill, i)
-											%a{'data-skillline' => skill_line_name, 'data-customskill-id' => custom_skill['id'], 'data-rank' => rank}<
+											%a{'data-skillline' => skill_line_name, 'data-customskill-id' => custom_skill['id'], 'data-rank' => i}<
 												- if custom_skill['selectorPref']
 													%span.customskill-entry-selectoroption>= custom_skill['selectorPref']
 												= sub_rank_value(custom_skill['selectorName'], rank, custom_skill['val'][rank].to_s)
