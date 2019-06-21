@@ -1602,7 +1602,8 @@
 		},
 		"customSkill": {
 			"pts": [160, 170, 180, 190, 200],
-			"count": 5
+			"count": 5,
+			"countUnique": 3
 		}
 	}
 }

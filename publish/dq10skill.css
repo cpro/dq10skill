@@ -670,10 +670,11 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
           height: 16px; }
         #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist .customskill-entry-name {
           text-align: right;
-          width: 392px; }
+          width: 172px; }
         #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist .customskill-entry-selector {
           height: 30px;
           width: 110px;
+          padding: 1px 0;
           font-size: 14px;
           text-align: center;
           vertical-align: middle; }

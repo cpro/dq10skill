@@ -959,11 +959,12 @@ $dialog-outer-border-width: 3px;
 				}
 				.customskill-entry-name {
 					text-align: right;
-					width: $entrylist-width - $entrylist-scrollbar-margin - $entrylist-selector-width * 3;
+					width: $entrylist-width - $entrylist-scrollbar-margin - $entrylist-selector-width * 5;
 				}
 				.customskill-entry-selector {
 					height: 30px;
 					width: $entrylist-selector-width;
+					padding: 1px 0;
 					font-size: 14px;
 					text-align: center;
 					vertical-align: middle;
