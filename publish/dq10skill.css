@@ -616,8 +616,8 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
 
 #customskill-selector {
   display: none;
-  width: 761px;
-  height: 432px;
+  width: 981px;
+  height: 532px;
   overflow: hidden; }
   #customskill-selector a.x-button {
     display: block;
@@ -646,12 +646,12 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
   #customskill-selector #customskill-selector-footer {
     display: none; }
   #customskill-selector #customskill-selector-body {
-    height: 400px;
+    height: 500px;
     font-size: 12px; }
     #customskill-selector #customskill-selector-body #customskill-selector-entrylists {
       position: absolute;
-      height: 400px;
-      width: 520px;
+      height: 500px;
+      width: 740px;
       top: 0;
       left: 0;
       border-right: 1px solid #99a;
@@ -660,7 +660,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
       #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist {
         display: none;
         position: absolute;
-        width: 502px;
+        width: 722px;
         top: 0;
         left: 0;
         border-collapse: collapse; }
@@ -674,6 +674,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
         #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist .customskill-entry-selector {
           height: 30px;
           width: 110px;
+          padding: 1px 0;
           font-size: 14px;
           text-align: center;
           vertical-align: middle; }
@@ -683,7 +684,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
             width: 104px;
             padding: 0;
             margin: auto;
-            border-bottom: 4px solid transparent;
+            border-bottom: 4px solid rgba(0, 0, 0, 0);
             cursor: pointer; }
             #customskill-selector #customskill-selector-body #customskill-selector-entrylists .customskill-entrylist .customskill-entry-selector a.selected {
               color: #347;
@@ -696,7 +697,7 @@ ul.badge-button-container li a, ul#badge-search-buttons-rarity li a {
             font-size: 10px; }
     #customskill-selector #customskill-selector-body #customskill-selector-pallette {
       position: absolute;
-      height: 400px;
+      height: 500px;
       width: 240px;
       top: 0;
       right: 0; }

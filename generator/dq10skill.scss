@@ -874,14 +874,14 @@ $dialog-outer-border-width: 3px;
 #customskill-selector {
 	display: none;
 
-	$body-height: 400px;
+	$body-height: 500px;
 	$body-padding: 0px;
 	$header-height: 30px;
 	$footer-height: 0px;
 
-	$entrylist-width: 520px;
 	$entrylist-scrollbar-margin: 18px;
 	$entrylist-selector-width: 110px;
+	$entrylist-width: $entrylist-selector-width * 5 + 190px;
 	$palette-width: 240px;
 
 	width: $entrylist-width + $dialog-inner-border-width + $palette-width;
@@ -959,11 +959,12 @@ $dialog-outer-border-width: 3px;
 				}
 				.customskill-entry-name {
 					text-align: right;
-					width: $entrylist-width - $entrylist-scrollbar-margin - $entrylist-selector-width * 3;
+					width: $entrylist-width - $entrylist-scrollbar-margin - $entrylist-selector-width * 5;
 				}
 				.customskill-entry-selector {
 					height: 30px;
 					width: $entrylist-selector-width;
+					padding: 1px 0;
 					font-size: 14px;
 					text-align: center;
 					vertical-align: middle;

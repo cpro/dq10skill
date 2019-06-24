@@ -41,9 +41,12 @@ var Dq10;
 })(Dq10 || (Dq10 = {}));
 /// <reference path="eventdispatcher.ts" />
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -588,8 +591,10 @@ var Dq10;
                     var skillLine = {
                         id: skillLineId,
                         skillPts: _this.wholePts.filter(function (skillPt) { return skillPt.skillLineId == skillLineId; }),
-                        custom: [0, 0, 0]
+                        custom: []
                     };
+                    for (var i = 0; i < _this.DB.consts.customSkill.count; i++)
+                        skillLine.custom.push(0);
                     _this.skillLineDic[skillLineId] = skillLine;
                     return skillLine;
                 });
@@ -963,6 +968,9 @@ var Dq10;
                         for (var i = 0; i < customSkillLength; i++) {
                             customIds.push(getData());
                         }
+                        for (var i = customSkillLength; i < DB.consts.customSkill.count; i++) {
+                            customIds.push(0);
+                        }
                         sim.setCustomSkills(skillLineId, customIds, 0);
                     }
                 };
@@ -1041,9 +1049,10 @@ var Dq10;
             };
             SimulatorCustomSkill.prototype.replaceRankValue = function (template, rank) {
                 var ret = template;
-                var rankName = 'ⅠⅡⅢ'.charAt(rank);
+                var grade = this.getGrade(rank);
+                var rankName = 'ⅠⅡⅢ'.charAt(grade);
                 ret = ret.replace('%r', rankName);
-                var rankValue = this.data.val[rank];
+                var rankValue = this.data.val[grade];
                 ret = ret.replace('%i', rankValue.toFixed(0)) //整数値
                     .replace('%f', rankValue.toFixed(1)); //小数値
                 return ret;
@@ -1051,7 +1060,8 @@ var Dq10;
             SimulatorCustomSkill.prototype.getHintText = function (rank) {
                 var FULLWIDTH_ADJUSTER = 0xFEE0;
                 var hint = this.data.desc;
-                var rankValue = this.data.val[rank];
+                var grade = this.getGrade(rank);
+                var rankValue = this.data.val[grade];
                 var rankValFullWidth = rankValue.toString().replace(/[0-9.]/g, function (m) {
                     return String.fromCharCode(m.charCodeAt(0) + 0xFEE0);
                 });
@@ -1062,6 +1072,14 @@ var Dq10;
                     hint += "\n\uFF08\u30C1\u30E3\u30FC\u30B8: " + rankValue + "\u79D2\uFF09";
                 return hint;
             };
+            SimulatorCustomSkill.prototype.getGrade = function (rank) {
+                if (this.data.skill200) {
+                    return rank >= 4 ? 1 : 0;
+                }
+                else {
+                    return rank >= 3 ? 2 : rank;
+                }
+            };
             SimulatorCustomSkill.emptySkillData = {
                 id: 0,
                 name: '（なし）',
@@ -1071,7 +1089,8 @@ var Dq10;
                 mp: null,
                 charge: null,
                 atk: null,
-                val: [0, 0, 0]
+                val: [0, 0, 0],
+                skill200: false,
             };
             return SimulatorCustomSkill;
         }());
@@ -2061,7 +2080,7 @@ var Dq10;
                         }
                         catch (e) {
                         }
-                        if (serial.length < 33) {
+                        if (serial.length < 33) { //バイト数が小さすぎる場合inflate失敗とみなす。(8+7*5)*6/8=32.25
                             serial = Base64.atob(query);
                             SkillSimulator.Simulator.deserializeBit(serial);
                         }
