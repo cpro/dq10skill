@@ -7,7 +7,7 @@
 <link href='https://dq10.cpro.jp/' rel='canonical'>
 <meta content='ドラゴンクエストX（ドラクエ10, DQ10, DQX）のスキル割り振りを計算するシミュレータ。' name='description'>
 <title>DQ10 スキルシミュレータ</title>
-<link href='./dq10skill.css?ver=14.0.1' rel='stylesheet' type='text/css'>
+<link href='./dq10skill.css?ver=14.0.2' rel='stylesheet' type='text/css'>
 <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js' type='text/javascript'></script>
 <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js' type='text/javascript'></script>
@@ -15,7 +15,7 @@
 <script src='js/rawinflate.min.js' type='text/javascript'></script>
 <script src='js/shortcut.min.js' type='text/javascript'></script>
 <script src='js/jquery.socialbutton-1.9.1.min.js' type='text/javascript'></script>
-<script src='./dq10skill.js?ver=14.0.1' type='text/javascript'></script>
+<script src='./dq10skill.js?ver=14.0.2' type='text/javascript'></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -6720,7 +6720,12 @@
 </ul>
 </li>
 <li>武器スキルの200P解放に対応。</li>
-<li>スキル編集画面で190P・200Pの選択に対応、新特技を追加。</li>
+<li>
+スキル編集画面で190P・200Pの選択に対応、新特技を追加。
+<ul>
+<li>2019/6/26 v14.0.2 新特技の強化パッシブスキルを追加、説明文を加筆。</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
@@ -6812,6 +6817,18 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-fisticuffs-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='fisticuffs'>Ⅲ (CT60)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-fisticuffs-1-3'><a data-customskill-id='1' data-rank='3' data-skillline='fisticuffs'>Ⅲ (CT60)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-fisticuffs-1-4'><a data-customskill-id='1' data-rank='4' data-skillline='fisticuffs'>Ⅲ (CT60)</a></td>
+</tr>
+<tr>
+<th class='customskill-entry-name' title='前方の敵集団に
+相手を選ばず
+神速の７回攻撃
+（消費MP: 8）
+（チャージ: 160秒）'>ばくれつきゃく</th>
+<td class='customskill-entry-selector' id='customskill-selector-fisticuffs-13-0'><a data-customskill-id='13' data-rank='0' data-skillline='fisticuffs'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-fisticuffs-13-1'><a data-customskill-id='13' data-rank='1' data-skillline='fisticuffs'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-fisticuffs-13-2'><a data-customskill-id='13' data-rank='2' data-skillline='fisticuffs'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-fisticuffs-13-3'><a data-customskill-id='13' data-rank='3' data-skillline='fisticuffs'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-fisticuffs-13-4'><a data-customskill-id='13' data-rank='4' data-skillline='fisticuffs'>Ⅱ (CT100)</a></td>
 </tr>
 <tr>
 <th class='customskill-entry-name' title='格闘の時の
@@ -6920,14 +6937,13 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-fisticuffs-12-4'><a data-customskill-id='12' data-rank='4' data-skillline='fisticuffs'>+12%</a></td>
 </tr>
 <tr>
-<th class='customskill-entry-name' title='
-（消費MP: 8）
-（チャージ: 160秒）'>ばくれつきゃく</th>
-<td class='customskill-entry-selector' id='customskill-selector-fisticuffs-13-0'><a data-customskill-id='13' data-rank='0' data-skillline='fisticuffs'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-fisticuffs-13-1'><a data-customskill-id='13' data-rank='1' data-skillline='fisticuffs'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-fisticuffs-13-2'><a data-customskill-id='13' data-rank='2' data-skillline='fisticuffs'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-fisticuffs-13-3'><a data-customskill-id='13' data-rank='3' data-skillline='fisticuffs'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-fisticuffs-13-4'><a data-customskill-id='13' data-rank='4' data-skillline='fisticuffs'>Ⅱ (CT100)</a></td>
+<th class='customskill-entry-name' title='ダメージが
+１％増える'>ばくれつきゃくの強化</th>
+<td class='customskill-entry-selector' id='customskill-selector-fisticuffs-14-0'><a data-customskill-id='14' data-rank='0' data-skillline='fisticuffs'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-fisticuffs-14-1'><a data-customskill-id='14' data-rank='1' data-skillline='fisticuffs'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-fisticuffs-14-2'><a data-customskill-id='14' data-rank='2' data-skillline='fisticuffs'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-fisticuffs-14-3'><a data-customskill-id='14' data-rank='3' data-skillline='fisticuffs'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-fisticuffs-14-4'><a data-customskill-id='14' data-rank='4' data-skillline='fisticuffs'>+3%</a></td>
 </tr>
 </table>
 <table class='customskill-entrylist' id='customskill-selector-entrylist-shield'>
@@ -6950,6 +6966,18 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-shield-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='shield'>Ⅲ (CT110)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-shield-1-3'><a data-customskill-id='1' data-rank='3' data-skillline='shield'>Ⅲ (CT110)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-shield-1-4'><a data-customskill-id='1' data-rank='4' data-skillline='shield'>Ⅲ (CT110)</a></td>
+</tr>
+<tr>
+<th class='customskill-entry-name' title='ＨＰを回復しつつ
+盾ガード時ＨＰが
+回復する効果付与
+（消費MP: 8）
+（チャージ: 180秒）'>ちからの盾</th>
+<td class='customskill-entry-selector' id='customskill-selector-shield-11-0'><a data-customskill-id='11' data-rank='0' data-skillline='shield'>Ⅰ (CT180)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-shield-11-1'><a data-customskill-id='11' data-rank='1' data-skillline='shield'>Ⅰ (CT180)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-shield-11-2'><a data-customskill-id='11' data-rank='2' data-skillline='shield'>Ⅰ (CT180)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-shield-11-3'><a data-customskill-id='11' data-rank='3' data-skillline='shield'>Ⅰ (CT180)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-shield-11-4'><a data-customskill-id='11' data-rank='4' data-skillline='shield'>Ⅱ (CT130)</a></td>
 </tr>
 <tr>
 <th class='customskill-entry-name' title='盾装備時の
@@ -7042,14 +7070,14 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-shield-10-4'><a data-customskill-id='10' data-rank='4' data-skillline='shield'>+10秒</a></td>
 </tr>
 <tr>
-<th class='customskill-entry-name' title='
-（消費MP: 8）
-（チャージ: 180秒）'>ちからの盾</th>
-<td class='customskill-entry-selector' id='customskill-selector-shield-11-0'><a data-customskill-id='11' data-rank='0' data-skillline='shield'>Ⅰ (CT180)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-shield-11-1'><a data-customskill-id='11' data-rank='1' data-skillline='shield'>Ⅰ (CT180)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-shield-11-2'><a data-customskill-id='11' data-rank='2' data-skillline='shield'>Ⅰ (CT180)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-shield-11-3'><a data-customskill-id='11' data-rank='3' data-skillline='shield'>Ⅰ (CT180)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-shield-11-4'><a data-customskill-id='11' data-rank='4' data-skillline='shield'>Ⅱ (CT130)</a></td>
+<th class='customskill-entry-name' title='盾装備時
+回復量が
+１％増える'>ちからの盾の回復量</th>
+<td class='customskill-entry-selector' id='customskill-selector-shield-12-0'><a data-customskill-id='12' data-rank='0' data-skillline='shield'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-shield-12-1'><a data-customskill-id='12' data-rank='1' data-skillline='shield'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-shield-12-2'><a data-customskill-id='12' data-rank='2' data-skillline='shield'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-shield-12-3'><a data-customskill-id='12' data-rank='3' data-skillline='shield'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-shield-12-4'><a data-customskill-id='12' data-rank='4' data-skillline='shield'>+3%</a></td>
 </tr>
 </table>
 <table class='customskill-entrylist' id='customskill-selector-entrylist-sword'>
@@ -7072,6 +7100,18 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-sword-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='sword'>Ⅲ (CT75)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-sword-1-3'><a data-customskill-id='1' data-rank='3' data-skillline='sword'>Ⅲ (CT75)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-sword-1-4'><a data-customskill-id='1' data-rank='4' data-skillline='sword'>Ⅲ (CT75)</a></td>
+</tr>
+<tr>
+<th class='customskill-entry-name' title='敵１体に
+強烈な一撃を放つ
+剣神の最終奥義
+（消費MP: 10）
+（チャージ: 180秒）'>アルテマソード</th>
+<td class='customskill-entry-selector' id='customskill-selector-sword-13-0'><a data-customskill-id='13' data-rank='0' data-skillline='sword'>Ⅰ (CT180)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-sword-13-1'><a data-customskill-id='13' data-rank='1' data-skillline='sword'>Ⅰ (CT180)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-sword-13-2'><a data-customskill-id='13' data-rank='2' data-skillline='sword'>Ⅰ (CT180)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-sword-13-3'><a data-customskill-id='13' data-rank='3' data-skillline='sword'>Ⅰ (CT180)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-sword-13-4'><a data-customskill-id='13' data-rank='4' data-skillline='sword'>Ⅱ (CT120)</a></td>
 </tr>
 <tr>
 <th class='customskill-entry-name' title='片手剣装備時の
@@ -7178,14 +7218,13 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-sword-12-4'><a data-customskill-id='12' data-rank='4' data-skillline='sword'>+8%</a></td>
 </tr>
 <tr>
-<th class='customskill-entry-name' title='
-（消費MP: 10）
-（チャージ: 180秒）'>アルテマソード</th>
-<td class='customskill-entry-selector' id='customskill-selector-sword-13-0'><a data-customskill-id='13' data-rank='0' data-skillline='sword'>Ⅰ (CT180)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-sword-13-1'><a data-customskill-id='13' data-rank='1' data-skillline='sword'>Ⅰ (CT180)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-sword-13-2'><a data-customskill-id='13' data-rank='2' data-skillline='sword'>Ⅰ (CT180)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-sword-13-3'><a data-customskill-id='13' data-rank='3' data-skillline='sword'>Ⅰ (CT180)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-sword-13-4'><a data-customskill-id='13' data-rank='4' data-skillline='sword'>Ⅱ (CT120)</a></td>
+<th class='customskill-entry-name' title='ダメージが
+２％増える'>アルテマソードの強化</th>
+<td class='customskill-entry-selector' id='customskill-selector-sword-14-0'><a data-customskill-id='14' data-rank='0' data-skillline='sword'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-sword-14-1'><a data-customskill-id='14' data-rank='1' data-skillline='sword'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-sword-14-2'><a data-customskill-id='14' data-rank='2' data-skillline='sword'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-sword-14-3'><a data-customskill-id='14' data-rank='3' data-skillline='sword'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-sword-14-4'><a data-customskill-id='14' data-rank='4' data-skillline='sword'>+5%</a></td>
 </tr>
 </table>
 <table class='customskill-entrylist' id='customskill-selector-entrylist-twohandedsword'>
@@ -7208,6 +7247,18 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-twohandedsword-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='twohandedsword'>Ⅲ (CT60)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-twohandedsword-1-3'><a data-customskill-id='1' data-rank='3' data-skillline='twohandedsword'>Ⅲ (CT60)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-twohandedsword-1-4'><a data-customskill-id='1' data-rank='4' data-skillline='twohandedsword'>Ⅲ (CT60)</a></td>
+</tr>
+<tr>
+<th class='customskill-entry-name' title='周囲の敵を
+強烈な一撃で
+なぎはらう
+（消費MP: 9）
+（チャージ: 180秒）'>大旋風斬り</th>
+<td class='customskill-entry-selector' id='customskill-selector-twohandedsword-13-0'><a data-customskill-id='13' data-rank='0' data-skillline='twohandedsword'>Ⅰ (CT180)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-twohandedsword-13-1'><a data-customskill-id='13' data-rank='1' data-skillline='twohandedsword'>Ⅰ (CT180)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-twohandedsword-13-2'><a data-customskill-id='13' data-rank='2' data-skillline='twohandedsword'>Ⅰ (CT180)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-twohandedsword-13-3'><a data-customskill-id='13' data-rank='3' data-skillline='twohandedsword'>Ⅰ (CT180)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-twohandedsword-13-4'><a data-customskill-id='13' data-rank='4' data-skillline='twohandedsword'>Ⅱ (CT120)</a></td>
 </tr>
 <tr>
 <th class='customskill-entry-name' title='両手剣装備時の
@@ -7314,14 +7365,13 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-twohandedsword-12-4'><a data-customskill-id='12' data-rank='4' data-skillline='twohandedsword'>+10%</a></td>
 </tr>
 <tr>
-<th class='customskill-entry-name' title='
-（消費MP: 9）
-（チャージ: 180秒）'>大旋風斬り</th>
-<td class='customskill-entry-selector' id='customskill-selector-twohandedsword-13-0'><a data-customskill-id='13' data-rank='0' data-skillline='twohandedsword'>Ⅰ (CT180)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-twohandedsword-13-1'><a data-customskill-id='13' data-rank='1' data-skillline='twohandedsword'>Ⅰ (CT180)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-twohandedsword-13-2'><a data-customskill-id='13' data-rank='2' data-skillline='twohandedsword'>Ⅰ (CT180)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-twohandedsword-13-3'><a data-customskill-id='13' data-rank='3' data-skillline='twohandedsword'>Ⅰ (CT180)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-twohandedsword-13-4'><a data-customskill-id='13' data-rank='4' data-skillline='twohandedsword'>Ⅱ (CT120)</a></td>
+<th class='customskill-entry-name' title='ダメージが
+２％増える'>大旋風斬りの強化</th>
+<td class='customskill-entry-selector' id='customskill-selector-twohandedsword-14-0'><a data-customskill-id='14' data-rank='0' data-skillline='twohandedsword'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-twohandedsword-14-1'><a data-customskill-id='14' data-rank='1' data-skillline='twohandedsword'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-twohandedsword-14-2'><a data-customskill-id='14' data-rank='2' data-skillline='twohandedsword'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-twohandedsword-14-3'><a data-customskill-id='14' data-rank='3' data-skillline='twohandedsword'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-twohandedsword-14-4'><a data-customskill-id='14' data-rank='4' data-skillline='twohandedsword'>+5%</a></td>
 </tr>
 </table>
 <table class='customskill-entrylist' id='customskill-selector-entrylist-knife'>
@@ -7344,6 +7394,18 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-knife-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='knife'>Ⅲ (CT60)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-knife-1-3'><a data-customskill-id='1' data-rank='3' data-skillline='knife'>Ⅲ (CT60)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-knife-1-4'><a data-customskill-id='1' data-rank='4' data-skillline='knife'>Ⅲ (CT60)</a></td>
+</tr>
+<tr>
+<th class='customskill-entry-name' title='周囲を切り裂く
+鋭いやいばが
+敵を襲う
+（消費MP: 8）
+（チャージ: 160秒）'>ネメシスエッジ</th>
+<td class='customskill-entry-selector' id='customskill-selector-knife-13-0'><a data-customskill-id='13' data-rank='0' data-skillline='knife'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-knife-13-1'><a data-customskill-id='13' data-rank='1' data-skillline='knife'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-knife-13-2'><a data-customskill-id='13' data-rank='2' data-skillline='knife'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-knife-13-3'><a data-customskill-id='13' data-rank='3' data-skillline='knife'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-knife-13-4'><a data-customskill-id='13' data-rank='4' data-skillline='knife'>Ⅱ (CT100)</a></td>
 </tr>
 <tr>
 <th class='customskill-entry-name' title='短剣装備時の
@@ -7451,14 +7513,13 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-knife-12-4'><a data-customskill-id='12' data-rank='4' data-skillline='knife'>+8%</a></td>
 </tr>
 <tr>
-<th class='customskill-entry-name' title='
-（消費MP: 8）
-（チャージ: 160秒）'>ネメシスエッジ</th>
-<td class='customskill-entry-selector' id='customskill-selector-knife-13-0'><a data-customskill-id='13' data-rank='0' data-skillline='knife'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-knife-13-1'><a data-customskill-id='13' data-rank='1' data-skillline='knife'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-knife-13-2'><a data-customskill-id='13' data-rank='2' data-skillline='knife'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-knife-13-3'><a data-customskill-id='13' data-rank='3' data-skillline='knife'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-knife-13-4'><a data-customskill-id='13' data-rank='4' data-skillline='knife'>Ⅱ (CT100)</a></td>
+<th class='customskill-entry-name' title='ダメージが
+１％増える'>ネメシスエッジの強化</th>
+<td class='customskill-entry-selector' id='customskill-selector-knife-14-0'><a data-customskill-id='14' data-rank='0' data-skillline='knife'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-knife-14-1'><a data-customskill-id='14' data-rank='1' data-skillline='knife'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-knife-14-2'><a data-customskill-id='14' data-rank='2' data-skillline='knife'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-knife-14-3'><a data-customskill-id='14' data-rank='3' data-skillline='knife'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-knife-14-4'><a data-customskill-id='14' data-rank='4' data-skillline='knife'>+3%</a></td>
 </tr>
 </table>
 <table class='customskill-entrylist' id='customskill-selector-entrylist-stick'>
@@ -7481,6 +7542,18 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-stick-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='stick'>Ⅲ (CT90)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-stick-1-3'><a data-customskill-id='1' data-rank='3' data-skillline='stick'>Ⅲ (CT90)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-stick-1-4'><a data-customskill-id='1' data-rank='4' data-skillline='stick'>Ⅲ (CT90)</a></td>
+</tr>
+<tr>
+<th class='customskill-entry-name' title='周囲の味方に
+ＭＰを最大２４０
+少しずつ回復
+（消費MP: 5）
+（チャージ: 240秒）'>スピリットゾーン</th>
+<td class='customskill-entry-selector' id='customskill-selector-stick-11-0'><a data-customskill-id='11' data-rank='0' data-skillline='stick'>Ⅰ (CT240)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-stick-11-1'><a data-customskill-id='11' data-rank='1' data-skillline='stick'>Ⅰ (CT240)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-stick-11-2'><a data-customskill-id='11' data-rank='2' data-skillline='stick'>Ⅰ (CT240)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-stick-11-3'><a data-customskill-id='11' data-rank='3' data-skillline='stick'>Ⅰ (CT240)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-stick-11-4'><a data-customskill-id='11' data-rank='4' data-skillline='stick'>Ⅱ (CT200)</a></td>
 </tr>
 <tr>
 <th class='customskill-entry-name' title='スティック装備時
@@ -7545,7 +7618,7 @@ ToDo:
 <tr>
 <th class='customskill-entry-name' title='スティック装備時
 回復量が
-６％増える'>ホイミの回復量の強化</th>
+６％増える'>ホイミの回復量</th>
 <td class='customskill-entry-selector' id='customskill-selector-stick-8-0'><a data-customskill-id='8' data-rank='0' data-skillline='stick'>+6%</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-stick-8-1'><a data-customskill-id='8' data-rank='1' data-skillline='stick'>+8%</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-stick-8-2'><a data-customskill-id='8' data-rank='2' data-skillline='stick'>+10%</a></td>
@@ -7555,7 +7628,7 @@ ToDo:
 <tr>
 <th class='customskill-entry-name' title='スティック装備時
 回復量が
-６％増える'>ベホイミの回復量の強化</th>
+６％増える'>ベホイミの回復量</th>
 <td class='customskill-entry-selector' id='customskill-selector-stick-9-0'><a data-customskill-id='9' data-rank='0' data-skillline='stick'>+6%</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-stick-9-1'><a data-customskill-id='9' data-rank='1' data-skillline='stick'>+8%</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-stick-9-2'><a data-customskill-id='9' data-rank='2' data-skillline='stick'>+10%</a></td>
@@ -7564,22 +7637,21 @@ ToDo:
 </tr>
 <tr>
 <th class='customskill-entry-name' title='効果範囲が
-１ｍ増える'>ホップスティックの範囲</th>
-<td class='customskill-entry-selector' id='customskill-selector-stick-10-0'><a data-customskill-id='10' data-rank='0' data-skillline='stick'>+1.0m</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-stick-10-1'><a data-customskill-id='10' data-rank='1' data-skillline='stick'>+2.0m</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-stick-10-2'><a data-customskill-id='10' data-rank='2' data-skillline='stick'>+3.0m</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-stick-10-3'><a data-customskill-id='10' data-rank='3' data-skillline='stick'>+3.0m</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-stick-10-4'><a data-customskill-id='10' data-rank='4' data-skillline='stick'>+3.0m</a></td>
+１ｍ増える'>ホップスティック効果範囲</th>
+<td class='customskill-entry-selector' id='customskill-selector-stick-10-0'><a data-customskill-id='10' data-rank='0' data-skillline='stick'>+1m</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-stick-10-1'><a data-customskill-id='10' data-rank='1' data-skillline='stick'>+2m</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-stick-10-2'><a data-customskill-id='10' data-rank='2' data-skillline='stick'>+3m</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-stick-10-3'><a data-customskill-id='10' data-rank='3' data-skillline='stick'>+3m</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-stick-10-4'><a data-customskill-id='10' data-rank='4' data-skillline='stick'>+3m</a></td>
 </tr>
 <tr>
-<th class='customskill-entry-name' title='
-（消費MP: 5）
-（チャージ: 240秒）'>スピリットゾーン</th>
-<td class='customskill-entry-selector' id='customskill-selector-stick-11-0'><a data-customskill-id='11' data-rank='0' data-skillline='stick'>Ⅰ (CT240)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-stick-11-1'><a data-customskill-id='11' data-rank='1' data-skillline='stick'>Ⅰ (CT240)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-stick-11-2'><a data-customskill-id='11' data-rank='2' data-skillline='stick'>Ⅰ (CT240)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-stick-11-3'><a data-customskill-id='11' data-rank='3' data-skillline='stick'>Ⅰ (CT240)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-stick-11-4'><a data-customskill-id='11' data-rank='4' data-skillline='stick'>Ⅱ (CT200)</a></td>
+<th class='customskill-entry-name' title='効果範囲が
+１ｍ増える'>スピリットゾーン効果範囲</th>
+<td class='customskill-entry-selector' id='customskill-selector-stick-12-0'><a data-customskill-id='12' data-rank='0' data-skillline='stick'>+1m</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-stick-12-1'><a data-customskill-id='12' data-rank='1' data-skillline='stick'>+1m</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-stick-12-2'><a data-customskill-id='12' data-rank='2' data-skillline='stick'>+1m</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-stick-12-3'><a data-customskill-id='12' data-rank='3' data-skillline='stick'>+1m</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-stick-12-4'><a data-customskill-id='12' data-rank='4' data-skillline='stick'>+2m</a></td>
 </tr>
 </table>
 <table class='customskill-entrylist' id='customskill-selector-entrylist-wand'>
@@ -7602,6 +7674,18 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-wand-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='wand'>Ⅲ (CT90)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-wand-1-3'><a data-customskill-id='1' data-rank='3' data-skillline='wand'>Ⅲ (CT90)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-wand-1-4'><a data-customskill-id='1' data-rank='4' data-skillline='wand'>Ⅲ (CT90)</a></td>
+</tr>
+<tr>
+<th class='customskill-entry-name' title='敵の足元に
+呪文ダメージが
+増える陣を作る
+（消費MP: 6）
+（チャージ: 200秒）'>霊脈魔法陣</th>
+<td class='customskill-entry-selector' id='customskill-selector-wand-14-0'><a data-customskill-id='14' data-rank='0' data-skillline='wand'>Ⅰ (CT200)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-wand-14-1'><a data-customskill-id='14' data-rank='1' data-skillline='wand'>Ⅰ (CT200)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-wand-14-2'><a data-customskill-id='14' data-rank='2' data-skillline='wand'>Ⅰ (CT200)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-wand-14-3'><a data-customskill-id='14' data-rank='3' data-skillline='wand'>Ⅰ (CT200)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-wand-14-4'><a data-customskill-id='14' data-rank='4' data-skillline='wand'>Ⅱ (CT160)</a></td>
 </tr>
 <tr>
 <th class='customskill-entry-name' title='両手杖装備時の
@@ -7716,7 +7800,7 @@ ToDo:
 <tr>
 <th class='customskill-entry-name' title='両手杖装備時
 効果時間が
-３秒増える'>活命の杖効果時間</th>
+３秒増える'>活命の杖の効果時間</th>
 <td class='customskill-entry-selector' id='customskill-selector-wand-13-0'><a data-customskill-id='13' data-rank='0' data-skillline='wand'>+3秒</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-wand-13-1'><a data-customskill-id='13' data-rank='1' data-skillline='wand'>+6秒</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-wand-13-2'><a data-customskill-id='13' data-rank='2' data-skillline='wand'>+9秒</a></td>
@@ -7724,14 +7808,14 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-wand-13-4'><a data-customskill-id='13' data-rank='4' data-skillline='wand'>+9秒</a></td>
 </tr>
 <tr>
-<th class='customskill-entry-name' title='
-（消費MP: 6）
-（チャージ: 200秒）'>霊脈魔法陣</th>
-<td class='customskill-entry-selector' id='customskill-selector-wand-14-0'><a data-customskill-id='14' data-rank='0' data-skillline='wand'>Ⅰ (CT200)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-wand-14-1'><a data-customskill-id='14' data-rank='1' data-skillline='wand'>Ⅰ (CT200)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-wand-14-2'><a data-customskill-id='14' data-rank='2' data-skillline='wand'>Ⅰ (CT200)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-wand-14-3'><a data-customskill-id='14' data-rank='3' data-skillline='wand'>Ⅰ (CT200)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-wand-14-4'><a data-customskill-id='14' data-rank='4' data-skillline='wand'>Ⅱ (CT160)</a></td>
+<th class='customskill-entry-name' title='両手杖装備時
+射程距離がが
+１ｍ伸びる'>霊脈魔法陣の射程強化</th>
+<td class='customskill-entry-selector' id='customskill-selector-wand-15-0'><a data-customskill-id='15' data-rank='0' data-skillline='wand'>+1m</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-wand-15-1'><a data-customskill-id='15' data-rank='1' data-skillline='wand'>+1m</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-wand-15-2'><a data-customskill-id='15' data-rank='2' data-skillline='wand'>+1m</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-wand-15-3'><a data-customskill-id='15' data-rank='3' data-skillline='wand'>+1m</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-wand-15-4'><a data-customskill-id='15' data-rank='4' data-skillline='wand'>+2m</a></td>
 </tr>
 </table>
 <table class='customskill-entrylist' id='customskill-selector-entrylist-spear'>
@@ -7754,6 +7838,18 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-spear-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='spear'>Ⅲ (CT90)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-spear-1-3'><a data-customskill-id='1' data-rank='3' data-skillline='spear'>Ⅲ (CT90)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-spear-1-4'><a data-customskill-id='1' data-rank='4' data-skillline='spear'>Ⅲ (CT90)</a></td>
+</tr>
+<tr>
+<th class='customskill-entry-name' title='敵１体に
+正確無比な
+神速の５連突き
+（消費MP: 8）
+（チャージ: 140秒）'>超さみだれ突き</th>
+<td class='customskill-entry-selector' id='customskill-selector-spear-11-0'><a data-customskill-id='11' data-rank='0' data-skillline='spear'>Ⅰ (CT140)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-spear-11-1'><a data-customskill-id='11' data-rank='1' data-skillline='spear'>Ⅰ (CT140)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-spear-11-2'><a data-customskill-id='11' data-rank='2' data-skillline='spear'>Ⅰ (CT140)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-spear-11-3'><a data-customskill-id='11' data-rank='3' data-skillline='spear'>Ⅰ (CT140)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-spear-11-4'><a data-customskill-id='11' data-rank='4' data-skillline='spear'>Ⅱ (CT80)</a></td>
 </tr>
 <tr>
 <th class='customskill-entry-name' title='ヤリ装備時の
@@ -7841,14 +7937,13 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-spear-10-4'><a data-customskill-id='10' data-rank='4' data-skillline='spear'>+8%</a></td>
 </tr>
 <tr>
-<th class='customskill-entry-name' title='
-（消費MP: 8）
-（チャージ: 140秒）'>超さみだれ突き</th>
-<td class='customskill-entry-selector' id='customskill-selector-spear-11-0'><a data-customskill-id='11' data-rank='0' data-skillline='spear'>Ⅰ (CT140)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-spear-11-1'><a data-customskill-id='11' data-rank='1' data-skillline='spear'>Ⅰ (CT140)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-spear-11-2'><a data-customskill-id='11' data-rank='2' data-skillline='spear'>Ⅰ (CT140)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-spear-11-3'><a data-customskill-id='11' data-rank='3' data-skillline='spear'>Ⅰ (CT140)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-spear-11-4'><a data-customskill-id='11' data-rank='4' data-skillline='spear'>Ⅱ (CT80)</a></td>
+<th class='customskill-entry-name' title='ダメージが
+３％増える'>超さみだれ突きの強化</th>
+<td class='customskill-entry-selector' id='customskill-selector-spear-12-0'><a data-customskill-id='12' data-rank='0' data-skillline='spear'>+3%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-spear-12-1'><a data-customskill-id='12' data-rank='1' data-skillline='spear'>+3%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-spear-12-2'><a data-customskill-id='12' data-rank='2' data-skillline='spear'>+3%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-spear-12-3'><a data-customskill-id='12' data-rank='3' data-skillline='spear'>+3%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-spear-12-4'><a data-customskill-id='12' data-rank='4' data-skillline='spear'>+8%</a></td>
 </tr>
 </table>
 <table class='customskill-entrylist' id='customskill-selector-entrylist-axe'>
@@ -7871,6 +7966,18 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-axe-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='axe'>Ⅲ (CT60)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-axe-1-3'><a data-customskill-id='1' data-rank='3' data-skillline='axe'>Ⅲ (CT60)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-axe-1-4'><a data-customskill-id='1' data-rank='4' data-skillline='axe'>Ⅲ (CT60)</a></td>
+</tr>
+<tr>
+<th class='customskill-entry-name' title='直線上にいる敵を
+大地もろとも
+切り裂く大技
+（消費MP: 18）
+（チャージ: 160秒）'>大地裂断</th>
+<td class='customskill-entry-selector' id='customskill-selector-axe-12-0'><a data-customskill-id='12' data-rank='0' data-skillline='axe'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-axe-12-1'><a data-customskill-id='12' data-rank='1' data-skillline='axe'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-axe-12-2'><a data-customskill-id='12' data-rank='2' data-skillline='axe'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-axe-12-3'><a data-customskill-id='12' data-rank='3' data-skillline='axe'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-axe-12-4'><a data-customskill-id='12' data-rank='4' data-skillline='axe'>Ⅱ (CT100)</a></td>
 </tr>
 <tr>
 <th class='customskill-entry-name' title='オノ装備時の
@@ -7967,14 +8074,13 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-axe-11-4'><a data-customskill-id='11' data-rank='4' data-skillline='axe'>+5%</a></td>
 </tr>
 <tr>
-<th class='customskill-entry-name' title='
-（消費MP: 18）
-（チャージ: 160秒）'>大地裂断</th>
-<td class='customskill-entry-selector' id='customskill-selector-axe-12-0'><a data-customskill-id='12' data-rank='0' data-skillline='axe'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-axe-12-1'><a data-customskill-id='12' data-rank='1' data-skillline='axe'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-axe-12-2'><a data-customskill-id='12' data-rank='2' data-skillline='axe'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-axe-12-3'><a data-customskill-id='12' data-rank='3' data-skillline='axe'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-axe-12-4'><a data-customskill-id='12' data-rank='4' data-skillline='axe'>Ⅱ (CT100)</a></td>
+<th class='customskill-entry-name' title='ダメージが
+２％増える'>大地裂断の強化</th>
+<td class='customskill-entry-selector' id='customskill-selector-axe-13-0'><a data-customskill-id='13' data-rank='0' data-skillline='axe'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-axe-13-1'><a data-customskill-id='13' data-rank='1' data-skillline='axe'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-axe-13-2'><a data-customskill-id='13' data-rank='2' data-skillline='axe'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-axe-13-3'><a data-customskill-id='13' data-rank='3' data-skillline='axe'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-axe-13-4'><a data-customskill-id='13' data-rank='4' data-skillline='axe'>+5%</a></td>
 </tr>
 </table>
 <table class='customskill-entrylist' id='customskill-selector-entrylist-hammer'>
@@ -7997,6 +8103,18 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-hammer-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='hammer'>Ⅲ (CT75)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-hammer-1-3'><a data-customskill-id='1' data-rank='3' data-skillline='hammer'>Ⅲ (CT75)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-hammer-1-4'><a data-customskill-id='1' data-rank='4' data-skillline='hammer'>Ⅲ (CT75)</a></td>
+</tr>
+<tr>
+<th class='customskill-entry-name' title='大地さえ破壊する
+一撃を敵周囲に
+叩きつける
+（消費MP: 9）
+（チャージ: 180秒）'>アースクラッシュ</th>
+<td class='customskill-entry-selector' id='customskill-selector-hammer-11-0'><a data-customskill-id='11' data-rank='0' data-skillline='hammer'>Ⅰ (CT180)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-hammer-11-1'><a data-customskill-id='11' data-rank='1' data-skillline='hammer'>Ⅰ (CT180)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-hammer-11-2'><a data-customskill-id='11' data-rank='2' data-skillline='hammer'>Ⅰ (CT180)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-hammer-11-3'><a data-customskill-id='11' data-rank='3' data-skillline='hammer'>Ⅰ (CT180)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-hammer-11-4'><a data-customskill-id='11' data-rank='4' data-skillline='hammer'>Ⅱ (CT120)</a></td>
 </tr>
 <tr>
 <th class='customskill-entry-name' title='ハンマー装備時の
@@ -8084,14 +8202,13 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-hammer-10-4'><a data-customskill-id='10' data-rank='4' data-skillline='hammer'>+10%</a></td>
 </tr>
 <tr>
-<th class='customskill-entry-name' title='
-（消費MP: 9）
-（チャージ: 180秒）'>アースクラッシュ</th>
-<td class='customskill-entry-selector' id='customskill-selector-hammer-11-0'><a data-customskill-id='11' data-rank='0' data-skillline='hammer'>Ⅰ (CT180)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-hammer-11-1'><a data-customskill-id='11' data-rank='1' data-skillline='hammer'>Ⅰ (CT180)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-hammer-11-2'><a data-customskill-id='11' data-rank='2' data-skillline='hammer'>Ⅰ (CT180)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-hammer-11-3'><a data-customskill-id='11' data-rank='3' data-skillline='hammer'>Ⅰ (CT180)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-hammer-11-4'><a data-customskill-id='11' data-rank='4' data-skillline='hammer'>Ⅱ (CT120)</a></td>
+<th class='customskill-entry-name' title='ダメージが
+１％増える'>アースクラッシュの強化</th>
+<td class='customskill-entry-selector' id='customskill-selector-hammer-12-0'><a data-customskill-id='12' data-rank='0' data-skillline='hammer'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-hammer-12-1'><a data-customskill-id='12' data-rank='1' data-skillline='hammer'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-hammer-12-2'><a data-customskill-id='12' data-rank='2' data-skillline='hammer'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-hammer-12-3'><a data-customskill-id='12' data-rank='3' data-skillline='hammer'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-hammer-12-4'><a data-customskill-id='12' data-rank='4' data-skillline='hammer'>+3%</a></td>
 </tr>
 </table>
 <table class='customskill-entrylist' id='customskill-selector-entrylist-staff'>
@@ -8113,6 +8230,18 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-staff-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='staff'>Ⅲ (CT70)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-staff-1-3'><a data-customskill-id='1' data-rank='3' data-skillline='staff'>Ⅲ (CT70)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-staff-1-4'><a data-customskill-id='1' data-rank='4' data-skillline='staff'>Ⅲ (CT70)</a></td>
+</tr>
+<tr>
+<th class='customskill-entry-name' title='氷の棍で敵１体を
+５回攻撃して
+氷属性も下げる
+（消費MP: 10）
+（チャージ: 160秒）'>豪雪氷結乱撃</th>
+<td class='customskill-entry-selector' id='customskill-selector-staff-10-0'><a data-customskill-id='10' data-rank='0' data-skillline='staff'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-staff-10-1'><a data-customskill-id='10' data-rank='1' data-skillline='staff'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-staff-10-2'><a data-customskill-id='10' data-rank='2' data-skillline='staff'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-staff-10-3'><a data-customskill-id='10' data-rank='3' data-skillline='staff'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-staff-10-4'><a data-customskill-id='10' data-rank='4' data-skillline='staff'>Ⅱ (CT100)</a></td>
 </tr>
 <tr>
 <th class='customskill-entry-name' title='棍装備時の
@@ -8191,14 +8320,13 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-staff-9-4'><a data-customskill-id='9' data-rank='4' data-skillline='staff'>+8%</a></td>
 </tr>
 <tr>
-<th class='customskill-entry-name' title='
-（消費MP: 10）
-（チャージ: 160秒）'>豪雪氷結乱撃</th>
-<td class='customskill-entry-selector' id='customskill-selector-staff-10-0'><a data-customskill-id='10' data-rank='0' data-skillline='staff'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-staff-10-1'><a data-customskill-id='10' data-rank='1' data-skillline='staff'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-staff-10-2'><a data-customskill-id='10' data-rank='2' data-skillline='staff'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-staff-10-3'><a data-customskill-id='10' data-rank='3' data-skillline='staff'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-staff-10-4'><a data-customskill-id='10' data-rank='4' data-skillline='staff'>Ⅱ (CT100)</a></td>
+<th class='customskill-entry-name' title='ダメージが
+３％増える'>豪雪氷結乱撃の強化</th>
+<td class='customskill-entry-selector' id='customskill-selector-staff-11-0'><a data-customskill-id='11' data-rank='0' data-skillline='staff'>+3%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-staff-11-1'><a data-customskill-id='11' data-rank='1' data-skillline='staff'>+3%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-staff-11-2'><a data-customskill-id='11' data-rank='2' data-skillline='staff'>+3%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-staff-11-3'><a data-customskill-id='11' data-rank='3' data-skillline='staff'>+3%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-staff-11-4'><a data-customskill-id='11' data-rank='4' data-skillline='staff'>+8%</a></td>
 </tr>
 </table>
 <table class='customskill-entrylist' id='customskill-selector-entrylist-claw'>
@@ -8221,6 +8349,18 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-claw-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='claw'>Ⅲ (CT100)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-claw-1-3'><a data-customskill-id='1' data-rank='3' data-skillline='claw'>Ⅲ (CT100)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-claw-1-4'><a data-customskill-id='1' data-rank='4' data-skillline='claw'>Ⅲ (CT100)</a></td>
+</tr>
+<tr>
+<th class='customskill-entry-name' title='神の閃光とともに
+前方の敵集団を
+切り裂く一撃
+（消費MP: 10）
+（チャージ: 160秒）'>ゴッドスマッシュ</th>
+<td class='customskill-entry-selector' id='customskill-selector-claw-13-0'><a data-customskill-id='13' data-rank='0' data-skillline='claw'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-claw-13-1'><a data-customskill-id='13' data-rank='1' data-skillline='claw'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-claw-13-2'><a data-customskill-id='13' data-rank='2' data-skillline='claw'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-claw-13-3'><a data-customskill-id='13' data-rank='3' data-skillline='claw'>Ⅰ (CT160)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-claw-13-4'><a data-customskill-id='13' data-rank='4' data-skillline='claw'>Ⅱ (CT100)</a></td>
 </tr>
 <tr>
 <th class='customskill-entry-name' title='ツメ装備時の
@@ -8328,14 +8468,13 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-claw-12-4'><a data-customskill-id='12' data-rank='4' data-skillline='claw'>+9秒</a></td>
 </tr>
 <tr>
-<th class='customskill-entry-name' title='
-（消費MP: 10）
-（チャージ: 160秒）'>ゴッドスマッシュ</th>
-<td class='customskill-entry-selector' id='customskill-selector-claw-13-0'><a data-customskill-id='13' data-rank='0' data-skillline='claw'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-claw-13-1'><a data-customskill-id='13' data-rank='1' data-skillline='claw'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-claw-13-2'><a data-customskill-id='13' data-rank='2' data-skillline='claw'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-claw-13-3'><a data-customskill-id='13' data-rank='3' data-skillline='claw'>Ⅰ (CT160)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-claw-13-4'><a data-customskill-id='13' data-rank='4' data-skillline='claw'>Ⅱ (CT100)</a></td>
+<th class='customskill-entry-name' title='ダメージが
+１％増える'>ゴッドスマッシュの強化</th>
+<td class='customskill-entry-selector' id='customskill-selector-claw-14-0'><a data-customskill-id='14' data-rank='0' data-skillline='claw'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-claw-14-1'><a data-customskill-id='14' data-rank='1' data-skillline='claw'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-claw-14-2'><a data-customskill-id='14' data-rank='2' data-skillline='claw'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-claw-14-3'><a data-customskill-id='14' data-rank='3' data-skillline='claw'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-claw-14-4'><a data-customskill-id='14' data-rank='4' data-skillline='claw'>+3%</a></td>
 </tr>
 </table>
 <table class='customskill-entrylist' id='customskill-selector-entrylist-fan'>
@@ -8358,6 +8497,18 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-fan-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='fan'>Ⅲ (CT140)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-fan-1-3'><a data-customskill-id='1' data-rank='3' data-skillline='fan'>Ⅲ (CT140)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-fan-1-4'><a data-customskill-id='1' data-rank='4' data-skillline='fan'>Ⅲ (CT140)</a></td>
+</tr>
+<tr>
+<th class='customskill-entry-name' title='煌びやかな舞で
+周囲の敵に
+６回攻撃
+（消費MP: 8）
+（チャージ: 150秒）'>おうぎ乱舞</th>
+<td class='customskill-entry-selector' id='customskill-selector-fan-12-0'><a data-customskill-id='12' data-rank='0' data-skillline='fan'>Ⅰ (CT150)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-fan-12-1'><a data-customskill-id='12' data-rank='1' data-skillline='fan'>Ⅰ (CT150)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-fan-12-2'><a data-customskill-id='12' data-rank='2' data-skillline='fan'>Ⅰ (CT150)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-fan-12-3'><a data-customskill-id='12' data-rank='3' data-skillline='fan'>Ⅰ (CT150)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-fan-12-4'><a data-customskill-id='12' data-rank='4' data-skillline='fan'>Ⅱ (CT90)</a></td>
 </tr>
 <tr>
 <th class='customskill-entry-name' title='扇装備時の
@@ -8454,14 +8605,13 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-fan-11-4'><a data-customskill-id='11' data-rank='4' data-skillline='fan'>+3.0m</a></td>
 </tr>
 <tr>
-<th class='customskill-entry-name' title='
-（消費MP: 8）
-（チャージ: 150秒）'>おうぎ乱舞</th>
-<td class='customskill-entry-selector' id='customskill-selector-fan-12-0'><a data-customskill-id='12' data-rank='0' data-skillline='fan'>Ⅰ (CT150)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-fan-12-1'><a data-customskill-id='12' data-rank='1' data-skillline='fan'>Ⅰ (CT150)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-fan-12-2'><a data-customskill-id='12' data-rank='2' data-skillline='fan'>Ⅰ (CT150)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-fan-12-3'><a data-customskill-id='12' data-rank='3' data-skillline='fan'>Ⅰ (CT150)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-fan-12-4'><a data-customskill-id='12' data-rank='4' data-skillline='fan'>Ⅱ (CT90)</a></td>
+<th class='customskill-entry-name' title='ダメージが
+１％増える'>おうぎ乱舞の強化</th>
+<td class='customskill-entry-selector' id='customskill-selector-fan-13-0'><a data-customskill-id='13' data-rank='0' data-skillline='fan'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-fan-13-1'><a data-customskill-id='13' data-rank='1' data-skillline='fan'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-fan-13-2'><a data-customskill-id='13' data-rank='2' data-skillline='fan'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-fan-13-3'><a data-customskill-id='13' data-rank='3' data-skillline='fan'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-fan-13-4'><a data-customskill-id='13' data-rank='4' data-skillline='fan'>+3%</a></td>
 </tr>
 </table>
 <table class='customskill-entrylist' id='customskill-selector-entrylist-whip'>
@@ -8484,6 +8634,18 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-whip-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='whip'>Ⅲ (CT75)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-whip-1-3'><a data-customskill-id='1' data-rank='3' data-skillline='whip'>Ⅲ (CT75)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-whip-1-4'><a data-customskill-id='1' data-rank='4' data-skillline='whip'>Ⅲ (CT75)</a></td>
+</tr>
+<tr>
+<th class='customskill-entry-name' title='周囲の敵に
+悶絶するほど
+全力で叩きつける
+（消費MP: 10）
+（チャージ: 150秒）'>悶絶全方打ち</th>
+<td class='customskill-entry-selector' id='customskill-selector-whip-14-0'><a data-customskill-id='14' data-rank='0' data-skillline='whip'>Ⅰ (CT150)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-whip-14-1'><a data-customskill-id='14' data-rank='1' data-skillline='whip'>Ⅰ (CT150)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-whip-14-2'><a data-customskill-id='14' data-rank='2' data-skillline='whip'>Ⅰ (CT150)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-whip-14-3'><a data-customskill-id='14' data-rank='3' data-skillline='whip'>Ⅰ (CT150)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-whip-14-4'><a data-customskill-id='14' data-rank='4' data-skillline='whip'>Ⅱ (CT100)</a></td>
 </tr>
 <tr>
 <th class='customskill-entry-name' title='ムチ装備時の
@@ -8598,14 +8760,13 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-whip-13-4'><a data-customskill-id='13' data-rank='4' data-skillline='whip'>+8%</a></td>
 </tr>
 <tr>
-<th class='customskill-entry-name' title='
-（消費MP: 10）
-（チャージ: 150秒）'>悶絶全方打ち</th>
-<td class='customskill-entry-selector' id='customskill-selector-whip-14-0'><a data-customskill-id='14' data-rank='0' data-skillline='whip'>Ⅰ (CT150)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-whip-14-1'><a data-customskill-id='14' data-rank='1' data-skillline='whip'>Ⅰ (CT150)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-whip-14-2'><a data-customskill-id='14' data-rank='2' data-skillline='whip'>Ⅰ (CT150)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-whip-14-3'><a data-customskill-id='14' data-rank='3' data-skillline='whip'>Ⅰ (CT150)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-whip-14-4'><a data-customskill-id='14' data-rank='4' data-skillline='whip'>Ⅱ (CT100)</a></td>
+<th class='customskill-entry-name' title='ダメージが
+２％増える'>悶絶全方打ちの強化</th>
+<td class='customskill-entry-selector' id='customskill-selector-whip-15-0'><a data-customskill-id='15' data-rank='0' data-skillline='whip'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-whip-15-1'><a data-customskill-id='15' data-rank='1' data-skillline='whip'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-whip-15-2'><a data-customskill-id='15' data-rank='2' data-skillline='whip'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-whip-15-3'><a data-customskill-id='15' data-rank='3' data-skillline='whip'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-whip-15-4'><a data-customskill-id='15' data-rank='4' data-skillline='whip'>+5%</a></td>
 </tr>
 </table>
 <table class='customskill-entrylist' id='customskill-selector-entrylist-boomerang'>
@@ -8628,6 +8789,18 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-boomerang-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='boomerang'>Ⅲ (CT90)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-boomerang-1-3'><a data-customskill-id='1' data-rank='3' data-skillline='boomerang'>Ⅲ (CT90)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-boomerang-1-4'><a data-customskill-id='1' data-rank='4' data-skillline='boomerang'>Ⅲ (CT90)</a></td>
+</tr>
+<tr>
+<th class='customskill-entry-name' title='前方の敵集団に
+２回攻撃の
+雷の刃を投げる
+（消費MP: 10）
+（チャージ: 150秒）'>ギガスロー</th>
+<td class='customskill-entry-selector' id='customskill-selector-boomerang-14-0'><a data-customskill-id='14' data-rank='0' data-skillline='boomerang'>Ⅰ (CT150)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-boomerang-14-1'><a data-customskill-id='14' data-rank='1' data-skillline='boomerang'>Ⅰ (CT150)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-boomerang-14-2'><a data-customskill-id='14' data-rank='2' data-skillline='boomerang'>Ⅰ (CT150)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-boomerang-14-3'><a data-customskill-id='14' data-rank='3' data-skillline='boomerang'>Ⅰ (CT150)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-boomerang-14-4'><a data-customskill-id='14' data-rank='4' data-skillline='boomerang'>Ⅱ (CT100)</a></td>
 </tr>
 <tr>
 <th class='customskill-entry-name' title='ブーメラン装備時
@@ -8734,14 +8907,13 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-boomerang-13-4'><a data-customskill-id='13' data-rank='4' data-skillline='boomerang'>+6%</a></td>
 </tr>
 <tr>
-<th class='customskill-entry-name' title='
-（消費MP: 10）
-（チャージ: 150秒）'>ギガスロー</th>
-<td class='customskill-entry-selector' id='customskill-selector-boomerang-14-0'><a data-customskill-id='14' data-rank='0' data-skillline='boomerang'>Ⅰ (CT150)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-boomerang-14-1'><a data-customskill-id='14' data-rank='1' data-skillline='boomerang'>Ⅰ (CT150)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-boomerang-14-2'><a data-customskill-id='14' data-rank='2' data-skillline='boomerang'>Ⅰ (CT150)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-boomerang-14-3'><a data-customskill-id='14' data-rank='3' data-skillline='boomerang'>Ⅰ (CT150)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-boomerang-14-4'><a data-customskill-id='14' data-rank='4' data-skillline='boomerang'>Ⅱ (CT100)</a></td>
+<th class='customskill-entry-name' title='ダメージが
+１％増える'>ギガスローの強化</th>
+<td class='customskill-entry-selector' id='customskill-selector-boomerang-15-0'><a data-customskill-id='15' data-rank='0' data-skillline='boomerang'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-boomerang-15-1'><a data-customskill-id='15' data-rank='1' data-skillline='boomerang'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-boomerang-15-2'><a data-customskill-id='15' data-rank='2' data-skillline='boomerang'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-boomerang-15-3'><a data-customskill-id='15' data-rank='3' data-skillline='boomerang'>+1%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-boomerang-15-4'><a data-customskill-id='15' data-rank='4' data-skillline='boomerang'>+3%</a></td>
 </tr>
 </table>
 <table class='customskill-entrylist' id='customskill-selector-entrylist-bow'>
@@ -8764,6 +8936,18 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-bow-1-2'><a data-customskill-id='1' data-rank='2' data-skillline='bow'>Ⅲ (CT50)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-bow-1-3'><a data-customskill-id='1' data-rank='3' data-skillline='bow'>Ⅲ (CT50)</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-bow-1-4'><a data-customskill-id='1' data-rank='4' data-skillline='bow'>Ⅲ (CT50)</a></td>
+</tr>
+<tr>
+<th class='customskill-entry-name' title='周囲の敵に
+太陽光をまとった
+光の矢を５回放つ
+（消費MP: 8）
+（チャージ: 140秒）'>サンライトアロー</th>
+<td class='customskill-entry-selector' id='customskill-selector-bow-14-0'><a data-customskill-id='14' data-rank='0' data-skillline='bow'>Ⅰ (CT140)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-bow-14-1'><a data-customskill-id='14' data-rank='1' data-skillline='bow'>Ⅰ (CT140)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-bow-14-2'><a data-customskill-id='14' data-rank='2' data-skillline='bow'>Ⅰ (CT140)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-bow-14-3'><a data-customskill-id='14' data-rank='3' data-skillline='bow'>Ⅰ (CT140)</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-bow-14-4'><a data-customskill-id='14' data-rank='4' data-skillline='bow'>Ⅱ (CT90)</a></td>
 </tr>
 <tr>
 <th class='customskill-entry-name' title='弓装備時の
@@ -8853,7 +9037,7 @@ ToDo:
 </tr>
 <tr>
 <th class='customskill-entry-name' title='効果範囲が
-０．２ｍ増える'>弓聖の守り星の範囲</th>
+０．２ｍ増える'>弓聖の守り星の効果範囲</th>
 <td class='customskill-entry-selector' id='customskill-selector-bow-11-0'><a data-customskill-id='11' data-rank='0' data-skillline='bow'>+0.2m</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-bow-11-1'><a data-customskill-id='11' data-rank='1' data-skillline='bow'>+0.3m</a></td>
 <td class='customskill-entry-selector' id='customskill-selector-bow-11-2'><a data-customskill-id='11' data-rank='2' data-skillline='bow'>+0.5m</a></td>
@@ -8879,14 +9063,13 @@ ToDo:
 <td class='customskill-entry-selector' id='customskill-selector-bow-13-4'><a data-customskill-id='13' data-rank='4' data-skillline='bow'>+10%</a></td>
 </tr>
 <tr>
-<th class='customskill-entry-name' title='
-（消費MP: 8）
-（チャージ: 140秒）'>サンライトアロー</th>
-<td class='customskill-entry-selector' id='customskill-selector-bow-14-0'><a data-customskill-id='14' data-rank='0' data-skillline='bow'>Ⅰ (CT140)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-bow-14-1'><a data-customskill-id='14' data-rank='1' data-skillline='bow'>Ⅰ (CT140)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-bow-14-2'><a data-customskill-id='14' data-rank='2' data-skillline='bow'>Ⅰ (CT140)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-bow-14-3'><a data-customskill-id='14' data-rank='3' data-skillline='bow'>Ⅰ (CT140)</a></td>
-<td class='customskill-entry-selector' id='customskill-selector-bow-14-4'><a data-customskill-id='14' data-rank='4' data-skillline='bow'>Ⅱ (CT90)</a></td>
+<th class='customskill-entry-name' title='ダメージが
+２％増える'>サンライトアローの強化</th>
+<td class='customskill-entry-selector' id='customskill-selector-bow-15-0'><a data-customskill-id='15' data-rank='0' data-skillline='bow'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-bow-15-1'><a data-customskill-id='15' data-rank='1' data-skillline='bow'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-bow-15-2'><a data-customskill-id='15' data-rank='2' data-skillline='bow'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-bow-15-3'><a data-customskill-id='15' data-rank='3' data-skillline='bow'>+2%</a></td>
+<td class='customskill-entry-selector' id='customskill-selector-bow-15-4'><a data-customskill-id='15' data-rank='4' data-skillline='bow'>+5%</a></td>
 </tr>
 </table>
 <table class='customskill-entrylist' id='customskill-selector-entrylist-courage'>
