@@ -1835,7 +1835,7 @@ namespace Dq10.SkillSimulator {
 
 			loadQuery();
 
-			var ui = window.location.pathname.indexOf('/simple.html') > 0 ? new SimpleUI(Simulator) : new SimulatorUI(Simulator);
+			var ui = window.location.pathname.indexOf('/simple.html') >= 0 ? new SimpleUI(Simulator) : new SimulatorUI(Simulator);
 			ui.setup();
 		});
 	});
