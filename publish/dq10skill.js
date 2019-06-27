@@ -2093,7 +2093,7 @@ var Dq10;
                     SkillSimulator.SimulatorDB = data;
                     SkillSimulator.Simulator.initialize();
                     loadQuery();
-                    var ui = window.location.pathname.indexOf('/simple.html') > 0 ? new SimpleUI(SkillSimulator.Simulator) : new SimulatorUI(SkillSimulator.Simulator);
+                    var ui = window.location.pathname.indexOf('/simple.html') >= 0 ? new SimpleUI(SkillSimulator.Simulator) : new SimulatorUI(SkillSimulator.Simulator);
                     ui.setup();
                 });
             });
