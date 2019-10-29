@@ -2096,6 +2096,19 @@ var Dq10;
                     var ui = window.location.pathname.indexOf('/simple.html') >= 0 ? new SimpleUI(SkillSimulator.Simulator) : new SimulatorUI(SkillSimulator.Simulator);
                     ui.setup();
                 });
+                $('#notice_dialog').dialog({
+                    title: '更新終了のお知らせ',
+                    modal: true,
+                    width: 600,
+                    closeOnEscape: true,
+                    draggable: false,
+                    buttons: [
+                        {
+                            text: '閉じる',
+                            click: function () { return $('#notice_dialog').dialog('close'); }
+                        }
+                    ]
+                });
             });
         })(jQuery);
     })(SkillSimulator = Dq10.SkillSimulator || (Dq10.SkillSimulator = {}));
